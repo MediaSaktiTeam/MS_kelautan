@@ -27435,6 +27435,8 @@ body.overflow-hidden {
 
 .demo-table-dynamic.custom thead th {
   width: auto !important; }
+  .demo-table-dynamic.custom thead th:first-child {
+    width: 30px !important; }
 
 table.dataTable thead .sorting {
   background: url("../img/sort/sort_both.png") no-repeat center right; }

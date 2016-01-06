@@ -54,7 +54,7 @@
 								<form class="style-form" method="GET" action="{{ route('sarananelayan_tambah') }}">
                 				<input type="hidden" name="_token" value="{{ csrf_token() }}">
 									<div class="form-group form-group-default required">
-										<label>Jenis Usaha Budidaya</label>
+										<label>Sarana / Prasarana</label>
 										<select class="full-width" data-init-plugin="select2" name="jenis">
 											<option value="Perahu/Kapal">Perahu/Kapal</option>
 											<option value="Alat Tangkap">Alat Tangkap</option>
@@ -62,7 +62,7 @@
 										</select>
 									</div>
 									<div class="form-group form-group-default required">
-										<label>Sarana / Prasarana</label>
+										<label>Detail</label>
 										<input type="text" name="sub" class="form-control" required>
 									</div>
 									<div class="form-group">
@@ -78,33 +78,31 @@
 						<!-- START PANEL -->
 						<div class="panel panel-default">
 							<div class="panel-body">
-								<div class="table-responsive">
-									<table class="table table-hover" id="basicTable">
-										<thead>
-											<tr>
-												<th width="70">
-													<button class="btn btn-check" data-toggle="modal" data-target="#modal-hapus" disabled id="hapus"><i class="pg-trash"></i></button>
-												</th>
-												<th>Jenis Usaha Budidaya</th>
-												<th>Sarana / Prasarana</th>
-											</tr>
-										</thead>
-										<tbody>
-											@foreach($sarana as $sr)
-											<tr>
-												<td>
-													<div class="checkbox">
-														<input type="checkbox" class="pilih" value="{{ $sr->id }}" id="checkbox{{ $sr->id }}">
-														<label for="checkbox{{ $sr->id }}" class="m-l-20"></label>
-													</div>
-												</td>
-												<td>{{ $sr->jenis }}</td>
-												<td>{{ $sr->sub }}</td>
-											</tr>
-											@endforeach
-										</tbody>
-									</table>
-								</div>
+								<table class="table table-hover demo-table-dynamic custom" id="tableWithDynamicRows">
+									<thead>
+										<tr>
+											<th>
+												<button class="btn btn-check" data-toggle="modal" data-target="#modal-hapus" disabled id="hapus"><i class="pg-trash"></i></button>
+											</th>
+											<th>Sarana / Prasarana</th>
+											<th>Detail</th>
+										</tr>
+									</thead>
+									<tbody>
+										@foreach($sarana as $sr)
+										<tr>
+											<td>
+												<div class="checkbox">
+													<input type="checkbox" class="pilih" value="{{ $sr->id }}" id="checkbox{{ $sr->id }}">
+													<label for="checkbox{{ $sr->id }}" class="m-l-20"></label>
+												</div>
+											</td>
+											<td>{{ $sr->jenis }}</td>
+											<td>{{ $sr->sub }}</td>
+										</tr>
+										@endforeach
+									</tbody>
+								</table>
 							</div>
 						</div>
 						<!-- END PANEL -->

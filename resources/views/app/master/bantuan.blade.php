@@ -77,33 +77,31 @@
 						<!-- START PANEL -->
 						<div class="panel panel-default">
 							<div class="panel-body">
-								<div class="table-responsive">
-									<table class="table table-hover" id="basicTable">
-										<thead>
-											<tr>
-												<th width="70">
-													<button class="btn btn-check" data-toggle="modal" data-target="#modal-hapus" disabled id="hapus"><i class="pg-trash"></i></button>
-												</th>
-												<th>Nama Bantuan</th>
-												<th>Bidang Usaha</th>
-											</tr>
-										</thead>
-										<tbody>
-											@foreach($bantuan as $bantu)
-											<tr>
-												<td>
-													<div class="checkbox">
-														<input type="checkbox" class="pilih" value="{{ $bantu->id }}" id="checkbox{{ $bantu->id }}">
-														<label for="checkbox{{ $bantu->id }}" class="m-l-20"></label>
-													</div>
-												</td>
-												<td>{{ $bantu->nama }}</td>
-												<td>{{ $bantu->jenis }}</td>
-											</tr>
-											@endforeach
-										</tbody>
-									</table>
-								</div>
+								<table class="table table-hover demo-table-dynamic custom" id="tableWithDynamicRows">
+									<thead>
+										<tr>
+											<th width="70">
+												<button class="btn btn-check" data-toggle="modal" data-target="#modal-hapus" disabled id="hapus"><i class="pg-trash"></i></button>
+											</th>
+											<th>Nama Bantuan</th>
+											<th>Bidang Usaha</th>
+										</tr>
+									</thead>
+									<tbody>
+										@foreach($bantuan as $bantu)
+										<tr>
+											<td>
+												<div class="checkbox">
+													<input type="checkbox" class="pilih" value="{{ $bantu->id }}" id="checkbox{{ $bantu->id }}">
+													<label for="checkbox{{ $bantu->id }}" class="m-l-20"></label>
+												</div>
+											</td>
+											<td>{{ $bantu->nama }}</td>
+											<td>{{ $bantu->jenis }}</td>
+										</tr>
+										@endforeach
+									</tbody>
+								</table>
 							</div>
 						</div>
 						<!-- END PANEL -->

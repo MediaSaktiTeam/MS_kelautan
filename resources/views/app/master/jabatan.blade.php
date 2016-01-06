@@ -70,31 +70,29 @@
 						<!-- START PANEL -->
 						<div class="panel panel-default">
 							<div class="panel-body">
-								<div class="table-responsive">
-									<table class="table table-hover" id="basicTable">
-										<thead>
-											<tr>
-												<th width="70">
-													<button class="btn btn-check" data-toggle="modal" data-target="#modal-hapus" disabled id="hapus"><i class="pg-trash"></i></button>
-												</th>
-												<th>Jabatan</th>
-											</tr>
-										</thead>
-										<tbody>
-											@foreach($jabatan as $jb)
-											<tr>
-												<td>
-													<div class="checkbox">
-														<input type="checkbox" class="pilih" value="{{ $jb->id }}" id="checkbox{{ $jb->id }}">
-														<label for="checkbox{{ $jb->id }}" class="m-l-20"></label>
-													</div>
-												</td>
-												<td>{{ $jb->nama }}</td>
-											</tr>
-											@endforeach
-										</tbody>
-									</table>
-								</div>
+								<table class="table table-hover demo-table-dynamic custom" id="tableWithDynamicRows">
+									<thead>
+										<tr>
+											<th width="70">
+												<button class="btn btn-check" data-toggle="modal" data-target="#modal-hapus" disabled id="hapus"><i class="pg-trash"></i></button>
+											</th>
+											<th>Jabatan</th>
+										</tr>
+									</thead>
+									<tbody>
+										@foreach($jabatan as $jb)
+										<tr>
+											<td>
+												<div class="checkbox">
+													<input type="checkbox" class="pilih" value="{{ $jb->id }}" id="checkbox{{ $jb->id }}">
+													<label for="checkbox{{ $jb->id }}" class="m-l-20"></label>
+												</div>
+											</td>
+											<td>{{ $jb->nama }}</td>
+										</tr>
+										@endforeach
+									</tbody>
+								</table>
 							</div>
 						</div>
 						<!-- END PANEL -->
