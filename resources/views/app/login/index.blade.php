@@ -50,7 +50,7 @@
 					<p class="p-t-35">Silahkan masuk untuk mengakses aplikasi</p>
 
 					@if ( Session::has('gagal') )
-						<div class="alert alert-danger" style="background:#ff0000;padding:5px;color:#fff">{{ Session::get('gagal') }}</div>
+						<div class="alert alert-danger no-margin">{{ Session::get('gagal') }}</div>
 					@endif
 
 					<!-- START Login Form -->

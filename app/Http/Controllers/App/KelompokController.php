@@ -15,7 +15,7 @@ class KelompokController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-     public function getIndex()
+    public function getIndex()
     {
         $data['kelompok'] = Kelompok::paginate(10);
         return view('app.kelompok.index', $data);
@@ -25,6 +25,7 @@ class KelompokController extends Controller
     {
         $data['kelompok'] = Kelompok::paginate(10);
         $dt = new Kelompok;
+        $dt->id = $request->id;
         $dt->nama = $request->nama;
         $dt->alamat = $request->alamat;
         $dt->no_rekening = $request->no_rekening;

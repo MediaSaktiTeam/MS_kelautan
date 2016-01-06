@@ -15,7 +15,7 @@ class TabelKelompok extends Migration
     
         Schema::create('app_kelompok', function(Blueprint $t)
         {
-            $t->increments('id');
+            $t->string('id',5)->primary();
             $t->string('nama',50);
             $t->string('alamat')->nullable();
             $t->string('no_rekening',30)->nullable();
