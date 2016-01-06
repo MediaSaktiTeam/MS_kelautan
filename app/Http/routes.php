@@ -67,7 +67,7 @@ Route::group(['middleware' => 'MustLogin', 'namespace' => 'App' ], function () {
         return view('app.pengaturan.index');
     });
 
-    Route::controller('app/kelompok/index', 'KelompokController',
+    Route::controller('app/kelompok', 'KelompokController',
         [
             'getIndex'  => 'kelompok',
             'getTambah'  => 'kelompok_tambah',

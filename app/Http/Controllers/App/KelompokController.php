@@ -29,6 +29,8 @@ class KelompokController extends Controller
         $dt->alamat = $request->alamat;
         $dt->no_rekening = $request->no_rekening;
         $dt->nama_rekening = $request->nama_rekening;
+        $dt->nama_bank = $request->nama_bank;
+        $dt->tipe = $request->tipe;
         $dt->save();
         return redirect()->route('kelompok', $data);
     }

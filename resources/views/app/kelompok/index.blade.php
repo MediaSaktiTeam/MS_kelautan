@@ -50,11 +50,11 @@
 							</div>
 							<div class="panel-body">
 							<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nulla, corrupti, esse. Earum!</p>
-								<form class="style-form" method="GET" action="{{ route('bantuan_tambah') }}">
+								<form class="style-form" method="GET" action="{{ route('kelompok_tambah') }}">
                 					<input type="hidden" name="_token" value="{{ csrf_token() }}">
                 					<div class="form-group form-group-default required">
 										<label>Bidang Usaha</label>
-										<select class="full-width" data-init-plugin="select2" name="jenis">
+										<select class="full-width" data-init-plugin="select2" name="tipe">
 											<option value="Nelayan">Nelayan</option>
 											<option value="Pembudidaya">Pembudidaya</option>
 										</select>
@@ -65,15 +65,19 @@
 									</div>
 									<div class="form-group form-group-default required">
 										<label>Alamat Sekretariat</label>
-										<input type="text" name="nama" class="form-control" required>
+										<input type="text" name="alamat" class="form-control" required>
 									</div>
 									<div class="form-group form-group-default required">
 										<label>Nomor Rekening</label>
-										<input type="text" name="nama" class="form-control" required>
+										<input type="text" name="no_rekening" class="form-control" required>
 									</div>
 									<div class="form-group form-group-default required">
 										<label>Nama Rekening</label>
-										<input type="text" name="nama" class="form-control" required>
+										<input type="text" name="nama_rekening" class="form-control" required>
+									</div>
+									<div class="form-group form-group-default required">
+										<label>Nama Bank</label>
+										<input type="text" name="nama_bank" class="form-control" required>
 									</div>
 									<div class="form-group">
 										<button type="submit" class="btn btn-primary btn-cons">Tambah</button>
@@ -100,127 +104,19 @@
 										</tr>
 									</thead>
 									<tbody>
+										@foreach($kelompok as $kel)
 										<tr>
 											<td>
 												<div class="checkbox">
-													<input type="checkbox" class="pilih" value="" id="checkbox">
-													<label for="checkbox" class="m-l-20"></label>
+													<input type="checkbox" class="pilih" value="{{ $kel->id }}" id="checkbox{{ $kel->id }}">
+													<label for="checkbox{{ $kel->id }}" class="m-l-20"></label>
 												</div>
 											</td>
-											<td>1298689</td>
-											<td>Akbar</td>
-											<td>Nelayan</td>
+											<td>{{ $kel->id }}</td>
+											<td>{{ $kel->nama }}</td>
+											<td>{{ $kel->tipe }}</td>
 										</tr>
-										<tr>
-											<td>
-												<div class="checkbox">
-													<input type="checkbox" class="pilih" value="" id="checkbox">
-													<label for="checkbox" class="m-l-20"></label>
-												</div>
-											</td>
-											<td>1298689</td>
-											<td>Akbar</td>
-											<td>Nelayan</td>
-										</tr>
-										<tr>
-											<td>
-												<div class="checkbox">
-													<input type="checkbox" class="pilih" value="" id="checkbox">
-													<label for="checkbox" class="m-l-20"></label>
-												</div>
-											</td>
-											<td>1298689</td>
-											<td>Akbar</td>
-											<td>Nelayan</td>
-										</tr>
-										<tr>
-											<td>
-												<div class="checkbox">
-													<input type="checkbox" class="pilih" value="" id="checkbox">
-													<label for="checkbox" class="m-l-20"></label>
-												</div>
-											</td>
-											<td>1298689</td>
-											<td>Akbar</td>
-											<td>Nelayan</td>
-										</tr>
-										<tr>
-											<td>
-												<div class="checkbox">
-													<input type="checkbox" class="pilih" value="" id="checkbox">
-													<label for="checkbox" class="m-l-20"></label>
-												</div>
-											</td>
-											<td>1298689</td>
-											<td>Akbar</td>
-											<td>Nelayan</td>
-										</tr>
-										<tr>
-											<td>
-												<div class="checkbox">
-													<input type="checkbox" class="pilih" value="" id="checkbox">
-													<label for="checkbox" class="m-l-20"></label>
-												</div>
-											</td>
-											<td>1298689</td>
-											<td>Akbar</td>
-											<td>Nelayan</td>
-										</tr>
-										<tr>
-											<td>
-												<div class="checkbox">
-													<input type="checkbox" class="pilih" value="" id="checkbox">
-													<label for="checkbox" class="m-l-20"></label>
-												</div>
-											</td>
-											<td>1298689</td>
-											<td>Akbar</td>
-											<td>Nelayan</td>
-										</tr>
-										<tr>
-											<td>
-												<div class="checkbox">
-													<input type="checkbox" class="pilih" value="" id="checkbox">
-													<label for="checkbox" class="m-l-20"></label>
-												</div>
-											</td>
-											<td>1298689</td>
-											<td>Akbar</td>
-											<td>Nelayan</td>
-										</tr>
-										<tr>
-											<td>
-												<div class="checkbox">
-													<input type="checkbox" class="pilih" value="" id="checkbox">
-													<label for="checkbox" class="m-l-20"></label>
-												</div>
-											</td>
-											<td>1298689</td>
-											<td>Akbar</td>
-											<td>Nelayan</td>
-										</tr>
-										<tr>
-											<td>
-												<div class="checkbox">
-													<input type="checkbox" class="pilih" value="" id="checkbox">
-													<label for="checkbox" class="m-l-20"></label>
-												</div>
-											</td>
-											<td>1298689</td>
-											<td>Akbar</td>
-											<td>Nelayan</td>
-										</tr>
-										<tr>
-											<td>
-												<div class="checkbox">
-													<input type="checkbox" class="pilih" value="" id="checkbox">
-													<label for="checkbox" class="m-l-20"></label>
-												</div>
-											</td>
-											<td>1298689</td>
-											<td>Akbar</td>
-											<td>Nelayan</td>
-										</tr>
+										@endforeach
 									</tbody>
 								</table>
 							</div>
@@ -287,8 +183,7 @@
 
 @section('registerscript')
 	<script>
-		$(".menu-items .link-master").addClass("active open");
-		$(".menu-items .link-master .sub-bantuan").addClass("active");
+		$(".menu-items .link-kelompok").addClass("active");
 
 		$(function(){
 
@@ -305,7 +200,7 @@
 					return false;
 				}
 
-				$(".btn-hapus").attr('href',"{{ route('bantuan_hapus') }}/"+id);
+				$(".btn-hapus").attr('href',"{{ route('kelompok_hapus') }}/"+id);
 
 			});
 		})();
