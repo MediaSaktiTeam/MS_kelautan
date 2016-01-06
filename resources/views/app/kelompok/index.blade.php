@@ -1,9 +1,9 @@
 @extends('app.layout.main')
 
-@section('konten')
-konten
+@section('title')
+	Kelompok
 @endsection
 
-@section('footer')
-footer
+@section('konten')
+konten
 @endsection
