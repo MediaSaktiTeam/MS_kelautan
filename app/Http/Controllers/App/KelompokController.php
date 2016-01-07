@@ -25,7 +25,7 @@ class KelompokController extends Controller
     {
         $data['kelompok'] = Kelompok::paginate(10);
         $dt = new Kelompok;
-        $dt->id = $request->id;
+        $dt->id_kelompok = $request->id;
         $dt->nama = $request->nama;
         $dt->alamat = $request->alamat;
         $dt->no_rekening = $request->no_rekening;
