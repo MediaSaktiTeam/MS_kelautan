@@ -56,9 +56,7 @@ Route::group(['middleware' => 'MustLogin', 'namespace' => 'App' ], function () {
     });
 
 
-    Route::get('/app/kelompok', function () {
-        return view('app.kelompok.index');
-    });
+    
 
     Route::get('/app/master/jabatan', function () {
         return view('app.master.jabatan');
@@ -82,6 +80,7 @@ Route::group(['middleware' => 'MustLogin', 'namespace' => 'App' ], function () {
             'getIndex'  => 'kelompok',
             'getTambah'  => 'kelompok_tambah',
             'getHapus'  => 'kelompok_hapus',
+            'getDetail'  => 'kelompok_get_detail',
         ]);
 
     Route::controller('app/master/bantuan', 'BantuanController',

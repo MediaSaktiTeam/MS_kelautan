@@ -21,6 +21,13 @@ class KelompokController extends Controller
         return view('app.kelompok.index', $data);
     }
 
+    public function getDetail($id)
+    {
+        $data['kelompok'] = Kelompok::find($id);
+
+        return view('app.kelompok.detail', $data);
+    }
+
     public function getTambah(Request $request)
     {
         $data['kelompok'] = Kelompok::paginate(10);

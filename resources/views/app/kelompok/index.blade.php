@@ -125,7 +125,7 @@
 											<td>{{ $kel->nama }}</td>
 											<td>{{ $kel->tipe }}</td>
 											<td>
-												<button class="btn btn-complete btn-xs" data-toggle="modal" data-target="#modal-view">Lihat</button>
+												<a class="btn btn-default btn-xs view" data-id="{{ $kel->id_kelompok }}" data-target="#modal-view">Lihat</a>
 												<button class="btn btn-primary btn-xs" data-toggle="modal" data-target="#modal-view-anggota-add">Tambah Anggota</button>
 											</td>
 										</tr>
@@ -175,37 +175,10 @@
 			<div class="modal-content">
 				<div class="modal-header clearfix text-left">
 					<button type="button" class="close" data-dismiss="modal"  aria-hidden="true"><i class="pg-close fs-14"></i></button>
-					<h5>Detail Kelompok <b>#019AC</b></h5>
+					<h5>Detail Kelompok</h5>
 				</div>
-				<div class="modal-body">
-					<table class="table table-hover demo-table-dynamic custom" id="tableWithDynamicRows">
-						<tbody>
-							<tr>
-								<td>Bidang Usaha</td>
-								<td><b>Nelayan</b></td>
-							</tr>
-							<tr>
-								<td>Nama Kelompok</td>
-								<td><b>Latingereng</b></td>
-							</tr>
-							<tr>
-								<td>Alamat Sekretariat</td>
-								<td><b>Jl. Borong Indah 9d</b></td>
-							</tr>
-							<tr>
-								<td>Nomor Rekening</td>
-								<td><b>9091209801</b></td>
-							</tr>
-							<tr>
-								<td>Nama Rekening</td>
-								<td><b>Gifa Eriyanto</b></td>
-							</tr>
-							<tr>
-								<td>Nama Bank</td>
-								<td><b>BRI</b></td>
-							</tr>
-						</tbody>
-					</table>
+				<div class="modal-body" id="view-detail">
+					
 				</div>
 				<div class="modal-footer">
 					<a class="btn btn-primary btn-hapus btn-cons pull-left inline" data-toggle="modal" data-target="#modal-view-anggota" data-dismiss="modal">Lihat Anggota</a>
@@ -440,23 +413,45 @@
 
 @section('registerscript')
 	<script>
-		$(".menu-items .link-kelompok").addClass("active");
+$(function(){
 
-		$("#hapus").click(function(){
+			var _token = $('meta[name="csrf-token"]').attr('content');
 
-			if($(".pilih:checked").length) {
-				var id = "";
-				$(".pilih:checked").each(function() {
-					id += $(this).val() + ",";
+			$("#hapus").click(function(){
+
+				if($(".pilih:checked").length) {
+		          var id = "";
+		          $(".pilih:checked").each(function() {
+		            id += $(this).val() + ",";
+		          });
+		          id =  id.slice(0,-1);
+		        }
+		        else {
+				  return false;
+		        }
+		        $(".btn-hapus").attr('href',"{{ route('kelompok_hapus') }}/"+id);
+
+			});
+
+			$("#show-tambah-kelompok").click(function(){
+				$("#tambah-kelompok").fadeIn();
+				$("input[name='nik']").focus();
+				$(this).hide();
+			});
+
+			// Show detail
+			$(".view").click(function(){
+				var id = $(this).data('id');
+				var url = "{{ url('app/kelompok/detail') }}";
+				var url = url+'/'+id;
+				$.get(url, {id:id, _token:_token}, function(data){
+					$("#view-detail").html(data);
+					$("#modal-view").modal('show');
 				});
-				id =  id.slice(0,-1);
-			}
-			else {
-				return false;
-			}
-
-			$(".btn-hapus").attr('href',"{{ route('kelompok_hapus') }}/"+id);
+			});
 
 		});
+
+		}
 	</script>
 @endsection
