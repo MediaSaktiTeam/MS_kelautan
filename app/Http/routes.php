@@ -31,6 +31,7 @@ Route::group(['middleware' => 'MustLogin', 'namespace' => 'App' ], function () {
         'getHapus'  => 'pembudidaya_hapus',
         'getSarana'  => 'pembudidaya_get_sarana',
         'getUsaha'  => 'pembudidaya_get_usaha',
+        'getDetail'  => 'pembudidaya_get_detail',
     ]);
 
     Route::get('/app/nelayan', function () {

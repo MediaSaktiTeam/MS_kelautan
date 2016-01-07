@@ -19,8 +19,7 @@ class PembudidayaController extends Controller
     public function getIndex()
     {
         $data['pembudidaya'] = User::where('profesi','Pembudidaya')->orderBy('id','desc')->get();
-        // $data['kelompok'] = Kelompok::where('tipe','Pembudidaya')->get();
-        $data['kelompok'] = Kelompok::all();
+        $data['kelompok'] = Kelompok::where('tipe','Pembudidaya')->get();
         $data['jabatan'] = Jabatan::all();
         $data['sarana'] = Sarana::where('jenis','Budidaya Air laut')->where('tipe','Pembudidaya')->get();
         return view ('app.pembudidaya.index',$data);
@@ -77,14 +76,54 @@ class PembudidayaController extends Controller
 
     }
 
-    public function getEdit()
+    public function getEdit($id)
     {
-
+        $data['kelompok'] = Kelompok::where('tipe','Pembudidaya')->get();
+        $data['jabatan'] = Jabatan::all();
+        $data['sarana'] = Sarana::where('jenis','Budidaya Air laut')->where('tipe','Pembudidaya')->get();
+        $data['pembudidaya'] = User::find($id);
+        return view('app.pembudidaya.sunting', $data);
     }
 
-    public function postUpdate()
+    public function postUpdate(Request $r)
     {
+        $this->validate($r,[
+                'nik' => 'required|unique:users,id,'.$r->id,
+                'id_sarana' => 'required',
+            ]);
 
+
+        $name = $r->name;
+        $username = str_slug($name,"-");
+
+        $pb = User::find($r->id);
+        $pb->name       = $name;
+        $pb->username   = $username;
+        $pb->password   = bcrypt($username);
+        $pb->nik        = $r->nik;
+        $pb->alamat     = $r->alamat;
+        $pb->id_kelompok  = $r->id_kelompok;
+        $pb->id_jabatan   = $r->id_jabatan;
+        $pb->id_usaha     = $r->id_usaha;
+
+        $pb->save();
+
+        $id = $r->id;
+
+        // Hapus lalu simpan kembali
+        KepemilikanSarana::where('id_user', $id)->delete();
+
+        foreach ( $r->id_sarana as $val ){
+            $record['id_sarana']  = $val; 
+            $record['id_user']    = $id; 
+            $records[] = $record;
+        }
+
+        DB::table('app_kepemilikan_sarana')->insert( $records );
+
+        $r->session()->flash('success','Data tersimpan');
+
+        return redirect(route('pembudidaya'));
     }
 
     public function getHapus(Request $r, $id)
@@ -96,6 +135,13 @@ class PembudidayaController extends Controller
         }
         $r->session()->flash('success', 'Data terhapus');
         return redirect()->route('pembudidaya');
+    }
+
+    public function getDetail($id)
+    {
+        $data['pembudidaya'] = User::find($id);
+
+        return view('app.pembudidaya.detail', $data);
     }
 
     public function getUsaha($jenis)

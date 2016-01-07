@@ -17,6 +17,9 @@ $factory->define(App\User::class, function (Faker\Generator $faker) {
     $username = str_slug($name);
     $profesi = ['Pembudidaya', 'Nelayan'];
     $index = rand(0,1);
+    $klp = ['kl1', 'kl2', 'kl3'];
+    $index2 = rand(0,3);
+
     return [
         'name' => $name,
         'username' => $username,
@@ -24,8 +27,8 @@ $factory->define(App\User::class, function (Faker\Generator $faker) {
         'nik' => str_random(10),
         'alamat' => $faker->address,
         'no_kartu_nelayan' => str_random(10),
-        'id_jabatan' => rand(1,2),
-        'id_kelompok' => rand(1,2),
+        'id_jabatan' => rand(1,3),
+        'id_kelompok' => $klp[$index],
         'id_usaha' => rand(1,4),
         'profesi' => $profesi[$index],
         'password' => bcrypt($username),
@@ -108,17 +111,6 @@ $factory->define(App\Menu::class, function ($faker) {
     'urutan' => 1,
     'lokasi' => 'Header',
     'jenis' => 'Custom',
-    ];
-
-});
-
-$factory->define(App\Kelompok::class, function ($faker) {
-
-  return [
-    'nama' => $faker->name,
-    'alamat' => $faker->address,
-    'no_rekening' => rand(000000,999999),
-    'no_rekening' => $faker->name,
     ];
 
 });

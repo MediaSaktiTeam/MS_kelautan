@@ -108,7 +108,6 @@
 											<th>
 												<button class="btn btn-check" data-toggle="modal" data-target="#modal-hapus" disabled id="hapus"><i class="pg-trash"></i></button>
 											</th>
-											<th>ID Kelompok</th>
 											<th>Nama Kelompok</th>
 											<th>Bidang Usaha</th>
 											<th>Aksi</th>
@@ -123,7 +122,6 @@
 													<label for="checkbox{{ $kel->id }}" class="m-l-20"></label>
 												</div>
 											</td>
-											<td>{{ $kel->id }}</td>
 											<td>{{ $kel->nama }}</td>
 											<td>{{ $kel->tipe }}</td>
 											<td>

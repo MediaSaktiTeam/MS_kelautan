@@ -191,11 +191,14 @@ class JabatanSeeder extends Seeder
   App\Jabatan::truncate();
 
     $data = array(
-        array('nama' => 'Ketua Kelompok Nelayan'),
-        array('nama' => 'Wakil Kelompok Nelayan'),
-      );
+      array('nama' => 'Ketua'),
+      array('nama' => 'Wakil'),
+      array('nama' => 'Sekretaris'),
+      array('nama' => 'Bendahara'),
+      array('nama' => 'Anggota'),
+    );
 
-      DB::table('app_jabatan')->insert($data);
+    DB::table('app_jabatan')->insert($data);
 
   }
 }
@@ -227,21 +230,12 @@ class KelompokSeeder extends Seeder
   {
     App\Kelompok::truncate();
 
-    factory(App\Kelompok::class, 1)->create();
-  }
-}
-
-class Jabatan extends Seeder
-{
-  public function run()
-  {
-    App\Jabatan::truncate();
-
     $data = array(
-      array('nama' => 'Ketua'),
-      array('nama' => 'Anggota')
-    );
+        array('id' => "kl1", 'nama' => "Bina Nusantara", 'alamat' => "Jl. Oke", 'tipe' => 'Pembudidaya'),
+        array('id' => "kl2", 'nama' => "Sipakainge", 'alamat' => "Jl. Oke", 'tipe' => 'Pembudidaya'),
+        array('id' => "kl3", 'nama' => "Sipatokkong", 'alamat' => "Jl. Oke", 'tipe' => 'Nelayan')
+      );
 
-    DB::table('app_jabatan')->insert($data);
+      DB::table('app_kelompok')->insert($data);
   }
 }

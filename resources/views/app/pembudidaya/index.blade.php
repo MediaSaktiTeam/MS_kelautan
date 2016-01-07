@@ -23,10 +23,7 @@
 						<!-- START BREADCRUMB -->
 						<ul class="breadcrumb">
 							<li>
-								<a href="#">Pembudidaya</a>
-							</li>
-							<li>
-								<a href="#" class="active">Tambah Pembudidaya</a>
+								<a href="{{ route('pembudidaya') }}">Pembudidaya</a>
 							</li>
 						</ul>
 					</div>
@@ -40,129 +37,118 @@
 				<div class="inner" style="transform: translateY(0px); opacity: 1;">
 
 					<div class="row">
-						<div class="col-lg-7 col-md-6 ">
 
-							@if ( Session::has('success') ) 
-					    		@include('app/layout/partials/alert-sukses', ['message' => session('success')])
-							@endif
+						<div id="tambah-pembudidaya" style="display:none">
+							<div class="col-lg-7 col-md-6 ">
 
-							@if ( Session::has('gagal') ) 
-					    		@include('app/layout/partials/alert-danger', ['message' => session('gagal')])
-							@endif
+								<!-- START PANEL -->
+								<div class="panel panel-transparent">
+									<div class="panel-body">
+										<form id="form-personal" method="post" action="{{ route('pembudidaya_simpan') }}" role="form">
+											
+											{{ csrf_field() }}
 
-							@if ( count($errors) > 0 )
-								@include('app/layout/partials/alert-danger', ['errors' => $errors])
-							@endif
-
-							<!-- START PANEL -->
-							<div class="panel panel-transparent">
-								<div class="panel-body">
-									<form id="form-personal" method="post" action="{{ route('pembudidaya_simpan') }}" role="form">
-										
-										{{ csrf_field() }}
-
-										<div class="row clearfix">
-											<div class="col-sm-6">
-												<div class="form-group required">
-													<label>NIK</label>
-													<input type="text" class="form-control" name="nik" required>
+											<div class="row clearfix">
+												<div class="col-sm-6">
+													<div class="form-group required">
+														<label>NIK</label>
+														<input type="text" class="form-control" name="nik" required>
+													</div>
 												</div>
-											</div>
-											<div class="col-sm-6">
-												<div class="form-group">
-													<label>Nama Lengkap</label>
-													<input type="text" class="form-control" name="name" required>
-												</div>
-											</div>
-										</div>
-
-										<div class="row">
-											<div class="col-sm-12">
-												<div class="form-group">
-													<label>Alamat</label>
-													<input type="text" class="form-control" name="alamat" required>
-												</div>
-											</div>
-										</div>
-										
-										<div class="row">
-											<div class="col-sm-6">
-												<div class="form-group">
-													<label>Nama Kelompok</label>
-													<div class="input-group">
-														<select class="full-width" name="id_kelompok" data-init-plugin="select2" required>
-															<option value="">Pilih Kelompok...</option>
-															@foreach( $kelompok as $klp )
-																<option value="{{ $klp->id }}">{{ $klp->nama }}</option>
-															@endforeach
-														</select>
-														<div class="input-group-btn">
-															<button class="btn btn-primary" type="button">+</button>
-														</div>
+												<div class="col-sm-6">
+													<div class="form-group">
+														<label>Nama Lengkap</label>
+														<input type="text" class="form-control" name="name" required>
 													</div>
 												</div>
 											</div>
-											<div class="col-sm-6">
-												<div class="form-group">
-													<label>Jabatan Dalam Kelompok</label>
-													<div class="input-group">
-														<select class="full-width" name="id_jabatan" data-init-plugin="select2" required>
-															<option value="">Pilih Jabatan...</option>
-															@foreach( $jabatan as $jab )
-																<option value="{{ $jab->id }}">{{ $jab->nama }}</option>
-															@endforeach
-														</select>
-														<div class="input-group-btn">
-															<button class="btn btn-primary" type="button">+</button>
-														</div>
+
+											<div class="row">
+												<div class="col-sm-12">
+													<div class="form-group">
+														<label>Alamat</label>
+														<input type="text" class="form-control" name="alamat" required>
 													</div>
 												</div>
 											</div>
-										</div>
-
-										<div class="row">
-											<div class="col-md-12">
-												<div class="form-group">
-													<label>Jenis Usaha Budidaya</label>
-												</div>
-											</div>
+											
 											<div class="row">
 												<div class="col-sm-6">
 													<div class="form-group">
-														<select onchange="get_usaha(this.value)" class="full-width" required data-init-plugin="select2">
-															<option value="">Pilih Jenis Usaha...</option>
-															<option value="Budidaya Air Laut">Budidaya Air Laut</option>
-															<option value="Budidaya Air Tawar">Budidaya Air Tawar</option>
-															<option value="Budidaya Air Payau">Budidaya Air Payau</option>
-														</select>
+														<label>Nama Kelompok</label>
+														<div class="input-group">
+															<select class="full-width" name="id_kelompok" data-init-plugin="select2" required>
+																<option value="">Pilih Kelompok...</option>
+																@foreach( $kelompok as $klp )
+																	<option value="{{ $klp->id }}">{{ $klp->nama }}</option>
+																@endforeach
+															</select>
+															<div class="input-group-btn">
+																<button class="btn btn-primary" type="button">+</button>
+															</div>
+														</div>
 													</div>
 												</div>
 												<div class="col-sm-6">
 													<div class="form-group">
-														<div id="usaha">
-															<select class="full-width" data-init-plugin="select2" disabled>
-																<option value="">Pilih Spesifik Usaha...</option>
+														<label>Jabatan Dalam Kelompok</label>
+														<div class="input-group">
+															<select class="full-width" name="id_jabatan" data-init-plugin="select2" required>
+																<option value="">Pilih Jabatan...</option>
+																@foreach( $jabatan as $jab )
+																	<option value="{{ $jab->id }}">{{ $jab->nama }}</option>
+																@endforeach
+															</select>
+															<div class="input-group-btn">
+																<button class="btn btn-primary" type="button">+</button>
+															</div>
+														</div>
+													</div>
+												</div>
+											</div>
+
+											<div class="row">
+												<div class="col-md-12">
+													<div class="form-group">
+														<label>Jenis Usaha Budidaya</label>
+													</div>
+												</div>
+												<div class="row">
+													<div class="col-sm-12">
+														<div class="form-group">
+															<select onchange="get_usaha(this.value)" class="full-width" required data-init-plugin="select2">
+																<option value="">Pilih Jenis Usaha...</option>
+																<option value="Budidaya Air Laut">Budidaya Air Laut</option>
+																<option value="Budidaya Air Tawar">Budidaya Air Tawar</option>
+																<option value="Budidaya Air Payau">Budidaya Air Payau</option>
 															</select>
 														</div>
 													</div>
 												</div>
-											</div>
-										</div>
 
-										<div class="row">
-											<div class="col-md-12">
-												<div class="form-group">
-													<label>Kepemilikan Sarana dan Prasarana</label>
+											</div>
+
+											<div class="row">
+												<div class="col-md-6">
+													<div class="form-group">
+														<label>Jenis Usaha</label>
+													</div>
+												</div>
+												<div class="col-md-6">
+													<div class="form-group">
+														<label>Kepemilikan Sarana dan Prasarana</label>
+													</div>
 												</div>
 											</div>
+
 											<div class="row">
 												<div class="col-sm-6">
 													<div class="form-group">
-														<select onchange="get_sarana(this.value)" class="full-width" required data-init-plugin="select2">
-															<option value="Budidaya Air Laut">Budidaya Air Laut</option>
-															<option value="Budidaya Air Tawar">Budidaya Air Tawar</option>
-															<option value="Budidaya Air Payau">Budidaya Air Payau</option>
-														</select>
+														<div id="usaha">
+															<select class="full-width" data-init-plugin="select2" disabled>
+																<option value="">Pilih Jenis Usaha...</option>
+															</select>
+														</div>
 													</div>
 												</div>
 												<div class="col-sm-6">
@@ -174,36 +160,52 @@
 														</div>
 													</div>
 												</div>
+												
 											</div>
-										</div>
 
-										<div class="clearfix"></div>
-										<button class="btn btn-primary" type="submit">Tambah</button>
-									</form>
+											<div class="clearfix"></div>
+											<button class="btn btn-primary" type="submit">Tambah</button>
+										</form>
+									</div>
 								</div>
+								<!-- END PANEL -->
 							</div>
-							<!-- END PANEL -->
-						</div>
-						
-						<div class="col-lg-5 col-md-6">
-							<!-- START PANEL -->
-							<div class="panel panel-transparent">
-								<div class="panel-heading">
-									<div class="panel-title">Keterangan</div>
+							
+							<div class="col-lg-5 col-md-6">
+								<!-- START PANEL -->
+								<div class="panel panel-transparent">
+									<div class="panel-heading">
+										<div class="panel-title">Keterangan</div>
+									</div>
+									<div class="panel-body">
+										<h3>Showcase and guide users with a <br>better User Interface &amp; Experience.
+										</h3>
+										<p>Forms are one of the most important components
+											<br> when it comes to a dashboard. Recognizing that fact, users are
+											<br>able work in a maximum content width.
+										</p>
+									</div>
 								</div>
-								<div class="panel-body">
-									<h3>Showcase and guide users with a <br>better User Interface &amp; Experience.
-									</h3>
-									<p>Forms are one of the most important components
-										<br> when it comes to a dashboard. Recognizing that fact, users are
-										<br>able work in a maximum content width.
-									</p>
-								</div>
+								<!-- END PANEL -->
 							</div>
-							<!-- END PANEL -->
 						</div>
 
 						<div class="col-md-12">
+								
+								@if ( Session::has('success') ) 
+						    		@include('app/layout/partials/alert-sukses', ['message' => session('success')])
+								@endif
+
+								@if ( Session::has('gagal') ) 
+						    		@include('app/layout/partials/alert-danger', ['message' => session('gagal')])
+								@endif
+
+								@if ( count($errors) > 0 )
+									@include('app/layout/partials/alert-danger', ['errors' => $errors])
+								@endif
+
+							<button id="show-tambah-pembudidaya" style="margin-bottom:20px" class="btn btn-primary">Tambah</button>
+							
 							<!-- START PANEL -->
 							<div class="panel panel-default">
 								<div class="panel-body">
@@ -235,7 +237,7 @@
 														<td>{{ $pb->jabatan->nama }}</td>
 														<td>{{ $pb->usaha->jenis }}</td>
 														<td style="text-align:center">
-															<a class="btn btn-default btn-xs"><i class="fa fa-search-plus"></i></a>
+															<a class="btn btn-default btn-xs view" data-id="{{ $pb->id }}"><i class="fa fa-search-plus"></i></a>
 															<a href="{{ route('pembudidaya_edit',$pb->id) }}" class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i></a>
 														</td>
 													</tr>
@@ -277,6 +279,27 @@
 </div>
 <!-- END PAGE CONTAINER -->
 
+<!-- MODAL STICK UP VIEW -->
+<div class="modal fade stick-up" id="modal-view" tabindex="-1" role="dialog" aria-hidden="true">
+	<div class="modal-dialog modal-lg">
+		<div class="modal-content-wrapper">
+			<div class="modal-content">
+				<div class="modal-header clearfix text-left">
+					<button type="button" class="close" data-dismiss="modal"  aria-hidden="true"><i class="pg-close fs-14"></i></button>
+					<h5>Detail Pembudidaya</h5>
+				</div>
+				<div class="modal-body" id="view-detail">
+
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default btn-cons no-margin pull-left inline" data-dismiss="modal">Kembali</button>
+				</div>
+			</div>
+		</div>
+		<!-- /.modal-content -->
+	</div>
+	<!-- /.modal-dialog -->
+</div>
 
 <!-- MODAL STICK UP SMALL ALERT -->
 <div class="modal fade stick-up" id="modal-hapus" tabindex="-1" role="dialog" aria-hidden="true">
@@ -311,6 +334,8 @@
 
 		$(function(){
 
+			var _token = $('meta[name="csrf-token"]').attr('content');
+
 			$("#hapus").click(function(){
 
 				if($(".pilih:checked").length) {
@@ -327,6 +352,23 @@
 
 			});
 
+			$("#show-tambah-pembudidaya").click(function(){
+				$("#tambah-pembudidaya").fadeIn();
+				$("input[name='nik']").focus();
+				$(this).hide();
+			});
+
+			// Show detail
+			$(".view").click(function(){
+				var id = $(this).data('id');
+				var url = "{{ url('app/pembudidaya/detail') }}";
+				var url = url+'/'+id;
+				$.get(url, {id:id, _token:_token}, function(data){
+					$("#view-detail").html(data);
+					$("#modal-view").modal('show');
+				});
+			});
+
 		});
 
 		function get_usaha(id){
@@ -337,6 +379,7 @@
 			$.get(url, { id:id, _token:_token}, function(data){
 				$('#usaha').html(data);
 			});
+			get_sarana(id);
 		}
 
 		function get_sarana(id){
