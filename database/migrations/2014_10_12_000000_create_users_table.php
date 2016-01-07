@@ -22,8 +22,9 @@ class CreateUsersTable extends Migration
             $table->string('nik', 30)->nullable();
             $table->string('alamat')->nullable();
             $table->string('no_kartu_nelayan',30)->nullable();
-            $table->integer('id_kelompok')->nullable();;
-            $table->integer('id_jabatan')->nullable();;
+            $table->integer('id_kelompok')->nullable();
+            $table->integer('id_jabatan')->nullable();
+            $table->integer('id_usaha')->nullable();
             $table->enum('profesi', ['Pembudidaya','Nelayan','Admin']);
             $table->rememberToken();
             $table->timestamps();

@@ -227,7 +227,7 @@
 														<td>{{ $pb->alamat }}</td>
 														<td>{{ $pb->kelompok->nama }}</td>
 														<td>{{ $pb->jabatan->nama }}</td>
-														<td>{{ $pb->s }}</td>
+														<td>{{ $pb->usaha->jenis }}</td>
 														<td style="text-align:center"><button class="btn btn-success btn-xs">Lihat</button></td>
 													</tr>
 												@endforeach
@@ -320,10 +320,9 @@
 
 		});
 
-
 		function get_usaha(id){
 			var _token = $('meta[name="csrf-token"]').attr('content');
-			var url = "{{ url('app/pembudidaya/get-usaha') }}";
+			var url = "{{ url('app/pembudidaya/usaha') }}";
 			var url = url+"/"+id;
 			$.get(url, { id:id, _token:_token}, function(data){
 				$('#usaha').html(data);
@@ -332,7 +331,7 @@
 
 		function get_sarana(id){
 			var _token = $('meta[name="csrf-token"]').attr('content');
-			var url = "{{ url('app/pembudidaya/get-sarana') }}";
+			var url = "{{ url('app/pembudidaya/sarana') }}";
 			var url = url+"/"+id;
 			$.get(url, { id:id, _token:_token}, function(data){
 				$('#sarana').html(data);

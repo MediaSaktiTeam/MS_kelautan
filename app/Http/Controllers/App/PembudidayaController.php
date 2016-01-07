@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
-use App\User, App\Kelompok, App\Jabatan;
+use App\User, App\Kelompok, App\Jabatan, App\Usaha, App\Sarana;
 
 class PembudidayaController extends Controller
 {
@@ -59,5 +59,15 @@ class PembudidayaController extends Controller
         return redirect()->route('pembudidaya');
     }
 
-    
+    public function getSarana($jenis)
+    {
+        $data['sarana'] = Sarana::where('jenis','$jenis')->where('tipe', 'pembudidaya')->get();
+        return view('app.pembudidaya.data-sarana', $data);
+    }
+
+    public function getUsaha($jenis)
+    {
+        $data['usaha'] = Usaha::where('jenis','$jenis')->get();
+        return view('app.pembudidaya.data-usaha', $data);
+    }
 }

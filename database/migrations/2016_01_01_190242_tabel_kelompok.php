@@ -20,6 +20,7 @@ class TabelKelompok extends Migration
             $t->string('alamat')->nullable();
             $t->string('no_rekening',30)->nullable();
             $t->string('nama_rekening', 50)->nullable();
+            $t->enum('tipe', ['Pembudidaya','Nelayan']);
         });
     }
 

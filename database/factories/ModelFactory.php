@@ -26,6 +26,7 @@ $factory->define(App\User::class, function (Faker\Generator $faker) {
         'no_kartu_nelayan' => str_random(10),
         'id_jabatan' => rand(1,2),
         'id_kelompok' => rand(1,2),
+        'id_usaha' => rand(1,4),
         'profesi' => $profesi[$index],
         'password' => bcrypt($username),
         'remember_token' => str_random(10)
