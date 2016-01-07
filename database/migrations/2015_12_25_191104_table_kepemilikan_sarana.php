@@ -15,7 +15,7 @@ class TableKepemilikanSarana extends Migration
     
         Schema::create('app_kepemilikan_sarana', function(Blueprint $t)
         {
-            $t->integer('id_sub_sarana');
+            $t->integer('id_sarana');
             $t->integer('id_user');
         });
     }

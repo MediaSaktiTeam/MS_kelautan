@@ -46,11 +46,21 @@
 					    		@include('app/layout/partials/alert-sukses', ['message' => session('success')])
 							@endif
 
+							@if ( Session::has('gagal') ) 
+					    		@include('app/layout/partials/alert-danger', ['message' => session('gagal')])
+							@endif
+
+							@if ( count($errors) > 0 )
+								@include('app/layout/partials/alert-danger', ['errors' => $errors])
+							@endif
+
 							<!-- START PANEL -->
 							<div class="panel panel-transparent">
 								<div class="panel-body">
-									<form id="form-personal" role="form" autocomplete="off">
+									<form id="form-personal" method="post" action="{{ route('pembudidaya_simpan') }}" role="form">
 										
+										{{ csrf_field() }}
+
 										<div class="row clearfix">
 											<div class="col-sm-6">
 												<div class="form-group required">
@@ -61,7 +71,7 @@
 											<div class="col-sm-6">
 												<div class="form-group">
 													<label>Nama Lengkap</label>
-													<input type="text" class="form-control" name="nama" required>
+													<input type="text" class="form-control" name="name" required>
 												</div>
 											</div>
 										</div>
@@ -80,14 +90,14 @@
 												<div class="form-group">
 													<label>Nama Kelompok</label>
 													<div class="input-group">
-														<select class="full-width" data-init-plugin="select2">
+														<select class="full-width" name="id_kelompok" data-init-plugin="select2" required>
 															<option value="">Pilih Kelompok...</option>
 															@foreach( $kelompok as $klp )
 																<option value="{{ $klp->id }}">{{ $klp->nama }}</option>
 															@endforeach
 														</select>
 														<div class="input-group-btn">
-															<button class="btn btn-primary" type="submit">+</button>
+															<button class="btn btn-primary" type="button">+</button>
 														</div>
 													</div>
 												</div>
@@ -96,14 +106,14 @@
 												<div class="form-group">
 													<label>Jabatan Dalam Kelompok</label>
 													<div class="input-group">
-														<select class="full-width" data-init-plugin="select2">
+														<select class="full-width" name="id_jabatan" data-init-plugin="select2" required>
 															<option value="">Pilih Jabatan...</option>
 															@foreach( $jabatan as $jab )
 																<option value="{{ $jab->id }}">{{ $jab->nama }}</option>
 															@endforeach
 														</select>
 														<div class="input-group-btn">
-															<button class="btn btn-primary" type="submit">+</button>
+															<button class="btn btn-primary" type="button">+</button>
 														</div>
 													</div>
 												</div>
@@ -119,7 +129,7 @@
 											<div class="row">
 												<div class="col-sm-6">
 													<div class="form-group">
-														<select onchange="get_usaha(this.value)" class="full-width" data-init-plugin="select2">
+														<select onchange="get_usaha(this.value)" class="full-width" required data-init-plugin="select2">
 															<option value="">Pilih Jenis Usaha...</option>
 															<option value="Budidaya Air Laut">Budidaya Air Laut</option>
 															<option value="Budidaya Air Tawar">Budidaya Air Tawar</option>
@@ -148,7 +158,7 @@
 											<div class="row">
 												<div class="col-sm-6">
 													<div class="form-group">
-														<select onchange="get_sarana(this.value)" class="full-width" data-init-plugin="select2">
+														<select onchange="get_sarana(this.value)" class="full-width" required data-init-plugin="select2">
 															<option value="Budidaya Air Laut">Budidaya Air Laut</option>
 															<option value="Budidaya Air Tawar">Budidaya Air Tawar</option>
 															<option value="Budidaya Air Payau">Budidaya Air Payau</option>
@@ -204,13 +214,11 @@
 													<th>
 														<button class="btn btn-check" data-toggle="modal" data-target="#modal-hapus" disabled id="hapus"><i class="pg-trash"></i></button>
 													</th>
-													<th>NIK</th>
 													<th>Nama Lengkap</th>
-													<th>Alamat</th>
 													<th>Nama Kelompok</th>
 													<th>Jabatan Kelompok</th>
 													<th>Jenis Usaha</th>
-													<th>Bantuan</th>
+													<th style="text-align:center">Aksi</th>
 												</tr>
 											</thead>
 											<tbody>
@@ -222,13 +230,14 @@
 																<label for="pb{{ $pb->id }}" class="m-l-20"></label>
 															</div>
 														</td>
-														<td><a href="{{ route('pembudidaya_edit',$pb->id) }}">{{ $pb->nik }}</a></td>
-														<td>{{ $pb->name }}</td>
-														<td>{{ $pb->alamat }}</td>
+														<td><a >{{ $pb->name }}</a></td>
 														<td>{{ $pb->kelompok->nama }}</td>
 														<td>{{ $pb->jabatan->nama }}</td>
 														<td>{{ $pb->usaha->jenis }}</td>
-														<td style="text-align:center"><button class="btn btn-success btn-xs">Lihat</button></td>
+														<td style="text-align:center">
+															<a class="btn btn-default btn-xs"><i class="fa fa-search-plus"></i></a>
+															<a href="{{ route('pembudidaya_edit',$pb->id) }}" class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i></a>
+														</td>
 													</tr>
 												@endforeach
 											</tbody>
@@ -321,6 +330,7 @@
 		});
 
 		function get_usaha(id){
+			$('#usaha').html('<i class="fa fa-spinner fa-spin"></i>');
 			var _token = $('meta[name="csrf-token"]').attr('content');
 			var url = "{{ url('app/pembudidaya/usaha') }}";
 			var url = url+"/"+id;
@@ -330,6 +340,7 @@
 		}
 
 		function get_sarana(id){
+			$('#sarana').html('<i class="fa fa-spinner fa-spin"></i>');
 			var _token = $('meta[name="csrf-token"]').attr('content');
 			var url = "{{ url('app/pembudidaya/sarana') }}";
 			var url = url+"/"+id;
