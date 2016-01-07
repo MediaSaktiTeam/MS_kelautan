@@ -185,9 +185,14 @@
 							<div class="panel panel-default">
 								<div class="panel-body">
 									<div class="">
-										<input type="text" class="form-control" placeholder="Pencarian">
+										<div class="input-group">
+											<input type="text" class="form-control" placeholder="Pencarian">
+											<span class="input-group-btn">
+												<a href="" class="btn btn-default"><i class="fa fa-print"></i> &nbsp;Cetak</a>
+											</span>
+										</div>
 										<br>
-
+										
 										<table class="table table-hover demo-table-dynamic custom" id="tableWithDynamicRows">
 											<thead>
 												<tr>
