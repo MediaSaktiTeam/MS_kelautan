@@ -21,7 +21,6 @@ class PembudidayaController extends Controller
         $data['pembudidaya'] = User::where('profesi','Pembudidaya')->orderBy('id','desc')->get();
         $data['kelompok'] = Kelompok::where('tipe','Pembudidaya')->get();
         $data['jabatan'] = Jabatan::all();
-        $data['sarana'] = Sarana::where('jenis','Budidaya Air laut')->where('tipe','Pembudidaya')->get();
         return view ('app.pembudidaya.index',$data);
     }
 

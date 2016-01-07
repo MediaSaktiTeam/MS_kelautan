@@ -30,7 +30,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 
     public function kelompok()
     {
-        return $this->belongsTo('App\Kelompok','id_kelompok','id');
+        return $this->belongsTo('App\Kelompok','id_kelompok','id_kelompok');
     }
 
     public function jabatan()

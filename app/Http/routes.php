@@ -34,9 +34,18 @@ Route::group(['middleware' => 'MustLogin', 'namespace' => 'App' ], function () {
         'getDetail'  => 'pembudidaya_get_detail',
     ]);
 
-    Route::get('/app/nelayan', function () {
-        return view('app.nelayan.index');
-    });
+    Route::controller('app/nelayan', 'NelayanController',
+    [
+        'getIndex'  => 'nelayan',
+        'getTambah'  => 'nelayan_tambah',
+        'postSimpan'  => 'nelayan_simpan',
+        'getEdit'  => 'nelayan_edit',
+        'postUpdate'  => 'nelayan_update',
+        'getHapus'  => 'nelayan_hapus',
+        'getSarana'  => 'nelayan_get_sarana',
+        'getUsaha'  => 'nelayan_get_usaha',
+        'getDetail'  => 'nelayan_get_detail',
+    ]);
 
     Route::get('/app/pengolah', function () {
         return view('app.pengolah.index');

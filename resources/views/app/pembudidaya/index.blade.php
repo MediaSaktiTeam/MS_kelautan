@@ -80,7 +80,7 @@
 															<select class="full-width" name="id_kelompok" data-init-plugin="select2" required>
 																<option value="">Pilih Kelompok...</option>
 																@foreach( $kelompok as $klp )
-																	<option value="{{ $klp->id }}">{{ $klp->nama }}</option>
+																	<option value="{{ $klp->id_kelompok }}">{{ $klp->nama }}</option>
 																@endforeach
 															</select>
 															<div class="input-group-btn">
@@ -232,7 +232,7 @@
 																<label for="pb{{ $pb->id }}" class="m-l-20"></label>
 															</div>
 														</td>
-														<td><a >{{ $pb->name }}</a></td>
+														<td>{{ $pb->name }}</td>
 														<td>{{ $pb->kelompok->nama }}</td>
 														<td>{{ $pb->jabatan->nama }}</td>
 														<td>{{ $pb->usaha->jenis }}</td>
