@@ -18855,7 +18855,7 @@ if("undefined"!=typeof e){var target=$(e.target);if(target.parent(".page-sidebar
                 "sLengthMenu": "_MENU_ ",
                 "sInfo": "Showing <b>_START_ to _END_</b> of _TOTAL_ entries"
             },
-            "iDisplayLength": 5
+            "iDisplayLength": 20
         };
 
 

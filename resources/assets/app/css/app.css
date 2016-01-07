@@ -27413,6 +27413,16 @@ body.overflow-hidden {
   background: #2D3E80;
   color: #fff; }
 
+.bg-blueblur {
+  background: #5364A5;
+  color: #fff; }
+
+.m-t-10 {
+  margin-top: 10px; }
+
+.m-b-10 {
+  margin-bottom: 10px; }
+
 .breadcrumb li + li:before {
   color: #fff; }
 
@@ -27446,3 +27456,6 @@ table.dataTable thead .sorting_asc {
 
 table.dataTable thead .sorting_desc {
   background: url("../img/sort/sort_desc.png") no-repeat center right; }
+
+.close {
+  margin-right: 10px; }

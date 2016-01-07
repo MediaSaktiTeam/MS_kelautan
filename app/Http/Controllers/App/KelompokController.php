@@ -48,7 +48,7 @@ class KelompokController extends Controller
         $val = explode(",", $id);
 
         foreach ($val as $value) {
-            Kelompok::where('id', $value)->delete();            
+            Kelompok::where('id_kelompok', $value)->delete();            
         }
         return redirect()->route('kelompok');
     }

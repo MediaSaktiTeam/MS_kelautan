@@ -133,13 +133,7 @@
 											<div class="col-md-12">
 												<div class="form-group">
 													<label>Kepemilikan Sarana dan Prasarana</label>
-												</div>
-											</div>
-										</div>
-
-										<div class="row">
-											<div class="col-sm-12">
-												<div class="form-group">
+												
 													<select name="id_sarana[]" class="full-width" data-init-plugin="select2" multiple="" data-placeholder="Pilih Sarana / Prasaranan...">
 
 														<?php $sarana = App\Sarana::where('tipe', 'Nelayan')->get(); ?>
@@ -178,24 +172,6 @@
 										<div class="clearfix"></div>
 										<button class="btn btn-primary" type="submit">Simpan</button>
 									</form>
-								</div>
-							</div>
-							<!-- END PANEL -->
-						</div>
-						
-						<div class="col-lg-5 col-md-6">
-							<!-- START PANEL -->
-							<div class="panel panel-transparent">
-								<div class="panel-heading">
-									<div class="panel-title">Keterangan</div>
-								</div>
-								<div class="panel-body">
-									<h3>Showcase and guide users with a <br>better User Interface &amp; Experience.
-									</h3>
-									<p>Forms are one of the most important components
-										<br> when it comes to a dashboard. Recognizing that fact, users are
-										<br>able work in a maximum content width.
-									</p>
 								</div>
 							</div>
 							<!-- END PANEL -->

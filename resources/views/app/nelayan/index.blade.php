@@ -21,11 +21,13 @@
 				<div class="container-fluid container-fixed-lg">
 					<div class="inner" style="transform: translateY(0px); opacity: 1;">
 						<!-- START BREADCRUMB -->
-						<ul class="breadcrumb">
+						<ul class="breadcrumb pull-left">
 							<li>
 								<a href="{{ route('nelayan') }}">Nelayan</a>
 							</li>
 						</ul>
+						
+						<button id="show-tambah-nelayan" class="btn btn-primary bg-blueblur m-t-10 m-b-10 pull-right">Tambah</button>
 					</div>
 				</div>
 
@@ -43,6 +45,10 @@
 
 								<!-- START PANEL -->
 								<div class="panel panel-transparent">
+									<div class="panel-heading">
+										<h3>Nelayan adalah</h3>
+										<p>istilah bagi orang-orang yang sehari-harinya bekerja menangkap ikan atau hewan laut lainnya yang hidup di dasar,maupun permukaan perairan. Perairan yang menjadi daerah aktivitas nelayan ini dapat merupakan perairan tawar, payau maupun laut.</p>
+									</div>
 									<div class="panel-body">
 										<form id="form-personal" method="post" action="{{ route('nelayan_simpan') }}" role="form">
 											
@@ -158,24 +164,6 @@
 								</div>
 								<!-- END PANEL -->
 							</div>
-							
-							<div class="col-lg-5 col-md-6">
-								<!-- START PANEL -->
-								<div class="panel panel-transparent">
-									<div class="panel-heading">
-										<div class="panel-title">Keterangan</div>
-									</div>
-									<div class="panel-body">
-										<h3>Showcase and guide users with a <br>better User Interface &amp; Experience.
-										</h3>
-										<p>Forms are one of the most important components
-											<br> when it comes to a dashboard. Recognizing that fact, users are
-											<br>able work in a maximum content width.
-										</p>
-									</div>
-								</div>
-								<!-- END PANEL -->
-							</div>
 						</div>
 
 						<div class="col-md-12">
@@ -192,12 +180,14 @@
 									@include('app/layout/partials/alert-danger', ['errors' => $errors])
 								@endif
 
-							<button id="show-tambah-nelayan" style="margin-bottom:20px" class="btn btn-primary">Tambah</button>
 							
 							<!-- START PANEL -->
 							<div class="panel panel-default">
 								<div class="panel-body">
 									<div class="">
+										<input type="text" class="form-control" placeholder="Pencarian">
+										<br>
+
 										<table class="table table-hover demo-table-dynamic custom" id="tableWithDynamicRows">
 											<thead>
 												<tr>

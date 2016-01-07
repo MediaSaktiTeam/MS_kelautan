@@ -49,7 +49,7 @@
 								</div>
 							</div>
 							<div class="panel-body">
-							<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nulla, corrupti, esse. Earum!</p>
+							<p>Silahkan tambahkan kelompok baru, selanjutnya tekan tombol <b>tambah anggota</b> untuk menambahkan anggota kelompok.</p>
 								<form class="style-form" method="GET" action="{{ route('kelompok_tambah') }}">
 									<input type="hidden" name="_token" value="{{ csrf_token() }}">
 									
@@ -102,12 +102,16 @@
 						<!-- START PANEL -->
 						<div class="panel panel-default">
 							<div class="panel-body">
+								<input type="text" class="form-control" placeholder="Pencarian">
+								<br>
+
 								<table class="table table-hover demo-table-dynamic custom" id="tableWithDynamicRows">
 									<thead>
 										<tr>
 											<th>
 												<button class="btn btn-check" data-toggle="modal" data-target="#modal-hapus" disabled id="hapus"><i class="pg-trash"></i></button>
 											</th>
+											<th>ID Kelompok</th>
 											<th>Nama Kelompok</th>
 											<th>Bidang Usaha</th>
 											<th>Aksi</th>
@@ -118,15 +122,17 @@
 										<tr>
 											<td>
 												<div class="checkbox">
-													<input type="checkbox" class="pilih" value="{{ $kel->id }}" id="checkbox{{ $kel->id }}">
-													<label for="checkbox{{ $kel->id }}" class="m-l-20"></label>
+													<input type="checkbox" class="pilih" value="{{ $kel->id_kelompok }}" id="checkbox{{ $kel->id_kelompok }}">
+													<label for="checkbox{{ $kel->id_kelompok }}" class="m-l-20"></label>
 												</div>
 											</td>
+											<td>{{ $kel->id_kelompok }}</td>
 											<td>{{ $kel->nama }}</td>
 											<td>{{ $kel->tipe }}</td>
 											<td>
-												<a class="btn btn-default btn-xs view" data-id="{{ $kel->id_kelompok }}" data-target="#modal-view">Lihat</a>
-												<button class="btn btn-primary btn-xs" data-toggle="modal" data-target="#modal-view-anggota-add">Tambah Anggota</button>
+												<a class="btn btn-default btn-xs view" data-id="{{ $kel->id_kelompok }}" data-toggle="modal" data-target="#modal-view"><i class="fa fa-search-plus"></i></a>
+												<a href="" class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i></a>
+												<button class="btn btn-complete btn-xs" data-toggle="modal" data-target="#modal-view-anggota-add">Tambah Anggota</button>
 											</td>
 										</tr>
 										@endforeach
@@ -413,23 +419,25 @@
 
 @section('registerscript')
 	<script>
-$(function(){
+		$(".menu-items .link-kelompok").addClass("active");
+
+		$(function(){
 
 			var _token = $('meta[name="csrf-token"]').attr('content');
 
 			$("#hapus").click(function(){
 
 				if($(".pilih:checked").length) {
-		          var id = "";
-		          $(".pilih:checked").each(function() {
-		            id += $(this).val() + ",";
-		          });
-		          id =  id.slice(0,-1);
-		        }
-		        else {
-				  return false;
-		        }
-		        $(".btn-hapus").attr('href',"{{ route('kelompok_hapus') }}/"+id);
+					var id = "";
+					$(".pilih:checked").each(function() {
+						id += $(this).val() + ",";
+					});
+					id =  id.slice(0,-1);
+				}
+				else {
+					return false;
+				}
+				$(".btn-hapus").attr('href',"{{ route('kelompok_hapus') }}/"+id);
 
 			});
 
@@ -451,7 +459,5 @@ $(function(){
 			});
 
 		});
-
-		}
 	</script>
 @endsection

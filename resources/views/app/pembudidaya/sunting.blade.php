@@ -126,20 +126,13 @@
 											<div class="col-md-12">
 												<div class="form-group">
 													<label>Jenis Usaha Budidaya</label>
+													<select onchange="get_usaha(this.value)" class="full-width" required data-init-plugin="select2">
+														<option value="">Pilih Jenis Usaha...</option>
+														<option value="Budidaya Air Laut" {{ $pembudidaya->usaha->jenis == "Budidaya Air Laut" ? "selected":"" }}>Budidaya Air Laut</option>
+														<option value="Budidaya Air Tawar" {{ $pembudidaya->usaha->jenis == "Budidaya Air Tawar" ? "selected":"" }}>Budidaya Air Tawar</option>
+														<option value="Budidaya Air Payau" {{ $pembudidaya->usaha->jenis == "Budidaya Air Payau" ? "selected":"" }}>Budidaya Air Payau</option>
+													</select>
 												</div>
-											</div>
-											<div class="row">
-												<div class="col-sm-12">
-													<div class="form-group">
-														<select onchange="get_usaha(this.value)" class="full-width" required data-init-plugin="select2">
-															<option value="">Pilih Jenis Usaha...</option>
-															<option value="Budidaya Air Laut" {{ $pembudidaya->usaha->jenis == "Budidaya Air Laut" ? "selected":"" }}>Budidaya Air Laut</option>
-															<option value="Budidaya Air Tawar" {{ $pembudidaya->usaha->jenis == "Budidaya Air Tawar" ? "selected":"" }}>Budidaya Air Tawar</option>
-															<option value="Budidaya Air Payau" {{ $pembudidaya->usaha->jenis == "Budidaya Air Payau" ? "selected":"" }}>Budidaya Air Payau</option>
-														</select>
-													</div>
-												</div>
-												
 											</div>
 										</div>
 
@@ -147,18 +140,6 @@
 											<div class="col-md-6">
 												<div class="form-group">
 													<label>Jenis Usaha</label>
-												</div>
-											</div>
-											<div class="col-md-6">
-												<div class="form-group">
-													<label>Kepemilikan Sarana dan Prasarana</label>
-												</div>
-											</div>
-										</div>
-
-										<div class="row">
-											<div class="col-sm-6">
-												<div class="form-group">
 													<div id="usaha">
 														<select class="full-width" data-init-plugin="select2" name="id_usaha" required>
 															<option value="">Pilih Spesifik Usaha...</option>
@@ -170,8 +151,9 @@
 													</div>
 												</div>
 											</div>
-											<div class="col-sm-6">
+											<div class="col-md-6">
 												<div class="form-group">
+													<label>Kepemilikan Sarana dan Prasarana</label>
 													<div id="sarana">
 														<select name="id_sarana[]" class="full-width" data-init-plugin="select2" multiple="" required>
 															<?php $sarana = App\Sarana::where('jenis', $pembudidaya->usaha->jenis)->get(); ?>
@@ -188,30 +170,23 @@
 													</div>
 												</div>
 											</div>
+										</div>
+
+										<div class="row">
+											<div class="col-sm-6">
+												<div class="form-group">
+												</div>
+											</div>
+											<div class="col-sm-6">
+												<div class="form-group">
+												</div>
+											</div>
 											
 										</div>
 
 										<div class="clearfix"></div>
 										<button class="btn btn-primary" type="submit">Simpan</button>
 									</form>
-								</div>
-							</div>
-							<!-- END PANEL -->
-						</div>
-						
-						<div class="col-lg-5 col-md-6">
-							<!-- START PANEL -->
-							<div class="panel panel-transparent">
-								<div class="panel-heading">
-									<div class="panel-title">Keterangan</div>
-								</div>
-								<div class="panel-body">
-									<h3>Showcase and guide users with a <br>better User Interface &amp; Experience.
-									</h3>
-									<p>Forms are one of the most important components
-										<br> when it comes to a dashboard. Recognizing that fact, users are
-										<br>able work in a maximum content width.
-									</p>
 								</div>
 							</div>
 							<!-- END PANEL -->
