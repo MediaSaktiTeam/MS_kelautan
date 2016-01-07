@@ -52,7 +52,7 @@
 								<h5>Sarana Nelayan</h5>
 								<p>* Sarana Nelayan adalah item yang digunakan pada halaman pembudidaya dan nelayan.</p>
 								<form class="style-form" method="GET" action="{{ route('sarananelayan_tambah') }}">
-                				<input type="hidden" name="_token" value="{{ csrf_token() }}">
+									<input type="hidden" name="_token" value="{{ csrf_token() }}">
 									<div class="form-group form-group-default required">
 										<label>Sarana / Prasarana</label>
 										<select class="full-width" data-init-plugin="select2" name="jenis">
@@ -86,6 +86,7 @@
 											</th>
 											<th>Sarana / Prasarana</th>
 											<th>Detail</th>
+											<th>Aksi</th>
 										</tr>
 									</thead>
 									<tbody>
@@ -99,6 +100,7 @@
 											</td>
 											<td>{{ $sr->jenis }}</td>
 											<td>{{ $sr->sub }}</td>
+											<td><button class="btn btn-default btn-xs" data-toggle="modal" data-target="#modal-sunting"><i class="fa fa-pencil"></i></button></td>
 										</tr>
 										@endforeach
 									</tbody>
@@ -138,21 +140,35 @@
 <!-- END PAGE CONTAINER -->
 
 
-<!-- MODAL STICK UP SMALL ALERT -->
-<div class="modal fade stick-up" id="modal-hapus" tabindex="-1" role="dialog" aria-hidden="true">
-	<div class="modal-dialog modal-sm">
+<!-- MODAL STICK UP EDIT -->
+<div class="modal fade stick-up" id="modal-sunting" tabindex="-1" role="dialog" aria-hidden="true">
+	<div class="modal-dialog">
 		<div class="modal-content-wrapper">
 			<div class="modal-content">
 				<div class="modal-header clearfix text-left">
-					<button type="button" class="close" data-dismiss="modal" aria-hidden="true"><i class="pg-close fs-14"></i></button>
-					<h5>Hapus Data</h5>
+					<button type="button" class="close" data-dismiss="modal"  aria-hidden="true"><i class="pg-close fs-14"></i></button>
+					<h5>Sunting Data</h5>
 				</div>
 				<div class="modal-body">
-					<p class="no-margin">Data akan dihapus. Apakah Anda yakin?</p>
-				</div>
-				<div class="modal-footer">
-					<a class="btn btn-danger btn-hapus btn-cons pull-left inline">Ya</a>
-					<button type="button" class="btn btn-default btn-cons no-margin pull-left inline" data-dismiss="modal">Tidak</button>
+					<form class="style-form" method="GET" action="{{ route('sarananelayan_tambah') }}">
+						<input type="hidden" name="_token" value="{{ csrf_token() }}">
+						<div class="form-group form-group-default required">
+							<label>Sarana / Prasarana</label>
+							<select class="full-width" data-init-plugin="select2" name="jenis">
+								<option value="Perahu/Kapal">Perahu/Kapal</option>
+								<option value="Alat Tangkap">Alat Tangkap</option>
+								<option value="Mesin">Mesin</option>
+							</select>
+						</div>
+						<div class="form-group form-group-default required">
+							<label>Detail</label>
+							<input type="text" name="sub" class="form-control" required>
+						</div>
+						<div class="form-group">
+							<button class="btn btn-primary btn-cons">Simpan</button>
+							<button type="button" class="btn btn-default btn-cons" data-dismiss="modal">Kembali</button>
+						</div>
+					</form>
 				</div>
 			</div>
 		</div>
@@ -160,7 +176,7 @@
 	</div>
 	<!-- /.modal-dialog -->
 </div>
-<!-- END MODAL STICK UP SMALL ALERT -->
+<!-- END MODAL STICK UP EDIT -->
 
 @endsection
 

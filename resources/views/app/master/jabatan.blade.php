@@ -52,7 +52,7 @@
 								<h5>Jabatan</h5>
 								<p>* Jabatan digunakan pada halaman kelompok.</p>
 								<form class="style-form" method="GET" action="{{ route('jabatan_tambah') }}">
-								<input type="hidden" name="_token" value="{{ csrf_token() }}">
+									<input type="hidden" name="_token" value="{{ csrf_token() }}">
 									<div class="form-group form-group-default required">
 										<label>Nama Jabatan</label>
 										<input type="text" name="nama" class="form-control" required>
@@ -77,6 +77,7 @@
 												<button class="btn btn-check" data-toggle="modal" data-target="#modal-hapus" disabled id="hapus"><i class="pg-trash"></i></button>
 											</th>
 											<th>Jabatan</th>
+											<th>Aksi</th>
 										</tr>
 									</thead>
 									<tbody>
@@ -89,6 +90,7 @@
 												</div>
 											</td>
 											<td>{{ $jb->nama }}</td>
+											<td><button class="btn btn-default btn-xs" data-toggle="modal" data-target="#modal-sunting"><i class="fa fa-pencil"></i></button></td>
 										</tr>
 										@endforeach
 									</tbody>
@@ -152,6 +154,37 @@
 	<!-- /.modal-dialog -->
 </div>
 <!-- END MODAL STICK UP SMALL ALERT -->
+
+
+<!-- MODAL STICK UP EDIT -->
+<div class="modal fade stick-up" id="modal-sunting" tabindex="-1" role="dialog" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content-wrapper">
+			<div class="modal-content">
+				<div class="modal-header clearfix text-left">
+					<button type="button" class="close" data-dismiss="modal"  aria-hidden="true"><i class="pg-close fs-14"></i></button>
+					<h5>Sunting Data</h5>
+				</div>
+				<div class="modal-body">
+					<form class="style-form" method="GET" action="{{ route('jabatan_tambah') }}">
+						<input type="hidden" name="_token" value="{{ csrf_token() }}">
+						<div class="form-group form-group-default required">
+							<label>Nama Jabatan</label>
+							<input type="text" name="nama" class="form-control" required>
+						</div>
+						<div class="form-group">
+							<button type="submit" class="btn btn-primary btn-cons">Simpan</button>
+							<button type="button" class="btn btn-default btn-cons" data-dismiss="modal">Kembali</button>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+		<!-- /.modal-content -->
+	</div>
+	<!-- /.modal-dialog -->
+</div>
+<!-- END MODAL STICK UP EDIT -->
 
 @endsection
 

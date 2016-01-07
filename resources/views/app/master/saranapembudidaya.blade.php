@@ -52,7 +52,7 @@
 								<h5>Sarana Pembudidaya</h5>
 								<p>* Sarana Pembudidaya adalah item yang digunakan pada halaman pembudidaya dan nelayan.</p>
 								<form class="style-form" method="GET" action="{{ route('saranapembudidaya_tambah') }}">
-                				<input type="hidden" name="_token" value="{{ csrf_token() }}">
+									<input type="hidden" name="_token" value="{{ csrf_token() }}">
 									<div class="form-group form-group-default required">
 										<label>Jenis Usaha Budidaya</label>
 										<select class="full-width" data-init-plugin="select2" name="jenis">
@@ -86,6 +86,7 @@
 											</th>
 											<th>Jenis Usaha Budidaya</th>
 											<th>Sarana / Prasarana</th>
+											<th>Aksi</th>
 										</tr>
 									</thead>
 									<tbody>
@@ -99,6 +100,7 @@
 											</td>
 											<td>{{ $sr->jenis }}</td>
 											<td>{{ $sr->sub }}</td>
+											<td><button class="btn btn-default btn-xs" data-toggle="modal" data-target="#modal-sunting"><i class="fa fa-pencil"></i></button></td>
 										</tr>
 										@endforeach
 									</tbody>
@@ -161,6 +163,45 @@
 	<!-- /.modal-dialog -->
 </div>
 <!-- END MODAL STICK UP SMALL ALERT -->
+
+
+<!-- MODAL STICK UP EDIT -->
+<div class="modal fade stick-up" id="modal-sunting" tabindex="-1" role="dialog" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content-wrapper">
+			<div class="modal-content">
+				<div class="modal-header clearfix text-left">
+					<button type="button" class="close" data-dismiss="modal"  aria-hidden="true"><i class="pg-close fs-14"></i></button>
+					<h5>Sunting Data</h5>
+				</div>
+				<div class="modal-body">
+					<form class="style-form" method="GET" action="{{ route('sarananelayan_tambah') }}">
+						<input type="hidden" name="_token" value="{{ csrf_token() }}">
+						<div class="form-group form-group-default required">
+							<label>Jenis Usaha Budidaya</label>
+							<select class="full-width" data-init-plugin="select2" name="jenis">
+								<option value="Budidaya Air Laut">Budidaya Air Laut</option>
+								<option value="Budidaya Air Tawar">Budidaya Air Tawar</option>
+								<option value="Budidaya Air Payau">Budidaya Air Payau</option>
+							</select>
+						</div>
+						<div class="form-group form-group-default required">
+							<label>Sarana / Prasarana</label>
+							<input type="text" name="sub" class="form-control" required>
+						</div>
+						<div class="form-group">
+							<button class="btn btn-primary btn-cons">Simpan</button>
+							<button type="button" class="btn btn-default btn-cons" data-dismiss="modal">Kembali</button>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+		<!-- /.modal-content -->
+	</div>
+	<!-- /.modal-dialog -->
+</div>
+<!-- END MODAL STICK UP EDIT -->
 
 @endsection
 
