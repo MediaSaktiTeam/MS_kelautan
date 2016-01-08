@@ -23,7 +23,7 @@ class KelompokController extends Controller
 
     public function getDetail($id)
     {
-        $data['kelompok'] = Kelompok::find($id);
+        $data['kelompok'] = Kelompok::where('id_kelompok',$id)->first();
 
         return view('app.kelompok.detail', $data);
     }
