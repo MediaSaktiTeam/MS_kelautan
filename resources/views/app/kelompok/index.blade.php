@@ -137,7 +137,6 @@
 											<td>
 												<a class="btn btn-default btn-xs view" data-id="{{ $kel->id_kelompok }}" data-toggle="modal" data-target="#modal-view"><i class="fa fa-search-plus"></i></a>
 												<a href="" class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i></a>
-												<button class="btn btn-complete btn-xs" data-toggle="modal" data-target="#modal-view-anggota-add">Tambah Anggota</button>
 											</td>
 										</tr>
 										@endforeach
@@ -272,119 +271,7 @@
 					</table>
 				</div>
 				<div class="modal-footer">
-					<a class="btn btn-primary btn-hapus btn-cons pull-left inline" data-toggle="modal" data-target="#modal-view-anggota" data-dismiss="modal">Tambah Anggota</a>
 					<button type="button" class="btn btn-default btn-cons no-margin pull-left inline" data-dismiss="modal">Kembali</button>
-				</div>
-			</div>
-		</div>
-		<!-- /.modal-content -->
-	</div>
-	<!-- /.modal-dialog -->
-</div>
-<!-- END MODAL STICK UP VIEW -->
-
-
-<!-- MODAL STICK UP VIEW -->
-<div class="modal fade stick-up" id="modal-view-anggota-add" tabindex="-1" role="dialog" aria-hidden="true">
-	<div class="modal-dialog modal-lg">
-		<div class="modal-content-wrapper">
-			<div class="modal-content">
-				<div class="modal-header clearfix text-left">
-					<button type="button" class="close" data-dismiss="modal"  aria-hidden="true"><i class="pg-close fs-14"></i></button>
-					<h5>Tambah Anggota Kelompok <b>#019AC</b></h5>
-				</div>
-				<div class="modal-body">
-					<form class="style-form" method="GET" action="{{ route('bantuan_tambah') }}">
-						<input type="hidden" name="_token" value="{{ csrf_token() }}">
-						<div class="form-group form-group-default required">
-							<label>Nama Anggota</label>
-							<select class="full-width" data-init-plugin="select2" name="nama">
-								<option value="">Pilih Anggota ..</option>
-								<option value="Gifa Eriyanto">Gifa Eriyanto</option>
-								<option value="Abd. Rahmat Ika">Abd. Rahmat Ika</option>
-								<option value="Akbar">Akbar</option>
-								<option value="Lutfi">Lutfi</option>
-							</select>
-						</div>
-						<div class="form-group form-group-default required">
-							<label>Jabatan</label>
-							<select class="full-width" data-init-plugin="select2" name="jabatan">
-								<option value="Anggota">Anggota</option>
-								<option value="Ketua">Ketua</option>
-								<option value="Wakil Ketua">Wakil Ketua</option>
-								<option value="Bendahara">Bendahara</option>
-							</select>
-						</div>
-						<div class="form-group form-group-default required">
-							<label>Bantuan Yang Pernah Diterima</label>
-
-							<div class="row">
-								<div class="col-md-9">
-									<select class="full-width" data-init-plugin="select2" name="jabatan">
-										<option value="">Jenis Bantuan ..</option>
-										<option value="Kapal/Perahu">Kapal/Perahu</option>
-										<option value="Alat Tangkap">Alat Tangkap</option>
-										<option value="Mesin">Mesin</option>
-									</select>
-								</div>
-								<div class="col-md-3">
-									<select class="full-width" data-init-plugin="select2" name="jabatan">
-										<option value="">Tahun ..</option>
-										<?php for ($i=2000; $i <= 2030; $i++) { ?>
-											<option value="<?php echo $i ?>"><?php echo $i ?></option>
-										<?php } ?>
-									</select>
-								</div>
-							</div>
-
-							<hr class="no-margin">
-
-							<div class="row">
-								<div class="col-md-9">
-									<select class="full-width" data-init-plugin="select2" name="jabatan">
-										<option value="">Jenis Bantuan ..</option>
-										<option value="Kapal/Perahu">Kapal/Perahu</option>
-										<option value="Alat Tangkap">Alat Tangkap</option>
-										<option value="Mesin">Mesin</option>
-									</select>
-								</div>
-								<div class="col-md-3">
-									<select class="full-width" data-init-plugin="select2" name="jabatan">
-										<option value="">Tahun ..</option>
-										<?php for ($i=2000; $i <= 2030; $i++) { ?>
-											<option value="<?php echo $i ?>"><?php echo $i ?></option>
-										<?php } ?>
-									</select>
-								</div>
-							</div>
-
-							<hr class="no-margin">
-
-							<div class="row">
-								<div class="col-md-9">
-									<select class="full-width" data-init-plugin="select2" name="jabatan">
-										<option value="">Jenis Bantuan ..</option>
-										<option value="Kapal/Perahu">Kapal/Perahu</option>
-										<option value="Alat Tangkap">Alat Tangkap</option>
-										<option value="Mesin">Mesin</option>
-									</select>
-								</div>
-								<div class="col-md-3">
-									<select class="full-width" data-init-plugin="select2" name="jabatan">
-										<option value="">Tahun ..</option>
-										<?php for ($i=2000; $i <= 2030; $i++) { ?>
-											<option value="<?php echo $i ?>"><?php echo $i ?></option>
-										<?php } ?>
-									</select>
-								</div>
-							</div>
-
-						</div>
-						<div class="form-group">
-							<button type="submit" class="btn btn-primary btn-cons">Tambah</button>
-							<button type="button" class="btn btn-default btn-cons" data-dismiss="modal">Kembali</button>
-						</div>
-					</form>
 				</div>
 			</div>
 		</div>
