@@ -2,42 +2,39 @@
 	<tbody>
 		<tr>
 			<td style="width:250px">NIK</td>
-			<td><b>{{ $pembudidaya->nik }}</b></td>
+			<td><b>{{ $nelayan->nik }}</b></td>
+		</tr>
+		<tr>
+			<td style="width:250px">No Kartu Nelayan</td>
+			<td><b>{{ $nelayan->no_kartu_nelayan }}</b></td>
 		</tr>
 		<tr>
 			<td>Nama Lengkap</td>
-			<td><b>{{ $pembudidaya->name }}</b></td>
+			<td><b>{{ $nelayan->name }}</b></td>
 		</tr>
 		<tr>
 			<td>Alamat</td>
-			<td><b>{{ $pembudidaya->alamat }}</b></td>
+			<td><b>{{ $nelayan->alamat }}</b></td>
 		</tr>
 		<tr>
 			<td>Nama Kelompok</td>
-			<td><b>{{ $pembudidaya->kelompok->nama }}</b></td>
+			<td><b>{{ $nelayan->kelompok->nama }}</b></td>
 		</tr>
 		<tr>
 			<td>Jabatan</td>
-			<td><b>{{ $pembudidaya->jabatan->nama }}</b></td>
+			<td><b>{{ $nelayan->jabatan->nama }}</b></td>
 		</tr>
 
 		<tr>
-			<td>Jenis Usaha</td>
-			<td><b>
-					{{ $pembudidaya->usaha->jenis }} 
-					&nbsp; <i class="fa fa-angle-double-right"></i> &nbsp; 
-					{{ $pembudidaya->usaha->nama }}
-				</b>
-			</td>
-		</tr>
-
-		<tr>
-			<?php $sarana = App\Sarana::where('jenis', $pembudidaya->usaha->jenis)->get(); ?>
-			<?php $Ksarana = App\KepemilikanSarana::where('id_user', $pembudidaya->id)->get(); ?>
+			<?php $Ksarana = App\KepemilikanSarana::where('id_user', $nelayan->id)->get(); ?>
 			<td>Sarana / Prasarana yang dimiliki</td>
 			<td><b>
 					@foreach ( $Ksarana as $ks )
-						<i class="fa fa-check-square-o"></i> {{ $ks->sarana->sub }} <br>
+						<i class="fa fa-check-square-o"></i> 
+							{{ $ks->sarana->jenis }}
+							&nbsp; <i class="fa fa-angle-double-right"></i> &nbsp;
+							{{ $ks->sarana->sub }} 
+						<br>
 					@endforeach
 				</b>
 			</td>
@@ -46,7 +43,7 @@
 	</tbody>
 </table>
 
-<h4>Bantuan yang pernah didapatkan</h4>
+<h5>Bantuan yang pernah didapatkan</h5>
 
 <table class="table table-bordered demo-table-dynamic custom" id="tableWithDynamicRows">
 	<tbody>

@@ -79,10 +79,9 @@ class NelayanController extends Controller
 
     public function getEdit($id)
     {
+        $data['nelayan'] = User::find($id);
         $data['kelompok'] = Kelompok::where('tipe','nelayan')->get();
         $data['jabatan'] = Jabatan::all();
-        $data['sarana'] = Sarana::where('jenis','Budidaya Air laut')->where('tipe','nelayan')->get();
-        $data['nelayan'] = User::find($id);
         return view('app.nelayan.sunting', $data);
     }
 
@@ -90,6 +89,7 @@ class NelayanController extends Controller
     {
         $this->validate($r,[
                 'nik' => 'required|unique:users,id,'.$r->id,
+                'no_kartu_nelayan' => 'required|unique:users,id,'.$r->id,
                 'id_sarana' => 'required',
             ]);
 
@@ -102,10 +102,10 @@ class NelayanController extends Controller
         $pb->username   = $username;
         $pb->password   = bcrypt($username);
         $pb->nik        = $r->nik;
+        $pb->no_kartu_nelayan = $r->no_kartu_nelayan;
         $pb->alamat     = $r->alamat;
         $pb->id_kelompok  = $r->id_kelompok;
         $pb->id_jabatan   = $r->id_jabatan;
-        $pb->id_usaha     = $r->id_usaha;
 
         $pb->save();
 
@@ -143,18 +143,6 @@ class NelayanController extends Controller
         $data['nelayan'] = User::find($id);
 
         return view('app.nelayan.detail', $data);
-    }
-
-    public function getUsaha($jenis)
-    {
-        $data['usaha'] = Usaha::where('jenis', $jenis)->get();
-        return view('app.nelayan.data-usaha', $data);
-    }
-
-    public function getSarana($jenis)
-    {
-        $data['sarana'] = Sarana::where('jenis', $jenis)->where('tipe', 'nelayan')->get();
-        return view('app.nelayan.data-sarana', $data);
     }
 
 }

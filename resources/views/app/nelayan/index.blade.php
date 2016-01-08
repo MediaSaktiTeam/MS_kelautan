@@ -219,7 +219,7 @@
 																<label for="pb{{ $nel->id }}" class="m-l-20"></label>
 															</div>
 														</td>
-														<td><a >{{ $nel->name }}</a></td>
+														<td>{{ $nel->name }}</td>
 														<td>{{ $nel->kelompok->nama }}</td>
 														<td>{{ $nel->jabatan->nama }}</td>
 														<td style="text-align:center">

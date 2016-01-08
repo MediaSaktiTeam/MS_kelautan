@@ -32,7 +32,6 @@
 		</tr>
 
 		<tr>
-			<?php $sarana = App\Sarana::where('jenis', $pembudidaya->usaha->jenis)->get(); ?>
 			<?php $Ksarana = App\KepemilikanSarana::where('id_user', $pembudidaya->id)->get(); ?>
 			<td>Sarana / Prasarana yang dimiliki</td>
 			<td><b>
@@ -46,7 +45,7 @@
 	</tbody>
 </table>
 
-<h4>Bantuan yang pernah didapatkan</h4>
+<h5>Bantuan yang pernah didapatkan</h5>
 
 <table class="table table-bordered demo-table-dynamic custom" id="tableWithDynamicRows">
 	<tbody>

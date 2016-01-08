@@ -1,7 +1,7 @@
 @extends('app.layout.main')
 
 @section('title')
-	Pembudidaya | Sunting
+	Nelayan | Sunting
 @endsection
 
 
@@ -23,10 +23,10 @@
 						<!-- START BREADCRUMB -->
 						<ul class="breadcrumb">
 							<li>
-								<a href="{{ route('pembudidaya') }}">Pembudidaya</a>
+								<a href="{{ route('nelayan') }}">Nelayan</a>
 							</li>
 							<li>
-								<a href="#" class="active">Sunting Pembudidaya</a>
+								<a href="#" class="active">Sunting Nelayan</a>
 							</li>
 						</ul>
 					</div>
@@ -57,32 +57,38 @@
 							<!-- START PANEL -->
 							<div class="panel panel-transparent">
 								<div class="panel-body">
-									<form id="form-personal" method="post" action="{{ route('pembudidaya_update') }}" role="form">
+									<form id="form-personal" method="post" action="{{ route('nelayan_update') }}" role="form">
 										
 										{{ csrf_field() }}
 
-										<input type="hidden" name="id" value="{{ $pembudidaya->id }}">
+										<input type="hidden" name="id" value="{{ $nelayan->id }}">
 
 										<div class="row clearfix">
 											<div class="col-sm-6">
 												<div class="form-group required">
 													<label>NIK</label>
-													<input type="text" class="form-control" name="nik" value="{{ $pembudidaya->nik }}" required>
+													<input type="text" class="form-control" name="nik" value="{{ $nelayan->nik }}" required>
 												</div>
 											</div>
 											<div class="col-sm-6">
 												<div class="form-group">
 													<label>Nama Lengkap</label>
-													<input type="text" class="form-control" name="name" value="{{ $pembudidaya->name }}" required>
+													<input type="text" class="form-control" name="name" value="{{ $nelayan->name }}" required>
 												</div>
 											</div>
 										</div>
 
 										<div class="row">
-											<div class="col-sm-12">
+											<div class="col-sm-6">
+												<div class="form-group required">
+													<label>No. Kartu Nelayan</label>
+													<input type="text" class="form-control" name="no_kartu_nelayan" value="{{ $nelayan->no_kartu_nelayan }}" required>
+												</div>
+											</div>
+											<div class="col-sm-6">
 												<div class="form-group">
 													<label>Alamat</label>
-													<input type="text" class="form-control" name="alamat" value="{{ $pembudidaya->alamat }}" required>
+													<input type="text" class="form-control" name="alamat" value="{{ $nelayan->alamat }}" required>
 												</div>
 											</div>
 										</div>
@@ -95,7 +101,7 @@
 														<select class="full-width" name="id_kelompok" data-init-plugin="select2" required>
 															<option value="">Pilih Kelompok...</option>
 															@foreach( $kelompok as $klp )
-																<option value="{{ $klp->id }}" {{ $pembudidaya->id_kelompok == $klp->id ? "selected":"" }}>{{ $klp->nama }}</option>
+																<option value="{{ $klp->id_kelompok }}" {{ $nelayan->id_kelompok == $klp->id_kelompok ? "selected":"" }}>{{ $klp->nama }}</option>
 															@endforeach
 														</select>
 														<div class="input-group-btn">
@@ -111,7 +117,7 @@
 														<select class="full-width" name="id_jabatan" data-init-plugin="select2" required>
 															<option value="">Pilih Jabatan...</option>
 															@foreach( $jabatan as $jab )
-																<option value="{{ $jab->id }}" {{ $pembudidaya->id_jabatan == $jab->id ? "selected":"" }}>{{ $jab->nama }}</option>
+																<option value="{{ $jab->id }}" {{ $nelayan->id_jabatan == $jab->id ? "selected":"" }}>{{ $jab->nama }}</option>
 															@endforeach
 														</select>
 														<div class="input-group-btn">
@@ -122,34 +128,9 @@
 											</div>
 										</div>
 
-										<div class="row">
-											<div class="col-md-12">
-												<div class="form-group">
-													<label>Jenis Usaha Budidaya</label>
-												</div>
-											</div>
-											<div class="row">
-												<div class="col-sm-12">
-													<div class="form-group">
-														<select onchange="get_usaha(this.value)" class="full-width" required data-init-plugin="select2">
-															<option value="">Pilih Jenis Usaha...</option>
-															<option value="Budidaya Air Laut" {{ $pembudidaya->usaha->jenis == "Budidaya Air Laut" ? "selected":"" }}>Budidaya Air Laut</option>
-															<option value="Budidaya Air Tawar" {{ $pembudidaya->usaha->jenis == "Budidaya Air Tawar" ? "selected":"" }}>Budidaya Air Tawar</option>
-															<option value="Budidaya Air Payau" {{ $pembudidaya->usaha->jenis == "Budidaya Air Payau" ? "selected":"" }}>Budidaya Air Payau</option>
-														</select>
-													</div>
-												</div>
-												
-											</div>
-										</div>
 
 										<div class="row">
-											<div class="col-md-6">
-												<div class="form-group">
-													<label>Jenis Usaha</label>
-												</div>
-											</div>
-											<div class="col-md-6">
+											<div class="col-md-12">
 												<div class="form-group">
 													<label>Kepemilikan Sarana dan Prasarana</label>
 												</div>
@@ -157,38 +138,41 @@
 										</div>
 
 										<div class="row">
-											<div class="col-sm-6">
+											<div class="col-sm-12">
 												<div class="form-group">
-													<div id="usaha">
-														<select class="full-width" data-init-plugin="select2" name="id_usaha" required>
-															<option value="">Pilih Spesifik Usaha...</option>
-															<?php $usaha = App\Usaha::where('jenis', $pembudidaya->usaha->jenis)->get(); ?>
-															@foreach( $usaha as $us )
-																<option value="{{ $us->id }}" {{ $pembudidaya->usaha->nama == $us->nama ? "selected":"" }}>{{ $us->nama }}</option>
-															@endforeach
-														</select>
-													</div>
-												</div>
-											</div>
-											<div class="col-sm-6">
-												<div class="form-group">
-													<div id="sarana">
-														<select name="id_sarana[]" class="full-width" data-init-plugin="select2" multiple="" required>
-															<?php $sarana = App\Sarana::where('jenis', $pembudidaya->usaha->jenis)->get(); ?>
-															<?php $Ksarana = App\KepemilikanSarana::where('id_user', $pembudidaya->id)->get(); ?>
-															<?php $Ksarana_arr = []; ?>
-															@foreach ( $Ksarana as $val )
-																<?php $Ksarana_arr[] = $val->id_sarana; ?>
-															@endforeach
+													<select name="id_sarana[]" class="full-width" data-init-plugin="select2" multiple="" data-placeholder="Pilih Sarana / Prasaranan...">
 
-															@foreach( $sarana as $sa )
-																<option value="{{ $sa->id }}" {{ in_array($sa->id, $Ksarana_arr) ? "selected":""}}>{{ $sa->sub }}</option>
-															@endforeach
-														</select>
-													</div>
+														<?php $sarana = App\Sarana::where('tipe', 'Nelayan')->get(); ?>
+														<?php $Ksarana = App\KepemilikanSarana::where('id_user', $nelayan->id)->get(); ?>
+														<?php $Ksarana_arr = []; ?>
+
+														@foreach ( $Ksarana as $val )
+															<?php $Ksarana_arr[] = $val->id_sarana; ?>
+														@endforeach
+
+														<optgroup label="Perahu/Kapal">
+														<?php $PK = App\Sarana::where('tipe','Nelayan')->where('jenis','Perahu Kapal')->get() ?>
+														@foreach( $PK as $rpk )
+															<option value="{{ $rpk->id }}" {{ in_array($rpk->id, $Ksarana_arr) ? "selected":""}}>{{ $rpk->sub }}</option>
+														@endforeach
+														</optgroup>
+
+														<optgroup label="Alat Tangkap">
+														<?php $PK = App\Sarana::where('tipe','Nelayan')->where('jenis','Alat Tangkap')->get() ?>
+														@foreach( $PK as $rpk )
+															<option value="{{ $rpk->id }}" {{ in_array($rpk->id, $Ksarana_arr) ? "selected":""}}>{{ $rpk->sub }}</option>
+														@endforeach
+														</optgroup>
+
+														<optgroup label="Mesin">
+														<?php $PK = App\Sarana::where('tipe','Nelayan')->where('jenis','Mesin')->get() ?>
+														@foreach( $PK as $rpk )
+															<option value="{{ $rpk->id }}" {{ in_array($rpk->id, $Ksarana_arr) ? "selected":""}}>{{ $rpk->sub }}</option>
+														@endforeach
+														</optgroup>
+													</select>
 												</div>
 											</div>
-											
 										</div>
 
 										<div class="clearfix"></div>
@@ -265,7 +249,7 @@
 
 @section('registerscript')
 	<script>
-		$(".menu-items .link-pembudidaya").addClass("active");
+		$(".menu-items .link-nelayan").addClass("active");
 
 		$(function(){
 
@@ -281,7 +265,7 @@
 		        else {
 				  return false;
 		        }
-		        $(".btn-hapus").attr('href',"{{ route('pembudidaya_hapus') }}/"+id);
+		        $(".btn-hapus").attr('href',"{{ route('nelayan_hapus') }}/"+id);
 
 			});
 
@@ -290,7 +274,7 @@
 		function get_usaha(id){
 			$('#usaha').html('<i class="fa fa-spinner fa-spin"></i>');
 			var _token = $('meta[name="csrf-token"]').attr('content');
-			var url = "{{ url('app/pembudidaya/usaha') }}";
+			var url = "{{ url('app/nelayan/usaha') }}";
 			var url = url+"/"+id;
 			$.get(url, { id:id, _token:_token}, function(data){
 				$('#usaha').html(data);
@@ -301,7 +285,7 @@
 		function get_sarana(id){
 			$('#sarana').html('<i class="fa fa-spinner fa-spin"></i>');
 			var _token = $('meta[name="csrf-token"]').attr('content');
-			var url = "{{ url('app/pembudidaya/sarana') }}";
+			var url = "{{ url('app/nelayan/sarana') }}";
 			var url = url+"/"+id;
 			$.get(url, { id:id, _token:_token}, function(data){
 				$('#sarana').html(data);

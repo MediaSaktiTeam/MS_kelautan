@@ -95,7 +95,7 @@
 														<select class="full-width" name="id_kelompok" data-init-plugin="select2" required>
 															<option value="">Pilih Kelompok...</option>
 															@foreach( $kelompok as $klp )
-																<option value="{{ $klp->id }}" {{ $pembudidaya->id_kelompok == $klp->id ? "selected":"" }}>{{ $klp->nama }}</option>
+																<option value="{{ $klp->id_kelompok }}" {{ $pembudidaya->id_kelompok == $klp->id_kelompok ? "selected":"" }}>{{ $klp->nama }}</option>
 															@endforeach
 														</select>
 														<div class="input-group-btn">
