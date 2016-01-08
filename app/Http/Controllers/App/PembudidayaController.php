@@ -155,4 +155,25 @@ class PembudidayaController extends Controller
         return view('app.pembudidaya.data-sarana', $data);
     }
 
+    public function getCari($cari = NULL)
+    {
+        $data['pembudidaya'] = DB::table('users')
+                                    ->leftJoin('app_kelompok', 'users.id_kelompok', '=', 'app_kelompok.id_kelompok')
+                                    ->leftJoin('app_usaha', 'users.id_usaha', '=', 'app_usaha.id')
+                                    ->leftJoin('app_jabatan', 'users.id_jabatan', '=', 'app_jabatan.id')
+                                        ->select(
+                                            'app_jabatan.nama as nama_jabatan',
+                                            'users.*', 'app_usaha.jenis as jenis_usaha',
+                                            'app_kelompok.nama as nama_kelompok')
+                                                ->where('users.profesi','Pembudidaya')
+                                                ->where(function($query) use ($cari) {
+                                                    $query->where('users.name','LIKE', '%'.$cari.'%')
+                                                            ->orWhere('app_kelompok.nama','LIKE', '%'.$cari.'%')
+                                                            ->orWhere('app_jabatan.nama','LIKE', '%'.$cari.'%')
+                                                            ->orWhere('app_usaha.nama','LIKE', '%'.$cari.'%')
+                                                            ->orWhere('app_usaha.jenis','LIKE', '%'.$cari.'%');
+                                                })
+                                    ->take(40)->get();
+        return view('app.pembudidaya.data-pencarian', $data);
+    }
 }

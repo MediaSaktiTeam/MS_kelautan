@@ -7,6 +7,12 @@
 
 
 @section('konten')
+
+<?php
+
+$SC = new App\Custom;
+
+?>
 <!-- START PAGE-CONTAINER -->
 <div class="page-container">
 
@@ -253,11 +259,16 @@
 															<h5 class="no-margin p-b-5 bold text-white">DISK SPACE</h5>
 															<hr>
 															<p>
-																<span class="no-margin text-white">Total : <b>5 GB</b></span>
+																<span class="no-margin text-white">Total : <b>{{ $SC->show_disk_space() }}</b></span>
 																&nbsp;&nbsp;&nbsp;&nbsp;
-																<span class="no-margin text-white">Used : <b>2,6 GB</b></span>
+																<span class="no-margin text-white">Used : <b>{{ $SC->show_use_space() }}</b></span>
 															</p>
-															<h3 class="semi-bold text-white">Free <b>2,4</b> GB</h3>
+															<?php
+
+																$free_disk_space = explode(" ", $SC->show_free_space());
+
+															?> 
+															<h3 class="semi-bold text-white">Free <b>{{ $free_disk_space[0] }}</b> GB</h3>
 															</p>
 														</div>
 													</div>

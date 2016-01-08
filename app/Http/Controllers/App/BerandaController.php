@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use App\Custom;
 
 class BerandaController extends Controller
 {
@@ -16,6 +17,10 @@ class BerandaController extends Controller
      */
     public function index()
     {
+        $disc_space = Custom::show_disc_space();
+        $disc_free_space = Custom::show_free_space();
+        $disc_use_space = Custom::show_use_space();
+        
         return view('app.beranda.index');
     }
 

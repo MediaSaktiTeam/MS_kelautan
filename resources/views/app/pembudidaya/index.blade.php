@@ -175,47 +175,54 @@
 								<div class="panel-body">
 									<div class="">
 										<div class="input-group">
-											<input type="text" class="form-control" placeholder="Pencarian">
+											<input type="text" onkeyup="cari_data(this.value)" class="form-control" placeholder="Pencarian">
 											<span class="input-group-btn">
 												<a href="" class="btn btn-default"><i class="fa fa-print"></i> &nbsp;Cetak</a>
 											</span>
 										</div>
 										<br>
 
-										<table class="table table-hover demo-table-dynamic custom" id="tableWithDynamicRows">
-											<thead>
-												<tr>
-													<th>
-														<button class="btn btn-check" data-toggle="modal" data-target="#modal-hapus" disabled id="hapus"><i class="pg-trash"></i></button>
-													</th>
-													<th>Nama Lengkap</th>
-													<th>Nama Kelompok</th>
-													<th>Jabatan Kelompok</th>
-													<th>Jenis Usaha</th>
-													<th style="text-align:center">Aksi</th>
-												</tr>
-											</thead>
-											<tbody>
-												@foreach( $pembudidaya as $pb )
+										<div id="show-pencarian"></div>
+
+										<div id="show-data">
+											<table class="table table-hover demo-table-dynamic custom" id="tableWithDynamicRows">
+												<thead>
 													<tr>
-														<td>
-															<div class="checkbox">
-																<input type="checkbox" class="pilih" value="{{ $pb->id }}" id="pb{{ $pb->id }}">
-																<label for="pb{{ $pb->id }}" class="m-l-20"></label>
-															</div>
-														</td>
-														<td>{{ $pb->name }}</td>
-														<td>{{ $pb->kelompok->nama }}</td>
-														<td>{{ $pb->jabatan->nama }}</td>
-														<td>{{ $pb->usaha->jenis }}</td>
-														<td style="text-align:center">
-															<a class="btn btn-default btn-xs view" data-id="{{ $pb->id }}"><i class="fa fa-search-plus"></i></a>
-															<a href="{{ route('pembudidaya_edit',$pb->id) }}" class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i></a>
-														</td>
+														<th>
+															<button class="btn btn-check" data-toggle="modal" data-target="#modal-hapus" disabled id="hapus"><i class="pg-trash"></i></button>
+														</th>
+														<th>Nama Lengkap</th>
+														<th>Nama Kelompok</th>
+														<th>Jabatan Kelompok</th>
+														<th>Jenis Usaha</th>
+														<th style="text-align:center">Aksi</th>
 													</tr>
-												@endforeach
-											</tbody>
-										</table>
+												</thead>
+
+												<tbody>
+													@foreach( $pembudidaya as $pb )
+														<tr>
+															<td>
+																<div class="checkbox">
+																	<input type="checkbox" class="pilih" value="{{ $pb->id }}" id="pb{{ $pb->id }}">
+																	<label for="pb{{ $pb->id }}" class="m-l-20"></label>
+																</div>
+															</td>
+															<td>{{ $pb->name }}</td>
+															<td>{{ $pb->kelompok->nama }}</td>
+															<td>{{ $pb->jabatan->nama }}</td>
+															<td>{{ $pb->usaha->jenis }}</td>
+															<td style="text-align:center">
+																<a class="btn btn-default btn-xs view" data-id="{{ $pb->id }}"><i class="fa fa-search-plus"></i></a>
+																<a href="{{ route('pembudidaya_edit',$pb->id) }}" class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i></a>
+															</td>
+														</tr>
+													@endforeach
+												</tbody>
+
+											</table>
+										</div>
+
 									</div>
 								</div>
 							</div>
@@ -331,7 +338,7 @@
 			});
 
 			// Show detail
-			$(".view").click(function(){
+			$(".panel").on('click', '.view', function(){
 				var id = $(this).data('id');
 				var url = "{{ url('app/pembudidaya/detail') }}";
 				var url = url+'/'+id;
@@ -362,6 +369,23 @@
 			$.get(url, { id:id, _token:_token}, function(data){
 				$('#sarana').html(data);
 			});
+		}
+
+		function cari_data(cari){
+			if ( cari == "" ) {
+				$("#show-data").show();
+				$("#show-pencarian").hide();
+			} else {
+				$("#show-data").hide();
+				$("#show-pencarian").show();
+				$("#show-pencarian").html('<tr><td colspan="6"><i class="fa fa-spinner fa-spin"></i></td></tr>');
+				var _token = $('meta[name="csrf-token"]').attr('content');
+				var url = "{{ url('app/pembudidaya/cari') }}";
+				var url = url+"/"+cari;
+				$.get(url, { cari:cari, _token:_token}, function(data){
+					$('#show-pencarian').html(data);
+				});
+			}
 		}
 
 	</script>
