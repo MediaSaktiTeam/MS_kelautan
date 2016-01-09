@@ -191,10 +191,7 @@
 					
 				</div>
 				<div class="modal-footer">
-					<?php $anggota = App\User::where('id_kelompok')->get() ?>
-					@foreach( $anggota as $ang )
-					<a class="btn btn-primary btn-hapus btn-cons pull-left inline view-anggota" data-id="{{ $ang->id_kelompok }}" data-toggle="modal" data-target="#modal-view-anggota" data-dismiss="modal">Lihat Anggota</a>
-					@endforeach
+					<a class="btn btn-primary btn-hapus btn-cons pull-left inline view-anggota" data-id="" data-dismiss="modal">Lihat Anggota</a>
 					<button type="button" class="btn btn-default btn-cons no-margin pull-left inline" data-dismiss="modal">Kembali</button>
 				</div>
 			</div>
@@ -213,7 +210,7 @@
 			<div class="modal-content">
 				<div class="modal-header clearfix text-left">
 					<button type="button" class="close" data-dismiss="modal"  aria-hidden="true"><i class="pg-close fs-14"></i></button>
-					<h5>Daftar Anggota Kelompok <b>#019AC</b></h5>
+					<h5>Daftar Anggota Kelompok</h5>
 				</div>
 				<div class="modal-body" id="view-detail-anggota">
 					
@@ -295,13 +292,15 @@
 				$.get(url, {id:id, _token:_token}, function(data){
 					$("#view-detail").html(data);
 					$("#modal-view").modal('show');
+					var id_kelompok = $('.modal').find('#id_kelompok').data('id');
+					$("#modal-view .view-anggota").attr('data-id',id_kelompok);
 				});
 			});
 
 			// Show detail Anggota
 			$(".view-anggota").click(function(){
-				var id = $(this).data('id');
-				var url = "{{ url('app/kelompok/detailanggota') }}";
+				var id = $(this).attr('data-id');
+				var url = "{{ url('app/kelompok/detail-anggota') }}";
 				var url = url+'/'+id;
 				$.get(url, {id:id, _token:_token}, function(data){
 					$("#view-detail-anggota").html(data);
@@ -310,5 +309,6 @@
 			});
 
 		});
+
 	</script>
 @endsection

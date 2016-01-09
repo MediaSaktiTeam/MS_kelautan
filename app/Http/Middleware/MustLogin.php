@@ -20,6 +20,10 @@ class MustLogin
 
             return $next($request);
             
+        } elseif ( Auth::viaRemember() ) {
+            
+            return $next($request);
+            
         }
 
         return redirect('/app/login');

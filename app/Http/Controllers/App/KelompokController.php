@@ -30,7 +30,7 @@ class KelompokController extends Controller
 
      public function getDetailAnggota($id)
     {
-        $data['user'] = User::where('id_kelompok',$id)->first();
+        $data['users'] = User::where('id_kelompok',$id)->get();
 
         return view('app.kelompok.detailanggota', $data);
     }

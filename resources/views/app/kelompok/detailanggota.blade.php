@@ -8,12 +8,11 @@
 							</tr>
 						</thead>
 						<tbody>
-							<?php $anggota = App\User::where('id_kelompok')->get() ?>
-							@foreach( $anggota as $ang )
+							@foreach( $users as $user )
 							<tr>
-								<td>{{ $ang->no_kartu_nelayan }}</td>
-								<td>{{ $ang->name }}</td>
-								<td>Ketua</td>
+								<td>{{ $user->no_kartu_nelayan }}</td>
+								<td>{{ $user->name }}</td>
+								<td>{{ $user->jabatan->nama }}</td>
 								<td>
 									<ul class="list-unstyled">
 										<li><b>2014:</b> Kapal/Perahu</li>
