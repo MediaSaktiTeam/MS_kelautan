@@ -191,7 +191,8 @@
 					
 				</div>
 				<div class="modal-footer">
-					@foreach ($anggota as $ang)
+					<?php $anggota = App\User::where('id_kelompok')->get() ?>
+					@foreach( $anggota as $ang )
 					<a class="btn btn-primary btn-hapus btn-cons pull-left inline view-anggota" data-id="{{ $ang->id_kelompok }}" data-toggle="modal" data-target="#modal-view-anggota" data-dismiss="modal">Lihat Anggota</a>
 					@endforeach
 					<button type="button" class="btn btn-default btn-cons no-margin pull-left inline" data-dismiss="modal">Kembali</button>

@@ -17,7 +17,6 @@ class KelompokController extends Controller
      */
     public function getIndex()
     {
-        $data['anggota'] = User::where('id_kelompok');
         $data['kelompok'] = Kelompok::paginate(10);
         return view('app.kelompok.index', $data);
     }

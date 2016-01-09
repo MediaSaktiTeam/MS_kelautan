@@ -8,10 +8,11 @@
 							</tr>
 						</thead>
 						<tbody>
-							@foreach($user as $u)
+							<?php $anggota = App\User::where('id_kelompok')->get() ?>
+							@foreach( $anggota as $ang )
 							<tr>
-								<td>{{ $u->no_kartu_nelayan }}</td>
-								<td>{{ $u->name }}</td>
+								<td>{{ $ang->no_kartu_nelayan }}</td>
+								<td>{{ $ang->name }}</td>
 								<td>Ketua</td>
 								<td>
 									<ul class="list-unstyled">
