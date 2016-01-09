@@ -81,6 +81,7 @@ Route::group(['middleware' => 'MustLogin', 'namespace' => 'App' ], function () {
             'getTambah'  => 'kelompok_tambah',
             'getHapus'  => 'kelompok_hapus',
             'getDetail'  => 'kelompok_get_detail',
+            'getDetailAnggota'  => 'kelompok_get_detail_anggota',
         ]);
 
     Route::controller('app/master/bantuan', 'BantuanController',

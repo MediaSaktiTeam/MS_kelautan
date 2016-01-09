@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
-use App\Kelompok;
+use App\User, App\Kelompok;
 
 class KelompokController extends Controller
 {
@@ -17,6 +17,7 @@ class KelompokController extends Controller
      */
     public function getIndex()
     {
+        $data['anggota'] = User::where('id_kelompok');
         $data['kelompok'] = Kelompok::paginate(10);
         return view('app.kelompok.index', $data);
     }
@@ -26,6 +27,13 @@ class KelompokController extends Controller
         $data['kelompok'] = Kelompok::where('id_kelompok',$id)->first();
 
         return view('app.kelompok.detail', $data);
+    }
+
+     public function getDetailAnggota($id)
+    {
+        $data['user'] = User::where('id_kelompok',$id)->first();
+
+        return view('app.kelompok.detailanggota', $data);
     }
 
     public function getTambah(Request $request)

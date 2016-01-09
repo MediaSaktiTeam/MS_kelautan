@@ -191,7 +191,9 @@
 					
 				</div>
 				<div class="modal-footer">
-					<a class="btn btn-primary btn-hapus btn-cons pull-left inline" data-toggle="modal" data-target="#modal-view-anggota" data-dismiss="modal">Lihat Anggota</a>
+					@foreach ($anggota as $ang)
+					<a class="btn btn-primary btn-hapus btn-cons pull-left inline view-anggota" data-id="{{ $ang->id_kelompok }}" data-toggle="modal" data-target="#modal-view-anggota" data-dismiss="modal">Lihat Anggota</a>
+					@endforeach
 					<button type="button" class="btn btn-default btn-cons no-margin pull-left inline" data-dismiss="modal">Kembali</button>
 				</div>
 			</div>
@@ -212,63 +214,8 @@
 					<button type="button" class="close" data-dismiss="modal"  aria-hidden="true"><i class="pg-close fs-14"></i></button>
 					<h5>Daftar Anggota Kelompok <b>#019AC</b></h5>
 				</div>
-				<div class="modal-body">
-					<table class="table table-hover demo-table-dynamic custom" id="tableWithDynamicRows">
-						<thead>
-							<tr>
-								<th>ID</th>
-								<th>Nama Anggota</th>
-								<th>Jabatan</th>
-								<th>Bantuan yang telah diterima</th>
-							</tr>
-						</thead>
-						<tbody>
-							<tr>
-								<td>098901823</td>
-								<td>Gifa Eriyanto</td>
-								<td>Ketua</td>
-								<td>
-									<ul class="list-unstyled">
-										<li><b>2014:</b> Kapal/Perahu</li>
-										<li><b>2015:</b> Alat Tangkap</li>
-									</ul>
-								</td>
-							</tr>
-							<tr>
-								<td>098901823</td>
-								<td>Gifa Eriyanto</td>
-								<td>Wakil Ketua</td>
-								<td>
-									<ul class="list-unstyled">
-										<li><b>2014:</b> Kapal/Perahu</li>
-										<li><b>2015:</b> Alat Tangkap</li>
-									</ul>
-								</td>
-							</tr>
-							<tr>
-								<td>098901823</td>
-								<td>Gifa Eriyanto</td>
-								<td>Bendahara</td>
-								<td>
-									<ul class="list-unstyled">
-										<li><b>2014:</b> Kapal/Perahu</li>
-										<li><b>2015:</b> Alat Tangkap</li>
-									</ul>
-								</td>
-							</tr>
-							<tr>
-								<td>098901823</td>
-								<td>Gifa Eriyanto</td>
-								<td>Anggota</td>
-								<td>
-									<ul class="list-unstyled">
-										<li><b>2014:</b> Kapal/Perahu</li>
-										<li><b>2015:</b> Alat Tangkap</li>
-									</ul>
-								</td>
-							</tr>
-						</tbody>
-					</table>
+				<div class="modal-body" id="view-detail-anggota">
+					
 				</div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-default btn-cons no-margin pull-left inline" data-dismiss="modal">Kembali</button>
@@ -347,6 +294,17 @@
 				$.get(url, {id:id, _token:_token}, function(data){
 					$("#view-detail").html(data);
 					$("#modal-view").modal('show');
+				});
+			});
+
+			// Show detail Anggota
+			$(".view-anggota").click(function(){
+				var id = $(this).data('id');
+				var url = "{{ url('app/kelompok/detailanggota') }}";
+				var url = url+'/'+id;
+				$.get(url, {id:id, _token:_token}, function(data){
+					$("#view-detail-anggota").html(data);
+					$("#modal-view-anggota").modal('show');
 				});
 			});
 
