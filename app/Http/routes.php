@@ -45,6 +45,11 @@ Route::group(['middleware' => 'MustLogin', 'namespace' => 'App' ], function () {
         'getDetail'  => 'nelayan_get_detail',
     ]);
 
+
+      Route::get('/app/bantuan', function () {
+        return view('app.bantuan.index');
+    });
+
     Route::get('/app/pengolah', function () {
         return view('app.pengolah.index');
     });
@@ -52,9 +57,7 @@ Route::group(['middleware' => 'MustLogin', 'namespace' => 'App' ], function () {
     Route::get('/app/master/bantuan', function () {
         return view('app.master.bantuan');
     });
-
-
-    
+ 
 
     Route::get('/app/master/jabatan', function () {
         return view('app.master.jabatan');
