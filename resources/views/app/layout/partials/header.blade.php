@@ -61,6 +61,10 @@
 						<a href="/app/kelompok"><span class="title">Kelompok</span></a>
 						<span class="icon-thumbnail">K</span>
 					</li>
+					<li class="link-bantuan">
+						<a href="/app/bantuan"><span class="title">Bantuan</span></a>
+						<span class="icon-thumbnail">B</span>
+					</li>
 					<li class="link-master">
 						<a href="javascript:;"><span class="title">Master</span>
 						<span class=" arrow"></span></a>
