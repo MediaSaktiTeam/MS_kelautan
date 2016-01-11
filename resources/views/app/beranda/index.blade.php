@@ -53,7 +53,7 @@ $SC = new App\Custom;
 													<div class="company col-xs-4">
 														<div>
 															<p class="font-montserrat text-success no-margin fs-16">
-																82
+																{{ $total_pembudidaya }}
 																<span class="font-arial text-white fs-12 hint-text m-l-5">(Total)</span>
 															</p>
 															<p class="bold text-white no-margin fs-11 font-montserrat lh-normal">
@@ -64,7 +64,7 @@ $SC = new App\Custom;
 													<div class="company col-xs-4">
 														<div>
 															<p class="font-montserrat text-success no-margin fs-16">
-																189
+																{{ $total_nelayan }}
 																<span class="font-arial text-white fs-12 hint-text m-l-5">(Total)</span>
 															</p>
 															<p class="bold text-white no-margin fs-11 font-montserrat lh-normal">
@@ -75,7 +75,7 @@ $SC = new App\Custom;
 													<div class="company col-xs-4">
 														<div>
 															<p class="font-montserrat text-success no-margin fs-16">
-																224
+																{{ $total_pengolah }}
 																<span class="font-arial text-white fs-12 hint-text m-l-5">(Total)</span>
 															</p>
 															<p class="bold text-white no-margin fs-11 font-montserrat lh-normal">

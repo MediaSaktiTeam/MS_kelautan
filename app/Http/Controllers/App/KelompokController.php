@@ -50,6 +50,24 @@ class KelompokController extends Controller
         return redirect()->route('kelompok', $data);
     }
 
+    public function getUpdate(Request $request)
+    {
+        $dt['id_kelompok']  = $request->id;
+        $dt['nama']         = $request->nama;
+        $dt['alamat']       = $request->alamat;
+        $dt['no_rekening']  = $request->no_rekening;
+        $dt['nama_rekening'] = $request->nama_rekening;
+        $dt['nama_bank']     = $request->nama_bank;
+        $dt['tipe']          = $request->tipe;
+
+        Kelompok::where('id_kelompok', $request->id)
+                    ->update($dt);
+
+        $data['kelompok'] = Kelompok::paginate(10);
+
+        return redirect()->route('kelompok', $data);
+    }
+
     public function getHapus($id){
 
         $val = explode(",", $id);

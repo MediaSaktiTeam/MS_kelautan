@@ -17,9 +17,7 @@ Route::group([ 'namespace' => 'App'], function(){
 
 Route::group(['middleware' => 'MustLogin', 'namespace' => 'App' ], function () {
 
-    Route::get('/app/beranda', function () {
-        return view('app.beranda.index');
-    });
+    Route::get('/app/beranda', 'BerandaController@index');
 
     Route::controller('app/pembudidaya', 'PembudidayaController',
     [
@@ -79,6 +77,7 @@ Route::group(['middleware' => 'MustLogin', 'namespace' => 'App' ], function () {
         [
             'getIndex'  => 'kelompok',
             'getTambah'  => 'kelompok_tambah',
+            'getUpdate'  => 'kelompok_update',
             'getHapus'  => 'kelompok_hapus',
             'getDetail'  => 'kelompok_get_detail',
             'getDetailAnggota'  => 'kelompok_get_detail_anggota',

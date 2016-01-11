@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\app;
 
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
-use App\Custom;
+use App\Custom, App\User;
 
 class BerandaController extends Controller
 {
@@ -17,11 +17,11 @@ class BerandaController extends Controller
      */
     public function index()
     {
-        $disc_space = Custom::show_disc_space();
-        $disc_free_space = Custom::show_free_space();
-        $disc_use_space = Custom::show_use_space();
+        $data['total_pembudidaya'] = User::where('profesi','Pembudidaya')->count();
+        $data['total_nelayan'] = User::where('profesi','Nelayan')->count();
+        $data['total_pengolah'] = User::where('profesi','Pengolah')->count();
         
-        return view('app.beranda.index');
+        return view('app.beranda.index', $data);
     }
 
     /**

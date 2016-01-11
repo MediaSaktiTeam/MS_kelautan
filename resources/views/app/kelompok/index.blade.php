@@ -40,7 +40,7 @@
 				
 				<!-- START ROW -->
 				<div class="row">
-					<div class="col-md-4">
+					<div id="col-tambah" class="col-md-4">
 						<!-- START PANEL -->
 						<div class="panel panel-default">
 							<div class="panel-heading">
@@ -50,8 +50,8 @@
 							</div>
 							<div class="panel-body">
 							<p>Silahkan tambahkan kelompok baru, selanjutnya tekan tombol <b>tambah anggota</b> untuk menambahkan anggota kelompok.</p>
-								<form class="style-form" method="GET" action="{{ route('kelompok_tambah') }}">
-									<input type="hidden" name="_token" value="{{ csrf_token() }}">
+								<form class="style-form" id="form-kelompok" method="GET" action="{{ route('kelompok_tambah') }}">
+									<input type="hidden" id="token" name="_token" value="{{ csrf_token() }}">
 									
 									<?php
 										$seed = str_split('ABCDEFGHIJKLMNOPQRSTUVWXYZ'
@@ -60,37 +60,37 @@
 										$rand = '';
 										foreach (array_rand($seed, 5) as $k) $rand .= $seed[$k];
 									?>
-									<input type="hidden" name="id" value="<?php echo $rand; ?>">
+									<input type="hidden" id="id-kelompok" name="id" value="<?php echo $rand; ?>">
 									
 									<div class="form-group form-group-default required">
 										<label>Bidang Usaha</label>
-										<select class="full-width" data-init-plugin="select2" name="tipe">
+										<select id="bidang-usaha" class="full-width" data-init-plugin="select2" name="tipe">
 											<option value="Nelayan">Nelayan</option>
 											<option value="Pembudidaya">Pembudidaya</option>
 										</select>
 									</div>
 									<div class="form-group form-group-default required">
 										<label>Nama Kelompok</label>
-										<input type="text" name="nama" class="form-control" required>
+										<input type="text" id="nama" name="nama" class="form-control" required>
 									</div>
 									<div class="form-group form-group-default required">
 										<label>Alamat Sekretariat</label>
-										<input type="text" name="alamat" class="form-control" required>
+										<input type="text" id="alamat" name="alamat" class="form-control" required>
 									</div>
 									<div class="form-group form-group-default required">
 										<label>Nomor Rekening</label>
-										<input type="text" name="no_rekening" class="form-control" required>
+										<input type="text" id="norek" name="no_rekening" class="form-control" required>
 									</div>
 									<div class="form-group form-group-default required">
 										<label>Nama Rekening</label>
-										<input type="text" name="nama_rekening" class="form-control" required>
+										<input type="text" id="narek" name="nama_rekening" class="form-control" required>
 									</div>
 									<div class="form-group form-group-default required">
 										<label>Nama Bank</label>
-										<input type="text" name="nama_bank" class="form-control" required>
+										<input type="text" id="nama-bank" name="nama_bank" class="form-control" required>
 									</div>
 									<div class="form-group">
-										<button type="submit" class="btn btn-primary btn-cons">Tambah</button>
+										<button type="submit" class="btn btn-primary btn-cons btn-simpan">Tambah</button>
 									</div>
 								</form>
 							</div>
@@ -136,7 +136,14 @@
 											<td>{{ $kel->tipe }}</td>
 											<td>
 												<a class="btn btn-default btn-xs view" data-id="{{ $kel->id_kelompok }}" data-toggle="modal" data-target="#modal-view"><i class="fa fa-search-plus"></i></a>
-												<a href="" class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i></a>
+												<a href="javascript:;"
+													data-id="{{ $kel->id_kelompok }}"
+													data-nama="{{ $kel->nama }}"
+													data-tipe="{{ $kel->tipe }}"
+													data-alamat="{{ $kel->alamat }}"
+													data-norek="{{ $kel->no_rekening }}"
+													data-narek="{{ $kel->nama_rekening }}"
+													data-bank="{{ $kel->nama_bank }}" class="btn btn-edit btn-primary btn-xs"><i class="fa fa-pencil"></i></a>
 											</td>
 										</tr>
 										@endforeach
@@ -306,6 +313,38 @@
 					$("#view-detail-anggota").html(data);
 					$("#modal-view-anggota").modal('show');
 				});
+			});
+
+			// Edit
+			$(".btn-edit").click(function(){
+				var id 		= $(this).data('id');
+				var nama 	= $(this).data('nama');
+				var tipe 	= $(this).data('tipe');
+				var alamat 	= $(this).data('alamat');
+				var norek 	= $(this).data('norek');
+				var narek 	= $(this).data('narek');
+				var bank 	= $(this).data('bank');
+
+				$("#col-tambah").hide();
+
+				$("select option").filter(function() {
+				    if( $(this).val().trim() == tipe ){
+				    	$(this).prop('selected', true);
+				    	$(".select2-chosen").html(tipe);
+				    }
+				});
+
+				$("#id-kelompok").val(id);
+				$("#nama").val(nama);
+				$("#alamat").val(alamat);
+				$("#narek").val(narek);
+				$("#norek").val(norek);
+				$("#nama-bank").val(bank);
+				$(".btn-simpan").html('Simpan');
+
+				$("#form-kelompok").attr("action","{{ route('kelompok_update') }}");
+
+				$("#col-tambah").fadeIn();
 			});
 
 		});
