@@ -105,7 +105,7 @@
 								<div class="input-group">
 									<input type="text" class="form-control" placeholder="Pencarian">
 									<span class="input-group-btn">
-										<a href="" class="btn btn-default"><i class="fa fa-print"></i> &nbsp;Cetak</a>
+										<a href="" class="btn btn-default" data-toggle="modal" data-target="#modal-ekspor"><i class="fa fa-file-archive-o"></i> &nbsp;Ekspor</a>
 									</span>
 								</div>
 								<br>
@@ -249,6 +249,36 @@
 				<div class="modal-footer">
 					<a class="btn btn-danger btn-hapus btn-cons pull-left inline">Ya</a>
 					<button type="button" class="btn btn-default btn-cons no-margin pull-left inline" data-dismiss="modal">Tidak</button>
+				</div>
+			</div>
+		</div>
+		<!-- /.modal-content -->
+	</div>
+	<!-- /.modal-dialog -->
+</div>
+<!-- END MODAL STICK UP SMALL ALERT -->
+
+
+<!-- MODAL STICK UP SMALL ALERT -->
+<div class="modal fade slide-up" id="modal-ekspor" tabindex="-1" role="dialog" aria-hidden="true">
+	<div class="modal-dialog modal-sm">
+		<div class="modal-content-wrapper">
+			<div class="modal-content">
+				<div class="modal-header clearfix text-left">
+					<button type="button" class="close" data-dismiss="modal"  aria-hidden="true"><i class="pg-close fs-14"></i></button>
+					<h5>Ekspor Data</h5>
+				</div>
+				<div class="modal-body">
+					<p class="no-margin">
+						<a href="">
+							<img src="" alt="">
+							Unduh Dalam Format Mic.Excel
+						</a>
+						<a href="">
+							<img src="" alt="">
+							Unduh Dalam Format PDF
+						</a>
+					</p>
 				</div>
 			</div>
 		</div>
