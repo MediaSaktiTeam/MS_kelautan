@@ -139,6 +139,27 @@
 		<!-- END OVERLAY -->
 
 
+		<!-- MODAL STICK UP SMALL ALERT -->
+		<div class="modal fade slide-up" id="modal-help" tabindex="-1" role="dialog" aria-hidden="true">
+			<div class="modal-dialog">
+				<div class="modal-content-wrapper">
+					<div class="modal-content">
+						<div class="modal-header clearfix text-left">
+							<button type="button" class="close" data-dismiss="modal"  aria-hidden="true"><i class="pg-close fs-14"></i></button>
+							<h5>Laporkan Masalah</h5>
+							<hr>
+						</div>
+						<div class="modal-body">
+						</div>
+					</div>
+				</div>
+				<!-- /.modal-content -->
+			</div>
+			<!-- /.modal-dialog -->
+		</div>
+		<!-- END MODAL STICK UP SMALL ALERT -->
+
+
 
 
 		<script src="{{ url('resources/assets/app/js/vendor.js') }}" type="text/javascript"></script>

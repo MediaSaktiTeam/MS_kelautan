@@ -165,8 +165,8 @@
 						</span>
 					</button>
 					<ul class="dropdown-menu profile-dropdown" role="menu">
-						<li><a href="#"><i class="pg-settings_small"></i> Pengaturan Akun</a></li>
-						<li><a href="#"><i class="pg-signals"></i> Bantuan</a></li>
+						<li><a href="/app/pengaturan"><i class="pg-settings_small"></i> Pengaturan Akun</a></li>
+						<li><a href="#" data-toggle="modal" data-target="#modal-help"><i class="pg-signals"></i> Laporkan Masalah</a></li>
 						<li class="bg-master-lighter">
 							<a href="{{ url('/app/logout') }}" class="clearfix">
 								<span class="pull-left">Logout</span>
