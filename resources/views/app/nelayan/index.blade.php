@@ -269,13 +269,13 @@
 			<div class="modal-content">
 				<div class="modal-header clearfix text-left">
 					<button type="button" class="close" data-dismiss="modal"  aria-hidden="true"><i class="pg-close fs-14"></i></button>
-					<h5>Detail nelayan</h5>
+					<h5>Detail Nelayan</h5>
 				</div>
 				<div class="modal-body" id="view-detail">
 
 				</div>
 				<div class="modal-footer">
-					<button type="button" class="btn btn-default btn-cons no-margin pull-left inline" data-dismiss="modal">Kembali</button>
+					<button type="button" class="btn btn-default btn-cons no-margin inline" data-dismiss="modal">Kembali</button>
 				</div>
 			</div>
 		</div>
@@ -311,24 +311,29 @@
 
 <!-- MODAL STICK UP SMALL ALERT -->
 <div class="modal fade slide-up" id="modal-ekspor" tabindex="-1" role="dialog" aria-hidden="true">
-	<div class="modal-dialog modal-sm">
+	<div class="modal-dialog">
 		<div class="modal-content-wrapper">
 			<div class="modal-content">
 				<div class="modal-header clearfix text-left">
 					<button type="button" class="close" data-dismiss="modal"  aria-hidden="true"><i class="pg-close fs-14"></i></button>
 					<h5>Ekspor Data</h5>
+					<hr>
 				</div>
 				<div class="modal-body">
-					<p class="no-margin">
-						<a href="">
-							<img src="" alt="">
-							Unduh Dalam Format Mic.Excel
-						</a>
-						<a href="">
-							<img src="" alt="">
-							Unduh Dalam Format PDF
-						</a>
-					</p>
+					<div class="row">
+						<div class="col-md-6">
+							<a href="">
+								<i class="fa fa-file-excel-o export-excel"></i>
+								Unduh Dalam Format Mic.Excel
+							</a>
+						</div>
+						<div class="col-md-6">
+							<a href="">
+								<i class="fa fa-file-pdf-o export-pdf"></i>
+								Unduh Dalam Format PDF
+							</a>
+						</div>
+					</div>
 				</div>
 			</div>
 		</div>

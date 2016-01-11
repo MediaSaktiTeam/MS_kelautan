@@ -27459,3 +27459,28 @@ table.dataTable thead .sorting_desc {
 
 .close {
   margin-right: 10px; }
+
+.export-excel {
+  background: #2ecc71;
+  padding: 10px;
+  color: #fff;
+  margin-right: 10px;
+  border-radius: 3px; }
+
+.export-pdf {
+  background: #e74c3c;
+  padding: 10px;
+  color: #fff;
+  margin-right: 10px;
+  border-radius: 3px; }
+
+#modal-ekspor a {
+  color: #333 !important;
+  padding: 13px 6px;
+  padding-right: 10px;
+  border-radius: 5px;
+  border: 1px solid transparent; }
+  #modal-ekspor a:hover {
+    border: 1px solid #ccc; }
+  #modal-ekspor a:active {
+    background: #eee; }
