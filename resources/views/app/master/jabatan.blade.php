@@ -90,7 +90,9 @@
 												</div>
 											</td>
 											<td>{{ $jb->nama }}</td>
-											<td><button class="btn btn-default btn-xs" data-toggle="modal" data-target="#modal-sunting"><i class="fa fa-pencil"></i></button></td>
+											<td><button class="btn btn-default btn-xs btn-edit" 
+														data-id="{{ $jb->id }}"
+														data-nama="{{ $jb->nama }}"><i class="fa fa-pencil"></i></button></td>
 										</tr>
 										@endforeach
 									</tbody>
@@ -166,12 +168,13 @@
 					<h5>Sunting Data</h5>
 				</div>
 				<div class="modal-body">
-					<form class="style-form" method="GET" action="{{ route('jabatan_tambah') }}">
+					<form class="style-form" method="GET" action="{{ route('jabatan_update') }}">
 						<input type="hidden" name="_token" value="{{ csrf_token() }}">
 						<div class="form-group form-group-default required">
 							<label>Nama Jabatan</label>
-							<input type="text" name="nama" class="form-control" required>
+							<input type="text" id="nama" name="nama" class="form-control" required>
 						</div>
+						<input type="hidden" name="id" id="id-jabatan">
 						<div class="form-group">
 							<button type="submit" class="btn btn-primary btn-cons">Simpan</button>
 							<button type="button" class="btn btn-default btn-cons" data-dismiss="modal">Kembali</button>
@@ -212,7 +215,15 @@
 				$(".btn-hapus").attr('href',"{{ route('jabatan_hapus') }}/"+id);
 
 			});
-		})();
+			$(".btn-edit").click(function(){
+
+				var id = $(this).data('id');
+				var nama = $(this).data('nama');
+				$('#id-jabatan').val(id);
+				$('#nama').val(nama);
+				$('#modal-sunting').modal('show');
+			});
+		});
 
 	</script>
 @endsection

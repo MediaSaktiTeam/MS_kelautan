@@ -40,5 +40,16 @@ class JabatanController extends Controller
         return redirect()->route('jabatan');
     }
 
+    public function getUpdate(Request $request)
+    {
+
+        $data = Jabatan::find($request->id);
+        $data->nama = $request->nama;
+        $data->save();
+        $data['jabatan'] = Jabatan::paginate(1);
+
+        return redirect()->route('jabatan', $data);
+    }
+
     
 }

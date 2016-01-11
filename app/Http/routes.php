@@ -97,12 +97,14 @@ Route::group(['middleware' => 'MustLogin', 'namespace' => 'App' ], function () {
             'getIndex'  => 'jabatan',
             'getTambah'  => 'jabatan_tambah',
             'getHapus'  => 'jabatan_hapus',
+            'getUpdate'  => 'jabatan_update',
         ]);
     Route::controller('app/master/usaha', 'UsahaController',
         [
             'getIndex'  => 'usaha',
             'getTambah' => 'usaha_tambah',
             'getHapus'  => 'usaha_hapus',
+            'getUpdate'  => 'usaha_update',
         ]);
     Route::controller('app/master/sarana-pembudidaya', 'SaranaPembudidayaController',
         [

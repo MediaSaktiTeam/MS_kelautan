@@ -40,4 +40,16 @@ class UsahaController extends Controller
         }
         return redirect()->route('usaha');
     }
+
+    public function getUpdate(Request $request)
+    {
+
+        $data = Usaha::find($request->id);
+        $data->jenis = $request->jenis;
+        $data->nama = $request->nama;
+        $data->save();
+        $data['usaha'] = Usaha::paginate(1);
+
+        return redirect()->route('usaha', $data);
+    }
 }
