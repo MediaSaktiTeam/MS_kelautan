@@ -36,7 +36,12 @@
 		@endforeach
 
 		@else
-			<tr><td colspan="6" style="text-align:center">Tidak menemukan data</td></tr>
+			<tr>
+				<td colspan="6" class="not-found">
+					<img src="{{ url('resources/assets/app/img/not_found.png') }}" alt="">
+					<span>Tidak menemukan data</span>
+				</td>
+			</tr>
 		@endif
 	</tbody>
 

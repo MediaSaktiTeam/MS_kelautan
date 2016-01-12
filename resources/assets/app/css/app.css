@@ -27484,3 +27484,13 @@ table.dataTable thead .sorting_desc {
     border: 1px solid #ccc; }
   #modal-ekspor a:active {
     background: #eee; }
+
+.not-found {
+  text-align: center; }
+  .not-found img {
+    width: 80px;
+    margin-top: 25px;
+    margin-bottom: 25px; }
+  .not-found span {
+    margin-bottom: 20px;
+    display: block; }
