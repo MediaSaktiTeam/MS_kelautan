@@ -156,7 +156,7 @@
 			<!-- START User Info-->
 			<div class="visible-lg visible-md m-t-10">
 				<div class="pull-left p-r-10 p-t-10 fs-16 font-heading">
-					<span class="bold">Admin</span> <span class="text-master">Bantaeng</span>
+					<span class="text-master">{{ $user->name }}</span>
 				</div>
 				<div class="dropdown pull-right">
 					<button class="profile-dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
