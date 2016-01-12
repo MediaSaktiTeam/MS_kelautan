@@ -46,9 +46,15 @@ Route::group(['middleware' => 'MustLogin', 'namespace' => 'App' ], function () {
     ]);
 
 
-      Route::get('/app/bantuan', function () {
-        return view('app.bantuan.index');
-    });
+    Route::controller('app/bantuan', 'RefBantuanController',
+        [
+            'getIndex' => 'ref_bantuan',
+            'postSimpan' => 'ref_bantuan_simpan',
+            'getEdit' => 'ref_bantuan_edit',
+            'postUpdate' => 'ref_bantuan_update',
+            'getHapus' => 'ref_bantuan_hapus',
+
+        ]);
 
     Route::get('/app/pengolah', function () {
         return view('app.pengolah.index');
