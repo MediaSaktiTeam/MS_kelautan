@@ -28,6 +28,7 @@ class DatabaseSeeder extends Seeder
         $this->call('SubUsahaSeeder');
         $this->call('SubSaranaSeeder');
         $this->call('JabatanSeeder');
+        $this->call('ValidasiTableSeeder');
     }
 }
 
@@ -237,5 +238,21 @@ class KelompokSeeder extends Seeder
       );
 
       DB::table('app_kelompok')->insert($data);
+  }
+}
+
+class ValidasiTableSeeder extends Seeder
+{
+  public function run()
+  {
+
+    DB::table('validasi')->truncate();
+
+    $data = array(
+      array('key' => 'RzI5ZGlRa2tnZVByVTBYM1hPTE9yTDJvaFZqeWpwWFEwZ1d3Q0NEay8yTT0=')
+    );
+
+    DB::table('validasi')->insert($data);
+
   }
 }

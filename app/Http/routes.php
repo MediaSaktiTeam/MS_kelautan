@@ -115,4 +115,5 @@ Route::group(['middleware' => 'MustLogin', 'namespace' => 'App' ], function () {
         ]);
 });
 
-
+Route::get('/mediasakti/validasi-app', 'ValidasiController@index');
+Route::post('/mediasakti/validasi-app', 'ValidasiController@validasi');
