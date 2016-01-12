@@ -78,9 +78,11 @@ Route::group(['middleware' => 'MustLogin', 'namespace' => 'App' ], function () {
         return view('app.master.usaha');
     });
 
-    Route::get('/app/pengaturan', function () {
-        return view('app.pengaturan.index');
-    });
+    Route::controller('/app/pengaturan', 'PengaturanController',
+        [
+            'getIndex'  => 'pengaturan',
+            'getUpdate'  => 'pengaturan_update',
+    ]);
 
     Route::controller('app/kelompok', 'KelompokController',
         [

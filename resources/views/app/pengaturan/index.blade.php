@@ -46,18 +46,16 @@
 								</div>
 							</div>
 							<div class="panel-body">
-								<form class="style-form" id="form-kelompok" method="GET" action="">
+								<form class="style-form" id="form-kelompok" method="GET" action="{{ route('pengaturan_update') }}">
+									<input type="hidden" name="_token" value="{{ csrf_token() }}">
 									<div class="form-group form-group-default required">
 										<label>Nama Pengguna</label>
-										<input type="text" id="nama" name="nama" value="admin" class="form-control" required>
+										<input type="hidden" name="id" value="{{ $user->id }}">
+										<input type="text" id="nama" name="username" value="{{ $user->username }}" class="form-control" required>
 									</div>
 									<div class="form-group form-group-default required">
-										<label>Nama Depan</label>
-										<input type="text" id="nama" name="nama" value="Admin" class="form-control" required>
-									</div>
-									<div class="form-group form-group-default required">
-										<label>Nama Belakang</label>
-										<input type="text" id="nama" name="nama" value="Bantaeng" class="form-control" required>
+										<label>Nama Tampilan</label>
+										<input type="text" id="nama" name="name" value="{{ $user->name }}" class="form-control" required>
 									</div>
 									<div class="form-group">
 										<button type="submit" class="btn btn-primary btn-cons btn-simpan">Simpan</button>
