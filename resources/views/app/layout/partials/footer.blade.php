@@ -7,7 +7,7 @@
 				<!-- BEGIN Overlay Header !-->
 				<div class="container-fluid">
 					<!-- BEGIN Overlay Logo !-->
-					<img class="overlay-brand" src="{{ url('resources/assets/app/img/logo.png') }}" alt="logo" data-src="{{ url('resources/assets/app/img/logo.png') }}" data-src-retina="{{ url('resources/assets/app/img/logo_2x.png') }}" width="78" height="22">
+					<img class="overlay-brand" src="{{ url('resources/assets/app/img/logo.png') }}" alt="logo" data-src="{{ url('resources/assets/app/img/logo.png') }}" data-src-retina="{{ url('resources/assets/app/img/logo_2x.png') }}" height="22">
 					<!-- END Overlay Logo !-->
 					<!-- BEGIN Overlay Close !-->
 					<a href="#" class="close-icon-light overlay-close text-black fs-16">
