@@ -1,9 +1,10 @@
+<br>
 <!-- START PANEL -->
-<div class="panel panel-transparent" id="preview-detail">
+<div class="panel panel-default">
+	<div class="panel-heading">
+		<div class="panel-title">Keterangan</div>
+	</div>
 	<div class="panel-body">
-		<div class="form-group">
-			<label>Keterangan</label>
-		</div>
 		<table class="table">
 			<tr>
 				<td>NIK</td>
