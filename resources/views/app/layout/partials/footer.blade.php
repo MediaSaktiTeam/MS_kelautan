@@ -150,6 +150,26 @@
 							<hr>
 						</div>
 						<div class="modal-body">
+							<form class="style-form" id="form-kelompok" method="GET" action="">
+								<div class="form-group form-group-default">
+									<label>Kode Laporan</label>
+									<?php
+										$seed = str_split('ABCDEFGHIJKLMNOPQRSTUVWXYZ'
+														 .'0123456789');
+										shuffle($seed); 
+										$rand = '';
+										foreach (array_rand($seed, 5) as $k) $rand .= $seed[$k];
+									?>
+									<b>#<?php echo $rand; ?></b>
+								</div>
+								<div class="form-group form-group-default required">
+									<label>Deskripsi Masalah</label>
+									<textarea name="" style="height: 150px;" rows="10" class="form-control"></textarea>
+								</div>
+								<div class="form-group">
+									<button type="submit" class="btn btn-primary btn-cons btn-simpan">Kirim</button>
+								</div>
+							</form>
 						</div>
 					</div>
 				</div>
