@@ -130,7 +130,7 @@
 														<option value="">Pilih Jenis Usaha...</option>
 														<option value="Budidaya Air Laut" {{ $pembudidaya->usaha->jenis == "Budidaya Air Laut" ? "selected":"" }}>Budidaya Air Laut</option>
 														<option value="Budidaya Air Tawar" {{ $pembudidaya->usaha->jenis == "Budidaya Air Tawar" ? "selected":"" }}>Budidaya Air Tawar</option>
-														<!-- <option style="display: none" value="Budidaya Air Payau" {{ $pembudidaya->usaha->jenis == "Budidaya Air Payau" ? "selected":"" }}>Budidaya Air Payau</option> -->
+														<option value="Budidaya Air Payau" {{ $pembudidaya->usaha->jenis == "Budidaya Air Payau" ? "selected":"" }}>Budidaya Air Payau</option>
 													</select>
 												</div>
 											</div>

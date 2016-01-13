@@ -127,17 +127,21 @@
 												<div class="col-md-6">
 													<div class="form-group">
 														<label>Jenis Usaha</label>
-														<select class="full-width" data-init-plugin="select2" disabled>
-															<option value="">Pilih Jenis Usaha...</option>
-														</select>
+														<div id="usaha">
+															<select class="full-width" data-init-plugin="select2" disabled>
+																<option value="">Pilih Jenis Usaha...</option>
+															</select>
+														</div>
 													</div>
 												</div>
 												<div class="col-md-6">
 													<div class="form-group">
 														<label>Kepemilikan Sarana dan Prasarana</label>
-														<select class="full-width" data-init-plugin="select2" disabled>
-															<option value="">Pilih Sarana / Prasarana...</option>
-														</select>
+														<div id="sarana">
+															<select class="full-width" data-init-plugin="select2" disabled>
+																<option value="">Pilih Sarana / Prasarana...</option>
+															</select>
+														</div>
 													</div>
 												</div>
 											</div>
@@ -232,24 +236,9 @@
 		</div>
 		<!-- END PAGE CONTENT -->
 		<!-- START COPYRIGHT -->
-		<!-- START CONTAINER FLUID -->
-
-
-		<div class="container-fluid container-fixed-lg footer">
-			<div class="copyright sm-text-center">
-				<p class="small no-margin pull-left sm-pull-reset">
-					<span class="hint-text">Copyright © 2015 </span>
-					<span class="font-montserrat">Media SAKTI</span>.
-					<span class="hint-text">All rights reserved. </span>
-					<span class="sm-block"><a href="#" class="m-l-10 m-r-10">Terms of use</a> | <a href="#" class="m-l-10">Privacy Policy</a></span>
-				</p>
-				<p class="small no-margin pull-right sm-pull-reset">
-					<a href="#">Hand-crafted</a> <span class="hint-text">&amp; Made with Love ®</span>
-				</p>
-				<div class="clearfix"></div>
-			</div>
-		</div>
+			@include('app.layout.partials.copyright')
 		<!-- END COPYRIGHT -->
+
 	</div>
 	<!-- END PAGE CONTENT WRAPPER -->
 

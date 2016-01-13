@@ -1,7 +1,7 @@
 @extends('app.layout.main')
 
 @section('title')
-	Bantuan | Tambah
+	Bantuan
 @endsection
 
 
@@ -23,11 +23,11 @@
 						<!-- START BREADCRUMB -->
 						<ul class="breadcrumb pull-left">
 							<li>
-								<a href="{{ route('nelayan') }}">Bantuan</a>
+								<a href="{{ route('ref_bantuan') }}">Bantuan</a>
 							</li>
 						</ul>
 						
-						<button id="show-tambah-nelayan" class="btn btn-primary bg-blueblur m-t-10 m-b-10 pull-right">Tambah</button>
+						<button id="show-tambah-bantuan" class="btn btn-primary bg-blueblur m-t-10 m-b-10 pull-right">Tambah</button>
 					</div>
 				</div>
 
@@ -40,13 +40,13 @@
 
 					<div class="row">
 
-						<div id="tambah-nelayan" style="display:none">
+						<div id="tambah-bantuan" style="display:none">
 							<div class="col-md-6">
 
 								<!-- START PANEL -->
 								<div class="panel panel-transparent">
 									<div class="panel-body">
-										<form id="form-personal" method="post" action="{{ route('nelayan_simpan') }}" role="form">
+										<form id="form-personal" method="post" action="{{ route('ref_bantuan_simpan') }}" role="form">
 											
 											{{ csrf_field() }}
 
@@ -54,44 +54,32 @@
 												<div class="col-sm-12">
 													<div class="form-group required">
 														<label>NIK / Nama / Kelompok</label>
-														<select id="bidang-usaha" class="full-width" data-init-plugin="select2" name="tipe">
-															<option value=""></option>
+														<select class="full-width" onchange="get_jenis_bantuan(this.value)" data-init-plugin="select2" name="id_user" required>
+															<option value="">Pilih Pengguna</option>
+															@foreach( $users as $u )
+																<option value="{{ $u->id }}">{{ $u->nik }} <b>-</b> {{ $u->name }} <b>-</b> {{ $u->nama_kelompok }}</option>
+															@endforeach
 														</select>
 													</div>
 												</div>
 											</div>
 
 											<div class="row">
-												<div class="col-sm-6">
-													<div class="form-group required">
+												<div class="col-sm-8">
+													<div class="form-group required" id="list-bantuan">
 														<label>Jenis Bantuan</label>
-														<input type="text" class="form-control" name="no_kartu_nelayan" required>
+														<select class="full-width" data-init-plugin="select2" required>
+															<option value="">Jenis Bantuan...</option>
+														</select>
 													</div>
 												</div>
-												<div class="col-sm-6">
+												<div class="col-sm-4">
 													<div class="form-group">
 														<label>Tahun</label>
-														<select id="bidang-usaha" class="full-width" data-init-plugin="select2" name="tipe">
-															<option value="">2011</option>
-															<option value="">2012</option>
-															<option value="">2013</option>
-															<option value="">2014</option>
-															<option value="">2015</option>
-															<option value="">2016</option>
-															<option value="">2017</option>
-															<option value="">2018</option>
-															<option value="">2019</option>
-															<option value="">2020</option>
-															<option value="">2021</option>
-															<option value="">2022</option>
-															<option value="">2023</option>
-															<option value="">2024</option>
-															<option value="">2025</option>
-															<option value="">2026</option>
-															<option value="">2027</option>
-															<option value="">2028</option>
-															<option value="">2029</option>
-															<option value="">2030</option>
+														<select name="tahun" class="full-width" data-init-plugin="select2" required>
+															@for( $t = 2011; $t < date('Y') + 2; $t++)
+																<option value="{{ $t }}" {{ $t == date('Y') ? "selected":"" }}>{{ $t }}</option>
+															@endfor
 														</select>
 													</div>
 												</div>
@@ -109,33 +97,8 @@
 
 							<div class="col-md-6">
 
-								<!-- START PANEL -->
-								<div class="panel panel-transparent">
-									<div class="panel-body">
-										<div class="form-group">
-											<label>Keterangan</label>
-										</div>
-										<table class="table">
-											<tr>
-												<td>NIK</td>
-												<td><b>0981293890</b></td>
-											</tr>
-											<tr>
-												<td>Nama</td>
-												<td><b>Gifa Eriyanto</b></td>
-											</tr>
-											<tr>
-												<td>Bidang Usaha</td>
-												<td><b>Nelayan</b></td>
-											</tr>
-											<tr>
-												<td>Kelompok</td>
-												<td><b>Media SAKTI</b></td>
-											</tr>
-										</table>
-									</div>
-								</div>
-								<!-- END PANEL -->
+								<div id="preview-data"></div>
+
 							</div>
 						</div>
 
@@ -184,31 +147,47 @@
 													</tr>
 												</thead>
 												<tbody>
-													<tr>
-														<td>
-															<div class="checkbox">
-																<input type="checkbox" class="pilih" value="" id="checkbox">
-																<label for="checkbox" class="m-l-20"></label>
-															</div>
-														</td>
-														<td>1</td>
-														<td></td>
-														<td></td>
-														<td></td>
-														<td></td>
-														<td></td>
-														<td>
-															<a class="btn btn-default btn-xs view" data-id="" data-toggle="modal" data-target="#modal-view"><i class="fa fa-search-plus"></i></a>
-															<a href="javascript:;"
-																data-id=""
-																data-nama=""
-																data-tipe=""
-																data-alamat=""
-																data-norek=""
-																data-narek=""
-																data-bank="" class="btn btn-edit btn-primary btn-xs"><i class="fa fa-pencil"></i></a>
-														</td>
-													</tr>
+													<?php $no = 1 ?>
+													@foreach( $bantuan_users as $bu )
+
+														<tr>
+															<td>
+																<div class="checkbox">
+																	<input type="checkbox" class="pilih" value="{{ $bu->id }}|{{ $bu->tahun_bantuan }}" id="pb{{ $bu->id }}|{{ $bu->tahun_bantuan }}">
+																	<label for="pb{{ $bu->id }}|{{ $bu->tahun_bantuan }}" class="m-l-20"></label>
+																</div>
+															</td>
+															<td>{{ $no }}</td>
+															<td>{{ $bu->name }}</td>
+															<td>{{ $bu->profesi }}</td>
+															<td>{{ $bu->nama_kelompok }}</td>
+															<td>
+																<ul class="list-unstyled">
+																	<?php
+
+																		$bantuan = DB::table('app_bantuan as ab')
+																						->leftJoin('app_bantuan_master as abm', 'abm.id', '=', 'ab.id_bantuan')
+																							->select('abm.nama')
+																								->where('ab.id_user', $bu->id)
+																								->where('ab.tahun', $bu->tahun_bantuan)
+																								->orderBy('ab.tahun', 'asc')
+																								->get(); ?>
+																	@foreach( $bantuan as $b )
+																		<li><i class="fa fa-check-square-o"></i>  {{ $b->nama }}</li>
+																	@endforeach
+																</ul>
+
+															</td>
+															<td>{{ $bu->tahun_bantuan }}</td>
+															<td>
+																<a href="{{ route('ref_bantuan_edit', [ $bu->id, $bu->tahun_bantuan]) }}" class="btn btn-edit btn-primary btn-xs"><i class="fa fa-pencil"></i></a>
+															</td>
+														</tr>
+
+													<?php $no++ ?>
+
+													@endforeach
+
 												</tbody>
 											</table>
 										</div>
@@ -223,25 +202,11 @@
 			</div>
 		</div>
 		<!-- END PAGE CONTENT -->
+
 		<!-- START COPYRIGHT -->
-		<!-- START CONTAINER FLUID -->
-
-
-		<div class="container-fluid container-fixed-lg footer">
-			<div class="copyright sm-text-center">
-				<p class="small no-margin pull-left sm-pull-reset">
-					<span class="hint-text">Copyright © 2015 </span>
-					<span class="font-montserrat">Media SAKTI</span>.
-					<span class="hint-text">All rights reserved. </span>
-					<span class="sm-block"><a href="#" class="m-l-10 m-r-10">Terms of use</a> | <a href="#" class="m-l-10">Privacy Policy</a></span>
-				</p>
-				<p class="small no-margin pull-right sm-pull-reset">
-					<a href="#">Hand-crafted</a> <span class="hint-text">&amp; Made with Love ®</span>
-				</p>
-				<div class="clearfix"></div>
-			</div>
-		</div>
+			@include('app.layout.partials.copyright')
 		<!-- END COPYRIGHT -->
+
 	</div>
 	<!-- END PAGE CONTENT WRAPPER -->
 
@@ -352,12 +317,12 @@
 		        else {
 				  return false;
 		        }
-		        $(".btn-hapus").attr('href',"{{ route('nelayan_hapus') }}/"+id);
+		        $(".btn-hapus").attr('href',"{{ route('ref_bantuan_hapus') }}/"+id);
 
 			});
 
-			$("#show-tambah-nelayan").click(function(){
-				$("#tambah-nelayan").fadeIn();
+			$("#show-tambah-bantuan").click(function(){
+				$("#tambah-bantuan").fadeIn();
 				$("input[name='nik']").focus();
 				$(this).hide();
 			});
@@ -375,13 +340,25 @@
 
 		});
 
-		function get_sarana(id){
-			$('#sarana').html('<i class="fa fa-spinner fa-spin"></i>');
+		function get_jenis_bantuan(id){
+			$("#list-bantuan").html('<i class="fa fa-spinner fa-spin"></i>');
 			var _token = $('meta[name="csrf-token"]').attr('content');
-			var url = "{{ url('app/nelayan/sarana') }}";
+			var url = "{{ url('app/bantuan/list-bantuan') }}";
 			var url = url+"/"+id;
 			$.get(url, { id:id, _token:_token}, function(data){
-				$('#sarana').html(data);
+				$('#list-bantuan').html(data);
+			});
+
+			get_data(id);
+		}
+
+		function get_data(id){
+			$('#preview-data').html('<div style="margin-top:30px;margin-left:30px"><i class="fa fa-spinner fa-spin"></i></div>');
+			var _token = $('meta[name="csrf-token"]').attr('content');
+			var url = "{{ url('app/bantuan/data-preview') }}";
+			var url = url+"/"+id;
+			$.get(url, { id:id, _token:_token}, function(data){
+				$('#preview-data').html(data);
 			});
 		}
 
@@ -394,7 +371,7 @@
 				$("#show-pencarian").show();
 				$("#show-pencarian").html('<tr><td colspan="6"><i class="fa fa-spinner fa-spin"></i></td></tr>');
 				var _token = $('meta[name="csrf-token"]').attr('content');
-				var url = "{{ url('app/nelayan/cari') }}";
+				var url = "{{ url('app/bantuan/cari') }}";
 				var url = url+"/"+cari;
 				$.get(url, { cari:cari, _token:_token}, function(data){
 					$('#show-pencarian').html(data);
