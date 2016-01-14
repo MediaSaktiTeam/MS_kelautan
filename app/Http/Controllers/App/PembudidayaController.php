@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
-use DB,Excel;
+use DB,Excel,PDF;
 use App\User, App\Kelompok, App\Jabatan, App\Usaha, App\Sarana, App\KepemilikanSarana;
 use App\RefBantuan;
 
@@ -200,9 +200,9 @@ class PembudidayaController extends Controller
 
 	public function getExportExcel()
 	{
-		$data['pembudidaya'] = User::where('profesi','Pembudidaya')->orderBy('id','desc')->get();
-		$data['kelompok'] = Kelompok::where('tipe','Pembudidaya')->get();
-		$data['jabatan'] = Jabatan::all();
+		$data['pembudidaya'] 	= User::where('profesi','Pembudidaya')->orderBy('id','desc')->get();
+		$data['kelompok'] 		= Kelompok::where('tipe','Pembudidaya')->get();
+		$data['jabatan'] 		= Jabatan::all();
 
         Excel::create('Data Pembudidaya');
 
@@ -214,6 +214,18 @@ class PembudidayaController extends Controller
                 $sheet->loadView('app.pembudidaya.export-excel', $data);
             }); 
         })->download('xlsx');
+	}
+
+	public function getExportPdf()
+	{
+		$data['pembudidaya'] 	= User::where('profesi','Pembudidaya')->orderBy('id','desc')->get();
+		$data['kelompok'] 		= Kelompok::where('tipe','Pembudidaya')->get();
+		$data['jabatan'] 		= Jabatan::all();
+		
+		// return view('app.pembudidaya.export-pdf', $data);
+
+        $pdf = PDF::loadView('app.pembudidaya.export-pdf', $data);
+        return $pdf->setPaper('legal')->setOrientation('landscape')->setWarnings(false)->download('Data Pembudidaya.pdf');
 	}
 
 }

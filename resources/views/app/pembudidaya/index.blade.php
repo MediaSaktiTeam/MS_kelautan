@@ -311,7 +311,7 @@
 							</a>
 						</div>
 						<div class="col-md-6">
-							<a href="">
+							<a href="{{ url('/app/pembudidaya/export-pdf') }}">
 								<i class="fa fa-file-pdf-o export-pdf"></i>
 								Unduh Dalam Format PDF
 							</a>
