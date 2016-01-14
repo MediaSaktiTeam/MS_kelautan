@@ -46,31 +46,29 @@
 
 <body>
 
-<center><h2>Data Pembudidaya <br> <small>Kementerian Perikanan dan Kelautan Kab. Bantaeng</small></h2></center>
+<center><h2>Data Nelayan <br> <small>Kementerian Perikanan dan Kelautan Kab. Bantaeng</small></h2></center>
 
 	<table class="table table-bordered">
 		<thead>
 			<tr>
 				<th>NIK</th>
+				<th>No Kartu Nelayan</th>
 				<th>Nama</th>
 				<th>Alamat</th>
-				<th>Jenis Usaha</th>
-				<th>Spesifik Usaha</th>
 				<th>Kelompok</th>
 			</tr>
 		</thead>
 		
 		<tbody>
 
-			@foreach( $pembudidaya as $pb )
+			@foreach( $nelayan as $nel )
 
 			<tr>
-				<td>{{ $pb->nik }}</td>
-				<td>{{ $pb->name }}</td>
-				<td>{{ $pb->alamat }}</td>
-				<td>{{ $pb->usaha->jenis }}</td>
-				<td>{{ $pb->usaha->nama }}</td>
-				<td>{{ $pb->kelompok->nama }} ({{ $pb->jabatan->nama }})</td>
+				<td>{{ $nel->nik }}</td>
+				<td>{{ $nel->no_kartu_nelayan }}</td>
+				<td>{{ $nel->name }}</td>
+				<td>{{ $nel->alamat }}</td>
+				<td>{{ $nel->kelompok->nama }} ({{ $nel->jabatan->nama }})</td>
 			</tr>
 
 			@endforeach

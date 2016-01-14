@@ -309,13 +309,13 @@
 				<div class="modal-body">
 					<div class="row">
 						<div class="col-md-6">
-							<a href="">
+							<a href="{{ url('/app/nelayan/export-excel') }}">
 								<i class="fa fa-file-excel-o export-excel"></i>
 								Unduh Dalam Format Mic.Excel
 							</a>
 						</div>
 						<div class="col-md-6">
-							<a href="">
+							<a href="{{ url('/app/nelayan/export-pdf') }}">
 								<i class="fa fa-file-pdf-o export-pdf"></i>
 								Unduh Dalam Format PDF
 							</a>

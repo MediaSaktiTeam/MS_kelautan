@@ -2,12 +2,11 @@
 		<thead>
 			<tr>
 				<th>NIK</th>
+				<th>No Kartu Nelayan</th>
 				<th>Nama Lengkap</th>
 				<th>Alamat</th>
 				<th>Nama Kelompok</th>
 				<th>Jabatan Kelompok</th>
-				<th>Jenis Usaha</th>
-				<th>Spesifik Usaha</th>
 				<th>Sarana/Prasarana yang dimiliki</th>
 				<th>Bantuan yang pernah didapatkan</th>
 
@@ -16,20 +15,19 @@
 		
 		<tbody>
 
-			@foreach( $pembudidaya as $pb )
+			@foreach( $nelayan as $nel )
 
 			<tr>
-				<td>{{ $pb->nik }}</td>
-				<td>{{ $pb->name }}</td>
-				<td>{{ $pb->alamat }}</td>
-				<td>{{ $pb->kelompok->nama }}</td>
-				<td>{{ $pb->jabatan->nama }}</td>
-				<td>{{ $pb->usaha->jenis }}</td>
-				<td>{{ $pb->usaha->nama }}</td>
+				<td>{{ $nel->nik }}</td>
+				<td>{{ $nel->no_kartu_nelayan }}</td>
+				<td>{{ $nel->name }}</td>
+				<td>{{ $nel->alamat }}</td>
+				<td>{{ $nel->kelompok->nama }}</td>
+				<td>{{ $nel->jabatan->nama }}</td>
 				<td>
-					<?php $Ksarana = App\KepemilikanSarana::where('id_user', $pb->id)->get(); ?>
+					<?php $Ksarana = App\KepemilikanSarana::where('id_user', $nel->id)->get(); ?>
 					@foreach ( $Ksarana as $ks )
-						- {{ $ks->sarana->sub }}
+						- {{ $ks->sarana->jenis }} {{ $ks->sarana->sub }}
 					@endforeach
 				</td>
 				<td>
@@ -37,7 +35,7 @@
 							$bantuan = DB::table('app_bantuan as ab')
 											->leftJoin('app_bantuan_master as abm', 'abm.id', '=', 'ab.id_bantuan')
 												->select('abm.nama', 'ab.tahun')
-													->where('ab.id_user', $pb->id)
+													->where('ab.id_user', $nel->id)
 													->orderBy('ab.tahun', 'asc')
 													->get(); ?>
 						@foreach( $bantuan as $b )

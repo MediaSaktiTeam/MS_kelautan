@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
-use DB;
+use DB,Excel,PDF;
 use App\User, App\Kelompok, App\Jabatan, App\Usaha, App\Sarana, App\KepemilikanSarana;
 use App\RefBantuan;
 
@@ -166,4 +166,31 @@ class NelayanController extends Controller
 		return view('app.nelayan.data-pencarian', $data);
 	}
 
+	public function getExportExcel()
+	{
+		$data['nelayan'] = User::where('profesi','Nelayan')->orderBy('id','desc')->get();
+		$data['kelompok'] = Kelompok::where('tipe','nelayan')->get();
+		$data['jabatan'] = Jabatan::all();
+
+        Excel::create('Data Nelayan');
+
+        Excel::create('Data Nelayan', function($excel) use($data)
+        {
+            
+            $excel->sheet('New sheet', function($sheet) use($data)
+            {
+                $sheet->loadView('app.nelayan.export-excel', $data);
+            }); 
+        })->download('xlsx');
+	}
+
+	public function getExportPdf()
+	{
+		$data['nelayan'] = User::where('profesi','Nelayan')->orderBy('id','desc')->get();
+		$data['kelompok'] = Kelompok::where('tipe','nelayan')->get();
+		$data['jabatan'] = Jabatan::all();
+		
+        $pdf = PDF::loadView('app.nelayan.export-pdf', $data);
+        return $pdf->setPaper('legal')->setOrientation('landscape')->setWarnings(false)->download('Data Nelayan.pdf');
+	}
 }
