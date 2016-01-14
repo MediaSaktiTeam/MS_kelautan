@@ -100,6 +100,7 @@ Route::group(['middleware' => 'MustLogin', 'namespace' => 'App' ], function () {
 			'getIndex'  => 'bantuan',
 			'getTambah'  => 'bantuan_tambah',
 			'getHapus'  => 'bantuan_hapus',
+			'getUpdate'  => 'bantuan_update',
 		]);
 	Route::controller('app/master/jabatan', 'JabatanController',
 		[

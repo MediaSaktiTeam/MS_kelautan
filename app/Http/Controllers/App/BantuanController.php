@@ -45,8 +45,8 @@ class BantuanController extends Controller
 	{
 
 		$data = Bantuan::find($request->id);
-		$data->nama = $request->nama;
 		$data->jenis = $request->jenis;
+		$data->nama = $request->nama;
 		$data->save();
 		$data['bantuan'] = Bantuan::paginate(1);
 

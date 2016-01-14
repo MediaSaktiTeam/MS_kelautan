@@ -99,7 +99,7 @@
 											</td>
 											<td>{{ $bantu->nama }}</td>
 											<td>{{ $bantu->jenis }}</td>
-											<td><button class="btn btn-default btn-xs btn-edit" data-id="$bantu->id" data-jenis="{{ $bantu->jenis }}" data-nama="{{ $bantu->nama }}"><i class="fa fa-pencil"></i></button></td>
+											<td><button class="btn btn-default btn-xs btn-edit" data-id="{{ $bantu->id }}" data-jenis="{{ $bantu->jenis }}" data-nama="{{ $bantu->nama }}"><i class="fa fa-pencil"></i></button></td>
 										</tr>
 										@endforeach
 									</tbody>
@@ -174,7 +174,7 @@
 					<h5>Sunting Data</h5>
 				</div>
 				<div class="modal-body">
-					<form class="style-form" method="GET" action="{{ route('bantuan_tambah') }}">
+					<form class="style-form" method="GET" action="{{ route('bantuan_update') }}">
 						<input type="hidden" name="_token" value="{{ csrf_token() }}">
 						<div class="form-group form-group-default required">
 							<label>Bidang Usaha</label>
@@ -188,6 +188,7 @@
 							<input type="text" id="nama" name="nama" class="form-control" required>
 						</div>
 						<div class="form-group">
+							<input type="hidden" id="id-jenis" name="id">
 							<button type="submit" class="btn btn-primary btn-cons">Simpan</button>
 							<button type="button" class="btn btn-default btn-cons" data-dismiss="modal">Kembali</button>
 						</div>
