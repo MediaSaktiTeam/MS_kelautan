@@ -41,4 +41,16 @@ class BantuanController extends Controller
 		return redirect()->route('bantuan');
 	}
 
+	public function getUpdate(Request $request)
+	{
+
+		$data = Bantuan::find($request->id);
+		$data->nama = $request->nama;
+		$data->jenis = $request->jenis;
+		$data->save();
+		$data['bantuan'] = Bantuan::paginate(1);
+
+		return redirect()->route('bantuan', $data);
+	}
+
 }

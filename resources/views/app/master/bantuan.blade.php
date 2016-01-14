@@ -99,7 +99,7 @@
 											</td>
 											<td>{{ $bantu->nama }}</td>
 											<td>{{ $bantu->jenis }}</td>
-											<td><button class="btn btn-default btn-xs" data-toggle="modal" data-target="#modal-sunting"><i class="fa fa-pencil"></i></button></td>
+											<td><button class="btn btn-default btn-xs btn-edit" data-id="$bantu->id" data-jenis="{{ $bantu->jenis }}" data-nama="{{ $bantu->nama }}"><i class="fa fa-pencil"></i></button></td>
 										</tr>
 										@endforeach
 									</tbody>
@@ -178,14 +178,14 @@
 						<input type="hidden" name="_token" value="{{ csrf_token() }}">
 						<div class="form-group form-group-default required">
 							<label>Bidang Usaha</label>
-							<select class="full-width" data-init-plugin="select2" name="jenis">
+							<select class="full-width" data-init-plugin="select2" name="jenis" id="jenis">
 								<option value="Nelayan">Nelayan</option>
 								<option value="Pembudidaya">Pembudidaya</option>
 							</select>
 						</div>
 						<div class="form-group form-group-default required">
 							<label>Nama Bantuan</label>
-							<input type="text" name="nama" class="form-control" required>
+							<input type="text" id="nama" name="nama" class="form-control" required>
 						</div>
 						<div class="form-group">
 							<button type="submit" class="btn btn-primary btn-cons">Simpan</button>
@@ -226,6 +226,23 @@
 
 				$(".btn-hapus").attr('href',"{{ route('bantuan_hapus') }}/"+id);
 
+			});
+
+			$(".btn-edit").click(function(){
+
+				var id = $(this).data('id');
+				var nama = $(this).data('nama');
+				var jenis = $(this).data('jenis');
+				$('#id-jenis').val(id);
+				$('#nama').val(nama);
+				$('#modal-sunting').modal('show');
+
+				$("select option").filter(function() {
+				    if( $(this).val().trim() == jenis ){
+				    	$(this).prop('selected', true);
+				    	$(".select2-chosen").html(jenis);
+				    }
+				});
 			});
 		})();
 	</script>

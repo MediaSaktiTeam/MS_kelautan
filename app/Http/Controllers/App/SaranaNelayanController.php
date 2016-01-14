@@ -45,7 +45,7 @@ class SaranaNelayanController extends Controller
 	public function getUpdate(Request $request)
 	{
 
-		$data = Usaha::find($request->id);
+		$data = Sarana::find($request->id);
 		$data->jenis = $request->jenis;
 		$data->sub = $request->sub;
 		$data->save();

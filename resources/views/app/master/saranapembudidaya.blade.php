@@ -100,7 +100,7 @@
 											</td>
 											<td>{{ $sr->jenis }}</td>
 											<td>{{ $sr->sub }}</td>
-											<td><button class="btn btn-default btn-xs" data-toggle="modal" data-target="#modal-sunting"><i class="fa fa-pencil"></i></button></td>
+											<td><button class="btn btn-default btn-xs btn-edit" data-id="{{ $sr->id }}" data-jenis="{{ $sr->jenis }}" data-sub="{{ $sr->sub }}"><i class="fa fa-pencil"></i></button></td>
 										</tr>
 										@endforeach
 									</tbody>
@@ -175,11 +175,11 @@
 					<h5>Sunting Data</h5>
 				</div>
 				<div class="modal-body">
-					<form class="style-form" method="GET" action="{{ route('sarananelayan_tambah') }}">
+					<form class="style-form" method="GET" action="{{ route('saranapembudidaya_update') }}">
 						<input type="hidden" name="_token" value="{{ csrf_token() }}">
 						<div class="form-group form-group-default required">
 							<label>Jenis Usaha Budidaya</label>
-							<select class="full-width" data-init-plugin="select2" name="jenis">
+							<select class="full-width" data-init-plugin="select2" name="jenis" id="jenis">
 								<option value="Budidaya Air Laut">Budidaya Air Laut</option>
 								<option value="Budidaya Air Tawar">Budidaya Air Tawar</option>
 								<option value="Budidaya Air Payau">Budidaya Air Payau</option>
@@ -187,9 +187,10 @@
 						</div>
 						<div class="form-group form-group-default required">
 							<label>Sarana / Prasarana</label>
-							<input type="text" name="sub" class="form-control" required>
+							<input type="text" id="sub" name="sub" class="form-control" required>
 						</div>
 						<div class="form-group">
+							<input type="hidden" id="id-jenis" name="id">
 							<button class="btn btn-primary btn-cons">Simpan</button>
 							<button type="button" class="btn btn-default btn-cons" data-dismiss="modal">Kembali</button>
 						</div>
@@ -228,6 +229,23 @@
 
 				$(".btn-hapus").attr('href',"{{ route('saranapembudidaya_hapus') }}/"+id);
 
+			});
+
+			$(".btn-edit").click(function(){
+
+				var id = $(this).data('id');
+				var sub = $(this).data('sub');
+				var jenis = $(this).data('jenis');
+				$('#id-jenis').val(id);
+				$('#sub').val(sub);
+				$('#modal-sunting').modal('show');
+
+				$("select option").filter(function() {
+				    if( $(this).val().trim() == jenis ){
+				    	$(this).prop('selected', true);
+				    	$(".select2-chosen").html(jenis);
+				    }
+				});
 			});
 		})();
 	</script>

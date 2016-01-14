@@ -40,4 +40,16 @@ class SaranaPembudidayaController extends Controller
 		}
 		return redirect()->route('saranapembudidaya');
 	}
+
+	public function getUpdate(Request $request)
+	{
+
+		$data = Sarana::find($request->id);
+		$data->jenis = $request->jenis;
+		$data->sub = $request->sub;
+		$data->save();
+		$data['sarana'] = Sarana::paginate(1);
+
+		return redirect()->route('saranapembudidaya', $data);
+	}
 }

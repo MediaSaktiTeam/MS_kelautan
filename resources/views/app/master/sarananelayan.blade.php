@@ -100,7 +100,7 @@
 											</td>
 											<td>{{ $sr->jenis }}</td>
 											<td>{{ $sr->sub }}</td>
-											<td><button class="btn btn-default btn-xs" data-toggle="modal" data-target="#modal-sunting"><i class="fa fa-pencil"></i></button></td>
+											<td><button class="btn btn-default btn-xs btn-edit" data-id="{{ $sr->id }}" data-jenis="{{ $sr->jenis }}" data-sub="{{ $sr->sub }}"><i class="fa fa-pencil"></i></button></td>
 										</tr>
 										@endforeach
 									</tbody>
@@ -162,7 +162,7 @@
 						</div>
 						<div class="form-group form-group-default required">
 							<label>Detail</label>
-							<input type="text" name="sub" class="form-control" required>
+							<input type="text" id="sub" name="sub" class="form-control" required>
 						</div>
 						<div class="form-group">
 							<input type="hidden" id="id-jenis" name="id">
@@ -208,10 +208,10 @@
 			$(".btn-edit").click(function(){
 
 				var id = $(this).data('id');
-				var nama = $(this).data('nama');
+				var sub = $(this).data('sub');
 				var jenis = $(this).data('jenis');
 				$('#id-jenis').val(id);
-				$('#nama').val(nama);
+				$('#sub').val(sub);
 				$('#modal-sunting').modal('show');
 
 				$("select option").filter(function() {
