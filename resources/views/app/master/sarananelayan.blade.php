@@ -150,11 +150,11 @@
 					<h5>Sunting Data</h5>
 				</div>
 				<div class="modal-body">
-					<form class="style-form" method="GET" action="{{ route('sarananelayan_tambah') }}">
+					<form class="style-form" method="GET" action="{{ route('sarananelayan_update') }}">
 						<input type="hidden" name="_token" value="{{ csrf_token() }}">
 						<div class="form-group form-group-default required">
 							<label>Sarana / Prasarana</label>
-							<select class="full-width" data-init-plugin="select2" name="jenis">
+							<select class="full-width" data-init-plugin="select2" name="jenis" id="jenis">
 								<option value="Perahu/Kapal">Perahu/Kapal</option>
 								<option value="Alat Tangkap">Alat Tangkap</option>
 								<option value="Mesin">Mesin</option>
@@ -165,6 +165,7 @@
 							<input type="text" name="sub" class="form-control" required>
 						</div>
 						<div class="form-group">
+							<input type="hidden" id="id-jenis" name="id">
 							<button class="btn btn-primary btn-cons">Simpan</button>
 							<button type="button" class="btn btn-default btn-cons" data-dismiss="modal">Kembali</button>
 						</div>
@@ -202,7 +203,23 @@
 				}
 
 				$(".btn-hapus").attr('href',"{{ route('sarananelayan_hapus') }}/"+id);
+			});
 
+			$(".btn-edit").click(function(){
+
+				var id = $(this).data('id');
+				var nama = $(this).data('nama');
+				var jenis = $(this).data('jenis');
+				$('#id-jenis').val(id);
+				$('#nama').val(nama);
+				$('#modal-sunting').modal('show');
+
+				$("select option").filter(function() {
+				    if( $(this).val().trim() == jenis ){
+				    	$(this).prop('selected', true);
+				    	$(".select2-chosen").html(jenis);
+				    }
+				});
 			});
 		})();
 	</script>

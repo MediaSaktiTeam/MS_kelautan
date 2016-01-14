@@ -41,4 +41,16 @@ class SaranaNelayanController extends Controller
 		}
 		return redirect()->route('sarananelayan');
 	}
+
+	public function getUpdate(Request $request)
+	{
+
+		$data = Usaha::find($request->id);
+		$data->jenis = $request->jenis;
+		$data->sub = $request->sub;
+		$data->save();
+		$data['sarana'] = Sarana::paginate(1);
+
+		return redirect()->route('sarananelayan', $data);
+	}
 }

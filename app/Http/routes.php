@@ -126,6 +126,7 @@ Route::group(['middleware' => 'MustLogin', 'namespace' => 'App' ], function () {
             'getIndex'  => 'sarananelayan',
             'getTambah' => 'sarananelayan_tambah',
             'getHapus'  => 'sarananelayan_hapus',
+            'getUpdate' => 'sarananelayan_update'
         ]);
 
 });

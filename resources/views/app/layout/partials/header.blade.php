@@ -82,7 +82,7 @@
 								<a href="/app/master/sarana-nelayan">Sarana Nelayan</a>
 								<span class="icon-thumbnail">SN</span>
 							</li>
-							<li class="sub-jenis">
+							<li class="sub-usaha">
 								<a href="/app/master/usaha">Usaha</a>
 								<span class="icon-thumbnail">U</span>
 							</li>
