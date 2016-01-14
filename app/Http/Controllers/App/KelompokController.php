@@ -37,7 +37,6 @@ class KelompokController extends Controller
 
 	public function getTambah(Request $request)
 	{
-		$data['kelompok'] = Kelompok::paginate(10);
 		$dt = new Kelompok;
 		$dt->id_kelompok = $request->id;
 		$dt->nama = $request->nama;
@@ -47,7 +46,7 @@ class KelompokController extends Controller
 		$dt->nama_bank = $request->nama_bank;
 		$dt->tipe = $request->tipe;
 		$dt->save();
-		return redirect()->route('kelompok', $data);
+		return redirect()->route('kelompok');
 	}
 
 	public function getUpdate(Request $request)
@@ -63,9 +62,7 @@ class KelompokController extends Controller
 		Kelompok::where('id_kelompok', $request->id)
 					->update($dt);
 
-		$data['kelompok'] = Kelompok::paginate(10);
-
-		return redirect()->route('kelompok', $data);
+		return redirect()->route('kelompok');
 	}
 
 	public function getHapus($id){

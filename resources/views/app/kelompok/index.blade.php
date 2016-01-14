@@ -126,10 +126,15 @@
 										@foreach($kelompok as $kel)
 										<tr>
 											<td>
+											<?php $data_user = App\User::where('id_kelompok', $kel->id_kelompok)->count(); ?>
+
+											@if ( $data_user < 1 )
 												<div class="checkbox">
 													<input type="checkbox" class="pilih" value="{{ $kel->id_kelompok }}" id="checkbox{{ $kel->id_kelompok }}">
 													<label for="checkbox{{ $kel->id_kelompok }}" class="m-l-20"></label>
 												</div>
+											@endif
+											
 											</td>
 											<td>{{ $kel->id_kelompok }}</td>
 											<td>{{ $kel->nama }}</td>

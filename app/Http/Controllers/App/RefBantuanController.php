@@ -21,22 +21,34 @@ class RefBantuanController extends Controller
 		$data['users'] = DB::table('users as u')
 							->leftJoin('app_kelompok as ak', 'u.id_kelompok', '=', 'ak.id_kelompok')
 							->select('u.*', 'ak.nama as nama_kelompok')
-								->where('u.profesi','<>','Admin')
+								->whereIn('u.profesi', ['Pembudidaya','Nelayan'])
 								->orderBy('ak.nama', 'asc')->get();
 
 		$data['bantuan_users'] = DB::table('app_bantuan as ab')
 							->leftJoin('users as u', 'u.id', '=', 'ab.id_user')
 							->leftJoin('app_kelompok as ak', 'u.id_kelompok', '=', 'ak.id_kelompok')
 							->select('u.*','ak.nama as nama_kelompok', 'ab.tahun as tahun_bantuan')
-								->where('u.profesi', '<>', 'Admin')
-								->groupBy('ab.tahun')
-								->orderBy('ab.tahun', 'desc')->get();
+								->whereIn('u.profesi', ['Pembudidaya','Nelayan'])
+								->orderBy('ab.id', 'desc')
+								->orderBy('ab.id_user', 'desc')
+								->orderBy('ab.tahun', 'desc')
+								->get();
 
 		return view('app.bantuan.index', $data);
 	}
 
 	public function postSimpan(Request $request)
 	{
+
+		$cek = RefBantuan::where('id_user', $request->id_user)
+							->where('tahun', $request->tahun)
+							->count();
+
+		if ( $cek > 0 ) {
+			$request->session()->flash('gagal','GAGAL!!! - Orang ini telah mendapatkan bantuan pada tahun yang sama');
+			return redirect()->route('ref_bantuan');
+			exit;
+		}
 
 		foreach( $request->id_bantuan as $val ) {
 			$dt = new RefBantuan;
@@ -112,8 +124,10 @@ class RefBantuanController extends Controller
 							->select('u.*','ak.nama as nama_kelompok', 'ab.tahun as tahun_bantuan')
 								->where('u.profesi', '<>', 'Admin')
 								->where('u.name', 'LIKE', '%'. $cari .'%')
-								->groupBy('ab.tahun')
-								->orderBy('ab.tahun', 'desc')->get();
+								->orderBy('ab.id', 'desc')
+								->orderBy('ab.id_user', 'desc')
+								->orderBy('ab.tahun', 'desc')
+								->get();
 
 		return view('app.bantuan.cari', $data);
 	}

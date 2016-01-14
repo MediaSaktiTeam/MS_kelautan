@@ -15,7 +15,6 @@ class TabelBantuan extends Migration
     
         Schema::create('app_bantuan', function(Blueprint $t)
         {
-            $t->bigIncrements('id')->unsigned();
             $t->string('id_user');
             $t->string('id_bantuan');
             $t->string('tahun',4);

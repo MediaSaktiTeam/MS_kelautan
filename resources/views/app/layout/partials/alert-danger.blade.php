@@ -3,7 +3,12 @@
 		<span aria-hidden="true">&times;</span>
 		<span class="sr-only">Close</span>
 	</button>
-	@foreach( $errors->all() as $error )
-    	<p>{{ $error }}</p>
-    @endforeach
+
+	@if ( count($errors->all()) > 0 )
+		@foreach( $errors->all() as $error )
+	    	<p>{{ $error }}</p>
+	    @endforeach
+	@else
+		{!! $message !!}
+	@endif
 </div>

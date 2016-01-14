@@ -54,7 +54,7 @@
 												<div class="col-sm-12">
 													<div class="form-group required">
 														<label>NIK / Nama / Kelompok</label>
-														<select class="full-width" onchange="get_jenis_bantuan(this.value)" data-init-plugin="select2" name="id_user" required>
+														<select class="full-width" onchange="get_data(this.value)" data-init-plugin="select2" name="id_user" required>
 															<option value="">Pilih Pengguna</option>
 															@foreach( $users as $u )
 																<option value="{{ $u->id }}">{{ $u->nik }} <b>-</b> {{ $u->name }} <b>-</b> {{ $u->nama_kelompok }}</option>
@@ -152,6 +152,18 @@
 													<?php $no = 1 ?>
 													@foreach( $bantuan_users as $bu )
 
+														<?php
+
+															if ( $no > 1 ) {
+																if ( $id_user == $bu->id && $tb == $bu->tahun_bantuan )
+																	continue;
+															}
+
+															$id_user = $bu->id;
+															$tb = $bu->tahun_bantuan;
+
+														?>
+														
 														<tr>
 															<td>
 																<div class="checkbox">
@@ -342,6 +354,17 @@
 
 		});
 
+		function get_data(id){
+			$('#preview-data').html('<div style="margin-top:30px;margin-left:30px"><i class="fa fa-spinner fa-spin"></i></div>');
+			var _token = $('meta[name="csrf-token"]').attr('content');
+			var url = "{{ url('app/bantuan/data-preview') }}";
+			var url = url+"/"+id;
+			$.get(url, { id:id, _token:_token}, function(data){
+				$('#preview-data').html(data);
+				get_jenis_bantuan(id);
+			});
+		}
+
 		function get_jenis_bantuan(id){
 			$("#list-bantuan").html('<i class="fa fa-spinner fa-spin"></i>');
 			var _token = $('meta[name="csrf-token"]').attr('content');
@@ -351,17 +374,6 @@
 				$('#list-bantuan').html(data);
 			});
 
-			get_data(id);
-		}
-
-		function get_data(id){
-			$('#preview-data').html('<div style="margin-top:30px;margin-left:30px"><i class="fa fa-spinner fa-spin"></i></div>');
-			var _token = $('meta[name="csrf-token"]').attr('content');
-			var url = "{{ url('app/bantuan/data-preview') }}";
-			var url = url+"/"+id;
-			$.get(url, { id:id, _token:_token}, function(data){
-				$('#preview-data').html(data);
-			});
 		}
 
 		function cari_data(cari){

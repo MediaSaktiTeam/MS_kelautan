@@ -305,7 +305,7 @@
 				<div class="modal-body">
 					<div class="row">
 						<div class="col-md-6">
-							<a href="">
+							<a href="{{ url('/app/pembudidaya/export-excel') }}">
 								<i class="fa fa-file-excel-o export-excel"></i>
 								Unduh Dalam Format Mic.Excel
 							</a>
@@ -337,7 +337,7 @@
 
 			var _token = $('meta[name="csrf-token"]').attr('content');
 
-			$("#hapus").click(function(){
+			$("table").on('click', '#hapus', function(){
 
 				if($(".pilih:checked").length) {
 		          var id = "";
@@ -379,8 +379,8 @@
 			var url = url+"/"+id;
 			$.get(url, { id:id, _token:_token}, function(data){
 				$('#usaha').html(data);
+				get_sarana(id);
 			});
-			get_sarana(id);
 		}
 
 		function get_sarana(id){
@@ -398,6 +398,7 @@
 				$("#show-data").show();
 				$("#show-pencarian").hide();
 			} else {
+
 				$("#show-data").hide();
 				$("#show-pencarian").show();
 				$("#show-pencarian").html('<tr><td colspan="6"><i class="fa fa-spinner fa-spin"></i></td></tr>');

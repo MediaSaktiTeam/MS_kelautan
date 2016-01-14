@@ -6,8 +6,9 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
-use DB;
+use DB,Excel;
 use App\User, App\Kelompok, App\Jabatan, App\Usaha, App\Sarana, App\KepemilikanSarana;
+use App\RefBantuan;
 
 class PembudidayaController extends Controller
 {
@@ -131,7 +132,10 @@ class PembudidayaController extends Controller
 
 		foreach ($val as $value) {
 			User::where('id', $value)->delete();            
+			RefBantuan::where('id_user', $value)->delete();     
 		}
+
+
 		$r->session()->flash('success', 'Data terhapus');
 		return redirect()->route('pembudidaya');
 	}
@@ -193,4 +197,23 @@ class PembudidayaController extends Controller
 									->get();
 		return view('app.pembudidaya.print-all', $data);
 	}
+
+	public function getExportExcel()
+	{
+		$data['pembudidaya'] = User::where('profesi','Pembudidaya')->orderBy('id','desc')->get();
+		$data['kelompok'] = Kelompok::where('tipe','Pembudidaya')->get();
+		$data['jabatan'] = Jabatan::all();
+
+        Excel::create('Data Pembudidaya');
+
+        Excel::create('Data Pembudidaya', function($excel) use($data)
+        {
+            
+            $excel->sheet('New sheet', function($sheet) use($data)
+            {
+                $sheet->loadView('app.pembudidaya.export-excel', $data);
+            }); 
+        })->download('xlsx');
+	}
+
 }

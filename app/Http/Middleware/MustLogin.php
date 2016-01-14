@@ -19,17 +19,22 @@ class MustLogin
         $user = Auth::user();
         if ( Auth::check() ) {
 
+            if($request->ajax()){
+                return $next($request);
+            }
+
             if ( !$this->validated() ) {
-                return redirect(url('/mediasakti/validasi-app'));
                 exit;
             } else {
-            
                 return $next($request);
-
             }
             
         } elseif ( Auth::viaRemember() ) {
             
+            if($request->ajax()){
+                return $next($request);
+            }
+
             if ( !$this->validated() ) {
                 return redirect(url('/mediasakti/validasi-app'));
                 exit;

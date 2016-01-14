@@ -8,6 +8,7 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use DB;
 use App\User, App\Kelompok, App\Jabatan, App\Usaha, App\Sarana, App\KepemilikanSarana;
+use App\RefBantuan;
 
 class NelayanController extends Controller
 {
@@ -132,7 +133,8 @@ class NelayanController extends Controller
 		$val = explode(",", $id);
 
 		foreach ($val as $value) {
-			User::where('id', $value)->delete();            
+			User::where('id', $value)->delete();
+			RefBantuan::where('id_user', $value)->delete();           
 		}
 		$r->session()->flash('success', 'Data terhapus');
 		return redirect()->route('nelayan');
