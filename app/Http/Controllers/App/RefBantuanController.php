@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\RefBantuan, App\User, App\Bantuan;
-use DB;
+use DB,Excel,PDF;
 
 class RefBantuanController extends Controller
 {
@@ -149,6 +149,58 @@ class RefBantuanController extends Controller
 		$data['bantuan'] = Bantuan::where('jenis', $user->profesi)->get();
 
 		return view('app.bantuan.list-bantuan', $data); 
+	}
+
+	public function getExportExcel()
+	{
+		$data['users'] = DB::table('users as u')
+							->leftJoin('app_kelompok as ak', 'u.id_kelompok', '=', 'ak.id_kelompok')
+							->select('u.*', 'ak.nama as nama_kelompok')
+								->whereIn('u.profesi', ['Pembudidaya','Nelayan'])
+								->orderBy('ak.nama', 'asc')->get();
+
+		$data['bantuan_users'] = DB::table('app_bantuan as ab')
+							->leftJoin('users as u', 'u.id', '=', 'ab.id_user')
+							->leftJoin('app_kelompok as ak', 'u.id_kelompok', '=', 'ak.id_kelompok')
+							->select('u.*','ak.nama as nama_kelompok', 'ab.tahun as tahun_bantuan')
+								->whereIn('u.profesi', ['Pembudidaya','Nelayan'])
+								->orderBy('ab.id', 'desc')
+								->orderBy('ab.id_user', 'desc')
+								->orderBy('ab.tahun', 'desc')
+								->get();
+
+        Excel::create('Data Bantuan');
+
+        Excel::create('Data Bantuan', function($excel) use($data)
+        {
+            
+            $excel->sheet('New sheet', function($sheet) use($data)
+            {
+                $sheet->loadView('app.bantuan.export-excel', $data);
+            }); 
+        })->download('xlsx');
+	}
+
+	public function getExportPdf()
+	{
+		$data['users'] = DB::table('users as u')
+							->leftJoin('app_kelompok as ak', 'u.id_kelompok', '=', 'ak.id_kelompok')
+							->select('u.*', 'ak.nama as nama_kelompok')
+								->whereIn('u.profesi', ['Pembudidaya','Nelayan'])
+								->orderBy('ak.nama', 'asc')->get();
+
+		$data['bantuan_users'] = DB::table('app_bantuan as ab')
+							->leftJoin('users as u', 'u.id', '=', 'ab.id_user')
+							->leftJoin('app_kelompok as ak', 'u.id_kelompok', '=', 'ak.id_kelompok')
+							->select('u.*','ak.nama as nama_kelompok', 'ab.tahun as tahun_bantuan')
+								->whereIn('u.profesi', ['Pembudidaya','Nelayan'])
+								->orderBy('ab.id', 'desc')
+								->orderBy('ab.id_user', 'desc')
+								->orderBy('ab.tahun', 'desc')
+								->get();
+		
+        $pdf = PDF::loadView('app.bantuan.export-pdf', $data);
+        return $pdf->setPaper('legal')->setOrientation('landscape')->setWarnings(false)->download('Data Bantuan.pdf');
 	}
 
 }

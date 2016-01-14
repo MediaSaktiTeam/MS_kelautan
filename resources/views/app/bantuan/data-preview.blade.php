@@ -34,9 +34,17 @@
 													->where('ab.id_user', $user->id)
 													->orderBy('ab.tahun', 'asc')
 													->get(); ?>
-						@foreach( $bantuan as $b )
-							<li><b>{{ $b->tahun }}:</b> {{ $b->nama }}</li>
-						@endforeach
+						@if ( count($bantuan) > 0 )
+						
+							@foreach( $bantuan as $b )
+								<li><b>{{ $b->tahun }}:</b> {{ $b->nama }}</li>
+							@endforeach
+
+						@else
+
+							<li style="color:red">Belum pernah mendapatkan bantuan</li>
+
+						@endif
 					</ul>
 				</td>
 			</tr>
