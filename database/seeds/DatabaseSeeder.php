@@ -23,7 +23,6 @@ class DatabaseSeeder extends Seeder
         $this->call('SettingTableSeeder');
         $this->call('MenuTableSeeder');
         $this->call('BantuanMasterSeeder');
-        $this->call('BantuanSeeder');
         $this->call('KelompokSeeder');
         $this->call('SubUsahaSeeder');
         $this->call('SubSaranaSeeder');
@@ -126,7 +125,7 @@ class BantuanMasterSeeder extends Seeder
 
   public function run() {
 
-  App\BantuanMaster::truncate();
+  App\Bantuan::truncate();
 
     $data = array(
         array('nama' => 'Bibit', 'jenis' => 'Pembudidaya'),
@@ -204,26 +203,6 @@ class JabatanSeeder extends Seeder
   }
 }
 
-class BantuanSeeder extends Seeder
-{
-
-  public function run() {
-
-  App\Bantuan::truncate();
-
-    $data = array(
-        array('id_user' => 2, 'id_bantuan' => 1, 'tahun' => 2015),
-        array('id_user' => 2, 'id_bantuan' => 2, 'tahun' => 2015),
-        array('id_user' => 2, 'id_bantuan' => 3, 'tahun' => 2015),
-        array('id_user' => 3, 'id_bantuan' => 2, 'tahun' => 2015),
-        array('id_user' => 4, 'id_bantuan' => 6, 'tahun' => 2015),
-        array('id_user' => 5, 'id_bantuan' => 7, 'tahun' => 2015)
-      );
-
-      DB::table('app_bantuan')->insert($data);
-
-  }
-}
 
 class KelompokSeeder extends Seeder
 {
@@ -249,7 +228,7 @@ class ValidasiTableSeeder extends Seeder
     DB::table('validasi')->truncate();
 
     $data = array(
-      array('key' => 'RzI5ZGlRa2tnZVByVTBYM1hPTE9yTDJvaFZqeWpwWFEwZ1d3Q0NEay8yTT0=')
+      array('key' => 'UEVCYnRqVWVtOEg0dHMxZ3ZRS3JFZXZkU0E2WmxiaWhMQThPYlR0TTc2UT0=')
     );
 
     DB::table('validasi')->insert($data);

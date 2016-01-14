@@ -24,6 +24,7 @@ class MustLogin
             }
 
             if ( !$this->validated() ) {
+                return redirect(url('/mediasakti/validasi-app'));
                 exit;
             } else {
                 return $next($request);
