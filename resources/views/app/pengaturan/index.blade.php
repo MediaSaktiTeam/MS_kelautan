@@ -1,12 +1,14 @@
 @extends('app.layout.main')
 
 @section('title')
-	Kelompok Nelayan | Tambah
+	Pengaturan
 @endsection
 
 
 
 @section('konten')
+
+<?php $SC = new App\Custom; ?>
 
 <!-- START PAGE-CONTAINER -->
 <div class="page-container">
@@ -34,7 +36,18 @@
 			<!-- START CONTAINER FLUID -->
 			<div class="container-fluid padding-25 sm-padding-10">
 
-				
+				<div class="row"> 
+					<div class="col-md-8"> 
+						@if ( Session::has('success') ) 
+				    		@include('app/layout/partials/alert-sukses', ['message' => session('success')])
+						@endif
+
+						@if ( Session::has('gagal') ) 
+				    		@include('app/layout/partials/alert-danger', ['message' => session('gagal')])
+						@endif
+					</div>
+				</div>
+
 				<!-- START ROW -->
 				<div class="row">
 					<div id="col-tambah" class="col-md-4">
@@ -75,21 +88,22 @@
 								</div>
 							</div>
 							<div class="panel-body">
-								<form class="style-form" id="form-kelompok" method="GET" action="">
+								<form class="style-form" id="form-kelompok" method="GET" action="{{ route('pengaturan_update_password') }}">
+									{{ csrf_field() }}
 									<div class="form-group form-group-default required">
 										<label>Kata Sandi Lama</label>
-										<input type="text" id="nama" name="nama" placeholder="Diubah 2 bulan yang lalu" class="form-control" required>
+										<input type="text" id="sandi-lama" name="sandi_lama" placeholder="{{ $SC->waktu_lalu($user->tgl_password) }}" class="form-control" required>
 									</div>
 									<div class="form-group form-group-default required">
 										<label>Kata Sandi Baru</label>
-										<input type="text" id="nama" name="nama" placeholder="Diubah 2 bulan yang lalu" class="form-control" disabled>
+										<input type="text" id="sandi-baru" name="sandi_baru" class="form-control" disabled>
 									</div>
-									<div class="form-group form-group-default required">
+									<div class="form-group form-group-default required" id="con-label-ulang-sandi">
 										<label>Ulangi Kata Sandi Baru</label>
-										<input type="text" id="nama" name="nama" placeholder="Diubah 2 bulan yang lalu" class="form-control" disabled>
+										<input type="text" id="ulang-sandi" class="form-control" disabled>
 									</div>
 									<div class="form-group">
-										<button type="submit" class="btn btn-primary btn-cons btn-simpan">Simpan</button>
+										<button type="submit" disabled class="btn btn-primary btn-cons btn-simpan btn-ganti-password">Simpan</button>
 									</div>
 								</form>
 							</div>
@@ -102,23 +116,7 @@
 		</div>
 		<!-- END PAGE CONTENT -->
 		<!-- START COPYRIGHT -->
-		<!-- START CONTAINER FLUID -->
-
-
-		<div class="container-fluid container-fixed-lg footer">
-			<div class="copyright sm-text-center">
-				<p class="small no-margin pull-left sm-pull-reset">
-					<span class="hint-text">Copyright © 2015 </span>
-					<span class="font-montserrat">Media SAKTI</span>.
-					<span class="hint-text">All rights reserved. </span>
-					<span class="sm-block"><a href="#" class="m-l-10 m-r-10">Terms of use</a> | <a href="#" class="m-l-10">Privacy Policy</a></span>
-				</p>
-				<p class="small no-margin pull-right sm-pull-reset">
-					<a href="#">Hand-crafted</a> <span class="hint-text">&amp; Made with Love ®</span>
-				</p>
-				<div class="clearfix"></div>
-			</div>
-		</div>
+			@include('app.layout.partials.copyright')
 		<!-- END COPYRIGHT -->
 	</div>
 	<!-- END PAGE CONTENT WRAPPER -->
@@ -132,5 +130,40 @@
 @section('registerscript')
 	<script>
 		$(".menu-items .link-pengaturan").addClass("active");
+
+		$(function(){
+
+			$("#sandi-lama").keyup(function(){
+				var sandi_lama = $(this).val();
+				if ( sandi_lama != "" ) {
+					$("#sandi-baru").removeAttr('disabled');
+				} else {
+					$("#sandi-baru").attr('disabled','');
+				}
+			});
+
+			$("#sandi-baru").keyup(function(){
+				var sandi_baru = $(this).val();
+				if ( sandi_baru != "" ) {
+					$("#ulang-sandi").removeAttr('disabled');
+				} else {
+					$("#ulang-sandi").attr('disabled','');
+				}
+			});
+
+			$("#ulang-sandi").keyup(function(){
+				var sandi_baru = $("#sandi-baru").val();
+				var ulang_sandi = $(this).val();
+
+				if ( sandi_baru == ulang_sandi ) {
+					$("#con-label-ulang-sandi").removeClass('has-error');
+					$(".btn-ganti-password").removeAttr('disabled');
+				} else {
+					$("#con-label-ulang-sandi").addClass('has-error');
+					$(".btn-ganti-password").attr('disabled','');
+				}
+			});
+
+		});
 	</script>
 @endsection

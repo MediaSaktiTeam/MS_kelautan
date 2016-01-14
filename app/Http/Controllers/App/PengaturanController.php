@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
-use App\User;
+use App\User, Auth, Hash, Carbon\Carbon;
 
 class PengaturanController extends Controller
 {
@@ -30,72 +30,32 @@ class PengaturanController extends Controller
 		$data->save();
 		$data['user'] = User::where('profesi', 'Admin')->first();
 
+		$request->session()->flash('success', 'Berhasil menyimpan data');
+
 		return redirect()->route('pengaturan', $data);
 	}
 
-	/**
-	 * Show the form for creating a new resource.
-	 *
-	 * @return \Illuminate\Http\Response
-	 */
-	public function create()
+	public function getUpdatePassword(Request $r)
 	{
-		//
+		$user = User::find(Auth::user()->id);
+
+		$sandi_baru = bcrypt($r->sandi_baru);
+
+
+		if ( Hash::check($r->sandi_lama, $user->password) ) 
+		{
+			$user->password = $sandi_baru;
+			$user->tgl_password = Carbon::now('Asia/Ujung_Pandang');
+			$user->save();
+
+			$r->session()->flash('success', 'Berhasil mengubah kata sandi');
+			return redirect()->route('pengaturan');
+		} 
+		else
+		{
+			$r->session()->flash('gagal', 'Gagal mengganti kata sandi, Kata sandi lama tidak sesuai');
+			return redirect()->route('pengaturan');
+		}
 	}
 
-	/**
-	 * Store a newly created resource in storage.
-	 *
-	 * @param  \Illuminate\Http\Request  $request
-	 * @return \Illuminate\Http\Response
-	 */
-	public function store(Request $request)
-	{
-		//
-	}
-
-	/**
-	 * Display the specified resource.
-	 *
-	 * @param  int  $id
-	 * @return \Illuminate\Http\Response
-	 */
-	public function show($id)
-	{
-		//
-	}
-
-	/**
-	 * Show the form for editing the specified resource.
-	 *
-	 * @param  int  $id
-	 * @return \Illuminate\Http\Response
-	 */
-	public function edit($id)
-	{
-		//
-	}
-
-	/**
-	 * Update the specified resource in storage.
-	 *
-	 * @param  \Illuminate\Http\Request  $request
-	 * @param  int  $id
-	 * @return \Illuminate\Http\Response
-	 */
-	public function update(Request $request, $id)
-	{
-		//
-	}
-
-	/**
-	 * Remove the specified resource from storage.
-	 *
-	 * @param  int  $id
-	 * @return \Illuminate\Http\Response
-	 */
-	public function destroy($id)
-	{
-		//
-	}
 }

@@ -82,6 +82,7 @@ Route::group(['middleware' => 'MustLogin', 'namespace' => 'App' ], function () {
         [
             'getIndex'  => 'pengaturan',
             'getUpdate'  => 'pengaturan_update',
+            'getUpdatePassword'  => 'pengaturan_update_password',
     ]);
 
     Route::controller('app/kelompok', 'KelompokController',

@@ -168,7 +168,7 @@ class RefBantuanController extends Controller
 								->orderBy('ab.id_user', 'desc')
 								->orderBy('ab.tahun', 'desc')
 								->get();
-
+								
         Excel::create('Data Bantuan');
 
         Excel::create('Data Bantuan', function($excel) use($data)
