@@ -58,7 +58,7 @@
 												<div class="col-sm-12">
 													<div class="form-group required">
 														<label>NIK / Nama / Kelompok</label>
-														<select class="full-width" onchange="get_data(this.value); get_jenis_bantuan(this.value)" data-init-plugin="select2" name="id_user" required>
+														<select class="full-width" onchange="get_data(this.value); get_jenis_bantuan(this.value)" data-init-plugin="select2" name="id_user" disabled>
 															<option value="">Pilih Pengguna</option>
 															<?php
 

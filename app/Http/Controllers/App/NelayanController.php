@@ -83,7 +83,7 @@ class NelayanController extends Controller
 		$data['nelayan'] = User::find($id);
 		$data['kelompok'] = Kelompok::where('tipe','nelayan')->get();
 		$data['jabatan'] = Jabatan::all();
-		return view('app.nelayan.sunting', $data);
+		return view('app.nelayan.update', $data);
 	}
 
 	public function postUpdate(Request $r)

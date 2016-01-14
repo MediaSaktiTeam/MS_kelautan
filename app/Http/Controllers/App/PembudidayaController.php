@@ -82,7 +82,7 @@ class PembudidayaController extends Controller
 		$data['jabatan'] = Jabatan::all();
 		$data['sarana'] = Sarana::where('jenis','Budidaya Air laut')->where('tipe','Pembudidaya')->get();
 		$data['pembudidaya'] = User::find($id);
-		return view('app.pembudidaya.sunting', $data);
+		return view('app.pembudidaya.update', $data);
 	}
 
 	public function postUpdate(Request $r)

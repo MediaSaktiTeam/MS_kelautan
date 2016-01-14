@@ -71,7 +71,7 @@ class RefBantuanController extends Controller
 								->where('ab.tahun', $tahun)
 								->groupBy('ab.id_user')->first();
 
-		return view('app.bantuan.edit', $data);
+		return view('app.bantuan.update', $data);
 	}
 
 	public function postUpdate(Request $r)
