@@ -128,12 +128,18 @@
 											<td>
 											<?php $data_user = App\User::where('id_kelompok', $kel->id_kelompok)->count(); ?>
 
-											@if ( $data_user < 1 )
-												<div class="checkbox">
-													<input type="checkbox" class="pilih" value="{{ $kel->id_kelompok }}" id="checkbox{{ $kel->id_kelompok }}">
+												<?php
+													$title = "";
+													$disabled = "";
+													if ( $data_user >= 1 ):
+														$title = "Kelompok sedang terpakai";
+														$disabled = "disabled";
+													endif
+												?>
+												<div class="checkbox" title="<?php echo $title ?>">
+													<input type="checkbox" class="pilih" value="{{ $kel->id_kelompok }}" id="checkbox{{ $kel->id_kelompok }}" <?php echo $disabled ?> >
 													<label for="checkbox{{ $kel->id_kelompok }}" class="m-l-20"></label>
 												</div>
-											@endif
 											
 											</td>
 											<td>{{ $kel->id_kelompok }}</td>
