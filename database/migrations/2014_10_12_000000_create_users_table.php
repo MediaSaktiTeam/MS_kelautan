@@ -26,7 +26,7 @@ class CreateUsersTable extends Migration
             $table->integer('id_jabatan')->nullable();
             $table->integer('id_usaha')->nullable();
             $table->enum('profesi', ['Pembudidaya','Nelayan','Admin']);
-            $table->date('tgl_password')->nullable();
+            $table->dateTime('tgl_password')->nullable();
             $table->rememberToken();
             $table->timestamps();
         });

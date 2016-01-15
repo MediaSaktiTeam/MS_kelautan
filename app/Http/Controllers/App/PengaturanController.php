@@ -45,7 +45,7 @@ class PengaturanController extends Controller
 		if ( Hash::check($r->sandi_lama, $user->password) ) 
 		{
 			$user->password = $sandi_baru;
-			$user->tgl_password = Carbon::now('Asia/Ujung_Pandang');
+			$user->tgl_password = date('Y-m-d H:i:s');
 			$user->save();
 
 			$r->session()->flash('success', 'Berhasil mengubah kata sandi');
