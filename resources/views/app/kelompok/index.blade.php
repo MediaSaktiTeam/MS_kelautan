@@ -49,7 +49,7 @@
 								</div>
 							</div>
 							<div class="panel-body">
-							<p>Silahkan tambahkan kelompok baru, selanjutnya tekan tombol <b>tambah anggota</b> untuk menambahkan anggota kelompok.</p>
+								<p>Silahkan tambahkan kelompok baru, selanjutnya tekan tombol <b>tambah anggota</b> untuk menambahkan anggota kelompok.</p>
 								<form class="style-form" id="form-kelompok" method="GET" action="{{ route('kelompok_tambah') }}">
 									<input type="hidden" id="token" name="_token" value="{{ csrf_token() }}">
 									
@@ -397,6 +397,13 @@
 
 				$("#form-kelompok").attr("action","{{ route('kelompok_update') }}");
 
+				$("#col-tambah .panel-title").html('Sunting Kelompok <b>' + nama + '</b>');
+				$("#col-tambah .panel-body > p").hide();
+				$("#col-tambah .panel-default").css("box-shadow","0 0 35px #ccc");
+				$("#col-tambah .panel-body form button").addClass("btn-success");
+				$("#col-tambah .panel-body form input[name='nama']").keyup(function(event) {
+					$("#col-tambah .panel-title b").text($(this).val());
+				});
 				$("#col-tambah").fadeIn();
 			});
 

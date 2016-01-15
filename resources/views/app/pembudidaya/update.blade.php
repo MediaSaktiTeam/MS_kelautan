@@ -99,7 +99,7 @@
 															@endforeach
 														</select>
 														<div class="input-group-btn">
-															<button class="btn btn-primary" type="button">+</button>
+															<a class="btn btn-primary" href="/app/kelompok">+</a>
 														</div>
 													</div>
 												</div>
@@ -107,17 +107,12 @@
 											<div class="col-sm-6">
 												<div class="form-group">
 													<label>Jabatan Dalam Kelompok</label>
-													<div class="input-group">
-														<select class="full-width" name="id_jabatan" data-init-plugin="select2" required>
-															<option value="">Pilih Jabatan...</option>
-															@foreach( $jabatan as $jab )
-																<option value="{{ $jab->id }}" {{ $pembudidaya->id_jabatan == $jab->id ? "selected":"" }}>{{ $jab->nama }}</option>
-															@endforeach
-														</select>
-														<div class="input-group-btn">
-															<button class="btn btn-primary" type="button">+</button>
-														</div>
-													</div>
+													<select class="full-width" name="id_jabatan" data-init-plugin="select2" required>
+														<option value="">Pilih Jabatan...</option>
+														@foreach( $jabatan as $jab )
+															<option value="{{ $jab->id }}" {{ $pembudidaya->id_jabatan == $jab->id ? "selected":"" }}>{{ $jab->nama }}</option>
+														@endforeach
+													</select>
 												</div>
 											</div>
 										</div>

@@ -92,15 +92,15 @@
 									{{ csrf_field() }}
 									<div class="form-group form-group-default required">
 										<label>Kata Sandi Lama</label>
-										<input type="text" id="sandi-lama" name="sandi_lama" placeholder="{{ $SC->waktu_lalu($user->tgl_password) }}" class="form-control" required>
+										<input type="password" id="sandi-lama" name="sandi_lama" placeholder="{{ $SC->waktu_lalu($user->tgl_password) }}" class="form-control" required>
 									</div>
 									<div class="form-group form-group-default required">
 										<label>Kata Sandi Baru</label>
-										<input type="text" id="sandi-baru" name="sandi_baru" class="form-control" disabled>
+										<input type="password" id="sandi-baru" name="sandi_baru" class="form-control" disabled>
 									</div>
 									<div class="form-group form-group-default required" id="con-label-ulang-sandi">
 										<label>Ulangi Kata Sandi Baru</label>
-										<input type="text" id="ulang-sandi" class="form-control" disabled>
+										<input type="password" id="ulang-sandi" class="form-control" disabled>
 									</div>
 									<div class="form-group">
 										<button type="submit" disabled class="btn btn-primary btn-cons btn-simpan btn-ganti-password">Simpan</button>
