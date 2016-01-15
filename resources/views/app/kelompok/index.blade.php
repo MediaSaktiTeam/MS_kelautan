@@ -23,7 +23,7 @@
 						<!-- START BREADCRUMB -->
 						<ul class="breadcrumb">
 							<li>
-								<a href="#">Kelompok Nelayan</a>
+								<a href="{{ route('kelompok') }}">Kelompok</a>
 							</li>
 							<li>
 								<a href="#" class="active">Tambah Kelompok</a>
@@ -103,63 +103,70 @@
 						<div class="panel panel-default">
 							<div class="panel-body">
 								<div class="input-group">
-									<input type="text" class="form-control" placeholder="Pencarian">
+									<input type="text" class="form-control" onkeyup="cari_data(this.value)" placeholder="Pencarian">
 									<span class="input-group-btn">
 										<a href="" class="btn btn-default" data-toggle="modal" data-target="#modal-ekspor"><i class="fa fa-file-archive-o"></i> &nbsp;Ekspor</a>
 									</span>
 								</div>
 								<br>
 
-								<table class="table table-hover demo-table-dynamic custom" id="tableWithDynamicRows">
-									<thead>
-										<tr>
-											<th>
-												<button class="btn btn-check" data-toggle="modal" data-target="#modal-hapus" disabled id="hapus"><i class="pg-trash"></i></button>
-											</th>
-											<th>ID Kelompok</th>
-											<th>Nama Kelompok</th>
-											<th>Bidang Usaha</th>
-											<th>Aksi</th>
-										</tr>
-									</thead>
-									<tbody>
-										@foreach($kelompok as $kel)
-										<tr>
-											<td>
-											<?php $data_user = App\User::where('id_kelompok', $kel->id_kelompok)->count(); ?>
+								<div id="show-pencarian"></div>
 
-												<?php
-													$title = "";
-													$disabled = "";
-													if ( $data_user >= 1 ):
-														$title = "Kelompok sedang terpakai";
-														$disabled = "disabled";
-													endif
-												?>
-												<div class="checkbox" title="<?php echo $title ?>">
-													<input type="checkbox" class="pilih" value="{{ $kel->id_kelompok }}" id="checkbox{{ $kel->id_kelompok }}" <?php echo $disabled ?> >
-													<label for="checkbox{{ $kel->id_kelompok }}" class="m-l-20"></label>
-												</div>
-											
-											</td>
-											<td>{{ $kel->id_kelompok }}</td>
-											<td>{{ $kel->nama }}</td>
-											<td>{{ $kel->tipe }}</td>
-											<td>
-												<a class="btn btn-default btn-xs view" data-id="{{ $kel->id_kelompok }}" data-toggle="modal" data-target="#modal-view"><i class="fa fa-search-plus"></i></a>
-												<a href="javascript:;"
-													data-id="{{ $kel->id_kelompok }}"
-													data-nama="{{ $kel->nama }}"
-													data-tipe="{{ $kel->tipe }}"
-													data-alamat="{{ $kel->alamat }}"
-													data-norek="{{ $kel->no_rekening }}"
-													data-narek="{{ $kel->nama_rekening }}"
-													data-bank="{{ $kel->nama_bank }}" class="btn btn-edit btn-primary btn-xs"><i class="fa fa-pencil"></i></a>
-											</td>
-										</tr>
-										@endforeach
-									</tbody>
-								</table>
+								<div id="show-data">
+
+									<table class="table table-hover demo-table-dynamic custom" id="tableWithDynamicRows">
+										<thead>
+											<tr>
+												<th>
+													<button class="btn btn-check" data-toggle="modal" data-target="#modal-hapus" disabled id="hapus"><i class="pg-trash"></i></button>
+												</th>
+												<th>ID Kelompok</th>
+												<th>Nama Kelompok</th>
+												<th>Bidang Usaha</th>
+												<th>Aksi</th>
+											</tr>
+										</thead>
+										<tbody>
+											@foreach($kelompok as $kel)
+											<tr>
+												<td>
+												<?php $data_user = App\User::where('id_kelompok', $kel->id_kelompok)->count(); ?>
+
+													<?php
+														$title = "";
+														$disabled = "";
+														if ( $data_user >= 1 ):
+															$title = "Kelompok sedang terpakai";
+															$disabled = "disabled";
+														endif
+													?>
+													<div class="checkbox" title="<?php echo $title ?>">
+														<input type="checkbox" class="pilih" value="{{ $kel->id_kelompok }}" id="checkbox{{ $kel->id_kelompok }}" <?php echo $disabled ?> >
+														<label for="checkbox{{ $kel->id_kelompok }}" class="m-l-20"></label>
+													</div>
+												
+												</td>
+												<td>{{ $kel->id_kelompok }}</td>
+												<td>{{ $kel->nama }}</td>
+												<td>{{ $kel->tipe }}</td>
+												<td>
+													<a class="btn btn-default btn-xs view" data-id="{{ $kel->id_kelompok }}" data-toggle="modal" data-target="#modal-view"><i class="fa fa-search-plus"></i></a>
+													<a href="javascript:;"
+														data-id="{{ $kel->id_kelompok }}"
+														data-nama="{{ $kel->nama }}"
+														data-tipe="{{ $kel->tipe }}"
+														data-alamat="{{ $kel->alamat }}"
+														data-norek="{{ $kel->no_rekening }}"
+														data-narek="{{ $kel->nama_rekening }}"
+														data-bank="{{ $kel->nama_bank }}" class="btn btn-edit btn-primary btn-xs"><i class="fa fa-pencil"></i></a>
+												</td>
+											</tr>
+											@endforeach
+										</tbody>
+									</table>
+
+								</div>
+
 							</div>
 						</div>
 						<!-- END PANEL -->
@@ -283,13 +290,13 @@
 				<div class="modal-body">
 					<div class="row">
 						<div class="col-md-6">
-							<a href="">
+							<a href="{{ url('/app/kelompok/export-excel') }}">
 								<i class="fa fa-file-excel-o export-excel"></i>
 								Unduh Dalam Format Mic.Excel
 							</a>
 						</div>
 						<div class="col-md-6">
-							<a href="">
+							<a href="{{ url('/app/kelompok/export-pdf') }}">
 								<i class="fa fa-file-pdf-o export-pdf"></i>
 								Unduh Dalam Format PDF
 							</a>
@@ -338,7 +345,7 @@
 			});
 
 			// Show detail
-			$(".view").click(function(){
+			$("body").on("click", ".view", function(){
 				var id = $(this).data('id');
 				var url = "{{ url('app/kelompok/detail') }}";
 				var url = url+'/'+id;
@@ -362,7 +369,7 @@
 			});
 
 			// Edit
-			$(".btn-edit").click(function(){
+			$("body").on("click", ".btn-edit", function(){
 				var id 		= $(this).data('id');
 				var nama 	= $(this).data('nama');
 				var tipe 	= $(this).data('tipe');
@@ -394,6 +401,24 @@
 			});
 
 		});
+
+		function cari_data(cari){
+			if ( cari == "" ) {
+				$("#show-data").show();
+				$("#show-pencarian").hide();
+			} else {
+
+				$("#show-data").hide();
+				$("#show-pencarian").show();
+				$("#show-pencarian").html('<tr><td colspan="6"><i class="fa fa-spinner fa-spin"></i></td></tr>');
+				var _token = $('meta[name="csrf-token"]').attr('content');
+				var url = "{{ url('app/kelompok/cari') }}";
+				var url = url+"/"+cari;
+				$.get(url, { cari:cari, _token:_token}, function(data){
+					$('#show-pencarian').html(data);
+				});
+			}
+		}
 
 	</script>
 @endsection

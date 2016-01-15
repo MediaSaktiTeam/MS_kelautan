@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\User, App\Kelompok;
+use Excel, PDF;
 
 class KelompokController extends Controller
 {
@@ -17,7 +18,7 @@ class KelompokController extends Controller
 	 */
 	public function getIndex()
 	{
-		$data['kelompok'] = Kelompok::paginate(10);
+		$data['kelompok'] = Kelompok::get();
 		return view('app.kelompok.index', $data);
 	}
 
@@ -73,6 +74,36 @@ class KelompokController extends Controller
 			Kelompok::where('id_kelompok', $value)->delete();            
 		}
 		return redirect()->route('kelompok');
+	}
+
+	public function getCari(Request $r)
+	{
+		$data['kelompok'] = Kelompok::where('nama', 'LIKE', '%'.$r->cari.'%')->get();
+		return view('app.kelompok.cari', $data);
+	}
+
+	public function getExportExcel()
+	{
+		$data['kelompok'] = Kelompok::get();
+
+        Excel::create('Data Kelompok');
+
+        Excel::create('Data Kelompok', function($excel) use($data)
+        {
+            
+            $excel->sheet('New sheet', function($sheet) use($data)
+            {
+                $sheet->loadView('app.kelompok.export-excel', $data);
+            }); 
+        })->download('xlsx');
+	}
+
+	public function getExportPdf()
+	{
+		$data['kelompok'] = Kelompok::get();
+		
+        $pdf = PDF::loadView('app.kelompok.export-pdf', $data);
+        return $pdf->setPaper('legal')->setOrientation('landscape')->setWarnings(false)->download('Data Kelompok.pdf');
 	}
 
 }
