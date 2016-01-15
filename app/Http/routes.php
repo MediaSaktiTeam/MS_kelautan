@@ -127,7 +127,10 @@ Route::group(['middleware' => 'MustLogin', 'namespace' => 'App' ], function () {
             'getTambah' => 'sarananelayan_tambah',
             'getHapus'  => 'sarananelayan_hapus',
         ]);
+
 });
+
+Route::get('app/lapor-masalah', 'email\EmailController@LaporMasalah');
 
 Route::get('/mediasakti/validasi-app', 'ValidasiController@index');
 Route::post('/mediasakti/validasi-app', 'ValidasiController@validasi');
