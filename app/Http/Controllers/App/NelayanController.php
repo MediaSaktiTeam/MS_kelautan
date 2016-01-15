@@ -42,6 +42,24 @@ class NelayanController extends Controller
 				'no_kartu_nelayan' => 'required|unique:users',
 				'id_sarana' => 'required',
 			]);
+		
+		// Validasi Jabatan
+		$vj = DB::table('users as u')
+						->leftJoin('app_kelompok as ak', 'u.id_kelompok', '=', 'ak.id_kelompok')
+						->leftJoin('app_jabatan as aj', 'u.id_jabatan', '=', 'aj.id')
+							->select('u.name', 'ak.nama as nama_kelompok', 'aj.nama as nama_jabatan')
+								->where('ak.id_kelompok', $r->id_kelompok)
+								->where('u.id_jabatan', $r->id_jabatan)
+								->where('aj.nama', '<>', "Anggota")
+								->where('u.profesi', 'Nelayan')
+									->first();
+		if ( $vj ) {
+
+			$r->session()->flash('gagal','GAGAL!!! Jabatan <b>'.$vj->nama_jabatan.'</b> pada kelompok <b>'.$vj->nama_kelompok.'</b> telah ada');
+
+			return redirect(route('nelayan'));
+			exit;
+		}
 
 
 		$name = $r->name;
@@ -94,6 +112,25 @@ class NelayanController extends Controller
 				'id_sarana' => 'required',
 			]);
 
+		// Validasi Jabatan
+		$vj = DB::table('users as u')
+						->leftJoin('app_kelompok as ak', 'u.id_kelompok', '=', 'ak.id_kelompok')
+						->leftJoin('app_jabatan as aj', 'u.id_jabatan', '=', 'aj.id')
+							->select('u.name', 'ak.nama as nama_kelompok', 'aj.nama as nama_jabatan')
+								->where('ak.id_kelompok', $r->id_kelompok)
+								->where('u.id_jabatan', $r->id_jabatan)
+								->where('aj.nama', '<>', "Anggota")
+								->where('u.profesi', 'Nelayan')
+								->where('u.id', '<>', $r->id)
+									->first();
+		if ( $vj ) {
+
+			$r->session()->flash('gagal','GAGAL!!! Jabatan <b>'.$vj->nama_jabatan.'</b> pada kelompok <b>'.$vj->nama_kelompok.'</b> telah ada');
+
+			return redirect(route('nelayan_edit', $r->id));
+			exit;
+
+		}
 
 		$name = $r->name;
 		$username = str_slug($name,"-");

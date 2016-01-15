@@ -37,14 +37,34 @@ class PembudidayaController extends Controller
 	public function postSimpan(Request $r)
 	{
 
-		$this->validate($r,[
-				'nik' => 'required|unique:users',
-				'id_sarana' => 'required',
-			]);
+		/* Validasi */
 
+			$this->validate($r,[
+					'nik' => 'required|unique:users',
+					'id_sarana' => 'required',
+				]);
 
-		$name = $r->name;
-		$username = str_slug($name,"-");
+			// Validasi Jabatan
+			$vj = DB::table('users as u')
+							->leftJoin('app_kelompok as ak', 'u.id_kelompok', '=', 'ak.id_kelompok')
+							->leftJoin('app_jabatan as aj', 'u.id_jabatan', '=', 'aj.id')
+								->select('u.name', 'ak.nama as nama_kelompok', 'aj.nama as nama_jabatan')
+									->where('ak.id_kelompok', $r->id_kelompok)
+									->where('u.id_jabatan', $r->id_jabatan)
+									->where('aj.nama', '<>', "Anggota")
+									->where('u.profesi', 'Pembudidaya')
+										->first();
+			if ( $vj ) {
+
+				$r->session()->flash('gagal','GAGAL!!! Jabatan <b>'.$vj->nama_jabatan.'</b> pada kelompok <b>'.$vj->nama_kelompok.'</b> telah ada');
+
+				return redirect(route('pembudidaya'));
+				exit;
+			}
+		/* end validasi */
+
+		$name 		= $r->name;
+		$username 	= str_slug($name,"-");
 
 		$pb = new User;
 		$pb->name       = $name;
@@ -91,7 +111,26 @@ class PembudidayaController extends Controller
 				'nik' => 'required|unique:users,id,'.$r->id,
 				'id_sarana' => 'required',
 			]);
+			
+		// Validasi Jabatan
+		$vj = DB::table('users as u')
+						->leftJoin('app_kelompok as ak', 'u.id_kelompok', '=', 'ak.id_kelompok')
+						->leftJoin('app_jabatan as aj', 'u.id_jabatan', '=', 'aj.id')
+							->select('u.name', 'ak.nama as nama_kelompok', 'aj.nama as nama_jabatan')
+								->where('ak.id_kelompok', $r->id_kelompok)
+								->where('u.id_jabatan', $r->id_jabatan)
+								->where('aj.nama', '<>', "Anggota")
+								->where('u.profesi', 'Pembudidaya')
+								->where('u.id', '<>', $r->id)
+									->first();
+		if ( $vj ) {
 
+			$r->session()->flash('gagal','GAGAL!!! Jabatan <b>'.$vj->nama_jabatan.'</b> pada kelompok <b>'.$vj->nama_kelompok.'</b> telah ada');
+
+			return redirect(route('pembudidaya_edit', $r->id));
+			exit;
+
+		}
 
 		$name = $r->name;
 		$username = str_slug($name,"-");
