@@ -63,14 +63,12 @@ class PembudidayaController extends Controller
 			}
 		/* end validasi */
 
-		$name 		= $r->name;
-		$username 	= str_slug($name,"-");
 
 		$pb = new User;
-		$pb->name       = $name;
-		$pb->username   = $username;
-		$pb->email      = $username."@mail.com";
-		$pb->password   = bcrypt($username);
+		$pb->name       = $r->name;
+		$pb->username   = $r->nik;
+		$pb->email      = $r->nik."@mail.com";
+		$pb->password   = bcrypt($r->nik);
 		$pb->nik        = $r->nik;
 		$pb->alamat     = $r->alamat;
 		$pb->id_kelompok  = $r->id_kelompok;
@@ -132,13 +130,10 @@ class PembudidayaController extends Controller
 
 		}
 
-		$name = $r->name;
-		$username = str_slug($name,"-");
-
 		$pb = User::find($r->id);
-		$pb->name       = $name;
-		$pb->username   = $username;
-		$pb->password   = bcrypt($username);
+		$pb->name       = $r->name;
+		$pb->username   = $r->nik;
+		$pb->password   = bcrypt($r->nik);
 		$pb->nik        = $r->nik;
 		$pb->alamat     = $r->alamat;
 		$pb->id_kelompok  = $r->id_kelompok;
