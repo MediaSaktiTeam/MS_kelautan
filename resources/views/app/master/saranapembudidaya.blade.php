@@ -93,8 +93,18 @@
 										@foreach($sarana as $sr)
 										<tr>
 											<td>
-												<div class="checkbox">
-													<input type="checkbox" class="pilih" value="{{ $sr->id }}" id="checkbox{{ $sr->id }}">
+											<?php $data_master = App\Sarana::where('id', $sr->id)->count(); ?>
+
+													<?php
+														$title = "";
+														$disabled = "";
+														if ( $data_master >= 1 ):
+															$title = "Sarana pembudidaya sedang terpakai";
+															$disabled = "disabled";
+														endif
+													?>
+												<div class="checkbox" title="<?php echo $title ?>">
+													<input type="checkbox" class="pilih" value="{{ $sr->id }}" id="checkbox{{ $sr->id }}" <?php echo $disabled ?> >
 													<label for="checkbox{{ $sr->id }}" class="m-l-20"></label>
 												</div>
 											</td>
