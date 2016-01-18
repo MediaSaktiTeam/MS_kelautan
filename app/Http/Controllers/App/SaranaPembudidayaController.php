@@ -24,6 +24,16 @@ class SaranaPembudidayaController extends Controller
 	public function getTambah(Request $request)
 	{
 		$data['sarana'] = Sarana::paginate(10);
+
+		/* Validasi */
+
+			$this->validate($request,[
+					'sub' => 'required|unique:app_sarana',
+					'jenis' => 'required',
+				]);
+
+		/* end validasi */
+
 		$dt = new Sarana;
 		$dt->jenis = $request->jenis;
 		$dt->sub = $request->sub;

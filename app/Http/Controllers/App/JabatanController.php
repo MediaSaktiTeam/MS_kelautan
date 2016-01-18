@@ -24,6 +24,15 @@ class JabatanController extends Controller
 	 public function getTambah(Request $request)
 	{
 		$data['jabatan'] = Jabatan::paginate(10);
+
+		/* Validasi */
+
+			$this->validate($request,[
+					'nama' => 'required|unique:app_jabatan',
+				]);
+
+		/* end validasi */
+
 		$dt = new Jabatan;
 		$dt->nama = $request->nama;
 		$dt->save();

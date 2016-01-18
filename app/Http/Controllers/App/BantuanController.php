@@ -23,12 +23,26 @@ class BantuanController extends Controller
 
 	public function getTambah(Request $request)
 	{
-		$data['bantuan'] = Bantuan::paginate(10);
+
+		/* Validasi */
+
+			$this->validate($request,[
+					'nama' => 'required',
+					'jenis' => 'required',
+				]);
+
+			$vb	=	Bantuan::where('nama',$request->nama)->where('jenis',$request->jenis)->count();
+
+			if ($vb > 0 ) {
+				return redirect()->route('bantuan');
+			}
+		/* end validasi */
+
 		$dt = new Bantuan;
 		$dt->nama = $request->nama;
 		$dt->jenis = $request->jenis;
 		$dt->save();
-		return redirect()->route('bantuan', $data);
+		return redirect()->route('bantuan');
 	}
 
 	public function getHapus($id){
