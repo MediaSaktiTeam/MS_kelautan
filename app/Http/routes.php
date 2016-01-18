@@ -55,7 +55,9 @@ Route::group(['middleware' => 'MustLogin', 'namespace' => 'App' ], function () {
 			'getHapus' => 'ref_bantuan_hapus',
 
 		]);
-
+	Route::get('/app/statistik', function () {
+		return view('app.statistik.index');
+	});
 	Route::get('/app/pengolah', function () {
 		return view('app.pengolah.index');
 	});
