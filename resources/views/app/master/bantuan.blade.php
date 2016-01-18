@@ -92,8 +92,18 @@
 										@foreach($bantuan as $bantu)
 										<tr>
 											<td>
-												<div class="checkbox">
-													<input type="checkbox" class="pilih" value="{{ $bantu->id }}" id="checkbox{{ $bantu->id }}">
+												<?php $data_master = App\Bantuan::where('id', $bantu->id)->count(); ?>
+
+													<?php
+														$title = "";
+														$disabled = "";
+														if ( $data_master >= 1 ):
+															$title = "Bantuan sedang terpakai";
+															$disabled = "disabled";
+														endif
+													?>
+												<div class="checkbox" title="<?php echo $title ?>">
+													<input type="checkbox" class="pilih" value="{{ $bantu->id }}" id="checkbox{{ $bantu->id }}" <?php echo $disabled ?> >
 													<label for="checkbox{{ $bantu->id }}" class="m-l-20"></label>
 												</div>
 											</td>

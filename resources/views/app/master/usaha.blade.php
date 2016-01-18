@@ -93,18 +93,18 @@
 										@foreach($usaha as $us)
 										<tr>
 											<td>
-											<?php $data_usaha = App\Usaha::where('id', $us->id)->count(); ?>
+											<?php $data_master = App\Usaha::where('id', $us->id)->count(); ?>
 
 													<?php
 														$title = "";
 														$disabled = "";
-														if ( $data_usaha >= 1 ):
+														if ( $data_master >= 1 ):
 															$title = "Usaha sedang terpakai";
 															$disabled = "disabled";
 														endif
 													?>
 												<div class="checkbox" title="<?php echo $title ?>">
-													<input type="checkbox" class="pilih" value="{{ $us->id }}" id="checkbox{{ $us->id }}" <?php echo $disabled ?>>
+													<input type="checkbox" class="pilih" value="{{ $us->id }}" id="checkbox{{ $us->id }}" <?php echo $disabled ?> >
 													<label for="checkbox{{ $us->id }}" class="m-l-20"></label>
 												</div>
 											</td>
