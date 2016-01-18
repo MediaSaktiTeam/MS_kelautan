@@ -94,7 +94,7 @@
 					</li>
 					<li class="link-statistik">
 						<a href="/app/statistik"><span class="title">Statistik</span></a>
-						<span class="icon-thumbnail">ST</span>
+						<span class="icon-thumbnail">S</span>
 					</li>
 					<li class="link-pengaturan">
 						<a href="/app/pengaturan"><span class="title">Pengaturan</span></a>

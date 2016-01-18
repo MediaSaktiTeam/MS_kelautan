@@ -1,6 +1,7 @@
 	<table class="table table-bordered table-responsive">
 		<thead>
 			<tr>
+				<th>No.</th>
 				<th>NIK</th>
 				<th>Nama Lengkap</th>
 				<th>Alamat</th>
@@ -30,6 +31,7 @@
 				?>
 				
 				<tr>
+					<td><?php echo $no ?></td>
 					<td>{{ $bu->nik }}</td>
 					<td>{{ $bu->name }}</td>
 					<td>{{ $bu->alamat }}</td>
