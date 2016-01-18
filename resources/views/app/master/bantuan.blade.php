@@ -92,7 +92,7 @@
 										@foreach($bantuan as $bantu)
 										<tr>
 											<td>
-												<?php $data_master = App\Bantuan::where('id', $bantu->id)->count(); ?>
+												<?php $data_master = App\RefBantuan::where('id_bantuan', $bantu->id)->count(); ?>
 
 													<?php
 														$title = "";

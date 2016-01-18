@@ -93,7 +93,7 @@
 										@foreach($sarana as $sr)
 										<tr>
 											<td>
-											<?php $data_master = App\Sarana::where('id', $sr->id)->count(); ?>
+											<?php $data_master = App\KepemilikanSarana::where('id_sarana', $sr->id)->count(); ?>
 
 													<?php
 														$title = "";

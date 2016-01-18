@@ -24,6 +24,16 @@ class UsahaController extends Controller
 	public function getTambah(Request $request)
 	{
 		$data['usaha'] = Usaha::paginate(10);
+		
+		/* Validasi */
+
+			$this->validate($request,[
+					'nama' => 'required|unique:app_usaha',
+					'jenis' => 'required',
+				]);
+
+		/* end validasi */
+
 		$dt = new Usaha;
 		$dt->nama = $request->nama;
 		$dt->jenis = $request->jenis;

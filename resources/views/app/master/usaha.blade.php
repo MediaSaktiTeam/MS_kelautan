@@ -93,7 +93,7 @@
 										@foreach($usaha as $us)
 										<tr>
 											<td>
-											<?php $data_master = App\Usaha::where('id', $us->id)->count(); ?>
+											<?php $data_master = App\User::where('id_usaha', $us->id)->count(); ?>
 
 													<?php
 														$title = "";

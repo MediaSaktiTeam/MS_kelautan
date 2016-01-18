@@ -84,7 +84,7 @@
 										@foreach($jabatan as $jb)
 										<tr>
 											<td>
-											<?php $data_master = App\Jabatan::where('id', $jb->id)->count(); ?>
+											<?php $data_master = App\User::where('id_jabatan', $jb->id)->count(); ?>
 
 													<?php
 														$title = "";
