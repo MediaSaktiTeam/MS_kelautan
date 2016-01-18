@@ -31,14 +31,13 @@ class SaranaPembudidayaController extends Controller
 					'sub' => 'required|unique:app_sarana',
 					'jenis' => 'required',
 				]);
-
 		/* end validasi */
 
 		$dt = new Sarana;
 		$dt->jenis = $request->jenis;
 		$dt->sub = $request->sub;
 		$dt->save();
-		return redirect()->route('saranapembudidaya', $data);
+		return redirect()->route('saranapembudidaya', $data)->with(session()->flash('success','Data Berhasil Tersimpan !!'));
 	}
 
 	public function getHapus($id){
@@ -48,7 +47,7 @@ class SaranaPembudidayaController extends Controller
 		foreach ($val as $value) {
 			Sarana::where('id', $value)->delete();            
 		}
-		return redirect()->route('saranapembudidaya');
+		return redirect()->route('saranapembudidaya')->with(session()->flash('delete','Data Berhasil Dihapus !!'));
 	}
 
 	public function getUpdate(Request $request)
@@ -60,6 +59,6 @@ class SaranaPembudidayaController extends Controller
 		$data->save();
 		$data['sarana'] = Sarana::paginate(1);
 
-		return redirect()->route('saranapembudidaya', $data);
+		return redirect()->route('saranapembudidaya', $data)->with(session()->flash('success','Data Berhasil diupdate !!'));
 	}
 }

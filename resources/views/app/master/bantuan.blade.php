@@ -41,6 +41,20 @@
 				<!-- START ROW -->
 				<div class="row">
 					<div class="col-md-6">
+						@if ( Session::has('success') ) 
+						    	@include('app/layout/partials/alert-sukses', ['message' => session('success')])
+						@endif
+						@if ( Session::has('delete') ) 
+						    	@include('app/layout/partials/alert-sukses', ['message' => session('delete')])
+						@endif
+						@if ( Session::has('gagal') ) 
+						    	@include('app/layout/partials/alert-danger', ['message' => session('gagal')])
+						@endif
+
+						@if ( count($errors) > 0 )
+								@include('app/layout/partials/alert-danger', ['errors' => $errors])
+						@endif		
+
 						<!-- START PANEL -->
 						<div class="panel panel-default">
 							<div class="panel-heading">
@@ -50,6 +64,8 @@
 							</div>
 							<div class="panel-body">
 								<h5>Bantuan</h5>
+
+								
 								<p>* Bantuan adalah item yang digunakan pada halaman pembudidaya dan nelayan.</p>
 								<form class="style-form" method="GET" action="{{ route('bantuan_tambah') }}">
 									<input type="hidden" name="_token" value="{{ csrf_token() }}">
