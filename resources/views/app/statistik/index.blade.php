@@ -5,7 +5,14 @@
 @endsection
 
 
-
 @section('konten')
 
+
+@endsection
+
+
+@section('registerscript')
+	<script>
+		$(".menu-items .link-statistik").addClass("active");
+	</script>
 @endsection
