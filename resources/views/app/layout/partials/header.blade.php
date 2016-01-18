@@ -92,13 +92,13 @@
 							</li>
 						</ul>
 					</li>
-					<li class="link-pengaturan">
-						<a href="/app/pengaturan"><span class="title">Pengaturan</span></a>
-						<span class="icon-thumbnail"><i class="fa fa-cog"></i></span>
-					</li>
 					<li class="link-statistik">
 						<a href="/app/statistik"><span class="title">Statistik</span></a>
 						<span class="icon-thumbnail">ST</span>
+					</li>
+					<li class="link-pengaturan">
+						<a href="/app/pengaturan"><span class="title">Pengaturan</span></a>
+						<span class="icon-thumbnail"><i class="fa fa-cog"></i></span>
 					</li>
 				</ul>
 				<div class="clearfix"></div>
