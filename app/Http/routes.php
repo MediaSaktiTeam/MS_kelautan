@@ -45,6 +45,12 @@ Route::get('/', function () {
 			'getDetail'  => 'nelayan_get_detail',
 		]);
 
+		Route::get('/app/statistik', function () {
+			return view('app.statistik.index');
+		});
+		Route::get('/app/pengolah', function () {
+			return view('app.pengolah.index');
+		});
 
 		Route::controller('app/bantuan', 'RefBantuanController',
 			[
