@@ -47,7 +47,11 @@ class MustLogin
             
         }
 
-        return redirect('/app/login');
+        if ( basename($_SERVER['REQUEST_URI']) == 'admin' ) {
+            return redirect('/admin/login'); 
+        } else {
+            return redirect('/app/login'); 
+        }
     }
 
     public function validated()

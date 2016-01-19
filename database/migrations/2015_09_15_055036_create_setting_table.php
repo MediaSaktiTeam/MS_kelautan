@@ -20,6 +20,7 @@ class CreateSettingTable extends Migration
             $table->string('tag');
             $table->string('fb');
             $table->string('twitter');
+            $table->string('gambar_utama', 50);
         });
     }
 
