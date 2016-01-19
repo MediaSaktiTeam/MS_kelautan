@@ -185,7 +185,6 @@ Route::get('/', function () {
 				'postSimpan'	=> 'page_simpan',
 				'getEdit'		=> 'page_edit',
 				'postUpdate'	=> 'page_update',
-				'postUpdate'	=> 'page_update',
 				'getDraft' 		=> 'page_draft',
 				'getCari' 		=> 'page_cari',
 				'getArsip' 		=> 'page_arsip',
