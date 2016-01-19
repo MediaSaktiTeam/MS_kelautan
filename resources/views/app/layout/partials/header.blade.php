@@ -5,17 +5,17 @@
 			<div class="sidebar-overlay-slide from-top" id="appMenu">
 				<div class="row">
 					<div class="col-xs-6 no-padding">
-						<a href="#" class="p-l-40"><img src="{{ url('resources/assets/app/img/demo/social_app.svg') }}" alt="socail">
+						<a href="/" target="_blank" class="p-l-40"><img src="{{ url('resources/assets/app/img/modules/2.jpg') }}" alt="Front Site" width="83px">
 						</a>
 					</div>
 					<div class="col-xs-6 no-padding">
-						<a href="#" class="p-l-10"><img src="{{ url('resources/assets/app/img/demo/email_app.svg') }}" alt="socail">
+						<a href="/admin" class="p-l-10"><img src="{{ url('resources/assets/app/img/modules/1.jpg') }}" alt="Content Management System" width="83px">
 						</a>
 					</div>
 				</div>
 				<div class="row">
 					<div class="col-xs-6 m-t-20 no-padding">
-						<a href="#" class="p-l-40"><img src="{{ url('resources/assets/app/img/demo/calendar_app.svg') }}" alt="socail">
+						<a href="/social-media" class="p-l-40"><img src="{{ url('resources/assets/app/img/modules/3.jpg') }}" alt="Social Media" width="83px">
 						</a>
 					</div>
 					<div class="col-xs-6 m-t-20 no-padding">
