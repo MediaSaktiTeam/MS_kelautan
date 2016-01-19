@@ -27494,3 +27494,23 @@ table.dataTable thead .sorting_desc {
   .not-found span {
     margin-bottom: 20px;
     display: block; }
+
+.jqplot-data-label {
+  color: #fff; }
+
+.jqplot-series-canvas {
+  background: #fff; }
+
+.jqplot-grid-canvas {
+  opacity: 0; }
+
+.jqplot-table-legend-swatch {
+  width: 10px;
+  height: 10px;
+  margin: 10px;
+  margin-left: 20px; }
+
+.years {
+  background: #f5f5f5;
+  border: none;
+  padding: 5px; }

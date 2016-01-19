@@ -1,6 +1,7 @@
 	<table class="table table-bordered table-responsive">
 		<thead>
 			<tr>
+				<th>No.</th>
 				<th>NIK</th>
 				<th>No Kartu Nelayan</th>
 				<th>Nama Lengkap</th>
@@ -15,22 +16,25 @@
 		
 		<tbody>
 
+			<?php $i = 1 ?>
+			
 			@foreach( $nelayan as $nel )
 
-			<tr>
-				<td>{{ $nel->nik }}</td>
-				<td>{{ $nel->no_kartu_nelayan }}</td>
-				<td>{{ $nel->name }}</td>
-				<td>{{ $nel->alamat }}</td>
-				<td>{{ $nel->kelompok->nama }}</td>
-				<td>{{ $nel->jabatan->nama }}</td>
-				<td>
-					<?php $Ksarana = App\KepemilikanSarana::where('id_user', $nel->id)->get(); ?>
-					@foreach ( $Ksarana as $ks )
-						- {{ $ks->sarana->jenis }} {{ $ks->sarana->sub }}
-					@endforeach
-				</td>
-				<td>
+				<tr>
+					<td><?php echo $i  ?></td>
+					<td>{{ $nel->nik }}</td>
+					<td>{{ $nel->no_kartu_nelayan }}</td>
+					<td>{{ $nel->name }}</td>
+					<td>{{ $nel->alamat }}</td>
+					<td>{{ $nel->kelompok->nama }}</td>
+					<td>{{ $nel->jabatan->nama }}</td>
+					<td>
+						<?php $Ksarana = App\KepemilikanSarana::where('id_user', $nel->id)->get(); ?>
+						@foreach ( $Ksarana as $ks )
+							- {{ $ks->sarana->jenis }} {{ $ks->sarana->sub }}
+						@endforeach
+					</td>
+					<td>
 						<?php
 							$bantuan = DB::table('app_bantuan as ab')
 											->leftJoin('app_bantuan_master as abm', 'abm.id', '=', 'ab.id_bantuan')
@@ -41,8 +45,10 @@
 						@foreach( $bantuan as $b )
 							 {{ $b->tahun }}:</b> {{ $b->nama }} 
 						@endforeach
-				</td>
-			</tr>
+					</td>
+				</tr>
+
+				<?php $i = $i + 1 ?>
 
 			@endforeach
 		</tbody>

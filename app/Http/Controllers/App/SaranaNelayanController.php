@@ -24,12 +24,21 @@ class SaranaNelayanController extends Controller
 	public function getTambah(Request $request)
 	{
 		$data['sarana'] = Sarana::paginate(10);
+
+		/* Validasi */
+
+			$this->validate($request,[
+					'sub' => 'required|unique:app_sarana',
+					'jenis' => 'required',
+				]);
+		/* end validasi */
+		
 		$dt = new Sarana;
 		$dt->jenis = $request->jenis;
 		$dt->sub = $request->sub;
 		$dt->tipe = 'Nelayan';
 		$dt->save();
-		return redirect()->route('sarananelayan', $data);
+		return redirect()->route('sarananelayan', $data)->with(session()->flash('success','Data Berhasil Tersimpan !!'));
 	}
 
 	public function getHapus($id){
@@ -39,7 +48,7 @@ class SaranaNelayanController extends Controller
 		foreach ($val as $value) {
 			Sarana::where('id', $value)->delete();            
 		}
-		return redirect()->route('sarananelayan');
+		return redirect()->route('sarananelayan')->with(session()->flash('delete','Data Berhasil Dihapus !!'));
 	}
 
 	public function getUpdate(Request $request)
@@ -51,6 +60,6 @@ class SaranaNelayanController extends Controller
 		$data->save();
 		$data['sarana'] = Sarana::paginate(1);
 
-		return redirect()->route('sarananelayan', $data);
+		return redirect()->route('sarananelayan', $data)->with(session()->flash('success','Data Berhasil diupdate !!'));
 	}
 }

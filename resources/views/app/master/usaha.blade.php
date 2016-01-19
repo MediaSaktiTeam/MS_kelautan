@@ -41,6 +41,19 @@
 				<!-- START ROW -->
 				<div class="row">
 					<div class="col-md-6">
+						@if ( Session::has('success') ) 
+						    	@include('app/layout/partials/alert-sukses', ['message' => session('success')])
+						@endif
+						@if ( Session::has('delete') ) 
+						    	@include('app/layout/partials/alert-sukses', ['message' => session('delete')])
+						@endif
+						@if ( Session::has('gagal') ) 
+						    	@include('app/layout/partials/alert-danger', ['message' => session('gagal')])
+						@endif
+
+						@if ( count($errors) > 0 )
+								@include('app/layout/partials/alert-danger', ['errors' => $errors])
+						@endif
 						<!-- START PANEL -->
 						<div class="panel panel-default">
 							<div class="panel-heading">
@@ -93,8 +106,18 @@
 										@foreach($usaha as $us)
 										<tr>
 											<td>
-												<div class="checkbox">
-													<input type="checkbox" class="pilih" value="{{ $us->id }}" id="checkbox{{ $us->id }}">
+											<?php $data_master = App\User::where('id_usaha', $us->id)->count(); ?>
+
+													<?php
+														$title = "";
+														$disabled = "";
+														if ( $data_master >= 1 ):
+															$title = "Usaha sedang terpakai";
+															$disabled = "disabled";
+														endif
+													?>
+												<div class="checkbox" title="<?php echo $title ?>">
+													<input type="checkbox" class="pilih" value="{{ $us->id }}" id="checkbox{{ $us->id }}" <?php echo $disabled ?> >
 													<label for="checkbox{{ $us->id }}" class="m-l-20"></label>
 												</div>
 											</td>

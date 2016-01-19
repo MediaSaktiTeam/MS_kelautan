@@ -51,6 +51,7 @@
 	<table class="table table-bordered">
 		<thead>
 			<tr>
+				<th>No.</th>
 				<th>NIK</th>
 				<th>Nama</th>
 				<th>Alamat</th>
@@ -62,16 +63,21 @@
 		
 		<tbody>
 
+			<?php $i = 1 ?>
+
 			@foreach( $pembudidaya as $pb )
 
-			<tr>
-				<td>{{ $pb->nik }}</td>
-				<td>{{ $pb->name }}</td>
-				<td>{{ $pb->alamat }}</td>
-				<td>{{ $pb->usaha->jenis }}</td>
-				<td>{{ $pb->usaha->nama }}</td>
-				<td>{{ $pb->kelompok->nama }} ({{ $pb->jabatan->nama }})</td>
-			</tr>
+				<tr>
+					<td><?php echo $i  ?></td>
+					<td>{{ $pb->nik }}</td>
+					<td>{{ $pb->name }}</td>
+					<td>{{ $pb->alamat }}</td>
+					<td>{{ $pb->usaha->jenis }}</td>
+					<td>{{ $pb->usaha->nama }}</td>
+					<td>{{ $pb->kelompok->nama }} ({{ $pb->jabatan->nama }})</td>
+				</tr>
+
+				<?php $i = $i + 1 ?>
 
 			@endforeach
 		</tbody>

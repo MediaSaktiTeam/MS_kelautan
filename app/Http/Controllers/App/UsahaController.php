@@ -24,11 +24,21 @@ class UsahaController extends Controller
 	public function getTambah(Request $request)
 	{
 		$data['usaha'] = Usaha::paginate(10);
+		
+		/* Validasi */
+
+			$this->validate($request,[
+					'nama' => 'required|unique:app_usaha',
+					'jenis' => 'required',
+				]);
+
+		/* end validasi */
+
 		$dt = new Usaha;
 		$dt->nama = $request->nama;
 		$dt->jenis = $request->jenis;
 		$dt->save();
-		return redirect()->route('usaha', $data);
+		return redirect()->route('usaha', $data)->with(session()->flash('success','Data Berhasil Tersimpan !!'));
 	}
 
 	public function getHapus($id){
@@ -36,9 +46,9 @@ class UsahaController extends Controller
 		$val = explode(",", $id);
 
 		foreach ($val as $value) {
-			Usaha::where('id', $value)->delete();            
+			Usaha::where('id', $value)->delete();           
 		}
-		return redirect()->route('usaha');
+		return redirect()->route('usaha')->with(session()->flash('success','Data Berhasil Terhapus !!'));
 	}
 
 	public function getUpdate(Request $request)
@@ -50,6 +60,6 @@ class UsahaController extends Controller
 		$data->save();
 		$data['usaha'] = Usaha::paginate(1);
 
-		return redirect()->route('usaha', $data);
+		return redirect()->route('usaha', $data)->with(session()->flash('success','Data Berhasil diupdate !!'));
 	}
 }
