@@ -86,10 +86,10 @@
 								<a href="/app/master/usaha">Usaha</a>
 								<span class="icon-thumbnail">U</span>
 							</li>
-							<li class="sub-jabatan">
+							<!-- <li class="sub-jabatan">
 								<a href="/app/master/jabatan">Jabatan</a>
 								<span class="icon-thumbnail">J</span>
-							</li>
+							</li> -->
 						</ul>
 					</li>
 					<li class="link-statistik">
