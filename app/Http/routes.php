@@ -6,7 +6,7 @@
 
 
 /* App */
-	Route::group([ 'namespace' => 'App'], function(){
+	Route::group([ 'middleware' => 'Validasi', 'namespace' => 'App'], function(){
 		
 		Route::post('/app/login', 'LoginController@postLogin');
 		Route::get('/app/login', 'LoginController@getLogin');
@@ -256,7 +256,11 @@
 			]);
 
 	});
+	
+	Route::group([ 'middleware' => 'Validasi', 'namespace' => 'Admin'], function(){
 
-	Route::get('admin/login', ['as' => 'getLogin', 'uses' => 'Admin\LoginController@getLogin']);
-	Route::post('admin/login', ['as' => 'postLogin', 'uses' => 'Admin\LoginController@postLogin']);
-	Route::get('admin/logout', ['as' => 'getLogout', 'uses' => 'Admin\LoginController@logout']);
+		Route::get('admin/login', ['as' => 'getLogin', 'uses' => 'LoginController@getLogin']);
+		Route::post('admin/login', ['as' => 'postLogin', 'uses' => 'LoginController@postLogin']);
+		Route::get('admin/logout', ['as' => 'getLogout', 'uses' => 'LoginController@logout']);
+
+	});

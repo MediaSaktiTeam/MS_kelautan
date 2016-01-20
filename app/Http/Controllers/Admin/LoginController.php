@@ -11,14 +11,10 @@ use App\Http\Controllers\Controller;
 class LoginController extends Controller
 {
 
-	/**
-	 * Create a new authentication controller instance.
-	 *
-	 * @return void
-	 */
 	public function __construct()
 	{
 		$this->middleware('guestApp', ['except' => 'logout']);
+		$this->middleware('Validasi');
 	}
 
 	public function getLogin()
