@@ -67,7 +67,7 @@
 											<div class="col-sm-6">
 												<div class="form-group required">
 													<label>NIK</label>
-													<input type="text" class="form-control" name="nik" value="{{ $nelayan->nik }}" required>
+													<input type="text" class="form-control number" name="nik" value="{{ $nelayan->nik }}" required>
 												</div>
 											</div>
 											<div class="col-sm-6">

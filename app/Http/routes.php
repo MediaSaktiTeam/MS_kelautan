@@ -1,9 +1,8 @@
 <?php
-
-Route::get('/', function(){
+/* Front */
+	Route::get('/', function(){
 		return view('maintenance.index');
 	});
-
 
 
 /* App */
