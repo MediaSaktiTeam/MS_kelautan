@@ -8,6 +8,10 @@
 
 @section('konten')
 
+<?php $total_pembudidaya = $pembudidaya_air_tawar + $pembudidaya_air_laut + $pembudidaya_air_payau ?>
+<?php $total_bantuan = App\RefBantuan::where('tahun', $_GET['tahun'])->count() ?>
+<?php $total_sarana_nelayan = $jml_perahu + $jml_mesin + $jml_alat_tangkap ?>
+
 <!-- START PAGE-CONTAINER -->
 <div class="page-container">
 
@@ -45,13 +49,10 @@
 								<div class="panel-heading">
 									<div class="panel-title">
 										Statistik Pembudidaya Tahun 
-										<select name="" id="" class="years">
-											<option value="">2016</option>
-											<option value="">2015</option>
-											<option value="">2014</option>
-											<option value="">2013</option>
-											<option value="">2012</option>
-											<option value="">2011</option>
+										<select name="" id="" class="years" onchange="window.open(this.options[this.selectedIndex].value,'_top')">
+											@for( $i = 2011; $i <= date('Y')+1; $i++ )
+												<option value="{{ url('/app/statistik') }}?tahun={{ $i }}" {{ $_GET['tahun'] == $i ? "selected":"" }}>{{ $i }}</option>
+											@endfor
 										</select>
 									</div>
 									<hr>
@@ -60,11 +61,17 @@
 									<div class="row">
 										<div class="col-sm-6">
 											<p>Statistik jumlah pembudidaya berdasarkan <b>jenis usaha</b></p>
+											@if( $total_pembudidaya == 0 ) 
+												<div class="alert alert-info"><center>Data Kosong</center></div>
+											@endif
 											<div id="pbdy-usaha" style="margin-top:20px; margin-left:20px; width:100%; height:auto;"></div>
 											<br>
 										</div>
 										<div class="col-sm-6">
 											<p>Statistik jumlah pembudidaya berdasarkan <b>bantuan</b></p>
+											@if( $total_bantuan == 0 ) 
+												<div class="alert alert-info"><center>Data Kosong</center></div>
+											@endif
 											<div id="pbdy-bantuan" style="margin-top:20px; margin-left:20px; width:100%; height:auto;"></div>
 											<br>
 										</div>
@@ -88,6 +95,9 @@
 									<div class="row">
 										<div class="col-sm-12">
 											<p>Statistik jumlah pengolah berdasarkan <b>kepemilikan sarana & prasarana</b>
+											@if( $total_sarana_nelayan == 0 ) 
+												<div class="alert alert-info"><center>Data Kosong</center></div>
+											@endif
 											<div id="nlyn-sarana" style="margin-top:20px; margin-left:20px; width:100%; height:auto;"></div>
 											<br>
 										</div>
@@ -149,66 +159,108 @@
 	<script src="{{ url('resources/assets/app/libs/jqplot/jquery.jqplot.min.js') }}"></script>
 	<script src="{{ url('resources/assets/app/libs/jqplot/plugins/jqplot.pieRenderer.min.js') }}"></script>
 	<script>
-		/* Pembudidaya */
-		$(document).ready(function(){
-			var plot1 = $.jqplot('pbdy-usaha', [[['Budidaya Air Laut',25],['Budidaya Air Tawar',14],['Budidaya Air Payau',7]]], {
-				gridPadding: {top:0, bottom:38, left:0, right:0},
-				seriesDefaults:{
-					renderer:$.jqplot.PieRenderer,
-					trendline:{ show:false },
-					rendererOptions: { padding: 8, showDataLabels: true }
-				},
-				legend:{
-					show:true,
-					placement: 'outside',
-					rendererOptions: {
-						numberRows: 1
-					},
-					location:'s',
-					marginTop: '15px'
-				}
-			});
 
-			var plot1 = $.jqplot('pbdy-bantuan', [[['Bibit',125],['Pakan',14],['Tali',7],['Para-para',27],['Perahu',2]]], {
-				gridPadding: {top:0, bottom:38, left:0, right:0},
-				seriesDefaults:{
-					renderer:$.jqplot.PieRenderer,
-					trendline:{ show:false },
-					rendererOptions: { padding: 8, showDataLabels: true }
-				},
-				legend:{
-					show:true,
-					placement: 'outside',
-					rendererOptions: {
-						numberRows: 1
-					},
-					location:'s',
-					marginTop: '15px'
-				}
+		/* Pembudidaya */
+			$(document).ready(function(){
+
+				@if( $total_pembudidaya != 0 )
+
+					var plot1 = $.jqplot('pbdy-usaha', 
+									[[
+										[ 'Budidaya Air Laut',{{ $pembudidaya_air_laut }} ],
+										[ 'Budidaya Air Tawar',{{ $pembudidaya_air_tawar }} ],
+										[ 'Budidaya Air Payau',{{ $pembudidaya_air_payau }} ],
+									]], 
+					{
+						gridPadding: {top:0, bottom:38, left:0, right:0},
+						seriesDefaults:{
+							renderer:$.jqplot.PieRenderer,
+							trendline:{ show:false },
+							rendererOptions: 
+								{ 
+									padding: 8, 
+									showDataLabels: true,
+									dataLabels :'value'
+								}
+							
+						},
+						
+						legend:{
+							show:true,
+							placement: 'outside',
+							rendererOptions: {
+								numberRows: 1
+							},
+							location:'s',
+							marginTop: '15px'
+						}
+					});
+
+				@endif
+
+				@if( $total_bantuan != 0 )
+
+					var plot1 = $.jqplot('pbdy-bantuan', 
+									[[
+
+										@foreach( $bantuan_master_pembudidaya as $bmp )
+											<?php
+												$jumlah = DB::table('app_bantuan as ab')
+																->join('users as u', 'u.id', '=', 'ab.id_user')
+																	->where('ab.id_bantuan', $bmp->id)
+																	->where(DB::raw('left(ab.tahun, 4)'), '<=', $_GET['tahun'])
+																	->count(); ?>
+												['{{ $bmp->nama }}',{{ $jumlah }}],
+
+										@endforeach
+									]], 
+						{
+						gridPadding: {top:0, bottom:38, left:0, right:0},
+						seriesDefaults:{
+							renderer:$.jqplot.PieRenderer,
+							trendline:{ show:false },
+							rendererOptions: { padding: 8, showDataLabels: true, dataLabels :'value' }
+						},
+						legend:{
+							show:true,
+							placement: 'outside',
+							rendererOptions: {
+								numberRows: 1
+							},
+							location:'s',
+							marginTop: '15px'
+						}
+					});
+				@endif
 			});
-		});
 
 
 		/* Nelayan */
-		$(document).ready(function(){
-			var plot2 = $.jqplot('nlyn-sarana', [[['Perahu',25],['Alat Tangkap',74],['Mesin',37]]], {
-				gridPadding: {top:0, bottom:38, left:0, right:0},
-				seriesDefaults:{
-					renderer:$.jqplot.PieRenderer,
-					trendline:{ show:false },
-					rendererOptions: { padding: 8, showDataLabels: true }
-				},
-				legend:{
-					show:true,
-					placement: 'outside',
-					rendererOptions: {
-						numberRows: 1
-					},
-					location:'s',
-					marginTop: '15px'
-				}
+			$(document).ready(function(){
+
+				@if( $total_sarana_nelayan != 0 ) 
+
+					var plot2 = $.jqplot('nlyn-sarana', [[['Perahu',{{ $jml_perahu }}],['Alat Tangkap',{{ $jml_alat_tangkap }}],['Mesin',{{ $jml_mesin }}]]], {
+						gridPadding: {top:0, bottom:38, left:0, right:0},
+						seriesDefaults:{
+							renderer:$.jqplot.PieRenderer,
+							trendline:{ show:false },
+							rendererOptions: { padding: 8, showDataLabels: true, dataLabels :'value' }
+						},
+						legend:{
+							show:true,
+							placement: 'outside',
+							rendererOptions: {
+								numberRows: 1
+							},
+							location:'s',
+							marginTop: '15px'
+						}
+					});
+
+				@endif
+
 			});
-		});
 
 
 		/* Pengolah */
