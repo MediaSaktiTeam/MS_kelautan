@@ -46,7 +46,7 @@
 
 <body>
 
-<center><h2>Data Pembudidaya <br> <small>Kementerian Perikanan dan Kelautan Kab. Bantaeng</small></h2></center>
+<center><h2>Data Pembudidaya <br> <small>Dinas Perikanan dan Kelautan Kab. Bantaeng</small></h2></center>
 
 	<table class="table table-bordered">
 		<thead>
