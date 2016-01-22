@@ -137,6 +137,11 @@
 				'getHapus'  => 'sarananelayan_hapus',
 				'getUpdate' => 'sarananelayan_update',
 			]);
+		Route::controller('app/master/sarana-pengolah', 'SaranaPengolahController',
+			[
+				'getIndex'  => 'saranapengolah',
+				'getTambah'  => 'saranapengolah_tambah',
+			]);
 
 	});
 

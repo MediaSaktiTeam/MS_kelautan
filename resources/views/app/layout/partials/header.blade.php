@@ -83,6 +83,16 @@
 								<span class="icon-thumbnail">SN</span>
 							</li>
 							<li class="sub-usaha">
+								<a href="javascript:;"><span class="title">Sarana Pengolah</span><span class=" arrow"></span></a>
+								<span class="icon-thumbnail">SP</span>
+								<ul class="sub-menu">
+									<li class="sub-bantuan">
+										<a href="/app/master/sarana-pengolah">Sarana</a>
+										<span class="icon-thumbnail">S</span>
+									</li>
+								</ul>
+							</li>
+							<li class="sub-usaha">
 								<a href="/app/master/usaha">Usaha</a>
 								<span class="icon-thumbnail">U</span>
 							</li>
