@@ -16,7 +16,7 @@ class TabelSarana extends Migration
             $table->bigIncrements('id');
             $table->string('jenis');
             $table->string('sub');
-            $table->enum('tipe',['Pembudidaya','Nelayan']);
+            $table->enum('tipe',['Pembudidaya','Nelayan','Pengolah']);
         });
     }
 
