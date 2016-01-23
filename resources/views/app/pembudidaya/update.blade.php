@@ -150,7 +150,7 @@
 												<div class="form-group">
 													<label>Kepemilikan Sarana dan Prasarana</label>
 													<div id="sarana">
-														<select name="id_sarana[]" class="full-width" data-init-plugin="select2" multiple="" required>
+														<select name="id_sarana[]" class="full-width" data-init-plugin="select2" multiple="">
 															<?php $sarana = App\Sarana::where('jenis', $pembudidaya->usaha->jenis)->get(); ?>
 															<?php $Ksarana = App\KepemilikanSarana::where('id_user', $pembudidaya->id)->get(); ?>
 															<?php $Ksarana_arr = []; ?>

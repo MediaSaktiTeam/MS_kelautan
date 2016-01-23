@@ -41,7 +41,6 @@ class PembudidayaController extends Controller
 
 			$this->validate($r,[
 					'nik' => 'required|unique:users',
-					'id_sarana' => 'required',
 				]);
 
 			// Validasi Jabatan
@@ -58,7 +57,7 @@ class PembudidayaController extends Controller
 
 				$r->session()->flash('gagal','GAGAL!!! Jabatan <b>'.$vj->nama_jabatan.'</b> pada kelompok <b>'.$vj->nama_kelompok.'</b> telah ada');
 
-				return redirect(route('pembudidaya'));
+				return redirect(route('pembudidaya'))->withInput();
 				exit;
 			}
 		/* end validasi */
@@ -80,13 +79,15 @@ class PembudidayaController extends Controller
 		$id = $pb->id;
 
 		// Simpan sarana
-		foreach ( $r->id_sarana as $val ){
-			$record['id_sarana']  = $val; 
-			$record['id_user']    = $id; 
-			$records[] = $record;
-		}
+		if( $r->id_sarana ) {
+			foreach ( $r->id_sarana as $val ){
+				$record['id_sarana']  = $val; 
+				$record['id_user']    = $id; 
+				$records[] = $record;
+			}
 
-		DB::table('app_kepemilikan_sarana')->insert( $records );
+			DB::table('app_kepemilikan_sarana')->insert( $records );
+		}
 
 		$r->session()->flash('success','Data tersimpan');
 
@@ -107,7 +108,6 @@ class PembudidayaController extends Controller
 	{
 		$this->validate($r,[
 				'nik' => 'required|unique:users,id,'.$r->id,
-				'id_sarana' => 'required',
 			]);
 			
 		// Validasi Jabatan
@@ -144,16 +144,19 @@ class PembudidayaController extends Controller
 
 		$id = $r->id;
 
-		// Hapus lalu simpan kembali
-		KepemilikanSarana::where('id_user', $id)->delete();
+		if( $r->id_sarana ) {
 
-		foreach ( $r->id_sarana as $val ){
-			$record['id_sarana']  = $val; 
-			$record['id_user']    = $id; 
-			$records[] = $record;
+			// Hapus lalu simpan kembali
+			KepemilikanSarana::where('id_user', $id)->delete();
+
+			foreach ( $r->id_sarana as $val ){
+				$record['id_sarana']  = $val; 
+				$record['id_user']    = $id; 
+				$records[] = $record;
+			}
+
+			DB::table('app_kepemilikan_sarana')->insert( $records );
 		}
-
-		DB::table('app_kepemilikan_sarana')->insert( $records );
 
 		$r->session()->flash('success','Data tersimpan');
 

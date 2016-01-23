@@ -5,7 +5,7 @@
 	});
 </script>
 
-<select name="id_sarana[]" class="full-width" data-init-plugin="select2" multiple="" required>
+<select name="id_sarana[]" class="full-width" data-init-plugin="select2" multiple="">
 	@foreach( $sarana as $sa )
 		<option value="{{ $sa->id }}">{{ $sa->sub }}</option>
 	@endforeach

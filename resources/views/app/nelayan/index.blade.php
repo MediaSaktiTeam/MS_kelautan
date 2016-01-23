@@ -43,6 +43,14 @@
 						<div id="tambah-nelayan" style="display:none">
 							<div class="col-lg-7 col-md-6 ">
 
+								@if ( Session::has('gagal') ) 
+						    		@include('app/layout/partials/alert-danger', ['message' => session('gagal')])
+								@endif
+
+								@if ( count($errors) > 0 )
+									@include('app/layout/partials/alert-danger', ['errors' => $errors])
+								@endif
+
 								<!-- START PANEL -->
 								<div class="panel panel-transparent">
 									<div class="panel-body">
@@ -54,13 +62,13 @@
 												<div class="col-sm-6">
 													<div class="form-group required">
 														<label>NIK</label>
-														<input type="text" class="form-control number" name="nik" required>
+														<input type="text" class="form-control number" name="nik" value="{{ Input::old('nik') }}" required>
 													</div>
 												</div>
 												<div class="col-sm-6">
 													<div class="form-group">
 														<label>Nama Lengkap</label>
-														<input type="text" class="form-control" name="name" required>
+														<input type="text" class="form-control" name="name" value="{{ Input::old('name') }}" required>
 													</div>
 												</div>
 											</div>
@@ -69,13 +77,13 @@
 												<div class="col-sm-6">
 													<div class="form-group required">
 														<label>No. Kartu Nelayan</label>
-														<input type="text" class="form-control" name="no_kartu_nelayan" required>
+														<input type="text" class="form-control" name="no_kartu_nelayan" value="{{ Input::old('no_kartu_nelayan') }}" required>
 													</div>
 												</div>
 												<div class="col-sm-6">
 													<div class="form-group">
 														<label>Alamat</label>
-														<input type="text" class="form-control" name="alamat" required>
+														<input type="text" class="form-control" name="alamat" value="{{ Input::old('alamat') }}"required>
 													</div>
 												</div>
 											</div>
@@ -88,7 +96,7 @@
 															<select class="full-width" name="id_kelompok" data-init-plugin="select2" required>
 																<option value="">Pilih Kelompok...</option>
 																@foreach( $kelompok as $klp )
-																	<option value="{{ $klp->id_kelompok }}">{{ $klp->nama }}</option>
+																	<option value="{{ $klp->id_kelompok }}" {{ Input::old('id_kelompok') == $klp->id_kelompok ? "selected":"" }}>{{ $klp->nama }}</option>
 																@endforeach
 															</select>
 															<div class="input-group-btn">
@@ -103,7 +111,7 @@
 														<select class="full-width" name="id_jabatan" data-init-plugin="select2" required>
 															<option value="">Pilih Jabatan...</option>
 															@foreach( $jabatan as $jab )
-																<option value="{{ $jab->id }}">{{ $jab->nama }}</option>
+																<option value="{{ $jab->id }}" {{ Input::old('id_jabatan') == $jab->id ? "selected":"" }}>{{ $jab->nama }}</option>
 															@endforeach
 														</select>
 													</div>
@@ -161,18 +169,9 @@
 
 						<div class="col-md-12">
 								
-								@if ( Session::has('success') ) 
-						    		@include('app/layout/partials/alert-sukses', ['message' => session('success')])
-								@endif
-
-								@if ( Session::has('gagal') ) 
-						    		@include('app/layout/partials/alert-danger', ['message' => session('gagal')])
-								@endif
-
-								@if ( count($errors) > 0 )
-									@include('app/layout/partials/alert-danger', ['errors' => $errors])
-								@endif
-
+							@if ( Session::has('success') ) 
+					    		@include('app/layout/partials/alert-sukses', ['message' => session('success')])
+							@endif
 							
 							<!-- START PANEL -->
 							<div class="panel panel-default">
@@ -369,6 +368,9 @@
 				});
 			});
 
+			@if ( count($errors) > 0 || Session::has('gagal') )
+				$("#tambah-nelayan").fadeIn();
+			@endif
 		});
 
 		function get_sarana(id){
