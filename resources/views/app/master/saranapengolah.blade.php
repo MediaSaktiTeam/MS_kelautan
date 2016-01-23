@@ -172,14 +172,13 @@
 					<h5>Sunting Data</h5>
 				</div>
 				<div class="modal-body">
-					<form class="style-form" method="GET" action="{{ route('sarananelayan_update') }}">
+					<form class="style-form" method="GET" action="{{ route('saranapengolah_update') }}">
 						<input type="hidden" name="_token" value="{{ csrf_token() }}">
 						<div class="form-group form-group-default required">
-							<label>Sarana / Prasarana</label>
+							<label>Peralatan Yang Dimiliki</label>
 							<select class="full-width" data-init-plugin="select2" name="jenis" id="jenis">
-								<option value="Perahu/Kapal">Perahu/Kapal</option>
-								<option value="Alat Tangkap">Alat Tangkap</option>
-								<option value="Mesin">Mesin</option>
+								<option value="Bantuan">Bantuan</option>
+								<option value="Swadaya">Swadaya</option>
 							</select>
 						</div>
 						<div class="form-group form-group-default required">
@@ -200,6 +199,29 @@
 	<!-- /.modal-dialog -->
 </div>
 <!-- END MODAL STICK UP EDIT -->
+<!-- MODAL STICK UP SMALL ALERT -->
+<div class="modal fade stick-up" id="modal-hapus" tabindex="-1" role="dialog" aria-hidden="true">
+	<div class="modal-dialog modal-sm">
+		<div class="modal-content-wrapper">
+			<div class="modal-content">
+				<div class="modal-header clearfix text-left">
+					<button type="button" class="close" data-dismiss="modal"  aria-hidden="true"><i class="pg-close fs-14"></i></button>
+					<h5>Hapus Data</h5>
+				</div>
+				<div class="modal-body">
+					<p class="no-margin">Data akan dihapus. Apakah Anda yakin?</p>
+				</div>
+				<div class="modal-footer">
+					<a class="btn btn-danger btn-hapus btn-cons pull-left inline">Ya</a>
+					<button type="button" class="btn btn-default btn-cons no-margin pull-left inline" data-dismiss="modal">Tidak</button>
+				</div>
+			</div>
+		</div>
+		<!-- /.modal-content -->
+	</div>
+	<!-- /.modal-dialog -->
+</div>
+<!-- END MODAL STICK UP SMALL ALERT -->
 
 @endsection
 
@@ -207,7 +229,7 @@
 @section('registerscript')
 	<script>
 		$(".menu-items .link-master").addClass("active open");
-		$(".menu-items .link-master .sub-sarananelayan").addClass("active");
+		$(".menu-items .link-master .sub-saranapengolah-sarana").addClass("active");
 
 		$(function(){
 
@@ -224,7 +246,7 @@
 					return false;
 				}
 
-				$(".btn-hapus").attr('href',"{{ route('sarananelayan_hapus') }}/"+id);
+				$(".btn-hapus").attr('href',"{{ route('saranapengolah_hapus') }}/"+id);
 			});
 
 			$(".btn-edit").click(function(){

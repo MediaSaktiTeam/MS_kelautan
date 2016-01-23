@@ -94,13 +94,17 @@
 								<a href="/app/master/sarana-nelayan">Sarana Nelayan</a>
 								<span class="icon-thumbnail">SN</span>
 							</li>
-							<li class="sub-usaha">
+							<li class="sub-saranapengolah">
 								<a href="javascript:;"><span class="title">Sarana Pengolah</span><span class=" arrow"></span></a>
 								<span class="icon-thumbnail">SP</span>
 								<ul class="sub-menu">
-									<li class="sub-bantuan">
+									<li class="sub-saranapengolah">
 										<a href="/app/master/sarana-pengolah">Sarana</a>
 										<span class="icon-thumbnail">S</span>
+									</li>
+									<li class="sub-saranapengolah">
+										<a href="/app/master/sarana-pengolah">Jenis Olahan</a>
+										<span class="icon-thumbnail">J</span>
 									</li>
 								</ul>
 							</li>

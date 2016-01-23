@@ -135,6 +135,8 @@
 			[
 				'getIndex'  => 'saranapengolah',
 				'getTambah'  => 'saranapengolah_tambah',
+				'getHapus'	=>	'saranapengolah_hapus',
+				'getUpdate'	=>	'saranapengolah_update',
 			]);
 
 	});

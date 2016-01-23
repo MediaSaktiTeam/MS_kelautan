@@ -41,6 +41,19 @@ class SaranaPengolahController extends Controller
 		return redirect()->route('saranapengolah', $data)->with(session()->flash('success','Data Berhasil Tersimpan !!'));
 	}
 
+	public function getUpdate(Request $request)
+	{
+
+		$data = Sarana::find($request->id);
+		$data->jenis = $request->jenis;
+		$data->sub = $request->sub;
+		$data->tipe = 'Pengolah';
+		$data->save();
+		$data['sarana'] = Sarana::paginate(1);
+
+		return redirect()->route('saranapengolah', $data)->with(session()->flash('success','Data Berhasil diupdate !!'));
+	}
+
 	public function getHapus($id){
 
 		$val = explode(",", $id);
@@ -50,5 +63,7 @@ class SaranaPengolahController extends Controller
 		}
 		return redirect()->route('saranapengolah')->with(session()->flash('delete','Data Berhasil Dihapus !!'));
 	}
+
+
 
 }
