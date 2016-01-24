@@ -49,9 +49,7 @@
 				'getIndex' => 'app.statistik',
 			]);
 
-		Route::get('/app/pengolah', function () {
-			return view('app.pengolah.index');
-		});
+		Route::controller('app/pengolah', 'PengolahController', ['getIndex' => 'pengolah']);
 
 		Route::controller('app/bantuan', 'RefBantuanController',
 			[
@@ -62,10 +60,6 @@
 				'getHapus' => 'ref_bantuan_hapus',
 
 			]);
-
-		Route::get('/app/pengolah', function () {
-			return view('app.pengolah.index');
-		});
 
 		Route::get('/app/master/bantuan', function () {
 			return view('app.master.bantuan');
@@ -151,8 +145,8 @@
 	Route::post('/mediasakti/validasi-app', 'ValidasiController@validasi');
 
 
-/* Admin */
-	Route::group(['middleware' => ['MustLogin'], 'namespace' => 'Admin' ], function(){
+/* Admin Blog */
+	Route::group(['middleware' => ['MustLogin', 'Blog'], 'namespace' => 'Admin' ], function(){
 
 		Route::get('admin', 'BerandaController@index');
 		Route::get('home', function(){

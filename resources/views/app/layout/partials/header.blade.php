@@ -45,26 +45,38 @@
 
 						<span class="icon-thumbnail"><i class="pg-home"></i></span>
 					</li>
-					<li class="link-pembudidaya">
-						<a href="/app/pembudidaya"><span class="title">Pembudidaya</span></a>
-						<span class="icon-thumbnail">P</span>
-					</li>
-					<li class="link-nelayan">
-						<a href="/app/nelayan"><span class="title">Nelayan</span></a>
-						<span class="icon-thumbnail">N</span>
-					</li>
-					<li class="link-pengolah">
-						<a href="/app/pengolah"><span class="title">Pengolah</span></a>
-						<span class="icon-thumbnail">Pl</span>
-					</li>
+
+					@if ( Permissions::pembudidaya() )
+						<li class="link-pembudidaya">
+							<a href="/app/pembudidaya"><span class="title">Pembudidaya</span></a>
+							<span class="icon-thumbnail">P</span>
+						</li>
+					@endif
+
+					@if ( Permissions::nelayan() )
+						<li class="link-nelayan">
+							<a href="/app/nelayan"><span class="title">Nelayan</span></a>
+							<span class="icon-thumbnail">N</span>
+						</li>
+					@endif
+
+					@if ( Permissions::pengolah() )
+						<li class="link-pengolah">
+							<a href="/app/pengolah"><span class="title">Pengolah</span></a>
+							<span class="icon-thumbnail">Pl</span>
+						</li>
+					@endif
+
 					<li class="link-kelompok">
 						<a href="/app/kelompok"><span class="title">Kelompok</span></a>
 						<span class="icon-thumbnail">K</span>
 					</li>
+
 					<li class="link-bantuan">
 						<a href="/app/bantuan"><span class="title">Bantuan</span></a>
 						<span class="icon-thumbnail">B</span>
 					</li>
+
 					<li class="link-master">
 						<a href="javascript:;"><span class="title">Master</span>
 						<span class=" arrow"></span></a>
@@ -102,10 +114,12 @@
 							</li> -->
 						</ul>
 					</li>
+
 					<li class="link-statistik">
 						<a href="/app/statistik"><span class="title">Statistik</span></a>
 						<span class="icon-thumbnail">S</span>
 					</li>
+
 					<li class="link-pengaturan">
 						<a href="/app/pengaturan"><span class="title">Pengaturan</span></a>
 						<span class="icon-thumbnail"><i class="fa fa-cog"></i></span>

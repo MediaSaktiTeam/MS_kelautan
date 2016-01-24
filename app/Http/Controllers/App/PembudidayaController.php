@@ -9,14 +9,15 @@ use App\Http\Controllers\Controller;
 use DB,Excel,PDF;
 use App\User, App\Kelompok, App\Jabatan, App\Usaha, App\Sarana, App\KepemilikanSarana;
 use App\RefBantuan;
+use App\Permissions;
 
 class PembudidayaController extends Controller
 {
-	/**
-	 * Display a listing of the resource.
-	 *
-	 * @return \Illuminate\Http\Response
-	 */
+	public function __construct()
+	{
+		$this->middleware('Pembudidaya');
+	}
+
 	public function getIndex()
 	{
 		$data['pembudidaya'] = User::where('profesi','Pembudidaya')->orderBy('id','desc')->get();
@@ -77,6 +78,12 @@ class PembudidayaController extends Controller
 		$pb->save();
 
 		$id = $pb->id;
+
+		// Simpan role
+		$role = new Permissions;
+		$role->id_user = $id;
+		$role->pembudidaya = 1;
+		$role->save();
 
 		// Simpan sarana
 		if( $r->id_sarana ) {

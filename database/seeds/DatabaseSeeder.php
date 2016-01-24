@@ -28,6 +28,7 @@ class DatabaseSeeder extends Seeder
         $this->call('SubSaranaSeeder');
         $this->call('JabatanSeeder');
         $this->call('ValidasiTableSeeder');
+        $this->call('PermissionsSeeder');
     }
 }
 
@@ -232,5 +233,19 @@ class ValidasiTableSeeder extends Seeder
 
     DB::table('validasi')->insert($data);
 
+  }
+}
+
+class PermissionsSeeder extends Seeder
+{
+  public function run()
+  {
+    App\Permissions::truncate();
+
+    $data = array(
+        array('id_user' => 1, 'pembudidaya' => 1, 'nelayan' => 1, 'pengolah' => 1, 'admin' => 1, 'blog' => 1)
+      );
+
+      DB::table('permissions')->insert($data);
   }
 }

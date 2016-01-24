@@ -1,7 +1,7 @@
 @extends('app.layout.main')
 
 @section('title')
-	Pembudidaya | Tambah
+	Pengolah | Tambah
 @endsection
 
 
@@ -23,11 +23,11 @@
 						<!-- START BREADCRUMB -->
 						<ul class="breadcrumb pull-left">
 							<li>
-								<a href="{{ route('pembudidaya') }}">Pembudidaya</a>
+								<a href="{{ route('pengolah') }}">Pengolah</a>
 							</li>
 						</ul>
 						
-						<button id="show-tambah-pembudidaya" class="btn btn-primary bg-blueblur m-t-10 m-b-10 pull-right">Tambah</button>
+						<button id="show-tambah-pengolah" class="btn btn-primary bg-blueblur m-t-10 m-b-10 pull-right">Tambah</button>
 					</div>
 				</div>
 
@@ -48,13 +48,13 @@
 							@include('app/layout/partials/alert-danger', ['errors' => $errors])
 						@endif
 
-						<div id="tambah-pembudidaya" style="display:none">
+						<div id="tambah-pengolah" style="display:none">
 							<div class="col-lg-7 col-md-6 ">
 
 								<!-- START PANEL -->
 								<div class="panel panel-transparent">
 									<div class="panel-body">
-										<form id="form-personal" method="post" action="{{ route('pembudidaya_simpan') }}" role="form">
+										<form id="form-personal" method="post" action="{{ url('/app/pengolah/simpan') }}" role="form">
 											
 											{{ csrf_field() }}
 
@@ -81,27 +81,44 @@
 													</div>
 												</div>
 											</div>
-
+											
 											<div class="row">
-												<div class="col-md-12">
+												<div class="col-sm-6">
 													<div class="form-group">
-														<label>Jenis Usaha Budidaya</label>
-														<select onchange="get_usaha(this.value)" class="full-width" name="jenis_usaha" required data-init-plugin="select2">
-															<option value="">Pilih Jenis Usaha...</option>
-															<option value="Budidaya Air Laut" {{ Input::old('jenis_usaha') == "Budidaya Air Laut" ? "selected":"" }}>Budidaya Air Laut</option>
-															<option value="Budidaya Air Tawar" {{ Input::old('jenis_usaha') == "Budidaya Air Tawar" ? "selected":"" }}>Budidaya Air Tawar</option>
-															<option value="Budidaya Air Payau" {{ Input::old('jenis_usaha') == "Budidaya Air Payau" ? "selected":"" }}>Budidaya Air Payau</option>
+														<label>Nama Kelompok</label>
+														<div class="input-group">
+															<select class="full-width" name="id_kelompok" data-init-plugin="select2" required>
+																<option value="">Pilih Kelompok...</option>
+																@foreach( $kelompok as $klp )
+																	<option value="{{ $klp->id_kelompok }}" {{ Input::old('id_kelompok') == $klp->id_kelompok ? "selected":"" }}>{{ $klp->nama }}</option>
+																@endforeach
+															</select>
+															<div class="input-group-btn">
+																<a class="btn btn-primary" href="/app/kelompok">+</a>
+															</div>
+														</div>
+													</div>
+												</div>
+												<div class="col-sm-6">
+													<div class="form-group">
+														<label>Jabatan Dalam Kelompok</label>
+														<select class="full-width" name="id_jabatan" data-init-plugin="select2" required>
+															<option value="">Pilih Jabatan...</option>
+															@foreach( $jabatan as $jab )
+																<option value="{{ $jab->id }}" {{ Input::old('id_jabatan') == $jab->id ? "selected":"" }}>{{ $jab->nama }}</option>
+															@endforeach
 														</select>
 													</div>
 												</div>
 											</div>
 
+
 											<div class="row">
 												<div class="col-md-6">
 													<div class="form-group">
 														<label>Jenis Olahan</label>
-														<div id="olahan">
-															<select class="full-width" data-init-plugin="select2" disabled>
+														<div id="usaha">
+															<select class="full-width" data-init-plugin="select2" name="jenis_olahan" required>
 																<option value="">Pilih Jenis Olahan...</option>
 															</select>
 														</div>
@@ -111,10 +128,48 @@
 													<div class="form-group">
 														<label>Kepemilikan Sarana dan Prasarana</label>
 														<div id="sarana">
-															<select class="full-width" data-init-plugin="select2" disabled>
+															<select class="full-width" data-init-plugin="select2" name="kepemilikan_sarana">
 																<option value="">Pilih Sarana / Prasarana...</option>
 															</select>
 														</div>
+													</div>
+												</div>
+											</div>
+
+											<div class="row">
+												<div class="col-md-6">
+													<div class="form-group">
+														<label>Legalitas Produksi</label>
+
+														<?php $jenis_legalitas = ['P-IRT', 'Depkes', 'Halal']; ?>
+
+														<select class="full-width" data-init-plugin="select2" name="jenis_legalitas" required>
+															<option value="">Pilih Legalitas Produksi...</option>
+															@for ( $i = 0; $i < count( $jenis_legalitas ); $i++ )
+																<option value="{{ $jenis_legalitas[$i] }}">{{ $jenis_legalitas[$i] }}</option>
+															@endfor
+														</select>
+													</div>
+												</div>
+												<div class="col-md-6">
+													<div class="form-group">
+														<label>Modal yang dimiliki</label>
+														<input type="text" class="form-control number" name="modal" value="{{ Input::old('modal') }}">
+													</div>
+												</div>
+											</div>
+
+											<div class="row">
+												<div class="col-md-6">
+													<div class="form-group">
+														<label>Modal Pinjaman</label>
+														<input type="text" class="form-control number" name="modal_pinjaman" value="{{ Input::old('modal_pinjaman') }}">
+													</div>
+												</div>
+												<div class="col-md-6">
+													<div class="form-group">
+														<label>Omzet Perbulan</label>
+														<input type="text" class="form-control number" name="omzet" value="{{ Input::old('omzet') }}">
 													</div>
 												</div>
 											</div>
@@ -127,6 +182,7 @@
 									</div>
 								</div>
 								<!-- END PANEL -->
+
 							</div>
 						</div>
 
@@ -198,7 +254,7 @@
 			<div class="modal-content">
 				<div class="modal-header clearfix text-left">
 					<button type="button" class="close" data-dismiss="modal"  aria-hidden="true"><i class="pg-close fs-14"></i></button>
-					<h5>Detail Pembudidaya</h5>
+					<h5>Detail pengolah</h5>
 				</div>
 				<div class="modal-body" id="view-detail">
 
@@ -251,13 +307,13 @@
 				<div class="modal-body">
 					<div class="row">
 						<div class="col-md-6">
-							<a href="{{ url('/app/pembudidaya/export-excel') }}">
+							<a href="{{ url('/app/pengolah/export-excel') }}">
 								<i class="fa fa-file-excel-o export-excel"></i>
 								Unduh Dalam Format Mic.Excel
 							</a>
 						</div>
 						<div class="col-md-6">
-							<a href="{{ url('/app/pembudidaya/export-pdf') }}">
+							<a href="{{ url('/app/pengolah/export-pdf') }}">
 								<i class="fa fa-file-pdf-o export-pdf"></i>
 								Unduh Dalam Format PDF
 							</a>
@@ -278,5 +334,50 @@
 @section('registerscript')
 	<script>
 		$(".menu-items .link-pengolah").addClass("active");
+
+		$(function(){
+
+			var _token = $('meta[name="csrf-token"]').attr('content');
+
+			$("table").on('click', '#hapus', function(){
+
+				if($(".pilih:checked").length) {
+		          var id = "";
+		          $(".pilih:checked").each(function() {
+		            id += $(this).val() + ",";
+		          });
+		          id =  id.slice(0,-1);
+		        }
+		        else {
+				  return false;
+		        }
+		        $(".btn-hapus").attr('href',"{{ url('/app/pengolah/hapus') }}/"+id);
+
+			});
+
+			$("#show-tambah-pengolah").click(function(){
+				$("#tambah-pengolah").fadeIn();
+				$("input[name='nik']").focus();
+				$(this).hide();
+			});
+
+			// Show detail
+			$(".panel").on('click', '.view', function(){
+				var id = $(this).data('id');
+				var url = "{{ url('app/pengolah/detail') }}";
+				var url = url+'/'+id;
+				$.get(url, {id:id, _token:_token}, function(data){
+					$("#view-detail").html(data);
+					$("#modal-view").modal('show');
+				});
+			});
+			$("#tambah-pengolah").fadeIn();
+
+			// @if ( count($errors) > 0 || Session::has('gagal') )
+			// 	$("#tambah-pengolah").fadeIn();
+			// 	get_usaha( "{{ Input::old('jenis_usaha') }}" );
+			// @endif
+
+		});
 	</script>
 @endsection

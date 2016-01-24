@@ -9,14 +9,16 @@ use App\Http\Controllers\Controller;
 use DB,Excel,PDF;
 use App\User, App\Kelompok, App\Jabatan, App\Usaha, App\Sarana, App\KepemilikanSarana;
 use App\RefBantuan;
+use App\Permissions;
 
 class NelayanController extends Controller
 {
-	/**
-	 * Display a listing of the resource.
-	 *
-	 * @return \Illuminate\Http\Response
-	 */
+	
+	public function __construct()
+	{
+		$this->middleware('Nelayan');
+	}
+
 	public function getIndex()
 	{
 		$data['nelayan'] = User::where('profesi','Nelayan')->orderBy('id','desc')->get();
@@ -76,6 +78,12 @@ class NelayanController extends Controller
 		$pb->save();
 
 		$id = $pb->id;
+
+		// Simpan role
+		$role = new Permissions;
+		$role->id_user = $id;
+		$role->nelayan = 1;
+		$role->save();
 
 		// Simpan sarana
 		if ( $r->id_sarana ) {

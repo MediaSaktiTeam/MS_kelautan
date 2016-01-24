@@ -25,7 +25,12 @@ class CreateUsersTable extends Migration
             $table->string('id_kelompok')->nullable();
             $table->integer('id_jabatan')->nullable();
             $table->integer('id_usaha')->nullable();
-            $table->enum('profesi', ['Pembudidaya','Nelayan','Admin']);
+            $table->integer('id_jenis_olahan')->nullable();
+            $table->string('legalitas_produksi')->nullable();
+            $table->float('modal_dimiliki')->nullable();
+            $table->float('modal_pinjaman')->nullable();
+            $table->float('omzet_perbulan')->nullable();
+            $table->enum('profesi', ['Pembudidaya','Nelayan','Admin', 'Pengolah', 'Blog']);
             $table->dateTime('tgl_password')->nullable();
             $table->rememberToken();
             $table->timestamps();

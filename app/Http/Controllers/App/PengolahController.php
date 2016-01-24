@@ -1,87 +1,49 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\App;
 
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use DB,Excel,PDF;
+use App\User, App\Kelompok, App\Jabatan, App\Usaha, App\Sarana, App\KepemilikanSarana;
+use App\RefBantuan;
 
 class PengolahController extends Controller
 {
-	/**
-	 * Display a listing of the resource.
-	 *
-	 * @return \Illuminate\Http\Response
-	 */
-	public function index()
+
+	public function __construct()
 	{
-		return view('app.pengolah', compact('pengolah'));
+		$this->middleware('Pengolah');
 	}
 
-	/**
-	 * Show the form for creating a new resource.
-	 *
-	 * @return \Illuminate\Http\Response
-	 */
-	public function create()
+	public function getIndex()
 	{
-		//
+		$data['pengolah'] = User::where('profesi','Pengolah')->orderBy('id','desc')->get();
+		$data['kelompok'] = Kelompok::where('tipe','Pengolah')->get();
+		$data['jabatan'] = Jabatan::all();
+		return view ('app.pengolah.index',$data);
 	}
 
-	/**
-	 * Store a newly created resource in storage.
-	 *
-	 * @param  \Illuminate\Http\Request  $request
-	 * @return \Illuminate\Http\Response
-	 */
-	public function store(Request $request)
+	public function postStore(Request $r)
 	{
-		//
+
 	}
 
-	/**
-	 * Display the specified resource.
-	 *
-	 * @param  int  $id
-	 * @return \Illuminate\Http\Response
-	 */
-	public function show($id)
+	public function getEdit(Request $r, $id)
 	{
-		//
+
 	}
 
-	/**
-	 * Show the form for editing the specified resource.
-	 *
-	 * @param  int  $id
-	 * @return \Illuminate\Http\Response
-	 */
-	public function edit($id)
+	public function postUpdate()
 	{
-		//
+
 	}
 
-	/**
-	 * Update the specified resource in storage.
-	 *
-	 * @param  \Illuminate\Http\Request  $request
-	 * @param  int  $id
-	 * @return \Illuminate\Http\Response
-	 */
-	public function update(Request $request, $id)
+	public function getHapus($id)
 	{
-		//
+
 	}
 
-	/**
-	 * Remove the specified resource from storage.
-	 *
-	 * @param  int  $id
-	 * @return \Illuminate\Http\Response
-	 */
-	public function destroy($id)
-	{
-		//
-	}
 }
