@@ -106,6 +106,10 @@
 										<a href="/app/master/jenisolahan">Jenis Olahan</a>
 										<span class="icon-thumbnail">J</span>
 									</li>
+									<li class="sub-merekdagang">
+										<a href="/app/master/merekdagang">Merek Dagang</a>
+										<span class="icon-thumbnail">M</span>
+									</li>
 								</ul>
 							</li>
 							<li class="sub-usaha">

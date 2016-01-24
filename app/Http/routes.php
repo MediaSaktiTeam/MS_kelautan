@@ -94,6 +94,14 @@
 				'getHapus'  => 'jenisolahan_hapus',
 			]);
 
+		Route::controller('app/master/merekdagang', 'MerekDagangController',
+			[
+				'getIndex'		=>	'merekdagang',
+				'getTambah'		=>	'merekdagang_tambah',
+				'getUpdate'		=>	'merekdagang_update',
+				'getHapus'		=>	'merekdagang_hapus',
+			]);
+
 		Route::controller('app/kelompok', 'KelompokController',
 			[
 				'getIndex'  => 'kelompok',
