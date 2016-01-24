@@ -86,6 +86,14 @@
 				'getUpdatePassword'  => 'pengaturan_update_password',
 		]);
 
+		Route::controller('app/master/jenisolahan', 'JenisOlahanController',
+			[
+				'getIndex'  => 'jenisolahan',
+				'getTambah'  => 'jenisolahan_tambah',
+				'getUpdate'  => 'jenisolahan_update',
+				'getHapus'  => 'jenisolahan_hapus',
+			]);
+
 		Route::controller('app/kelompok', 'KelompokController',
 			[
 				'getIndex'  => 'kelompok',

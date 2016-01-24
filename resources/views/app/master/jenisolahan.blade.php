@@ -1,7 +1,7 @@
 @extends('app.layout.main')
 
 @section('title')
-	Master | Sarana Pengolah
+	Master | Jenis Olahan
 @endsection
 
 
@@ -26,7 +26,7 @@
 								<a href="#">Master</a>
 							</li>
 							<li>
-								<a href="#" class="active">Peralatan yang dimiliki</a>
+								<a href="#" class="active">Jenis Olahan yang dimiliki</a>
 							</li>
 						</ul>
 					</div>
@@ -62,20 +62,13 @@
 								</div>
 							</div>
 							<div class="panel-body">
-								<h5>Sarana</h5>
-								<p>* Peralatan yang dimiliki digunakan dihalaman pengolah.</p>
-								<form class="style-form" method="GET" action="{{ route('saranapengolah_tambah') }}">
+								<h5>Jenis Olahan</h5>
+								<p>* Jenis Olahan yang dimiliki.</p>
+								<form class="style-form" method="GET" action="{{ route('jenisolahan_tambah') }}">
 									<input type="hidden" name="_token" value="{{ csrf_token() }}">
 									<div class="form-group form-group-default required">
-										<label>Peralatan yang dimiliki</label>
-										<select class="full-width" data-init-plugin="select2" name="jenis">
-											<option value="Bantuan">Bantuan</option>
-											<option value="Swadaya">Swadaya</option>
-										</select>
-									</div>
-									<div class="form-group form-group-default required">
-										<label>Detail</label>
-										<input type="text" name="sub" class="form-control" required>
+										<label>Jenis Olahan</label>
+										<input type="text" name="jenis" class="form-control" required>
 									</div>
 									<div class="form-group">
 										<button class="btn btn-primary btn-cons">Tambah</button>
@@ -97,15 +90,14 @@
 												<button class="btn btn-check" data-toggle="modal" data-target="#modal-hapus" disabled id="hapus"><i class="pg-trash"></i></button>
 											</th>
 											<th>Jenis</th>
-											<th>Sarana</th>
 											<th>Aksi</th>
 										</tr>
 									</thead>
 									<tbody>
-										@foreach($saranapengolah as $sp)
+										@foreach($JenisOlahan as $jo)
 										<tr>
 											<td>
-											<?php $data_master = App\KepemilikanSarana::where('id_sarana', $sp->id)->count(); ?>
+											<?php $data_master = App\KepemilikanSarana::where('id_sarana', $jo->id)->count(); ?>
 
 													<?php
 														$title = "";
@@ -116,13 +108,12 @@
 														endif
 													?>
 												<div class="checkbox" title="<?php echo $title ?>">
-													<input type="checkbox" class="pilih" value="{{ $sp->id }}" id="checkbox{{ $sp->id }}" <?php echo $disabled ?>>
-													<label for="checkbox{{ $sp->id }}" class="m-l-20"></label>
+													<input type="checkbox" class="pilih" value="{{ $jo->id }}" id="checkbox{{ $jo->id }}" <?php echo $disabled ?>>
+													<label for="checkbox{{ $jo->id }}" class="m-l-20"></label>
 												</div>
 											</td>
-											<td>{{ $sp->jenis }}</td>
-											<td>{{ $sp->sub }}</td>
-											<td><button class="btn btn-default btn-xs btn-edit" data-id="{{ $sp->id }}" data-jenis="{{ $sp->jenis }}" data-sub="{{ $sp->sub }}"><i class="fa fa-pencil"></i></button></td>
+											<td>{{ $jo->jenis }}</td>
+											<td><button class="btn btn-default btn-xs btn-edit" data-id="{{ $jo->id }}" data-jenis="{{ $jo->jenis }}" ><i class="fa fa-pencil"></i></button></td>
 										</tr>
 										@endforeach
 									</tbody>
@@ -172,18 +163,11 @@
 					<h5>Sunting Data</h5>
 				</div>
 				<div class="modal-body">
-					<form class="style-form" method="GET" action="{{ route('saranapengolah_update') }}">
+					<form class="style-form" method="GET" action="{{ route('jenisolahan_update') }}">
 						<input type="hidden" name="_token" value="{{ csrf_token() }}">
 						<div class="form-group form-group-default required">
-							<label>Peralatan Yang Dimiliki</label>
-							<select class="full-width" data-init-plugin="select2" name="jenis" id="jenis">
-								<option value="Bantuan">Bantuan</option>
-								<option value="Swadaya">Swadaya</option>
-							</select>
-						</div>
-						<div class="form-group form-group-default required">
-							<label>Detail</label>
-							<input type="text" id="sub" name="sub" class="form-control" required>
+							<label>Jenis Olahan</label>
+							<input type="text" id="jenis" name="jenis" class="form-control" required>
 						</div>
 						<div class="form-group">
 							<input type="hidden" id="id-jenis" name="id">
@@ -230,7 +214,7 @@
 	<script>
 		$(".menu-items .link-master").addClass("active open");
 		$(".menu-items .link-master .sub-saranapengolah").addClass("active");
-		$(".menu-items .link-master .sub-sarana").addClass("active");
+		$(".menu-items .link-master .sub-jenisolahan").addClass("active");
 
 		$(function(){
 
@@ -247,16 +231,15 @@
 					return false;
 				}
 
-				$(".btn-hapus").attr('href',"{{ route('saranapengolah_hapus') }}/"+id);
+				$(".btn-hapus").attr('href',"{{ route('jenisolahan_hapus') }}/"+id);
 			});
 
 			$(".btn-edit").click(function(){
 
 				var id = $(this).data('id');
-				var sub = $(this).data('sub');
 				var jenis = $(this).data('jenis');
 				$('#id-jenis').val(id);
-				$('#sub').val(sub);
+				$('#jenis').val(jenis);
 				$('#modal-sunting').modal('show');
 
 				$("select option").filter(function() {

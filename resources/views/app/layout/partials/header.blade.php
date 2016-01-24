@@ -98,12 +98,12 @@
 								<a href="javascript:;"><span class="title">Sarana Pengolah</span><span class=" arrow"></span></a>
 								<span class="icon-thumbnail">SP</span>
 								<ul class="sub-menu">
-									<li class="sub-saranapengolah">
+									<li class="sub-sarana">
 										<a href="/app/master/sarana-pengolah">Sarana</a>
 										<span class="icon-thumbnail">S</span>
 									</li>
-									<li class="sub-saranapengolah">
-										<a href="/app/master/sarana-pengolah">Jenis Olahan</a>
+									<li class="sub-jenisolahan">
+										<a href="/app/master/jenisolahan">Jenis Olahan</a>
 										<span class="icon-thumbnail">J</span>
 									</li>
 								</ul>
