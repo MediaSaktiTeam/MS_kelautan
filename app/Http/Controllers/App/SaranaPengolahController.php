@@ -28,9 +28,15 @@ class SaranaPengolahController extends Controller
 		/* Validasi */
 
 			$this->validate($request,[
-					'sub' => 'required|unique:app_sarana',
+					'sub' => 'required',
 					'jenis' => 'required',
 				]);
+
+			$vb	=	Sarana::where('sub',$request->sub)->where('jenis',$request->jenis)->count();
+			if ($vb > 0 ) {
+				return redirect()->route('saranapengolah')->with(session()->flash('gagal','Data Sudah ada !!'));
+			}
+
 		/* end validasi */
 		
 		$dt = new Sarana;
