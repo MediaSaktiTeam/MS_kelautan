@@ -82,7 +82,11 @@ class UserTableSeeder extends Seeder
     App\User::truncate();
 
     $data = array(
-      array('name' => 'Admin', 'username' => 'admin', 'email' => 'developer@mediasakti.com', 'password' => bcrypt('admin'), 'profesi' => 'Admin')
+      array('name' => 'Admin', 'username' => 'admin', 'email' => 'developer@mediasakti.com', 'password' => bcrypt('admin'), 'profesi' => 'Admin'),
+      array('name' => 'Pembudidaya', 'username' => 'pembudidaya', 'email' => 'developer1@mediasakti.com', 'password' => bcrypt('pembudidaya'), 'profesi' => 'Admin'),
+      array('name' => 'Nelayan', 'username' => 'nelayan', 'email' => 'developer2@mediasakti.com', 'password' => bcrypt('nelayan'), 'profesi' => 'Admin'),
+      array('name' => 'Pengolah', 'username' => 'pengolah', 'email' => 'developer3@mediasakti.com', 'password' => bcrypt('pengolah'), 'profesi' => 'Admin'),
+      array('name' => 'Blog', 'username' => 'blog', 'email' => 'developer4@mediasakti.com', 'password' => bcrypt('blog'), 'profesi' => 'Admin')
     );
 
     DB::table('users')->insert($data);
@@ -243,7 +247,11 @@ class PermissionsSeeder extends Seeder
     App\Permissions::truncate();
 
     $data = array(
-        array('id_user' => 1, 'pembudidaya' => 1, 'nelayan' => 1, 'pengolah' => 1, 'admin' => 1, 'blog' => 1)
+        array('id_user' => 1, 'pembudidaya' => 1, 'nelayan' => 1, 'pengolah' => 1, 'admin' => 1, 'blog' => 1),
+        array('id_user' => 2, 'pembudidaya' => 1, 'nelayan' => 0, 'pengolah' => 0, 'admin' => 0, 'blog' => 0),
+        array('id_user' => 3, 'pembudidaya' => 0, 'nelayan' => 1, 'pengolah' => 0, 'admin' => 0, 'blog' => 0),
+        array('id_user' => 4, 'pembudidaya' => 0, 'nelayan' => 0, 'pengolah' => 1, 'admin' => 0, 'blog' => 0),
+        array('id_user' => 5, 'pembudidaya' => 0, 'nelayan' => 0, 'pengolah' => 0, 'admin' => 0, 'blog' => 1)
       );
 
       DB::table('permissions')->insert($data);

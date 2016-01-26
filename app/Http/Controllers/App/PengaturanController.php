@@ -17,8 +17,7 @@ class PengaturanController extends Controller
 	 */
 	public function getIndex()
 	{
-		$data['user'] = User::where('profesi', 'Admin')->first();
-		return view ('app.pengaturan.index', $data);
+		return view ('app.pengaturan.index');
 	}
 
 	public function getUpdate(Request $request)

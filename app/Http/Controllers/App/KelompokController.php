@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\User, App\Kelompok;
-use Excel, PDF;
+use Excel, PDF, Permissions;
 
 class KelompokController extends Controller
 {
@@ -18,7 +18,11 @@ class KelompokController extends Controller
 	 */
 	public function getIndex()
 	{
-		$data['kelompok'] = Kelompok::get();
+		if ( Permissions::admin() ) {
+			$data['kelompok'] = Kelompok::get();
+		} else {
+			$data['kelompok'] = Kelompok::where('tipe', Permissions::pnp_role())->get();
+		}
 		return view('app.kelompok.index', $data);
 	}
 

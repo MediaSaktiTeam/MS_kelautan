@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\RefBantuan, App\User, App\Bantuan;
-use DB,Excel,PDF;
+use DB,Excel,PDF,Permissions;
 
 class RefBantuanController extends Controller
 {
@@ -18,17 +18,23 @@ class RefBantuanController extends Controller
 	 */
 	 public function getIndex()
 	{
+		if ( Permissions::admin() ) {
+			$profesi = ['Pembudidaya','Nelayan'];
+		} else {
+			$profesi = [Permissions::pnp_role()];
+		}
+
 		$data['users'] = DB::table('users as u')
 							->leftJoin('app_kelompok as ak', 'u.id_kelompok', '=', 'ak.id_kelompok')
 							->select('u.*', 'ak.nama as nama_kelompok')
-								->whereIn('u.profesi', ['Pembudidaya','Nelayan'])
+								->whereIn('u.profesi', $profesi)
 								->orderBy('ak.nama', 'asc')->get();
 
 		$data['bantuan_users'] = DB::table('app_bantuan as ab')
 							->leftJoin('users as u', 'u.id', '=', 'ab.id_user')
 							->leftJoin('app_kelompok as ak', 'u.id_kelompok', '=', 'ak.id_kelompok')
 							->select('u.*','ak.nama as nama_kelompok', 'ab.tahun as tahun_bantuan')
-								->whereIn('u.profesi', ['Pembudidaya','Nelayan'])
+								->whereIn('u.profesi', $profesi)
 								->orderBy('ab.id', 'desc')
 								->orderBy('ab.id_user', 'desc')
 								->orderBy('ab.tahun', 'desc')

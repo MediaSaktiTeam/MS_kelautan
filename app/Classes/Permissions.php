@@ -38,4 +38,21 @@ class Permissions
 		$sql = DB::table('permissions')->where('id_user', Auth::user()->id)->first();
 		return $sql->blog == 1 ? true : false; 
 	}
+
+	public function pnp_role()
+	{
+		$sql = DB::table('permissions')->where('id_user', Auth::user()->id)->first();
+		$data = array(
+					'Pembudidaya' => $sql->pembudidaya,
+					'Nelayan' => $sql->nelayan,
+					'Pengolah' => $sql->pengolah
+					);
+		$jml = array_sum($data);
+		if ( $jml == 3 ){
+			return false;
+		} else {
+			$cari = array_search(1, $data);
+			return $cari;
+		}
+	}
 }

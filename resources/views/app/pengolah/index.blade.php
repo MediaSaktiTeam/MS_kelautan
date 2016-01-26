@@ -373,10 +373,10 @@
 			});
 			$("#tambah-pengolah").fadeIn();
 
-			// @if ( count($errors) > 0 || Session::has('gagal') )
-			// 	$("#tambah-pengolah").fadeIn();
-			// 	get_usaha( "{{ Input::old('jenis_usaha') }}" );
-			// @endif
+			@if ( count($errors) > 0 || Session::has('gagal') )
+				$("#tambah-pengolah").fadeIn();
+				get_usaha( "{{ Input::old('jenis_usaha') }}" );
+			@endif
 
 		});
 	</script>

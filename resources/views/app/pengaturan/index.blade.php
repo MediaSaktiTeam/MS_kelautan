@@ -63,12 +63,12 @@
 									<input type="hidden" name="_token" value="{{ csrf_token() }}">
 									<div class="form-group form-group-default required">
 										<label>Nama Pengguna</label>
-										<input type="hidden" name="id" value="{{ $user->id }}">
-										<input type="text" id="nama" name="username" value="{{ $user->username }}" class="form-control" required>
+										<input type="hidden" name="id" value="{{ Auth::user()->id }}">
+										<input type="text" id="nama" name="username" value="{{ Auth::user()->username }}" class="form-control" required>
 									</div>
 									<div class="form-group form-group-default required">
 										<label>Nama Tampilan</label>
-										<input type="text" id="nama" name="name" value="{{ $user->name }}" class="form-control" required>
+										<input type="text" id="nama" name="name" value="{{ Auth::user()->name }}" class="form-control" required>
 									</div>
 									<div class="form-group">
 										<button type="submit" class="btn btn-primary btn-cons btn-simpan">Simpan</button>
@@ -92,7 +92,7 @@
 									{{ csrf_field() }}
 									<div class="form-group form-group-default required">
 										<label>Kata Sandi Lama</label>
-										<input type="password" id="sandi-lama" name="sandi_lama" placeholder="{{ $SC->waktu_lalu($user->tgl_password) }}" class="form-control" required>
+										<input type="password" id="sandi-lama" name="sandi_lama" placeholder="{{ $SC->waktu_lalu(Auth::user()->tgl_password) }}" class="form-control" required>
 									</div>
 									<div class="form-group form-group-default required">
 										<label>Kata Sandi Baru</label>

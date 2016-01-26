@@ -45,11 +45,10 @@
 						<div class="panel panel-default">
 							<div class="panel-heading">
 								<div class="panel-title">
-									Kelompok Nelayan
+									Kelompok {{ Permissions::pnp_role() }}
 								</div>
 							</div>
 							<div class="panel-body">
-								<p>Silahkan tambahkan kelompok baru, selanjutnya tekan tombol <b>tambah anggota</b> untuk menambahkan anggota kelompok.</p>
 								<form class="style-form" id="form-kelompok" method="GET" action="{{ route('kelompok_tambah') }}">
 									<input type="hidden" id="token" name="_token" value="{{ csrf_token() }}">
 									
@@ -62,13 +61,19 @@
 									?>
 									<input type="hidden" id="id-kelompok" name="id" value="<?php echo $rand; ?>">
 									
-									<div class="form-group form-group-default required">
-										<label>Bidang Usaha</label>
-										<select id="bidang-usaha" class="full-width" data-init-plugin="select2" name="tipe">
-											<option value="Nelayan">Nelayan</option>
-											<option value="Pembudidaya">Pembudidaya</option>
-										</select>
-									</div>
+									@if ( Permissions::admin() )
+										<div class="form-group form-group-default required">
+											<label>Bidang Usaha</label>
+											<select id="bidang-usaha" class="full-width" data-init-plugin="select2" name="tipe">
+													<option value="Nelayan">Nelayan</option>
+													<option value="Pembudidaya">Pembudidaya</option>
+													<option value="Pengolah">Pengolah</option>
+											</select>
+										</div>
+									@else
+										<input type="hidden" name="tipe" value="{{ Permissions::pnp_role() }}">
+									@endif
+
 									<div class="form-group form-group-default required">
 										<label>Nama Kelompok</label>
 										<input type="text" id="nama" name="nama" class="form-control" required>

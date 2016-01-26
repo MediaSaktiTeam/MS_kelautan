@@ -86,36 +86,48 @@
 								<a href="/app/master/bantuan">Bantuan</a>
 								<span class="icon-thumbnail">Bn</span>
 							</li>
-							<li class="sub-saranapembudidaya">
-								<a href="/app/master/sarana-pembudidaya">Sarana Pembudidaya</a>
-								<span class="icon-thumbnail">SP</span>
-							</li>
-							<li class="sub-sarananelayan">
-								<a href="/app/master/sarana-nelayan">Sarana Nelayan</a>
-								<span class="icon-thumbnail">SN</span>
-							</li>
-							<li class="sub-saranapengolah">
-								<a href="javascript:;"><span class="title">Sarana Pengolah</span><span class=" arrow"></span></a>
-								<span class="icon-thumbnail">SP</span>
-								<ul class="sub-menu">
-									<li class="sub-sarana">
-										<a href="/app/master/sarana-pengolah">Sarana</a>
-										<span class="icon-thumbnail">S</span>
-									</li>
-									<li class="sub-jenisolahan">
-										<a href="/app/master/jenisolahan">Jenis Olahan</a>
-										<span class="icon-thumbnail">J</span>
-									</li>
-									<li class="sub-merekdagang">
-										<a href="/app/master/merekdagang">Merek Dagang</a>
-										<span class="icon-thumbnail">M</span>
-									</li>
-								</ul>
-							</li>
-							<li class="sub-usaha">
-								<a href="/app/master/usaha">Usaha</a>
-								<span class="icon-thumbnail">U</span>
-							</li>
+
+							@if ( Permissions::pembudidaya() )
+								<li class="sub-saranapembudidaya">
+									<a href="/app/master/sarana-pembudidaya">Sarana Pembudidaya</a>
+									<span class="icon-thumbnail">SP</span>
+								</li>
+							@endif
+
+							@if ( Permissions::nelayan() )
+								<li class="sub-sarananelayan">
+									<a href="/app/master/sarana-nelayan">Sarana Nelayan</a>
+									<span class="icon-thumbnail">SN</span>
+								</li>
+							@endif
+
+							@if ( Permissions::pengolah() )
+								<li class="sub-saranapengolah">
+									<a href="javascript:;"><span class="title">Sarana Pengolah</span><span class=" arrow"></span></a>
+									<span class="icon-thumbnail">SP</span>
+									<ul class="sub-menu">
+										<li class="sub-sarana">
+											<a href="/app/master/sarana-pengolah">Sarana</a>
+											<span class="icon-thumbnail">S</span>
+										</li>
+										<li class="sub-jenisolahan">
+											<a href="/app/master/jenisolahan">Jenis Olahan</a>
+											<span class="icon-thumbnail">J</span>
+										</li>
+										<li class="sub-merekdagang">
+											<a href="/app/master/merekdagang">Merek Dagang</a>
+											<span class="icon-thumbnail">M</span>
+										</li>
+									</ul>
+								</li>
+							@endif
+
+							@if ( Permissions::pembudidaya() )
+								<li class="sub-usaha">
+									<a href="/app/master/usaha">Usaha</a>
+									<span class="icon-thumbnail">U</span>
+								</li>
+							@endif
 							<!-- <li class="sub-jabatan">
 								<a href="/app/master/jabatan">Jabatan</a>
 								<span class="icon-thumbnail">J</span>
