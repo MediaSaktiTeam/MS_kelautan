@@ -217,7 +217,8 @@ class KelompokSeeder extends Seeder
     $data = array(
         array('id_kelompok' => "kl1", 'nama' => "Bina Nusantara", 'alamat' => "Jl. Oke", 'tipe' => 'Pembudidaya'),
         array('id_kelompok' => "kl2", 'nama' => "Sipakainge", 'alamat' => "Jl. Oke", 'tipe' => 'Pembudidaya'),
-        array('id_kelompok' => "kl3", 'nama' => "Sipatokkong", 'alamat' => "Jl. Oke", 'tipe' => 'Nelayan')
+        array('id_kelompok' => "kl3", 'nama' => "Sipatokkong", 'alamat' => "Jl. Oke", 'tipe' => 'Nelayan'),
+        array('id_kelompok' => "kl4", 'nama' => "Semangat Nusantara", 'alamat' => "Jl. Durian", 'tipe' => 'Pengolah')
       );
 
       DB::table('app_kelompok')->insert($data);

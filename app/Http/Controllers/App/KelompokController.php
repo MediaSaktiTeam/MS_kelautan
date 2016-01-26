@@ -51,7 +51,7 @@ class KelompokController extends Controller
 		$dt->nama_bank = $request->nama_bank;
 		$dt->tipe = $request->tipe;
 		$dt->save();
-		return redirect()->route('kelompok');
+		return redirect()->route('kelompok')->with(session()->flash('success','Data Berhasil Tersimpan !!'));
 	}
 
 	public function getUpdate(Request $request)
@@ -67,7 +67,7 @@ class KelompokController extends Controller
 		Kelompok::where('id_kelompok', $request->id)
 					->update($dt);
 
-		return redirect()->route('kelompok');
+		return redirect()->route('kelompok')->with(session()->flash('success','Data Berhasil diupdate !!'));
 	}
 
 	public function getHapus($id){
@@ -77,7 +77,7 @@ class KelompokController extends Controller
 		foreach ($val as $value) {
 			Kelompok::where('id_kelompok', $value)->delete();            
 		}
-		return redirect()->route('kelompok');
+		return redirect()->route('kelompok')->with(session()->flash('delete','Data Berhasil Dihapus !!'));
 	}
 
 	public function getCari(Request $r)
