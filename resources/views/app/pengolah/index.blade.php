@@ -54,7 +54,7 @@
 								<!-- START PANEL -->
 								<div class="panel panel-transparent">
 									<div class="panel-body">
-										<form id="form-personal" method="post" action="{{ url('/app/pengolah/simpan') }}" role="form">
+										<form id="form-personal" method="post" action="{{ url('/app/pengolah/store') }}" role="form">
 											
 											{{ csrf_field() }}
 
@@ -118,8 +118,12 @@
 													<div class="form-group">
 														<label>Jenis Olahan</label>
 														<div id="usaha">
-															<select class="full-width" data-init-plugin="select2" name="jenis_olahan" required>
+															<select class="full-width" data-init-plugin="select2" name="id_jenis_olahan" required>
 																<option value="">Pilih Jenis Olahan...</option>
+																<?php $JO = App\JenisOlahan::all() ?>
+																@foreach( $JO as $jo )
+																	<option value="{{ $jo->id }}">{{ $jo->jenis }}</option>
+																@endforeach
 															</select>
 														</div>
 													</div>
@@ -127,11 +131,22 @@
 												<div class="col-md-6">
 													<div class="form-group">
 														<label>Kepemilikan Sarana dan Prasarana</label>
-														<div id="sarana">
-															<select class="full-width" data-init-plugin="select2" name="kepemilikan_sarana">
-																<option value="">Pilih Sarana / Prasarana...</option>
-															</select>
-														</div>
+														<select name="id_sarana[]" class="full-width" data-init-plugin="select2" multiple="" data-placeholder="Pilih Sarana / Prasaranan...">
+
+															<optgroup label="Bantuan">
+															<?php $PK = App\Sarana::where('tipe','Pengolah')->where('jenis','Bantuan')->get() ?>
+															@foreach( $PK as $rpk )
+																<option value="{{ $rpk->id }}">{{ $rpk->sub }}</option>
+															@endforeach
+															</optgroup>
+
+															<optgroup label="Swadaya">
+															<?php $PK = App\Sarana::where('tipe','Pengolah')->where('jenis','Swadaya')->get() ?>
+															@foreach( $PK as $rpk )
+																<option value="{{ $rpk->id }}">{{ $rpk->sub }}</option>
+															@endforeach
+															</optgroup>
+														</select>
 													</div>
 												</div>
 											</div>
