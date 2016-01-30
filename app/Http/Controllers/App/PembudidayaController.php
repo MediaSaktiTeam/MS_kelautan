@@ -79,12 +79,6 @@ class PembudidayaController extends Controller
 
 		$id = $pb->id;
 
-		// Simpan role
-		$role = new Permissions;
-		$role->id_user = $id;
-		$role->pembudidaya = 1;
-		$role->save();
-
 		// Simpan sarana
 		if( $r->id_sarana ) {
 			foreach ( $r->id_sarana as $val ){
@@ -175,8 +169,9 @@ class PembudidayaController extends Controller
 		$val = explode(",", $id);
 
 		foreach ($val as $value) {
-			User::where('id', $value)->delete();            
-			RefBantuan::where('id_user', $value)->delete();     
+			User::where('id', $value)->delete();
+			RefBantuan::where('id_user', $value)->delete();
+			KepemilikanSarana::where('id_user', $value)->delete();
 		}
 
 

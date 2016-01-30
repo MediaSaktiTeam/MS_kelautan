@@ -47,4 +47,13 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
     {
         return $this->hasMany('App\KepemilikanSarana', 'id_user', 'id');
     }
+
+    public function olahan()
+    {
+        return $this->belongsTo('App\JenisOlahan', 'id_jenis_olahan');
+    }
+    public function merekdagang()
+    {
+        return $this->belongsTo('App\MerekDagang', 'id_merek_dagang');
+    }
 }

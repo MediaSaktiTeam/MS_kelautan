@@ -166,7 +166,6 @@
 								@if ( Session::has('success') ) 
 						    		@include('app/layout/partials/alert-sukses', ['message' => session('success')])
 								@endif
-							
 							<!-- START PANEL -->
 							<div class="panel panel-default">
 								<div class="panel-body">

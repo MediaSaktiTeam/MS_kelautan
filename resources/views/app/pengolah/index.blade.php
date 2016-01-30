@@ -118,17 +118,34 @@
 													<div class="form-group">
 														<label>Jenis Olahan</label>
 														<div id="usaha">
-															<select class="full-width" data-init-plugin="select2" name="id_jenis_olahan" required>
+															<select class="full-width" data-init-plugin="select2" name="jenis_olahan" required>
 																<option value="">Pilih Jenis Olahan...</option>
 																<?php $JO = App\JenisOlahan::all() ?>
 																@foreach( $JO as $jo )
-																	<option value="{{ $jo->id }}">{{ $jo->jenis }}</option>
+																	<option value="{{ $jo->id }}" {{ Input::old('id_jenis_olahan') == $jo->id ? "selected":"" }}>{{ $jo->jenis }}</option>
 																@endforeach
 															</select>
 														</div>
 													</div>
 												</div>
 												<div class="col-md-6">
+													<div class="form-group">
+														<label>Merek Dagang</label>
+														<div id="usaha">
+															<select class="full-width" data-init-plugin="select2" name="merek_dagang">
+																<option value="">Pilih Merek Dagang...</option>
+																<?php $merekDagang = App\MerekDagang::all() ?>
+																@foreach( $merekDagang as $md )
+																	<option value="{{ $md->id }}" {{ Input::old('merek_dagang') == $md->id ? "selected":"" }}>{{ $md->merek }}</option>
+																@endforeach
+															</select>
+														</div>
+													</div>
+												</div>
+											</div>
+
+											<div class="row">
+												<div class="col-sm-12">
 													<div class="form-group">
 														<label>Kepemilikan Sarana dan Prasarana</label>
 														<select name="id_sarana[]" class="full-width" data-init-plugin="select2" multiple="" data-placeholder="Pilih Sarana / Prasaranan...">
@@ -156,12 +173,12 @@
 													<div class="form-group">
 														<label>Legalitas Produksi</label>
 
-														<?php $jenis_legalitas = ['P-IRT', 'Depkes', 'Halal']; ?>
+														<?php $legalitas_produksi = ['P-IRT', 'Depkes', 'Halal']; ?>
 
-														<select class="full-width" data-init-plugin="select2" name="jenis_legalitas" required>
+														<select class="full-width" data-init-plugin="select2" name="legalitas_produksi" required>
 															<option value="">Pilih Legalitas Produksi...</option>
-															@for ( $i = 0; $i < count( $jenis_legalitas ); $i++ )
-																<option value="{{ $jenis_legalitas[$i] }}">{{ $jenis_legalitas[$i] }}</option>
+															@for ( $i = 0; $i < count( $legalitas_produksi ); $i++ )
+																<option value="{{ $legalitas_produksi[$i] }}" {{ Input::old('legalitas_produksi') == $legalitas_produksi[$i] ? "selected":"" }}>{{ $legalitas_produksi[$i] }}</option>
 															@endfor
 														</select>
 													</div>
@@ -169,7 +186,7 @@
 												<div class="col-md-6">
 													<div class="form-group">
 														<label>Modal yang dimiliki</label>
-														<input type="text" class="form-control number" name="modal" value="{{ Input::old('modal') }}">
+														<input type="text" class="form-control number" name="modal_dimiliki" value="{{ Input::old('modal_dimiliki') }}">
 													</div>
 												</div>
 											</div>
@@ -184,7 +201,7 @@
 												<div class="col-md-6">
 													<div class="form-group">
 														<label>Omzet Perbulan</label>
-														<input type="text" class="form-control number" name="omzet" value="{{ Input::old('omzet') }}">
+														<input type="text" class="form-control number" name="omzet_perbulan" value="{{ Input::old('omzet_perbulan') }}">
 													</div>
 												</div>
 											</div>
@@ -237,6 +254,24 @@
 												</thead>
 
 												<tbody>
+													@foreach( $pengolah as $pe )
+														<tr>
+															<td>
+																<div class="checkbox">
+																	<input type="checkbox" class="pilih" value="{{ $pe->id }}" id="pb{{ $pe->id }}">
+																	<label for="pb{{ $pe->id }}" class="m-l-20"></label>
+																</div>
+															</td>
+															<td>{{ $pe->name }}</td>
+															<td>{{ $pe->kelompok->nama }}</td>
+															<td>{{ $pe->jabatan->nama }}</td>
+															<td>{{ $pe->olahan->jenis }}</td>
+															<td style="text-align:center">
+																<a class="btn btn-default btn-xs view" data-id="{{ $pe->id }}"><i class="fa fa-search-plus"></i></a>
+																<a href="{{ url('/app/pengolah/edit/'.$pe->id) }}" class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i></a>
+															</td>
+														</tr>
+													@endforeach
 												</tbody>
 
 											</table>
@@ -386,13 +421,29 @@
 					$("#modal-view").modal('show');
 				});
 			});
-			$("#tambah-pengolah").fadeIn();
 
 			@if ( count($errors) > 0 || Session::has('gagal') )
 				$("#tambah-pengolah").fadeIn();
-				get_usaha( "{{ Input::old('jenis_usaha') }}" );
 			@endif
 
 		});
+
+		function cari_data(cari){
+			if ( cari == "" ) {
+				$("#show-data").show();
+				$("#show-pencarian").hide();
+			} else {
+
+				$("#show-data").hide();
+				$("#show-pencarian").show();
+				$("#show-pencarian").html('<tr><td colspan="6"><i class="fa fa-spinner fa-spin"></i></td></tr>');
+				var _token = $('meta[name="csrf-token"]').attr('content');
+				var url = "{{ url('app/pengolah/search') }}";
+				var url = url+"/"+cari;
+				$.get(url, { cari:cari, _token:_token}, function(data){
+					$('#show-pencarian').html(data);
+				});
+			}
+		}
 	</script>
 @endsection
