@@ -187,6 +187,7 @@
 														<th>
 															<button class="btn btn-check" data-toggle="modal" data-target="#modal-hapus" disabled id="hapus"><i class="pg-trash"></i></button>
 														</th>
+														<th>No</th>
 														<th>Nama Lengkap</th>
 														<th>Nama Kelompok</th>
 														<th>Jabatan Kelompok</th>
@@ -196,7 +197,7 @@
 												</thead>
 
 												<tbody>
-													<?php $i = ($_GET['page'] - 1) * $limit + 1; ?>
+
 													@foreach( $pembudidaya as $pb )
 														<tr>
 															<td>
