@@ -196,6 +196,7 @@
 												</thead>
 
 												<tbody>
+													<?php $i = ($_GET['page'] - 1) * $limit + 1; ?>
 													@foreach( $pembudidaya as $pb )
 														<tr>
 															<td>
@@ -204,6 +205,7 @@
 																	<label for="pb{{ $pb->id }}" class="m-l-20"></label>
 																</div>
 															</td>
+															<td>{{$i++}}</td>
 															<td>{{ $pb->name }}</td>
 															<td>{{ $pb->kelompok->nama }}</td>
 															<td>{{ $pb->jabatan->nama }}</td>

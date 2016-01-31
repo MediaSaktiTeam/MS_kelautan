@@ -89,11 +89,13 @@
 											<th width="70">
 												<button class="btn btn-check" data-toggle="modal" data-target="#modal-hapus" disabled id="hapus"><i class="pg-trash"></i></button>
 											</th>
+											<th>No</th>
 											<th>Jabatan</th>
 											<th>Aksi</th>
 										</tr>
 									</thead>
 									<tbody>
+										<?php $i = ($_GET['page'] - 1) * $limit + 1; ?>
 										@foreach($jabatan as $jb)
 										<tr>
 											<td>
@@ -112,6 +114,7 @@
 													<label for="checkbox{{ $jb->id }}" class="m-l-20"></label>
 												</div>
 											</td>
+											<td>{{$i++}}</td>
 											<td>{{ $jb->nama }}</td>
 											<td><button class="btn btn-default btn-xs btn-edit" 
 														data-id="{{ $jb->id }}"

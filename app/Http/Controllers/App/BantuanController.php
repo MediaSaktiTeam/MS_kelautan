@@ -16,10 +16,12 @@ class BantuanController extends Controller
 	 *
 	 * @return \Illuminate\Http\Response
 	 */
+
 	 public function getIndex()
 	{
-		$data['bantuan'] = Bantuan::paginate(10);
-		return view('app.master.bantuan', $data);
+		$limit = 10;
+		$data['bantuan'] = Bantuan::paginate($limit);
+		return view('app.master.bantuan', $data)->with('limit', $limit);
 	}
 
 	public function getTambah(Request $request)

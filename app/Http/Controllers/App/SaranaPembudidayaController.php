@@ -17,8 +17,9 @@ class SaranaPembudidayaController extends Controller
 	 */
 	public function getIndex()
 	{
+		$limit=10;
 		$data['sarana'] = Sarana::where('tipe', 'Pembudidaya')->paginate(10);
-		return view('app.master.saranapembudidaya', $data);
+		return view('app.master.saranapembudidaya', $data)->with('limit', $limit);
 	}
 
 	public function getTambah(Request $request)

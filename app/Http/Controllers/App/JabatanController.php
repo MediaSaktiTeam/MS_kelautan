@@ -17,8 +17,9 @@ class JabatanController extends Controller
 	 */
 	public function getIndex()
 	{
+		$limit=10;
 		$data['jabatan'] = Jabatan::paginate(10);
-		return view ('app.master.jabatan',$data);
+		return view ('app.master.jabatan',$data)->with('limit', $limit);
 	}
 
 	 public function getTambah(Request $request)
