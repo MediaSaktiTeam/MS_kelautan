@@ -20,9 +20,9 @@ class PembudidayaController extends Controller
 
 	public function getIndex()
 	{
-		$data['pembudidaya'] = User::where('profesi','Pembudidaya')->orderBy('id','desc')->get();
-		$data['kelompok'] = Kelompok::where('tipe','Pembudidaya')->get();
-		$data['jabatan'] = Jabatan::all();
+		$data['pembudidaya'] = User::where('profesi','Pembudidaya')->orderBy('id','desc')->paginate(10);
+		$data['kelompok'] = Kelompok::where('tipe','Pembudidaya')->paginate(10);
+		$data['jabatan'] = Jabatan::paginate(10);
 		return view ('app.pembudidaya.index',$data);
 	}
 

@@ -239,7 +239,7 @@
 										<div id="show-pencarian"></div>
 
 										<div id="show-data">
-											<table class="table table-hover demo-table-dynamic custom" id="tableWithDynamicRows">
+											<table class="table table-hover demo-table-dynamic custom">
 												<thead>
 													<tr>
 														<th>

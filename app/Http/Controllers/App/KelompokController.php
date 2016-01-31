@@ -19,9 +19,9 @@ class KelompokController extends Controller
 	public function getIndex()
 	{
 		if ( Permissions::admin() ) {
-			$data['kelompok'] = Kelompok::get();
+			$data['kelompok'] = Kelompok::paginate(10);
 		} else {
-			$data['kelompok'] = Kelompok::where('tipe', Permissions::pnp_role())->get();
+			$data['kelompok'] = Kelompok::where('tipe', Permissions::pnp_role())->paginate(10);
 		}
 		return view('app.kelompok.index', $data);
 	}

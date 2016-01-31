@@ -21,9 +21,9 @@ class NelayanController extends Controller
 
 	public function getIndex()
 	{
-		$data['nelayan'] = User::where('profesi','Nelayan')->orderBy('id','desc')->get();
-		$data['kelompok'] = Kelompok::where('tipe','nelayan')->get();
-		$data['jabatan'] = Jabatan::all();
+		$data['nelayan'] = User::where('profesi','Nelayan')->orderBy('id','desc')->paginate(10);
+		$data['kelompok'] = Kelompok::where('tipe','nelayan')->paginate(10);
+		$data['jabatan'] = Jabatan::paginate(10);
 		return view ('app.nelayan.index',$data);
 	}
 

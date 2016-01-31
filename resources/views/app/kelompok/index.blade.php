@@ -133,7 +133,7 @@
 
 								<div id="show-data">
 
-									<table class="table table-hover demo-table-dynamic custom" id="tableWithDynamicRows">
+									<table class="table table-hover demo-table-dynamic custom">
 										<thead>
 											<tr>
 												<th>
@@ -183,7 +183,7 @@
 											@endforeach
 										</tbody>
 									</table>
-
+									<center>{!! $kelompok->links() !!}</center>
 								</div>
 
 							</div>

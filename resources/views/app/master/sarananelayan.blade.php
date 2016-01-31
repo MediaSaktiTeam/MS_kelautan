@@ -91,7 +91,7 @@
 						<!-- START PANEL -->
 						<div class="panel panel-default">
 							<div class="panel-body">
-								<table class="table table-hover demo-table-dynamic custom" id="tableWithDynamicRows">
+								<table class="table table-hover demo-table-dynamic custom">
 									<thead>
 										<tr>
 											<th>
@@ -128,6 +128,7 @@
 										@endforeach
 									</tbody>
 								</table>
+								<center>{!! $sarana->links() !!}</center>
 							</div>
 						</div>
 						<!-- END PANEL -->
