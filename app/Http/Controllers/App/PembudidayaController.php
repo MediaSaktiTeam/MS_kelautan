@@ -22,8 +22,10 @@ class PembudidayaController extends Controller
 	{
 		$data['pembudidaya'] = User::where('profesi','Pembudidaya')->orderBy('id','desc')->paginate(10);
 		$data['kelompok'] = Kelompok::where('tipe','Pembudidaya')->paginate(10);
-		$data['jabatan'] = Jabatan::paginate(10);
-		return view ('app.pembudidaya.index',$data);
+		
+		$limit = 10;
+		$data['jabatan'] = Jabatan::paginate($limit);
+		return view ('app.pembudidaya.index',$data)->with('limit', $limit);
 	}
 
 	 public function getTambah(Request $request)

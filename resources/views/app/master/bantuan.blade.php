@@ -99,14 +99,22 @@
 											<th width="70">
 												<button class="btn btn-check" data-toggle="modal" data-target="#modal-hapus" disabled id="hapus"><i class="pg-trash"></i></button>
 											</th>
-											<th>No</th>
+											<th>No.</th>
 											<th>Nama Bantuan</th>
 											<th>Bidang Usaha</th>
 											<th>Aksi</th>
 										</tr>
 									</thead>
 									<tbody>
-										<?php $i = ($_GET['page'] - 1) * $limit + 1; ?>
+
+										<?php
+											if ( isset($_GET['page']) ) {
+												$i = ($_GET['page'] - 1) * $limit + 1;
+											} else {
+												$i = 1;
+											}
+										?>
+
 										@foreach($bantuan as $bantu)
 										<tr>
 											<td>
@@ -126,7 +134,7 @@
 												</div>
 											</td>
 											
-											<td>{{$i++}}</td>
+											<td>{{ $i++ }}</td>
 											<td>{{ $bantu->nama }}</td>
 											<td>{{ $bantu->jenis }}</td>
 											<td><button class="btn btn-default btn-xs btn-edit" data-id="{{ $bantu->id }}" data-jenis="{{ $bantu->jenis }}" data-nama="{{ $bantu->nama }}"><i class="fa fa-pencil"></i></button></td>

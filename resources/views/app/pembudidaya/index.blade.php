@@ -187,7 +187,7 @@
 														<th>
 															<button class="btn btn-check" data-toggle="modal" data-target="#modal-hapus" disabled id="hapus"><i class="pg-trash"></i></button>
 														</th>
-														<th>No</th>
+														<th>No.</th>
 														<th>Nama Lengkap</th>
 														<th>Nama Kelompok</th>
 														<th>Jabatan Kelompok</th>
@@ -198,6 +198,14 @@
 
 												<tbody>
 
+													<?php
+														if ( isset($_GET['page']) ) {
+															$i = ($_GET['page'] - 1) * $limit + 1;
+														} else {
+															$i = 1;
+														}
+													?>
+
 													@foreach( $pembudidaya as $pb )
 														<tr>
 															<td>
@@ -206,7 +214,7 @@
 																	<label for="pb{{ $pb->id }}" class="m-l-20"></label>
 																</div>
 															</td>
-															<td>{{$i++}}</td>
+															<td>{{ $i++ }}</td>
 															<td>{{ $pb->name }}</td>
 															<td>{{ $pb->kelompok->nama }}</td>
 															<td>{{ $pb->jabatan->nama }}</td>

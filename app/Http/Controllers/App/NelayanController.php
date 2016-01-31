@@ -23,8 +23,10 @@ class NelayanController extends Controller
 	{
 		$data['nelayan'] = User::where('profesi','Nelayan')->orderBy('id','desc')->paginate(10);
 		$data['kelompok'] = Kelompok::where('tipe','nelayan')->paginate(10);
-		$data['jabatan'] = Jabatan::paginate(10);
-		return view ('app.nelayan.index',$data);
+		
+		$limit = 10;
+		$data['jabatan'] = Jabatan::paginate($limit);
+		return view ('app.nelayan.index',$data)->with('limit', $limit);
 	}
 
 	 public function getTambah(Request $request)

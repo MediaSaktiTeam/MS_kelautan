@@ -139,6 +139,7 @@
 												<th>
 													<button class="btn btn-check" data-toggle="modal" data-target="#modal-hapus" disabled id="hapus"><i class="pg-trash"></i></button>
 												</th>
+												<th>No.</th>
 												<th>ID Kelompok</th>
 												<th>Nama Kelompok</th>
 												<th>Bidang Usaha</th>
@@ -146,6 +147,15 @@
 											</tr>
 										</thead>
 										<tbody>
+
+											<?php
+												if ( isset($_GET['page']) ) {
+													$i = ($_GET['page'] - 1) * $limit + 1;
+												} else {
+													$i = 1;
+												}
+											?>
+											
 											@foreach($kelompok as $kel)
 											<tr>
 												<td>
@@ -165,6 +175,7 @@
 													</div>
 												
 												</td>
+												<td>{{ $i++ }}</td>
 												<td>{{ $kel->id_kelompok }}</td>
 												<td>{{ $kel->nama }}</td>
 												<td>{{ $kel->tipe }}</td>

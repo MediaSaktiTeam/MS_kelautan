@@ -20,10 +20,11 @@ class PengolahController extends Controller
 
 	public function getIndex()
 	{
-		$data['pengolah'] = User::where('profesi','Pengolah')->orderBy('id','desc')->paginate(10);
-		$data['kelompok'] = Kelompok::where('tipe','Pengolah')->paginate(10);
-		$data['jabatan'] = Jabatan::paginate(10);
-		return view ('app.pengolah.index',$data);
+		$limit = 10;
+		$data['pengolah'] = User::where('profesi','Pengolah')->orderBy('id','desc')->paginate($limit);
+		$data['kelompok'] = Kelompok::where('tipe','Pengolah')->paginate($limit);
+		$data['jabatan'] = Jabatan::paginate($limit);
+		return view ('app.pengolah.index',$data)->with('limit', $limit);
 	}
 
 	public function postStore(Request $r)

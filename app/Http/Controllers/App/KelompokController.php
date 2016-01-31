@@ -18,12 +18,13 @@ class KelompokController extends Controller
 	 */
 	public function getIndex()
 	{
+		$limit = 10;
 		if ( Permissions::admin() ) {
-			$data['kelompok'] = Kelompok::paginate(10);
+			$data['kelompok'] = Kelompok::paginate($limit);
 		} else {
-			$data['kelompok'] = Kelompok::where('tipe', Permissions::pnp_role())->paginate(10);
+			$data['kelompok'] = Kelompok::where('tipe', Permissions::pnp_role())->paginate($limit);
 		}
-		return view('app.kelompok.index', $data);
+		return view('app.kelompok.index', $data)->with('limit', $limit);
 	}
 
 	public function getDetail($id)

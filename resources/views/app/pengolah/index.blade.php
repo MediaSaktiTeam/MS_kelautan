@@ -245,6 +245,7 @@
 														<th>
 															<button class="btn btn-check" data-toggle="modal" data-target="#modal-hapus" disabled id="hapus"><i class="pg-trash"></i></button>
 														</th>
+														<th>No.</th>
 														<th>Nama Lengkap</th>
 														<th>Nama Kelompok</th>
 														<th>Jabatan Kelompok</th>
@@ -254,6 +255,15 @@
 												</thead>
 
 												<tbody>
+
+													<?php
+														if ( isset($_GET['page']) ) {
+															$i = ($_GET['page'] - 1) * $limit + 1;
+														} else {
+															$i = 1;
+														}
+													?>
+
 													@foreach( $pengolah as $pe )
 														<tr>
 															<td>
@@ -262,6 +272,7 @@
 																	<label for="pb{{ $pe->id }}" class="m-l-20"></label>
 																</div>
 															</td>
+															<td>{{ $i++ }}</td>
 															<td>{{ $pe->name }}</td>
 															<td>{{ $pe->kelompok->nama }}</td>
 															<td>{{ $pe->jabatan->nama }}</td>
@@ -275,6 +286,7 @@
 												</tbody>
 
 											</table>
+											<center>{!! $pengolah->links() !!}</center>
 										</div>
 
 									</div>
