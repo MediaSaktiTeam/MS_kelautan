@@ -127,6 +127,7 @@
 											<td>{{ $bantu->jenis }}</td>
 											<td><button class="btn btn-default btn-xs btn-edit" data-id="{{ $bantu->id }}" data-jenis="{{ $bantu->jenis }}" data-nama="{{ $bantu->nama }}"><i class="fa fa-pencil"></i></button></td>
 										</tr>
+
 										@endforeach
 									</tbody>
 								</table>
