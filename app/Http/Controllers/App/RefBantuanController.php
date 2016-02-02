@@ -18,6 +18,7 @@ class RefBantuanController extends Controller
 	 */
 	 public function getIndex()
 	{
+		$limit = 10;
 		if ( Permissions::admin() ) {
 			$profesi = ['Pembudidaya','Nelayan'];
 		} else {
@@ -38,9 +39,9 @@ class RefBantuanController extends Controller
 								->orderBy('ab.id', 'desc')
 								->orderBy('ab.id_user', 'desc')
 								->orderBy('ab.tahun', 'desc')
-								->get();
+								->paginate($limit);
 
-		return view('app.bantuan.index', $data);
+		return view('app.bantuan.index', $data)->with('limit', $limit);
 	}
 
 	public function postSimpan(Request $request)

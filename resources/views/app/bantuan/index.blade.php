@@ -204,6 +204,7 @@
 
 												</tbody>
 											</table>
+											<center>{!! $bantuan_users->links() !!}</center>
 										</div>
 
 									</div>
