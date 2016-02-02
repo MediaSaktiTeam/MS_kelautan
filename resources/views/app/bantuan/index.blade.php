@@ -384,7 +384,7 @@
 			} else {
 				$("#show-data").hide();
 				$("#show-pencarian").show();
-				$("#show-pencarian").html('<tr><td colspan="6"><i class="fa fa-spinner fa-spin"></i></td></tr>');
+				$("#show-pencarian").html('<tr><td colspan="8"><i class="fa fa-spinner fa-spin"></i></td></tr>');
 				var _token = $('meta[name="csrf-token"]').attr('content');
 				var url = "{{ url('app/bantuan/cari') }}";
 				var url = url+"/"+cari;
