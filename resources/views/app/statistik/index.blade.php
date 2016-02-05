@@ -120,7 +120,10 @@
 								<div class="panel-body">
 									<div class="row">
 										<div class="col-sm-12">
-											<p>Statistik jumlah pengolah berdasarkan <b>kepemilikan sarana & prasarana</b></p>
+											<p>Statistik jumlah pengolah berdasarkan <b>jenis olahan</b></p>
+											@if( $total_pengolah == 0 ) 
+												<div class="alert alert-info"><center>Data Kosong</center></div>
+											@endif
 											<div id="pglh-usaha" style="margin-top:20px; margin-left:20px; width:100%; height:auto;"></div>
 											<br>
 										</div>
@@ -265,23 +268,50 @@
 
 		/* Pengolah */
 		$(document).ready(function(){
-			var plot3 = $.jqplot('pglh-usaha', [[['Perahu',25],['Alat Tangkap',74],['Mesin',137]]], {
-				gridPadding: {top:0, bottom:38, left:0, right:0},
-				seriesDefaults:{
-					renderer:$.jqplot.PieRenderer,
-					trendline:{ show:false },
-					rendererOptions: { padding: 8, showDataLabels: true }
-				},
-				legend:{
-					show:true,
-					placement: 'outside',
-					rendererOptions: {
-						numberRows: 1
+
+			@if( $total_pengolah != 0 ) 
+
+				var plot3 = $.jqplot('pglh-usaha', [[
+						<?php $no = 1 ?>
+						@foreach( $jenis_olahan as $jo )
+
+							<?php $jml_jo = App\User::where('id_jenis_olahan', $jo->id)->count() ?>
+
+							@if ( $jml_jo < 1 ) 
+								<?php continue ?>
+							@endif
+
+							@if ( count($jenis_olahan) == $no )
+								['{{ $jo->jenis }}', {{ $jml_jo }}]
+							@else
+								['{{ $jo->jenis }}', {{ $jml_jo }}],
+							@endif
+
+							<?php $no++ ?>
+						@endforeach
+					]], 
+
+					{
+					gridPadding: {top:0, bottom:38, left:0, right:0},
+					seriesDefaults:{
+						renderer:$.jqplot.PieRenderer,
+						trendline:{ show:false },
+						rendererOptions: { padding: 8, showDataLabels: true, dataLabels :'value' }
 					},
-					location:'s',
-					marginTop: '15px'
-				}
-			});
+					legend:{
+						show:true,
+						placement: 'outside',
+						rendererOptions: {
+							numberRows: 1
+						},
+						location:'s',
+						marginTop: '15px'
+					}
+				});
+
+			@endif
+
 		});
+		
 	</script>
 @endsection

@@ -8,7 +8,7 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use DB,Excel,PDF;
 use App\User, App\Kelompok, App\Jabatan, App\Usaha, App\Sarana, App\KepemilikanSarana;
-use App\Bantuan, App\RefBantuan;
+use App\Bantuan, App\RefBantuan, App\JenisOlahan;
 
 class StatistikController extends Controller
 {
@@ -57,6 +57,10 @@ class StatistikController extends Controller
 										->join('app_kepemilikan_sarana as aks', 'aks.id_user', '=', 'u.id')
 										->join('app_sarana as as', 'as.id', '=', 'aks.id_sarana')
 											->where('as.jenis', 'Alat Tangkap')->count();
+
+		// Statistik Pengolah
+		$data['total_pengolah'] = User::where('profesi','Pengolah')->count();
+		$data['jenis_olahan'] = JenisOlahan::all();
 
 		return view ('app.statistik.index',$data);
 	}

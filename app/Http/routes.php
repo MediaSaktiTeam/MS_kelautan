@@ -3,7 +3,7 @@
 	Route::get('/', function(){
 		return view('maintenance.index');
 	});
-
+	
 
 /* App */
 	Route::group([ 'middleware' => 'Validasi', 'namespace' => 'App'], function(){

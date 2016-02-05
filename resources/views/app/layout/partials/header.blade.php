@@ -136,7 +136,7 @@
 					</li>
 
 					<li class="link-statistik">
-						<a href="/app/statistik"><span class="title">Statistik</span></a>
+						<a href="/app/statistik?tahun={{ date('Y') }}"><span class="title">Statistik</span></a>
 						<span class="icon-thumbnail">S</span>
 					</li>
 
