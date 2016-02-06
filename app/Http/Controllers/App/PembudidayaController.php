@@ -42,9 +42,14 @@ class PembudidayaController extends Controller
 
 		/* Validasi */
 
-			$this->validate($r,[
-					'nik' => 'required|unique:users',
-				]);
+			// Validasi NIK
+			$vn = User::where('nik', $r->nik)->count();
+
+			if ( $vn > 0 )
+			{
+				$r->session()->flash('error_nik', $r->nik);
+				return redirect(route('pembudidaya'))->withInput();
+			}
 
 			// Validasi Jabatan
 			$vj = DB::table('users as u')
@@ -109,9 +114,14 @@ class PembudidayaController extends Controller
 
 	public function postUpdate(Request $r)
 	{
-		$this->validate($r,[
-				'nik' => 'required|unique:users,id,'.$r->id,
-			]);
+		// Validasi NIK
+		$vn = User::where('nik', $r->nik)->where('id', '<>', $r->id)->count();
+
+		if ( $vn > 0 )
+		{
+			$r->session()->flash('error_nik', $r->nik);
+			return redirect('/app/pembudidaya/edit/'. $r->id);
+		}
 			
 		// Validasi Jabatan
 		$vj = DB::table('users as u')

@@ -31,9 +31,14 @@ class PengolahController extends Controller
 	{
 		/* Validasi */
 
-			$this->validate($r,[
-					'nik' => 'required|unique:users',
-				]);
+			// Validasi NIK
+			$vn = User::where('nik', $r->nik)->count();
+
+			if ( $vn > 0 )
+			{
+				$r->session()->flash('error_nik', $r->nik);
+				return redirect(route('pengolah'))->withInput();
+			}
 
 			// Validasi Jabatan
 			$vj = DB::table('users as u')
@@ -108,9 +113,14 @@ class PengolahController extends Controller
 	{
 		/* Validasi */
 
-			$this->validate($r,[
-					'nik' => 'required|unique:users,id,'.$id,
-				]);
+			// Validasi NIK
+			$vn = User::where('nik', $r->nik)->where('id', '<>', $r->id)->count();
+
+			if ( $vn > 0 )
+			{
+				$r->session()->flash('error_nik', $r->nik);
+				return redirect('/app/pengolah/edit/'. $id);
+			}
 
 			// Validasi Jabatan
 			$vj = DB::table('users as u')

@@ -42,9 +42,17 @@ class NelayanController extends Controller
 	{
 
 		$this->validate($r,[
-				'nik' => 'required|unique:users',
 				'no_kartu_nelayan' => 'required|unique:users',
 			]);
+
+		// Validasi NIK
+		$vn = User::where('nik', $r->nik)->count();
+
+		if ( $vn > 0 )
+		{
+			$r->session()->flash('error_nik', $r->nik);
+			return redirect(route('nelayan'))->withInput();
+		}
 		
 		// Validasi Jabatan
 		$vj = DB::table('users as u')
@@ -109,9 +117,17 @@ class NelayanController extends Controller
 	public function postUpdate(Request $r)
 	{
 		$this->validate($r,[
-				'nik' => 'required|unique:users,id,'.$r->id,
 				'no_kartu_nelayan' => 'required|unique:users,id,'.$r->id,
 			]);
+
+		// Validasi NIK
+		$vn = User::where('nik', $r->nik)->where('id', '<>', $r->id)->count();
+
+		if ( $vn > 0 )
+		{
+			$r->session()->flash('error_nik', $r->nik);
+			return redirect('/app/nelayan/edit/'. $r->id);
+		}
 
 		// Validasi Jabatan
 		$vj = DB::table('users as u')

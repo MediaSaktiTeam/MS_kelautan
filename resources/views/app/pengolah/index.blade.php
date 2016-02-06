@@ -40,6 +40,11 @@
 
 					<div class="row">
 
+						@if ( Session::has('error_nik') )
+							<?php $user = App\User::where('nik', Session::get('error_nik'))->first() ?>
+				    		<div class="alert alert-danger">GAGAL!!! NIK <b>{{ Session::get('error_nik') }}</b> telah terdaftar. <a href="javascript:;" data-toggle="modal" data-target="#modal-double-nik">Lihat</a></div> 
+						@endif
+
 						@if ( Session::has('gagal') )
 				    		@include('app/layout/partials/alert-danger', ['message' => session('gagal')])
 						@endif
@@ -122,7 +127,7 @@
 																<option value="">Pilih Jenis Olahan...</option>
 																<?php $JO = App\JenisOlahan::all() ?>
 																@foreach( $JO as $jo )
-																	<option value="{{ $jo->id }}" {{ Input::old('id_jenis_olahan') == $jo->id ? "selected":"" }}>{{ $jo->jenis }}</option>
+																	<option value="{{ $jo->id }}" {{ Input::old('jenis_olahan') == $jo->id ? "selected":"" }}>{{ $jo->jenis }}</option>
 																@endforeach
 															</select>
 														</div>
@@ -390,6 +395,45 @@
 </div>
 <!-- END MODAL STICK UP SMALL ALERT -->
 
+@if ( Session::has('error_nik') )
+
+	<!-- MODAL STICK UP VIEW -->
+	<div class="modal fade stick-up" id="modal-double-nik" tabindex="-1" role="dialog" aria-hidden="true">
+		<div class="modal-dialog modal-md">
+			<div class="modal-content-wrapper">
+				<div class="modal-content">
+					<div class="modal-header clearfix text-left">
+						<button type="button" class="close" data-dismiss="modal"  aria-hidden="true"><i class="pg-close fs-14"></i></button>
+						<h5>Data</h5>
+					</div>
+					<div class="modal-body" id="view-detail">
+						<table class="table">
+							<tr>
+								<td style="width:100px">NIK</td><td>: {{ $user->nik }}</td>
+							</tr>
+							<tr>
+								<td style="width:100px">Nama</td><td>: {{ $user->name }}</td>
+							</tr>
+							<tr>
+								<td style="width:100px">Kelompok</td><td>: {{ $user->kelompok->nama }}</td>
+							</tr>
+							<tr>
+								<td style="width:100px">Profesi</td><td>: {{ $user->profesi }}</td>
+							</tr>
+						</table>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-default btn-cons no-margin inline" data-dismiss="modal">Kembali</button>
+					</div>
+				</div>
+			</div>
+			<!-- /.modal-content -->
+		</div>
+		<!-- /.modal-dialog -->
+	</div>
+
+@endif
+
 @endsection
 
 
@@ -434,7 +478,7 @@
 				});
 			});
 
-			@if ( count($errors) > 0 || Session::has('gagal') )
+			@if ( count($errors) > 0 || Session::has('gagal') || Session::has('error_nik') )
 				$("#tambah-pengolah").fadeIn();
 			@endif
 
