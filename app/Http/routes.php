@@ -154,6 +154,13 @@
 				'getHapus'	=>	'saranapengolah_hapus',
 				'getUpdate'	=>	'saranapengolah_update',
 			]);
+		Route::controller('app/administrator/', 'AdministratorController',
+			[
+				'getIndex'  => 'administrator',
+				'getTambah'  => 'administrator_tambah',
+				'getHapus'	=>	'administrator_hapus',
+				'getUpdate'	=>	'administrator_update',
+			]);
 
 	});
 

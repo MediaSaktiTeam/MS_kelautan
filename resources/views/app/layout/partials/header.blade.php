@@ -140,6 +140,11 @@
 						<span class="icon-thumbnail">S</span>
 					</li>
 
+					<li class="link-administrator">
+						<a href="/app/administrator"><span class="title">Administrator</span></a>
+						<span class="icon-thumbnail">A</span>
+					</li>
+
 					<li class="link-pengaturan">
 						<a href="/app/pengaturan"><span class="title">Pengaturan</span></a>
 						<span class="icon-thumbnail"><i class="fa fa-cog"></i></span>
