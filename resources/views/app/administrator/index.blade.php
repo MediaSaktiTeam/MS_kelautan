@@ -62,11 +62,11 @@
 							<div class="panel-body">
 								
 								<p>* Administrator adalah hak akses untuk mengelola Data Kelautan</p>
-								<form class="style-form" method="GET" action="{{ route('administrator_tambah') }}">
+								<form class="style-form" method="POST" action="{{ route('administrator_tambah') }}">
 									<input type="hidden" name="_token" value="{{ csrf_token() }}">
 									<div class="form-group form-group-default required">
 										<label>Username</label>
-										<input type="text" name="nama" class="form-control" required>
+										<input type="text" name="username" value="{{ Input::old('username') }}" class="form-control" required>
 									</div>
 									<p>*Password Default 12345</p>
 									
@@ -74,23 +74,23 @@
 									<div class="form-group required">
 										<label>Hak Akses</label>
 										<div class="checkbox" title="hak_akses">
-											<input type="checkbox" value="id" id="nelayan" required>
+											<input type="checkbox" name="nelayan" id="nelayan">
 											<label for="nelayan">Nelayan</label>
 										</div>
 
 										<div class="checkbox" title="hak_akses">
-											<input type="checkbox" value="id" id="pembudidaya" required>
+											<input type="checkbox" name="pembudidaya" id="pembudidaya">
 											<label for="pembudidaya">Pembudidaya</label>
 										</div>
 
 										<div class="checkbox" title="hak_akses">
-											<input type="checkbox" value="id" id="pengolah" required>
+											<input type="checkbox" name="pengolah" id="pengolah">
 											<label for="pengolah">Pengolah</label>
 										</div>
 									</div>
 									<br>
 									<div class="form-group">
-										<button type="submit" class="btn btn-primary btn-cons">Tambah</button>
+										<button class="btn btn-primary btn-cons">Tambah</button>
 									</div>
 								</form>
 							</div>
@@ -123,18 +123,33 @@
 											}
 										?>
 
-										<tr>
-											<td>
+										@foreach ( $users	 as $r )
+
+											<?php
 												
-			
-											</td>
-											<td></td>
-											<td></td>
-											<td><button class="btn btn-default btn-xs btn-edit" data-id="" data-jenis="" data-nama=""><i class="fa fa-pencil"></i></button></td>
-										</tr>
+												$ck = App\Permissions::where('id_user', $r->id)->first();
+
+												if ( $ck->admin == 1 ) continue; 
+
+											?>
+
+											<tr>
+												<td>
+													<div class="checkbox">
+														<input type="checkbox" class="pilih" value="{{ $r->id }}" id="pb{{ $r->id }}">
+														<label for="pb{{ $r->id }}" class="m-l-20"></label>
+													</div>
+				
+												</td>
+												<td>{{ $i++ }}</td>
+												<td>{{ $r->username }}</td>
+												<td>
+													<button class="btn btn-default btn-xs btn-edit" data-id="{{ $r->id }}" data-toggle="modal" data-target="#modal-edit"><i class="fa fa-pencil"></i></button>
+											</tr>
+										@endforeach
 									</tbody>
 								</table>
-								<center></center>
+								<center>{!! $users->render() !!}</center>
 							</div>
 						</div>
 						<!-- END PANEL -->
@@ -196,7 +211,7 @@
 
 
 <!-- MODAL STICK UP EDIT -->
-<div class="modal fade stick-up" id="modal-sunting" tabindex="-1" role="dialog" aria-hidden="true">
+<div class="modal fade stick-up" id="modal-edit" tabindex="-1" role="dialog" aria-hidden="true">
 	<div class="modal-dialog">
 		<div class="modal-content-wrapper">
 			<div class="modal-content">
@@ -205,32 +220,9 @@
 					<h5>Sunting Data</h5>
 				</div>
 				<div class="modal-body">
-					<form class="style-form" method="GET" action="{{ route('administrator_update') }}">
-						<input type="hidden" name="_token" value="{{ csrf_token() }}">
-						<div class="form-group form-group-default required">
-										<label>Username</label>
-										<input type="text" name="nama" class="form-control" required>
-									</div>
-									<p>*Password Default 12345</p>
-									
-									<br>
-									<div class="form-group required">
-										<label>Hak Akses</label>
-										<div class="checkbox" title="hak_akses">
-											<input type="checkbox" value="id" id="nelayan" required>
-											<label for="nelayan">Nelayan</label>
-										</div>
-
-										<div class="checkbox" title="hak_akses">
-											<input type="checkbox" value="id" id="pembudidaya" required>
-											<label for="pembudidaya">Pembudidaya</label>
-										</div>
-
-										<div class="checkbox" title="hak_akses">
-											<input type="checkbox" value="id" id="pengolah" required>
-											<label for="pengolah">Pengolah</label>
-										</div>
-									</div>
+					<form class="style-form" method="post" action="{{ route('administrator_update') }}">
+						<div id="edit">
+						</div>
 					</form>
 				</div>
 			</div>
@@ -264,24 +256,17 @@
 					return false;
 				}
 
-				$(".btn-hapus").attr('href',"{{ route('bantuan_hapus') }}/"+id);
+				$(".btn-hapus").attr('href',"{{ route('administrator_hapus') }}/"+id);
 
 			});
 
 			$(".btn-edit").click(function(){
 
+				$("#edit").html('<center><i class="fa fa-spinner fa-spin"></i></center>');
 				var id = $(this).data('id');
-				var nama = $(this).data('nama');
-				var jenis = $(this).data('jenis');
-				$('#id-jenis').val(id);
-				$('#nama').val(nama);
-				$('#modal-sunting').modal('show');
-
-				$("select option").filter(function() {
-				    if( $(this).val().trim() == jenis ){
-				    	$(this).prop('selected', true);
-				    	$(".select2-chosen").html(jenis);
-				    }
+				$.get("{{ url('/app/administrator/edit') }}/"+id, function(data)
+				{
+					$("#edit").html(data);
 				});
 			});
 		})();

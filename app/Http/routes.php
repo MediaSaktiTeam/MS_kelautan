@@ -154,12 +154,12 @@
 				'getHapus'	=>	'saranapengolah_hapus',
 				'getUpdate'	=>	'saranapengolah_update',
 			]);
-		Route::controller('app/administrator/', 'AdministratorController',
+		Route::controller('app/administrator', 'AdministratorController',
 			[
 				'getIndex'  => 'administrator',
-				'getTambah'  => 'administrator_tambah',
+				'postTambah'  => 'administrator_tambah',
 				'getHapus'	=>	'administrator_hapus',
-				'getUpdate'	=>	'administrator_update',
+				'postUpdate'	=>	'administrator_update',
 			]);
 
 	});
