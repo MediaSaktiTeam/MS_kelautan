@@ -29,7 +29,8 @@ var config = (function () {
     var json = null;
     $.ajax({
         'async': false,
-        'url': './scripts/filemanager.config.js',
+        'url': 'http://kelautan.dev/resources/assets/admin/libs/ckeditor-full/plugins/filemanager/scripts/filemanager.config.js',
+        // 'url': './scripts/filemanager.config.js',
         'dataType': "json",
         cache: false, 
         'success': function (data) {

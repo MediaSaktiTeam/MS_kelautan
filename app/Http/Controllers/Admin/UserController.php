@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
-use App\User;
+use App\User,App\Permissions;
 use DB, Validator, Auth;
 
 class UserController extends Controller
@@ -20,8 +20,12 @@ class UserController extends Controller
 
     public function getIndex()
     {
-        $Users = User::orderBy('id','desc')->get();
-        return view('admin.users.index', ['Users' => $Users ]);
+        $data['Users'] = DB::table('users as u')
+                                ->join('permissions as p', 'p.id_user', '=', 'u.id')
+                                ->select('u.*')
+                                ->where('p.blog', 1)->get();
+
+        return view('admin.users.index', $data);
     }
 
 
@@ -47,8 +51,16 @@ class UserController extends Controller
         $User->email    = $request->email;
         $User->username = $request->username;
         $User->password = bcrypt($request->password);
+        $User->profesi  = 'Admin';
 
         $User->save();
+
+        $id = $User->id;
+
+        $data = new Permissions;
+        $data->id_user = $id;
+        $data->blog = 1;
+        $data->save();
 
         $request->session()->flash('success','Berhasil menyimpan pengguna');
         return redirect(route('user'));

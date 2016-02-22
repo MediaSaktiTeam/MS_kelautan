@@ -10,6 +10,6 @@
 // 	// config.removePlugins = 'elementspath,save,font';
 // 	config.skin = 'bootstrapck';
 
-// 	config.filebrowserBrowseUrl = '../../resources/assets/admin/libs/ckeditor-full/plugins/filemanager/index.html';
-//     config.filebrowserImageBrowseUrl = '../../resources/assets/admin/libs/ckeditor-full/plugins/filemanager/index.html';
+// 	config.filebrowserBrowseUrl = 'resources/assets/admin/libs/ckeditor-full/plugins/filemanager/index.html';
+//     config.filebrowserImageBrowseUrl = 'resources/assets/admin/libs/ckeditor-full/plugins/filemanager/index.html';
 // };

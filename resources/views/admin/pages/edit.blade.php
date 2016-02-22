@@ -160,7 +160,7 @@
 
 		});
 
-				CKEDITOR.editorConfig = function( config ) {
+		CKEDITOR.editorConfig = function( config ) {
 			config.skin = 'bootstrapck';
 			config.filebrowserBrowseUrl = '../../../resources/assets/admin/libs/filemanager/index.html';
 	 		config.filebrowserImageBrowseUrl = '../../../resources/assets/admin/libs/filemanager/index.html' ;

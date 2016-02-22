@@ -15,7 +15,7 @@
         "chars_only_latin": true,
         "dateFormat": "d M Y H:i",
         "serverRoot": true,
-        "fileRoot": "resources/assets/media/",
+        "fileRoot": "/resources/assets/admin/images/upload/",
         "relPath": false,
         "logger": false,
         "plugins": []

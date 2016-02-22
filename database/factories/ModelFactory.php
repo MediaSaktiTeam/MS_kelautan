@@ -97,6 +97,7 @@ $factory->define(App\Setting::class, function ($faker) {
     'sitename' => 'Web Ku',
     'description' => 'Lorem Ipsum dolor sit amet consectetur',
     'email' => 'contoh@mail.com',
+    'visi_misi' => 'Lorem Ipsum dolor sit amet consectetur',
     'tag' => 'Lorem, ipsum, dolor, sit amet',
     ];
 

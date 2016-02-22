@@ -17,6 +17,7 @@ class CreateSettingTable extends Migration
             $table->string('sitename',100);
             $table->string('description');
             $table->string('email',100);
+            $table->text('visi_misi',100);
             $table->string('tag');
             $table->string('fb');
             $table->string('twitter');

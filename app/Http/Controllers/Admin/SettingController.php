@@ -47,7 +47,10 @@ class SettingController extends Controller
         $Set2->sitename      = $Set1->sitename;
         $Set2->description   = $Set1->description;
         $Set2->email         = $Set1->email;
+        $Set2->visi_misi     = $Set1->visi_misi;
         $Set2->tag           = $Set1->tag;
+        $Set2->alamat        = $Set1->alamat;
+        $Set2->phone         = $Set1->phone;
         $Set2->fb            = $Set1->fb;
         $Set2->twitter       = $Set1->twitter;
         $Set2->gambar_utama  = $Set1->gambar_utama;
@@ -57,6 +60,9 @@ class SettingController extends Controller
         $Set1->sitename      = $req->sitename;
         $Set1->description   = $req->description;
         $Set1->email         = $req->email;
+        $Set1->visi_misi     = $req->visi_misi;
+        $Set1->alamat        = $req->alamat;
+        $Set1->phone         = $req->phone;
         $Set1->tag           = $req->tag;
         $Set1->fb            = $req->fb;
         $Set1->twitter       = $req->twitter;

@@ -1,7 +1,21 @@
 <?php
 /* Front */
-	Route::get('/', function(){
-		return view('maintenance.index');
+	Route::group(['namespace' => 'Front' ], function(){
+
+		Route::get('/', ['as' => 'home', 'uses' => 'FrontController@index']);
+		Route::get('/blog', 'FrontController@blog');
+		Route::get('/blog/{slug}', 'FrontController@blogPost');
+		Route::get('/blog/kategori/{slug}', ['as' => 'Kategori', 'uses' => 'FrontController@kategori']);
+
+		Route::get('/page/{slug}', 'FrontController@page');
+		Route::get('/galeri', 'FrontController@galeri');
+
+		Route::get('/contact', ['as' => 'contact', 'uses' => 'FrontController@contact']);
+
+		Route::post('/contact', ['as' => 'post_contact', 'uses' => 'FrontController@saveContact']);
+
+		Route::get('/pencarian', ['as' => 'Pencarian', 'uses' => 'FrontController@pencarian']);
+
 	});
 	
 

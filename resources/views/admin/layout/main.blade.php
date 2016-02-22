@@ -2,7 +2,7 @@
 <html lang="id">
 <head>
 
-	<title>@yield('title')</title>
+	<title>@yield('title') DISKANLUT KAB. BANTAENG</title>
 
 	@include('admin.layout.partials.meta')
 
@@ -57,7 +57,7 @@
 						<!-- Raw Notifications -->
 						<li class="notifications dropdown">
 							
-							<?php $CountPesanBaru = App\Pesan::where('baru',1)->count(); ?>
+							<?php $CountPesanBaru = App\Pesan::where('baru',1)->where('tipe','Masuk')->count(); ?>
 							<a href="#" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
 								<i class="entypo-mail"></i>
 								@if ( $CountPesanBaru > 0 )
@@ -67,8 +67,8 @@
 							
 							<ul class="dropdown-menu">
 
-								<?php $Pesan = App\Pesan::take(5)->orderBy('baru','asc')->orderBy('id','desc')->get(); ?>
-								<?php $CountPesan = App\Pesan::all()->count(); ?>
+								<?php $Pesan = App\Pesan::where('tipe','Masuk')->take(5)->orderBy('baru','asc')->orderBy('id','desc')->get(); ?>
+								<?php $CountPesan = App\Pesan::where('tipe','Masuk')->count(); ?>
 
 								@if ( $CountPesan > 0 )
 

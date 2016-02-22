@@ -42,7 +42,7 @@
 							<label for="field-2" class="col-sm-3 control-label">Deskripsi Situs</label>
 							
 							<div class="col-sm-5">
-								<textarea class="form-control" name="description" id="field-2" data-validate="required" data-message-required="This is custom message for required field.">{{ $Set->description }}</textarea>
+								<textarea class="form-control" name="description" id="field-2" data-validate="required" data-message-required="Wajib diisi">{{ $Set->description }}</textarea>
 								<br>
 								<p><i>Jelaskan tentang apa situs ini dengan singkat.</i></p>
 							</div>
@@ -53,11 +53,36 @@
 							
 							<div class="col-sm-5">
 								<input type="text" class="form-control" id="field-4" value="{{ $Set->email }}" name="email" data-validate="required" data-message-required="Wajib diisi">
-								<br>
-								<p><i>Alamat ini digunakan untuk tujuan admin, seperti pesan masuk.</i></p>
 							</div>
 						</div>
 						
+						<div class="form-group">
+							<label for="field-2" class="col-sm-3 control-label">Visi Misi</label>
+							
+							<div class="col-sm-5">
+								<textarea class="form-control" name="visi_misi" id="field-2" data-validate="required" data-message-required="Wajib diisi">{{ $Set->visi_misi }}</textarea>
+							</div>
+						</div>
+
+						<div class="form-group">
+							<label class="col-sm-3 control-label">Alamat</label>
+							
+							<div class="col-sm-5">
+								
+								<input type="text" name="alamat" value="{{ $Set->alamat }}" class="form-control" />
+								
+							</div>
+						</div>
+
+						<div class="form-group">
+							<label class="col-sm-3 control-label">No. Telpon</label>
+							
+							<div class="col-sm-5">
+								
+								<input type="text" name="phone" value="{{ $Set->phone }}" class="form-control" />
+								
+							</div>
+						</div>
 						<div class="form-group">
 							<label class="col-sm-3 control-label">Kata Kunci Pencarian</label>
 							

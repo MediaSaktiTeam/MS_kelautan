@@ -24,9 +24,11 @@
 	<div class="panel-heading">
 		<div class="panel-title">Daftar Pengguna</div>
 		
-		<div class="panel-options">
-			<a href="{{ route('user_tambah') }}" class="bg"><i class="entypo-plus"></i>Tambah Baru</a>
-		</div>
+		@if ( Permissions::admin() )
+			<div class="panel-options">
+				<a href="{{ route('user_tambah') }}" class="bg"><i class="entypo-plus"></i>Tambah Baru</a>
+			</div>
+		@endif
 	</div>
 		
 	<table class="table table-bordered table-responsive">
@@ -36,7 +38,9 @@
 				<th>Nama Lengkap</th>
 				<th>Nama Pengguna</th>
 				<th>Alamat Email</th>
-				<th>Aksi</th>
+				@if ( Permissions::admin() )
+					<th>Aksi</th>
+				@endif
 			</tr>
 		</thead>
 		
@@ -51,11 +55,13 @@
 				<td>{{ $User->name }} {{ Auth::User()->id == $User->id ? "(Anda)":"" }}</td>
 				<td>{{ $User->username }}</td>
 				<td>{{ $User->email }}</td>
-				<td>
-					@if ( Auth::User()->id != $User->id )
-						<a href="#" data-toggle="modal" data-id="{{ $User->id }}" data-target="#modal-hapus" class="bg hapus"><i class="fa fa-trash-o"></i> &nbsp;Hapus</a>
-					@endif
-				</td>
+				@if ( Permissions::admin() )
+					<td>
+						@if ( Auth::User()->id != $User->id )
+							<a href="#" data-toggle="modal" data-id="{{ $User->id }}" data-target="#modal-hapus" class="bg hapus"><i class="fa fa-trash-o"></i> &nbsp;Hapus</a>
+						@endif
+					</td>
+				@endif
 			</tr>
 			<?php $no++ ?>
 
