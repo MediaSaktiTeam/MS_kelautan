@@ -18988,36 +18988,32 @@ if("undefined"!=typeof e){var target=$(e.target);if(target.parent(".page-sidebar
         e.stopPropagation();
     })
     
-})(window.jQuery);
-
-$(function(){
-
-	/* Check Delete */
-	$(".table .checkbox input").change(function() {
-		var check = $(".table .checkbox input:checked").length;
-		if (check > 0) {
-			$(".btn-check").removeAttr("disabled");
-			console.log(check);
-		} else {
-			$(".btn-check").attr("disabled","true");
-			console.log(check);
-		}
-	});
-
-	$(".number").keydown(function (e) {
-        // Allow: backspace, delete, tab, escape, enter and .
-        if ($.inArray(e.keyCode, [46, 8, 9, 27, 13, 110, 190]) !== -1 ||
-             // Allow: Ctrl+A, Command+A
-            (e.keyCode == 65 && ( e.ctrlKey === true || e.metaKey === true ) ) || 
-             // Allow: home, end, left, right, down, up
-            (e.keyCode >= 35 && e.keyCode <= 40)) {
-                 // let it happen, don't do anything
-                 return;
-        }
-        // Ensure that it is a number and stop the keypress
-        if ((e.shiftKey || (e.keyCode < 48 || e.keyCode > 57)) && (e.keyCode < 96 || e.keyCode > 105)) {
-            e.preventDefault();
-        }
-    });
-
+})(window.jQuery);;
+/* Check Delete */
+$(".table .checkbox input").change(function() {
+	var check = $(".table .checkbox input:checked").length;
+	if (check > 0) {
+		$(".btn-check").removeAttr("disabled");
+		console.log(check);
+	} else {
+		$(".btn-check").attr("disabled","true");
+		console.log(check);
+	}
 });
+
+
+
+// Menu Pin
+$(".btn[data-toggle-pin='sidebar']").click(function () {
+	var body = $('body').hasClass('menu-pin');
+	if ( body === true ) {
+		localStorage.setItem("menupin", "0");
+	} else {
+		localStorage.setItem("menupin", "1");
+	}
+});
+
+var status = localStorage.getItem("menupin");
+if (status == 1) {
+	$('body').addClass('menu-pin');
+}
