@@ -25,3 +25,6 @@
 
 <!-- Favicon Icon -->
 <link rel="shortcut icon" href="{{ url('resources/assets/front/img/favicon.ico') }}">
+
+<link href='http://fonts.googleapis.com/css?family=Merriweather:400,700,400italic' rel='stylesheet' type='text/css'>
+<link href='http://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
