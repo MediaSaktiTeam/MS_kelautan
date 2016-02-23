@@ -60,7 +60,7 @@ class PageTableSeeder extends Seeder
   {
     App\Page::truncate();
 
-    factory(App\Page::class, 10)->create();
+    factory(App\Page::class, 1)->create();
   }
 }
 
