@@ -58,12 +58,10 @@ $factory->define(App\BlogKategori::class, function ($faker) {
 
 $factory->define(App\Page::class, function ($faker) {
 
-  $judul  = $faker->sentence(mt_rand(3, 10));
-  $slug   = str_slug($judul);
   return [
-    'judul' => $judul,
-    'slug' => $slug,
-    'konten' => join("\n\n", $faker->paragraphs(mt_rand(3, 6))),
+    'judul' => "Visi Misi",
+    'slug' => "visi-misi",
+    'konten' => "Terwujudnya pembangunan perikanan dan kelautan yang berkelanjutan, berdaya saing dan berkeadilan untuk kesejahteraan masyarakat",
     'id_user' => 1
      ];
 });
