@@ -59,9 +59,64 @@ $factory->define(App\BlogKategori::class, function ($faker) {
 $factory->define(App\Page::class, function ($faker) {
 
   return [
-    'judul' => "Visi Misi",
+    'judul' => "Visi, Misi, Kebijakan Pembangunan",
     'slug' => "visi-misi",
-    'konten' => "Terwujudnya pembangunan perikanan dan kelautan yang berkelanjutan, berdaya saing dan berkeadilan untuk kesejahteraan masyarakat",
+    'konten' => '
+      
+      <div class="col-sm-12 text-center">
+        
+        <h2 class="quote-name" style="font-size: 40px;">Visi</h2>
+
+          <div class="separator"><i class="fa fa-quote-left"></i></div>
+
+          <p class="quote-role">
+            Terwujudnya pembangunan perikanan dan kelautan yang berkelanjutan, berdaya saing dan berkeadilan untuk kesejahteraan masyarakat.
+          </p>
+
+          <br>
+
+      </div>
+
+
+      <div class="about-left shadow col-sm-6">
+        
+        <img src="img/visi.png" width="100%" alt="">
+
+      </div>
+
+      <div class="about-right about-list col-sm-6">
+        
+        <h4>Misi</h4>
+        
+        <ol type="a">
+          <li>Meningkatkan pengelolaan dan pemanfaatan sumberdaya perikanan dan kelautan secara optimal dan berkelanjutan.</li>
+          <li>Memberikan pelayanan prima bagi pengembangan usaha perikanan dan kelautan yang berdaya saing.</li>
+          <li>Meningkatkan pengembangan revitalisasi budidaya rumput laut, ikan air tawar dan bandeng serta udang, melalui pemanfaatan teknologi yang ramah lingkungan</li>
+          <li>Penciptaan iklim usaha kondusif bagi pelaku ekonomi dalam pengembangan kelautan dan perikanan.</li>
+          <li>Pembinaan dan pengembangan kelembagaan yang berkesinambungan.</li>
+          <li>Mendukung pengembangan wisata bahari.</li>
+        </ol>
+
+
+      </div>
+        
+
+      <div class="col-sm-12">
+        
+        <br>
+        <br>
+      
+        <h4>Potensi Perikanan dan Kelautan dimanfaatkan oleh Nelayan dan Pembudidaya ikan  Untuk Bidang  :</h4>
+
+        <p><span style="color:#ff0000;">Perikanan Tangkap</span> Merupakan Lokasi yang <b>strategis</b> bagi Nelayan&nbsp; baik nelayan Kab. Bantaeng maupun kabupaten tetangga (Bulukumba, Jeneponto dan Takalar) sebagai Tempat berlabuh untuk &nbsp;menunjang aktifitas nelayan Tangkap maka Pemerintah Kabupaten Bantaeng berupaya untuk menyediakan sarana dan prasarana perikanan tangkap berupa Pangkalan Pendaratan Ikan (PPI) akan terealisasi&nbsp; pada tahun 2014 dengan sumber anggaran Tugas Pembantuan dari Kementrian Kelautan dan Perikanan RI.</p>
+
+        <p><span style="color:#ff0000;">Pengolahan dan Pemasaran Hasil Perikanan (P2HP)</span> :&nbsp; Berorientasi pada Pengembangan Sarana dan Prasarana Pengolahan dan Pemasaran Hasil Perikanan dengan kegiatan Penyediaan/rehabilitasi sarana dan prasarana pengolahan dan pemasaran dengan target peningkatan pengolahan volume ikan termasuk rumput laut dan kapasitas unit pengolahan ikan serta peningkatan jumlah konsumsi ikan per kapita, Unit Pengolahan dan Pemasaran berupa Kelompok Pengolahan yang sudah terbentuk sebanyak 56 Kelompok namun yang akatif berproduksi sebanyak 22 Kelompok dengan tingkat produksi patanu 2013 sebesar 574 Kg</p>
+
+        <p><span style="color:#ff0000;">Pengawasan Perikanan</span> : Pengembangan Sarana dan Prasarana Pengawasan, Kab. Bantaeng adalah salah satu kabupaten yang telah terbentuk POKMASWAS sebanyak 10 POKMASWAS yang telah dilengkapi dengan Kapal Pengawas untuk menikatkan ketaatan dan ketertiban dalam memanfaatkan sumberdaya kelautan dan perikanan dan pada tahun 2014 telah dibanguna garasi speet boot (Resteelsteiger) dan Bangunan Pos Pengawas Laut.</p>
+
+      </div>
+
+    ',
     'id_user' => 1
      ];
 });
@@ -92,11 +147,13 @@ $factory->define(App\Kategori::class, function ($faker) {
 $factory->define(App\Setting::class, function ($faker) {
 
   return [
-    'sitename' => 'Web Ku',
-    'description' => 'Lorem Ipsum dolor sit amet consectetur',
+    'sitename' => 'Dinas Perikanan dan Kelautan Kab. Bantaeng',
+    'description' => 'Website ini adalah website resmi Dinas Perikanan dan Kelautan Kabupaten Bantaeng',
     'email' => 'contoh@mail.com',
-    'visi_misi' => 'Lorem Ipsum dolor sit amet consectetur',
+    'visi_misi' => 'Terwujudnya pembangunan perikanan dan kelautan yang berkelanjutan, berdaya saing dan berkeadilan untuk kesejahteraan masyarakat',
     'tag' => 'Lorem, ipsum, dolor, sit amet',
+    'alamat' => 'Street Name Ankara Turkey',
+    'phone' => '+90 (123) 456 78 99',
     ];
 
 });

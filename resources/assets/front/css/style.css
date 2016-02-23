@@ -313,6 +313,9 @@ section {
 	position: relative;
 	z-index: 9;
 }
+.sub-menu li {
+	list-style: none;
+}
 /* Swiper */
 .swiper-container {
 	margin: 0 auto;
@@ -775,16 +778,9 @@ section {
 	color:#FC7E7E;
 }
 .section-contact form input[type='text'],
-.section-contact form input[type='email'] {
+.section-contact form input[type='email'],
+.section-contact form select {
 	width: 45%;
-	float: left;
-	margin-right: 10px;
-	background-color: transparent;
-}
-
-.section-contact form input[name='subject']
-{
-	width: 98%;
 	float: left;
 	margin-right: 10px;
 	background-color: transparent;
@@ -1520,7 +1516,7 @@ img.mfp-img {
 .section-gallery-inner .image-zoom {
 	position: absolute;
 	top: 50%;
-	left: 60%;
+	left: 50%;
 	margin-top: -40px;
 	margin-left: -50px;
 	opacity: 0;
