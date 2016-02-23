@@ -18,6 +18,8 @@ class CreateSettingTable extends Migration
             $table->string('description');
             $table->string('email',100);
             $table->text('visi_misi',100);
+            $table->string('alamat',100);
+            $table->string('phone',30);
             $table->string('tag');
             $table->string('fb');
             $table->string('twitter');

@@ -140,10 +140,14 @@
 						<span class="icon-thumbnail">S</span>
 					</li>
 
+					@if ( Permissions::admin() )
+
 					<li class="link-administrator">
 						<a href="/app/administrator"><span class="title">Administrator</span></a>
 						<span class="icon-thumbnail">A</span>
 					</li>
+
+					@endif
 
 					<li class="link-pengaturan">
 						<a href="/app/pengaturan"><span class="title">Pengaturan</span></a>
