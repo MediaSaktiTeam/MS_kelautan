@@ -17,7 +17,11 @@
 		Route::get('/pencarian', ['as' => 'Pencarian', 'uses' => 'FrontController@pencarian']);
 
 	});
-	
+	Route::get('/mail', function(){
+		$data['subjek'] = "Tes";
+		$data['pesan'] = "Tes";
+		return view('app.lapor-masalah.index', $data);
+	});
 
 /* App */
 	Route::group([ 'middleware' => 'Validasi', 'namespace' => 'App'], function(){
@@ -178,7 +182,7 @@
 
 	});
 
-	Route::get('app/lapor-masalah', 'email\EmailController@LaporMasalah');
+	Route::get('app/lapor-masalah', 'app\EmailController@LaporMasalah');
 
 	Route::get('/mediasakti/validasi-app', 'ValidasiController@index');
 	Route::post('/mediasakti/validasi-app', 'ValidasiController@validasi');

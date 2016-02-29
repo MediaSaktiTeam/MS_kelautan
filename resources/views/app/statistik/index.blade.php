@@ -5,7 +5,6 @@
 @endsection
 
 
-
 @section('konten')
 
 <?php $total_pembudidaya = $pembudidaya_air_tawar + $pembudidaya_air_laut + $pembudidaya_air_payau ?>

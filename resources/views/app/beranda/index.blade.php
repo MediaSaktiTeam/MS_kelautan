@@ -32,7 +32,7 @@ $SC = new App\Custom;
 						<div class="row">
 							<div class="col-md-12 m-b-10">
 								<div class="ar-3-2 widget-1-wrapper">
-									
+
 									<!-- START WIDGET -->
 									<div class="widget-1 panel no-border bg-complete no-margin widget-loader-circle-lg">
 										<div class="panel-heading top-right ">
@@ -186,6 +186,7 @@ $SC = new App\Custom;
 										<div class="panel-body no-padding">
 											<div class="metro live-tile" data-mode="carousel" data-start-now="true" data-delay="3000">
 												
+												<?php $r = App\Page::where('judul', 'LIKE', '%visi%')->first() ?>
 												<div class="slide-front tiles slide active">
 													<div class="padding-30">
 														<div class="pull-top">
@@ -195,19 +196,20 @@ $SC = new App\Custom;
 															<div class="pull-right">
 																<ul class="list-inline">
 																	<li>
-																		<a href="#" class="widget-3-fav no-decoration">Read</a>
+																		<a href="{{ url('/page') }}/{{ $r->slug }}" class="widget-3-fav no-decoration">Read</a>
 																	</li>
 																</ul>
 															</div>
 															<div class="clearfix"></div>
 														</div>
 														<div class="pull-bottom p-b-30">
-															<p class="p-t-10 fs-12 p-b-5 hint-text">21 Jan</p>
-															<h3 class="no-margin text-white p-b-10 p-r-30">Carefully designed for a great experience</h3>
+															<p class="p-t-10 fs-12 p-b-5 hint-text">{{ $SC->tgl_indo($r->created_at) }}</p>
+															<h3 class="no-margin text-white p-b-10 p-r-30">{{ $r->judul }}</h3>
 														</div>
 													</div>
 												</div>
 
+												<?php $r = App\Blog::orderBy('id', 'desc')->first() ?>
 												<div class="slide-back tiles">
 													<div class="padding-30">
 														<div class="pull-top">
@@ -217,17 +219,17 @@ $SC = new App\Custom;
 															<div class="pull-right">
 																<ul class="list-inline">
 																	<li>
-																		<a href="#" class="widget-3-fav no-decoration">Read</a>
+																		<a href="{{ url('/blog') }}/{{ $r->slug }}" class="widget-3-fav no-decoration">Read</a>
 																	</li>
 																</ul>
 															</div>
 															<div class="clearfix"></div>
 														</div>
 														<div class="pull-bottom p-b-30">
-															<p class="p-t-10 fs-12 p-b-5 hint-text">21 Jan</p>
-															<h3 class="no-margin text-white p-b-10 p-r-30">A whole new
+															<p class="p-t-10 fs-12 p-b-5 hint-text">{{ $SC->tgl_indo($r->created_at) }}</p>
+															<h3 class="no-margin text-white p-b-10 p-r-30">{{ $r->judul }}
 																<br>
-																<span class="semi-bold">page</span>
+																<span class="semi-bold">Berita</span>
 															</h3>
 														</div>
 													</div>
@@ -284,7 +286,8 @@ $SC = new App\Custom;
 							<div class="col-sm-6 m-b-10">
 								<div class="ar-1-1">
 									<!-- START WIDGET -->
-									<div class="panel no-border bg-master widget widget-6 widget-loader-circle-lg no-margin weather-rain">
+									<!-- <div class="panel no-border bg-master widget widget-6 widget-loader-circle-lg no-margin weather-sunny"> -->
+									<div class="panel no-border bg-master widget widget-6 widget-loader-circle-lg no-margin" style="background: url('http://www.bmkg.go.id/ImagesStatus/{{ $gambar }}.gif');background-size:cover">
 										<div class="panel-heading">
 											<div class="panel-controls">
 												<ul>
@@ -295,10 +298,11 @@ $SC = new App\Custom;
 										</div>
 										<div class="panel-body">
 											<div class="pull-bottom bottom-left bottom-right padding-25">
-												<h1 class="text-white semi-bold">30&#176;</h1>
+												<h1 class="text-white semi-bold">{{ $suhu_min }} - {{ $suhu_max }}&#176;</h1>
 												<span class="label font-montserrat fs-11">Hari ini</span>
-												<p class="text-white m-t-20">Hujan</p>
-												<p class="text-white hint-text m-t-30">Sabtu, 2 Januari 2015</p>
+												<p class="text-white m-t-20">{{ $cuaca }}</p>
+												<p class="text-white hint-text m-t-30">{{ $SC->hari_indo(date('l')) }}, {{ $SC->tgl_indo(date('Y-m-d')) }}
+												</p>
 											</div>
 										</div>
 									</div>
@@ -309,7 +313,7 @@ $SC = new App\Custom;
 
 							<div class="col-sm-12 m-b-10">
 								<!-- START WIDGET -->
-								<div class="widget-17 panel  no-border no-margin widget-loader-circle">
+								<div class="panel  no-border no-margin widget-loader-circle">
 									<div class="panel-heading">
 										<div class="panel-title">
 											<i class="pg-map"></i> Bantaeng, Indonesia
@@ -322,14 +326,7 @@ $SC = new App\Custom;
 														<a data-target="#" href="#" data-toggle="dropdown" aria-haspopup="true" role="button" aria-expanded="false">
 															<i class="portlet-icon portlet-icon-settings"></i>
 														</a>
-														<ul class="dropdown-menu pull-right" role="menu">
-															<li><a href="#">AAPL</a>
-															</li>
-															<li><a href="#">YHOO</a>
-															</li>
-															<li><a href="#">GOOG</a>
-															</li>
-														</ul>
+
 													</div>
 												</li>
 												<li>
@@ -344,95 +341,51 @@ $SC = new App\Custom;
 												<div class="col-md-12 col-xlg-6">
 													<div class="row m-t-20">
 														<div class="col-md-5">
-															<h4 class="no-margin">Monday</h4>
-															<p class="small hint-text">9th August 2014</p>
+															<h4 class="no-margin">{{ $SC->hari_indo(date('l')) }}</h4>
+															<p class="small hint-text">{{ $SC->hari_indo(date('l')) }}, {{ $SC->tgl_indo(date('Y-m-d')) }}</p>
 														</div>
 														<div class="col-md-7">
 															<div class="pull-left">
-																<p class="small hint-text no-margin">Currently</p>
-																<h4 class="text-danger bold no-margin">32°<span class="small">/ 30C</span></h4>
+																<p class="small hint-text no-margin">Suhu</p>
+																<h4 class="text-danger bold no-margin">{{ $suhu_max }}°<span class="small">/ {{ $suhu_min }}C</span></h4>
 															</div>
 															<div class="pull-right">
-																<canvas height="64" width="64" class="clear-day"></canvas>
+																<img src="http://www.bmkg.go.id/ImagesStatus/{{ $gambar }}.gif">
 															</div>
 														</div>
 													</div>
-													<h5>Feels like<span class="semi-bold">rainy</span></h5>
-													<p>Weather information</p>
+													<h5> <span class="semi-bold"> {{ $cuaca }}</span></h5>
+													<p>Informasi Cuaca</p>
 													<div class="widget-17-weather">
 														<div class="row">
 															<div class="col-sm-6 p-r-10">
 																<div class="row">
 																	<div class="col-md-12">
-																		<p class="pull-left">Wind</p>
-																		<p class="pull-right bold">11km/h</p>
+																		<p class="pull-left">Kecepatan Angin</p>
+																		<p class="pull-right bold">{{ $kecepatan_angin }} km/jam</p>
 																	</div>
 																</div>
 																<div class="row">
 																	<div class="col-md-12">
-																		<p class="pull-left">Sunrise</p>
-																		<p class="pull-right bold">05:20</p>
-																	</div>
-																</div>
-																<div class="row">
-																	<div class="col-md-12">
-																		<p class="pull-left">Humidity</p>
-																		<p class="pull-right bold">20%</p>
-																	</div>
-																</div>
-																<div class="row">
-																	<div class="col-md-12">
-																		<p class="pull-left">Precipitation</p>
-																		<p class="pull-right bold">60%</p>
+																		<p class="pull-left">Arah Angin</p>
+																		<p class="pull-right bold">{{ $arah_angin }}</p>
 																	</div>
 																</div>
 															</div>
 															<div class="col-sm-6 p-l-10">
 																<div class="row">
 																	<div class="col-md-12">
-																		<p class="pull-left">Sunset</p>
-																		<p class="pull-right bold">21:05</p>
+																		<p class="pull-left">Kelembaban Minimal</p>
+																		<p class="pull-right bold">{{ $kelembapan_min }}%</p>
 																	</div>
 																</div>
 																<div class="row">
 																	<div class="col-md-12">
-																		<p class="pull-left">Visibility</p>
-																		<p class="pull-right bold">21km</p>
+																		<p class="pull-left">Kelembaban Maksimal</p>
+																		<p class="pull-right bold">{{ $kelembapan_max }}%</p>
 																	</div>
 																</div>
 															</div>
-														</div>
-													</div>
-													<div class="row m-t-10 timeslot">
-														<div class="col-xs-2 p-t-10 text-center">
-															<p class="small">13:30</p>
-															<canvas height="25" width="25" class="partly-cloudy-day"></canvas>
-															<p class="text-danger bold">30°C</p>
-														</div>
-														<div class="col-xs-2 p-t-10 text-center">
-															<p class="small">14:00</p>
-															<canvas height="25" width="25" class="cloudy"></canvas>
-															<p class="text-danger bold">30°C</p>
-														</div>
-														<div class="col-xs-2 p-t-10 text-center">
-															<p class="small">14:30</p>
-															<canvas height="25" width="25" class="rain"></canvas>
-															<p class="text-danger bold">30°C</p>
-														</div>
-														<div class="col-xs-2 p-t-10 text-center">
-															<p class="small">15:00</p>
-															<canvas height="25" width="25" class="sleet"></canvas>
-															<p class="text-danger bold">30°C</p>
-														</div>
-														<div class="col-xs-2 p-t-10 text-center">
-															<p class="small">15:30</p>
-															<canvas height="25" width="25" class="snow"></canvas>
-															<p class="text-danger bold">30°C</p>
-														</div>
-														<div class="col-xs-2 p-t-10 text-center">
-															<p class="small">16:00</p>
-															<canvas height="25" width="25" class="wind"></canvas>
-															<p class="text-danger bold">30°C</p>
 														</div>
 													</div>
 												</div>
