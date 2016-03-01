@@ -21,7 +21,7 @@ class EmailController extends Controller
         $kirim = Mail::send(['html' => 'app.lapor-masalah.index'], [ 'data' => $data ], function ($m) use($data) {
 		            $m->from(env('MAIL_USERNAME'), 'Diskanlut Bantaeng');
 
-		            $m->to("abd.rahmat.ika@gmail.com", "Media Sakti")->subject($data['subjek']);
+		            $m->to("info@media-sakti.com", "Media Sakti")->subject($data['subjek']);
 		        });
 
         if ( $kirim ) {
