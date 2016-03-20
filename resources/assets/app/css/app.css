@@ -2657,7 +2657,9 @@ tbody.collapse.in {
   cursor: not-allowed; }
 
 .open > .dropdown-menu {
-  display: block; }
+  display: block; 
+  z-index: 999 !important;
+}
 
 .open > a {
   outline: 0; }
