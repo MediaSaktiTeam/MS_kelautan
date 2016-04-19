@@ -158,6 +158,7 @@ return [
         'Maatwebsite\Excel\ExcelServiceProvider',
         Barryvdh\DomPDF\ServiceProvider::class,
         App\Providers\PermissionsServiceProvider::class,
+        'Orangehill\Iseed\IseedServiceProvider',
 
     ],
 
