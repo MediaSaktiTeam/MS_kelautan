@@ -48,8 +48,35 @@
 
 					@if ( Permissions::pembudidaya() )
 						<li class="link-pembudidaya">
-							<a href="/app/pembudidaya"><span class="title">Pembudidaya</span></a>
+							<a href="javascript:;"><span class="title">Pembudidaya</span>
+							<span class=" arrow"></span></a>
 							<span class="icon-thumbnail">P</span>
+							<ul class="sub-menu">
+								@if ( Permissions::pembudidaya() )
+								<li class="sub-pembudidaya">
+									<a href="/app/pembudidaya">Daftar Pembudidaya</a>
+									<span class="icon-thumbnail">DP</span>
+								</li>
+								<li class="sub-pemasar">
+									<a href="javascript:;">Laporan Produksi <span class=" arrow"></span></a>
+									<span class="icon-thumbnail">LP</span>
+									<ul class="sub-menu">
+										<li class="sub-pembudidaya">
+											<a href="/app/pembudidaya">Air Tawar</a>
+											<span class="icon-thumbnail">AT</span>
+										</li>
+										<li class="sub-pembudidaya">
+											<a href="/app/pembudidaya">Rumput Laut</a>
+											<span class="icon-thumbnail">RL</span>
+										</li>
+										<li class="sub-pembudidaya">
+											<a href="/app/pembudidaya">Tambak</a>
+											<span class="icon-thumbnail">T</span>
+										</li>
+									</ul>
+								</li>
+								@endif
+							</ul>
 						</li>
 					@endif
 
