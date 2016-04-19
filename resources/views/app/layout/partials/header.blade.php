@@ -60,12 +60,32 @@
 						</li>
 					@endif
 
-					@if ( Permissions::pengolah() )
+				<!-- 	@if ( Permissions::pengolah() )
 						<li class="link-pengolah">
 							<a href="/app/pengolah"><span class="title">Pengolah</span></a>
 							<span class="icon-thumbnail">Pl</span>
 						</li>
-					@endif
+					@endif -->
+
+					
+					<li class="link-pengolah">
+						<a href="javascript:;"><span class="title">Pengolah</span>
+						<span class=" arrow"></span></a>
+						<span class="icon-thumbnail">PL</span>
+						<ul class="sub-menu">
+							@if ( Permissions::pengolah() )
+							<li class="sub-pengolah">
+								<a href="/app/pengolah">Daftar Pengolah</a>
+								<span class="icon-thumbnail">DP</span>
+							</li>
+							<li class="sub-pemasar">
+								<a href="/app/pemasar">Pemasar</a>
+								<span class="icon-thumbnail">PS</span>
+							</li>
+							@endif
+						</ul>
+					</li>
+
 
 					<li class="link-kelompok">
 						<a href="/app/kelompok"><span class="title">Kelompok</span></a>

@@ -68,6 +68,7 @@
 			]);
 
 		Route::controller('app/pengolah', 'PengolahController', ['getIndex' => 'pengolah']);
+		Route::controller('app/pemasar', 'PemasarController', ['getIndex' => 'pemasar']);
 
 		Route::controller('app/bantuan', 'RefBantuanController',
 			[
