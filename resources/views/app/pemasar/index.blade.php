@@ -49,7 +49,7 @@
 										<form id="form-personal" method="post" action="{{ url('/app/pemasar') }}" role="form">
 											
 											{{ csrf_field() }}
-											<label>I.KETERANGAN IDENTITAS</label>
+											<label>KETERANGAN IDENTITAS</label>
 											<div class="row">
 												<div class="col-sm-6">
 													<div class="form-group">
@@ -107,7 +107,7 @@
 												</div>
 											</div>
 											<hr>
-											<label>II.KETERANGAN UNIT PEMASAR</label>
+											<label>KETERANGAN UNIT PEMASAR</label>
 											<div class="row">
 												<div class="col-md-6">
 													<div class="form-group">
