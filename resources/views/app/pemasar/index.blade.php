@@ -46,44 +46,33 @@
 								<!-- START PANEL -->
 								<div class="panel panel-transparent">
 									<div class="panel-body">
-										<form id="form-personal" method="post" action="{{ url('/app/pemasar') }}" role="form">
+										<form id="form-personal" method="GET" action="{{ route('pemasar_tambah') }}" role="form">
 											
-											{{ csrf_field() }}
+											<input type="hidden" id="token" name="_token" value="{{ csrf_token() }}">
 											<label>KETERANGAN IDENTITAS</label>
 											<div class="row">
 												<div class="col-sm-6">
 													<div class="form-group">
 														<label>Provinsi</label>
-															<select class="full-width" name="id_provinsi" data-init-plugin="select2" required>
-																<option value="">Pilih Provinsi...</option>
+														<span id="provinsi">
+															<select class="full-width" name="provinsi" data-init-plugin="select2" onchange="get_kabupaten(this.value)" required>
+																<option value="">Pilih Provinsi</option>
+																<?php $provinsi = App\Provinsi::orderBy('nama', 'asc')->get() ?>
+																@foreach ( $provinsi as $prov )
+																	<option value="{{ $prov->id }}">{{ $prov->nama }}</option>
+																@endforeach
 															</select>
+														</span>
 													</div>
 												</div>
-												<div class="col-sm-6">
-													<div class="form-group">
-														<label>Desa/Kelurahan</label>
-														<select class="full-width" name="id_desa" data-init-plugin="select2" required>
-															<option value="">Pilih Desa/Kelurahan...</option>
-														</select>
-													</div>
-												</div>
-											</div>
-
-											<div class="row">
 												<div class="col-md-6">
 													<div class="form-group">
 														<label>Kabupaten/Kota</label>
-														<div id="kabupaten">
+														<span id="kabupaten">
 															<select class="full-width" data-init-plugin="select2" name="kabupaten" required>
 																<option value="">Pilih Kabupaten/Kota...</option>
 															</select>
-														</div>
-													</div>
-												</div>
-												<div class="col-md-6">
-													<div class="form-group">
-														<label>Kode Jenis Kegiatan</label>
-														<input type="text" class="form-control" name="kode_kegiatan" value="">
+														</span>
 													</div>
 												</div>
 											</div>
@@ -97,6 +86,25 @@
 																<option value="">Pilih Kecamatan...</option>
 															</select>
 														</div>
+													</div>
+												</div>
+												<div class="col-sm-6">
+													<div class="form-group">
+														<label>Desa/Kelurahan</label>
+														<span id="desa">
+														<select class="full-width" name="desa" data-init-plugin="select2" required>
+															<option value="">Pilih Desa/Kelurahan...</option>
+														</select>
+														</span>
+													</div>
+												</div>
+											</div>
+
+											<div class="row">
+												<div class="col-md-6">
+													<div class="form-group">
+														<label>Kode Jenis Kegiatan</label>
+														<input type="text" class="form-control" name="kode_kegiatan" value="">
 													</div>
 												</div>
 												<div class="col-md-6">
@@ -147,19 +155,19 @@
 													<div clas="form-group">
 														<div class="col-md-4">
 															<div class="radio radio-success">
-															<input type="radio"  value="pengumpul" name="optionyes" id="pengumpul">
+															<input type="radio"  value="pengumpul" name="Pengumpul" id="pengumpul">
 															<label for="pengumpul">Pengumpul</label>
 															</div>
 														</div>
 														<div class="col-md-4">
 															<div class="radio radio-success">
-															<input type="radio"  value="pedagang" name="optionyes" id="pedagang">
+															<input type="radio"  value="pedagang" name="Pedagang" id="pedagang">
 															<label for="pedagang">Pedagang</label>
 															</div>
 														</div>
 														<div class="col-md-4">
 															<div class="radio radio-success">
-															<input type="radio"  value="pengecer" name="optionyes" id="pengecer">
+															<input type="radio"  value="pengecer" name="Pengecer" id="pengecer">
 															<label for="pengecer">Pengecer</label>
 															</div>
 														</div>
@@ -221,6 +229,7 @@
 												</thead>
 
 												<tbody>
+													@foreach($pemasar as $pem)
 														<tr>
 															<td>
 																<div class="checkbox">
@@ -228,20 +237,21 @@
 																	<label for="" class="m-l-20"></label>
 																</div>
 															</td>
-															<td></td>
-															<td></td>
-															<td></td>
-															<td></td>
-															<td></td>
+															<td>{{ $pem->pemilik_pemasar }}</td>
+															<td>{{ $pem->nama }}</td>
+															<td>{{ $pem->nama }}</td>
+															<td>{{ $pem->nama }}</td>
+															<td>{{ $pem->nama }}</td>
 															<td style="text-align:center">
 																<a class="btn btn-default btn-xs view" data-id=""><i class="fa fa-search-plus"></i></a>
 																<a href="" class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i></a>
 															</td>
 														</tr>
+													@endforeach
 												</tbody>
 
 											</table>
-											<center></center>
+											<center>{!! $pemasar->links() !!}</center>
 										</div>
 
 									</div>
@@ -391,6 +401,33 @@
 	<script>
 		$(".menu-items .link-pengolah").addClass("active open");
 		$(".menu-items .link-pengolah .sub-pemasar").addClass("active");
+
+		function get_kabupaten(id_prov){
+			var _token = $('meta[name="csrf-token"]').attr('content');
+			var url = "{{ url('get-kabupaten') }}";
+			var url = url+"/"+id_prov;
+			$.get(url, { id_prov:id_prov, _token:_token}, function(data){
+				$('#kabupaten').html(data);
+			});
+		}
+
+		function get_kecamatan(id_kabupaten){
+			var _token = $('meta[name="csrf-token"]').attr('content');
+			var url = "{{ url('get-kecamatan') }}";
+			var url = url+"/"+id_kabupaten;
+			$.get(url, { id_kabupaten:id_kabupaten, _token:_token}, function(data){
+				$('#kecamatan').html(data);
+			});
+		}
+
+		function get_desa(id_kecamatan){
+			var _token = $('meta[name="csrf-token"]').attr('content');
+			var url = "{{ url('get-desa') }}";
+			var url = url+"/"+id_kecamatan;
+			$.get(url, { id_kecamatan:id_kecamatan, _token:_token}, function(data){
+				$('#desa').html(data);
+			});
+		}
 
 		$(function(){
 

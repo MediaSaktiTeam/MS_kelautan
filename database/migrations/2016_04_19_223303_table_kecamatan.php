@@ -13,9 +13,9 @@ class TableKecamatan extends Migration
     public function up()
     {
         Schema::create('kecamatan', function (Blueprint $table) {
-            $table->integer('id')->unsigned();
+            $table->string('id', 11);
             $table->primary('id');
-            $table->integer('id_kabupaten');
+            $table->string('id_kabupaten');
             $table->string('nama', 50);
         });
     }

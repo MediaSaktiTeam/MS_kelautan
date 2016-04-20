@@ -68,8 +68,16 @@
 			]);
 
 		Route::controller('app/pengolah', 'PengolahController', ['getIndex' => 'pengolah']);
-		Route::controller('app/pemasar', 'PemasarController', ['getIndex' => 'pemasar']);
+		Route::controller('app/pemasar', 'PemasarController', 
+			[
 
+				'getIndex' => 'pemasar',
+				'getTambah'  => 'pemasar_tambah',
+
+			]);
+		Route::get('get-kabupaten/{id}', 'PemasarController@get_kabupaten');
+		Route::get('get-kecamatan/{id}', 'PemasarController@get_kecamatan');
+		Route::get('get-desa/{id}', 'PemasarController@get_desa');
 		Route::controller('app/bantuan', 'RefBantuanController',
 			[
 				'getIndex' => 'ref_bantuan',
