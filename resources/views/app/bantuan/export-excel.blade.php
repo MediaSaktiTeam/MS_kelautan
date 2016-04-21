@@ -1,4 +1,3 @@
-
 	<table class="table table-bordered">
 		<thead>
 			<tr>
@@ -23,21 +22,17 @@
 			</tr>
 		</thead>
 		
-		<tbody>
-
 			<?php $no = 1 ?>
 			@foreach( $bantuan_users as $bu )
 
 				<?php
 
-					if ( $no > 1 ) {
-						if ( $id_user == $bu->id && $tb == $bu->tahun_bantuan )
-							continue;
-					}
+					// Cegah tampil data rangkap
+					if ( $no > 1 ) 
+						if ( $id_user == $bu->id && $tb == $bu->tahun_bantuan ) continue;
 
 					$id_user = $bu->id;
 					$tb = $bu->tahun_bantuan;
-
 				?>
 				
 				<tr>
@@ -52,22 +47,24 @@
 					<td>
 						<?php
 
-							$bantuan = DB::table('app_bantuan as ab')
-											->leftJoin('app_bantuan_master as abm', 'abm.id', '=', 'ab.id_bantuan')
-												->select('abm.nama')
-													->where('ab.id_user', $bu->id)
-													->where('ab.tahun', $bu->tahun_bantuan)
-													->orderBy('ab.tahun', 'asc')
-													->get(); ?>
+						$bantuan = DB::table('app_bantuan as ab')
+							->leftJoin('app_bantuan_master as abm', 'abm.id', '=', 'ab.id_bantuan')
+								->select('abm.nama')
+									->where('ab.id_user', $bu->id)
+									->where('ab.tahun', $bu->tahun_bantuan)
+									->orderBy('ab.tahun', 'asc')
+									->get(); ?>
 						<?php $i = 1 ?>
 						@foreach( $bantuan as $b )
 							{{ $i++ > 1 ? ", ".$b->nama:$b->nama }} 
 						@endforeach
 
 					</td>
+
 				</tr>
 
 			@endforeach
+			
 
 		</tbody>
 	</table>

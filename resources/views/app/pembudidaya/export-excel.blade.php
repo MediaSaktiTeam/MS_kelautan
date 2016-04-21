@@ -22,7 +22,7 @@
 			@foreach( $pembudidaya as $pb )
 
 				<tr>
-					<td><?php echo $i  ?></td>
+					<td><?php echo $i++  ?></td>
 					<td>{{ $pb->nik }}</td>
 					<td>{{ $pb->name }}</td>
 					<td>{{ $pb->alamat }}</td>
@@ -32,8 +32,9 @@
 					<td>{{ $pb->usaha->nama }}</td>
 					<td>
 						<?php $Ksarana = App\KepemilikanSarana::where('id_user', $pb->id)->get(); ?>
+						<?php $nmr = 1 ?>
 						@foreach ( $Ksarana as $ks )
-							- {{ $ks->sarana->sub }}
+							{{ $nmr++ > 1 ? ", ".$ks->sarana->sub : $ks->sarana->sub }}
 						@endforeach
 					</td>
 					<td>
@@ -44,13 +45,12 @@
 													->where('ab.id_user', $pb->id)
 													->orderBy('ab.tahun', 'asc')
 													->get(); ?>
+						<?php $nmr = 1 ?>
 						@foreach( $bantuan as $b )
-							 {{ $b->tahun }}:</b> {{ $b->nama }} 
+							 {{ $nmr++ > 1 ? ", ":"" }} {{ $b->tahun }}: {{ $b->nama }} 
 						@endforeach
 					</td>
 				</tr>
-
-				<?php $i = $i + 1 ?>
 
 			@endforeach
 		</tbody>

@@ -73,6 +73,7 @@
 
 				<?php
 
+					// Cegah tampil data rangkap
 					if ( $no > 1 ) {
 						if ( $id_user == $bu->id && $tb == $bu->tahun_bantuan )
 							continue;
@@ -84,7 +85,7 @@
 				?>
 				
 				<tr>
-					<td><?php echo $no ?></td>
+					<td>{{ $no++ }}</td>
 					<td>{{ $bu->nik }}</td>
 					<td>{{ $bu->name }}</td>
 					<td>{{ $bu->alamat }}</td>
@@ -103,13 +104,11 @@
 													->orderBy('ab.tahun', 'asc')
 													->get(); ?>
 						@foreach( $bantuan as $b )
-							- {{ $b->nama }} <br>
+							- {{ $b->nama }}<br>
 						@endforeach
 
 					</td>
 				</tr>
-
-				<?php $no++ ?>
 
 			@endforeach
 

@@ -174,12 +174,27 @@
 							<!-- START PANEL -->
 							<div class="panel panel-default">
 								<div class="panel-body">
+
 									<div class="">
-										<div class="input-group">
-											<input type="text" onkeyup="cari_data(this.value)" class="form-control" placeholder="Pencarian">
-											<span class="input-group-btn">
-												<a href="" class="btn btn-default" data-toggle="modal" data-target="#modal-ekspor"><i class="fa fa-file-archive-o"></i> &nbsp;Ekspor</a>
-											</span>
+
+										<div class="col-md-4">
+											<div class="form-group">
+												<select onchange="window.open(this.options[this.selectedIndex].value,'_top')" class="full-width" data-init-plugin="select2">
+														<option value="{{ route('pembudidaya', ['f' => '']) }}" {{ $_GET['f'] == '' ? 'selected' : '' }}>Semua Jenis Usaha</option> 
+														<option value="{{ route('pembudidaya', ['f' => 'Budidaya Air Laut']) }}" {{ $_GET['f'] == 'Budidaya Air Laut' ? 'selected' : '' }}>Budidaya Air Laut</option> 
+														<option value="{{ route('pembudidaya', ['f' => 'Budidaya Air Tawar']) }}" {{ $_GET['f'] == 'Budidaya Air Tawar' ? 'selected' : '' }}>Budidaya Air Tawar</option> 
+														<option value="{{ route('pembudidaya', ['f' => 'Budidaya Air Payau']) }}" {{ $_GET['f'] == 'Budidaya Air Payau' ? 'selected' : '' }}>Budidaya Air Payau</option> 
+												</select>
+											</div>
+										</div>
+
+										<div class="col-md-8">
+											<div class="input-group">
+												<input type="text" onkeyup="cari_data(this.value)" class="form-control" placeholder="Pencarian">
+												<span class="input-group-btn">
+													<a href="" class="btn btn-default" data-toggle="modal" data-target="#modal-ekspor"><i class="fa fa-file-archive-o"></i> &nbsp;Ekspor</a>
+												</span>
+											</div>
 										</div>
 										<br>
 
@@ -211,25 +226,38 @@
 														}
 													?>
 
-													@foreach( $pembudidaya as $pb )
+													@if ( $pembudidaya->total() > 0 )
+
+														@foreach( $pembudidaya as $pb )
+															<tr>
+																<td>
+																	<div class="checkbox">
+																		<input type="checkbox" class="pilih" value="{{ $pb->id }}" id="pb{{ $pb->id }}">
+																		<label for="pb{{ $pb->id }}" class="m-l-20"></label>
+																	</div>
+																</td>
+																<td>{{ $i++ }}</td>
+																<td>{{ $pb->name }}</td>
+																<td>{{ $pb->kelompok->nama }}</td>
+																<td>{{ $pb->jabatan->nama }}</td>
+																<td>{{ $pb->usaha->jenis }}</td>
+																<td style="text-align:center">
+																	<a class="btn btn-default btn-xs view" data-id="{{ $pb->id }}"><i class="fa fa-search-plus"></i></a>
+																	<a href="{{ route('pembudidaya_edit',$pb->id) }}" class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i></a>
+																</td>
+															</tr>
+														@endforeach
+
+													@else
+
 														<tr>
-															<td>
-																<div class="checkbox">
-																	<input type="checkbox" class="pilih" value="{{ $pb->id }}" id="pb{{ $pb->id }}">
-																	<label for="pb{{ $pb->id }}" class="m-l-20"></label>
-																</div>
-															</td>
-															<td>{{ $i++ }}</td>
-															<td>{{ $pb->name }}</td>
-															<td>{{ $pb->kelompok->nama }}</td>
-															<td>{{ $pb->jabatan->nama }}</td>
-															<td>{{ $pb->usaha->jenis }}</td>
-															<td style="text-align:center">
-																<a class="btn btn-default btn-xs view" data-id="{{ $pb->id }}"><i class="fa fa-search-plus"></i></a>
-																<a href="{{ route('pembudidaya_edit',$pb->id) }}" class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i></a>
+															<td colspan="7"  class="not-found">
+																<img src="{{ url('resources/assets/app/img/not_found.png') }}" alt="">
+																<span>Tidak ada data</span>
 															</td>
 														</tr>
-													@endforeach
+
+													@endif
 												</tbody>
 
 											</table>
@@ -316,13 +344,13 @@
 				<div class="modal-body">
 					<div class="row">
 						<div class="col-md-6">
-							<a href="{{ url('/app/pembudidaya/export-excel') }}">
+							<a href="{{ url('/app/pembudidaya/export-excel?f='.$_GET['f']) }}">
 								<i class="fa fa-file-excel-o export-excel"></i>
 								Unduh Dalam Format Mic.Excel
 							</a>
 						</div>
 						<div class="col-md-6">
-							<a href="{{ url('/app/pembudidaya/export-pdf') }}">
+							<a href="{{ url('/app/pembudidaya/export-pdf?f='.$_GET['f']) }}">
 								<i class="fa fa-file-pdf-o export-pdf"></i>
 								Unduh Dalam Format PDF
 							</a>
