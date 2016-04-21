@@ -65,7 +65,7 @@
 														</span>
 													</div>
 												</div>
-												<div class="col-md-6">
+												<div class="col-sm-6">
 													<div class="form-group">
 														<label>Kabupaten/Kota</label>
 														<span id="kabupaten">
@@ -78,7 +78,7 @@
 											</div>
 
 											<div class="row">
-												<div class="col-md-6">
+												<div class="col-sm-6">
 													<div class="form-group">
 														<label>Kecamatan</label>
 														<div id="kecamatan">
@@ -101,13 +101,13 @@
 											</div>
 
 											<div class="row">
-												<div class="col-md-6">
+												<div class="col-sm-6">
 													<div class="form-group">
 														<label>Kode Jenis Kegiatan</label>
 														<input type="text" class="form-control" name="kode_kegiatan" value="">
 													</div>
 												</div>
-												<div class="col-md-6">
+												<div class="col-sm-6">
 													<div class="form-group">
 														<label>Nomor Urut Direktori</label>
 														<input type="text" class="form-control" name="nomor_direktori" value="">
@@ -117,13 +117,13 @@
 											<hr>
 											<label>KETERANGAN UNIT PEMASAR</label>
 											<div class="row">
-												<div class="col-md-6">
+												<div class="col-sm-6">
 													<div class="form-group">
 														<label>Nama Unit Pemasar</label>
 														<input type="text" class="form-control" name="unit_pemasar" value="">
 													</div>
 												</div>
-												<div class="col-md-6">
+												<div class="col-sm-6">
 													<div class="form-group">
 														<label>Nama Pemilik Unit Pemasar</label>
 														<input type="text" class="form-control" name="pemilik_pemasar" value="">
@@ -132,8 +132,8 @@
 											</div>
 
 											<div class="row">
-												<div class="col-md-12">
-													<div clas="form-group">
+												<div class="col-sm-12">
+													<div class="form-group">
 														<label>Alamat Unit Pemasar</label>
 														<input type="text" class="form-control" name="alamat_pemasar" value="">
 													</div>
@@ -141,31 +141,43 @@
 											</div>
 											
 											<div class="row">
-												<div class="col-md-12">
-													<div clas="form-group">
-														<label>(Jl.RT/RW)</label>
+												<div class="col-sm-4">
+													<div class="form-group">
+														<label>RT/RW</label>
 														<input type="text" class="form-control" name="alamat_erte" value="">
+													</div>
+												</div>
+												<div class="col-sm-4">
+													<div class="form-group">
+														<label>Telepon</label>
+														<input type="text" class="form-control number" name="telepon" value="">
+													</div>
+												</div>
+												<div class="col-sm-4">
+													<div class="form-group">
+														<label>Kode POS</label>
+														<input type="text" class="form-control" name="kode_pos" value="">
 													</div>
 												</div>
 											</div>
 											<hr>
 											<div class="row">
-												<div class="col-md-12">
+												<div class="col-sm-12">
 													<label>Jenis Kegiatan Pemasaran yang Utama</label>
 													<div clas="form-group">
-														<div class="col-md-4">
+														<div class="col-sm-4">
 															<div class="radio radio-success">
 															<input type="radio"  value="pengumpul" name="Pengumpul" id="pengumpul">
 															<label for="pengumpul">Pengumpul</label>
 															</div>
 														</div>
-														<div class="col-md-4">
+														<div class="col-sm-4">
 															<div class="radio radio-success">
 															<input type="radio"  value="pedagang" name="Pedagang" id="pedagang">
 															<label for="pedagang">Pedagang</label>
 															</div>
 														</div>
-														<div class="col-md-4">
+														<div class="col-sm-4">
 															<div class="radio radio-success">
 															<input type="radio"  value="pengecer" name="Pengecer" id="pengecer">
 															<label for="pengecer">Pengecer</label>
@@ -175,10 +187,8 @@
 												</div>
 											</div>
 									
-											
-
 											<div class="row">
-												<div class="col-md-12">
+												<div class="col-sm-12">
 													<div clas="form-group">
 														<label>Tahun Mulai Usaha</label>
 														<input type="date" class="form-control" name="tahun_mulai" value="">

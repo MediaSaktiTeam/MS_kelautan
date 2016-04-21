@@ -97,6 +97,18 @@
 										<input type="text" id="alamat" name="alamat" class="form-control" required>
 									</div>
 									<div class="form-group form-group-default required">
+										<label>RT/RW</label>
+										<input type="text" id="rt" name="rt" class="form-control" required>
+									</div>
+									<div class="form-group form-group-default required">
+										<label>Telepon</label>
+										<input type="text" id="telepon" name="telepon" class="form-control" required>
+									</div>
+									<div class="form-group form-group-default required">
+										<label>Kode POS</label>
+										<input type="text" id="kode_pos" name="kode_pos" class="form-control" required>
+									</div>
+									<div class="form-group form-group-default required">
 										<label>Nomor Rekening</label>
 										<input type="text" id="norek" name="no_rekening" class="form-control" required>
 									</div>

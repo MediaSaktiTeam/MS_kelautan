@@ -88,6 +88,27 @@
 											</div>
 											
 											<div class="row">
+												<div class="col-sm-4">
+													<div class="form-group">
+														<label>RT/RW</label>
+														<input type="text" class="form-control" name="alamat_erte" value="">
+													</div>
+												</div>
+												<div class="col-sm-4">
+													<div class="form-group">
+														<label>Telepon</label>
+														<input type="text" class="form-control number" name="telepon" value="">
+													</div>
+												</div>
+												<div class="col-sm-4">
+													<div class="form-group">
+														<label>Kode POS</label>
+														<input type="text" class="form-control" name="kode_pos" value="">
+													</div>
+												</div>
+											</div>
+
+											<div class="row">
 												<div class="col-sm-6">
 													<div class="form-group">
 														<label>Nama Kelompok</label>
