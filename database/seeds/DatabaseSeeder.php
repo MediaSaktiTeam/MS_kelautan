@@ -33,7 +33,6 @@ class DatabaseSeeder extends Seeder
 }
 
 
-
 class BlogTableSeeder extends Seeder
 {
   public function run()

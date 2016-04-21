@@ -51,14 +51,18 @@
 	<table class="table table-bordered">
 		<thead>
 			<tr>
-				<th>No.</th>
-				<th>NIK</th>
-				<th>Nama Lengkap</th>
-				<th>Alamat</th>
-				<th>Nama Kelompok</th>
-				<th>Bidang Usaha</th>
-				<th>Bantuan yang didapatkan</th>
-				<th>Tahun</th>
+				<th rowspan="2" style="width: 10px;text-align: center; vertical-align: middle">No.</th>
+				<th rowspan="2" style="vertical-align: middle;width: 150px">NIK</th>
+				<th rowspan="2" style="vertical-align: middle">Nama Lengkap</th>
+				<th rowspan="2" style="vertical-align: middle">Alamat</th>
+				<th rowspan="2" style="vertical-align: middle">Nama Kelompok</th>
+				<th rowspan="2" style="vertical-align: middle;width: 80px;text-align: center;">Bidang Usaha</th>
+				<th colspan="3" style="text-align: center">Bantuan yang didapatkan</th>
+			</tr>
+			<tr>
+				<th style="text-align: center;width: 50px">Tahun</th>
+				<th>Program</th>
+				<th>Bantuan</th>
 			</tr>
 		</thead>
 		
@@ -85,7 +89,9 @@
 					<td>{{ $bu->name }}</td>
 					<td>{{ $bu->alamat }}</td>
 					<td>{{ $bu->nama_kelompok }}</td>
-					<td>{{ $bu->profesi }}</td>
+					<td style="text-align: center;">{{ $bu->profesi }}</td>
+					<td style="text-align: center;">{{ $bu->tahun_bantuan }}</td>
+					<td>{{ $bu->nama_program }}</td>
 					<td>
 						<?php
 
@@ -97,11 +103,10 @@
 													->orderBy('ab.tahun', 'asc')
 													->get(); ?>
 						@foreach( $bantuan as $b )
-							- {{ $b->nama }}
+							- {{ $b->nama }} <br>
 						@endforeach
 
 					</td>
-					<td>{{ $bu->tahun_bantuan }}</td>
 				</tr>
 
 				<?php $no++ ?>
