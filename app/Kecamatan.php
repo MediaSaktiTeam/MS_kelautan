@@ -10,6 +10,10 @@ class Kecamatan extends Model
     public $timestamps = false;
 
     public function kabupaten(){
-    	return $this->belongsTo('App\kabupaten', 'id_kabupaten');
+    	return $this->belongsTo('App\kabupaten', 'id');
+    }
+
+    public function kecamatan(){
+    	return $this->hasMany('App\Desa', 'id_kecamatan');
     }
 }

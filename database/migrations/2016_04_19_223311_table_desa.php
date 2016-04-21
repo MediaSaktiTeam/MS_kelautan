@@ -13,9 +13,9 @@ class TableDesa extends Migration
     public function up()
     {
         Schema::create('desa', function (Blueprint $table) {
-            $table->integer('id')->unsigned();
+            $table->string('id', 11);
             $table->primary('id');
-            $table->integer('id_kecamatan');
+            $table->string('id_kecamatan', 11);
             $table->string('nama', 50);
         });
     }
