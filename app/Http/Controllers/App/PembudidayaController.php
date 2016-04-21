@@ -18,9 +18,17 @@ class PembudidayaController extends Controller
 		$this->middleware('Pembudidaya');
 	}
 
-	public function getIndex()
+	public function getIndex(Request $r)
 	{
-		$data['pembudidaya'] = User::where('profesi','Pembudidaya')->orderBy('id','desc')->paginate(10);
+
+		if ( !isset( $r->f ) ) return redirect()->route('pembudidaya', ['f' => '']);
+
+		$pembudidaya = User::where('profesi','Pembudidaya')->orderBy('id','desc');
+
+		if ( $r->f != "" ) $pembudidaya->where('jenis_usaha', $r->f);
+
+		$data['pembudidaya'] = $pembudidaya->paginate(10);
+
 		$data['kelompok'] = Kelompok::where('tipe','Pembudidaya')->paginate(10);
 		
 		$limit = 10;
@@ -81,6 +89,7 @@ class PembudidayaController extends Controller
 		$pb->id_kelompok  = $r->id_kelompok;
 		$pb->id_jabatan   = $r->id_jabatan;
 		$pb->id_usaha     = $r->id_usaha;
+		$pb->jenis_usaha     = $r->jenis_usaha;
 
 		$pb->save();
 
@@ -249,9 +258,14 @@ class PembudidayaController extends Controller
 		return view('app.pembudidaya.print-all', $data);
 	}
 
-	public function getExportExcel()
+	public function getExportExcel(Request $r)
 	{
-		$data['pembudidaya'] 	= User::where('profesi','Pembudidaya')->orderBy('id','desc')->get();
+		$pembudidaya 	= User::where('profesi','Pembudidaya')->orderBy('id','desc');
+
+		if ( $r->f != "" ) $pembudidaya->where('jenis_usaha', $r->f);
+
+		$data['pembudidaya'] = $pembudidaya->get();
+
 		$data['kelompok'] 		= Kelompok::where('tipe','Pembudidaya')->get();
 		$data['jabatan'] 		= Jabatan::all();
 
@@ -267,9 +281,14 @@ class PembudidayaController extends Controller
         })->download('xlsx');
 	}
 
-	public function getExportPdf()
+	public function getExportPdf(Request $r)
 	{
-		$data['pembudidaya'] 	= User::where('profesi','Pembudidaya')->orderBy('id','desc')->get();
+		$pembudidaya 	= User::where('profesi','Pembudidaya')->orderBy('id','desc');
+
+		if ( $r->f != "" ) $pembudidaya->where('jenis_usaha', $r->f);
+
+		$data['pembudidaya'] = $pembudidaya->get();
+
 		$data['kelompok'] 		= Kelompok::where('tipe','Pembudidaya')->get();
 		$data['jabatan'] 		= Jabatan::all();
 		

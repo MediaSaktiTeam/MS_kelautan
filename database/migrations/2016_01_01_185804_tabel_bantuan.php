@@ -18,6 +18,7 @@ class TabelBantuan extends Migration
             $t->bigIncrements('id');
             $t->string('id_user');
             $t->string('id_bantuan');
+            $t->string('nama_program');
             $t->string('tahun',4);
         });
     }

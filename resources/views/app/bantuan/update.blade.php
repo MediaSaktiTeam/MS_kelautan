@@ -117,6 +117,15 @@
 												</div>
 											</div>
 
+											<div class="row clearfix">
+												<div class="col-sm-12">
+													<div class="form-group required">
+														<label>Nama Program</label>
+														<input type="text" name="nama_program" value="{{ $user->nama_program }}" required class="form-control">
+													</div>
+												</div>
+											</div>
+
 											<div class="clearfix"></div>
 											<br>
 											

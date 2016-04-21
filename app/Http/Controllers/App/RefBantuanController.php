@@ -16,8 +16,17 @@ class RefBantuanController extends Controller
 	 *
 	 * @return \Illuminate\Http\Response
 	 */
-	 public function getIndex()
+	 public function getIndex(Request $r)
 	{
+
+		$params = \Input::all();
+		if ( count($params) != 3 ) {
+			$params = ['bidang' => 'all',
+						'thn' => 'all',
+						'klp' => 'all'];
+			return redirect()->route('ref_bantuan', $params);
+		}
+
 		$limit = 10;
 		if ( Permissions::admin() ) {
 			$profesi = ['Pembudidaya','Nelayan'];
@@ -31,15 +40,20 @@ class RefBantuanController extends Controller
 								->whereIn('u.profesi', $profesi)
 								->orderBy('ak.nama', 'asc')->get();
 
-		$data['bantuan_users'] = DB::table('app_bantuan as ab')
+		$bantuan_users = DB::table('app_bantuan as ab')
 							->leftJoin('users as u', 'u.id', '=', 'ab.id_user')
 							->leftJoin('app_kelompok as ak', 'u.id_kelompok', '=', 'ak.id_kelompok')
-							->select('u.*','ak.nama as nama_kelompok', 'ab.tahun as tahun_bantuan')
+							->select('u.*','ak.nama as nama_kelompok', 'ab.tahun as tahun_bantuan', 'ab.nama_program')
 								->whereIn('u.profesi', $profesi)
 								->orderBy('ab.id', 'desc')
 								->orderBy('ab.id_user', 'desc')
-								->orderBy('ab.tahun', 'desc')
-								->paginate($limit);
+								->orderBy('ab.tahun', 'desc');
+
+		if ( $r->thn != 'all') $bantuan_users->where('ab.tahun', $r->thn);
+		if ( $r->klp != 'all') $bantuan_users->where('ak.id_kelompok', $r->klp);
+		if ( $r->bidang != 'all') $bantuan_users->where('u.profesi', $r->bidang);
+
+		$data['bantuan_users'] = $bantuan_users->paginate($limit);
 
 		return view('app.bantuan.index', $data)->with('limit', $limit);
 	}
@@ -73,7 +87,7 @@ class RefBantuanController extends Controller
 	{
 		$data['user'] = DB::table('app_bantuan as ab')
 							->leftJoin('users as u', 'u.id', '=', 'ab.id_user')
-							->select('u.*', 'ab.tahun as tahun_bantuan')
+							->select('u.*', 'ab.tahun as tahun_bantuan', 'ab.nama_program')
 								->where('ab.id_user', $id)
 								->where('ab.tahun', $tahun)
 								->groupBy('ab.id_user')->first();
@@ -92,9 +106,10 @@ class RefBantuanController extends Controller
 
 		foreach( $r->id_bantuan as $val ) {
 			$dt = new RefBantuan;
-			$dt->id_user = $r->id_user;   
+			$dt->id_user = $r->id;   
 			$dt->id_bantuan = $val;
 			$dt->tahun = $r->tahun_update;
+			$dt->nama_program = $r->nama_program;
 			$dt->save();   
 		}
 
@@ -158,7 +173,7 @@ class RefBantuanController extends Controller
 		return view('app.bantuan.list-bantuan', $data); 
 	}
 
-	public function getExportExcel()
+	public function getExportExcel(Request $r)
 	{
 		$data['users'] = DB::table('users as u')
 							->leftJoin('app_kelompok as ak', 'u.id_kelompok', '=', 'ak.id_kelompok')
@@ -166,16 +181,21 @@ class RefBantuanController extends Controller
 								->whereIn('u.profesi', ['Pembudidaya','Nelayan'])
 								->orderBy('ak.nama', 'asc')->get();
 
-		$data['bantuan_users'] = DB::table('app_bantuan as ab')
+		$bantuan_users = DB::table('app_bantuan as ab')
 							->leftJoin('users as u', 'u.id', '=', 'ab.id_user')
 							->leftJoin('app_kelompok as ak', 'u.id_kelompok', '=', 'ak.id_kelompok')
-							->select('u.*','ak.nama as nama_kelompok', 'ab.tahun as tahun_bantuan')
+							->select('u.*','ak.nama as nama_kelompok', 'ab.tahun as tahun_bantuan', 'ab.nama_program')
 								->whereIn('u.profesi', ['Pembudidaya','Nelayan'])
 								->orderBy('ab.id', 'desc')
 								->orderBy('ab.id_user', 'desc')
-								->orderBy('ab.tahun', 'desc')
-								->get();
-								
+								->orderBy('ab.tahun', 'desc');
+
+		if ( $r->thn != 'all') $bantuan_users->where('ab.tahun', $r->thn);
+		if ( $r->klp != 'all') $bantuan_users->where('ak.id_kelompok', $r->klp);
+		if ( $r->bidang != 'all') $bantuan_users->where('u.profesi', $r->bidang);
+
+		$data['bantuan_users'] = $bantuan_users->get();
+
         Excel::create('Data Bantuan');
 
         Excel::create('Data Bantuan', function($excel) use($data)
@@ -188,7 +208,7 @@ class RefBantuanController extends Controller
         })->download('xlsx');
 	}
 
-	public function getExportPdf()
+	public function getExportPdf(Request $r)
 	{
 		$data['users'] = DB::table('users as u')
 							->leftJoin('app_kelompok as ak', 'u.id_kelompok', '=', 'ak.id_kelompok')
@@ -196,15 +216,20 @@ class RefBantuanController extends Controller
 								->whereIn('u.profesi', ['Pembudidaya','Nelayan'])
 								->orderBy('ak.nama', 'asc')->get();
 
-		$data['bantuan_users'] = DB::table('app_bantuan as ab')
+		$bantuan_users = DB::table('app_bantuan as ab')
 							->leftJoin('users as u', 'u.id', '=', 'ab.id_user')
 							->leftJoin('app_kelompok as ak', 'u.id_kelompok', '=', 'ak.id_kelompok')
-							->select('u.*','ak.nama as nama_kelompok', 'ab.tahun as tahun_bantuan')
+							->select('u.*','ak.nama as nama_kelompok', 'ab.tahun as tahun_bantuan', 'ab.nama_program')
 								->whereIn('u.profesi', ['Pembudidaya','Nelayan'])
 								->orderBy('ab.id', 'desc')
 								->orderBy('ab.id_user', 'desc')
-								->orderBy('ab.tahun', 'desc')
-								->get();
+								->orderBy('ab.tahun', 'desc');
+
+		if ( $r->thn != 'all') $bantuan_users->where('ab.tahun', $r->thn);
+		if ( $r->klp != 'all') $bantuan_users->where('ak.id_kelompok', $r->klp);
+		if ( $r->bidang != 'all') $bantuan_users->where('u.profesi', $r->bidang);
+
+		$data['bantuan_users'] = $bantuan_users->get();
 		
         $pdf = PDF::loadView('app.bantuan.export-pdf', $data);
         return $pdf->setPaper('legal')->setOrientation('landscape')->setWarnings(false)->download('Data Bantuan.pdf');

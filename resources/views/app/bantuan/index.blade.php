@@ -84,6 +84,14 @@
 													</div>
 												</div>
 											</div>
+											<div class="row clearfix">
+												<div class="col-sm-12">
+													<div class="form-group required">
+														<label>Nama Program</label>
+														<input type="text" name="nama_program" required class="form-control">
+													</div>
+												</div>
+											</div>
 
 											<div class="clearfix"></div>
 											<br>
@@ -123,11 +131,46 @@
 							<div class="panel panel-default">
 								<div class="panel-body">
 									<div class="">
-										<div class="input-group">
-											<input type="text" onkeyup="cari_data(this.value)" class="form-control" placeholder="Pencarian">
-											<span class="input-group-btn">
-												<a href="" class="btn btn-default" data-toggle="modal" data-target="#modal-ekspor"><i class="fa fa-file-archive-o"></i> &nbsp;Ekspor</a>
-											</span>
+
+										<?php $all_tahun = App\RefBantuan::groupBy('tahun')->orderBy('tahun','asc')->get() ?> 
+										<?php $all_kelompok = App\Kelompok::groupBy('nama')->orderBy('nama','asc')->get() ?> 
+										<div class="col-md-2">
+											<div class="form-group">
+												<select onchange="window.open(this.options[this.selectedIndex].value,'_top')" class="full-width" data-init-plugin="select2">
+													<option value="{{ route('ref_bantuan', ['bidang' => 'all', 'thn' => $_GET['thn'], 'klp' => $_GET['klp'] ]) }}" {{ $_GET['bidang'] == 'all' ? 'selected' : '' }}>Semua Bidang Usaha</option>
+													<option value="{{ route('ref_bantuan', ['bidang' => 'Nelayan', 'thn' => $_GET['thn'], 'klp' => $_GET['klp'] ]) }}" {{ $_GET['bidang'] == 'Nelayan' ? 'selected' : '' }}>Nelayan</option>
+													<option value="{{ route('ref_bantuan', ['bidang' => 'Pembudidaya', 'thn' => $_GET['thn'], 'klp' => $_GET['klp'] ]) }}" {{ $_GET['bidang'] == 'Pembudidaya' ? 'selected' : '' }}>Pembudidaya</option>
+												</select>
+											</div>
+										</div>
+										<div class="col-md-2">
+											<div class="form-group">
+												<select onchange="window.open(this.options[this.selectedIndex].value,'_top')" class="full-width" data-init-plugin="select2">
+														<option value="{{ route('ref_bantuan', ['bidang' => $_GET['bidang'], 'thn' => 'all', 'klp' => $_GET['klp'] ]) }}" {{ $_GET['thn'] == 'all' ? 'selected' : '' }}>Semua Tahun</option>
+													@foreach( $all_tahun as $tahun )
+														<option value="{{ route('ref_bantuan', ['bidang' => $_GET['bidang'], 'thn' => $tahun->tahun, 'klp' => $_GET['klp'] ]) }}" {{ $_GET['thn'] == $tahun->tahun ? 'selected' : '' }}>{{ $tahun->tahun }}</option>
+													@endforeach
+												</select>
+											</div>
+										</div>
+										<div class="col-md-2">
+											<div class="form-group">
+												<select onchange="window.open(this.options[this.selectedIndex].value,'_top')" class="full-width" data-init-plugin="select2">
+														<option value="{{ route('ref_bantuan', ['bidang' => $_GET['bidang'], 'thn' => $_GET['thn'], 'klp' => 'all' ]) }}" {{ $_GET['klp'] == 'all' ? 'selected' : '' }}>Semua Kelompok</option>
+													@foreach( $all_kelompok as $klp )
+														<option value="{{ route('ref_bantuan', ['bidang' => $_GET['bidang'], 'thn' => $_GET['thn'], 'klp' => $klp->id_kelompok ]) }}" {{ $_GET['klp'] == $klp->id_kelompok ? 'selected' : '' }}>{{ $klp->nama }}</option>
+													@endforeach
+												</select>
+											</div>
+										</div>
+
+										<div class="col-md-6">
+											<div class="input-group">
+												<input type="text" onkeyup="cari_data(this.value)" class="form-control" placeholder="Pencarian">
+												<span class="input-group-btn">
+													<a href="" class="btn btn-default" data-toggle="modal" data-target="#modal-ekspor"><i class="fa fa-file-archive-o"></i> &nbsp;Ekspor</a>
+												</span>
+											</div>
 										</div>
 										<br>
 										<div id="show-pencarian"></div>
@@ -143,64 +186,79 @@
 														<th>Nama Anggota</th>
 														<th>Bidang Usaha</th>
 														<th>Nama Kelompok</th>
-														<th>Jenis Bantuan</th>
 														<th>Tahun</th>
+														<th>Program</th>
+														<th>Jenis Bantuan</th>
 														<th>Aksi</th>
 													</tr>
 												</thead>
 												<tbody>
-													<?php $no = 1 ?>
-													@foreach( $bantuan_users as $bu )
 
-														<?php
+													@if ( count($bantuan_users) > 0 )
 
-															if ( $no > 1 ) {
-																if ( $id_user == $bu->id && $tb == $bu->tahun_bantuan )
-																	continue;
-															}
+														<?php $no = 1 ?>
 
-															$id_user = $bu->id;
-															$tb = $bu->tahun_bantuan;
+														@foreach( $bantuan_users as $bu )
 
-														?>
-														
+															<?php
+
+																if ( $no > 1 ) {
+																	if ( $id_user == $bu->id && $tb == $bu->tahun_bantuan )
+																		continue;
+																}
+
+																$id_user = $bu->id;
+																$tb = $bu->tahun_bantuan;
+
+															?>
+															
+															<tr>
+																<td>
+																	<div class="checkbox">
+																		<input type="checkbox" class="pilih" value="{{ $bu->id }}|{{ $bu->tahun_bantuan }}" id="pb{{ $bu->id }}|{{ $bu->tahun_bantuan }}">
+																		<label for="pb{{ $bu->id }}|{{ $bu->tahun_bantuan }}" class="m-l-20"></label>
+																	</div>
+																</td>
+																<td>{{ $no }}</td>
+																<td>{{ $bu->name }}</td>
+																<td>{{ $bu->profesi }}</td>
+																<td>{{ $bu->nama_kelompok }}</td>
+																<td>{{ $bu->tahun_bantuan }}</td>
+																<td>{{ $bu->nama_program }}</td>
+																<td>
+																	<ul class="list-unstyled">
+																		<?php
+
+																			$bantuan = DB::table('app_bantuan as ab')
+																							->leftJoin('app_bantuan_master as abm', 'abm.id', '=', 'ab.id_bantuan')
+																								->select('abm.nama')
+																									->where('ab.id_user', $bu->id)
+																									->where('ab.tahun', $bu->tahun_bantuan)
+																									->orderBy('ab.tahun', 'asc')
+																									->get(); ?>
+																		@foreach( $bantuan as $b )
+																			<li><i class="fa fa-check-square-o"></i>  {{ $b->nama }}</li>
+																		@endforeach
+																	</ul>
+
+																</td>
+																<td>
+																	<a href="{{ route('ref_bantuan_edit', [ $bu->id, $bu->tahun_bantuan]) }}" class="btn btn-edit btn-primary btn-xs"><i class="fa fa-pencil"></i></a>
+																</td>
+															</tr>
+
+														<?php $no++ ?>
+
+														@endforeach
+
+													@else
 														<tr>
-															<td>
-																<div class="checkbox">
-																	<input type="checkbox" class="pilih" value="{{ $bu->id }}|{{ $bu->tahun_bantuan }}" id="pb{{ $bu->id }}|{{ $bu->tahun_bantuan }}">
-																	<label for="pb{{ $bu->id }}|{{ $bu->tahun_bantuan }}" class="m-l-20"></label>
-																</div>
-															</td>
-															<td>{{ $no }}</td>
-															<td>{{ $bu->name }}</td>
-															<td>{{ $bu->profesi }}</td>
-															<td>{{ $bu->nama_kelompok }}</td>
-															<td>
-																<ul class="list-unstyled">
-																	<?php
-
-																		$bantuan = DB::table('app_bantuan as ab')
-																						->leftJoin('app_bantuan_master as abm', 'abm.id', '=', 'ab.id_bantuan')
-																							->select('abm.nama')
-																								->where('ab.id_user', $bu->id)
-																								->where('ab.tahun', $bu->tahun_bantuan)
-																								->orderBy('ab.tahun', 'asc')
-																								->get(); ?>
-																	@foreach( $bantuan as $b )
-																		<li><i class="fa fa-check-square-o"></i>  {{ $b->nama }}</li>
-																	@endforeach
-																</ul>
-
-															</td>
-															<td>{{ $bu->tahun_bantuan }}</td>
-															<td>
-																<a href="{{ route('ref_bantuan_edit', [ $bu->id, $bu->tahun_bantuan]) }}" class="btn btn-edit btn-primary btn-xs"><i class="fa fa-pencil"></i></a>
+															<td colspan="9"  class="not-found">
+																<img src="{{ url('resources/assets/app/img/not_found.png') }}" alt="">
+																<span>Tidak ada data</span>
 															</td>
 														</tr>
-
-													<?php $no++ ?>
-
-													@endforeach
+													@endif
 
 												</tbody>
 											</table>
@@ -288,13 +346,13 @@
 				<div class="modal-body">
 					<div class="row">
 						<div class="col-md-6">
-							<a href="{{ url('/app/bantuan/export-excel') }}">
+							<a href="{{ url('/app/bantuan/export-excel?bidang='.$_GET['bidang'].'&thn='.$_GET['thn'].'&klp='.$_GET['klp']) }}">
 								<i class="fa fa-file-excel-o export-excel"></i>
 								Unduh Dalam Format Mic.Excel
 							</a>
 						</div>
 						<div class="col-md-6">
-							<a href="{{ url('/app/bantuan/export-pdf') }}">
+							<a href="{{ url('/app/bantuan/export-pdf?bidang='.$_GET['bidang'].'&thn='.$_GET['thn'].'&klp='.$_GET['klp']) }}">
 								<i class="fa fa-file-pdf-o export-pdf"></i>
 								Unduh Dalam Format PDF
 							</a>
