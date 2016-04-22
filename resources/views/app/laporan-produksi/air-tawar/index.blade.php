@@ -1,7 +1,7 @@
 @extends('app.layout.main')
 
 @section('title')
-	Pemasar | Tambah
+	Produksi Air Tawar
 @endsection
 
 
@@ -23,7 +23,7 @@
 						<!-- START BREADCRUMB -->
 						<ul class="breadcrumb pull-left">
 							<li>
-								<a href="{{ route('pemasar') }}">Pemasar</a>
+								<a href="{{ route('airtawar') }}">Pemasar</a>
 							</li>
 						</ul>
 						
@@ -46,7 +46,7 @@
 								<!-- START PANEL -->
 								<div class="panel panel-transparent">
 									<div class="panel-body">
-										<form id="form-personal" method="GET" action="{{ route('pemasar_tambah') }}" role="form">
+										<form id="form-personal" method="GET" action="{{ route('air_tawar_tambah') }}" role="form">
 											
 											<input type="hidden" id="token" name="_token" value="{{ csrf_token() }}">
 											<label>KETERANGAN IDENTITAS</label>
@@ -65,7 +65,7 @@
 														</span>
 													</div>
 												</div>
-												<div class="col-sm-6">
+												<div class="col-md-6">
 													<div class="form-group">
 														<label>Kabupaten/Kota</label>
 														<span id="kabupaten">
@@ -78,7 +78,7 @@
 											</div>
 
 											<div class="row">
-												<div class="col-sm-6">
+												<div class="col-md-6">
 													<div class="form-group">
 														<label>Kecamatan</label>
 														<div id="kecamatan">
@@ -100,101 +100,24 @@
 												</div>
 											</div>
 
-											<div class="row">
-												<div class="col-sm-6">
-													<div class="form-group">
-														<label>Kode Jenis Kegiatan</label>
-														<input type="text" class="form-control" name="kode_kegiatan" value="">
-													</div>
-												</div>
-												<div class="col-sm-6">
-													<div class="form-group">
-														<label>Nomor Urut Direktori</label>
-														<input type="text" class="form-control" name="nomor_direktori" value="">
-													</div>
-												</div>
-											</div>
 											<hr>
-											<label>KETERANGAN UNIT PEMASAR</label>
+											<label>KETERANGAN PRODUKSI</label>
 											<div class="row">
-												<div class="col-sm-6">
+												<div class="col-md-6">
 													<div class="form-group">
-														<label>Nama Unit Pemasar</label>
-														<input type="text" class="form-control" name="unit_pemasar" value="">
+														<label>Luas Areal (Ha)</label>
+														<input type="number" name="luas_areal" value="{{ Input::old('luas_areal') }}" class="form-control" required="">
 													</div>
 												</div>
-												<div class="col-sm-6">
+												<div class="col-md-6">
 													<div class="form-group">
-														<label>Nama Pemilik Unit Pemasar</label>
-														<input type="text" class="form-control" name="pemilik_pemasar" value="">
+														<label>Luas Tanam</label>
+														<input type="number" name="luas_tanam" value="{{ Input::old('luas_tanam') }}" class="form-control" required="">
 													</div>
 												</div>
 											</div>
 
-											<div class="row">
-												<div class="col-sm-12">
-													<div class="form-group">
-														<label>Alamat Unit Pemasar</label>
-														<input type="text" class="form-control" name="alamat_pemasar" value="">
-													</div>
-												</div>
-											</div>
 											
-											<div class="row">
-												<div class="col-sm-4">
-													<div class="form-group">
-														<label>RT/RW</label>
-														<input type="text" class="form-control" name="alamat_erte" value="">
-													</div>
-												</div>
-												<div class="col-sm-4">
-													<div class="form-group">
-														<label>Telepon</label>
-														<input type="text" class="form-control number" name="telepon" value="">
-													</div>
-												</div>
-												<div class="col-sm-4">
-													<div class="form-group">
-														<label>Kode POS</label>
-														<input type="text" class="form-control" name="kode_pos" value="">
-													</div>
-												</div>
-											</div>
-											<hr>
-											<div class="row">
-												<div class="col-sm-12">
-													<label>Jenis Kegiatan Pemasaran yang Utama</label>
-													<div clas="form-group">
-														<div class="col-sm-4">
-															<div class="radio radio-success">
-															<input type="radio"  value="pengumpul" name="Pengumpul" id="pengumpul">
-															<label for="pengumpul">Pengumpul</label>
-															</div>
-														</div>
-														<div class="col-sm-4">
-															<div class="radio radio-success">
-															<input type="radio"  value="pedagang" name="Pedagang" id="pedagang">
-															<label for="pedagang">Pedagang</label>
-															</div>
-														</div>
-														<div class="col-sm-4">
-															<div class="radio radio-success">
-															<input type="radio"  value="pengecer" name="Pengecer" id="pengecer">
-															<label for="pengecer">Pengecer</label>
-															</div>
-														</div>
-													</div>
-												</div>
-											</div>
-									
-											<div class="row">
-												<div class="col-sm-12">
-													<div clas="form-group">
-														<label>Tahun Mulai Usaha</label>
-														<input type="date" class="form-control" name="tahun_mulai" value="">
-													</div>
-												</div>
-											</div>
 											<div class="clearfix"></div>
 											<br>
 											
@@ -239,7 +162,7 @@
 												</thead>
 
 												<tbody>
-													@foreach($pemasar as $pem)
+													@foreach($airtawar as $at)
 														<tr>
 															<td>
 																<div class="checkbox">
@@ -247,11 +170,11 @@
 																	<label for="" class="m-l-20"></label>
 																</div>
 															</td>
-															<td>{{ $pem->pemilik_pemasar }}</td>
-															<td>{{ $pem->nama }}</td>
-															<td>{{ $pem->nama }}</td>
-															<td>{{ $pem->nama }}</td>
-															<td>{{ $pem->nama }}</td>
+															<td>{{ $at->desa }}</td>
+															<td>{{ $at->desa }}</td>
+															<td>{{ $at->desa }}</td>
+															<td>{{ $at->desa }}</td>
+															<td>{{ $at->desa }}</td>
 															<td style="text-align:center">
 																<a class="btn btn-default btn-xs view" data-id=""><i class="fa fa-search-plus"></i></a>
 																<a href="" class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i></a>
@@ -261,7 +184,7 @@
 												</tbody>
 
 											</table>
-											<center>{!! $pemasar->links() !!}</center>
+											<center>{!! $airtawar->links() !!}</center>
 										</div>
 
 									</div>
@@ -409,8 +332,9 @@
 
 @section('registerscript')
 	<script>
-		$(".menu-items .link-pengolah").addClass("active open");
-		$(".menu-items .link-pengolah .sub-pemasar").addClass("active");
+		$(".menu-items .link-pembudidaya").addClass("active open");
+		$(".menu-items .link-pembudidaya .sub-laporan-produksi").addClass("active");
+		$(".menu-items .link-pembudidaya .sub-laporan-produksi .sub-airtawar").addClass("active");
 
 		function get_kabupaten(id_prov){
 			var _token = $('meta[name="csrf-token"]').attr('content');

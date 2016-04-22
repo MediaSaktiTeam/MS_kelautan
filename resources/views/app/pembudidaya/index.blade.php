@@ -432,6 +432,7 @@
 @section('registerscript')
 	<script>
 		$(".menu-items .link-pembudidaya").addClass("active");
+		$(".menu-items .link-pembudidaya .sub-pembudidaya").addClass("active");
 
 		$(function(){
 

@@ -15,10 +15,10 @@ class CreatePemasarsTable extends Migration
         Schema::create('app_pemasar', function (Blueprint $table) {
             $table->increments('id');
             $table->timestamps();
-            $table->string('provinsi',50);
-            $table->string('kabupaten',50);
-            $table->string('kecamatan',50);
-            $table->string('desa',50);
+            $table->string('provinsi');
+            $table->string('kabupaten');
+            $table->string('kecamatan');
+            $table->string('desa');
             $table->string('kode_kegiatan',50);
             $table->string('nomor_direktori')->nullable();
             $table->string('unit_pemasar',50);
