@@ -1,7 +1,6 @@
 <?php 
-
 	$Ms = new App\Custom;
-	// Default value of filter date on produksi
+	// Default value of date filter on produksi
 	$sql = App\Produksi::orderBy('id', 'desc')->first();
 	$limit1 = date_format(date_create($sql->created_at), "Y-m-d");
 	$limit = strtotime("$limit1 +1 day");
