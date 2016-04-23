@@ -74,19 +74,21 @@
 									<span class="icon-thumbnail">PR</span>
 								</li>
 								<li class="sub-pemasar">
+
+								<li class="sub-laporan-produksi">
 									<a href="javascript:;">Laporan Produksi <span class=" arrow"></span></a>
 									<span class="icon-thumbnail">LP</span>
 									<ul class="sub-menu">
-										<li class="sub-pembudidaya">
-											<a href="/app/pembudidaya">Air Tawar</a>
+										<li class="sub-airtawar">
+											<a href="/app/airtawar">Air Tawar</a>
 											<span class="icon-thumbnail">AT</span>
 										</li>
-										<li class="sub-pembudidaya">
-											<a href="/app/pembudidaya">Rumput Laut</a>
+										<li class="sub-rumputlaut">
+											<a href="/app/rumputlaut">Rumput Laut</a>
 											<span class="icon-thumbnail">RL</span>
 										</li>
-										<li class="sub-pembudidaya">
-											<a href="/app/pembudidaya">Tambak</a>
+										<li class="sub-tambak">
+											<a href="/app/tambak">Tambak</a>
 											<span class="icon-thumbnail">T</span>
 										</li>
 									</ul>

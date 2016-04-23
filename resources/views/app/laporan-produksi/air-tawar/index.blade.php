@@ -1,7 +1,7 @@
 @extends('app.layout.main')
 
 @section('title')
-	Pengolah | Tambah
+	Produksi Air Tawar
 @endsection
 
 
@@ -23,11 +23,11 @@
 						<!-- START BREADCRUMB -->
 						<ul class="breadcrumb pull-left">
 							<li>
-								<a href="{{ route('pengolah') }}">Pengolah</a>
+								<a href="{{ route('airtawar') }}">Pemasar</a>
 							</li>
 						</ul>
 						
-						<button id="show-tambah-pengolah" class="btn btn-primary bg-blueblur m-t-10 m-b-10 pull-right">Tambah</button>
+						<button id="show-tambah-pemasar" class="btn btn-primary bg-blueblur m-t-10 m-b-10 pull-right">Tambah</button>
 					</div>
 				</div>
 
@@ -40,198 +40,84 @@
 
 					<div class="row">
 
-						@if ( Session::has('error_nik') )
-							<?php $user = App\User::where('nik', Session::get('error_nik'))->first() ?>
-				    		<div class="alert alert-danger">GAGAL!!! NIK <b>{{ Session::get('error_nik') }}</b> telah terdaftar. <a href="javascript:;" data-toggle="modal" data-target="#modal-double-nik">Lihat</a></div> 
-						@endif
-
-						@if ( Session::has('gagal') )
-				    		@include('app/layout/partials/alert-danger', ['message' => session('gagal')])
-						@endif
-
-						@if ( count($errors) > 0 )
-							@include('app/layout/partials/alert-danger', ['errors' => $errors])
-						@endif
-
-						<div id="tambah-pengolah" style="display:none">
+						<div id="tambah-pemasar" style="display:none">
 							<div class="col-lg-7 col-md-6 ">
 
 								<!-- START PANEL -->
 								<div class="panel panel-transparent">
 									<div class="panel-body">
-										<form id="form-personal" method="post" action="{{ url('/app/pengolah/store') }}" role="form">
+										<form id="form-personal" method="GET" action="{{ route('air_tawar_tambah') }}" role="form">
 											
-											{{ csrf_field() }}
-
-											<div class="row clearfix">
-												<div class="col-sm-6">
-													<div class="form-group required">
-														<label>NIK</label>
-														<input type="text" class="form-control number" name="nik" value="{{ Input::old('nik') }}" required>
-													</div>
-												</div>
+											<input type="hidden" id="token" name="_token" value="{{ csrf_token() }}">
+											<label>KETERANGAN IDENTITAS</label>
+											<div class="row">
 												<div class="col-sm-6">
 													<div class="form-group">
-														<label>Nama Lengkap</label>
-														<input type="text" class="form-control" name="name" name="nik" value="{{ Input::old('name') }}" required>
+														<label>Provinsi</label>
+														<span id="provinsi">
+															<select class="full-width" name="provinsi" data-init-plugin="select2" onchange="get_kabupaten(this.value)" required>
+																<option value="">Pilih Provinsi</option>
+																<?php $provinsi = App\Provinsi::where('nama','Sulawesi Selatan')->get() ?>
+																@foreach ( $provinsi as $prov )
+																	<option value="{{ $prov->id }}">{{ $prov->nama }}</option>
+																@endforeach
+															</select>
+														</span>
+													</div>
+												</div>
+												<div class="col-md-6">
+													<div class="form-group">
+														<label>Kabupaten/Kota</label>
+														<span id="kabupaten">
+															<select class="full-width" data-init-plugin="select2" name="kabupaten" required>
+																<option value="">Pilih Kabupaten/Kota...</option>
+															</select>
+														</span>
 													</div>
 												</div>
 											</div>
 
 											<div class="row">
-												<div class="col-sm-12">
+												<div class="col-md-6">
 													<div class="form-group">
-														<label>Alamat</label>
-														<input type="text" class="form-control" name="alamat" value="{{ Input::old('alamat') }}" required>
+														<label>Kecamatan</label>
+														<div id="kecamatan">
+															<select class="full-width" data-init-plugin="select2" name="kecamatan" required>
+																<option value="">Pilih Kecamatan...</option>
+															</select>
+														</div>
+													</div>
+												</div>
+												<div class="col-sm-6">
+													<div class="form-group">
+														<label>Desa/Kelurahan</label>
+														<span id="desa">
+														<select class="full-width" name="desa" data-init-plugin="select2" required>
+															<option value="">Pilih Desa/Kelurahan...</option>
+														</select>
+														</span>
 													</div>
 												</div>
 											</div>
+
+											<hr>
+											<label>KETERANGAN PRODUKSI</label>
+											<div class="row">
+												<div class="col-md-6">
+													<div class="form-group">
+														<label>Luas Areal (Ha)</label>
+														<input type="number" name="luas_areal" value="{{ Input::old('luas_areal') }}" class="form-control" required="">
+													</div>
+												</div>
+												<div class="col-md-6">
+													<div class="form-group">
+														<label>Luas Tanam</label>
+														<input type="number" name="luas_tanam" value="{{ Input::old('luas_tanam') }}" class="form-control" required="">
+													</div>
+												</div>
+											</div>
+
 											
-											<div class="row">
-												<div class="col-sm-4">
-													<div class="form-group">
-														<label>RT/RW</label>
-														<input type="text" class="form-control" name="alamat_erte" value="">
-													</div>
-												</div>
-												<div class="col-sm-4">
-													<div class="form-group">
-														<label>Telepon</label>
-														<input type="text" class="form-control number" name="telepon" value="">
-													</div>
-												</div>
-												<div class="col-sm-4">
-													<div class="form-group">
-														<label>Kode POS</label>
-														<input type="text" class="form-control" name="kode_pos" value="">
-													</div>
-												</div>
-											</div>
-
-											<div class="row">
-												<div class="col-sm-6">
-													<div class="form-group">
-														<label>Nama Kelompok</label>
-														<div class="input-group">
-															<select class="full-width" name="id_kelompok" data-init-plugin="select2" required>
-																<option value="">Pilih Kelompok...</option>
-																@foreach( $kelompok as $klp )
-																	<option value="{{ $klp->id_kelompok }}" {{ Input::old('id_kelompok') == $klp->id_kelompok ? "selected":"" }}>{{ $klp->nama }}</option>
-																@endforeach
-															</select>
-															<div class="input-group-btn">
-																<a class="btn btn-primary" href="/app/kelompok">+</a>
-															</div>
-														</div>
-													</div>
-												</div>
-												<div class="col-sm-6">
-													<div class="form-group">
-														<label>Jabatan Dalam Kelompok</label>
-														<select class="full-width" name="id_jabatan" data-init-plugin="select2" required>
-															<option value="">Pilih Jabatan...</option>
-															@foreach( $jabatan as $jab )
-																<option value="{{ $jab->id }}" {{ Input::old('id_jabatan') == $jab->id ? "selected":"" }}>{{ $jab->nama }}</option>
-															@endforeach
-														</select>
-													</div>
-												</div>
-											</div>
-
-
-											<div class="row">
-												<div class="col-md-6">
-													<div class="form-group">
-														<label>Jenis Olahan</label>
-														<div id="usaha">
-															<select class="full-width" data-init-plugin="select2" name="jenis_olahan" required>
-																<option value="">Pilih Jenis Olahan...</option>
-																<?php $JO = App\JenisOlahan::all() ?>
-																@foreach( $JO as $jo )
-																	<option value="{{ $jo->id }}" {{ Input::old('jenis_olahan') == $jo->id ? "selected":"" }}>{{ $jo->jenis }}</option>
-																@endforeach
-															</select>
-														</div>
-													</div>
-												</div>
-												<div class="col-md-6">
-													<div class="form-group">
-														<label>Merek Dagang</label>
-														<div id="usaha">
-															<select class="full-width" data-init-plugin="select2" name="merek_dagang">
-																<option value="">Pilih Merek Dagang...</option>
-																<?php $merekDagang = App\MerekDagang::all() ?>
-																@foreach( $merekDagang as $md )
-																	<option value="{{ $md->id }}" {{ Input::old('merek_dagang') == $md->id ? "selected":"" }}>{{ $md->merek }}</option>
-																@endforeach
-															</select>
-														</div>
-													</div>
-												</div>
-											</div>
-
-											<div class="row">
-												<div class="col-sm-12">
-													<div class="form-group">
-														<label>Kepemilikan Sarana dan Prasarana</label>
-														<select name="id_sarana[]" class="full-width" data-init-plugin="select2" multiple="" data-placeholder="Pilih Sarana / Prasaranan...">
-
-															<optgroup label="Bantuan">
-															<?php $PK = App\Sarana::where('tipe','Pengolah')->where('jenis','Bantuan')->get() ?>
-															@foreach( $PK as $rpk )
-																<option value="{{ $rpk->id }}">{{ $rpk->sub }}</option>
-															@endforeach
-															</optgroup>
-
-															<optgroup label="Swadaya">
-															<?php $PK = App\Sarana::where('tipe','Pengolah')->where('jenis','Swadaya')->get() ?>
-															@foreach( $PK as $rpk )
-																<option value="{{ $rpk->id }}">{{ $rpk->sub }}</option>
-															@endforeach
-															</optgroup>
-														</select>
-													</div>
-												</div>
-											</div>
-
-											<div class="row">
-												<div class="col-md-6">
-													<div class="form-group">
-														<label>Legalitas Produksi</label>
-
-														<?php $legalitas_produksi = ['P-IRT', 'Depkes', 'Halal']; ?>
-
-														<select class="full-width" data-init-plugin="select2" name="legalitas_produksi" required>
-															<option value="">Pilih Legalitas Produksi...</option>
-															@for ( $i = 0; $i < count( $legalitas_produksi ); $i++ )
-																<option value="{{ $legalitas_produksi[$i] }}" {{ Input::old('legalitas_produksi') == $legalitas_produksi[$i] ? "selected":"" }}>{{ $legalitas_produksi[$i] }}</option>
-															@endfor
-														</select>
-													</div>
-												</div>
-												<div class="col-md-6">
-													<div class="form-group">
-														<label>Modal yang dimiliki</label>
-														<input type="text" class="form-control number" name="modal_dimiliki" value="{{ Input::old('modal_dimiliki') }}">
-													</div>
-												</div>
-											</div>
-
-											<div class="row">
-												<div class="col-md-6">
-													<div class="form-group">
-														<label>Modal Pinjaman</label>
-														<input type="text" class="form-control number" name="modal_pinjaman" value="{{ Input::old('modal_pinjaman') }}">
-													</div>
-												</div>
-												<div class="col-md-6">
-													<div class="form-group">
-														<label>Omzet Perbulan</label>
-														<input type="text" class="form-control number" name="omzet_perbulan" value="{{ Input::old('omzet_perbulan') }}">
-													</div>
-												</div>
-											</div>
-
 											<div class="clearfix"></div>
 											<br>
 											
@@ -245,11 +131,6 @@
 						</div>
 
 						<div class="col-md-12">
-								
-								@if ( Session::has('success') ) 
-						    		@include('app/layout/partials/alert-sukses', ['message' => session('success')])
-								@endif
-							
 							<!-- START PANEL -->
 							<div class="panel panel-default">
 								<div class="panel-body">
@@ -281,38 +162,29 @@
 												</thead>
 
 												<tbody>
-
-													<?php
-														if ( isset($_GET['page']) ) {
-															$i = ($_GET['page'] - 1) * $limit + 1;
-														} else {
-															$i = 1;
-														}
-													?>
-
-													@foreach( $pengolah as $pe )
+													@foreach($airtawar as $at)
 														<tr>
 															<td>
 																<div class="checkbox">
-																	<input type="checkbox" class="pilih" value="{{ $pe->id }}" id="pb{{ $pe->id }}">
-																	<label for="pb{{ $pe->id }}" class="m-l-20"></label>
+																	<input type="checkbox" class="pilih" value="" id="">
+																	<label for="" class="m-l-20"></label>
 																</div>
 															</td>
-															<td>{{ $i++ }}</td>
-															<td>{{ $pe->name }}</td>
-															<td>{{ $pe->kelompok->nama }}</td>
-															<td>{{ $pe->jabatan->nama }}</td>
-															<td>{{ $pe->olahan->jenis }}</td>
+															<td>{{ $at->desa }}</td>
+															<td>{{ $at->desa }}</td>
+															<td>{{ $at->desa }}</td>
+															<td>{{ $at->desa }}</td>
+															<td>{{ $at->desa }}</td>
 															<td style="text-align:center">
-																<a class="btn btn-default btn-xs view" data-id="{{ $pe->id }}"><i class="fa fa-search-plus"></i></a>
-																<a href="{{ url('/app/pengolah/edit/'.$pe->id) }}" class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i></a>
+																<a class="btn btn-default btn-xs view" data-id=""><i class="fa fa-search-plus"></i></a>
+																<a href="" class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i></a>
 															</td>
 														</tr>
 													@endforeach
 												</tbody>
 
 											</table>
-											<center>{!! $pengolah->links() !!}</center>
+											<center>{!! $airtawar->links() !!}</center>
 										</div>
 
 									</div>
@@ -395,7 +267,7 @@
 				<div class="modal-body">
 					<div class="row">
 						<div class="col-md-6">
-							<a href="{{ url('/app/pengolah/export-excel') }}">
+							<a href="{{ url('/app/pemasar/export-excel') }}">
 								<i class="fa fa-file-excel-o export-excel"></i>
 								Unduh Dalam Format Mic.Excel
 							</a>
@@ -460,8 +332,37 @@
 
 @section('registerscript')
 	<script>
-		$(".menu-items .link-pengolah").addClass("active open");
-		$(".menu-items .link-pengolah .sub-pengolah").addClass("active");
+		$(".menu-items .link-pembudidaya").addClass("active open");
+		$(".menu-items .link-pembudidaya .sub-laporan-produksi").addClass("active");
+		$(".menu-items .link-pembudidaya .sub-laporan-produksi .sub-airtawar").addClass("active");
+
+		function get_kabupaten(id_prov){
+			var _token = $('meta[name="csrf-token"]').attr('content');
+			var url = "{{ url('get-kabupaten') }}";
+			var url = url+"/"+id_prov;
+			$.get(url, { id_prov:id_prov, _token:_token}, function(data){
+				$('#kabupaten').html(data);
+			});
+		}
+
+		function get_kecamatan(id_kabupaten){
+			var _token = $('meta[name="csrf-token"]').attr('content');
+			var url = "{{ url('get-kecamatan') }}";
+			var url = url+"/"+id_kabupaten;
+			$.get(url, { id_kabupaten:id_kabupaten, _token:_token}, function(data){
+				$('#kecamatan').html(data);
+			});
+		}
+
+		function get_desa(id_kecamatan){
+			var _token = $('meta[name="csrf-token"]').attr('content');
+			var url = "{{ url('get-desa') }}";
+			var url = url+"/"+id_kecamatan;
+			$.get(url, { id_kecamatan:id_kecamatan, _token:_token}, function(data){
+				$('#desa').html(data);
+			});
+		}
+
 		$(function(){
 
 			var _token = $('meta[name="csrf-token"]').attr('content');
@@ -482,8 +383,8 @@
 
 			});
 
-			$("#show-tambah-pengolah").click(function(){
-				$("#tambah-pengolah").fadeIn();
+			$("#show-tambah-pemasar").click(function(){
+				$("#tambah-pemasar").fadeIn();
 				$("input[name='nik']").focus();
 				$(this).hide();
 			});
@@ -500,7 +401,7 @@
 			});
 
 			@if ( count($errors) > 0 || Session::has('gagal') || Session::has('error_nik') )
-				$("#tambah-pengolah").fadeIn();
+				$("#tambah-pemasar").fadeIn();
 			@endif
 
 		});
