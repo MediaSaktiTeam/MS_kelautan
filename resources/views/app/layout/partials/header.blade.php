@@ -1,4 +1,16 @@
+<?php 
 
+	$Ms = new App\Custom;
+	// Default value of filter date on produksi
+	$sql = App\Produksi::orderBy('id', 'desc')->first();
+	$limit1 = date_format(date_create($sql->created_at), "Y-m-d");
+	$limit = strtotime("$limit1 +1 day");
+	$limit = date("Y-m-d", $limit);
+
+	$offset = strtotime("$limit1 -3 months");
+	$offset = date("Y-m-d", $offset);
+	
+?>
 		<!-- BEGIN SIDEBPANEL-->
 		<nav class="page-sidebar" data-pages="sidebar">
 			<!-- BEGIN SIDEBAR MENU TOP TRAY CONTENT-->
@@ -57,6 +69,11 @@
 									<a href="/app/pembudidaya">Daftar Pembudidaya</a>
 									<span class="icon-thumbnail">DP</span>
 								</li>
+								
+								<li class="sub-produksi">
+									<a href="/app/produksi?offset={{ $offset }}&limit={{ $limit }}&pr={{ $Ms->enk('Pembudidaya') }}">Produksi</a>
+									<span class="icon-thumbnail">PR</span>
+								</li>
 								<li class="sub-pemasar">
 									<a href="javascript:;">Laporan Produksi <span class=" arrow"></span></a>
 									<span class="icon-thumbnail">LP</span>
@@ -81,10 +98,24 @@
 					@endif
 
 					@if ( Permissions::nelayan() )
+
 						<li class="link-nelayan">
-							<a href="/app/nelayan"><span class="title">Nelayan</span></a>
+							<a href="javascript:;"><span class="title">Nelayan</span>
+							<span class=" arrow"></span></a>
 							<span class="icon-thumbnail">N</span>
+							<ul class="sub-menu">
+
+								<li class="sub-nelayan">
+									<a href="/app/nelayan"><span class="title">Daftar Nelayan</span></a>
+									<span class="icon-thumbnail">N</span>
+								</li>
+								<li class="sub-produksi">
+									<a href="/app/produksi?offset={{ $offset }}&limit={{ $limit }}&pr={{ $Ms->enk('Nelayan') }}">Produksi</a>
+									<span class="icon-thumbnail">PR</span>
+								</li>
+							</ul>
 						</li>
+
 					@endif
 
 				<!-- 	@if ( Permissions::pengolah() )
@@ -95,23 +126,27 @@
 					@endif -->
 
 					
-					<li class="link-pengolah">
-						<a href="javascript:;"><span class="title">Pengolah</span>
-						<span class=" arrow"></span></a>
-						<span class="icon-thumbnail">PL</span>
-						<ul class="sub-menu">
-							@if ( Permissions::pengolah() )
-							<li class="sub-pengolah">
-								<a href="/app/pengolah">Daftar Pengolah</a>
-								<span class="icon-thumbnail">DP</span>
-							</li>
-							<li class="sub-pemasar">
-								<a href="/app/pemasar">Pemasar</a>
-								<span class="icon-thumbnail">PS</span>
-							</li>
-							@endif
-						</ul>
-					</li>
+					@if ( Permissions::pengolah() )
+						<li class="link-pengolah">
+							<a href="javascript:;"><span class="title">Pengolah</span>
+							<span class=" arrow"></span></a>
+							<span class="icon-thumbnail">PL</span>
+							<ul class="sub-menu">
+								<li class="sub-pengolah">
+									<a href="/app/pengolah">Daftar Pengolah</a>
+									<span class="icon-thumbnail">DP</span>
+								</li>
+								<li class="sub-pemasar">
+									<a href="/app/pemasar">Pemasar</a>
+									<span class="icon-thumbnail">PS</span>
+								</li>
+								<li class="sub-produksi">
+									<a href="/app/produksi?offset={{ $offset }}&limit={{ $limit }}&pr={{ $Ms->enk('Pengolah') }}">Produksi</a>
+									<span class="icon-thumbnail">M</span>
+								</li>
+							</ul>
+						</li>
+					@endif
 
 
 					<li class="link-kelompok">

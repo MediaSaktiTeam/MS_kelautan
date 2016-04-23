@@ -1,3 +1,5 @@
+<?php $Ms = new App\Custom; ?>
+
 <table class="table table-hover demo-table-dynamic custom" id="tableWithDynamicRows">
 	<tbody>
 		<tr>
@@ -42,6 +44,49 @@
 
 	</tbody>
 </table>
+
+
+<h5>Data Produksi</h5>
+
+<?php
+	
+	$produksi = DB::table('produksi as p')
+						->leftJoin('users as u', 'p.id_user', '=', 'u.id')
+						->select('p.*','u.id as id_user', 'u.name')
+						->where('u.id', $nelayan->id)
+						->orderBy('p.id','asc')
+						->get();
+
+?>
+<table class="table table-bordered demo-table-dynamic custom" id="tableWithDynamicRows">
+	<tr>
+		<th>Tanggal</th>
+		<th>Jenis Produksi</th>
+		<th>Jenis Ikan</th>
+		<th>Biaya Produksi</th>
+	</tr>
+
+	@if ( count($produksi) > 0 )
+
+		@foreach( $produksi as $pr )
+			<tr>
+				<td>{{ $Ms->tgl_indo($pr->created_at) }}</td>
+				<td>{{ $pr->jenis_produksi }}</td>
+				<td>{{ $pr->jenis_ikan }}</td>
+				<td>{{ $Ms->rupiah($pr->biaya_produksi) }}</td>
+			</tr>
+		@endforeach
+
+	@else 
+
+		<tr>
+			<td colspan="4">Tidak ada data</td>
+		</tr>
+
+	@endif
+
+</table>
+
 
 <h5>Bantuan yang pernah didapatkan</h5>
 

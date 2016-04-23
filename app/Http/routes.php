@@ -188,6 +188,10 @@
 				'getHapus'	=>	'administrator_hapus',
 				'postUpdate'	=>	'administrator_update',
 			]);
+		Route::controller('app/produksi', 'ProduksiController',
+			[
+				'getIndex'  => 'produksi'
+			]);
 
 	});
 

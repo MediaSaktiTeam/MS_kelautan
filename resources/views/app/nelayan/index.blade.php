@@ -386,7 +386,8 @@
 
 @section('registerscript')
 	<script>
-		$(".menu-items .link-nelayan").addClass("active");
+		$(".menu-items .link-nelayan").addClass("active open");
+		$(".menu-items .link-nelayan .sub-nelayan").addClass("active");
 
 		$(function(){
 
