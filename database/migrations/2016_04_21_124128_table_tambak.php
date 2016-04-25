@@ -18,9 +18,18 @@ class TableTambak extends Migration
             $table->string('kabupaten');
             $table->string('kecamatan');
             $table->string('desa');
+            $table->string('rtp');
             $table->string('panjang_pantai');
             $table->string('potensi');
             $table->string('luas_tanam');
+            $table->string('penebaran_windu');
+            $table->string('penebaran_vanamae');
+            $table->string('penebaran_bandeng');
+            $table->string('jumlah_hidup_windu');
+            $table->string('jumlah_hidup_vanamae');
+            $table->string('jumlah_hidup_bandeng');
+            $table->string('pakan_pelet');
+            $table->string('pakan_dedak');
         });
     }
 

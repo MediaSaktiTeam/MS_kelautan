@@ -18,8 +18,13 @@ class TableAirTawar extends Migration
             $table->string('kabupaten');
             $table->string('kecamatan');
             $table->string('desa');
+            $table->string('rtp');
             $table->string('luas_areal');
             $table->string('luas_tanam');
+            $table->string('mas');
+            $table->string('nila');
+            $table->string('lele');
+            $table->string('bawal');
         });
     }
 
