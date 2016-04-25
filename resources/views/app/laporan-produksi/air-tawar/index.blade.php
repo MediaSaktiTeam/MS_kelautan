@@ -103,16 +103,79 @@
 											<hr>
 											<label>KETERANGAN PRODUKSI</label>
 											<div class="row">
-												<div class="col-md-6">
+												<div class="col-md-4">
+													<div class="form-group">
+														<label>Petani/RTP</label>
+														<input type="number" name="rtp" value="{{ Input::old('rtp') }}" class="form-control" required="">
+													</div>
+												</div>
+												<div class="col-md-4">
 													<div class="form-group">
 														<label>Luas Areal (Ha)</label>
 														<input type="number" name="luas_areal" value="{{ Input::old('luas_areal') }}" class="form-control" required="">
 													</div>
 												</div>
-												<div class="col-md-6">
+												<div class="col-md-4">
 													<div class="form-group">
 														<label>Luas Tanam</label>
 														<input type="number" name="luas_tanam" value="{{ Input::old('luas_tanam') }}" class="form-control" required="">
+													</div>
+												</div>
+											</div>
+
+											<hr>
+											<label>PENEBARAN (Ekor)</label>
+											<div class="row">
+												<div class="col-md-3">
+													<div class="form-group">
+														<label>MAS</label>
+														<input type="number" name="penebaran_mas" value="{{ Input::old('penebaran_mas') }}" class="form-control" required="">
+													</div>
+												</div>
+												<div class="col-md-3">
+													<div class="form-group">
+														<label>NILA</label>
+														<input type="number" name="penebaran_nila" value="{{ Input::old('penebaran_nila') }}" class="form-control" required="">
+													</div>
+												</div>
+												<div class="col-md-3">
+													<div class="form-group">
+														<label>LELE</label>
+														<input type="number" name="penebaran_lele" value="{{ Input::old('penebaran_lele') }}" class="form-control" required="">
+													</div>
+												</div>
+												<div class="col-md-3">
+													<div class="form-group">
+														<label>BAWAL</label>
+														<input type="number" name="penebaran_bawal" value="{{ Input::old('penebaran_bawal') }}" class="form-control" required="">
+													</div>
+												</div>
+											</div>
+											<hr>
+											<label>JUMLAH HIDUP</label>
+											<div class="row">
+												<div class="col-md-3">
+													<div class="form-group">
+														<label>MAS</label>
+														<input type="number" name="jumlah_hidup_mas" value="{{ Input::old('jumlah_hidup_mas') }}" class="form-control" required="">
+													</div>
+												</div>
+												<div class="col-md-3">
+													<div class="form-group">
+														<label>NILA</label>
+														<input type="number" name="jumlah_hidup_nila" value="{{ Input::old('jumlah_hidup_nila') }}" class="form-control" required="">
+													</div>
+												</div>
+												<div class="col-md-3">
+													<div class="form-group">
+														<label>LELE</label>
+														<input type="number" name="jumlah_hidup_lele" value="{{ Input::old('jumlah_hidup_lele') }}" class="form-control" required="">
+													</div>
+												</div>
+												<div class="col-md-3">
+													<div class="form-group">
+														<label>BAWAL</label>
+														<input type="number" name="jumlah_hidup_bawal" value="{{ Input::old('jumlah_hidup_bawal') }}" class="form-control" required="">
 													</div>
 												</div>
 											</div>
@@ -155,6 +218,7 @@
 														<th>No.</th>
 														<th>Kecamatan</th>
 														<th>Desa</th>
+														<th>Petani/RTP</th>
 														<th>Luas Areal (Ha)</th>
 														<th>Luas Tanam (Ha)</th>
 														<th style="text-align:center">Aksi</th>
@@ -178,8 +242,9 @@
 																</div>
 															</td>
 															<td>{{ $i++ }}</td>
-															<td>{{ $at->kecamatan }}</td>
+															<td>{{ $at->datakecamatan->nama }}</td>
 															<td>{{ $at->desa }}</td>
+															<td>{{ $at->rtp }}</td>
 															<td>{{ $at->luas_areal }}</td>
 															<td>{{ $at->luas_tanam }}</td>
 															<td style="text-align:center">

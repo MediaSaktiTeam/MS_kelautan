@@ -73,7 +73,7 @@
 														<span id="kabupaten">
 															<select class="full-width" data-init-plugin="select2" name="kabupaten" required>
 																<option value="">Pilih Kabupaten/Kota...</option>
-																<option value="{{ $airtawar->kabupaten }}">{{ $airtawar->kabupaten }}</option>
+																<option value="{{ $airtawar->kabupaten }}">{{ $airtawar->datakabupaten->nama }}</option>
 															</select>
 
 														</span>
@@ -88,7 +88,7 @@
 														<div id="kecamatan">
 															<select class="full-width" data-init-plugin="select2" name="kecamatan" required>
 																<option value="">Pilih Kecamatan...</option>
-																<option value="{{ $airtawar->kecamatan }}">{{ $airtawar->kecamatan }}</option>
+																<option value="{{ $airtawar->kecamatan }}">{{ $airtawar->datakecamatan->nama }}</option>
 															</select>
 														</div>
 													</div>
@@ -109,13 +109,19 @@
 											<hr>
 											<label>KETERANGAN PRODUKSI</label>
 											<div class="row">
-												<div class="col-md-6">
+												<div class="col-md-4">
+													<div class="form-group">
+														<label>Petani/RTP</label>
+														<input type="number" name="rtp" value="{{ $airtawar->rtp }}" class="form-control" required="">
+													</div>
+												</div>
+												<div class="col-md-4">
 													<div class="form-group">
 														<label>Luas Areal (Ha)</label>
 														<input type="number" name="luas_areal" value="{{ $airtawar->luas_areal }}" class="form-control" required="">
 													</div>
 												</div>
-												<div class="col-md-6">
+												<div class="col-md-4">
 													<div class="form-group">
 														<label>Luas Tanam</label>
 														<input type="number" name="luas_tanam" value="{{ $airtawar->luas_tanam }}" class="form-control" required="">
@@ -123,6 +129,64 @@
 												</div>
 											</div>
 
+											<hr>
+											<label>PENEBARAN (Ekor)</label>
+											<div class="row">
+												<div class="col-md-3">
+													<div class="form-group">
+														<label>MAS</label>
+														<input type="number" name="penebaran_mas" value="{{ $airtawar->penebaran_mas }}" class="form-control" required="">
+													</div>
+												</div>
+												<div class="col-md-3">
+													<div class="form-group">
+														<label>NILA</label>
+														<input type="number" name="penebaran_nila" value="{{ $airtawar->penebaran_nila }}" class="form-control" required="">
+													</div>
+												</div>
+												<div class="col-md-3">
+													<div class="form-group">
+														<label>LELE</label>
+														<input type="number" name="penebaran_lele" value="{{ $airtawar->penebaran_lele }}" class="form-control" required="">
+													</div>
+												</div>
+												<div class="col-md-3">
+													<div class="form-group">
+														<label>BAWAL</label>
+														<input type="number" name="penebaran_bawal" value="{{ $airtawar->penebaran_bawal }}" class="form-control" required="">
+													</div>
+												</div>
+											</div>
+											<hr>
+											<label>JUMLAH HIDUP</label>
+											<div class="row">
+												<div class="col-md-3">
+													<div class="form-group">
+														<label>MAS</label>
+														<input type="number" name="jumlah_hidup_mas" value="{{ $airtawar->jumlah_hidup_mas }}" class="form-control" required="">
+													</div>
+												</div>
+												<div class="col-md-3">
+													<div class="form-group">
+														<label>NILA</label>
+														<input type="number" name="jumlah_hidup_nila" value="{{ $airtawar->jumlah_hidup_nila }}" class="form-control" required="">
+													</div>
+												</div>
+												<div class="col-md-3">
+													<div class="form-group">
+														<label>LELE</label>
+														<input type="number" name="jumlah_hidup_lele" value="{{ $airtawar->jumlah_hidup_lele }}" class="form-control" required="">
+													</div>
+												</div>
+												<div class="col-md-3">
+													<div class="form-group">
+														<label>BAWAL</label>
+														<input type="number" name="jumlah_hidup_bawal" value="{{ $airtawar->jumlah_hidup_bawal }}" class="form-control" required="">
+													</div>
+												</div>
+											</div>
+
+			
 											
 											<div class="clearfix"></div>
 											<br>

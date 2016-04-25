@@ -20,15 +20,15 @@ class AirTawarController extends Controller
 	}
 
 	public function get_kabupaten($id){
-		return view('app.pemasar.get-kabupaten', ['id' => $id]);
+		return view('app.laporan-produksi.air-tawar.get-kabupaten', ['id' => $id]);
 	}
 
 	public function get_kecamatan($id){
-		return view('app.pemasar.get-kecamatan', ['id' => $id]);
+		return view('app.laporan-produksi.air-tawar.get-kecamatan', ['id' => $id]);
 	}
 
 	public function get_desa($id){
-		return view('app.pemasar.get-desa', ['id' => $id]);
+		return view('app.laporan-produksi.air-tawar.get-desa', ['id' => $id]);
 	}
 
 	public function getTambah(Request $request)
@@ -39,8 +39,17 @@ class AirTawarController extends Controller
 		$dt->kabupaten = $request->kabupaten;
 		$dt->kecamatan = $request->kecamatan;
 		$dt->desa = $request->desa;
+		$dt->rtp = $request->rtp;
 		$dt->luas_areal = $request->luas_areal;
 		$dt->luas_tanam = $request->luas_tanam;
+		$dt->penebaran_mas = $request->penebaran_mas;
+		$dt->penebaran_nila = $request->penebaran_nila;
+		$dt->penebaran_lele = $request->penebaran_lele;
+		$dt->penebaran_bawal = $request->penebaran_bawal;
+		$dt->jumlah_hidup_mas = $request->jumlah_hidup_mas;
+		$dt->jumlah_hidup_nila = $request->jumlah_hidup_nila;
+		$dt->jumlah_hidup_lele = $request->jumlah_hidup_lele;
+		$dt->jumlah_hidup_bawal = $request->jumlah_hidup_bawal;
 		$dt->save();
 		return redirect()->route('airtawar')->with(session()->flash('success','Data Berhasil Tersimpan !!'));
 	}
@@ -73,8 +82,17 @@ class AirTawarController extends Controller
 		$dt->kabupaten = $request->kabupaten;
 		$dt->kecamatan = $request->kecamatan;
 		$dt->desa = $request->desa;
+		$dt->rtp = $request->rtp;
 		$dt->luas_areal = $request->luas_areal;
 		$dt->luas_tanam = $request->luas_tanam;
+		$dt->penebaran_mas = $request->penebaran_mas;
+		$dt->penebaran_nila = $request->penebaran_nila;
+		$dt->penebaran_lele = $request->penebaran_lele;
+		$dt->penebaran_bawal = $request->penebaran_bawal;
+		$dt->jumlah_hidup_mas = $request->jumlah_hidup_mas;
+		$dt->jumlah_hidup_nila = $request->jumlah_hidup_nila;
+		$dt->jumlah_hidup_lele = $request->jumlah_hidup_lele;
+		$dt->jumlah_hidup_bawal = $request->jumlah_hidup_bawal;
 		$dt->save();
 		$data['airtawar'] = AirTawar::paginate(1);
 

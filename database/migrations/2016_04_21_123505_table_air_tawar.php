@@ -21,10 +21,14 @@ class TableAirTawar extends Migration
             $table->string('rtp');
             $table->string('luas_areal');
             $table->string('luas_tanam');
-            $table->string('mas');
-            $table->string('nila');
-            $table->string('lele');
-            $table->string('bawal');
+            $table->string('penebaran_mas');
+            $table->string('penebaran_nila');
+            $table->string('penebaran_lele');
+            $table->string('penebaran_bawal');
+            $table->string('jumlah_hidup_mas');
+            $table->string('jumlah_hidup_nila');
+            $table->string('jumlah_hidup_lele');
+            $table->string('jumlah_hidup_bawal');
         });
     }
 
