@@ -1,13 +1,22 @@
-<?php 
+<?php
 	$Ms = new App\Custom;
 	// Default value of date filter on produksi
 	$sql = App\Produksi::orderBy('id', 'desc')->first();
-	$limit1 = date_format(date_create($sql->created_at), "Y-m-d");
-	$limit = strtotime("$limit1 +1 day");
-	$limit = date("Y-m-d", $limit);
 
-	$offset = strtotime("$limit1 -3 months");
-	$offset = date("Y-m-d", $offset);
+	if ( $sql ) {
+
+		$limit1 = date_format(date_create($sql->created_at), "Y-m-d");
+		$limit = strtotime("$limit1 +1 day");
+		$limit = date("Y-m-d", $limit);
+
+		$offset = strtotime("$limit1 -3 months");
+		$offset = date("Y-m-d", $offset);
+
+	} else {
+		$offset = date('Y-m-d');
+		$limit = strtotime("$offset +3 months");
+		$limit = date("Y-m-d", $limit);
+	}
 	
 ?>
 		<!-- BEGIN SIDEBPANEL-->
