@@ -84,6 +84,9 @@
 
 				'getIndex' => 'airtawar',
 				'getTambah'  => 'air_tawar_tambah',
+				'getEdit' => 'airtawar_edit',
+				'getUpdate'  => 'airtawar_update',
+				'getHapus' => 'airtawar_hapus',
 
 			]);
 

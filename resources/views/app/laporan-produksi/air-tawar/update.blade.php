@@ -23,11 +23,13 @@
 						<!-- START BREADCRUMB -->
 						<ul class="breadcrumb pull-left">
 							<li>
-								<a href="{{ route('airtawar') }}">Pemasar</a>
+								<a href="{{ route('airtawar') }}">Air Tawar</a>
+							</li>
+							<li>
+								<a href="#" class="active">Sunting Air Tawar</a>
 							</li>
 						</ul>
 						
-						<button id="show-tambah-pemasar" class="btn btn-primary bg-blueblur m-t-10 m-b-10 pull-right">Tambah</button>
 					</div>
 				</div>
 
@@ -40,13 +42,13 @@
 
 					<div class="row">
 
-						<div id="tambah-pemasar" style="display:none">
+						<div id="edit-airtawar">
 							<div class="col-lg-7 col-md-6 ">
 
 								<!-- START PANEL -->
 								<div class="panel panel-transparent">
 									<div class="panel-body">
-										<form id="form-personal" method="GET" action="{{ route('air_tawar_tambah') }}" role="form">
+										<form id="form-personal" method="GET" action="{{ route('airtawar_update') }}" role="form">
 											
 											<input type="hidden" id="token" name="_token" value="{{ csrf_token() }}">
 											<label>KETERANGAN IDENTITAS</label>
@@ -59,7 +61,7 @@
 																<option value="">Pilih Provinsi</option>
 																<?php $provinsi = App\Provinsi::where('nama','Sulawesi Selatan')->get() ?>
 																@foreach ( $provinsi as $prov )
-																	<option value="{{ $prov->id }}" {{ Input::old('provinsi') == $prov->id ? "selected":"" }}>{{ $prov->nama }}</option>
+																	<option value="{{ $prov->id }}" {{ $airtawar->provinsi == $prov->id ? "selected":"" }}>{{ $prov->nama }}</option>
 																@endforeach
 															</select>
 														</span>
@@ -71,7 +73,9 @@
 														<span id="kabupaten">
 															<select class="full-width" data-init-plugin="select2" name="kabupaten" required>
 																<option value="">Pilih Kabupaten/Kota...</option>
+																<option value="{{ $airtawar->kabupaten }}">{{ $airtawar->kabupaten }}</option>
 															</select>
+
 														</span>
 													</div>
 												</div>
@@ -84,6 +88,7 @@
 														<div id="kecamatan">
 															<select class="full-width" data-init-plugin="select2" name="kecamatan" required>
 																<option value="">Pilih Kecamatan...</option>
+																<option value="{{ $airtawar->kecamatan }}">{{ $airtawar->kecamatan }}</option>
 															</select>
 														</div>
 													</div>
@@ -94,6 +99,7 @@
 														<span id="desa">
 														<select class="full-width" name="desa" data-init-plugin="select2" required>
 															<option value="">Pilih Desa/Kelurahan...</option>
+															<option value="{{ $airtawar->desa }}">{{ $airtawar->desa }}</option>
 														</select>
 														</span>
 													</div>
@@ -106,13 +112,13 @@
 												<div class="col-md-6">
 													<div class="form-group">
 														<label>Luas Areal (Ha)</label>
-														<input type="number" name="luas_areal" value="{{ Input::old('luas_areal') }}" class="form-control" required="">
+														<input type="number" name="luas_areal" value="{{ $airtawar->luas_areal }}" class="form-control" required="">
 													</div>
 												</div>
 												<div class="col-md-6">
 													<div class="form-group">
 														<label>Luas Tanam</label>
-														<input type="number" name="luas_tanam" value="{{ Input::old('luas_tanam') }}" class="form-control" required="">
+														<input type="number" name="luas_tanam" value="{{ $airtawar->luas_tanam }}" class="form-control" required="">
 													</div>
 												</div>
 											</div>
@@ -121,7 +127,7 @@
 											<div class="clearfix"></div>
 											<br>
 											<input type="hidden" id="id-airtawar" name="id">
-											<button class="btn btn-primary" type="submit">Tambah</button>
+											<button class="btn btn-primary" type="submit">Simpan</button>
 										</form>
 									</div>
 								</div>
@@ -130,75 +136,7 @@
 							</div>
 						</div>
 
-						<div class="col-md-12">
-							<!-- START PANEL -->
-							<div class="panel panel-default">
-								<div class="panel-body">
-									<div class="">
-										<div class="input-group">
-											<input type="text" onkeyup="cari_data(this.value)" class="form-control" placeholder="Pencarian">
-											<span class="input-group-btn">
-												<a href="" class="btn btn-default" data-toggle="modal" data-target="#modal-ekspor"><i class="fa fa-file-archive-o"></i> &nbsp;Ekspor</a>
-											</span>
-										</div>
-										<br>
-
-										<div id="show-pencarian"></div>
-
-										<div id="show-data">
-											<table class="table table-hover demo-table-dynamic custom">
-												<thead>
-													<tr>
-														<th>
-															<button class="btn btn-check" data-toggle="modal" data-target="#modal-hapus" disabled id="hapus"><i class="pg-trash"></i></button>
-														</th>
-														<th>No.</th>
-														<th>Kecamatan</th>
-														<th>Desa</th>
-														<th>Luas Areal (Ha)</th>
-														<th>Luas Tanam (Ha)</th>
-														<th style="text-align:center">Aksi</th>
-													</tr>
-												</thead>
-
-												<tbody>
-													<?php
-														if ( isset($_GET['page']) ) {
-															$i = ($_GET['page'] - 1) * $limit + 1;
-														} else {
-															$i = 1;
-														}
-													?>
-													@foreach($airtawar as $at)
-														<tr>
-															<td>
-																<div class="checkbox">
-																	<input type="checkbox" class="pilih" value="{{ $at->id }}" id="at{{ $at->id }}">
-																	<label for="at{{ $at->id }}" class="m-l-20"></label>
-																</div>
-															</td>
-															<td>{{ $i++ }}</td>
-															<td>{{ $at->kecamatan }}</td>
-															<td>{{ $at->desa }}</td>
-															<td>{{ $at->luas_areal }}</td>
-															<td>{{ $at->luas_tanam }}</td>
-															<td style="text-align:center">
-																<a class="btn btn-default btn-xs view" data-id="{{ $at->id }}"><i class="fa fa-search-plus"></i></a>
-																<a href="{{ route('airtawar_edit',$at->id) }}" class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i></a>
-															</td>
-		
-														</tr>
-													@endforeach
-												</tbody>
-
-											</table>
-											<center>{!! $airtawar->links() !!}</center>
-										</div>
-
-									</div>
-								</div>
-							</div>
-							<!-- END PANEL -->
+						
 						</div>
 					</div>
 				</div>
@@ -215,125 +153,7 @@
 </div>
 <!-- END PAGE CONTAINER -->
 
-<!-- MODAL STICK UP VIEW -->
-<div class="modal fade stick-up" id="modal-view" tabindex="-1" role="dialog" aria-hidden="true">
-	<div class="modal-dialog modal-lg">
-		<div class="modal-content-wrapper">
-			<div class="modal-content">
-				<div class="modal-header clearfix text-left">
-					<button type="button" class="close" data-dismiss="modal"  aria-hidden="true"><i class="pg-close fs-14"></i></button>
-					<h5>Detail pengolah</h5>
-				</div>
-				<div class="modal-body" id="view-detail">
 
-				</div>
-				<div class="modal-footer">
-					<button type="button" class="btn btn-default btn-cons no-margin inline" data-dismiss="modal">Kembali</button>
-				</div>
-			</div>
-		</div>
-		<!-- /.modal-content -->
-	</div>
-	<!-- /.modal-dialog -->
-</div>
-
-<!-- MODAL STICK UP SMALL ALERT -->
-<div class="modal fade stick-up" id="modal-hapus" tabindex="-1" role="dialog" aria-hidden="true">
-	<div class="modal-dialog modal-sm">
-		<div class="modal-content-wrapper">
-			<div class="modal-content">
-				<div class="modal-header clearfix text-left">
-					<button type="button" class="close" data-dismiss="modal"  aria-hidden="true"><i class="pg-close fs-14"></i></button>
-					<h5>Hapus Data</h5>
-				</div>
-				<div class="modal-body">
-					<p class="no-margin">Data akan dihapus. Apakah Anda yakin?</p>
-				</div>
-				<div class="modal-footer">
-					<a class="btn btn-danger btn-hapus btn-cons pull-left inline">Ya</a>
-					<button type="button" class="btn btn-default btn-cons no-margin pull-left inline" data-dismiss="modal">Tidak</button>
-				</div>
-			</div>
-		</div>
-		<!-- /.modal-content -->
-	</div>
-	<!-- /.modal-dialog -->
-</div>
-<!-- END MODAL STICK UP SMALL ALERT -->
-
-
-<!-- MODAL STICK UP SMALL ALERT -->
-<div class="modal fade slide-up" id="modal-ekspor" tabindex="-1" role="dialog" aria-hidden="true">
-	<div class="modal-dialog">
-		<div class="modal-content-wrapper">
-			<div class="modal-content">
-				<div class="modal-header clearfix text-left">
-					<button type="button" class="close" data-dismiss="modal"  aria-hidden="true"><i class="pg-close fs-14"></i></button>
-					<h5>Ekspor Data</h5>
-					<hr>
-				</div>
-				<div class="modal-body">
-					<div class="row">
-						<div class="col-md-6">
-							<a href="{{ url('/app/pemasar/export-excel') }}">
-								<i class="fa fa-file-excel-o export-excel"></i>
-								Unduh Dalam Format Mic.Excel
-							</a>
-						</div>
-						<div class="col-md-6">
-							<a href="{{ url('/app/pengolah/export-pdf') }}">
-								<i class="fa fa-file-pdf-o export-pdf"></i>
-								Unduh Dalam Format PDF
-							</a>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-		<!-- /.modal-content -->
-	</div>
-	<!-- /.modal-dialog -->
-</div>
-<!-- END MODAL STICK UP SMALL ALERT -->
-
-@if ( Session::has('error_nik') )
-
-	<!-- MODAL STICK UP VIEW -->
-	<div class="modal fade stick-up" id="modal-double-nik" tabindex="-1" role="dialog" aria-hidden="true">
-		<div class="modal-dialog modal-md">
-			<div class="modal-content-wrapper">
-				<div class="modal-content">
-					<div class="modal-header clearfix text-left">
-						<button type="button" class="close" data-dismiss="modal"  aria-hidden="true"><i class="pg-close fs-14"></i></button>
-						<h5>Data</h5>
-					</div>
-					<div class="modal-body" id="view-detail">
-						<table class="table">
-							<tr>
-								<td style="width:100px">NIK</td><td>: {{ $user->nik }}</td>
-							</tr>
-							<tr>
-								<td style="width:100px">Nama</td><td>: {{ $user->name }}</td>
-							</tr>
-							<tr>
-								<td style="width:100px">Kelompok</td><td>: {{ $user->kelompok->nama }}</td>
-							</tr>
-							<tr>
-								<td style="width:100px">Profesi</td><td>: {{ $user->profesi }}</td>
-							</tr>
-						</table>
-					</div>
-					<div class="modal-footer">
-						<button type="button" class="btn btn-default btn-cons no-margin inline" data-dismiss="modal">Kembali</button>
-					</div>
-				</div>
-			</div>
-			<!-- /.modal-content -->
-		</div>
-		<!-- /.modal-dialog -->
-	</div>
-
-@endif
 
 @endsection
 
@@ -387,7 +207,7 @@
 		        else {
 				  return false;
 		        }
-		        $(".btn-hapus").attr('href',"{{ url('/app/airtawar/hapus') }}/"+id);
+		        $(".btn-hapus").attr('href',"{{ url('/app/pengolah/hapus') }}/"+id);
 
 			});
 
