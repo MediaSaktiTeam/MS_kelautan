@@ -178,8 +178,8 @@
 																</div>
 															</td>
 															<td>{{ $i++ }}</td>
-															<td>{{ $at->kecamatan->nama }}</td>
-															<td>{{ $at->desa->nama }}</td>
+															<td>{{ $at->kecamatan }}</td>
+															<td>{{ $at->desa }}</td>
 															<td>{{ $at->luas_areal }}</td>
 															<td>{{ $at->luas_tanam }}</td>
 															<td style="text-align:center">
