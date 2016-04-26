@@ -157,7 +157,22 @@
 							</ul>
 						</li>
 					@endif
-
+	
+					<li class="link-pesisir">
+							<a href="javascript:;"><span class="title">Pesisir</span>
+							<span class=" arrow"></span></a>
+							<span class="icon-thumbnail">PS</span>
+							<ul class="sub-menu">
+								<li class="sub-mangrove">
+									<a href="/app/mangrove">Mangrove</a>
+									<span class="icon-thumbnail">M</span>
+								</li>
+								<li class="sub-terumbu">
+									<a href="/app/terumbu">Terumbu Karang</a>
+									<span class="icon-thumbnail">TK</span>
+								</li>
+							</ul>
+						</li>
 
 					<li class="link-kelompok">
 						<a href="/app/kelompok"><span class="title">Kelompok</span></a>

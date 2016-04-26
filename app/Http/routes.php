@@ -75,6 +75,12 @@
 				'getTambah'  => 'pemasar_tambah',
 
 			]);
+		Route::controller('app/mangrove', 'MangroveController', 
+			[
+				'getIndex' => 'mangrove',
+				'getTambah' => 'mangrove_tambah'
+			]);
+
 		Route::get('get-kabupaten/{id}', 'PemasarController@get_kabupaten');
 		Route::get('get-kecamatan/{id}', 'PemasarController@get_kecamatan');
 		Route::get('get-desa/{id}', 'PemasarController@get_desa');
