@@ -75,9 +75,9 @@
 				'getTambah'  => 'pemasar_tambah',
 
 			]);
-		Route::get('get-kabupaten/{id}', 'PemasarController@get_kabupaten');
-		Route::get('get-kecamatan/{id}', 'PemasarController@get_kecamatan');
-		Route::get('get-desa/{id}', 'PemasarController@get_desa');
+		Route::get('get-kabupaten/{id}', 'LokasiController@get_kabupaten');
+		Route::get('get-kecamatan/{id}', 'LokasiController@get_kecamatan');
+		Route::get('get-desa/{id}', 'LokasiController@get_desa');
 
 		Route::controller('app/airtawar', 'AirTawarController', 
 			[

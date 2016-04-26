@@ -10,7 +10,7 @@ class Desa extends Model
     public $timestamps = false;
 
     public function kecamatan(){
-    	return $this->belongsTo('App\kecamatan', 'id');
+    	return $this->belongsTo('App\kecamatan', 'id_kecamatan');
     }
 
 }

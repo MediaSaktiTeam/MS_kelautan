@@ -19,18 +19,6 @@ class PemasarController extends Controller
 		return view ('app.pemasar.index',$data);
 	}
 
-	public function get_kabupaten($id){
-		return view('app.pemasar.get-kabupaten', ['id' => $id]);
-	}
-
-	public function get_kecamatan($id){
-		return view('app.pemasar.get-kecamatan', ['id' => $id]);
-	}
-
-	public function get_desa($id){
-		return view('app.pemasar.get-desa', ['id' => $id]);
-	}
-
 	public function getTambah(Request $request)
 	{
 		$dt = new Pemasar;

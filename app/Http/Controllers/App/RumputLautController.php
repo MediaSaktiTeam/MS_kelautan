@@ -20,18 +20,6 @@ class RumputLautController extends Controller
 		return view ('app.laporan-produksi.rumputlaut.index',$data)->with('limit', $limit);
 	}
 
-	public function get_kabupaten($id){
-		return view('app.laporan-produksi.rumputlaut.get-kabupaten', ['id' => $id]);
-	}
-
-	public function get_kecamatan($id){
-		return view('app.laporan-produksi.rumputlaut.get-kecamatan', ['id' => $id]);
-	}
-
-	public function get_desa($id){
-		return view('app.laporan-produksi.rumputlaut.get-desa', ['id' => $id]);
-	}
-
 	public function getDetail($id)
 	{
 		$data['rumputlaut'] = RumputLaut::where('id',$id)->first();
@@ -84,8 +72,7 @@ class RumputLautController extends Controller
 	public function getUpdate(Request $request)
 	{
 
-		$dt = new RumputLaut;
-		$dt->id = $request->id;
+		$dt = RumputLaut::find($request->id);
 		$dt->provinsi = $request->provinsi;
 		$dt->kabupaten = $request->kabupaten;
 		$dt->kecamatan = $request->kecamatan;

@@ -17,19 +17,14 @@ class AirTawarController extends Controller
 	{
 		$limit = 10;
 		$data['airtawar'] = AirTawar::paginate($limit);
+		// $data['airtawar'] = DB::table('app_air_tawar')
+		// 							->leftJoin('kecamatan', 'app_air_tawar.kecamatan', '=', 'kecamatan.id')
+		// 							->leftJoin('desa', 'app_air_tawar.desa', '=', 'desa.id')
+		// 								->select(
+		// 									'kecamatan.nama as nama_kecamatan',
+		// 									'app_air_tawar.*',
+		// 									'desa.nama as nama_desa')->paginate($limit);
 		return view ('app.laporan-produksi.air-tawar.index',$data)->with('limit', $limit);
-	}
-
-	public function get_kabupaten($id){
-		return view('app.laporan-produksi.air-tawar.get-kabupaten', ['id' => $id]);
-	}
-
-	public function get_kecamatan($id){
-		return view('app.laporan-produksi.air-tawar.get-kecamatan', ['id' => $id]);
-	}
-
-	public function get_desa($id){
-		return view('app.laporan-produksi.air-tawar.get-desa', ['id' => $id]);
 	}
 
 	public function getDetail($id)
@@ -76,7 +71,6 @@ class AirTawarController extends Controller
 	{
 		$data['provinsi'] = Provinsi::all();
 		$data['kabupaten'] = Kabupaten::all();
-		$data['kecamatan'] = Kecamatan::all();
 		$data['airtawar'] = AirTawar::find($id);
 		return view('app.laporan-produksi.air-tawar.update', $data);
 	}
@@ -84,8 +78,7 @@ class AirTawarController extends Controller
 	public function getUpdate(Request $request)
 	{
 
-		$dt = new AirTawar;
-		$dt->id = $request->id;
+		$dt = AirTawar::find($request->id);
 		$dt->provinsi = $request->provinsi;
 		$dt->kabupaten = $request->kabupaten;
 		$dt->kecamatan = $request->kecamatan;
@@ -105,6 +98,47 @@ class AirTawarController extends Controller
 		$data['airtawar'] = AirTawar::paginate(1);
 
 		return redirect()->route('airtawar', $data)->with(session()->flash('success','Data Berhasil diupdate !!'));
+	}
+
+	public function getCari($cari = NULL)
+	{
+		$data['airtawar'] = DB::table('app_air_tawar')
+									->leftJoin('kecamatan', 'app_air_tawar.kecamatan', '=', 'kecamatan.id')
+									->leftJoin('desa', 'app_air_tawar.desa', '=', 'desa.id')
+										->select(
+											'kecamatan.nama as nama_kecamatan',
+											'app_air_tawar.*',
+											'desa.nama as nama_desa')
+												->where(function($query) use ($cari) {
+													$query->where('app_air_tawar.kecamatan','LIKE', '%'.$cari.'%')
+															->orWhere('app_air_tawar.desa','LIKE', '%'.$cari.'%');
+												})
+									->take(40)->get();
+		return view('app.laporan-produksi.airtawar.cari', $data);
+	}
+
+	public function getExportExcel()
+	{
+		$data['airtawar'] = AirTawar::get();
+
+        Excel::create('Data airtawar');
+
+        Excel::create('Data airtawar', function($excel) use($data)
+        {
+            
+            $excel->sheet('New sheet', function($sheet) use($data)
+            {
+                $sheet->loadView('app.laporan-produksi.air-tawar.export-excel', $data);
+            }); 
+        })->download('xlsx');
+	}
+
+	public function getExportPdf()
+	{
+		$data['airtawar'] = AirTawar::get();
+		
+        $pdf = PDF::loadView('app.laporan-produksi.air-tawar.export-pdf', $data);
+        return $pdf->setPaper('legal')->setOrientation('landscape')->setWarnings(false)->download('Data airtawar.pdf');
 	}
 
 }
