@@ -12,4 +12,5 @@ class Desa extends Model
     public function kecamatan(){
     	return $this->belongsTo('App\kecamatan', 'id');
     }
+
 }

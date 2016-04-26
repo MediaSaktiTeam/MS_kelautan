@@ -15,8 +15,9 @@ class AirTawarController extends Controller
 
 	public function getIndex()
 	{
-		$data['airtawar'] = AirTawar::paginate(10);
-		return view ('app.laporan-produksi.air-tawar.index',$data);
+		$limit = 10;
+		$data['airtawar'] = AirTawar::paginate($limit);
+		return view ('app.laporan-produksi.air-tawar.index',$data)->with('limit', $limit);
 	}
 
 	public function get_kabupaten($id){
@@ -29,6 +30,13 @@ class AirTawarController extends Controller
 
 	public function get_desa($id){
 		return view('app.laporan-produksi.air-tawar.get-desa', ['id' => $id]);
+	}
+
+	public function getDetail($id)
+	{
+		$data['airtawar'] = AirTawar::where('id',$id)->first();
+
+		return view('app.laporan-produksi.air-tawar.detail', $data);
 	}
 
 	public function getTambah(Request $request)
