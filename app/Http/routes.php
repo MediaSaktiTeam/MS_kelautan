@@ -87,6 +87,19 @@
 				'getEdit' => 'airtawar_edit',
 				'getUpdate'  => 'airtawar_update',
 				'getHapus' => 'airtawar_hapus',
+				'getDetail'  => 'airtawar_get_detail',
+
+			]);
+
+		Route::controller('app/rumputlaut', 'RumputLautController', 
+			[
+
+				'getIndex' => 'rumputlaut',
+				'getTambah'  => 'rumputlaut_tambah',
+				'getEdit' => 'rumputlaut_edit',
+				'getUpdate'  => 'rumputlaut_update',
+				'getHapus' => 'rumputlaut_hapus',
+				'getDetail'  => 'rumputlaut_get_detail',
 
 			]);
 
