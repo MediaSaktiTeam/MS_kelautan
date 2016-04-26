@@ -1,7 +1,7 @@
 @extends('app.layout.main')
 
 @section('title')
-	Nelayan | Tambah
+	Produksi Air Tawar
 @endsection
 
 
@@ -23,11 +23,11 @@
 						<!-- START BREADCRUMB -->
 						<ul class="breadcrumb pull-left">
 							<li>
-								<a href="{{ route('nelayan') }}">Nelayan</a>
+								<a href="{{ route('airtawar') }}">Pemasar</a>
 							</li>
 						</ul>
 						
-						<button id="show-tambah-nelayan" class="btn btn-primary bg-blueblur m-t-10 m-b-10 pull-right">Tambah</button>
+						<button id="show-tambah-pemasar" class="btn btn-primary bg-blueblur m-t-10 m-b-10 pull-right">Tambah</button>
 					</div>
 				</div>
 
@@ -36,170 +36,164 @@
 			<br>
 
 			<div class="container-fluid container-fixed-lg">
-
 				<div class="inner" style="transform: translateY(0px); opacity: 1;">
 
 					<div class="row">
 
-						<div id="tambah-nelayan" style="display:none">
+						<div id="tambah-pemasar" style="display:none">
 							<div class="col-lg-7 col-md-6 ">
-
-								@if ( Session::has('error_nik') )
-									<?php $user = App\User::where('nik', Session::get('error_nik'))->first() ?>
-						    		<div class="alert alert-danger">GAGAL!!! NIK <b>{{ Session::get('error_nik') }}</b> telah terdaftar. <a href="javascript:;" data-toggle="modal" data-target="#modal-double-nik">Lihat</a></div> 
-								@endif
-
-								@if ( Session::has('gagal') ) 
-						    		@include('app/layout/partials/alert-danger', ['message' => session('gagal')])
-								@endif
-
-								@if ( count($errors) > 0 )
-									@include('app/layout/partials/alert-danger', ['errors' => $errors])
-								@endif
 
 								<!-- START PANEL -->
 								<div class="panel panel-transparent">
 									<div class="panel-body">
-										<form id="form-personal" method="post" action="{{ route('nelayan_simpan') }}" role="form">
+										<form id="form-personal" method="GET" action="{{ route('air_tawar_tambah') }}" role="form">
 											
-											{{ csrf_field() }}
-
-											<div class="row clearfix">
-												<div class="col-sm-6">
-													<div class="form-group required">
-														<label>NIK</label>
-														<input type="text" class="form-control number" name="nik" value="{{ Input::old('nik') }}" required>
-													</div>
-												</div>
-												<div class="col-sm-6">
-													<div class="form-group">
-														<label>Nama Lengkap</label>
-														<input type="text" class="form-control" name="name" value="{{ Input::old('name') }}" required>
-													</div>
-												</div>
-											</div>
-
-											<div class="row">
-												<div class="col-sm-6">
-													<div class="form-group required">
-														<label>No. Kartu Nelayan</label>
-														<input type="text" class="form-control" name="no_kartu_nelayan" value="{{ Input::old('no_kartu_nelayan') }}" required>
-													</div>
-												</div>
-												<div class="col-sm-6">
-													<div class="form-group">
-														<label>Alamat</label>
-														<input type="text" class="form-control" name="alamat" value="{{ Input::old('alamat') }}"required>
-													</div>
-												</div>
-											</div>
-
-											<div class="row">
-												<div class="col-sm-4">
-													<div class="form-group">
-														<label>RT/RW</label>
-														<input type="text" class="form-control" name="alamat_erte" value="">
-													</div>
-												</div>
-												<div class="col-sm-4">
-													<div class="form-group">
-														<label>Telepon</label>
-														<input type="text" class="form-control" name="telepon" value="">
-													</div>
-												</div>
-												<div class="col-sm-4">
-													<div class="form-group">
-														<label>Kode POS</label>
-														<input type="text" class="form-control" name="kode_pos" value="">
-													</div>
-												</div>
-											</div>
-											
+											<input type="hidden" id="token" name="_token" value="{{ csrf_token() }}">
+											<label>KETERANGAN IDENTITAS</label>
 											<div class="row">
 												<div class="col-sm-6">
 													<div class="form-group">
-														<label>Nama Kelompok</label>
-														<div class="input-group">
-															<select class="full-width" name="id_kelompok" data-init-plugin="select2" required>
-																<option value="">Pilih Kelompok...</option>
-																@foreach( $kelompok as $klp )
-																	<option value="{{ $klp->id_kelompok }}" {{ Input::old('id_kelompok') == $klp->id_kelompok ? "selected":"" }}>{{ $klp->nama }}</option>
+														<label>Provinsi</label>
+														<span id="provinsi">
+															<select class="full-width"  name="provinsi" data-init-plugin="select2" onchange="get_kabupaten(this.value)" required>
+																<option value="">Pilih Provinsi</option>
+																<?php $provinsi = App\Provinsi::where('nama','Sulawesi Selatan')->get() ?>
+																@foreach ( $provinsi as $prov )
+																	<option value="{{ $prov->id }}" {{ Input::old('provinsi') == $prov->id ? "selected":"" }}>{{ $prov->nama }}</option>
 																@endforeach
 															</select>
-															<div class="input-group-btn">
-																<a class="btn btn-primary" href="/app/kelompok">+</a>
-															</div>
+														</span>
+													</div>
+												</div>
+												<div class="col-md-6">
+													<div class="form-group">
+														<label>Kabupaten/Kota</label>
+														<span id="kabupaten">
+															<select class="full-width" data-init-plugin="select2" name="kabupaten" required>
+																<option value="">Pilih Kabupaten/Kota...</option>
+															</select>
+														</span>
+													</div>
+												</div>
+											</div>
+
+											<div class="row">
+												<div class="col-md-6">
+													<div class="form-group">
+														<label>Kecamatan</label>
+														<div id="kecamatan">
+															<select class="full-width" data-init-plugin="select2" name="kecamatan" required>
+																<option value="">Pilih Kecamatan...</option>
+															</select>
 														</div>
 													</div>
 												</div>
 												<div class="col-sm-6">
 													<div class="form-group">
-														<label>Jabatan Dalam Kelompok</label>
-														<select class="full-width" name="id_jabatan" data-init-plugin="select2" required>
-															<option value="">Pilih Jabatan...</option>
-															@foreach( $jabatan as $jab )
-																<option value="{{ $jab->id }}" {{ Input::old('id_jabatan') == $jab->id ? "selected":"" }}>{{ $jab->nama }}</option>
-															@endforeach
+														<label>Desa/Kelurahan</label>
+														<span id="desa">
+														<select class="full-width" name="desa" data-init-plugin="select2" required>
+															<option value="">Pilih Desa/Kelurahan...</option>
 														</select>
+														</span>
 													</div>
 												</div>
 											</div>
 
+											<hr>
+											<label>KETERANGAN PRODUKSI</label>
 											<div class="row">
-												<div class="col-md-12">
+												<div class="col-md-4">
 													<div class="form-group">
-														<label>Kepemilikan Sarana dan Prasarana</label>
+														<label>Petani/RTP</label>
+														<input type="number" name="rtp" value="{{ Input::old('rtp') }}" class="form-control" required="">
+													</div>
+												</div>
+												<div class="col-md-4">
+													<div class="form-group">
+														<label>Luas Areal (Ha)</label>
+														<input type="number" name="luas_areal" value="{{ Input::old('luas_areal') }}" class="form-control" required="">
+													</div>
+												</div>
+												<div class="col-md-4">
+													<div class="form-group">
+														<label>Luas Tanam</label>
+														<input type="number" name="luas_tanam" value="{{ Input::old('luas_tanam') }}" class="form-control" required="">
 													</div>
 												</div>
 											</div>
 
+											<hr>
+											<label>PENEBARAN (Ekor)</label>
 											<div class="row">
-												<div class="col-sm-12">
+												<div class="col-md-3">
 													<div class="form-group">
-														<select name="id_sarana[]" class="full-width" data-init-plugin="select2" multiple="" data-placeholder="Pilih Sarana / Prasaranan...">
-
-															<optgroup label="Perahu/Kapal">
-															<?php $PK = App\Sarana::where('tipe','Nelayan')->where('jenis','Perahu Kapal')->get() ?>
-															@foreach( $PK as $rpk )
-																<option value="{{ $rpk->id }}">{{ $rpk->sub }}</option>
-															@endforeach
-															</optgroup>
-
-															<optgroup label="Alat Tangkap">
-															<?php $PK = App\Sarana::where('tipe','Nelayan')->where('jenis','Alat Tangkap')->get() ?>
-															@foreach( $PK as $rpk )
-																<option value="{{ $rpk->id }}">{{ $rpk->sub }}</option>
-															@endforeach
-															</optgroup>
-
-															<optgroup label="Mesin">
-															<?php $PK = App\Sarana::where('tipe','Nelayan')->where('jenis','Mesin')->get() ?>
-															@foreach( $PK as $rpk )
-																<option value="{{ $rpk->id }}">{{ $rpk->sub }}</option>
-															@endforeach
-															</optgroup>
-														</select>
+														<label>MAS</label>
+														<input type="number" name="penebaran_mas" value="{{ Input::old('penebaran_mas') }}" class="form-control" required="">
+													</div>
+												</div>
+												<div class="col-md-3">
+													<div class="form-group">
+														<label>NILA</label>
+														<input type="number" name="penebaran_nila" value="{{ Input::old('penebaran_nila') }}" class="form-control" required="">
+													</div>
+												</div>
+												<div class="col-md-3">
+													<div class="form-group">
+														<label>LELE</label>
+														<input type="number" name="penebaran_lele" value="{{ Input::old('penebaran_lele') }}" class="form-control" required="">
+													</div>
+												</div>
+												<div class="col-md-3">
+													<div class="form-group">
+														<label>BAWAL</label>
+														<input type="number" name="penebaran_bawal" value="{{ Input::old('penebaran_bawal') }}" class="form-control" required="">
+													</div>
+												</div>
+											</div>
+											<hr>
+											<label>JUMLAH HIDUP</label>
+											<div class="row">
+												<div class="col-md-3">
+													<div class="form-group">
+														<label>MAS</label>
+														<input type="number" name="jumlah_hidup_mas" value="{{ Input::old('jumlah_hidup_mas') }}" class="form-control" required="">
+													</div>
+												</div>
+												<div class="col-md-3">
+													<div class="form-group">
+														<label>NILA</label>
+														<input type="number" name="jumlah_hidup_nila" value="{{ Input::old('jumlah_hidup_nila') }}" class="form-control" required="">
+													</div>
+												</div>
+												<div class="col-md-3">
+													<div class="form-group">
+														<label>LELE</label>
+														<input type="number" name="jumlah_hidup_lele" value="{{ Input::old('jumlah_hidup_lele') }}" class="form-control" required="">
+													</div>
+												</div>
+												<div class="col-md-3">
+													<div class="form-group">
+														<label>BAWAL</label>
+														<input type="number" name="jumlah_hidup_bawal" value="{{ Input::old('jumlah_hidup_bawal') }}" class="form-control" required="">
 													</div>
 												</div>
 											</div>
 
+											
 											<div class="clearfix"></div>
 											<br>
-											
+											<input type="hidden" id="id-airtawar" name="id">
 											<button class="btn btn-primary" type="submit">Tambah</button>
 										</form>
 									</div>
 								</div>
 								<!-- END PANEL -->
+
 							</div>
 						</div>
 
 						<div class="col-md-12">
-								
-							@if ( Session::has('success') ) 
-					    		@include('app/layout/partials/alert-sukses', ['message' => session('success')])
-							@endif
-							
 							<!-- START PANEL -->
 							<div class="panel panel-default">
 								<div class="panel-body">
@@ -211,6 +205,7 @@
 											</span>
 										</div>
 										<br>
+
 										<div id="show-pencarian"></div>
 
 										<div id="show-data">
@@ -221,14 +216,16 @@
 															<button class="btn btn-check" data-toggle="modal" data-target="#modal-hapus" disabled id="hapus"><i class="pg-trash"></i></button>
 														</th>
 														<th>No.</th>
-														<th>Nama Lengkap</th>
-														<th>Nama Kelompok</th>
-														<th>Jabatan Kelompok</th>
+														<th>Kecamatan</th>
+														<th>Desa</th>
+														<th>Petani/RTP</th>
+														<th>Luas Areal (Ha)</th>
+														<th>Luas Tanam (Ha)</th>
 														<th style="text-align:center">Aksi</th>
 													</tr>
 												</thead>
-												<tbody>
 
+												<tbody>
 													<?php
 														if ( isset($_GET['page']) ) {
 															$i = ($_GET['page'] - 1) * $limit + 1;
@@ -236,28 +233,31 @@
 															$i = 1;
 														}
 													?>
-													
-													@foreach( $nelayan as $nel )
+													@foreach($airtawar as $at)
 														<tr>
 															<td>
 																<div class="checkbox">
-																	<input type="checkbox" class="pilih" value="{{ $nel->id }}" id="pb{{ $nel->id }}">
-																	<label for="pb{{ $nel->id }}" class="m-l-20"></label>
+																	<input type="checkbox" class="pilih" value="{{ $at->id }}" id="at{{ $at->id }}">
+																	<label for="at{{ $at->id }}" class="m-l-20"></label>
 																</div>
 															</td>
 															<td>{{ $i++ }}</td>
-															<td>{{ $nel->name }}</td>
-															<td>{{ $nel->kelompok->nama }}</td>
-															<td>{{ $nel->jabatan->nama }}</td>
+															<td>{{ $at->datakecamatan->nama }}</td>
+															<td>{{ $at->desa }}</td>
+															<td>{{ $at->rtp }}</td>
+															<td>{{ $at->luas_areal }}</td>
+															<td>{{ $at->luas_tanam }}</td>
 															<td style="text-align:center">
-																<a class="btn btn-default btn-xs view" data-id="{{ $nel->id }}"><i class="fa fa-search-plus"></i></a>
-																<a href="{{ route('nelayan_edit',$nel->id) }}" class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i></a>
+																<a class="btn btn-default btn-xs view" data-id="{{ $at->id }}"><i class="fa fa-search-plus"></i></a>
+																<a href="{{ route('airtawar_edit',$at->id) }}" class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i></a>
 															</td>
+		
 														</tr>
 													@endforeach
 												</tbody>
+
 											</table>
-											<center>{!! $nelayan->links() !!}</center>
+											<center>{!! $airtawar->links() !!}</center>
 										</div>
 
 									</div>
@@ -271,11 +271,9 @@
 		</div>
 		<!-- END PAGE CONTENT -->
 		<!-- START COPYRIGHT -->
-		<!-- START CONTAINER FLUID -->
-
 			@include('app.layout.partials.copyright')
-			
 		<!-- END COPYRIGHT -->
+
 	</div>
 	<!-- END PAGE CONTENT WRAPPER -->
 
@@ -289,7 +287,7 @@
 			<div class="modal-content">
 				<div class="modal-header clearfix text-left">
 					<button type="button" class="close" data-dismiss="modal"  aria-hidden="true"><i class="pg-close fs-14"></i></button>
-					<h5>Detail Nelayan</h5>
+					<h5>Detail pengolah</h5>
 				</div>
 				<div class="modal-body" id="view-detail">
 
@@ -342,13 +340,13 @@
 				<div class="modal-body">
 					<div class="row">
 						<div class="col-md-6">
-							<a href="{{ url('/app/nelayan/export-excel') }}">
+							<a href="{{ url('/app/pemasar/export-excel') }}">
 								<i class="fa fa-file-excel-o export-excel"></i>
 								Unduh Dalam Format Mic.Excel
 							</a>
 						</div>
 						<div class="col-md-6">
-							<a href="{{ url('/app/nelayan/export-pdf') }}">
+							<a href="{{ url('/app/pengolah/export-pdf') }}">
 								<i class="fa fa-file-pdf-o export-pdf"></i>
 								Unduh Dalam Format PDF
 							</a>
@@ -407,14 +405,42 @@
 
 @section('registerscript')
 	<script>
-		$(".menu-items .link-nelayan").addClass("active open");
-		$(".menu-items .link-nelayan .sub-nelayan").addClass("active");
+		$(".menu-items .link-pembudidaya").addClass("active open");
+		$(".menu-items .link-pembudidaya .sub-laporan-produksi").addClass("active");
+		$(".menu-items .link-pembudidaya .sub-laporan-produksi .sub-airtawar").addClass("active");
+
+		function get_kabupaten(id_prov){
+			var _token = $('meta[name="csrf-token"]').attr('content');
+			var url = "{{ url('get-kabupaten') }}";
+			var url = url+"/"+id_prov;
+			$.get(url, { id_prov:id_prov, _token:_token}, function(data){
+				$('#kabupaten').html(data);
+			});
+		}
+
+		function get_kecamatan(id_kabupaten){
+			var _token = $('meta[name="csrf-token"]').attr('content');
+			var url = "{{ url('get-kecamatan') }}";
+			var url = url+"/"+id_kabupaten;
+			$.get(url, { id_kabupaten:id_kabupaten, _token:_token}, function(data){
+				$('#kecamatan').html(data);
+			});
+		}
+
+		function get_desa(id_kecamatan){
+			var _token = $('meta[name="csrf-token"]').attr('content');
+			var url = "{{ url('get-desa') }}";
+			var url = url+"/"+id_kecamatan;
+			$.get(url, { id_kecamatan:id_kecamatan, _token:_token}, function(data){
+				$('#desa').html(data);
+			});
+		}
 
 		$(function(){
 
 			var _token = $('meta[name="csrf-token"]').attr('content');
 
-			$("#hapus").click(function(){
+			$("table").on('click', '#hapus', function(){
 
 				if($(".pilih:checked").length) {
 		          var id = "";
@@ -426,20 +452,20 @@
 		        else {
 				  return false;
 		        }
-		        $(".btn-hapus").attr('href',"{{ route('nelayan_hapus') }}/"+id);
+		        $(".btn-hapus").attr('href',"{{ url('/app/airtawar/hapus') }}/"+id);
 
 			});
 
-			$("#show-tambah-nelayan").click(function(){
-				$("#tambah-nelayan").fadeIn();
+			$("#show-tambah-pemasar").click(function(){
+				$("#tambah-pemasar").fadeIn();
 				$("input[name='nik']").focus();
 				$(this).hide();
 			});
 
 			// Show detail
-			$(".panel").on('click','.view', function(){
+			$(".panel").on('click', '.view', function(){
 				var id = $(this).data('id');
-				var url = "{{ url('app/nelayan/detail') }}";
+				var url = "{{ url('app/pengolah/detail') }}";
 				var url = url+'/'+id;
 				$.get(url, {id:id, _token:_token}, function(data){
 					$("#view-detail").html(data);
@@ -448,36 +474,56 @@
 			});
 
 			@if ( count($errors) > 0 || Session::has('gagal') || Session::has('error_nik') )
-				$("#tambah-nelayan").fadeIn();
+				$("#tambah-pemasar").fadeIn();
 			@endif
 
 		});
-
-		function get_sarana(id){
-			$('#sarana').html('<i class="fa fa-spinner fa-spin"></i>');
-			var _token = $('meta[name="csrf-token"]').attr('content');
-			var url = "{{ url('app/nelayan/sarana') }}";
-			var url = url+"/"+id;
-			$.get(url, { id:id, _token:_token}, function(data){
-				$('#sarana').html(data);
-			});
-		}
 
 		function cari_data(cari){
 			if ( cari == "" ) {
 				$("#show-data").show();
 				$("#show-pencarian").hide();
 			} else {
+
 				$("#show-data").hide();
 				$("#show-pencarian").show();
 				$("#show-pencarian").html('<tr><td colspan="6"><i class="fa fa-spinner fa-spin"></i></td></tr>');
 				var _token = $('meta[name="csrf-token"]').attr('content');
-				var url = "{{ url('app/nelayan/cari') }}";
+				var url = "{{ url('app/pengolah/search') }}";
 				var url = url+"/"+cari;
 				$.get(url, { cari:cari, _token:_token}, function(data){
 					$('#show-pencarian').html(data);
 				});
 			}
 		}
+
+		$(function(){
+
+			$(".btn-edit").click(function(){
+
+				var id = $(this).data('id');
+				var provinsi = $(this).data('provinsi');
+				var kabupaten = $(this).data('kabupaten');
+				var kecamatan = $(this).data('kecamatan');
+				var desa = $(this).data('desa');
+				var areal = $(this).data('areal');
+				var tanam = $(this).data('tanam');
+				$('#id-airtawar').val(id);
+				$('#provinsi').val(provinsi);
+				$('#kabupaten').val(kabupaten);
+				$('#kecamatan').val(kecamatan);
+				$('#desa').val(desa);
+				$('#areal').val(areal);
+				$('#tanam').val(tanam);
+				$('#modal-sunting').modal('show');
+
+				$("select option").filter(function() {
+				    if( $(this).val().trim() == jenis ){
+				    	$(this).prop('selected', true);
+				    	$(".select2-chosen").html(jenis);
+				    }
+				});
+			});
+		})();
 	</script>
 @endsection

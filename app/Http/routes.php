@@ -78,6 +78,18 @@
 		Route::get('get-kabupaten/{id}', 'PemasarController@get_kabupaten');
 		Route::get('get-kecamatan/{id}', 'PemasarController@get_kecamatan');
 		Route::get('get-desa/{id}', 'PemasarController@get_desa');
+
+		Route::controller('app/airtawar', 'AirTawarController', 
+			[
+
+				'getIndex' => 'airtawar',
+				'getTambah'  => 'air_tawar_tambah',
+				'getEdit' => 'airtawar_edit',
+				'getUpdate'  => 'airtawar_update',
+				'getHapus' => 'airtawar_hapus',
+
+			]);
+
 		Route::controller('app/bantuan', 'RefBantuanController',
 			[
 				'getIndex' => 'ref_bantuan',
@@ -187,6 +199,10 @@
 				'postTambah'  => 'administrator_tambah',
 				'getHapus'	=>	'administrator_hapus',
 				'postUpdate'	=>	'administrator_update',
+			]);
+		Route::controller('app/produksi', 'ProduksiController',
+			[
+				'getIndex'  => 'produksi'
 			]);
 
 	});

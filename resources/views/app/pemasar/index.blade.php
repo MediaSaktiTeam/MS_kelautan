@@ -57,7 +57,7 @@
 														<span id="provinsi">
 															<select class="full-width" name="provinsi" data-init-plugin="select2" onchange="get_kabupaten(this.value)" required>
 																<option value="">Pilih Provinsi</option>
-																<?php $provinsi = App\Provinsi::orderBy('nama', 'asc')->get() ?>
+																<?php $provinsi = App\Provinsi::where('nama','Sulawesi Selatan')->get() ?>
 																@foreach ( $provinsi as $prov )
 																	<option value="{{ $prov->id }}">{{ $prov->nama }}</option>
 																@endforeach

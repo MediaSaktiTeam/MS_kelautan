@@ -9,7 +9,6 @@ use App\Http\Controllers\Controller;
 use DB,Excel,PDF;
 use App\User, App\Kelompok, App\Jabatan, App\Usaha, App\Sarana, App\KepemilikanSarana;
 use App\RefBantuan;
-use App\Permissions;
 
 class PembudidayaController extends Controller
 {
