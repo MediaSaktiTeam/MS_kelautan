@@ -73,6 +73,10 @@
 
 				'getIndex' => 'pemasar',
 				'getTambah'  => 'pemasar_tambah',
+				'getEdit' => 'pemasar_edit',
+				'getUpdate'  => 'pemasar_update',
+				'getHapus' => 'pemasar_hapus',
+				'getDetail'  => 'pemasar_get_detail',
 
 			]);
 
