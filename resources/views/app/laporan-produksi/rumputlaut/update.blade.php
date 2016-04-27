@@ -72,7 +72,7 @@
 														<label>Kabupaten/Kota</label>
 														<span id="kabupaten">
 															<select class="full-width" data-init-plugin="select2" name="kabupaten" required>
-																<option value="">Pilih Kabupaten/Kota...</option>
+																<option value="{{ $rumputlaut->kabupaten }}" {{ Input::old('kabupaten') == $rumputlaut->kabupaten ? "selected":"" }}>{{ $rumputlaut->datakabupaten->nama }}</option>
 															</select>
 														</span>
 													</div>
@@ -82,7 +82,7 @@
 														<label>Kecamatan</label>
 														<div id="kecamatan">
 															<select class="full-width" data-init-plugin="select2" name="kecamatan" required>
-																<option value="">Pilih Kecamatan...</option>
+																<option value="{{ $rumputlaut->kecamatan }}" {{ Input::old('kecamatan') == $rumputlaut->kecamatan ? "selected":"" }}>{{ $rumputlaut->datakecamatan->nama }}</option>
 															</select>
 														</div>
 													</div>
@@ -92,7 +92,7 @@
 														<label>Desa/Kelurahan</label>
 														<span id="desa">
 														<select class="full-width" name="desa" data-init-plugin="select2" required>
-															<option value="">Pilih Desa/Kelurahan...</option>
+															<option value="{{ $rumputlaut->desa }}" {{ Input::old('desa') == $rumputlaut->desa ? "selected":"" }}>{{ $rumputlaut->desa }}</option>
 														</select>
 														</span>
 													</div>
@@ -105,31 +105,31 @@
 												<div class="col-md-2">
 													<div class="form-group">
 														<label>Petani/RTP</label>
-														<input type="number" name="rtp" value="{{ Input::old('rtp') }}" class="form-control" required="">
+														<input type="number" name="rtp" value="{{ $rumputlaut->rtp }}" class="form-control" required="">
 													</div>
 												</div>
 												<div class="col-md-2">
 													<div class="form-group">
 														<label>Panjang Pantai</label>
-														<input type="number" name="panjang_pantai" value="{{ Input::old('panjang_pantai') }}" class="form-control" required="">
+														<input type="number" name="panjang_pantai" value="{{ $rumputlaut->panjang_pantai }}" class="form-control" required="">
 													</div>
 												</div>
 												<div class="col-md-2">
 													<div class="form-group">
 														<label>Potensi</label>
-														<input type="number" name="potensi" value="{{ Input::old('potensi') }}" class="form-control" required="">
+														<input type="number" name="potensi" value="{{ $rumputlaut->potensi }}" class="form-control" required="">
 													</div>
 												</div>
 												<div class="col-md-2">
 													<div class="form-group">
 														<label>Luas Tanam</label>
-														<input type="number" name="luas_tanam" value="{{ Input::old('luas_tanam') }}" class="form-control" required="">
+														<input type="number" name="luas_tanam" value="{{ $rumputlaut->luas_tanam }}" class="form-control" required="">
 													</div>
 												</div>
 												<div class="col-md-2">
 													<div class="form-group">
 														<label>Bentangan</label>
-														<input type="number" name="bentangan" value="{{ Input::old('bentangan') }}" class="form-control" required="">
+														<input type="number" name="bentangan" value="{{ $rumputlaut->bentangan }}" class="form-control" required="">
 													</div>
 												</div>
 											</div>
@@ -140,25 +140,25 @@
 												<div class="col-md-3">
 													<div class="form-group">
 														<label>Bibit cottoni</label>
-														<input type="number" name="bibit_cottoni" value="{{ Input::old('bibit_cottoni') }}" class="form-control" required="">
+														<input type="number" name="bibit_cottoni" value="{{ $rumputlaut->bibit_cottoni }}" class="form-control" required="">
 													</div>
 												</div>
 												<div class="col-md-3">
 													<div class="form-group">
 														<label>bibit spinosum</label>
-														<input type="number" name="bibit_spinosum" value="{{ Input::old('bibit_spinosum') }}" class="form-control" required="">
+														<input type="number" name="bibit_spinosum" value="{{ $rumputlaut->bibit_spinosum }}" class="form-control" required="">
 													</div>
 												</div>
 												<div class="col-md-3">
 													<div class="form-group">
 														<label>cottoni basah</label>
-														<input type="number" name="cottoni_basah" value="{{ Input::old('cottoni_basah') }}" class="form-control" required="">
+														<input type="number" name="cottoni_basah" value="{{ $rumputlaut->cottoni_basah }}" class="form-control" required="">
 													</div>
 												</div>
 												<div class="col-md-3">
 													<div class="form-group">
 														<label>cottoni kering</label>
-														<input type="number" name="cottoni_kering" value="{{ Input::old('cottoni_kering') }}" class="form-control" required="">
+														<input type="number" name="cottoni_kering" value="{{ $rumputlaut->cottoni_kering }}" class="form-control" required="">
 													</div>
 												</div>
 											</div>
@@ -168,13 +168,13 @@
 												<div class="col-md-3">
 													<div class="form-group">
 														<label>spinosum basah</label>
-														<input type="number" name="spinosum_basah" value="{{ Input::old('spinosum_basah') }}" class="form-control" required="">
+														<input type="number" name="spinosum_basah" value="{{ $rumputlaut->spinosum_basah }}" class="form-control" required="">
 													</div>
 												</div>
 												<div class="col-md-3">
 													<div class="form-group">
 														<label>spinosum kering</label>
-														<input type="number" name="spinosum_kering" value="{{ Input::old('spinosum_kering') }}" class="form-control" required="">
+														<input type="number" name="spinosum_kering" value="{{ $rumputlaut->spinosum_kering }}" class="form-control" required="">
 													</div>
 												</div>
 											</div>
@@ -182,7 +182,7 @@
 											
 											<div class="clearfix"></div>
 											<br>
-											<input type="hidden" id="id-rumputlaut" name="id">
+											<input type="hidden" id="id-rumputlaut" name="id" value="{{ $rumputlaut->id }}">
 											<button class="btn btn-primary" type="submit">Simpan</button>
 										</form>
 									</div>

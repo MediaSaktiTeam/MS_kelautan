@@ -103,6 +103,18 @@
 
 			]);
 
+		Route::controller('app/tambak', 'TambakController', 
+			[
+
+				'getIndex' => 'tambak',
+				'getTambah'  => 'tambak_tambah',
+				'getEdit' => 'tambak_edit',
+				'getUpdate'  => 'tambak_update',
+				'getHapus' => 'tambak_hapus',
+				'getDetail'  => 'tambak_get_detail',
+
+			]);
+
 		Route::controller('app/bantuan', 'RefBantuanController',
 			[
 				'getIndex' => 'ref_bantuan',

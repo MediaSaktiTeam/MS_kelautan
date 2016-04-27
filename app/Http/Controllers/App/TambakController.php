@@ -7,36 +7,36 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use DB,Excel,PDF;
-use App\User,App\AirTawar,App\Provinsi,App\Kabupaten,App\Kecamatan,App\Desa;
+use App\User,App\Tambak,App\Provinsi,App\Kabupaten,App\Kecamatan,App\Desa;
 use App\Permissions;
 
-class AirTawarController extends Controller
+class TambakController extends Controller
 {
 
 	public function getIndex()
 	{
 		$limit = 10;
-		$data['airtawar'] = AirTawar::paginate($limit);
-		// $data['airtawar'] = DB::table('app_air_tawar')
+		$data['tambak'] = Tambak::paginate($limit);
+		// $data['Tambak'] = DB::table('app_air_tawar')
 		// 							->leftJoin('kecamatan', 'app_air_tawar.kecamatan', '=', 'kecamatan.id')
 		// 							->leftJoin('desa', 'app_air_tawar.desa', '=', 'desa.id')
 		// 								->select(
 		// 									'kecamatan.nama as nama_kecamatan',
 		// 									'app_air_tawar.*',
 		// 									'desa.nama as nama_desa')->paginate($limit);
-		return view ('app.laporan-produksi.air-tawar.index',$data)->with('limit', $limit);
+		return view ('app.laporan-produksi.tambak.index',$data)->with('limit', $limit);
 	}
 
 	public function getDetail($id)
 	{
-		$data['airtawar'] = AirTawar::where('id',$id)->first();
+		$data['tambak'] = Tambak::where('id',$id)->first();
 
-		return view('app.laporan-produksi.air-tawar.detail', $data);
+		return view('app.laporan-produksi.tambak.detail', $data);
 	}
 
 	public function getTambah(Request $request)
 	{
-		$dt = new AirTawar;
+		$dt = new Tambak;
 		$dt->id = $request->id;
 		$dt->provinsi = $request->provinsi;
 		$dt->kabupaten = $request->kabupaten;
@@ -54,7 +54,7 @@ class AirTawarController extends Controller
 		$dt->jumlah_hidup_lele = $request->jumlah_hidup_lele;
 		$dt->jumlah_hidup_bawal = $request->jumlah_hidup_bawal;
 		$dt->save();
-		return redirect()->route('airtawar')->with(session()->flash('success','Data Berhasil Tersimpan !!'));
+		return redirect()->route('Tambak')->with(session()->flash('success','Data Berhasil Tersimpan !!'));
 	}
 
 	public function getHapus($id){
@@ -62,23 +62,23 @@ class AirTawarController extends Controller
 		$val = explode(",", $id);
 
 		foreach ($val as $value) {
-			AirTawar::where('id', $value)->delete();           
+			Tambak::where('id', $value)->delete();           
 		}
-		return redirect()->route('airtawar')->with(session()->flash('success','Data Berhasil Terhapus !!'));
+		return redirect()->route('tambak')->with(session()->flash('success','Data Berhasil Terhapus !!'));
 	}
 
 	public function getEdit($id)
 	{
 		$data['provinsi'] = Provinsi::all();
 		$data['kabupaten'] = Kabupaten::all();
-		$data['airtawar'] = AirTawar::find($id);
-		return view('app.laporan-produksi.air-tawar.update', $data);
+		$data['tambak'] = Tambak::find($id);
+		return view('app.laporan-produksi.tambak.update', $data);
 	}
 
 	public function getUpdate(Request $request)
 	{
 
-		$dt = AirTawar::find($request->id);
+		$dt = Tambak::find($request->id);
 		$dt->id = $request->id;
 		$dt->provinsi = $request->provinsi;
 		$dt->kabupaten = $request->kabupaten;
@@ -96,14 +96,14 @@ class AirTawarController extends Controller
 		$dt->jumlah_hidup_lele = $request->jumlah_hidup_lele;
 		$dt->jumlah_hidup_bawal = $request->jumlah_hidup_bawal;
 		$dt->save();
-		$data['airtawar'] = AirTawar::paginate(1);
+		$data['tambak'] = Tambak::paginate(1);
 
-		return redirect()->route('airtawar', $data)->with(session()->flash('success','Data Berhasil diupdate !!'));
+		return redirect()->route('tambak', $data)->with(session()->flash('success','Data Berhasil diupdate !!'));
 	}
 
 	public function getCari($cari = NULL)
 	{
-		$data['airtawar'] = DB::table('app_air_tawar')
+		$data['tambak'] = DB::table('app_air_tawar')
 									->leftJoin('kecamatan', 'app_air_tawar.kecamatan', '=', 'kecamatan.id')
 									->leftJoin('desa', 'app_air_tawar.desa', '=', 'desa.id')
 										->select(
@@ -115,31 +115,31 @@ class AirTawarController extends Controller
 															->orWhere('app_air_tawar.desa','LIKE', '%'.$cari.'%');
 												})
 									->take(40)->get();
-		return view('app.laporan-produksi.airtawar.cari', $data);
+		return view('app.laporan-produksi.Tambak.cari', $data);
 	}
 
 	public function getExportExcel()
 	{
-		$data['airtawar'] = AirTawar::get();
+		$data['tambak'] = Tambak::get();
 
-        Excel::create('Data airtawar');
+        Excel::create('Data Tambak');
 
-        Excel::create('Data airtawar', function($excel) use($data)
+        Excel::create('Data Tambak', function($excel) use($data)
         {
             
             $excel->sheet('New sheet', function($sheet) use($data)
             {
-                $sheet->loadView('app.laporan-produksi.air-tawar.export-excel', $data);
+                $sheet->loadView('app.laporan-produksi.tambak.export-excel', $data);
             }); 
         })->download('xlsx');
 	}
 
 	public function getExportPdf()
 	{
-		$data['airtawar'] = AirTawar::get();
+		$data['tambak'] = Tambak::get();
 		
-        $pdf = PDF::loadView('app.laporan-produksi.air-tawar.export-pdf', $data);
-        return $pdf->setPaper('legal')->setOrientation('landscape')->setWarnings(false)->download('Data airtawar.pdf');
+        $pdf = PDF::loadView('app.laporan-produksi.tambak.export-pdf', $data);
+        return $pdf->setPaper('legal')->setOrientation('landscape')->setWarnings(false)->download('Data Tambak.pdf');
 	}
 
 }

@@ -1,7 +1,7 @@
 @extends('app.layout.main')
 
 @section('title')
-	Produksi Rumput Laut
+	Produksi Tambak
 @endsection
 
 
@@ -23,7 +23,7 @@
 						<!-- START BREADCRUMB -->
 						<ul class="breadcrumb pull-left">
 							<li>
-								<a href="{{ route('rumputlaut') }}">Rumput Laut</a>
+								<a href="{{ route('tambak') }}">Tambak</a>
 							</li>
 						</ul>
 						
@@ -41,17 +41,17 @@
 					<div class="row">
 
 						<div id="tambah-pemasar" style="display:none">
-							<div class="col-lg-8 col-md-5 ">
+							<div class="col-lg-7 col-md-6 ">
 
 								<!-- START PANEL -->
 								<div class="panel panel-transparent">
 									<div class="panel-body">
-										<form id="form-personal" method="GET" action="{{ route('rumputlaut_tambah') }}" role="form">
+										<form id="form-personal" method="GET" action="{{ route('tambak_tambah') }}" role="form">
 											
 											<input type="hidden" id="token" name="_token" value="{{ csrf_token() }}">
 											<label>KETERANGAN IDENTITAS</label>
 											<div class="row">
-												<div class="col-sm-3">
+												<div class="col-sm-6">
 													<div class="form-group">
 														<label>Provinsi</label>
 														<span id="provinsi">
@@ -65,7 +65,7 @@
 														</span>
 													</div>
 												</div>
-												<div class="col-md-3">
+												<div class="col-md-6">
 													<div class="form-group">
 														<label>Kabupaten/Kota</label>
 														<span id="kabupaten">
@@ -75,7 +75,10 @@
 														</span>
 													</div>
 												</div>
-												<div class="col-md-3">
+											</div>
+
+											<div class="row">
+												<div class="col-md-6">
 													<div class="form-group">
 														<label>Kecamatan</label>
 														<div id="kecamatan">
@@ -85,7 +88,7 @@
 														</div>
 													</div>
 												</div>
-												<div class="col-sm-3">
+												<div class="col-sm-6">
 													<div class="form-group">
 														<label>Desa/Kelurahan</label>
 														<span id="desa">
@@ -100,63 +103,51 @@
 											<hr>
 											<label>KETERANGAN PRODUKSI</label>
 											<div class="row">
-												<div class="col-md-2">
+												<div class="col-md-4">
 													<div class="form-group">
 														<label>Petani/RTP</label>
 														<input type="number" name="rtp" value="{{ Input::old('rtp') }}" class="form-control" required="">
 													</div>
 												</div>
-												<div class="col-md-2">
+												<div class="col-md-4">
 													<div class="form-group">
-														<label>Panjang Pantai</label>
-														<input type="number" name="panjang_pantai" value="{{ Input::old('panjang_pantai') }}" class="form-control" required="">
+														<label>Luas Areal (Ha)</label>
+														<input type="number" name="luas_areal" value="{{ Input::old('luas_areal') }}" class="form-control" required="">
 													</div>
 												</div>
-												<div class="col-md-2">
-													<div class="form-group">
-														<label>Potensi</label>
-														<input type="number" name="potensi" value="{{ Input::old('potensi') }}" class="form-control" required="">
-													</div>
-												</div>
-												<div class="col-md-2">
+												<div class="col-md-4">
 													<div class="form-group">
 														<label>Luas Tanam</label>
 														<input type="number" name="luas_tanam" value="{{ Input::old('luas_tanam') }}" class="form-control" required="">
 													</div>
 												</div>
-												<div class="col-md-2">
-													<div class="form-group">
-														<label>Bentangan</label>
-														<input type="number" name="bentangan" value="{{ Input::old('bentangan') }}" class="form-control" required="">
-													</div>
-												</div>
 											</div>
 
 											<hr>
-											<label>Bibit</label>
+											<label>PENEBARAN (Ekor)</label>
 											<div class="row">
 												<div class="col-md-3">
 													<div class="form-group">
-														<label>Bibit cottoni</label>
-														<input type="number" name="bibit_cottoni" value="{{ Input::old('bibit_cottoni') }}" class="form-control" required="">
+														<label>MAS</label>
+														<input type="number" name="penebaran_mas" value="{{ Input::old('penebaran_mas') }}" class="form-control" required="">
 													</div>
 												</div>
 												<div class="col-md-3">
 													<div class="form-group">
-														<label>bibit spinosum</label>
-														<input type="number" name="bibit_spinosum" value="{{ Input::old('bibit_spinosum') }}" class="form-control" required="">
+														<label>NILA</label>
+														<input type="number" name="penebaran_nila" value="{{ Input::old('penebaran_nila') }}" class="form-control" required="">
 													</div>
 												</div>
 												<div class="col-md-3">
 													<div class="form-group">
-														<label>cottoni basah</label>
-														<input type="number" name="cottoni_basah" value="{{ Input::old('cottoni_basah') }}" class="form-control" required="">
+														<label>LELE</label>
+														<input type="number" name="penebaran_lele" value="{{ Input::old('penebaran_lele') }}" class="form-control" required="">
 													</div>
 												</div>
 												<div class="col-md-3">
 													<div class="form-group">
-														<label>cottoni kering</label>
-														<input type="number" name="cottoni_kering" value="{{ Input::old('cottoni_kering') }}" class="form-control" required="">
+														<label>BAWAL</label>
+														<input type="number" name="penebaran_bawal" value="{{ Input::old('penebaran_bawal') }}" class="form-control" required="">
 													</div>
 												</div>
 											</div>
@@ -165,14 +156,26 @@
 											<div class="row">
 												<div class="col-md-3">
 													<div class="form-group">
-														<label>spinosum basah</label>
-														<input type="number" name="spinosum_basah" value="{{ Input::old('spinosum_basah') }}" class="form-control" required="">
+														<label>MAS</label>
+														<input type="number" name="jumlah_hidup_mas" value="{{ Input::old('jumlah_hidup_mas') }}" class="form-control" required="">
 													</div>
 												</div>
 												<div class="col-md-3">
 													<div class="form-group">
-														<label>spinosum kering</label>
-														<input type="number" name="spinosum_kering" value="{{ Input::old('spinosum_kering') }}" class="form-control" required="">
+														<label>NILA</label>
+														<input type="number" name="jumlah_hidup_nila" value="{{ Input::old('jumlah_hidup_nila') }}" class="form-control" required="">
+													</div>
+												</div>
+												<div class="col-md-3">
+													<div class="form-group">
+														<label>LELE</label>
+														<input type="number" name="jumlah_hidup_lele" value="{{ Input::old('jumlah_hidup_lele') }}" class="form-control" required="">
+													</div>
+												</div>
+												<div class="col-md-3">
+													<div class="form-group">
+														<label>BAWAL</label>
+														<input type="number" name="jumlah_hidup_bawal" value="{{ Input::old('jumlah_hidup_bawal') }}" class="form-control" required="">
 													</div>
 												</div>
 											</div>
@@ -180,7 +183,7 @@
 											
 											<div class="clearfix"></div>
 											<br>
-											<input type="hidden" id="id-rumputlaut" name="id">
+											<input type="hidden" id="id-tambak" name="id">
 											<button class="btn btn-primary" type="submit">Tambah</button>
 										</form>
 									</div>
@@ -216,10 +219,8 @@
 														<th>Kecamatan</th>
 														<th>Desa</th>
 														<th>Petani/RTP</th>
-														<th>Panjang Pantai</th>
-														<th>Potensi</th>
-														<th>Luas Tanam</th>
-														<th>bentangan</th>
+														<th>Luas Areal (Ha)</th>
+														<th>Luas Tanam (Ha)</th>
 														<th style="text-align:center">Aksi</th>
 													</tr>
 												</thead>
@@ -232,25 +233,23 @@
 															$i = 1;
 														}
 													?>
-													@foreach($rumputlaut as $rl)
+													@foreach($tambak as $at)
 														<tr>
 															<td>
 																<div class="checkbox">
-																	<input type="checkbox" class="pilih" value="{{ $rl->id }}" id="at{{ $rl->id }}">
-																	<label for="at{{ $rl->id }}" class="m-l-20"></label>
+																	<input type="checkbox" class="pilih" value="{{ $at->id }}" id="at{{ $at->id }}">
+																	<label for="at{{ $at->id }}" class="m-l-20"></label>
 																</div>
 															</td>
 															<td>{{ $i++ }}</td>
-															<td>{{ $rl->datakecamatan->nama }}</td>
-															<td>{{ $rl->desa }}</td>
-															<td>{{ $rl->rtp }}</td>
-															<td>{{ $rl->panjang_pantai }}</td>
-															<td>{{ $rl->potensi }}</td>
-															<td>{{ $rl->luas_tanam }} Ha</td>
-															<td>{{ $rl->bentangan }}</td>
+															<td>{{ $at->datakecamatan->nama }}</td>
+															<td>{{ $at->desa }}</td>
+															<td>{{ $at->rtp }}</td>
+															<td>{{ $at->luas_areal }} Ha</td>
+															<td>{{ $at->luas_tanam }} Ha</td>
 															<td style="text-align:center">
-																<a class="btn btn-default btn-xs view" data-id="{{ $rl->id }}"><i class="fa fa-search-plus"></i></a>
-																<a href="{{ route('rumputlaut_edit',$rl->id) }}" class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i></a>
+																<a class="btn btn-default btn-xs view" data-id="{{ $at->id }}"><i class="fa fa-search-plus"></i></a>
+																<a href="{{ route('tambak_edit',$at->id) }}" class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i></a>
 															</td>
 		
 														</tr>
@@ -258,7 +257,7 @@
 												</tbody>
 
 											</table>
-											<center>{!! $rumputlaut->links() !!}</center>
+											<center>{!! $tambak->links() !!}</center>
 										</div>
 
 									</div>
@@ -288,7 +287,7 @@
 			<div class="modal-content">
 				<div class="modal-header clearfix text-left">
 					<button type="button" class="close" data-dismiss="modal"  aria-hidden="true"><i class="pg-close fs-14"></i></button>
-					<h5>Detail Laporan Produksi Rumput Laut</h5>
+					<h5>Detail Laporan Produksi Tambak</h5>
 				</div>
 				<div class="modal-body" id="view-detail">
 
@@ -341,13 +340,13 @@
 				<div class="modal-body">
 					<div class="row">
 						<div class="col-md-6">
-							<a href="{{ url('/app/pemasar/export-excel') }}">
+							<a href="{{ url('/app/tambak/export-excel') }}">
 								<i class="fa fa-file-excel-o export-excel"></i>
 								Unduh Dalam Format Mic.Excel
 							</a>
 						</div>
 						<div class="col-md-6">
-							<a href="{{ url('/app/pengolah/export-pdf') }}">
+							<a href="{{ url('/app/tambak/export-pdf') }}">
 								<i class="fa fa-file-pdf-o export-pdf"></i>
 								Unduh Dalam Format PDF
 							</a>
@@ -364,7 +363,40 @@
 
 @if ( Session::has('error_nik') )
 
-	
+	<!-- MODAL STICK UP VIEW -->
+	<div class="modal fade stick-up" id="modal-double-nik" tabindex="-1" role="dialog" aria-hidden="true">
+		<div class="modal-dialog modal-md">
+			<div class="modal-content-wrapper">
+				<div class="modal-content">
+					<div class="modal-header clearfix text-left">
+						<button type="button" class="close" data-dismiss="modal"  aria-hidden="true"><i class="pg-close fs-14"></i></button>
+						<h5>Data</h5>
+					</div>
+					<div class="modal-body" id="view-detail">
+						<table class="table">
+							<tr>
+								<td style="width:100px">NIK</td><td>: {{ $user->nik }}</td>
+							</tr>
+							<tr>
+								<td style="width:100px">Nama</td><td>: {{ $user->name }}</td>
+							</tr>
+							<tr>
+								<td style="width:100px">Kelompok</td><td>: {{ $user->kelompok->nama }}</td>
+							</tr>
+							<tr>
+								<td style="width:100px">Profesi</td><td>: {{ $user->profesi }}</td>
+							</tr>
+						</table>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-default btn-cons no-margin inline" data-dismiss="modal">Kembali</button>
+					</div>
+				</div>
+			</div>
+			<!-- /.modal-content -->
+		</div>
+		<!-- /.modal-dialog -->
+	</div>
 
 @endif
 
@@ -375,7 +407,7 @@
 	<script>
 		$(".menu-items .link-pembudidaya").addClass("active open");
 		$(".menu-items .link-pembudidaya .sub-laporan-produksi").addClass("active");
-		$(".menu-items .link-pembudidaya .sub-laporan-produksi .sub-rumputlaut").addClass("active");
+		$(".menu-items .link-pembudidaya .sub-laporan-produksi .sub-tambak").addClass("active");
 
 		function get_kabupaten(id_prov){
 			var _token = $('meta[name="csrf-token"]').attr('content');
@@ -420,7 +452,7 @@
 		        else {
 				  return false;
 		        }
-		        $(".btn-hapus").attr('href',"{{ url('/app/rumputlaut/hapus') }}/"+id);
+		        $(".btn-hapus").attr('href',"{{ url('/app/tambak/hapus') }}/"+id);
 
 			});
 
@@ -433,7 +465,7 @@
 			// Show detail
 			$(".panel").on('click', '.view', function(){
 				var id = $(this).data('id');
-				var url = "{{ url('app/rumputlaut/detail') }}";
+				var url = "{{ url('app/tambak/detail') }}";
 				var url = url+'/'+id;
 				$.get(url, {id:id, _token:_token}, function(data){
 					$("#view-detail").html(data);
@@ -476,7 +508,7 @@
 				var desa = $(this).data('desa');
 				var areal = $(this).data('areal');
 				var tanam = $(this).data('tanam');
-				$('#id-rumputlaut').val(id);
+				$('#id-tambak').val(id);
 				$('#provinsi').val(provinsi);
 				$('#kabupaten').val(kabupaten);
 				$('#kecamatan').val(kecamatan);
