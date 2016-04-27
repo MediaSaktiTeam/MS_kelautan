@@ -243,10 +243,12 @@
 																	<button class="btn btn-check" data-toggle="modal" data-target="#modal-hapus" disabled id="hapus"><i class="pg-trash"></i></button>
 																</th>
 																<th>No.</th>
-																<th>Nama Lengkap</th>
-																<th>Nama Kelompok</th>
-																<th>Jabatan Kelompok</th>
-																<th>Jenis Olahan</th>
+																<th>Nama Kecamatan</th>
+																<th>Nama Desa</th>
+																<th>Luas Lahan Manrgrove</th>
+																<th>Kondisi Rusak</th>
+																<th>Kondisi Sedang</th>
+																<th>Kondisi Baik</th>
 																<th style="text-align:center">Aksi</th>
 															</tr>
 														</thead>
@@ -259,6 +261,8 @@
 																			<label for="" class="m-l-20"></label>
 																		</div>
 																	</td>
+																	<td></td>
+																	<td></td>
 																	<td></td>
 																	<td></td>
 																	<td></td>
