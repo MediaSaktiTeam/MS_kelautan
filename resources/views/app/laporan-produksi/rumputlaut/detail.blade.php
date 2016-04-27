@@ -5,55 +5,66 @@
 			<th>Kecamatan</th>
 			<th>Desa</th>
 			<th>Petani/RTP</th>
-			<th>Luas Areal</th>
+			<th>Panjang Pantai</th>
+			<th>Potensi</th>
 			<th>Luas Tanam</th>
+			<th>Bentangan</th>
 		</tr>
 	</thead>
 	<tbody>
 		<tr>
-			<td><b>{{ $airtawar->datakecamatan->nama }}</b></td>
-			<td><b>{{ $airtawar->desa }}</b></td>
-			<td><b>{{ $airtawar->rtp }}</b></td>
-			<td><b>{{ $airtawar->luas_areal }} Ha</b></td>
-			<td><b>{{ $airtawar->luas_tanam}} Ha</b></td>
+			<td>{{ $rumputlaut->datakecamatan->nama }}</td>
+			<td>{{ $rumputlaut->desa }}</td>
+			<td>{{ $rumputlaut->rtp }}</td>
+			<td>{{ $rumputlaut->panjang_pantai }}</td>
+			<td>{{ $rumputlaut->potensi }}</td>
+			<td>{{ $rumputlaut->luas_tanam }} Ha</td>
+			<td>{{ $rumputlaut->bentangan }}</td>
 		</tr>
 	</tbody>
 </table>
-<h5>Penebaran</h5>
+<h5>Bibit</h5>
 <table class="table table-hover">
 	<thead>
 		<tr>
-			<th>Mas</th>
-			<th>Nila</th>
-			<th>lele</th>
-			<th>Bawal</th>
+			<th>Cottoni</th>
+			<th>Spinosum</th>
 		</tr>
 	</thead>
 	<tbody>
 		<tr>
-			<td><b>{{ $airtawar->penebaran_mas }} Ekor</b></td>
-			<td><b>{{ $airtawar->penebaran_nila }} Ekor</b></td>
-			<td><b>{{ $airtawar->penebaran_lele }} Ekor</b></td>
-			<td><b>{{ $airtawar->penebaran_bawal }} Ekor</b></td>
+			<td>{{ $rumputlaut->bibit_cottoni }}</td>
+			<td>{{ $rumputlaut->bibit_spinosum }}</td>
 		</tr>
 	</tbody>
 </table>
-<h5>Jumlah Hidup</h5>
+<h5>Jenis Bibit Cottoni</h5>
 <table class="table table-hover">
 	<thead>
 		<tr>
-			<th>Mas</th>
-			<th>Nila</th>
-			<th>lele</th>
-			<th>Bawal</th>
+			<th>Basah</th>
+			<th>Kering</th>
 		</tr>
 	</thead>
 	<tbody>
 		<tr>
-			<td><b>{{ $airtawar->jumlah_hidup_mas }} Ekor</b></td>
-			<td><b>{{ $airtawar->jumlah_hidup_nila }} Ekor</b></td>
-			<td><b>{{ $airtawar->jumlah_hidup_lele }} Ekor</b></td>
-			<td><b>{{ $airtawar->jumlah_hidup_bawal }} Ekor</b></td>
+			<td>{{ $rumputlaut->cottoni_basah }}</td>
+			<td>{{ $rumputlaut->cottoni_kering }}</td>
+		</tr>
+	</tbody>
+</table>
+<h5>Jenis Bibit Spinosum</h5>
+<table class="table table-hover">
+	<thead>
+		<tr>
+			<th>Basah</th>
+			<th>Kering</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td>{{ $rumputlaut->spinosum_basah }}</td>
+			<td>{{ $rumputlaut->spinosum_kering }}</td>
 		</tr>
 	</tbody>
 </table>

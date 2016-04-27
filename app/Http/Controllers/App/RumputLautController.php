@@ -94,4 +94,46 @@ class RumputLautController extends Controller
 		return redirect()->route('rumputlaut', $data)->with(session()->flash('success','Data Berhasil diupdate !!'));
 	}
 
+	public function getCari($cari = NULL)
+	{
+		$data['rumputlaut'] = DB::table('app_air_tawar')
+									->leftJoin('kecamatan', 'app_air_tawar.kecamatan', '=', 'kecamatan.id')
+									->leftJoin('desa', 'app_air_tawar.desa', '=', 'desa.id')
+										->select(
+											'kecamatan.nama as nama_kecamatan',
+											'app_air_tawar.*',
+											'desa.nama as nama_desa')
+												->where(function($query) use ($cari) {
+													$query->where('app_air_tawar.kecamatan','LIKE', '%'.$cari.'%')
+															->orWhere('app_air_tawar.desa','LIKE', '%'.$cari.'%');
+												})
+									->take(40)->get();
+		return view('app.laporan-produksi.rumputlaut.cari', $data);
+	}
+
+	public function getExportExcel()
+	{
+		$data['rumputlaut'] = RumputLaut::get();
+
+        Excel::create('Data rumputlaut');
+
+        Excel::create('Data rumputlaut', function($excel) use($data)
+        {
+            
+            $excel->sheet('New sheet', function($sheet) use($data)
+            {
+                $sheet->loadView('app.laporan-produksi.air-tawar.export-excel', $data);
+            }); 
+        })->download('xlsx');
+	}
+
+	public function getExportPdf()
+	{
+		$data['rumputlaut'] = RumputLaut::get();
+		
+        $pdf = PDF::loadView('app.laporan-produksi.air-tawar.export-pdf', $data);
+        return $pdf->setPaper('legal')->setOrientation('landscape')->setWarnings(false)->download('Data rumputlaut.pdf');
+	}
+
+
 }

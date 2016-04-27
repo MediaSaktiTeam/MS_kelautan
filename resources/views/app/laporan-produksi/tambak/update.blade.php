@@ -23,7 +23,7 @@
 						<!-- START BREADCRUMB -->
 						<ul class="breadcrumb pull-left">
 							<li>
-								<a href="{{ route('airtawar') }}">Air Tawar</a>
+								<a href="{{ route('tambak') }}">Air Tawar</a>
 							</li>
 							<li>
 								<a href="#" class="active">Sunting Air Tawar</a>
@@ -42,13 +42,13 @@
 
 					<div class="row">
 
-						<div id="edit-airtawar">
+						<div id="edit-tambak">
 							<div class="col-lg-7 col-md-6 ">
 
 								<!-- START PANEL -->
 								<div class="panel panel-transparent">
 									<div class="panel-body">
-										<form id="form-personal" method="GET" action="{{ route('airtawar_update') }}" role="form">
+										<form id="form-personal" method="GET" action="{{ route('tambak_update') }}" role="form">
 											
 											<label>KETERANGAN IDENTITAS</label>
 											<div class="row">
@@ -71,7 +71,7 @@
 														<label>Kabupaten/Kota</label>
 														<span id="kabupaten">
 															<select class="full-width" data-init-plugin="select2" name="kabupaten" required>
-																<option value="{{ $airtawar->kabupaten }}" {{ Input::old('kabupaten') == $airtawar->kabupaten ? "selected":"" }}>{{ $airtawar->datakabupaten->nama }}</option>
+																<option value="{{ $tambak->kabupaten }}" {{ Input::old('kabupaten') == $tambak->kabupaten ? "selected":"" }}>{{ $tambak->datakabupaten->nama }}</option>
 															</select>
 														</span>
 													</div>
@@ -81,7 +81,7 @@
 														<label>Kecamatan</label>
 														<div id="kecamatan">
 															<select class="full-width" data-init-plugin="select2" name="kecamatan" required>
-																<option value="{{ $airtawar->kecamatan }}" {{ Input::old('kecamatan') == $airtawar->kecamatan ? "selected":"" }}>{{ $airtawar->datakecamatan->nama }}</option>
+																<option value="{{ $tambak->kecamatan }}" {{ Input::old('kecamatan') == $tambak->kecamatan ? "selected":"" }}>{{ $tambak->datakecamatan->nama }}</option>
 															</select>
 														</div>
 													</div>
@@ -91,7 +91,7 @@
 														<label>Desa/Kelurahan</label>
 														<span id="desa">
 														<select class="full-width" name="desa" data-init-plugin="select2" required>
-															<option value="{{ $airtawar->desa }}" {{ Input::old('desa') == $airtawar->desa ? "selected":"" }}>{{ $airtawar->desa }}</option>
+															<option value="{{ $tambak->desa }}" {{ Input::old('desa') == $tambak->desa ? "selected":"" }}>{{ $tambak->desa }}</option>
 														</select>
 														</span>
 													</div>
@@ -104,19 +104,19 @@
 												<div class="col-md-4">
 													<div class="form-group">
 														<label>Petani/RTP</label>
-														<input type="number" name="rtp" value="{{ $airtawar->rtp }}" class="form-control" required="">
+														<input type="number" name="rtp" value="{{ $tambak->rtp }}" class="form-control" required="">
 													</div>
 												</div>
 												<div class="col-md-4">
 													<div class="form-group">
 														<label>Luas Areal (Ha)</label>
-														<input type="number" name="luas_areal" value="{{ $airtawar->luas_areal }}" class="form-control" required="">
+														<input type="number" name="luas_areal" value="{{ $tambak->luas_areal }}" class="form-control" required="">
 													</div>
 												</div>
 												<div class="col-md-4">
 													<div class="form-group">
 														<label>Luas Tanam</label>
-														<input type="number" name="luas_tanam" value="{{ $airtawar->luas_tanam }}" class="form-control" required="">
+														<input type="number" name="luas_tanam" value="{{ $tambak->luas_tanam }}" class="form-control" required="">
 													</div>
 												</div>
 											</div>
@@ -127,25 +127,25 @@
 												<div class="col-md-3">
 													<div class="form-group">
 														<label>MAS</label>
-														<input type="number" name="penebaran_mas" value="{{ $airtawar->penebaran_mas }}" class="form-control" required="">
+														<input type="number" name="penebaran_mas" value="{{ $tambak->penebaran_mas }}" class="form-control" required="">
 													</div>
 												</div>
 												<div class="col-md-3">
 													<div class="form-group">
 														<label>NILA</label>
-														<input type="number" name="penebaran_nila" value="{{ $airtawar->penebaran_nila }}" class="form-control" required="">
+														<input type="number" name="penebaran_nila" value="{{ $tambak->penebaran_nila }}" class="form-control" required="">
 													</div>
 												</div>
 												<div class="col-md-3">
 													<div class="form-group">
 														<label>LELE</label>
-														<input type="number" name="penebaran_lele" value="{{ $airtawar->penebaran_lele }}" class="form-control" required="">
+														<input type="number" name="penebaran_lele" value="{{ $tambak->penebaran_lele }}" class="form-control" required="">
 													</div>
 												</div>
 												<div class="col-md-3">
 													<div class="form-group">
 														<label>BAWAL</label>
-														<input type="number" name="penebaran_bawal" value="{{ $airtawar->penebaran_bawal }}" class="form-control" required="">
+														<input type="number" name="penebaran_bawal" value="{{ $tambak->penebaran_bawal }}" class="form-control" required="">
 													</div>
 												</div>
 											</div>
@@ -155,29 +155,29 @@
 												<div class="col-md-3">
 													<div class="form-group">
 														<label>MAS</label>
-														<input type="number" name="jumlah_hidup_mas" value="{{ $airtawar->jumlah_hidup_mas }}" class="form-control" required="">
+														<input type="number" name="jumlah_hidup_mas" value="{{ $tambak->jumlah_hidup_mas }}" class="form-control" required="">
 													</div>
 												</div>
 												<div class="col-md-3">
 													<div class="form-group">
 														<label>NILA</label>
-														<input type="number" name="jumlah_hidup_nila" value="{{ $airtawar->jumlah_hidup_nila }}" class="form-control" required="">
+														<input type="number" name="jumlah_hidup_nila" value="{{ $tambak->jumlah_hidup_nila }}" class="form-control" required="">
 													</div>
 												</div>
 												<div class="col-md-3">
 													<div class="form-group">
 														<label>LELE</label>
-														<input type="number" name="jumlah_hidup_lele" value="{{ $airtawar->jumlah_hidup_lele }}" class="form-control" required="">
+														<input type="number" name="jumlah_hidup_lele" value="{{ $tambak->jumlah_hidup_lele }}" class="form-control" required="">
 													</div>
 												</div>
 												<div class="col-md-3">
 													<div class="form-group">
 														<label>BAWAL</label>
-														<input type="number" name="jumlah_hidup_bawal" value="{{ $airtawar->jumlah_hidup_bawal }}" class="form-control" required="">
+														<input type="number" name="jumlah_hidup_bawal" value="{{ $tambak->jumlah_hidup_bawal }}" class="form-control" required="">
 													</div>
 												</div>
 											</div>
-											<input type="hidden" id="id-airtawar" name="id" value="{{ $airtawar->id }}">
+											<input type="hidden" id="id-tambak" name="id" value="{{ $tambak->id }}">
 
 			
 											
@@ -218,7 +218,7 @@
 	<script>
 		$(".menu-items .link-pembudidaya").addClass("active open");
 		$(".menu-items .link-pembudidaya .sub-laporan-produksi").addClass("active");
-		$(".menu-items .link-pembudidaya .sub-laporan-produksi .sub-airtawar").addClass("active");
+		$(".menu-items .link-pembudidaya .sub-laporan-produksi .sub-tambak").addClass("active");
 
 		function get_kabupaten(id_prov){
 			var _token = $('meta[name="csrf-token"]').attr('content');
@@ -319,7 +319,7 @@
 				var desa = $(this).data('desa');
 				var areal = $(this).data('areal');
 				var tanam = $(this).data('tanam');
-				$('#id-airtawar').val(id);
+				$('#id-tambak').val(id);
 				$('#provinsi').val(provinsi);
 				$('#kabupaten').val(kabupaten);
 				$('#kecamatan').val(kecamatan);
