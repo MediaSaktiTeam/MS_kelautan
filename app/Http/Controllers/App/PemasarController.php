@@ -32,7 +32,9 @@ class PemasarController extends Controller
 		$dt->unit_pemasar = $request->unit_pemasar;
 		$dt->pemilik_pemasar = $request->pemilik_pemasar;
 		$dt->alamat_pemasar = $request->alamat_pemasar;
-		$dt->alamat_erte = $request->alamat_erte;
+		$dt->erte = $request->erte;
+		$dt->tlp = $request->tlp;
+		$dt->pos = $request->pos;
 		$dt->tipe = $request->tipe;
 		$dt->tahun_mulai = $request->tahun_mulai;
 		$dt->save();
