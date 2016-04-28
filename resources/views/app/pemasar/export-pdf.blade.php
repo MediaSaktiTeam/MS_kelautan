@@ -46,7 +46,7 @@
 
 <body>
 
-<center><h2>Data Pnegolah <br> <small>Dinas Perikanan dan Kelautan Kab. Bantaeng</small></h2></center>
+<center><h2>Data Pemasar <br> <small>Dinas Perikanan dan Kelautan Kab. Bantaeng</small></h2></center>
 
 	<table class="table table-bordered">
 		<thead>
@@ -67,29 +67,7 @@
 		</thead>
 		
 		<tbody>
-			<?php $i = 1 ?>
-
-			@foreach( $pengolah as $pe )
-
-				<tr>
-					<td><?php echo $i  ?></td>
-					<td>{{ $pe->nik }}</td>
-					<td>{{ $pe->name }}</td>
-					<td>{{ $pe->alamat }}</td>
-					<td>{{ $pe->kelompok->nama }}</td>
-					<td>{{ $pe->jabatan->nama }}</td>
-					<td>{{ $pe->olahan->jenis }}</td>
-					<td>{{ $pe->legalitas_produksi }}</td>
-					<td>{{ $pe->merekdagang->merek }}</td>
-					<td>{{ $pe->modal_dimiliki }}</td>
-					<td>{{ $pe->modal_pinjaman }}</td>
-					<td>{{ $pe->omzet_perbulan }}</td>
-				</tr>
-
-				<?php $i = $i + 1 ?>
-
-			@endforeach
-		</tbody>
+			
 	</table>
 
 </body>

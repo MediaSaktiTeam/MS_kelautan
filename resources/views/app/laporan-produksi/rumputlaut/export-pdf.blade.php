@@ -21,7 +21,8 @@
 		  width: 100%;
 		  max-width: 100%;
 		  margin-bottom: 20px;
-		  font-size: 11px;
+		  font-size: 10px;
+		  font-family: Arial;
 		}
 		.table > thead > tr > th,
 		.table > tbody > tr > th,
@@ -64,13 +65,13 @@
 				<th rowspan="2">Potensi</th>
 				<th rowspan="2">Luas Tanam</th>
 				<th rowspan="2">Bentangan</th>
-				<th colspan="2">Bibit</th>
-				<th>Jenis Bibit Cottoni</th>
-				<th>Jenis Bibit Spinosum</th>
+				<th rowspan="2">Jumlah Bibit Cottonii</th>
+				<th rowspan="2">Jumlah Bibit Spinosum</th>
+				<th colspan="2">Produksi Eucheuma Cottonii</th>
+				<th colspan="2">Produksi Eucheuma Spinosum</th>
+				<th rowspan="2">Keterangan</th>
 			</tr>
 			<tr>
-				<th>Cottoni</th>
-				<th>Spinosum</th>
 				<th>Basah</th>
 				<th>Kering</th>
 				<th>Basah</th>
@@ -82,7 +83,7 @@
 
 		<?php $i = 1 ?>
 
-		@foreach( $airtawar as $at )
+		@foreach( $rumputlaut as $rl )
 
 			<tr>
 				<td><?php echo $i  ?></td>
@@ -90,9 +91,16 @@
 				<td>{{ $rl->desa }}</td>
 				<td>{{ $rl->rtp }}</td>
 				<td>{{ $rl->panjang_pantai }}</td>
-				<td>{{ $rl->potensi }}</td>
+				<td>{{ $rl->potensi }} Ha</td>
 				<td>{{ $rl->luas_tanam }} Ha</td>
 				<td>{{ $rl->bentangan }}</td>
+				<td>{{ $rl->bibit_cottoni }} Kg</td>
+				<td>{{ $rl->bibit_spinosum }} Kg</td>
+				<td>{{ $rl->cottoni_basah }} Kg</td>
+				<td>{{ $rl->cottoni_kering }} Kg</td>
+				<td>{{ $rl->spinosum_basah }} Kg</td>
+				<td>{{ $rl->spinosum_kering }} Kg</td>
+				<td>isi keterangan</td>
 			</tr>
 				
 			<?php $i = $i + 1 ?>

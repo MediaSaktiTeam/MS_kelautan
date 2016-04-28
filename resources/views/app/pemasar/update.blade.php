@@ -57,7 +57,7 @@
 							<!-- START PANEL -->
 							<div class="panel panel-transparent">
 								<div class="panel-body">
-									<form id="form-personal" method="post" action="{{ url('/app/pemasar/update') }}/{{ $pemasar->id }}" role="form">
+									<form id="form-personal" method="GET" action="{{ route('pemasar_update') }}" role="form">
 									
 											<input type="hidden" id="token" name="_token" value="{{ csrf_token() }}">
 											<label>KETERANGAN IDENTITAS</label>

@@ -53,7 +53,7 @@ class PemasarController extends Controller
 		$val = explode(",", $id);
 
 		foreach ($val as $value) {
-			pemasar::where('id', $value)->delete();           
+			Pemasar::where('id', $value)->delete();           
 		}
 		return redirect()->route('pemasar')->with(session()->flash('success','Data Berhasil Terhapus !!'));
 	}
@@ -62,7 +62,7 @@ class PemasarController extends Controller
 	{
 		$data['provinsi'] = Provinsi::all();
 		$data['kabupaten'] = Kabupaten::all();
-		$data['pemasar'] = pemasar::find($id);
+		$data['pemasar'] = Pemasar::find($id);
 		return view('app.pemasar.update', $data);
 	}
 
@@ -91,21 +91,10 @@ class PemasarController extends Controller
 		return redirect()->route('pemasar', $data)->with(session()->flash('success','Data Berhasil diupdate !!'));
 	}
 
-	public function getCari($cari = NULL)
+	public function getCari(Request $r)
 	{
-		$data['pemasar'] = DB::table('app_air_tawar')
-									->leftJoin('kecamatan', 'app_air_tawar.kecamatan', '=', 'kecamatan.id')
-									->leftJoin('desa', 'app_air_tawar.desa', '=', 'desa.id')
-										->select(
-											'kecamatan.nama as nama_kecamatan',
-											'app_air_tawar.*',
-											'desa.nama as nama_desa')
-												->where(function($query) use ($cari) {
-													$query->where('app_air_tawar.kecamatan','LIKE', '%'.$cari.'%')
-															->orWhere('app_air_tawar.desa','LIKE', '%'.$cari.'%');
-												})
-									->take(40)->get();
-		return view('app.laporan-produksi.pemasar.cari', $data);
+		$data['pemasar'] = Pemasar::where('unit_pemasar  ', 'LIKE', '%'.$r->cari.'%')->get();
+		return view('app.pemasar.search', $data);
 	}
 
 	public function getExportExcel()
@@ -113,7 +102,7 @@ class PemasarController extends Controller
 		$data['pemasar'] = Pemasar::get();
 
         Excel::create('Data pemasar');
-
+ 
         Excel::create('Data pemasar', function($excel) use($data)
         {
             

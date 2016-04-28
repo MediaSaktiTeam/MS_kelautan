@@ -17,13 +17,6 @@ class TambakController extends Controller
 	{
 		$limit = 10;
 		$data['tambak'] = Tambak::paginate($limit);
-		// $data['Tambak'] = DB::table('app_air_tawar')
-		// 							->leftJoin('kecamatan', 'app_air_tawar.kecamatan', '=', 'kecamatan.id')
-		// 							->leftJoin('desa', 'app_air_tawar.desa', '=', 'desa.id')
-		// 								->select(
-		// 									'kecamatan.nama as nama_kecamatan',
-		// 									'app_air_tawar.*',
-		// 									'desa.nama as nama_desa')->paginate($limit);
 		return view ('app.laporan-produksi.tambak.index',$data)->with('limit', $limit);
 	}
 
@@ -43,18 +36,19 @@ class TambakController extends Controller
 		$dt->kecamatan = $request->kecamatan;
 		$dt->desa = $request->desa;
 		$dt->rtp = $request->rtp;
-		$dt->luas_areal = $request->luas_areal;
+		$dt->panjang_pantai = $request->panjang_pantai;
+		$dt->potensi = $request->potensi;
 		$dt->luas_tanam = $request->luas_tanam;
-		$dt->penebaran_mas = $request->penebaran_mas;
-		$dt->penebaran_nila = $request->penebaran_nila;
-		$dt->penebaran_lele = $request->penebaran_lele;
-		$dt->penebaran_bawal = $request->penebaran_bawal;
-		$dt->jumlah_hidup_mas = $request->jumlah_hidup_mas;
-		$dt->jumlah_hidup_nila = $request->jumlah_hidup_nila;
-		$dt->jumlah_hidup_lele = $request->jumlah_hidup_lele;
-		$dt->jumlah_hidup_bawal = $request->jumlah_hidup_bawal;
+		$dt->penebaran_windu = $request->penebaran_windu;
+		$dt->penebaran_vanamae = $request->penebaran_vanamae;
+		$dt->penebaran_bandeng = $request->penebaran_bandeng;
+		$dt->jumlah_hidup_windu = $request->jumlah_hidup_windu;
+		$dt->jumlah_hidup_vanamae = $request->jumlah_hidup_vanamae;
+		$dt->jumlah_hidup_bandeng = $request->jumlah_hidup_bandeng;
+		$dt->pakan_pelet = $request->pakan_pelet;
+		$dt->pakan_dedak = $request->pakan_dedak;
 		$dt->save();
-		return redirect()->route('Tambak')->with(session()->flash('success','Data Berhasil Tersimpan !!'));
+		return redirect()->route('tambak')->with(session()->flash('success','Data Berhasil Tersimpan !!'));
 	}
 
 	public function getHapus($id){
@@ -85,16 +79,17 @@ class TambakController extends Controller
 		$dt->kecamatan = $request->kecamatan;
 		$dt->desa = $request->desa;
 		$dt->rtp = $request->rtp;
-		$dt->luas_areal = $request->luas_areal;
+		$dt->panjang_pantai = $request->panjang_pantai;
+		$dt->postensi = $request->postensi;
 		$dt->luas_tanam = $request->luas_tanam;
-		$dt->penebaran_mas = $request->penebaran_mas;
-		$dt->penebaran_nila = $request->penebaran_nila;
-		$dt->penebaran_lele = $request->penebaran_lele;
-		$dt->penebaran_bawal = $request->penebaran_bawal;
-		$dt->jumlah_hidup_mas = $request->jumlah_hidup_mas;
-		$dt->jumlah_hidup_nila = $request->jumlah_hidup_nila;
-		$dt->jumlah_hidup_lele = $request->jumlah_hidup_lele;
-		$dt->jumlah_hidup_bawal = $request->jumlah_hidup_bawal;
+		$dt->penebaran_windu = $request->penebaran_windu;
+		$dt->penebaran_vanamae = $request->penebaran_vanamae;
+		$dt->penebaran_bandeng = $request->penebaran_bawal;
+		$dt->jumlah_hidup_windu = $request->jumlah_hidup_windu;
+		$dt->jumlah_hidup_vanamae = $request->jumlah_hidup_vanamae;
+		$dt->jumlah_hidup_bandeng = $request->jumlah_hidup_bandeng;
+		$dt->pakan_pelet = $request->pakan_pelet;
+		$dt->pakan_dedak = $request->pakan_dedak;
 		$dt->save();
 		$data['tambak'] = Tambak::paginate(1);
 
@@ -103,16 +98,16 @@ class TambakController extends Controller
 
 	public function getCari($cari = NULL)
 	{
-		$data['tambak'] = DB::table('app_air_tawar')
-									->leftJoin('kecamatan', 'app_air_tawar.kecamatan', '=', 'kecamatan.id')
-									->leftJoin('desa', 'app_air_tawar.desa', '=', 'desa.id')
+		$data['tambak'] = DB::table('app_tambak')
+									->leftJoin('kecamatan', 'app_tambak.kecamatan', '=', 'kecamatan.id')
+									->leftJoin('desa', 'app_tambak.desa', '=', 'desa.id')
 										->select(
 											'kecamatan.nama as nama_kecamatan',
-											'app_air_tawar.*',
+											'app_tambak.*',
 											'desa.nama as nama_desa')
 												->where(function($query) use ($cari) {
-													$query->where('app_air_tawar.kecamatan','LIKE', '%'.$cari.'%')
-															->orWhere('app_air_tawar.desa','LIKE', '%'.$cari.'%');
+													$query->where('app_tambak.kecamatan','LIKE', '%'.$cari.'%')
+															->orWhere('app_tambak.desa','LIKE', '%'.$cari.'%');
 												})
 									->take(40)->get();
 		return view('app.laporan-produksi.Tambak.cari', $data);
