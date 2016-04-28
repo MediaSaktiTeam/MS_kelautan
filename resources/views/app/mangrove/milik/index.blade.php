@@ -51,44 +51,21 @@
 											<input type="hidden" id="token" name="_token" value="{{ csrf_token() }}">
 											<label>KETERANGAN IDENTITAS</label>
 											<div class="row">
-												<div class="col-sm-6">
+												<div class="col-sm-4">
 													<div class="form-group">
-														<label>Provinsi</label>
-														<span id="provinsi">
-															<select class="full-width" name="provinsi" data-init-plugin="select2" onchange="get_kabupaten(this.value)" required>
-																<option value="">Pilih Provinsi</option>
-																<?php $provinsi = App\Provinsi::where('nama','Sulawesi Selatan')->get() ?>
-																@foreach ( $provinsi as $prov )
-																	<option value="{{ $prov->id }}">{{ $prov->nama }}</option>
+														<label>Kecamatan</label>
+														<span id="kecamatan">
+															<select class="full-width" data-init-plugin="select2" name="kabupaten" required>
+																<option value="">Pilih Kecamatan...</option>
+																<?php $kecamatan = App\Kecamatan::all() ?>
+																@foreach ($kecamatan as $kec)
+																<option value="{{ $kec->id }}">{{$kec->nama}}</option>
 																@endforeach
 															</select>
 														</span>
 													</div>
 												</div>
-												<div class="col-sm-6">
-													<div class="form-group">
-														<label>Kabupaten/Kota</label>
-														<span id="kabupaten">
-															<select class="full-width" data-init-plugin="select2" name="kabupaten" required>
-																<option value="">Pilih Kabupaten/Kota...</option>
-															</select>
-														</span>
-													</div>
-												</div>
-											</div>
-
-											<div class="row">
-												<div class="col-sm-6">
-													<div class="form-group">
-														<label>Kecamatan</label>
-														<div id="kecamatan">
-															<select class="full-width" data-init-plugin="select2" name="kecamatan" required>
-																<option value="">Pilih Kecamatan...</option>
-															</select>
-														</div>
-													</div>
-												</div>
-												<div class="col-sm-6">
+												<div class="col-sm-4">
 													<div class="form-group">
 														<label>Desa/Kelurahan</label>
 														<span id="desa">
@@ -98,106 +75,36 @@
 														</span>
 													</div>
 												</div>
-											</div>
-
-											<div class="row">
-												<div class="col-sm-6">
+												<div class="col-sm-4">
 													<div class="form-group">
-														<label>Kode Jenis Kegiatan</label>
-														<input type="text" class="form-control" name="kode_kegiatan" value="">
-													</div>
-												</div>
-												<div class="col-sm-6">
-													<div class="form-group">
-														<label>Nomor Urut Direktori</label>
-														<input type="text" class="form-control" name="nomor_direktori" value="">
-													</div>
-												</div>
-											</div>
-											<hr>
-											<label>KETERANGAN UNIT PEMASAR</label>
-											<div class="row">
-												<div class="col-sm-6">
-													<div class="form-group">
-														<label>Nama Unit Pemasar</label>
-														<input type="text" class="form-control" name="unit_pemasar" value="">
-													</div>
-												</div>
-												<div class="col-sm-6">
-													<div class="form-group">
-														<label>Nama Pemilik Unit Pemasar</label>
-														<input type="text" class="form-control" name="pemilik_pemasar" value="">
+														<label>Luas Lahan Mangrove</label>
+														<input type="text" class="form-control number" name="luas_lahan" value="">
 													</div>
 												</div>
 											</div>
 
 											<div class="row">
-												<div class="col-sm-12">
-													<div class="form-group">
-														<label>Alamat Unit Pemasar</label>
-														<input type="text" class="form-control" name="alamat_pemasar" value="">
-													</div>
-												</div>
-											</div>
-											
-											<div class="row">
 												<div class="col-sm-4">
 													<div class="form-group">
-														<label>RT/RW</label>
-														<input type="text" class="form-control" name="alamat_erte" value="">
+														<label>Kondisi Rusak</label>
+														<input type="text" class="form-control number" name="kondisi_rusak" value="">
 													</div>
 												</div>
 												<div class="col-sm-4">
 													<div class="form-group">
-														<label>Telepon</label>
-														<input type="text" class="form-control number" name="telepon" value="">
+														<label>Kondisi Sedang</label>
+														<input type="text" class="form-control number" name="kondisi_sedang" value="">
 													</div>
 												</div>
 												<div class="col-sm-4">
 													<div class="form-group">
-														<label>Kode POS</label>
-														<input type="text" class="form-control" name="kode_pos" value="">
-													</div>
-												</div>
-											</div>
-											<hr>
-											<div class="row">
-												<div class="col-sm-12">
-													<label>Jenis Kegiatan Pemasaran yang Utama</label>
-													<div clas="form-group">
-														<div class="col-sm-4">
-															<div class="radio radio-success">
-															<input type="radio"  value="pengumpul" name="Pengumpul" id="pengumpul">
-															<label for="pengumpul">Pengumpul</label>
-															</div>
-														</div>
-														<div class="col-sm-4">
-															<div class="radio radio-success">
-															<input type="radio"  value="pedagang" name="Pedagang" id="pedagang">
-															<label for="pedagang">Pedagang</label>
-															</div>
-														</div>
-														<div class="col-sm-4">
-															<div class="radio radio-success">
-															<input type="radio"  value="pengecer" name="Pengecer" id="pengecer">
-															<label for="pengecer">Pengecer</label>
-															</div>
-														</div>
-													</div>
-												</div>
-											</div>
-									
-											<div class="row">
-												<div class="col-sm-12">
-													<div clas="form-group">
-														<label>Tahun Mulai Usaha</label>
-														<input type="date" class="form-control" name="tahun_mulai" value="">
+														<label>Kondisi Baik</label>
+														<input type="text" class="form-control number" name="kondisi_baik" value="">
 													</div>
 												</div>
 											</div>
 											<div class="clearfix"></div>
 											<br>
-											
 											<button class="btn btn-primary" type="submit">Tambah</button>
 										</form>
 									</div>
@@ -415,14 +322,14 @@
 		$(".menu-items .link-pengolah .sub-mangrove").addClass("active open");
 		$(".menu-items .link-pengolah .sub-mangrove .sub-mangrove-milik").addClass("active");
 
-		function get_kabupaten(id_prov){
-			var _token = $('meta[name="csrf-token"]').attr('content');
-			var url = "{{ url('get-kabupaten') }}";
-			var url = url+"/"+id_prov;
-			$.get(url, { id_prov:id_prov, _token:_token}, function(data){
-				$('#kabupaten').html(data);
-			});
-		}
+		// function get_kabupaten(id_prov){
+		// 	var _token = $('meta[name="csrf-token"]').attr('content');
+		// 	var url = "{{ url('get-kabupaten') }}";
+		// 	var url = url+"/"+id_prov;
+		// 	$.get(url, { id_prov:id_prov, _token:_token}, function(data){
+		// 		$('#kabupaten').html(data);
+		// 	});
+		// }
 
 		function get_kecamatan(id_kabupaten){
 			var _token = $('meta[name="csrf-token"]').attr('content');
