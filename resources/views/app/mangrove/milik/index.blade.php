@@ -1,7 +1,7 @@
 @extends('app.layout.main')
 
 @section('title')
-	Mangrove| Tambah
+	Luas Lahan Mangrove yang dimiliki | Tambah
 @endsection
 
 
@@ -23,7 +23,7 @@
 						<!-- START BREADCRUMB -->
 						<ul class="breadcrumb pull-left">
 							<li>
-								<a href="{{ route('mangrove') }}">Mangrove</a>
+								<a href="{{ route('mangrovemilik') }}">Luas Lahan Mangrove yang dimiliki</a>
 							</li>
 						</ul>
 						
@@ -46,7 +46,7 @@
 								<!-- START PANEL -->
 								<div class="panel panel-transparent">
 									<div class="panel-body">
-										<form id="form-personal" method="GET" action="{{ route('mangrove_tambah') }}" role="form">
+										<form id="form-personal" method="GET" action="{{ route('mangrovemilik_tambah') }}" role="form">
 											
 											<input type="hidden" id="token" name="_token" value="{{ csrf_token() }}">
 											<label>KETERANGAN IDENTITAS</label>
@@ -208,83 +208,67 @@
 						</div>
 
 						<div class="col-md-12">
+							<!-- START PANEL -->
 							<div class="panel panel-default">
-								<ul class="nav nav-tabs nav-tabs-fillup">
-									<li class="active">
-										<a data-toggle="tab" href="#slide1"><span>Home</span></a>
-									</li>
-									<li>
-										<a data-toggle="tab" href="#slide2"><span>Profile</span></a>
-									</li>
-									<li>
-										<a data-toggle="tab" href="#slide3"><span>Messages</span></a>
-									</li>
-								</ul>
-								<!-- START PANEL -->
-								<div class="tab-content">
-									<div class="tab-pane slide-left active" id="slide1">
-										<div class="panel-body">
-											<div class="">
-												<div class="input-group">
-													<input type="text" onkeyup="cari_data(this.value)" class="form-control" placeholder="Pencarian">
-													<span class="input-group-btn">
-														<a href="" class="btn btn-default" data-toggle="modal" data-target="#modal-ekspor"><i class="fa fa-file-archive-o"></i> &nbsp;Ekspor</a>
-													</span>
-												</div>
-												<br>
-
-												<div id="show-pencarian"></div>
-
-												<div id="show-data">
-													<table class="table table-hover demo-table-dynamic custom">
-														<thead>
-															<tr>
-																<th>
-																	<button class="btn btn-check" data-toggle="modal" data-target="#modal-hapus" disabled id="hapus"><i class="pg-trash"></i></button>
-																</th>
-																<th>No.</th>
-																<th>Nama Kecamatan</th>
-																<th>Nama Desa</th>
-																<th>Luas Lahan Manrgrove</th>
-																<th>Kondisi Rusak</th>
-																<th>Kondisi Sedang</th>
-																<th>Kondisi Baik</th>
-																<th style="text-align:center">Aksi</th>
-															</tr>
-														</thead>
-
-														<tbody>
-																<tr>
-																	<td>
-																		<div class="checkbox">
-																			<input type="checkbox" class="pilih" value="" id="">
-																			<label for="" class="m-l-20"></label>
-																		</div>
-																	</td>
-																	<td></td>
-																	<td></td>
-																	<td></td>
-																	<td></td>
-																	<td></td>
-																	<td></td>
-																	<td></td>
-																	<td style="text-align:center">
-																		<a class="btn btn-default btn-xs view" data-id=""><i class="fa fa-search-plus"></i></a>
-																		<a href="" class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i></a>
-																	</td>
-																</tr>
-														</tbody>
-
-													</table>
-													<center></center>
-												</div>
-
-											</div>
+								<div class="panel-body">
+									<div class="">
+										<div class="input-group">
+											<input type="text" onkeyup="cari_data(this.value)" class="form-control" placeholder="Pencarian">
+											<span class="input-group-btn">
+												<a href="" class="btn btn-default" data-toggle="modal" data-target="#modal-ekspor"><i class="fa fa-file-archive-o"></i> &nbsp;Ekspor</a>
+											</span>
 										</div>
+										<br>
+
+										<div id="show-pencarian"></div>
+
+										<div id="show-data">
+											<table class="table table-hover demo-table-dynamic custom">
+												<thead>
+													<tr>
+														<th>
+															<button class="btn btn-check" data-toggle="modal" data-target="#modal-hapus" disabled id="hapus"><i class="pg-trash"></i></button>
+														</th>
+														<th>No.</th>
+														<th>Nama Kecamatan</th>
+														<th>Nama Desa</th>
+														<th>Luas Lahan Mangrove</th>
+														<th>Kondisi Rusak</th>
+														<th>Kondisi Sedang</th>
+														<th>Kondisi Baik</th>
+														<th style="text-align:center">Aksi</th>
+													</tr>
+												</thead>
+
+												<tbody>
+														<tr>
+															<td>
+																<div class="checkbox">
+																	<input type="checkbox" class="pilih" value="" id="">
+																	<label for="" class="m-l-20"></label>
+																</div>
+															</td>
+															<td></td>
+															<td></td>
+															<td></td>
+															<td></td>
+															<td></td>
+															<td></td>
+															<td></td>
+															<td style="text-align:center">
+																<a class="btn btn-default btn-xs view" data-id=""><i class="fa fa-search-plus"></i></a>
+																<a href="" class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i></a>
+															</td>
+														</tr>
+												</tbody>
+
+											</table>
+											<center></center>
+										</div>
+
 									</div>
-									<div class="tab-pane slide-left" id="slide2">a</div>
-									<div class="tab-pane slide-left" id="slide3">b</div>
 								</div>
+							</div>
 							<!-- END PANEL -->
 						</div>
 					</div>
@@ -362,13 +346,13 @@
 				<div class="modal-body">
 					<div class="row">
 						<div class="col-md-6">
-							<a href="{{ url('/app/mangrove/export-excel') }}">
+							<a href="{{ url('/app/mangrovemilik/export-excel') }}">
 								<i class="fa fa-file-excel-o export-excel"></i>
 								Unduh Dalam Format Mic.Excel
 							</a>
 						</div>
 						<div class="col-md-6">
-							<a href="{{ url('/app/pengolah/export-pdf') }}">
+							<a href="{{ url('/app/mangrovemilik/export-pdf') }}">
 								<i class="fa fa-file-pdf-o export-pdf"></i>
 								Unduh Dalam Format PDF
 							</a>
@@ -428,7 +412,35 @@
 @section('registerscript')
 	<script>
 		$(".menu-items .link-pesisir").addClass("active open");
-		$(".menu-items .link-pesisir .sub-mangrove").addClass("active");
+		$(".menu-items .link-pengolah .sub-mangrove").addClass("active open");
+		$(".menu-items .link-pengolah .sub-mangrove .sub-mangrove-milik").addClass("active");
+
+		function get_kabupaten(id_prov){
+			var _token = $('meta[name="csrf-token"]').attr('content');
+			var url = "{{ url('get-kabupaten') }}";
+			var url = url+"/"+id_prov;
+			$.get(url, { id_prov:id_prov, _token:_token}, function(data){
+				$('#kabupaten').html(data);
+			});
+		}
+
+		function get_kecamatan(id_kabupaten){
+			var _token = $('meta[name="csrf-token"]').attr('content');
+			var url = "{{ url('get-kecamatan') }}";
+			var url = url+"/"+id_kabupaten;
+			$.get(url, { id_kabupaten:id_kabupaten, _token:_token}, function(data){
+				$('#kecamatan').html(data);
+			});
+		}
+
+		function get_desa(id_kecamatan){
+			var _token = $('meta[name="csrf-token"]').attr('content');
+			var url = "{{ url('get-desa') }}";
+			var url = url+"/"+id_kecamatan;
+			$.get(url, { id_kecamatan:id_kecamatan, _token:_token}, function(data){
+				$('#desa').html(data);
+			});
+		}
 
 		$(function(){
 
@@ -446,7 +458,7 @@
 		        else {
 				  return false;
 		        }
-		        $(".btn-hapus").attr('href',"{{ url('/app/mangrove/hapus') }}/"+id);
+		        $(".btn-hapus").attr('href',"{{ url('/app/mangrovemilik/hapus') }}/"+id);
 
 			});
 
@@ -459,7 +471,7 @@
 			// Show detail
 			$(".panel").on('click', '.view', function(){
 				var id = $(this).data('id');
-				var url = "{{ url('app/mangrove/detail') }}";
+				var url = "{{ url('app/mangrovemilik/detail') }}";
 				var url = url+'/'+id;
 				$.get(url, {id:id, _token:_token}, function(data){
 					$("#view-detail").html(data);
@@ -483,7 +495,7 @@
 				$("#show-pencarian").show();
 				$("#show-pencarian").html('<tr><td colspan="6"><i class="fa fa-spinner fa-spin"></i></td></tr>');
 				var _token = $('meta[name="csrf-token"]').attr('content');
-				var url = "{{ url('app/mangrove/search') }}";
+				var url = "{{ url('app/mangrovemilik/search') }}";
 				var url = url+"/"+cari;
 				$.get(url, { cari:cari, _token:_token}, function(data){
 					$('#show-pencarian').html(data);

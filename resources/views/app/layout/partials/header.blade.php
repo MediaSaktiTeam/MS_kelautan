@@ -164,8 +164,23 @@
 							<span class="icon-thumbnail">PS</span>
 							<ul class="sub-menu">
 								<li class="sub-mangrove">
-									<a href="/app/mangrove">Mangrove</a>
-									<span class="icon-thumbnail">M</span>
+									<a href="javascript:;"><span class="title">Lahan Mangrove</span>
+									<span class="arrow"></span></a>
+									<span class="icon-thumbnail">LM</span>
+									<ul class="sub-menu">
+										<li class="sub-mangrove-milik">
+											<a href="/app/mangrove/milik">Dimiliki</a>
+											<span class="icon-thumbnail">DM</span>
+										</li>
+										<li class="sub-mangrove-rehabilitasi">
+											<a href="/app/mangrove/rehabilitasi">Direhabilitasi</a>
+											<span class="icon-thumbnail">DR</span>
+										</li>
+										<li class="sub-mangrove-jenis">
+											<a href="/app/mangrove/jenis">Jenis Mangrove</a>
+											<span class="icon-thumbnail">JM</span>
+										</li>
+									</ul>
 								</li>
 								<li class="sub-terumbu">
 									<a href="/app/terumbu">Terumbu Karang</a>

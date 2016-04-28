@@ -3,16 +3,16 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateTableMangrove extends Migration
+class CreateTableMangroveMilik extends Migration
 {
     /**
      * Run the migrations.
      *
      * @return void
      */
-     public function up()
+    public function up()
     {
-        Schema::create('app_mangrove', function (Blueprint $table) {
+        Schema::create('app_mangrove_milik', function (Blueprint $table) {
             $table->increments('id');
             $table->timestamps();
             $table->string('kecamatan');
@@ -24,6 +24,7 @@ class CreateTableMangrove extends Migration
         });
         
     }
+
 
     /**
      * Reverse the migrations.
