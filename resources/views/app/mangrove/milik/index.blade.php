@@ -51,21 +51,42 @@
 											<input type="hidden" id="token" name="_token" value="{{ csrf_token() }}">
 											<label>KETERANGAN IDENTITAS</label>
 											<div class="row">
-												<div class="col-sm-4">
+												<div class="row">
+												<div class="col-sm-3">
 													<div class="form-group">
-														<label>Kecamatan</label>
-														<span id="kecamatan">
-															<select class="full-width" data-init-plugin="select2" name="kabupaten" required>
-																<option value="">Pilih Kecamatan...</option>
-																<?php $kecamatan = App\Kecamatan::all() ?>
-																@foreach ($kecamatan as $kec)
-																<option value="{{ $kec->id }}">{{$kec->nama}}</option>
+														<label>Provinsi</label>
+														<span id="provinsi">
+															<select class="full-width" name="provinsi" data-init-plugin="select2" onchange="get_kabupaten(this.value)" required>
+																<option value="">Pilih Provinsi</option>
+																<?php $provinsi = App\Provinsi::where('nama','Sulawesi Selatan')->get() ?>
+																@foreach ( $provinsi as $prov )
+																	<option value="{{ $prov->id }}">{{ $prov->nama }}</option>
 																@endforeach
 															</select>
 														</span>
 													</div>
 												</div>
-												<div class="col-sm-4">
+												<div class="col-sm-3">
+													<div class="form-group">
+														<label>Kabupaten/Kota</label>
+														<span id="kabupaten">
+															<select class="full-width" data-init-plugin="select2" name="kabupaten" required>
+																<option value="">Pilih Kabupaten/Kota...</option>
+															</select>
+														</span>
+													</div>
+												</div>
+												<div class="col-sm-3">
+													<div class="form-group">
+														<label>Kecamatan</label>
+														<div id="kecamatan">
+															<select class="full-width" data-init-plugin="select2" name="kecamatan" required>
+																<option value="">Pilih Kecamatan...</option>
+															</select>
+														</div>
+													</div>
+												</div>
+												<div class="col-sm-3">
 													<div class="form-group">
 														<label>Desa/Kelurahan</label>
 														<span id="desa">
@@ -75,28 +96,28 @@
 														</span>
 													</div>
 												</div>
-												<div class="col-sm-4">
+											</div>
+
+											<div class="row">
+												<div class="col-sm-3">
 													<div class="form-group">
 														<label>Luas Lahan Mangrove</label>
 														<input type="text" class="form-control number" name="luas_lahan" value="">
 													</div>
 												</div>
-											</div>
-
-											<div class="row">
-												<div class="col-sm-4">
+												<div class="col-sm-3">
 													<div class="form-group">
 														<label>Kondisi Rusak</label>
 														<input type="text" class="form-control number" name="kondisi_rusak" value="">
 													</div>
 												</div>
-												<div class="col-sm-4">
+												<div class="col-sm-3">
 													<div class="form-group">
 														<label>Kondisi Sedang</label>
 														<input type="text" class="form-control number" name="kondisi_sedang" value="">
 													</div>
 												</div>
-												<div class="col-sm-4">
+												<div class="col-sm-3">
 													<div class="form-group">
 														<label>Kondisi Baik</label>
 														<input type="text" class="form-control number" name="kondisi_baik" value="">
@@ -322,14 +343,14 @@
 		$(".menu-items .link-pengolah .sub-mangrove").addClass("active open");
 		$(".menu-items .link-pengolah .sub-mangrove .sub-mangrove-milik").addClass("active");
 
-		// function get_kabupaten(id_prov){
-		// 	var _token = $('meta[name="csrf-token"]').attr('content');
-		// 	var url = "{{ url('get-kabupaten') }}";
-		// 	var url = url+"/"+id_prov;
-		// 	$.get(url, { id_prov:id_prov, _token:_token}, function(data){
-		// 		$('#kabupaten').html(data);
-		// 	});
-		// }
+		function get_kabupaten(id_prov){
+			var _token = $('meta[name="csrf-token"]').attr('content');
+			var url = "{{ url('get-kabupaten') }}";
+			var url = url+"/"+id_prov;
+			$.get(url, { id_prov:id_prov, _token:_token}, function(data){
+				$('#kabupaten').html(data);
+			});
+		}
 
 		function get_kecamatan(id_kabupaten){
 			var _token = $('meta[name="csrf-token"]').attr('content');
