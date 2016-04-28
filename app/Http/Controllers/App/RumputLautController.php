@@ -122,7 +122,7 @@ class RumputLautController extends Controller
             
             $excel->sheet('New sheet', function($sheet) use($data)
             {
-                $sheet->loadView('app.laporan-produksi.air-tawar.export-excel', $data);
+                $sheet->loadView('app.laporan-produksi.rumputlaut.export-excel', $data);
             }); 
         })->download('xlsx');
 	}
@@ -131,7 +131,7 @@ class RumputLautController extends Controller
 	{
 		$data['rumputlaut'] = RumputLaut::get();
 		
-        $pdf = PDF::loadView('app.laporan-produksi.air-tawar.export-pdf', $data);
+        $pdf = PDF::loadView('app.laporan-produksi.rumputlaut.export-pdf', $data);
         return $pdf->setPaper('legal')->setOrientation('landscape')->setWarnings(false)->download('Data rumputlaut.pdf');
 	}
 

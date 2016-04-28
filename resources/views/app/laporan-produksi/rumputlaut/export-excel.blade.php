@@ -1,51 +1,50 @@
-
-
-	<table class="table table-bordered table-responsive">
-		<thead>
+<table class="table">
 			<tr>
-				<th>No.</th>
-				<th>Kecamatan</th>
-				<th>Desa</th>
-				<th>Petani/RTP</th>
-				<th>Luas Areal (Ha)</th>
-				<th>Luas Tanam (Ha)</th>
-				<th>Penebaran Mas</th>
-				<th>Penebaran Nila</th>
-				<th>Penebaran Lele</th>
-				<th>Penebaran Bawal</th>
-				<th>Jumlah Hidup Mas</th>
-				<th>Jumlah Hidup Nila</th>
-				<th>Jumlah Hidup Lele</th>
-				<th>Jumlah Hidup Bawal</th>
+				<th rowspan="2">No.</th>
+				<th rowspan="2">Kecamatan</th>
+				<th rowspan="2">Desa</th>
+				<th rowspan="2">Petani/RTP</th>
+				<th rowspan="2">Panjang Pantai</th>
+				<th rowspan="2">Potensi</th>
+				<th rowspan="2">Luas Tanam</th>
+				<th rowspan="2">Bentangan</th>
+				<th rowspan="2">Jumlah Bibit Cottonii</th>
+				<th rowspan="2">Jumlah Bibit Spinosum</th>
+				<th colspan="2">Produksi Eucheuma Cottonii</th>
+				<th colspan="2">Produksi Eucheuma Spinosum</th>
+				<th rowspan="2">Keterangan</th>
 			</tr>
-		</thead>
-		
-		<tbody>
+			<tr>
+				<th>Basah</th>
+				<th>Kering</th>
+				<th>Basah</th>
+				<th>Kering</th>
+			</tr>
 
 		<?php $i = 1 ?>
 
-		@foreach( $airtawar as $at )
+		@foreach( $rumputlaut as $rl )
 
 			<tr>
 				<td><?php echo $i  ?></td>
-				<td>{{ $at->datakecamatan->nama }}</td>
-				<td>{{ $at->desa }}</td>
-				<td>{{ $at->rtp }}</td>
-				<td>{{ $at->luas_areal }} Ha</td>
-				<td>{{ $at->luas_tanam }} Ha</td>
-				<td>{{ $at->penebaran_mas }}</td>
-				<td>{{ $at->penebaran_nila }}</td>
-				<td>{{ $at->penebaran_lele }}</td>
-				<td>{{ $at->penebaran_bawal }}</td>
-				<td>{{ $at->jumlah_hidup_mas }}</td>
-				<td>{{ $at->jumlah_hidup_nila }}</td>
-				<td>{{ $at->jumlah_hidup_lele }}</td>
-				<td>{{ $at->jumlah_hidup_bawal }}</td>
+				<td>{{ $rl->datakecamatan->nama }}</td>
+				<td>{{ $rl->desa }}</td>
+				<td>{{ $rl->rtp }}</td>
+				<td>{{ $rl->panjang_pantai }}</td>
+				<td>{{ $rl->potensi }} Ha</td>
+				<td>{{ $rl->luas_tanam }} Ha</td>
+				<td>{{ $rl->bentangan }}</td>
+				<td>{{ $rl->bibit_cottoni }} Kg</td>
+				<td>{{ $rl->bibit_spinosum }} Kg</td>
+				<td>{{ $rl->cottoni_basah }} Kg</td>
+				<td>{{ $rl->cottoni_kering }} Kg</td>
+				<td>{{ $rl->spinosum_basah }} Kg</td>
+				<td>{{ $rl->spinosum_kering }} Kg</td>
+				<td>isi keterangan</td>
 			</tr>
 				
 			<?php $i = $i + 1 ?>
 
 		@endforeach
 			
-		</tbody>
 	</table>

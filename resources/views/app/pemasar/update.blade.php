@@ -41,11 +41,6 @@
 
 					<div class="row">
 						<div class="col-lg-7 col-md-6 ">
-
-							@if ( Session::has('error_nik') )
-								<?php $user = App\User::where('nik', Session::get('error_nik'))->first() ?>
-					    		<div class="alert alert-danger">GAGAL!!! NIK <b>{{ Session::get('error_nik') }}</b> telah terdaftar. <a href="javascript:;" data-toggle="modal" data-target="#modal-double-nik">Lihat</a></div> 
-							@endif
 						
 							@if ( Session::has('success') ) 
 					    		@include('app/layout/partials/alert-sukses', ['message' => session('success')])
@@ -62,21 +57,87 @@
 							<!-- START PANEL -->
 							<div class="panel panel-transparent">
 								<div class="panel-body">
-									<form id="form-personal" method="post" action="{{ url('/app/pengolah/update') }}/{{ $pe->id }}" role="form">
-											
-											{{ csrf_field() }}
-
-											<div class="row clearfix">
+									<form id="form-personal" method="GET" action="{{ route('pemasar_update') }}" role="form">
+									
+											<input type="hidden" id="token" name="_token" value="{{ csrf_token() }}">
+											<label>KETERANGAN IDENTITAS</label>
+											<div class="row">
 												<div class="col-sm-6">
-													<div class="form-group required">
-														<label>NIK</label>
-														<input type="text" class="form-control number" name="nik" value="{{ $pe->nik }}" required>
+													<div class="form-group">
+														<label>Provinsi</label>
+														<span id="provinsi">
+															<select class="full-width" name="provinsi" data-init-plugin="select2" onchange="get_kabupaten(this.value)" required>
+																<option value="">Pilih Provinsi</option>
+																<?php $provinsi = App\Provinsi::where('nama','Sulawesi Selatan')->get() ?>
+																@foreach ( $provinsi as $prov )
+																	<option value="{{ $prov->id }}" {{ Input::old('provinsi') == $prov->id ? "selected":"" }}>{{ $prov->nama }}</option>
+																@endforeach
+															</select>
+														</span>
 													</div>
 												</div>
 												<div class="col-sm-6">
 													<div class="form-group">
-														<label>Nama Lengkap</label>
-														<input type="text" class="form-control" name="name" name="nik" value="{{ $pe->name }}" required>
+														<label>Kabupaten/Kota</label>
+														<span id="kabupaten">
+															<select class="full-width" data-init-plugin="select2" name="kabupaten" required>
+																<option value="{{ $pemasar->kabupaten }}" {{ Input::old('kabupaten') == $pemasar->kabupaten ? "selected":"" }}>{{ $pemasar->datakabupaten->nama }}</option>
+															</select>
+														</span>
+													</div>
+												</div>
+											</div>
+
+											<div class="row">
+												<div class="col-sm-6">
+													<div class="form-group">
+														<label>Kecamatan</label>
+														<div id="kecamatan">
+															<select class="full-width" data-init-plugin="select2" name="kecamatan" required>
+																<option value="{{ $pemasar->kecamatan }}" {{ Input::old('kecamatan') == $pemasar->kecamatan ? "selected":"" }}>{{ $pemasar->datakecamatan->nama }}</option>
+															</select>
+														</div>
+													</div>
+												</div>
+												<div class="col-sm-6">
+													<div class="form-group">
+														<label>Desa/Kelurahan</label>
+														<span id="desa">
+														<select class="full-width" name="desa" data-init-plugin="select2" required>
+															<option value="{{ $pemasar->desa }}" {{ Input::old('desa') == $pemasar->desa ? "selected":"" }}>{{ $pemasar->desa }}</option>
+														</select>
+														</span>
+													</div>
+												</div>
+											</div>
+
+											<div class="row">
+												<div class="col-sm-6">
+													<div class="form-group">
+														<label>Kode Jenis Kegiatan</label>
+														<input type="text" class="form-control" name="kode_kegiatan" value="{{ $pemasar->kode_kegiatan }}">
+													</div>
+												</div>
+												<div class="col-sm-6">
+													<div class="form-group">
+														<label>Nomor Urut Direktori</label>
+														<input type="text" class="form-control" name="nomor_direktori" value="{{ $pemasar->nomor_direktori }}">
+													</div>
+												</div>
+											</div>
+											<hr>
+											<label>KETERANGAN UNIT PEMASAR</label>
+											<div class="row">
+												<div class="col-sm-6">
+													<div class="form-group">
+														<label>Nama Unit Pemasar</label>
+														<input type="text" class="form-control" name="unit_pemasar" value="{{ $pemasar->unit_pemasar }}">
+													</div>
+												</div>
+												<div class="col-sm-6">
+													<div class="form-group">
+														<label>Nama Pemilik Unit Pemasar</label>
+														<input type="text" class="form-control" name="pemilik_pemasar" value="{{ $pemasar->pemilik_pemasar }}">
 													</div>
 												</div>
 											</div>
@@ -84,147 +145,68 @@
 											<div class="row">
 												<div class="col-sm-12">
 													<div class="form-group">
-														<label>Alamat</label>
-														<input type="text" class="form-control" name="alamat" value="{{ $pe->alamat }}" required>
+														<label>Alamat Unit Pemasar</label>
+														<input type="text" class="form-control" name="alamat_pemasar" value="{{ $pemasar->alamat_pemasar }}">
 													</div>
 												</div>
 											</div>
 											
 											<div class="row">
-												<div class="col-sm-6">
+												<div class="col-sm-4">
 													<div class="form-group">
-														<label>Nama Kelompok</label>
-														<div class="input-group">
-															<select class="full-width" name="id_kelompok" data-init-plugin="select2" required>
-																<option value="">Pilih Kelompok...</option>
-																<?php $kelompok = App\Kelompok::where('tipe','Pengolah')->orderBy('nama', 'asc')->get() ?>
-																@foreach( $kelompok as $klp )
-																	<option value="{{ $klp->id_kelompok }}" {{ $pe->id_kelompok == $klp->id_kelompok ? "selected":"" }}>{{ $klp->nama }}</option>
-																@endforeach
-															</select>
-															<div class="input-group-btn">
-																<a class="btn btn-primary" href="/app/kelompok">+</a>
+														<label>RT/RW</label>
+														<input type="text" class="form-control" name="erte" value="{{ $pemasar->erte }}">
+													</div>
+												</div>
+												<div class="col-sm-4">
+													<div class="form-group">
+														<label>Telepon</label>
+														<input type="text" class="form-control number" name="tlp" value="{{ $pemasar->tlp }}">
+													</div>
+												</div>
+												<div class="col-sm-4">
+													<div class="form-group">
+														<label>Kode POS</label>
+														<input type="text" class="form-control" name="pos" value="{{ $pemasar->pos }}">
+													</div>
+												</div>
+											</div>
+											<hr>
+											<div class="row">
+												<div class="col-sm-12">
+													<label>Jenis Kegiatan Pemasaran yang Utama</label>
+													<div clas="form-group">
+														<div class="col-sm-4">
+															<div class="radio radio-success">
+															<input type="radio"  value="pengumpul" name="tipe" id="pengumpul" {{ $pemasar->tipe == 'Pengumpul' ? "checked":"" }}>
+															<label for="pengumpul">Pengumpul</label>
+															</div>
+														</div>
+														<div class="col-sm-4">
+															<div class="radio radio-success">
+															<input type="radio"  value="pedagang" name="tipe" id="pedagang" {{ $pemasar->tipe == 'Pedagang' ? "checked":"" }}>
+															<label for="pedagang">Pedagang</label>
+															</div>
+														</div>
+														<div class="col-sm-4">
+															<div class="radio radio-success">
+															<input type="radio"  value="pengecer" name="tipe" id="pengecer" {{ $pemasar->tipe == 'Pengecer' ? "checked":"" }}>
+															<label for="pengecer">Pengecer</label>
 															</div>
 														</div>
 													</div>
 												</div>
-												<div class="col-sm-6">
-													<div class="form-group">
-														<label>Jabatan Dalam Kelompok</label>
-														<select class="full-width" name="id_jabatan" data-init-plugin="select2" required>
-															<option value="">Pilih Jabatan...</option>
-															<?php $jabatan = App\Jabatan::orderBy('nama', 'asc')->get() ?>
-															@foreach( $jabatan as $jab )
-																<option value="{{ $jab->id }}" {{ $pe->id_jabatan == $jab->id ? "selected":"" }}>{{ $jab->nama }}</option>
-															@endforeach
-														</select>
-													</div>
-												</div>
 											</div>
-
-
+									
 											<div class="row">
-												<div class="col-md-6">
-													<div class="form-group">
-														<label>Jenis Olahan</label>
-														<div id="usaha">
-															<select class="full-width" data-init-plugin="select2" name="jenis_olahan" required>
-																<option value="">Pilih Jenis Olahan...</option>
-																<?php $JO = App\JenisOlahan::all() ?>
-																@foreach( $JO as $jo )
-																	<option value="{{ $jo->id }}" {{ $pe->id_jenis_olahan == $jo->id ? "selected":"" }}>{{ $jo->jenis }}</option>
-																@endforeach
-															</select>
-														</div>
-													</div>
-												</div>
-												<div class="col-md-6">
-													<div class="form-group">
-														<label>Merek Dagang</label>
-														<div id="usaha">
-															<select class="full-width" data-init-plugin="select2" name="merek_dagang">
-																<option value="">Pilih Merek Dagang...</option>
-																<?php $merekDagang = App\MerekDagang::all() ?>
-																@foreach( $merekDagang as $md )
-																	<option value="{{ $md->id }}" {{ $pe->id_merek_dagang == $md->id ? "selected":"" }}>{{ $md->merek }}</option>
-																@endforeach
-															</select>
-														</div>
-													</div>
-												</div>
-
-											</div>
-
-											<div class="row">
-												<div class="col-md-12">
-													<div class="form-group">
-														<label>Kepemilikan Sarana dan Prasarana</label>
-														<select name="id_sarana[]" class="full-width" data-init-plugin="select2" multiple="" data-placeholder="Pilih Sarana / Prasaranan...">
-
-															<?php $sarana = App\Sarana::where('tipe', 'Pengolah')->get(); ?>
-															<?php $Ksarana = App\KepemilikanSarana::where('id_user', $pe->id)->get(); ?>
-															<?php $Ksarana_arr = []; ?>
-
-															@foreach ( $Ksarana as $val )
-																<?php $Ksarana_arr[] = $val->id_sarana; ?>
-															@endforeach
-
-															<optgroup label="Bantuan">
-															<?php $PK = App\Sarana::where('tipe','Pengolah')->where('jenis','Bantuan')->get() ?>
-															@foreach( $PK as $rpk )
-																<option value="{{ $rpk->id }}" {{ in_array($rpk->id, $Ksarana_arr) ? "selected":""}}>{{ $rpk->sub }}</option>
-															@endforeach
-															</optgroup>
-
-															<optgroup label="Swadaya">
-															<?php $PK = App\Sarana::where('tipe','Pengolah')->where('jenis','Swadaya')->get() ?>
-															@foreach( $PK as $rpk )
-																<option value="{{ $rpk->id }}" {{ in_array($rpk->id, $Ksarana_arr) ? "selected":""}}>{{ $rpk->sub }}</option>
-															@endforeach
-															</optgroup>
-														</select>
+												<div class="col-sm-12">
+													<div clas="form-group">
+														<label>Tahun Mulai Usaha</label>
+														<input type="date" class="form-control" name="tahun_mulai" value="{{ $pemasar->tahun_mulai }}">
 													</div>
 												</div>
 											</div>
-
-											<div class="row">
-												<div class="col-md-6">
-													<div class="form-group">
-														<label>Legalitas Produksi</label>
-
-														<?php $legalitas_produksi = ['P-IRT', 'Depkes', 'Halal']; ?>
-
-														<select class="full-width" data-init-plugin="select2" name="legalitas_produksi" required>
-															<option value="">Pilih Legalitas Produksi...</option>
-															@for ( $i = 0; $i < count( $legalitas_produksi ); $i++ )
-																<option value="{{ $legalitas_produksi[$i] }}" {{ $pe->legalitas_produksi == $legalitas_produksi[$i] ? "selected":"" }}>{{ $legalitas_produksi[$i] }}</option>
-															@endfor
-														</select>
-													</div>
-												</div>
-												<div class="col-md-6">
-													<div class="form-group">
-														<label>Modal yang dimiliki</label>
-														<input type="text" class="form-control number" name="modal_dimiliki" value="{{ $pe->modal_dimiliki }}">
-													</div>
-												</div>
-											</div>
-
-											<div class="row">
-												<div class="col-md-6">
-													<div class="form-group">
-														<label>Modal Pinjaman</label>
-														<input type="text" class="form-control number" name="modal_pinjaman" value="{{ $pe->modal_pinjaman }}">
-													</div>
-												</div>
-												<div class="col-md-6">
-													<div class="form-group">
-														<label>Omzet Perbulan</label>
-														<input type="text" class="form-control number" name="omzet_perbulan" value="{{ $pe->omzet_perbulan }}">
-													</div>
-												</div>
-											</div>
-
+											<input type="hidden" id="id-airtawar" name="id" value="{{ $pemasar->id }}">
 											<div class="clearfix"></div>
 											<br>
 											
@@ -278,44 +260,7 @@
 </div>
 <!-- END MODAL STICK UP SMALL ALERT -->
 
-@if ( Session::has('error_nik') )
 
-	<!-- MODAL STICK UP VIEW -->
-	<div class="modal fade stick-up" id="modal-double-nik" tabindex="-1" role="dialog" aria-hidden="true">
-		<div class="modal-dialog modal-md">
-			<div class="modal-content-wrapper">
-				<div class="modal-content">
-					<div class="modal-header clearfix text-left">
-						<button type="button" class="close" data-dismiss="modal"  aria-hidden="true"><i class="pg-close fs-14"></i></button>
-						<h5>Data</h5>
-					</div>
-					<div class="modal-body" id="view-detail">
-						<table class="table">
-							<tr>
-								<td style="width:100px">NIK</td><td>: {{ $user->nik }}</td>
-							</tr>
-							<tr>
-								<td style="width:100px">Nama</td><td>: {{ $user->name }}</td>
-							</tr>
-							<tr>
-								<td style="width:100px">Kelompok</td><td>: {{ $user->kelompok->nama }}</td>
-							</tr>
-							<tr>
-								<td style="width:100px">Profesi</td><td>: {{ $user->profesi }}</td>
-							</tr>
-						</table>
-					</div>
-					<div class="modal-footer">
-						<button type="button" class="btn btn-default btn-cons no-margin inline" data-dismiss="modal">Kembali</button>
-					</div>
-				</div>
-			</div>
-			<!-- /.modal-content -->
-		</div>
-		<!-- /.modal-dialog -->
-	</div>
-
-@endif
 
 
 @endsection
@@ -323,7 +268,8 @@
 
 @section('registerscript')
 	<script>
-		$(".menu-items .link-pengolah").addClass("active");
+		$(".menu-items .link-pengolah").addClass("active open");
+		$(".menu-items .link-pengolah .sub-pemasar").addClass("active");
 
 		$(function(){
 
@@ -345,24 +291,30 @@
 
 		});
 
-		function get_usaha(id){
-			$('#usaha').html('<i class="fa fa-spinner fa-spin"></i>');
+		function get_kabupaten(id_prov){
 			var _token = $('meta[name="csrf-token"]').attr('content');
-			var url = "{{ url('app/pembudidaya/usaha') }}";
-			var url = url+"/"+id;
-			$.get(url, { id:id, _token:_token}, function(data){
-				$('#usaha').html(data);
+			var url = "{{ url('get-kabupaten') }}";
+			var url = url+"/"+id_prov;
+			$.get(url, { id_prov:id_prov, _token:_token}, function(data){
+				$('#kabupaten').html(data);
 			});
-			get_sarana(id);
 		}
 
-		function get_sarana(id){
-			$('#sarana').html('<i class="fa fa-spinner fa-spin"></i>');
+		function get_kecamatan(id_kabupaten){
 			var _token = $('meta[name="csrf-token"]').attr('content');
-			var url = "{{ url('app/pembudidaya/sarana') }}";
-			var url = url+"/"+id;
-			$.get(url, { id:id, _token:_token}, function(data){
-				$('#sarana').html(data);
+			var url = "{{ url('get-kecamatan') }}";
+			var url = url+"/"+id_kabupaten;
+			$.get(url, { id_kabupaten:id_kabupaten, _token:_token}, function(data){
+				$('#kecamatan').html(data);
+			});
+		}
+
+		function get_desa(id_kecamatan){
+			var _token = $('meta[name="csrf-token"]').attr('content');
+			var url = "{{ url('get-desa') }}";
+			var url = url+"/"+id_kecamatan;
+			$.get(url, { id_kecamatan:id_kecamatan, _token:_token}, function(data){
+				$('#desa').html(data);
 			});
 		}
 

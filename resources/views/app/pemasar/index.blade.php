@@ -144,19 +144,19 @@
 												<div class="col-sm-4">
 													<div class="form-group">
 														<label>RT/RW</label>
-														<input type="text" class="form-control" name="alamat_erte" value="">
+														<input type="text" class="form-control" name="erte" value="">
 													</div>
 												</div>
 												<div class="col-sm-4">
 													<div class="form-group">
 														<label>Telepon</label>
-														<input type="text" class="form-control number" name="telepon" value="">
+														<input type="text" class="form-control number" name="tlp" value="">
 													</div>
 												</div>
 												<div class="col-sm-4">
 													<div class="form-group">
 														<label>Kode POS</label>
-														<input type="text" class="form-control" name="kode_pos" value="">
+														<input type="text" class="form-control" name="pos" value="">
 													</div>
 												</div>
 											</div>
@@ -167,19 +167,19 @@
 													<div clas="form-group">
 														<div class="col-sm-4">
 															<div class="radio radio-success">
-															<input type="radio"  value="pengumpul" name="Pengumpul" id="pengumpul">
+															<input type="radio"  value="pengumpul" name="tipe" id="pengumpul">
 															<label for="pengumpul">Pengumpul</label>
 															</div>
 														</div>
 														<div class="col-sm-4">
 															<div class="radio radio-success">
-															<input type="radio"  value="pedagang" name="Pedagang" id="pedagang">
+															<input type="radio"  value="pedagang" name="tipe" id="pedagang">
 															<label for="pedagang">Pedagang</label>
 															</div>
 														</div>
 														<div class="col-sm-4">
 															<div class="radio radio-success">
-															<input type="radio"  value="pengecer" name="Pengecer" id="pengecer">
+															<input type="radio"  value="pengecer" name="tipe" id="pengecer">
 															<label for="pengecer">Pengecer</label>
 															</div>
 														</div>
@@ -230,31 +230,40 @@
 															<button class="btn btn-check" data-toggle="modal" data-target="#modal-hapus" disabled id="hapus"><i class="pg-trash"></i></button>
 														</th>
 														<th>No.</th>
-														<th>Nama Lengkap</th>
-														<th>Nama Kelompok</th>
-														<th>Jabatan Kelompok</th>
-														<th>Jenis Olahan</th>
+														<th>Nama UPI</th>
+														<th>Pemilik</th>
+														<th>Alamat</th>
+														<th>No Telp</th>
+														<th>Tahun Berdiri</th>
 														<th style="text-align:center">Aksi</th>
 													</tr>
 												</thead>
 
 												<tbody>
+													<?php
+														if ( isset($_GET['page']) ) {
+															$i = ($_GET['page'] - 1) * $limit + 1;
+														} else {
+															$i = 1;
+														}
+													?>
 													@foreach($pemasar as $pem)
 														<tr>
 															<td>
 																<div class="checkbox">
-																	<input type="checkbox" class="pilih" value="" id="">
-																	<label for="" class="m-l-20"></label>
+																	<input type="checkbox" class="pilih" value="{{ $pem->id }}" id="pem{{ $pem->id }}">
+																	<label for="pem{{ $pem->id }}" class="m-l-20"></label>
 																</div>
 															</td>
+															<td>{{ $i++ }}</td>
+															<td>{{ $pem->unit_pemasar }}</td>
 															<td>{{ $pem->pemilik_pemasar }}</td>
-															<td>{{ $pem->nama }}</td>
-															<td>{{ $pem->nama }}</td>
-															<td>{{ $pem->nama }}</td>
-															<td>{{ $pem->nama }}</td>
+															<td>{{ $pem->alamat_pemasar }}</td>
+															<td>{{ $pem->tlp }}</td>
+															<td>{{ $pem->tahun_mulai }}</td>
 															<td style="text-align:center">
-																<a class="btn btn-default btn-xs view" data-id=""><i class="fa fa-search-plus"></i></a>
-																<a href="" class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i></a>
+																<a class="btn btn-default btn-xs view" data-id="{{ $pem->id }}"><i class="fa fa-search-plus"></i></a>
+																<a href="{{ route('pemasar_edit',$pem->id) }}" class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i></a>
 															</td>
 														</tr>
 													@endforeach
@@ -291,7 +300,7 @@
 			<div class="modal-content">
 				<div class="modal-header clearfix text-left">
 					<button type="button" class="close" data-dismiss="modal"  aria-hidden="true"><i class="pg-close fs-14"></i></button>
-					<h5>Detail pengolah</h5>
+					<h5>Detail Pemasar</h5>
 				</div>
 				<div class="modal-body" id="view-detail">
 
@@ -455,7 +464,7 @@
 		        else {
 				  return false;
 		        }
-		        $(".btn-hapus").attr('href',"{{ url('/app/pengolah/hapus') }}/"+id);
+		        $(".btn-hapus").attr('href',"{{ url('/app/pemasar/hapus') }}/"+id);
 
 			});
 
@@ -468,7 +477,7 @@
 			// Show detail
 			$(".panel").on('click', '.view', function(){
 				var id = $(this).data('id');
-				var url = "{{ url('app/pengolah/detail') }}";
+				var url = "{{ url('app/pemasar/detail') }}";
 				var url = url+'/'+id;
 				$.get(url, {id:id, _token:_token}, function(data){
 					$("#view-detail").html(data);
@@ -492,7 +501,7 @@
 				$("#show-pencarian").show();
 				$("#show-pencarian").html('<tr><td colspan="6"><i class="fa fa-spinner fa-spin"></i></td></tr>');
 				var _token = $('meta[name="csrf-token"]').attr('content');
-				var url = "{{ url('app/pengolah/search') }}";
+				var url = "{{ url('app/pemasar/cari') }}";
 				var url = url+"/"+cari;
 				$.get(url, { cari:cari, _token:_token}, function(data){
 					$('#show-pencarian').html(data);

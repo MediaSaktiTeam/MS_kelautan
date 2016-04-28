@@ -24,7 +24,9 @@ class CreatePemasarsTable extends Migration
             $table->string('unit_pemasar',50);
             $table->string('pemilik_pemasar',50);
             $table->string('alamat_pemasar',50);
-            $table->string('alamat_erte',50);
+            $table->string('erte',50);
+            $table->string('tlp',50);
+            $table->string('pos',50);
             $table->enum('tipe', ['Pengumpul','Pedagang','Pengecer']);
             $table->date('tahun_mulai');
         });

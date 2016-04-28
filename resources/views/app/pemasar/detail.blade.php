@@ -1,71 +1,80 @@
-<table class="table table-hover demo-table-dynamic custom" id="tableWithDynamicRows">
+<h5>IDENTITAS</h5>
+<table class="table table-hover">
+	<thead>
+		<tr>
+			<th>Provinsi</th>
+			<th>Kabupaten</th>
+			<th>Kecamatan</th>
+			<th>Desa</th>
+		</tr>
+	</thead>
 	<tbody>
 		<tr>
-			<td style="width:250px">NIK</td>
-			<td><b>{{ $pengolah->nik }}</b></td>
+			<td><b>{{ $pemasar->dataprovinsi->nama }}</b></td>
+			<td><b>{{ $pemasar->datakabupaten->nama }}</b></td>
+			<td><b>{{ $pemasar->datakecamatan->nama }}</b></td>
+			<td><b>{{ $pemasar->desa }}</b></td>
 		</tr>
+	</tbody>
+</table>
+<table class="table table-hover">
+	<thead>
 		<tr>
-			<td>Nama Lengkap</td>
-			<td><b>{{ $pengolah->name }}</b></td>
+			<th>Kode Jenis Kegiatan</th>
+			<th>Nomor Urut Direktori</th>
 		</tr>
+	</thead>
+	<tbody>
 		<tr>
-			<td>Alamat</td>
-			<td><b>{{ $pengolah->alamat }}</b></td>
+			<td><b>{{ $pemasar->kode_kegiatan }}</b></td>
+			<td><b>{{ $pemasar->nomor_direktori }}</b></td>
 		</tr>
+	</tbody>
+</table>
+<h5>KETERANGAN UNIT PEMASAR</h5>
+<table class="table table-hover">
+	<thead>
 		<tr>
-			<td>Nama Kelompok</td>
-			<td><b>{{ $pengolah->kelompok->nama }}</b></td>
+			<th>Nama Unit Pemasar</th>
+			<th>Pemilik Unit Pemasar</th>
+			<th>Alamat Unit Pemasar</th>
 		</tr>
+	</thead>
+	<tbody>
 		<tr>
-			<td>Jabatan</td>
-			<td><b>{{ $pengolah->jabatan->nama }}</b></td>
+			<td><b>{{ $pemasar->unit_pemasar }}</b></td>
+			<td><b>{{ $pemasar->pemilik_pemasar }}</b></td>
+			<td><b>{{ $pemasar->alamat_pemasar }}</b></td>
 		</tr>
-
+	</tbody>
+</table>
+<table class="table table-hover">
+	<thead>
 		<tr>
-			<td>Jenis Olahan</td>
-			<td><b>{{ $pengolah->olahan->jenis }}</b></td>
+			<th>RT/RW</th>
+			<th>Telepon</th>
+			<th>Kode POS</th>
 		</tr>
-
+	</thead>
+	<tbody>
 		<tr>
-			<td>Legalitas Produksi</td>
-			<td><b>{{ $pengolah->legalitas_produksi }}</b></td>
+			<td><b>{{ $pemasar->erte }}</b></td>
+			<td><b>{{ $pemasar->tlp }}</b></td>
+			<td><b>{{ $pemasar->pos }}</b></td>
 		</tr>
-
+	</tbody>
+</table>
+<table class="table table-hover">
+	<thead>
 		<tr>
-			<td>Merek Dagang</td>
-			<td><b>{{ $pengolah->merekdagang->merek }}</b></td>
+			<th>Jenis Kegiatan Pemasaran</th>
+			<th>Tahun Mulai Usaha</th>
 		</tr>
-
+	</thead>
+	<tbody>
 		<tr>
-			<td>Modal yang dimiliki</td>
-			<td><b>{{ $pengolah->modal_dimiliki }}</b></td>
+			<td><b>{{ $pemasar->tipe }}</b></td>
+			<td><b>{{ $pemasar->tahun_mulai }}</b></td>
 		</tr>
-
-		<tr>
-			<td>Modal Pinjaman</td>
-			<td><b>{{ $pengolah->modal_pinjaman }}</b></td>
-		</tr>
-
-
-		<tr>
-			<td>Omzet Perbulan</td>
-			<td><b>{{ $pengolah->omzet_perbulan }}</b></td>
-		</tr>
-
-		<tr>
-			<?php $Ksarana = App\KepemilikanSarana::where('id_user', $pengolah->id)->get(); ?>
-			<td>Sarana / Prasarana yang dimiliki</td>
-			<td><b>
-					@foreach ( $Ksarana as $ks )
-						<i class="fa fa-check-square-o"></i> 
-							{{ $ks->sarana->jenis }}
-							&nbsp; <i class="fa fa-angle-double-right"></i> &nbsp;
-							{{ $ks->sarana->sub }} 
-						<br>
-					@endforeach
-				</b>
-			</td>
-		</tr>
-
 	</tbody>
 </table>

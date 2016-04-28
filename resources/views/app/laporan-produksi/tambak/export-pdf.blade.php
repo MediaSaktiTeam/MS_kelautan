@@ -21,7 +21,8 @@
 		  width: 100%;
 		  max-width: 100%;
 		  margin-bottom: 20px;
-		  font-size: 11px;
+		  font-size: 10px;
+		  font-family: Arial;
 		}
 		.table > thead > tr > th,
 		.table > tbody > tr > th,
@@ -51,7 +52,7 @@
 
 <body>
 
-<center><h2>Data Laporan Produksi Air Tawar <br> <small>Dinas Perikanan dan Kelautan Kab. Bantaeng</small></h2></center>
+<center><h2>Data Laporan Produksi Tambak <br> <small>Dinas Perikanan dan Kelautan Kab. Bantaeng</small></h2></center>
 
 	<table class="table table-bordered">
 		<thead>
@@ -60,49 +61,29 @@
 				<th rowspan="2">Kecamatan</th>
 				<th rowspan="2">Desa</th>
 				<th rowspan="2">Petani/RTP</th>
-				<th rowspan="2">Luas Areal (Ha)</th>
-				<th rowspan="2">Luas Tanam (Ha)</th>
-				<th colspan="4">Penebaran</th>
-				<th colspan="4">Jumlah Hidup</th>
+				<th rowspan="2">Panjang Pantai</th>
+				<th rowspan="2">Potensi</th>
+				<th rowspan="2">Luas Tanam</th>
+				<th colspan="3">Penebaran</th>
+				<th colspan="3">Jumlah Hidup</th>
+				<th colspan="2">Pakan</th>
+				<th rowspan="2">Keterangan</th>
 			</tr>
 			<tr>
-				<th>Mas</th>
-				<th>Nila</th>
-				<th>Lele</th>
-				<th>Bawal</th>
-				<th>Mas</th>
-				<th>Nila</th>
-				<th>Lele</th>
-				<th>Bawal</th>
+				<th>Windu</th>
+				<th>Vanamae</th>
+				<th>Bandeng</th>
+				<th>Windu</th>
+				<th>Vanamae</th>
+				<th>Bandeng</th>
+				<th>Pellet</th>
+				<th>Dedak</th>
 			</tr>
 		</thead>
 		
 		<tbody>
 
-		<?php $i = 1 ?>
-
-		@foreach( $airtawar as $at )
-
-			<tr>
-				<td><?php echo $i  ?></td>
-				<td>{{ $at->datakecamatan->nama }}</td>
-				<td>{{ $at->desa }}</td>
-				<td>{{ $at->rtp }}</td>
-				<td>{{ $at->luas_areal }} Ha</td>
-				<td>{{ $at->luas_tanam }} Ha</td>
-				<td>{{ $at->penebaran_mas }}</td>
-				<td>{{ $at->penebaran_nila }}</td>
-				<td>{{ $at->penebaran_lele }}</td>
-				<td>{{ $at->penebaran_bawal }}</td>
-				<td>{{ $at->jumlah_hidup_mas }}</td>
-				<td>{{ $at->jumlah_hidup_nila }}</td>
-				<td>{{ $at->jumlah_hidup_lele }}</td>
-				<td>{{ $at->jumlah_hidup_bawal }}</td>
-			</tr>
-				
-			<?php $i = $i + 1 ?>
-
-		@endforeach
+		
 			
 		</tbody>
 	</table>

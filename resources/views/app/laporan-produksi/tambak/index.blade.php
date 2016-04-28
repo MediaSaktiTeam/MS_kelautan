@@ -51,7 +51,7 @@
 											<input type="hidden" id="token" name="_token" value="{{ csrf_token() }}">
 											<label>KETERANGAN IDENTITAS</label>
 											<div class="row">
-												<div class="col-sm-6">
+												<div class="col-sm-3">
 													<div class="form-group">
 														<label>Provinsi</label>
 														<span id="provinsi">
@@ -65,7 +65,7 @@
 														</span>
 													</div>
 												</div>
-												<div class="col-md-6">
+												<div class="col-md-3">
 													<div class="form-group">
 														<label>Kabupaten/Kota</label>
 														<span id="kabupaten">
@@ -75,10 +75,7 @@
 														</span>
 													</div>
 												</div>
-											</div>
-
-											<div class="row">
-												<div class="col-md-6">
+												<div class="col-md-3">
 													<div class="form-group">
 														<label>Kecamatan</label>
 														<div id="kecamatan">
@@ -88,7 +85,7 @@
 														</div>
 													</div>
 												</div>
-												<div class="col-sm-6">
+												<div class="col-sm-3">
 													<div class="form-group">
 														<label>Desa/Kelurahan</label>
 														<span id="desa">
@@ -101,21 +98,30 @@
 											</div>
 
 											<hr>
-											<label>KETERANGAN PRODUKSI</label>
+											<label>KETERANGAN LAHAN</label>
 											<div class="row">
-												<div class="col-md-4">
+												<div class="col-md-6">
+													<div class="form-group">
+														<label>Panjang Garis Pantai</label>
+														<input type="number" name="panjang_pantai" value="{{ Input::old('rtp') }}" class="form-control" required="">
+													</div>
+												</div>
+												<div class="col-md-6">
 													<div class="form-group">
 														<label>Petani/RTP</label>
-														<input type="number" name="rtp" value="{{ Input::old('rtp') }}" class="form-control" required="">
+														<input type="number" name="rtp" value="{{ Input::old('luas_areal') }}" class="form-control" required="">
 													</div>
 												</div>
-												<div class="col-md-4">
+											</div>
+
+											<div class="row">
+												<div class="col-md-6">
 													<div class="form-group">
-														<label>Luas Areal (Ha)</label>
-														<input type="number" name="luas_areal" value="{{ Input::old('luas_areal') }}" class="form-control" required="">
+														<label>Luas Potensi</label>
+														<input type="number" name="potensi" value="{{ Input::old('potensi') }}" class="form-control" required="">
 													</div>
 												</div>
-												<div class="col-md-4">
+												<div class="col-md-6">
 													<div class="form-group">
 														<label>Luas Tanam</label>
 														<input type="number" name="luas_tanam" value="{{ Input::old('luas_tanam') }}" class="form-control" required="">
@@ -124,66 +130,68 @@
 											</div>
 
 											<hr>
-											<label>PENEBARAN (Ekor)</label>
+											<label>PENEBARAN</label>
 											<div class="row">
-												<div class="col-md-3">
+												<div class="col-md-4">
 													<div class="form-group">
-														<label>MAS</label>
-														<input type="number" name="penebaran_mas" value="{{ Input::old('penebaran_mas') }}" class="form-control" required="">
+														<label>Windu</label>
+														<input type="number" name="penebaran_windu" value="{{ Input::old('penebaran_windu') }}" class="form-control" required="">
 													</div>
 												</div>
-												<div class="col-md-3">
+												<div class="col-md-4">
 													<div class="form-group">
-														<label>NILA</label>
-														<input type="number" name="penebaran_nila" value="{{ Input::old('penebaran_nila') }}" class="form-control" required="">
+														<label>Vanamae</label>
+														<input type="number" name="penebaran_vanamae" value="{{ Input::old('penebaran_vanamae') }}" class="form-control" required="">
 													</div>
 												</div>
-												<div class="col-md-3">
+												<div class="col-md-4">
 													<div class="form-group">
-														<label>LELE</label>
-														<input type="number" name="penebaran_lele" value="{{ Input::old('penebaran_lele') }}" class="form-control" required="">
-													</div>
-												</div>
-												<div class="col-md-3">
-													<div class="form-group">
-														<label>BAWAL</label>
-														<input type="number" name="penebaran_bawal" value="{{ Input::old('penebaran_bawal') }}" class="form-control" required="">
+														<label>Bandeng</label>
+														<input type="number" name="penebaran_bandeng" value="{{ Input::old('penebaran_bandeng') }}" class="form-control" required="">
 													</div>
 												</div>
 											</div>
 											<hr>
 											<label>JUMLAH HIDUP</label>
 											<div class="row">
-												<div class="col-md-3">
+												<div class="col-md-4">
 													<div class="form-group">
-														<label>MAS</label>
-														<input type="number" name="jumlah_hidup_mas" value="{{ Input::old('jumlah_hidup_mas') }}" class="form-control" required="">
+														<label>Windu</label>
+														<input type="number" name="jumlah_hidup_windu" value="{{ Input::old('jumlah_hidup_windu') }}" class="form-control" required="">
 													</div>
 												</div>
-												<div class="col-md-3">
+												<div class="col-md-4">
 													<div class="form-group">
-														<label>NILA</label>
-														<input type="number" name="jumlah_hidup_nila" value="{{ Input::old('jumlah_hidup_nila') }}" class="form-control" required="">
+														<label>Vanamae</label>
+														<input type="number" name="jumlah_hidup_vanamae" value="{{ Input::old('jumlah_hidup_vanamae') }}" class="form-control" required="">
 													</div>
 												</div>
-												<div class="col-md-3">
+												<div class="col-md-4">
 													<div class="form-group">
-														<label>LELE</label>
-														<input type="number" name="jumlah_hidup_lele" value="{{ Input::old('jumlah_hidup_lele') }}" class="form-control" required="">
-													</div>
-												</div>
-												<div class="col-md-3">
-													<div class="form-group">
-														<label>BAWAL</label>
-														<input type="number" name="jumlah_hidup_bawal" value="{{ Input::old('jumlah_hidup_bawal') }}" class="form-control" required="">
+														<label>Bandeng</label>
+														<input type="number" name="jumlah_hidup_bandeng" value="{{ Input::old('jumlah_hidup_bandeng') }}" class="form-control" required="">
 													</div>
 												</div>
 											</div>
+											<label>PAKAN</label>
+											<div class="row">
+												<div class="col-md-4">
+													<div class="form-group">
+														<label>Pellet</label>
+														<input type="number" name="pakan_pelet" value="{{ Input::old('pakan_pelet') }}" class="form-control" required="">
+													</div>
+												</div>
+												<div class="col-md-4">
+													<div class="form-group">
+														<label>Dedak</label>
+														<input type="number" name="pakan_dedak" value="{{ Input::old('pakan_dedak') }}" class="form-control" required="">
+													</div>
+												</div>											</div>
+											<input type="hidden" id="id-tambak" name="id">
 
 											
 											<div class="clearfix"></div>
 											<br>
-											<input type="hidden" id="id-tambak" name="id">
 											<button class="btn btn-primary" type="submit">Tambah</button>
 										</form>
 									</div>
