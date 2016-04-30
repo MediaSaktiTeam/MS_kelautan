@@ -186,7 +186,8 @@
 														<label>Dedak</label>
 														<input type="number" name="pakan_dedak" value="{{ Input::old('pakan_dedak') }}" class="form-control" required="">
 													</div>
-												</div>											</div>
+												</div>											
+											</div>
 											<input type="hidden" id="id-tambak" name="id">
 
 											
