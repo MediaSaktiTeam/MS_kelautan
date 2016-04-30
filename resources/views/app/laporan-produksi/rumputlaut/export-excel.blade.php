@@ -15,10 +15,21 @@
 				<th rowspan="2">Keterangan</th>
 			</tr>
 			<tr>
+				<th></th>
+				<th></th>
+				<th></th>
+				<th></th>
+				<th></th>
+				<th></th>
+				<th></th>
+				<th></th>
+				<th></th>
+				<th></th>
 				<th>Basah</th>
 				<th>Kering</th>
 				<th>Basah</th>
 				<th>Kering</th>
+				<th></th>
 			</tr>
 
 		<?php $i = 1 ?>
@@ -36,10 +47,10 @@
 				<td>{{ $rl->bentangan }}</td>
 				<td>{{ $rl->bibit_cottoni }} Kg</td>
 				<td>{{ $rl->bibit_spinosum }} Kg</td>
-				<td>{{ $rl->cottoni_basah }} Kg</td>
-				<td>{{ $rl->cottoni_kering }} Kg</td>
-				<td>{{ $rl->spinosum_basah }} Kg</td>
-				<td>{{ $rl->spinosum_kering }} Kg</td>
+				<td>{{ $rl->cottoni_basah }} KgCB</td>
+				<td>{{ $rl->cottoni_kering }} KgCK</td>
+				<td>{{ $rl->spinosum_basah }} KgSB</td>
+				<td>{{ $rl->spinosum_kering }} KgSK</td>
 				<td>isi keterangan</td>
 			</tr>
 				
