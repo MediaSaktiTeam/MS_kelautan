@@ -228,7 +228,8 @@
 														<th>Kecamatan</th>
 														<th>Desa</th>
 														<th>Petani/RTP</th>
-														<th>Luas Areal (Ha)</th>
+														<th>Panjang Pantai</th>
+														<th>Potensi</th>
 														<th>Luas Tanam (Ha)</th>
 														<th style="text-align:center">Aksi</th>
 													</tr>
@@ -254,7 +255,8 @@
 															<td>{{ $at->datakecamatan->nama }}</td>
 															<td>{{ $at->desa }}</td>
 															<td>{{ $at->rtp }}</td>
-															<td>{{ $at->luas_areal }} Ha</td>
+															<td>{{ $at->panjang_pantai }} Ha</td>
+															<td>{{ $at->potensi }}</td>
 															<td>{{ $at->luas_tanam }} Ha</td>
 															<td style="text-align:center">
 																<a class="btn btn-default btn-xs view" data-id="{{ $at->id }}"><i class="fa fa-search-plus"></i></a>

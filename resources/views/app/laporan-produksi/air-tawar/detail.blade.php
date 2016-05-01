@@ -57,3 +57,15 @@
 		</tr>
 	</tbody>
 </table>
+<table class="table table-hover">
+	<thead>
+		<tr>
+			<th>Keterangan</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td><b>keterangan</b></td>
+		</tr>
+	</tbody>
+</table>

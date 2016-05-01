@@ -82,9 +82,32 @@
 		</thead>
 		
 		<tbody>
+			<?php $i = 1 ?>
 
-		
-			
+		@foreach( $tambak as $tb )
+
+			<tr>
+				<td><?php echo $i  ?></td>
+				<td>{{ $tb->datakecamatan->nama }}</td>
+				<td>{{ $tb->desa }}</td>
+				<td>{{ $tb->rtp }}</td>
+				<td>{{ $tb->panjang_pantai }}</td>
+				<td>{{ $tb->potensi }}</td>
+				<td>{{ $tb->luas_tanam }} Ha</td>
+				<td>{{ $tb->penebaran_windu }}</td>
+				<td>{{ $tb->penebaran_vanamae }}</td>
+				<td>{{ $tb->penebaran_bandeng }}</td>
+				<td>{{ $tb->jumlah_hidup_windu }}</td>
+				<td>{{ $tb->jumlah_hidup_vanamae }}</td>
+				<td>{{ $tb->jumlah_hidup_bandeng }}</td>
+				<td>{{ $tb->pakan_pelet }}</td>
+				<td>{{ $tb->pakan_dedak }}</td>
+				<td>Isi keterangan</td>
+			</tr>
+				
+			<?php $i = $i + 1 ?>
+
+		@endforeach			
 		</tbody>
 	</table>
 

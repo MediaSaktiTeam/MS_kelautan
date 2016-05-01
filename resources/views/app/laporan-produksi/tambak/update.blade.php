@@ -71,7 +71,10 @@
 														<label>Kabupaten/Kota</label>
 														<span id="kabupaten">
 															<select class="full-width" data-init-plugin="select2" name="kabupaten" required>
-																<option value="">Pilih Kabupaten/Kota...</option>
+																<?php $kabupaten = App\Kabupaten::where('nama','Kab. Bantaeng')->get() ?>
+																@foreach ( $kabupaten as $kab )
+																	<option value="{{ $tambak->kabupaten }}" {{ $kab->id == $tambak->kabupaten ? "selected":"" }}>{{ $kab->nama }}</option>
+																@endforeach
 															</select>
 														</span>
 													</div>
@@ -81,7 +84,10 @@
 														<label>Kecamatan</label>
 														<div id="kecamatan">
 															<select class="full-width" data-init-plugin="select2" name="kecamatan" required>
-																<option value="">Pilih Kecamatan...</option>
+																<?php $kecamatan = App\Kecamatan::where('id_kabupaten','7303')->get() ?>
+																@foreach ( $kecamatan as $kec )
+																	<option value="{{ $tambak->kecamatan }}" {{ $kec->id == $tambak->kecamatan ? "selected":"" }}>{{ $kec->nama }}</option>
+																@endforeach
 															</select>
 														</div>
 													</div>
@@ -91,7 +97,7 @@
 														<label>Desa/Kelurahan</label>
 														<span id="desa">
 														<select class="full-width" name="desa" data-init-plugin="select2" required>
-															<option value="">Pilih Desa/Kelurahan...</option>
+															<option value="{{ $tambak->desa }}" {{ Input::old('desa') == $tambak->desa ? "selected":"" }}>{{ $tambak->desa }}</option>
 														</select>
 														</span>
 													</div>

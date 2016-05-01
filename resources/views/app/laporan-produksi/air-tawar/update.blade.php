@@ -71,7 +71,10 @@
 														<label>Kabupaten/Kota</label>
 														<span id="kabupaten">
 															<select class="full-width" data-init-plugin="select2" name="kabupaten" required>
-																<option value="{{ $airtawar->kabupaten }}" {{ Input::old('kabupaten') == $airtawar->kabupaten ? "selected":"" }}>{{ $airtawar->datakabupaten->nama }}</option>
+																<?php $kabupaten = App\Kabupaten::where('nama','Kab. Bantaeng')->get() ?>
+																@foreach ( $kabupaten as $kab )
+																	<option value="{{ $airtawar->kabupaten }}" {{ Input::old('kabupaten') == $airtawar->kabupaten ? "selected":"" }}>{{ $kab->nama }}</option>
+																@endforeach
 															</select>
 														</span>
 													</div>
@@ -81,7 +84,10 @@
 														<label>Kecamatan</label>
 														<div id="kecamatan">
 															<select class="full-width" data-init-plugin="select2" name="kecamatan" required>
-																<option value="{{ $airtawar->kecamatan }}" {{ Input::old('kecamatan') == $airtawar->kecamatan ? "selected":"" }}>{{ $airtawar->datakecamatan->nama }}</option>
+																<?php $kecamatan = App\Kecamatan::where('id_kabupaten','7303')->get() ?>
+																@foreach ( $kecamatan as $kec )
+																	<option value="{{ $airtawar->kecamatan }}" {{ $kec->id == $airtawar->kecamatan ? "selected":"" }}>{{ $kec->nama }}</option>
+																@endforeach
 															</select>
 														</div>
 													</div>

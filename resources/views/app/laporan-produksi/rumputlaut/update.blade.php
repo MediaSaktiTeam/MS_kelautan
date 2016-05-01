@@ -72,7 +72,10 @@
 														<label>Kabupaten/Kota</label>
 														<span id="kabupaten">
 															<select class="full-width" data-init-plugin="select2" name="kabupaten" required>
-																<option value="{{ $rumputlaut->kabupaten }}" {{ Input::old('kabupaten') == $rumputlaut->kabupaten ? "selected":"" }}>{{ $rumputlaut->datakabupaten->nama }}</option>
+																<?php $kabupaten = App\Kabupaten::where('nama','Kab. Bantaeng')->get() ?>
+																@foreach ( $kabupaten as $kab )
+																	<option value="{{ $rumputlaut->kabupaten }}" {{ Input::old('kabupaten') == $rumputlaut->kabupaten ? "selected":"" }}>{{ $kab->nama }}</option>
+																@endforeach
 															</select>
 														</span>
 													</div>
@@ -82,7 +85,10 @@
 														<label>Kecamatan</label>
 														<div id="kecamatan">
 															<select class="full-width" data-init-plugin="select2" name="kecamatan" required>
-																<option value="{{ $rumputlaut->kecamatan }}" {{ Input::old('kecamatan') == $rumputlaut->kecamatan ? "selected":"" }}>{{ $rumputlaut->datakecamatan->nama }}</option>
+																<?php $kecamatan = App\Kecamatan::where('id_kabupaten','7303')->get() ?>
+																@foreach ( $kecamatan as $kec )
+																	<option value="{{ $rumputlaut->kecamatan }}" {{ $kec->id == $rumputlaut->kecamatan ? "selected":"" }}>{{ $kec->nama }}</option>
+																@endforeach
 															</select>
 														</div>
 													</div>

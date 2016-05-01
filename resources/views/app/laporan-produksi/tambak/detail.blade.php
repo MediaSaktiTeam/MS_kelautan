@@ -23,18 +23,16 @@
 <table class="table table-hover">
 	<thead>
 		<tr>
-			<th>Mas</th>
-			<th>Nila</th>
-			<th>lele</th>
-			<th>Bawal</th>
+			<th>Windu</th>
+			<th>Vanamae</th>
+			<th>Bandeng</th>
 		</tr>
 	</thead>
 	<tbody>
 		<tr>
-			<td><b>{{ $tambak->penebaran_mas }} Ekor</b></td>
-			<td><b>{{ $tambak->penebaran_nila }} Ekor</b></td>
-			<td><b>{{ $tambak->penebaran_lele }} Ekor</b></td>
-			<td><b>{{ $tambak->penebaran_bawal }} Ekor</b></td>
+			<td><b>{{ $tambak->penebaran_windu }} Ekor</b></td>
+			<td><b>{{ $tambak->penebaran_vanamae }} Ekor</b></td>
+			<td><b>{{ $tambak->penebaran_bandeng }} Ekor</b></td>
 		</tr>
 	</tbody>
 </table>
@@ -42,18 +40,43 @@
 <table class="table table-hover">
 	<thead>
 		<tr>
-			<th>Mas</th>
-			<th>Nila</th>
-			<th>lele</th>
-			<th>Bawal</th>
+			<th>Windu</th>
+			<th>Vanamae</th>
+			<th>Bandeng</th>
 		</tr>
 	</thead>
 	<tbody>
 		<tr>
-			<td><b>{{ $tambak->jumlah_hidup_mas }} Ekor</b></td>
-			<td><b>{{ $tambak->jumlah_hidup_nila }} Ekor</b></td>
-			<td><b>{{ $tambak->jumlah_hidup_lele }} Ekor</b></td>
-			<td><b>{{ $tambak->jumlah_hidup_bawal }} Ekor</b></td>
+			<td><b>{{ $tambak->jumlah_hidup_windu }} Ekor</b></td>
+			<td><b>{{ $tambak->jumlah_hidup_vanamae }} Ekor</b></td>
+			<td><b>{{ $tambak->jumlah_hidup_bandeng }} Ekor</b></td>
+		</tr>
+	</tbody>
+</table>
+<h5>Pakan</h5>
+<table class="table table-hover">
+	<thead>
+		<tr>
+			<th>Pellet</th>
+			<th>Dedak</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td><b>{{ $tambak->pakan_pelet }}</b></td>
+			<td><b>{{ $tambak->pakan_dedak }}</b></td>
+		</tr>
+	</tbody>
+</table>
+<table class="table table-hover">
+	<thead>
+		<tr>
+			<th>Keterangan</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td><b>keterangan</b></td>
 		</tr>
 	</tbody>
 </table>
