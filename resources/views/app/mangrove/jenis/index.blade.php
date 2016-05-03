@@ -1,7 +1,7 @@
 @extends('app.layout.main')
 
 @section('title')
-	Luas Lahan Mangrove yang dimiliki | Tambah
+	Nama nama Jenis Mangrove | Tambah
 @endsection
 
 
@@ -23,7 +23,7 @@
 						<!-- START BREADCRUMB -->
 						<ul class="breadcrumb pull-left">
 							<li>
-								<a href="{{ route('mangrovemilik') }}">Luas Lahan Mangrove yang dimiliki</a>
+								<a href="{{ route('mangrovejenis') }}">Nama nama Jenis Mangrove</a>
 							</li>
 						</ul>
 						
@@ -46,12 +46,12 @@
 								<!-- START PANEL -->
 								<div class="panel panel-transparent">
 									<div class="panel-body">
-										<form id="form-personal" method="GET" action="{{ route('mangrovemilik_tambah') }}" role="form">
+										<form id="form-personal" method="GET" action="{{ route('mangrovejenis_tambah') }}" role="form">
 											
 											<input type="hidden" id="token" name="_token" value="{{ csrf_token() }}">
 											<label>KETERANGAN IDENTITAS</label>
 											<div class="row">
-												<div class="col-sm-4">
+												<div class="col-sm-6">
 													<div class="form-group">
 														<label>Kecamatan</label>
 														<div id="kecamatan">
@@ -61,41 +61,10 @@
 														</div>
 													</div>
 												</div>
-												<div class="col-sm-4">
+												<div class="col-sm-6">
 													<div class="form-group">
-														<label>Desa/Kelurahan</label>
-														<span id="desa">
-														<select class="full-width" name="desa" data-init-plugin="select2" required>
-															<option value="">Pilih Desa/Kelurahan...</option>
-														</select>
-														</span>
-													</div>
-												</div>
-												<div class="col-sm-4">
-													<div class="form-group">
-														<label>Luas Lahan Mangrove</label>
-														<input type="text" class="form-control number" name="luas_lahan" value="">
-													</div>
-												</div>
-											</div>
-
-											<div class="row">
-												<div class="col-sm-4">
-													<div class="form-group">
-														<label>Kondisi Rusak</label>
-														<input type="text" class="form-control number" name="kondisi_rusak" value="">
-													</div>
-												</div>
-												<div class="col-sm-4">
-													<div class="form-group">
-														<label>Kondisi Sedang</label>
-														<input type="text" class="form-control number" name="kondisi_sedang" value="">
-													</div>
-												</div>
-												<div class="col-sm-4">
-													<div class="form-group">
-														<label>Kondisi Baik</label>
-														<input type="text" class="form-control number" name="kondisi_baik" value="">
+														<label>Jenis Jenis Mangrove</label>
+														<input type="text" class="form-control number" name="jenis_mangrove" value="">
 													</div>
 												</div>
 											</div>
@@ -134,11 +103,7 @@
 														</th>
 														<th>No.</th>
 														<th>Nama Kecamatan</th>
-														<th>Nama Desa</th>
-														<th>Luas Lahan Mangrove</th>
-														<th>Kondisi Rusak</th>
-														<th>Kondisi Sedang</th>
-														<th>Kondisi Baik</th>
+														<th>Jenis Jenis Mangrove</th>
 														<th style="text-align:center">Aksi</th>
 													</tr>
 												</thead>
@@ -154,10 +119,6 @@
 															<td></td>
 															<td></td>
 															<td></td>
-															<td></td>
-															<td></td>
-															<td></td>
-															<td></td>
 															<td style="text-align:center">
 																<a class="btn btn-default btn-xs view" data-id=""><i class="fa fa-search-plus"></i></a>
 																<a href="" class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i></a>
@@ -167,11 +128,6 @@
 														<tr>
 															<td><b>Jumlah</b></td>
 															<td></td>
-															<td></td>
-															<td></td>
-															<td class="text-right"><b>8,82 Ha</b></td>
-															<td class="text-right"><b>8,82 Ha</b></td>
-															<td class="text-right"><b>8,82 Ha</b></td>
 															<td class="text-right"><b>8,82 Ha</b></td>
 															<td></td>
 														</tr>
@@ -261,13 +217,13 @@
 				<div class="modal-body">
 					<div class="row">
 						<div class="col-md-6">
-							<a href="{{ url('/app/mangrovemilik/export-excel') }}">
+							<a href="{{ url('/app/mangrovejenis/export-excel') }}">
 								<i class="fa fa-file-excel-o export-excel"></i>
 								Unduh Dalam Format Mic.Excel
 							</a>
 						</div>
 						<div class="col-md-6">
-							<a href="{{ url('/app/mangrovemilik/export-pdf') }}">
+							<a href="{{ url('/app/mangrovejenis/export-pdf') }}">
 								<i class="fa fa-file-pdf-o export-pdf"></i>
 								Unduh Dalam Format PDF
 							</a>
@@ -328,7 +284,7 @@
 	<script>
 		$(".menu-items .link-pesisir").addClass("active open");
 		$(".menu-items .link-pengolah .sub-mangrove").addClass("active open");
-		$(".menu-items .link-pengolah .sub-mangrove .sub-mangrove-milik").addClass("active");
+		$(".menu-items .link-pengolah .sub-mangrove .sub-mangrove-jenis").addClass("active");
 
 		function get_kabupaten(id_prov){
 			var _token = $('meta[name="csrf-token"]').attr('content');
@@ -373,7 +329,7 @@
 				else {
 				  return false;
 				}
-				$(".btn-hapus").attr('href',"{{ url('/app/mangrovemilik/hapus') }}/"+id);
+				$(".btn-hapus").attr('href',"{{ url('/app/mangrovejenis/hapus') }}/"+id);
 
 			});
 
@@ -386,7 +342,7 @@
 			// Show detail
 			$(".panel").on('click', '.view', function(){
 				var id = $(this).data('id');
-				var url = "{{ url('app/mangrovemilik/detail') }}";
+				var url = "{{ url('app/mangrovejenis/detail') }}";
 				var url = url+'/'+id;
 				$.get(url, {id:id, _token:_token}, function(data){
 					$("#view-detail").html(data);
@@ -410,7 +366,7 @@
 				$("#show-pencarian").show();
 				$("#show-pencarian").html('<tr><td colspan="6"><i class="fa fa-spinner fa-spin"></i></td></tr>');
 				var _token = $('meta[name="csrf-token"]').attr('content');
-				var url = "{{ url('app/mangrovemilik/search') }}";
+				var url = "{{ url('app/mangrovejenis/search') }}";
 				var url = url+"/"+cari;
 				$.get(url, { cari:cari, _token:_token}, function(data){
 					$('#show-pencarian').html(data);

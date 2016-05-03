@@ -90,6 +90,11 @@
 				'getIndex' => 'mangroverehabilitasi',
 				'getTambah' => 'mangroverehabilitasi_tambah'
 			]);
+		Route::controller('app/mangrove/jenis', 'MangroveJenisController', 
+			[
+				'getIndex' => 'mangrovejenis',
+				'getTambah' => 'mangrovejenis_tambah'
+			]);
 
 		Route::get('get-kabupaten/{id}', 'LokasiController@get_kabupaten');
 		Route::get('get-kecamatan/{id}', 'LokasiController@get_kecamatan');
