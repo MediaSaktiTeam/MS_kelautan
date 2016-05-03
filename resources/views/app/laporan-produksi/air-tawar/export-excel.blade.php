@@ -3,20 +3,32 @@
 	<table class="table table-bordered table-responsive">
 		<thead>
 			<tr>
-				<th>No.</th>
-				<th>Kecamatan</th>
-				<th>Desa</th>
-				<th>Petani/RTP</th>
-				<th>Luas Areal (Ha)</th>
-				<th>Luas Tanam (Ha)</th>
-				<th>Penebaran Mas</th>
-				<th>Penebaran Nila</th>
-				<th>Penebaran Lele</th>
-				<th>Penebaran Bawal</th>
-				<th>Jumlah Hidup Mas</th>
-				<th>Jumlah Hidup Nila</th>
-				<th>Jumlah Hidup Lele</th>
-				<th>Jumlah Hidup Bawal</th>
+				<th rowspan="2">No.</th>
+				<th rowspan="2">Kecamatan</th>
+				<th rowspan="2">Desa</th>
+				<th rowspan="2">Petani/RTP</th>
+				<th rowspan="2">Luas Areal (Ha)</th>
+				<th rowspan="2">Luas Tanam (Ha)</th>
+				<th colspan="4">Penebaran</th>
+				<th colspan="4">Jumlah Hidup</th>
+				<th rowspan="2">Keterangan</th>
+			</tr>
+			<tr>
+				<th></th>
+				<th></th>
+				<th></th>
+				<th></th>
+				<th></th>
+				<th></th>
+				<th>Mas</th>
+				<th>Nila</th>
+				<th>Lele</th>
+				<th>Bawal</th>
+				<th>Mas</th>
+				<th>Nila</th>
+				<th>Lele</th>
+				<th>Bawal</th>
+				<th></th>
 			</tr>
 		</thead>
 		
@@ -41,6 +53,7 @@
 				<td>{{ $at->jumlah_hidup_nila }}</td>
 				<td>{{ $at->jumlah_hidup_lele }}</td>
 				<td>{{ $at->jumlah_hidup_bawal }}</td>
+				<td>Keterangan</td>
 			</tr>
 				
 			<?php $i = $i + 1 ?>

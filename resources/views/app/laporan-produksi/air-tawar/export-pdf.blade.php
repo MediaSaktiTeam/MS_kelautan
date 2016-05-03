@@ -64,6 +64,7 @@
 				<th rowspan="2">Luas Tanam (Ha)</th>
 				<th colspan="4">Penebaran</th>
 				<th colspan="4">Jumlah Hidup</th>
+				<th rowspan="2">Keterangan</th>
 			</tr>
 			<tr>
 				<th>Mas</th>
@@ -98,6 +99,7 @@
 				<td>{{ $at->jumlah_hidup_nila }}</td>
 				<td>{{ $at->jumlah_hidup_lele }}</td>
 				<td>{{ $at->jumlah_hidup_bawal }}</td>
+				<td>Isi keterangan</td>
 			</tr>
 				
 			<?php $i = $i + 1 ?>
