@@ -1,7 +1,7 @@
 @extends('app.layout.main')
 
 @section('title')
-	Pemasar | Tambah
+	Luas Lahan Mangrove yang dimiliki | Tambah
 @endsection
 
 
@@ -14,7 +14,7 @@
 	<!-- START PAGE CONTENT WRAPPER -->
 	<div class="page-content-wrapper">
 		
-		<!-- START PAGE CONTENT -->			
+		<!-- START PAGE CONTENT -->         
 		<div class="content">
 			
 			<div class="jumbotron bg-darkblue" data-pages="parallax">
@@ -23,11 +23,11 @@
 						<!-- START BREADCRUMB -->
 						<ul class="breadcrumb pull-left">
 							<li>
-								<a href="{{ route('pemasar') }}">Pemasar</a>
+								<a href="{{ route('mangrovemilik') }}">Luas Lahan Mangrove yang dimiliki</a>
 							</li>
 						</ul>
 						
-						<button id="show-tambah-pemasar" class="btn btn-primary bg-blueblur m-t-10 m-b-10 pull-right">Tambah</button>
+						<button id="show-tambah-mangrove" class="btn btn-primary bg-blueblur m-t-10 m-b-10 pull-right">Tambah</button>
 					</div>
 				</div>
 
@@ -40,45 +40,18 @@
 
 					<div class="row">
 
-						<div id="tambah-pemasar" style="display:none">
+						<div id="tambah-mangrove" style="display:none">
 							<div class="col-lg-7 col-md-6 ">
 
 								<!-- START PANEL -->
 								<div class="panel panel-transparent">
 									<div class="panel-body">
-										<form id="form-personal" method="GET" action="{{ route('pemasar_tambah') }}" role="form">
+										<form id="form-personal" method="GET" action="{{ route('mangrovemilik_tambah') }}" role="form">
 											
 											<input type="hidden" id="token" name="_token" value="{{ csrf_token() }}">
 											<label>KETERANGAN IDENTITAS</label>
 											<div class="row">
-												<div class="col-sm-6">
-													<div class="form-group">
-														<label>Provinsi</label>
-														<span id="provinsi">
-															<select class="full-width" name="provinsi" data-init-plugin="select2" onchange="get_kabupaten(this.value)" required>
-																<option value="">Pilih Provinsi</option>
-																<?php $provinsi = App\Provinsi::where('nama','Sulawesi Selatan')->get() ?>
-																@foreach ( $provinsi as $prov )
-																	<option value="{{ $prov->id }}">{{ $prov->nama }}</option>
-																@endforeach
-															</select>
-														</span>
-													</div>
-												</div>
-												<div class="col-sm-6">
-													<div class="form-group">
-														<label>Kabupaten/Kota</label>
-														<span id="kabupaten">
-															<select class="full-width" data-init-plugin="select2" name="kabupaten" required>
-																<option value="">Pilih Kabupaten/Kota...</option>
-															</select>
-														</span>
-													</div>
-												</div>
-											</div>
-
-											<div class="row">
-												<div class="col-sm-6">
+												<div class="col-sm-4">
 													<div class="form-group">
 														<label>Kecamatan</label>
 														<div id="kecamatan">
@@ -88,7 +61,7 @@
 														</div>
 													</div>
 												</div>
-												<div class="col-sm-6">
+												<div class="col-sm-4">
 													<div class="form-group">
 														<label>Desa/Kelurahan</label>
 														<span id="desa">
@@ -98,106 +71,36 @@
 														</span>
 													</div>
 												</div>
-											</div>
-
-											<div class="row">
-												<div class="col-sm-6">
+												<div class="col-sm-4">
 													<div class="form-group">
-														<label>Kode Jenis Kegiatan</label>
-														<input type="text" class="form-control" name="kode_kegiatan" value="">
-													</div>
-												</div>
-												<div class="col-sm-6">
-													<div class="form-group">
-														<label>Nomor Urut Direktori</label>
-														<input type="text" class="form-control" name="nomor_direktori" value="">
-													</div>
-												</div>
-											</div>
-											<hr>
-											<label>KETERANGAN UNIT PEMASAR</label>
-											<div class="row">
-												<div class="col-sm-6">
-													<div class="form-group">
-														<label>Nama Unit Pemasar</label>
-														<input type="text" class="form-control" name="unit_pemasar" value="">
-													</div>
-												</div>
-												<div class="col-sm-6">
-													<div class="form-group">
-														<label>Nama Pemilik Unit Pemasar</label>
-														<input type="text" class="form-control" name="pemilik_pemasar" value="">
+														<label>Luas Lahan Mangrove</label>
+														<input type="text" class="form-control number" name="luas_lahan" value="">
 													</div>
 												</div>
 											</div>
 
 											<div class="row">
-												<div class="col-sm-12">
-													<div class="form-group">
-														<label>Alamat Unit Pemasar</label>
-														<input type="text" class="form-control" name="alamat_pemasar" value="">
-													</div>
-												</div>
-											</div>
-											
-											<div class="row">
 												<div class="col-sm-4">
 													<div class="form-group">
-														<label>RT/RW</label>
-														<input type="text" class="form-control" name="alamat_erte" value="">
+														<label>Kondisi Rusak</label>
+														<input type="text" class="form-control number" name="kondisi_rusak" value="">
 													</div>
 												</div>
 												<div class="col-sm-4">
 													<div class="form-group">
-														<label>Telepon</label>
-														<input type="text" class="form-control number" name="telepon" value="">
+														<label>Kondisi Sedang</label>
+														<input type="text" class="form-control number" name="kondisi_sedang" value="">
 													</div>
 												</div>
 												<div class="col-sm-4">
 													<div class="form-group">
-														<label>Kode POS</label>
-														<input type="text" class="form-control" name="kode_pos" value="">
-													</div>
-												</div>
-											</div>
-											<hr>
-											<div class="row">
-												<div class="col-sm-12">
-													<label>Jenis Kegiatan Pemasaran yang Utama</label>
-													<div clas="form-group">
-														<div class="col-sm-4">
-															<div class="radio radio-success">
-															<input type="radio"  value="pengumpul" name="Pengumpul" id="pengumpul">
-															<label for="pengumpul">Pengumpul</label>
-															</div>
-														</div>
-														<div class="col-sm-4">
-															<div class="radio radio-success">
-															<input type="radio"  value="pedagang" name="Pedagang" id="pedagang">
-															<label for="pedagang">Pedagang</label>
-															</div>
-														</div>
-														<div class="col-sm-4">
-															<div class="radio radio-success">
-															<input type="radio"  value="pengecer" name="Pengecer" id="pengecer">
-															<label for="pengecer">Pengecer</label>
-															</div>
-														</div>
-													</div>
-												</div>
-											</div>
-									
-											<div class="row">
-												<div class="col-sm-12">
-													<div clas="form-group">
-														<label>Tahun Mulai Usaha</label>
-														<input type="date" class="form-control" name="tahun_mulai" value="">
+														<label>Kondisi Baik</label>
+														<input type="text" class="form-control number" name="kondisi_baik" value="">
 													</div>
 												</div>
 											</div>
 											<div class="clearfix"></div>
 											<br>
-											
 											<button class="btn btn-primary" type="submit">Tambah</button>
 										</form>
 									</div>
@@ -230,16 +133,17 @@
 															<button class="btn btn-check" data-toggle="modal" data-target="#modal-hapus" disabled id="hapus"><i class="pg-trash"></i></button>
 														</th>
 														<th>No.</th>
-														<th>Nama Lengkap</th>
-														<th>Nama Kelompok</th>
-														<th>Jabatan Kelompok</th>
-														<th>Jenis Olahan</th>
+														<th>Nama Kecamatan</th>
+														<th>Nama Desa</th>
+														<th>Luas Lahan Mangrove</th>
+														<th>Kondisi Rusak</th>
+														<th>Kondisi Sedang</th>
+														<th>Kondisi Baik</th>
 														<th style="text-align:center">Aksi</th>
 													</tr>
 												</thead>
 
 												<tbody>
-													@foreach($pemasar as $pem)
 														<tr>
 															<td>
 																<div class="checkbox">
@@ -247,21 +151,34 @@
 																	<label for="" class="m-l-20"></label>
 																</div>
 															</td>
-															<td>{{ $pem->pemilik_pemasar }}</td>
-															<td>{{ $pem->nama }}</td>
-															<td>{{ $pem->nama }}</td>
-															<td>{{ $pem->nama }}</td>
-															<td>{{ $pem->nama }}</td>
+															<td></td>
+															<td></td>
+															<td></td>
+															<td></td>
+															<td></td>
+															<td></td>
+															<td></td>
 															<td style="text-align:center">
 																<a class="btn btn-default btn-xs view" data-id=""><i class="fa fa-search-plus"></i></a>
 																<a href="" class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i></a>
 															</td>
 														</tr>
-													@endforeach
+
+														<tr>
+															<td><b>Jumlah</b></td>
+															<td></td>
+															<td></td>
+															<td></td>
+															<td class="text-right"><b>8,82 Ha</b></td>
+															<td class="text-right"><b>8,82 Ha</b></td>
+															<td class="text-right"><b>8,82 Ha</b></td>
+															<td class="text-right"><b>8,82 Ha</b></td>
+															<td></td>
+														</tr>
 												</tbody>
 
 											</table>
-											<center>{!! $pemasar->links() !!}</center>
+											<center></center>
 										</div>
 
 									</div>
@@ -344,13 +261,13 @@
 				<div class="modal-body">
 					<div class="row">
 						<div class="col-md-6">
-							<a href="{{ url('/app/pemasar/export-excel') }}">
+							<a href="{{ url('/app/mangrovemilik/export-excel') }}">
 								<i class="fa fa-file-excel-o export-excel"></i>
 								Unduh Dalam Format Mic.Excel
 							</a>
 						</div>
 						<div class="col-md-6">
-							<a href="{{ url('/app/pengolah/export-pdf') }}">
+							<a href="{{ url('/app/mangrovemilik/export-pdf') }}">
 								<i class="fa fa-file-pdf-o export-pdf"></i>
 								Unduh Dalam Format PDF
 							</a>
@@ -409,8 +326,9 @@
 
 @section('registerscript')
 	<script>
-		$(".menu-items .link-pengolah").addClass("active open");
-		$(".menu-items .link-pengolah .sub-pemasar").addClass("active");
+		$(".menu-items .link-pesisir").addClass("active open");
+		$(".menu-items .link-pengolah .sub-mangrove").addClass("active open");
+		$(".menu-items .link-pengolah .sub-mangrove .sub-mangrove-milik").addClass("active");
 
 		function get_kabupaten(id_prov){
 			var _token = $('meta[name="csrf-token"]').attr('content');
@@ -446,21 +364,21 @@
 			$("table").on('click', '#hapus', function(){
 
 				if($(".pilih:checked").length) {
-		          var id = "";
-		          $(".pilih:checked").each(function() {
-		            id += $(this).val() + ",";
-		          });
-		          id =  id.slice(0,-1);
-		        }
-		        else {
+				  var id = "";
+				  $(".pilih:checked").each(function() {
+					id += $(this).val() + ",";
+				  });
+				  id =  id.slice(0,-1);
+				}
+				else {
 				  return false;
-		        }
-		        $(".btn-hapus").attr('href',"{{ url('/app/pengolah/hapus') }}/"+id);
+				}
+				$(".btn-hapus").attr('href',"{{ url('/app/mangrovemilik/hapus') }}/"+id);
 
 			});
 
-			$("#show-tambah-pemasar").click(function(){
-				$("#tambah-pemasar").fadeIn();
+			$("#show-tambah-mangrove").click(function(){
+				$("#tambah-mangrove").fadeIn();
 				$("input[name='nik']").focus();
 				$(this).hide();
 			});
@@ -468,7 +386,7 @@
 			// Show detail
 			$(".panel").on('click', '.view', function(){
 				var id = $(this).data('id');
-				var url = "{{ url('app/pengolah/detail') }}";
+				var url = "{{ url('app/mangrovemilik/detail') }}";
 				var url = url+'/'+id;
 				$.get(url, {id:id, _token:_token}, function(data){
 					$("#view-detail").html(data);
@@ -477,7 +395,7 @@
 			});
 
 			@if ( count($errors) > 0 || Session::has('gagal') || Session::has('error_nik') )
-				$("#tambah-pemasar").fadeIn();
+				$("#tambah-mangrove").fadeIn();
 			@endif
 
 		});
@@ -492,7 +410,7 @@
 				$("#show-pencarian").show();
 				$("#show-pencarian").html('<tr><td colspan="6"><i class="fa fa-spinner fa-spin"></i></td></tr>');
 				var _token = $('meta[name="csrf-token"]').attr('content');
-				var url = "{{ url('app/pengolah/search') }}";
+				var url = "{{ url('app/mangrovemilik/search') }}";
 				var url = url+"/"+cari;
 				$.get(url, { cari:cari, _token:_token}, function(data){
 					$('#show-pencarian').html(data);

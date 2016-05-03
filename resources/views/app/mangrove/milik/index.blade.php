@@ -14,7 +14,7 @@
 	<!-- START PAGE CONTENT WRAPPER -->
 	<div class="page-content-wrapper">
 		
-		<!-- START PAGE CONTENT -->			
+		<!-- START PAGE CONTENT -->         
 		<div class="content">
 			
 			<div class="jumbotron bg-darkblue" data-pages="parallax">
@@ -51,32 +51,7 @@
 											<input type="hidden" id="token" name="_token" value="{{ csrf_token() }}">
 											<label>KETERANGAN IDENTITAS</label>
 											<div class="row">
-												<div class="row">
-												<div class="col-sm-3">
-													<div class="form-group">
-														<label>Provinsi</label>
-														<span id="provinsi">
-															<select class="full-width" name="provinsi" data-init-plugin="select2" onchange="get_kabupaten(this.value)" required>
-																<option value="">Pilih Provinsi</option>
-																<?php $provinsi = App\Provinsi::where('nama','Sulawesi Selatan')->get() ?>
-																@foreach ( $provinsi as $prov )
-																	<option value="{{ $prov->id }}">{{ $prov->nama }}</option>
-																@endforeach
-															</select>
-														</span>
-													</div>
-												</div>
-												<div class="col-sm-3">
-													<div class="form-group">
-														<label>Kabupaten/Kota</label>
-														<span id="kabupaten">
-															<select class="full-width" data-init-plugin="select2" name="kabupaten" required>
-																<option value="">Pilih Kabupaten/Kota...</option>
-															</select>
-														</span>
-													</div>
-												</div>
-												<div class="col-sm-3">
+												<div class="col-sm-4">
 													<div class="form-group">
 														<label>Kecamatan</label>
 														<div id="kecamatan">
@@ -86,7 +61,7 @@
 														</div>
 													</div>
 												</div>
-												<div class="col-sm-3">
+												<div class="col-sm-4">
 													<div class="form-group">
 														<label>Desa/Kelurahan</label>
 														<span id="desa">
@@ -96,28 +71,28 @@
 														</span>
 													</div>
 												</div>
-											</div>
-
-											<div class="row">
-												<div class="col-sm-3">
+												<div class="col-sm-4">
 													<div class="form-group">
 														<label>Luas Lahan Mangrove</label>
 														<input type="text" class="form-control number" name="luas_lahan" value="">
 													</div>
 												</div>
-												<div class="col-sm-3">
+											</div>
+
+											<div class="row">
+												<div class="col-sm-4">
 													<div class="form-group">
 														<label>Kondisi Rusak</label>
 														<input type="text" class="form-control number" name="kondisi_rusak" value="">
 													</div>
 												</div>
-												<div class="col-sm-3">
+												<div class="col-sm-4">
 													<div class="form-group">
 														<label>Kondisi Sedang</label>
 														<input type="text" class="form-control number" name="kondisi_sedang" value="">
 													</div>
 												</div>
-												<div class="col-sm-3">
+												<div class="col-sm-4">
 													<div class="form-group">
 														<label>Kondisi Baik</label>
 														<input type="text" class="form-control number" name="kondisi_baik" value="">
@@ -187,6 +162,18 @@
 																<a class="btn btn-default btn-xs view" data-id=""><i class="fa fa-search-plus"></i></a>
 																<a href="" class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i></a>
 															</td>
+														</tr>
+
+														<tr>
+															<td><b>Jumlah</b></td>
+															<td></td>
+															<td></td>
+															<td></td>
+															<td class="text-right"><b>8,82 Ha</b></td>
+															<td class="text-right"><b>8,82 Ha</b></td>
+															<td class="text-right"><b>8,82 Ha</b></td>
+															<td class="text-right"><b>8,82 Ha</b></td>
+															<td></td>
 														</tr>
 												</tbody>
 
@@ -377,16 +364,16 @@
 			$("table").on('click', '#hapus', function(){
 
 				if($(".pilih:checked").length) {
-		          var id = "";
-		          $(".pilih:checked").each(function() {
-		            id += $(this).val() + ",";
-		          });
-		          id =  id.slice(0,-1);
-		        }
-		        else {
+				  var id = "";
+				  $(".pilih:checked").each(function() {
+					id += $(this).val() + ",";
+				  });
+				  id =  id.slice(0,-1);
+				}
+				else {
 				  return false;
-		        }
-		        $(".btn-hapus").attr('href',"{{ url('/app/mangrovemilik/hapus') }}/"+id);
+				}
+				$(".btn-hapus").attr('href',"{{ url('/app/mangrovemilik/hapus') }}/"+id);
 
 			});
 
