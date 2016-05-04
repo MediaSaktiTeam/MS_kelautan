@@ -76,7 +76,7 @@
 	</thead>
 	<tbody>
 		<tr>
-			<td><b>keterangan</b></td>
+			<td><b>{{ $tambak->keterangan }}</b></td>
 		</tr>
 	</tbody>
 </table>

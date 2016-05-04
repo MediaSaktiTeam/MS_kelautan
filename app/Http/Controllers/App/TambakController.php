@@ -47,6 +47,7 @@ class TambakController extends Controller
 		$dt->jumlah_hidup_bandeng = $request->jumlah_hidup_bandeng;
 		$dt->pakan_pelet = $request->pakan_pelet;
 		$dt->pakan_dedak = $request->pakan_dedak;
+		$dt->keterangan = $request->keterangan;
 		$dt->save();
 		return redirect()->route('tambak')->with(session()->flash('success','Data Berhasil Tersimpan !!'));
 	}
@@ -80,16 +81,17 @@ class TambakController extends Controller
 		$dt->desa = $request->desa;
 		$dt->rtp = $request->rtp;
 		$dt->panjang_pantai = $request->panjang_pantai;
-		$dt->postensi = $request->postensi;
+		$dt->potensi = $request->potensi;
 		$dt->luas_tanam = $request->luas_tanam;
 		$dt->penebaran_windu = $request->penebaran_windu;
 		$dt->penebaran_vanamae = $request->penebaran_vanamae;
-		$dt->penebaran_bandeng = $request->penebaran_bawal;
+		$dt->penebaran_bandeng = $request->penebaran_bandeng;
 		$dt->jumlah_hidup_windu = $request->jumlah_hidup_windu;
 		$dt->jumlah_hidup_vanamae = $request->jumlah_hidup_vanamae;
 		$dt->jumlah_hidup_bandeng = $request->jumlah_hidup_bandeng;
 		$dt->pakan_pelet = $request->pakan_pelet;
 		$dt->pakan_dedak = $request->pakan_dedak;
+		$dt->keterangan = $request->keterangan;
 		$dt->save();
 		$data['tambak'] = Tambak::paginate(1);
 

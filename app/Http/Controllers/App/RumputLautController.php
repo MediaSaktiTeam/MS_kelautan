@@ -46,6 +46,7 @@ class RumputLautController extends Controller
 		$dt->cottoni_kering = $request->cottoni_kering;
 		$dt->spinosum_basah = $request->spinosum_basah;
 		$dt->spinosum_kering = $request->spinosum_kering;
+		$dt->keterangan = $request->keterangan;
 		$dt->save();
 		return redirect()->route('rumputlaut')->with(session()->flash('success','Data Berhasil Tersimpan !!'));
 	}
@@ -88,6 +89,7 @@ class RumputLautController extends Controller
 		$dt->cottoni_kering = $request->cottoni_kering;
 		$dt->spinosum_basah = $request->spinosum_basah;
 		$dt->spinosum_kering = $request->spinosum_kering;
+		$dt->keterangan = $request->keterangan;
 		$dt->save();
 		$data['rumputlaut'] = RumputLaut::paginate(1);
 

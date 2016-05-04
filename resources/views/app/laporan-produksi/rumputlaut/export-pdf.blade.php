@@ -100,7 +100,7 @@
 				<td>{{ $rl->cottoni_kering }} Kg</td>
 				<td>{{ $rl->spinosum_basah }} Kg</td>
 				<td>{{ $rl->spinosum_kering }} Kg</td>
-				<td>isi keterangan</td>
+				<td>{{ $rl->keterangan }}</td>
 			</tr>
 				
 			<?php $i = $i + 1 ?>

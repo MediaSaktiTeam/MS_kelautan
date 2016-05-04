@@ -183,6 +183,14 @@
 													</div>
 												</div>
 											</div>
+											<div class="row">
+												<div class="col-md-12">
+													<div class="form-group">
+														<label>Keterangan</label>
+														<textarea name="keterangan" cols="30" rows="10" class="form-control" required="">{{ $airtawar->keterangan }}</textarea>
+													</div>
+												</div>
+											</div>
 											<input type="hidden" id="id-airtawar" name="id" value="{{ $airtawar->id }}">
 
 			

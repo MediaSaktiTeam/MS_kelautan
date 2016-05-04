@@ -30,6 +30,7 @@ class TableTambak extends Migration
             $table->string('jumlah_hidup_bandeng');
             $table->string('pakan_pelet');
             $table->string('pakan_dedak');
+            $table->string('keterangan');
         });
     }
 

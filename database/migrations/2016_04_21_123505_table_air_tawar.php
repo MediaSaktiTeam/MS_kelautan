@@ -29,6 +29,7 @@ class TableAirTawar extends Migration
             $table->string('jumlah_hidup_nila');
             $table->string('jumlah_hidup_lele');
             $table->string('jumlah_hidup_bawal');
+            $table->string('keterangan');
         });
     }
 

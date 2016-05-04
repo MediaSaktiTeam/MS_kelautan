@@ -54,7 +54,7 @@
 				<td>{{ $tb->jumlah_hidup_bandeng }}</td>
 				<td>{{ $tb->pakan_pelet }}</td>
 				<td>{{ $tb->pakan_dedak }}</td>
-				<td>Isi keterangan</td>
+				<td>{{ $tb->keterangan }}</td>
 			</tr>
 				
 			<?php $i = $i + 1 ?>

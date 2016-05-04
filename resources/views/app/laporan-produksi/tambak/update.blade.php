@@ -110,13 +110,13 @@
 												<div class="col-md-6">
 													<div class="form-group">
 														<label>Panjang Garis Pantai</label>
-														<input type="number" name="panjang_pantai" value="{{ Input::old('rtp') }}" class="form-control" required="">
+														<input type="number" name="panjang_pantai" value="{{ $tambak->rtp }}" class="form-control" required="">
 													</div>
 												</div>
 												<div class="col-md-6">
 													<div class="form-group">
 														<label>Petani/RTP</label>
-														<input type="number" name="rtp" value="{{ Input::old('luas_areal') }}" class="form-control" required="">
+														<input type="number" name="rtp" value="{{ $tambak->rtp }}" class="form-control" required="">
 													</div>
 												</div>
 											</div>
@@ -125,13 +125,13 @@
 												<div class="col-md-6">
 													<div class="form-group">
 														<label>Luas Potensi</label>
-														<input type="number" name="potensi" value="{{ Input::old('potensi') }}" class="form-control" required="">
+														<input type="number" name="potensi" value="{{ $tambak->potensi }}" class="form-control" required="">
 													</div>
 												</div>
 												<div class="col-md-6">
 													<div class="form-group">
 														<label>Luas Tanam</label>
-														<input type="number" name="luas_tanam" value="{{ Input::old('luas_tanam') }}" class="form-control" required="">
+														<input type="number" name="luas_tanam" value="{{ $tambak->luas_tanam }}" class="form-control" required="">
 													</div>
 												</div>
 											</div>
@@ -142,19 +142,19 @@
 												<div class="col-md-4">
 													<div class="form-group">
 														<label>Windu</label>
-														<input type="number" name="penebaran_windu" value="{{ Input::old('penebaran_windu') }}" class="form-control" required="">
+														<input type="number" name="penebaran_windu" value="{{ $tambak->penebaran_windu }}" class="form-control" required="">
 													</div>
 												</div>
 												<div class="col-md-4">
 													<div class="form-group">
 														<label>Vanamae</label>
-														<input type="number" name="penebaran_vanamae" value="{{ Input::old('penebaran_vanamae') }}" class="form-control" required="">
+														<input type="number" name="penebaran_vanamae" value="{{ $tambak->penebaran_vanamae }}" class="form-control" required="">
 													</div>
 												</div>
 												<div class="col-md-4">
 													<div class="form-group">
 														<label>Bandeng</label>
-														<input type="number" name="penebaran_bandeng" value="{{ Input::old('penebaran_bandeng') }}" class="form-control" required="">
+														<input type="number" name="penebaran_bandeng" value="{{ $tambak->penebaran_bandeng }}" class="form-control" required="">
 													</div>
 												</div>
 											</div>
@@ -164,19 +164,19 @@
 												<div class="col-md-4">
 													<div class="form-group">
 														<label>Windu</label>
-														<input type="number" name="jumlah_hidup_windu" value="{{ Input::old('jumlah_hidup_windu') }}" class="form-control" required="">
+														<input type="number" name="jumlah_hidup_windu" value="{{ $tambak->jumlah_hidup_windu }}" class="form-control" required="">
 													</div>
 												</div>
 												<div class="col-md-4">
 													<div class="form-group">
 														<label>Vanamae</label>
-														<input type="number" name="jumlah_hidup_vanamae" value="{{ Input::old('jumlah_hidup_vanamae') }}" class="form-control" required="">
+														<input type="number" name="jumlah_hidup_vanamae" value="{{ $tambak->jumlah_hidup_vanamae }}" class="form-control" required="">
 													</div>
 												</div>
 												<div class="col-md-4">
 													<div class="form-group">
 														<label>Bandeng</label>
-														<input type="number" name="jumlah_hidup_bandeng" value="{{ Input::old('jumlah_hidup_bandeng') }}" class="form-control" required="">
+														<input type="number" name="jumlah_hidup_bandeng" value="{{ $tambak->jumlah_hidup_bandeng }}" class="form-control" required="">
 													</div>
 												</div>
 											</div>
@@ -185,19 +185,27 @@
 												<div class="col-md-4">
 													<div class="form-group">
 														<label>Pellet</label>
-														<input type="number" name="pakan_pelet" value="{{ Input::old('pakan_pelet') }}" class="form-control" required="">
+														<input type="number" name="pakan_pelet" value="{{ $tambak->pakan_pelet }}" class="form-control" required="">
 													</div>
 												</div>
 												<div class="col-md-4">
 													<div class="form-group">
 														<label>Dedak</label>
-														<input type="number" name="pakan_dedak" value="{{ Input::old('pakan_dedak') }}" class="form-control" required="">
+														<input type="number" name="pakan_dedak" value="{{ $tambak->pakan_dedak }}" class="form-control" required="">
 													</div>
 												</div>											
 											</div>
-											<input type="hidden" id="id-tambak" name="id">
+											<div class="row">
+												<div class="col-md-12">
+													<div class="form-group">
+														<label>Keterangan</label>
+														<textarea name="keterangan" cols="30" rows="10" class="form-control" required="">{{ $tambak->keterangan }}</textarea>
+													</div>
+												</div>
+											</div>
 											
 											<div class="clearfix"></div>
+											<input type="hidden" id="id-tambak" name="id" value="{{ $tambak->id }}">
 											<br>
 											<button class="btn btn-primary" type="submit">Simpan</button>
 										</form>

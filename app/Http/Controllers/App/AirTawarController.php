@@ -53,6 +53,7 @@ class AirTawarController extends Controller
 		$dt->jumlah_hidup_nila = $request->jumlah_hidup_nila;
 		$dt->jumlah_hidup_lele = $request->jumlah_hidup_lele;
 		$dt->jumlah_hidup_bawal = $request->jumlah_hidup_bawal;
+		$dt->keterangan = $request->keterangan;
 		$dt->save();
 		return redirect()->route('airtawar')->with(session()->flash('success','Data Berhasil Tersimpan !!'));
 	}
@@ -95,6 +96,7 @@ class AirTawarController extends Controller
 		$dt->jumlah_hidup_nila = $request->jumlah_hidup_nila;
 		$dt->jumlah_hidup_lele = $request->jumlah_hidup_lele;
 		$dt->jumlah_hidup_bawal = $request->jumlah_hidup_bawal;
+		$dt->keterangan = $request->keterangan;
 		$dt->save();
 		$data['airtawar'] = AirTawar::paginate(1);
 

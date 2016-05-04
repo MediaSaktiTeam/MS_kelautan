@@ -179,6 +179,14 @@
 													</div>
 												</div>
 											</div>
+											<div class="row">
+												<div class="col-md-12">
+													<div class="form-group">
+														<label>Keterangan</label>
+														<textarea name="keterangan" id="" cols="30" rows="10" value="{{ Input::old('keterangan') }}" class="form-control" required=""></textarea>
+													</div>
+												</div>
+											</div>
 
 											
 											<div class="clearfix"></div>

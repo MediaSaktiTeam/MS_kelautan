@@ -29,6 +29,7 @@ class TableRumputLaut extends Migration
             $table->string('cottoni_kering');
             $table->string('spinosum_basah');
             $table->string('spinosum_kering');
+            $table->string('keterangan');
         });
     }
 

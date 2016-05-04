@@ -184,6 +184,14 @@
 													</div>
 												</div>
 											</div>
+											<div class="row">
+												<div class="col-md-12">
+													<div class="form-group">
+														<label>Keterangan</label>
+														<textarea name="keterangan" cols="30" rows="10" class="form-control" required="">{{ $rumputlaut->keterangan }}</textarea>
+													</div>
+												</div>
+											</div>
 
 											
 											<div class="clearfix"></div>

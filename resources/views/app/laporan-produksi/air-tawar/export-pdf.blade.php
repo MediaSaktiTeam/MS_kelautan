@@ -99,7 +99,7 @@
 				<td>{{ $at->jumlah_hidup_nila }}</td>
 				<td>{{ $at->jumlah_hidup_lele }}</td>
 				<td>{{ $at->jumlah_hidup_bawal }}</td>
-				<td>Isi keterangan</td>
+				<td>{{ $at->keterangan }}</td>
 			</tr>
 				
 			<?php $i = $i + 1 ?>

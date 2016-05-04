@@ -51,7 +51,7 @@
 				<td>{{ $rl->cottoni_kering }} KgCK</td>
 				<td>{{ $rl->spinosum_basah }} KgSB</td>
 				<td>{{ $rl->spinosum_kering }} KgSK</td>
-				<td>isi keterangan</td>
+				<td>{{ $rl->keterangan }}</td>
 			</tr>
 				
 			<?php $i = $i + 1 ?>

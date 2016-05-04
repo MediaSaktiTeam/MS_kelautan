@@ -65,7 +65,7 @@
 	</thead>
 	<tbody>
 		<tr>
-			<td><b>keterangan</b></td>
+			<td><b>{{ $airtawar->keterangan }}</b></td>
 		</tr>
 	</tbody>
 </table>
