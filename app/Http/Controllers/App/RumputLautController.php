@@ -98,16 +98,16 @@ class RumputLautController extends Controller
 
 	public function getCari($cari = NULL)
 	{
-		$data['rumputlaut'] = DB::table('app_air_tawar')
-									->leftJoin('kecamatan', 'app_air_tawar.kecamatan', '=', 'kecamatan.id')
-									->leftJoin('desa', 'app_air_tawar.desa', '=', 'desa.id')
+		$data['rumputlaut'] = DB::table('app_rumput_laut')
+									->leftJoin('kecamatan', 'app_rumput_laut.kecamatan', '=', 'kecamatan.id')
+									->leftJoin('desa', 'app_rumput_laut.desa', '=', 'desa.id')
 										->select(
 											'kecamatan.nama as nama_kecamatan',
-											'app_air_tawar.*',
+											'app_rumput_laut.*',
 											'desa.nama as nama_desa')
 												->where(function($query) use ($cari) {
-													$query->where('app_air_tawar.kecamatan','LIKE', '%'.$cari.'%')
-															->orWhere('app_air_tawar.desa','LIKE', '%'.$cari.'%');
+													$query->where('kecamatan.nama','LIKE', '%'.$cari.'%')
+															->orWhere('desa.nama','LIKE', '%'.$cari.'%');
 												})
 									->take(40)->get();
 		return view('app.laporan-produksi.rumputlaut.cari', $data);

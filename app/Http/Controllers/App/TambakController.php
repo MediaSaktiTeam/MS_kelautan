@@ -108,11 +108,11 @@ class TambakController extends Controller
 											'app_tambak.*',
 											'desa.nama as nama_desa')
 												->where(function($query) use ($cari) {
-													$query->where('app_tambak.kecamatan','LIKE', '%'.$cari.'%')
-															->orWhere('app_tambak.desa','LIKE', '%'.$cari.'%');
+													$query->where('kecamatan.nama','LIKE', '%'.$cari.'%')
+															->orWhere('desa.nama','LIKE', '%'.$cari.'%');
 												})
 									->take(40)->get();
-		return view('app.laporan-produksi.Tambak.cari', $data);
+		return view('app.laporan-produksi.tambak.cari', $data);
 	}
 
 	public function getExportExcel()
