@@ -46,7 +46,7 @@
 								<!-- START PANEL -->
 								<div class="panel panel-transparent">
 									<div class="panel-body">
-										<form id="form-personal" method="GET" action="{{ route('mangrovemilik_tambah') }}" role="form">
+										<form id="form-personal" method="GET" action="{{ route('mangrovemilik_add') }}" role="form">
 											
 											<input type="hidden" id="token" name="_token" value="{{ csrf_token() }}">
 											<label>KETERANGAN IDENTITAS</label>
@@ -78,7 +78,7 @@
 												<div class="col-sm-4">
 													<div class="form-group">
 														<label>Luas Lahan Mangrove</label>
-														<input type="text" class="form-control number" name="luas_lahan" value="">
+														<input type="number" class="form-control number" name="luas_lahan" value="">
 													</div>
 												</div>
 											</div>
@@ -87,19 +87,19 @@
 												<div class="col-sm-4">
 													<div class="form-group">
 														<label>Kondisi Rusak</label>
-														<input type="text" class="form-control number" name="kondisi_rusak" value="">
+														<input type="number" class="form-control number" name="kondisi_rusak" value="">
 													</div>
 												</div>
 												<div class="col-sm-4">
 													<div class="form-group">
 														<label>Kondisi Sedang</label>
-														<input type="text" class="form-control number" name="kondisi_sedang" value="">
+														<input type="number" class="form-control number" name="kondisi_sedang" value="">
 													</div>
 												</div>
 												<div class="col-sm-4">
 													<div class="form-group">
 														<label>Kondisi Baik</label>
-														<input type="text" class="form-control number" name="kondisi_baik" value="">
+														<input type="number" class="form-control number" name="kondisi_baik" value="">
 													</div>
 												</div>
 											</div>
@@ -148,26 +148,34 @@
 												</thead>
 
 												<tbody>
+												<?php
+														if ( isset($_GET['page']) ) {
+															$i = ($_GET['page'] - 1) * $limit + 1;
+														} else {
+															$i = 1;
+														}
+													?>
+												@foreach($mangrovemilik as $mi)
 														<tr>
 															<td>
 																<div class="checkbox">
-																	<input type="checkbox" class="pilih" value="" id="">
-																	<label for="" class="m-l-20"></label>
+																	<input type="checkbox" class="pilih" value="{{ $mi->id }}" id="mi{{ $mi->id }}">
+																	<label for="mi{{ $mi->id }}" class="m-l-20"></label>
 																</div>
 															</td>
-															<td></td>
-															<td></td>
-															<td></td>
-															<td></td>
-															<td></td>
-															<td></td>
-															<td></td>
+															<td>{{ $i++ }}</td>
+															<td>{{ $mi->datakecamatan->nama }}</td>
+															<td>{{ $mi->desa }}</td>
+															<td>{{ $mi->luas_lahan }} M<sup>2</sup></td>
+															<td>{{ $mi->kondisi_rusak }} M<sup>2</sup></td>
+															<td>{{ $mi->kondisi_sedang }} M<sup>2</sup></td>
+															<td>{{ $mi->kondisi_baik }} M<sup>2</sup></td>
 															<td style="text-align:center">
-																<a class="btn btn-default btn-xs view" data-id=""><i class="fa fa-search-plus"></i></a>
+																<a class="btn btn-default btn-xs view" data-id="{{ $mi->id }}"><i class="fa fa-search-plus"></i></a>
 																<a href="" class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i></a>
 															</td>
 														</tr>
-
+												@endforeach
 														<tr>
 															<td><b>Jumlah</b></td>
 															<td></td>
@@ -182,7 +190,7 @@
 												</tbody>
 
 											</table>
-											<center></center>
+											<center>{!! $mangrovemilik->links() !!}</center>
 										</div>
 
 									</div>
@@ -377,13 +385,13 @@
 				else {
 				  return false;
 				}
-				$(".btn-hapus").attr('href',"{{ url('/app/mangrovemilik/hapus') }}/"+id);
+				$(".btn-hapus").attr('href',"{{route('mangrovemilik_delete') }}/"+id);
 
 			});
 
 			$("#show-tambah-mangrove").click(function(){
 				$("#tambah-mangrove").fadeIn();
-				$("input[name='nik']").focus();
+				$("input[name='kecamatan']").focus();
 				$(this).hide();
 			});
 

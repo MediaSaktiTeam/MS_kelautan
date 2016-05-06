@@ -14,7 +14,6 @@ class CreateTableMangroveMilik extends Migration
     {
         Schema::create('app_mangrove_milik', function (Blueprint $table) {
             $table->increments('id');
-            $table->timestamps();
             $table->string('kecamatan');
             $table->string('desa');
             $table->integer('luas_lahan');
