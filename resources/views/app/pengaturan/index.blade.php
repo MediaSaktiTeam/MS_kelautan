@@ -66,6 +66,8 @@
 										<input type="hidden" name="id" value="{{ Auth::user()->id }}">
 										<input type="text" id="nama" name="username" value="{{ Auth::user()->username }}" class="form-control" required>
 									</div>
+									<p class="help">* Nama pengguna digunakan untuk <i>login</i></p>
+									<br>
 									<div class="form-group form-group-default required">
 										<label>Nama Tampilan</label>
 										<input type="text" id="nama" name="name" value="{{ Auth::user()->name }}" class="form-control" required>
