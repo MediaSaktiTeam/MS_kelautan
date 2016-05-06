@@ -12,7 +12,7 @@
 	<tbody>
 		<tr>
 			<td><b>{{ $airtawar->datakecamatan->nama }}</b></td>
-			<td><b>{{ $airtawar->desa }}</b></td>
+			<td><b>{{ $airtawar->datadesa->nama }}</b></td>
 			<td><b>{{ $airtawar->rtp }}</b></td>
 			<td><b>{{ $airtawar->luas_areal }} Ha</b></td>
 			<td><b>{{ $airtawar->luas_tanam}} Ha</b></td>

@@ -14,7 +14,7 @@
 	<tbody>
 		<tr>
 			<td>{{ $rumputlaut->datakecamatan->nama }}</td>
-			<td>{{ $rumputlaut->desa }}</td>
+			<td>{{ $rumputlaut->datadesa->nama }}</td>
 			<td>{{ $rumputlaut->rtp }}</td>
 			<td>{{ $rumputlaut->panjang_pantai }}</td>
 			<td>{{ $rumputlaut->potensi }}</td>

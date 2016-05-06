@@ -13,8 +13,7 @@ class TableDesa extends Migration
     public function up()
     {
         Schema::create('desa', function (Blueprint $table) {
-            $table->string('id', 11);
-            $table->primary('id');
+            $table->increments('id');
             $table->string('id_kecamatan');
             $table->string('nama', 50);
         });
