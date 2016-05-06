@@ -5,7 +5,9 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
 
 	<style>
-
+		* {
+			font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
+		}
 		.table {
 		    border-collapse: collapse !important;
 		}
@@ -44,6 +46,10 @@
 		  vertical-align: bottom;
 		  text-align: center;
 		}
+		.table-no-border, .table-no-border * {
+			border: none !important;
+			text-align: left !important;
+		}
 
 </style>
 
@@ -54,22 +60,40 @@
 
 <center><h2>Data Laporan Produksi Air Tawar <br> <small>Dinas Perikanan dan Kelautan Kab. Bantaeng</small></h2></center>
 
+	<table class="table table-no-border" style="width: 40%">
+		<tr>
+			<td><b>KABUPATEN</b></td>
+			<td><b>BANTAENG</b></td>
+		</tr>
+		<tr>
+			<td><b>KWARTAL</b></td>
+			<td><b>1 (Satu) Januari s/d Maret</b></td>
+		</tr>
+		<tr>
+			<td><b>TAHUN</b></td>
+			<td><b>2016</b></td>
+		</tr>
+	</table>
+
 	<table class="table table-bordered">
 		<thead>
 			<tr>
-				<th rowspan="2">No.</th>
-				<th rowspan="2">Kecamatan</th>
-				<th rowspan="2">Desa</th>
-				<th rowspan="2">Petani/RTP</th>
-				<th rowspan="2">Panjang Pantai</th>
-				<th rowspan="2">Potensi</th>
-				<th rowspan="2">Luas Tanam</th>
-				<th rowspan="2">Bentangan</th>
-				<th rowspan="2">Jumlah Bibit Cottonii</th>
-				<th rowspan="2">Jumlah Bibit Spinosum</th>
-				<th colspan="2">Produksi Eucheuma Cottonii</th>
-				<th colspan="2">Produksi Eucheuma Spinosum</th>
-				<th rowspan="2">Keterangan</th>
+				<th rowspan="3">No.</th>
+				<th rowspan="3">Kecamatan</th>
+				<th rowspan="3">Desa</th>
+				<th rowspan="3">Petani/RTP</th>
+				<th rowspan="3">Panjang Pantai</th>
+				<th rowspan="3">Potensi</th>
+				<th rowspan="3">Luas Tanam</th>
+				<th rowspan="3">Bentangan</th>
+				<th rowspan="3">Jumlah Bibit Cottonii</th>
+				<th rowspan="3">Jumlah Bibit Spinosum</th>
+				<th colspan="4">Produksi</th>
+				<th rowspan="3">Keterangan</th>
+			</tr>
+			<tr>
+				<th colspan="2">Eucheuma Cottonii</th>
+				<th colspan="2">Eucheuma Spinosum</th>
 			</tr>
 			<tr>
 				<th>Basah</th>
@@ -103,11 +127,46 @@
 				<td>{{ $rl->keterangan }}</td>
 			</tr>
 				
+			<tr>
+				<td colspan="3"><b>JUMLAH</b></td>
+				<td><b>14.4</b></td>
+				<td><b>23.5</b> Ha</td>
+				<td><b>23.5</b> Ha</td>
+				<td><b>234</b></td>
+				<td><b>234</b></td>
+				<td><b>234</b></td>
+				<td><b>234</b></td>
+				<td><b>234</b></td>
+				<td><b>234</b></td>
+				<td><b>234</b></td>
+				<td><b>234</b></td>
+				<td></td>
+			</tr>
+				
 			<?php $i = $i + 1 ?>
 
 		@endforeach
 			
 		</tbody>
+	</table>
+
+	<table class="table table-no-border" style="width: 100%;">
+		<tr>
+			<td width="70%">Mengetahui:<br>Kasie Budidaya Laut, Payau<br>dan Air Tawar
+				<br>
+				<br>
+				<br>
+			</td>
+			<td>Bantaeng, 4 April 2016<br>Petugas Statistik Budidaya
+				<br>
+				<br>
+				<br>
+			</td>
+		</tr>
+		<tr>
+			<td width="70%"><b>MARWAH, SP.</b><br>NIP. 12309812980310192</td>
+			<td><b>AHMAD</b><br>NIP. 12309812980310192</td>
+		</tr>
 	</table>
 
 </body>
