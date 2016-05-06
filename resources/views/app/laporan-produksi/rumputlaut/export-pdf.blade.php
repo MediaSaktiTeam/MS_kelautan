@@ -4,54 +4,7 @@
 
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
 
-	<style>
-		* {
-			font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
-		}
-		.table {
-		    border-collapse: collapse !important;
-		}
-		.table td,
-		.table th {
-		  background-color: #fff !important;
-		  }
-		.table-bordered th,
-		.table-bordered td {
-		    border: 1px solid #ddd !important;
-		  }
-		.table {
-		  width: 100%;
-		  max-width: 100%;
-		  margin-bottom: 20px;
-		  font-size: 10px;
-		  font-family: Arial;
-		}
-		.table > thead > tr > th,
-		.table > tbody > tr > th,
-		.table > tfoot > tr > th,
-		.table > thead > tr > td,
-		.table > tbody > tr > td,
-		.table > tfoot > tr > td {
-		  padding: 8px;
-		  line-height: 1.42857143;
-		  vertical-align: top;
-		  border-top: 1px solid #ddd;
-		}
-		.table > thead > tr > th {
-		  vertical-align: bottom;
-		  text-align: center;
-		  border-bottom: 2px solid #ddd;
-		}
-		.table > tbody > tr > td {
-		  vertical-align: bottom;
-		  text-align: center;
-		}
-		.table-no-border, .table-no-border * {
-			border: none !important;
-			text-align: left !important;
-		}
-
-</style>
+	<link rel="stylesheet" href="{{ url('resources/assets/app/css/laporan.css') }}">
 
 </head>
 
