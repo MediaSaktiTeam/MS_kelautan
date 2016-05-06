@@ -320,8 +320,6 @@
 				<div class="brand inline m-l-25">
 					<a href="/app/"><img src="{{ url('resources/assets/app/img/logo.png') }}" alt="logo" data-src="{{ url('resources/assets/app/img/logo.png') }}" data-src-retina="{{ url('resources/assets/app/img/logo_2x.png') }}" height="32"></a>
 				</div>
-
-				<a href="#" class="search-link" data-toggle="search"><i class="pg-search"></i>Ketik apa saja untuk <span class="bold">mencari</span></a>
 			</div>
 		</div>
 

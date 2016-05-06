@@ -135,7 +135,7 @@ $SC = new App\Custom;
 														<div class="col-md-7">
 															<div class="pull-left">
 																<p class="small hint-text no-margin">Suhu</p>
-																<h4 class="text-danger bold no-margin">{{ $suhu_max }}°<span class="small">/ {{ $suhu_min }}C</span></h4>
+																<h4 class="text-danger bold no-margin">{{ $suhu_min }} - {{ $suhu_max }}°<span class="small">C</span></h4>
 															</div>
 															<div class="pull-right">
 																<img src="http://www.bmkg.go.id/ImagesStatus/{{ $gambar }}.gif">
