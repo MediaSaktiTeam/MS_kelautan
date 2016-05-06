@@ -7,7 +7,9 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
 
 	<style>
-
+		* {
+			font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
+		}
 		.table {
 		    border-collapse: collapse !important;
 		}
@@ -23,6 +25,8 @@
 		  width: 100%;
 		  max-width: 100%;
 		  margin-bottom: 20px;
+		  font-size: 10px;
+		  font-family: Arial;
 		}
 		.table > thead > tr > th,
 		.table > tbody > tr > th,
