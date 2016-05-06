@@ -92,50 +92,57 @@
 											<label>KETERANGAN PRODUKSI</label>
 											<div class="row">
 												<div class="col-md-4">
-													<div class="form-group">
 														<label>Petani/RTP</label>
+													<div class="form-group input-group">
 														<input type="number" name="rtp" value="{{ $airtawar->rtp }}" class="form-control" placeholder="Jumlah" required="">
+														<span class="input-group-addon">RTP</span>
 													</div>
 												</div>
 												<div class="col-md-4">
-													<div class="form-group">
 														<label>Luas Areal</label>
-														<input type="number" name="luas_areal" value="{{ $airtawar->luas_areal }}" class="form-control" placeholder="Ha" required="">
+													<div class="form-group input-group">
+														<input type="number" name="luas_areal" value="{{ $airtawar->luas_areal }}" class="form-control" placeholder="Luas" required="">
+														<span class="input-group-addon">Ha</span>
 													</div>
 												</div>
 												<div class="col-md-4">
-													<div class="form-group">
 														<label>Luas Tanam</label>
-														<input type="number" name="luas_tanam" value="{{ $airtawar->luas_tanam }}" class="form-control" placeholder="Ha" required="">
+													<div class="form-group input-group">
+														<input type="number" name="luas_tanam" value="{{ $airtawar->luas_tanam }}" class="form-control" placeholder="Luas" required="">
+														<span class="input-group-addon">Ha</span>
 													</div>
 												</div>
 											</div>
 
 											<hr>
-											<label>PENEBARAN (Ekor)</label>
+											<label>PENEBARAN</label>
 											<div class="row">
 												<div class="col-md-3">
-													<div class="form-group">
 														<label>MAS</label>
-														<input type="number" name="penebaran_mas" value="{{ $airtawar->penebaran_mas }}" class="form-control" placeholder="Jumlah (Ekor)" required="">
+													<div class="form-group input-group">
+														<input type="number" name="penebaran_mas" value="{{ $airtawar->penebaran_mas }}" class="form-control" placeholder="Jumlah" required="">
+														<span class="input-group-addon">Ekor</span>
 													</div>
 												</div>
 												<div class="col-md-3">
-													<div class="form-group">
 														<label>NILA</label>
-														<input type="number" name="penebaran_nila" value="{{ $airtawar->penebaran_nila }}" class="form-control" placeholder="Jumlah (Ekor)" required="">
+													<div class="form-group input-group">
+														<input type="number" name="penebaran_nila" value="{{ $airtawar->penebaran_nila }}" class="form-control" placeholder="Jumlah" required="">
+														<span class="input-group-addon">Ekor</span>
 													</div>
 												</div>
 												<div class="col-md-3">
-													<div class="form-group">
 														<label>LELE</label>
-														<input type="number" name="penebaran_lele" value="{{ $airtawar->penebaran_lele }}" class="form-control" placeholder="Jumlah (Ekor)" required="">
+													<div class="form-group input-group">
+														<input type="number" name="penebaran_lele" value="{{ $airtawar->penebaran_lele }}" class="form-control" placeholder="Jumlah" required="">
+														<span class="input-group-addon">Ekor</span>
 													</div>
 												</div>
 												<div class="col-md-3">
-													<div class="form-group">
 														<label>BAWAL</label>
-														<input type="number" name="penebaran_bawal" value="{{ $airtawar->penebaran_bawal }}" class="form-control" placeholder="Jumlah (Ekor)" required="">
+													<div class="form-group input-group">
+														<input type="number" name="penebaran_bawal" value="{{ $airtawar->penebaran_bawal }}" class="form-control" placeholder="Jumlah" required="">
+														<span class="input-group-addon">Ekor</span>
 													</div>
 												</div>
 											</div>
@@ -143,33 +150,37 @@
 											<label>JUMLAH HIDUP</label>
 											<div class="row">
 												<div class="col-md-3">
-													<div class="form-group">
 														<label>MAS</label>
-														<input type="number" name="jumlah_hidup_mas" value="{{ $airtawar->jumlah_hidup_mas }}" class="form-control" placeholder="Jumlah (Ekor)" required="">
+													<div class="form-group input-group">
+														<input type="number" name="jumlah_hidup_mas" value="{{ $airtawar->jumlah_hidup_mas }}" class="form-control" placeholder="Jumlah" required="">
+														<span class="input-group-addon">Ekor</span>
 													</div>
 												</div>
 												<div class="col-md-3">
-													<div class="form-group">
 														<label>NILA</label>
-														<input type="number" name="jumlah_hidup_nila" value="{{ $airtawar->jumlah_hidup_nila }}" class="form-control" placeholder="Jumlah (Ekor)" required="">
+													<div class="form-group input-group">
+														<input type="number" name="jumlah_hidup_nila" value="{{ $airtawar->jumlah_hidup_nila }}" class="form-control" placeholder="Jumlah" required="">
+														<span class="input-group-addon">Ekor</span>
 													</div>
 												</div>
 												<div class="col-md-3">
-													<div class="form-group">
 														<label>LELE</label>
-														<input type="number" name="jumlah_hidup_lele" value="{{ $airtawar->jumlah_hidup_lele }}" class="form-control" placeholder="Jumlah (Ekor)" required="">
+													<div class="form-group input-group">
+														<input type="number" name="jumlah_hidup_lele" value="{{ $airtawar->jumlah_hidup_lele }}" class="form-control" placeholder="Jumlah" required="">
+														<span class="input-group-addon">Ekor</span>
 													</div>
 												</div>
 												<div class="col-md-3">
-													<div class="form-group">
 														<label>BAWAL</label>
-														<input type="number" name="jumlah_hidup_bawal" value="{{ $airtawar->jumlah_hidup_bawal }}" class="form-control" placeholder="Jumlah (Ekor)" required="">
+													<div class="form-group input-group">
+														<input type="number" name="jumlah_hidup_bawal" value="{{ $airtawar->jumlah_hidup_bawal }}" class="form-control" placeholder="Jumlah" required="">
+														<span class="input-group-addon">Ekor</span>
 													</div>
 												</div>
 											</div>
 											<div class="row">
 												<div class="col-md-12">
-													<div class="form-group">
+													<div class="form-group input-group">
 														<label>Keterangan</label>
 														<textarea name="keterangan" cols="30" rows="10" class="form-control" required="">{{ $airtawar->keterangan }}</textarea>
 													</div>

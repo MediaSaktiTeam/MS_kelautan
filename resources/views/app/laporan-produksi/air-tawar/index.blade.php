@@ -97,19 +97,21 @@
 													<label>Petani/RTP</label>
 													<div class="form-group input-group">
 														<input type="number" name="rtp" value="{{ Input::old('rtp') }}" class="form-control" placeholder="Jumlah" required="">
-														 <span class="input-group-addon">RTP</span>
+														<span class="input-group-addon">RTP</span>
 													</div>
 												</div>
 												<div class="col-md-4">
-													<div class="form-group">
-														<label>Luas Areal</label>
-														<input type="number" name="luas_areal" value="{{ Input::old('luas_areal') }}" class="form-control" placeholder="Ha" required="">
+													<label>Luas Areal</label>
+													<div class="form-group input-group">
+														<input type="number" name="luas_areal" value="{{ Input::old('luas_areal') }}" class="form-control" placeholder="Luas" required="">
+														<span class="input-group-addon">Ha</span>
 													</div>
 												</div>
 												<div class="col-md-4">
-													<div class="form-group">
-														<label>Luas Tanam</label>
-														<input type="number" name="luas_tanam" value="{{ Input::old('luas_tanam') }}" class="form-control" placeholder="Ha" required="">
+													<label>Luas Tanam</label>
+													<div class="form-group input-group">
+														<input type="number" name="luas_tanam" value="{{ Input::old('luas_tanam') }}" class="form-control" placeholder="Luas" required="">
+														<span class="input-group-addon">Ha</span>
 													</div>
 												</div>
 											</div>
@@ -118,27 +120,31 @@
 											<label>PENEBARAN (Ekor)</label>
 											<div class="row">
 												<div class="col-md-3">
-													<div class="form-group">
 														<label>MAS</label>
-														<input type="number" name="penebaran_mas" value="{{ Input::old('penebaran_mas') }}" class="form-control" placeholder="Jumlah (Ekor)" required="">
+													<div class="form-group input-group">
+														<input type="number" name="penebaran_mas" value="{{ Input::old('penebaran_mas') }}" class="form-control" placeholder="Jumlah" required="">
+														<span class="input-group-addon">Ekor</span>
 													</div>
 												</div>
 												<div class="col-md-3">
-													<div class="form-group">
 														<label>NILA</label>
-														<input type="number" name="penebaran_nila" value="{{ Input::old('penebaran_nila') }}" class="form-control" placeholder="Jumlah (Ekor)" required="">
+													<div class="form-group input-group">
+														<input type="number" name="penebaran_nila" value="{{ Input::old('penebaran_nila') }}" class="form-control" placeholder="Jumlah" required="">
+														<span class="input-group-addon">Ekor</span>
 													</div>
 												</div>
 												<div class="col-md-3">
-													<div class="form-group">
 														<label>LELE</label>
-														<input type="number" name="penebaran_lele" value="{{ Input::old('penebaran_lele') }}" class="form-control" placeholder="Jumlah (Ekor)" required="">
+													<div class="form-group input-group">
+														<input type="number" name="penebaran_lele" value="{{ Input::old('penebaran_lele') }}" class="form-control" placeholder="Jumlah" required="">
+														<span class="input-group-addon">Ekor</span>
 													</div>
 												</div>
 												<div class="col-md-3">
-													<div class="form-group">
 														<label>BAWAL</label>
-														<input type="number" name="penebaran_bawal" value="{{ Input::old('penebaran_bawal') }}" class="form-control" placeholder="Jumlah (Ekor)" required="">
+													<div class="form-group input-group">
+														<input type="number" name="penebaran_bawal" value="{{ Input::old('penebaran_bawal') }}" class="form-control" placeholder="Jumlah" required="">
+														<span class="input-group-addon">Ekor</span>
 													</div>
 												</div>
 											</div>
@@ -146,27 +152,31 @@
 											<label>JUMLAH HIDUP</label>
 											<div class="row">
 												<div class="col-md-3">
-													<div class="form-group">
 														<label>MAS</label>
-														<input type="number" name="jumlah_hidup_mas" value="{{ Input::old('jumlah_hidup_mas') }}" class="form-control" placeholder="Jumlah (Ekor)" required="">
+													<div class="form-group input-group">
+														<input type="number" name="jumlah_hidup_mas" value="{{ Input::old('jumlah_hidup_mas') }}" class="form-control" placeholder="Jumlah" required="">
+														<span class="input-group-addon">Ekor</span>
 													</div>
 												</div>
 												<div class="col-md-3">
-													<div class="form-group">
 														<label>NILA</label>
-														<input type="number" name="jumlah_hidup_nila" value="{{ Input::old('jumlah_hidup_nila') }}" class="form-control" placeholder="Jumlah (Ekor)" required="">
+													<div class="form-group input-group">
+														<input type="number" name="jumlah_hidup_nila" value="{{ Input::old('jumlah_hidup_nila') }}" class="form-control" placeholder="Jumlah" required="">
+														<span class="input-group-addon">Ekor</span>
 													</div>
 												</div>
 												<div class="col-md-3">
-													<div class="form-group">
 														<label>LELE</label>
-														<input type="number" name="jumlah_hidup_lele" value="{{ Input::old('jumlah_hidup_lele') }}" class="form-control" placeholder="Jumlah (Ekor)" required="">
+													<div class="form-group input-group">
+														<input type="number" name="jumlah_hidup_lele" value="{{ Input::old('jumlah_hidup_lele') }}" class="form-control" placeholder="Jumlah" required="">
+														<span class="input-group-addon">Ekor</span>
 													</div>
 												</div>
 												<div class="col-md-3">
-													<div class="form-group">
 														<label>BAWAL</label>
-														<input type="number" name="jumlah_hidup_bawal" value="{{ Input::old('jumlah_hidup_bawal') }}" class="form-control" placeholder="Jumlah (Ekor)" required="">
+													<div class="form-group input-group">
+														<input type="number" name="jumlah_hidup_bawal" value="{{ Input::old('jumlah_hidup_bawal') }}" class="form-control" placeholder="Jumlah" required="">
+														<span class="input-group-addon">Ekor</span>
 													</div>
 												</div>
 											</div>
