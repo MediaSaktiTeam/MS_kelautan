@@ -51,12 +51,16 @@
 											<input type="hidden" id="token" name="_token" value="{{ csrf_token() }}">
 											<label>KETERANGAN IDENTITAS</label>
 											<div class="row">
-												<div class="col-sm-6">
+												<div class="col-sm-4">
 													<div class="form-group">
 														<label>Kecamatan</label>
 														<div id="kecamatan">
-															<select class="full-width" data-init-plugin="select2" name="kecamatan" required>
+															<select class="full-width" data-init-plugin="select2" name="kecamatan" required  onchange="get_desa(this.value)">
 																<option value="">Pilih Kecamatan...</option>
+																<?php $kecamatan = App\Kecamatan::where('id_kabupaten','7303')->get() ?>
+																@foreach ( $kecamatan as $kec )
+																	<option value="{{ $kec->id }}">{{ $kec->nama }}</option>
+																@endforeach
 															</select>
 														</div>
 													</div>
