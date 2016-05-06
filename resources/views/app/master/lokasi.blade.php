@@ -40,7 +40,7 @@
 				
 				<!-- START ROW -->
 				<div class="row">
-					<div class="col-md-6">
+					<div class="col-md-12">
 						@if ( Session::has('success') ) 
 						    	@include('app/layout/partials/alert-sukses', ['message' => session('success')])
 						@endif
@@ -63,65 +63,92 @@
 								</div>
 							</div>
 							<div class="panel-body">
-								<h5>Lokasi</h5>
-								<p>* Lokasi adalah item untuk menambahkan Lokasi.</p>
+								<h5>Keterangan Lokasi</h5>
+								<p>Berikut adalah berbagai lokasi di bantaeng. Mulai dari Provinsi sampai desa, silahkan sunting ID lokasi sesuai kebutuhan Anda!</p>
+
 								<form class="style-form" method="GET" action="{{ route('lokasi_tambah') }}">
-									<input type="hidden" name="_token" value="{{ csrf_token() }}">
-									<div class="form-group form-group-default required">
-										<label>Bidang Usaha</label>
-										<select class="full-width" data-init-plugin="select2" name="jenis">
-											<option value="Nelayan">Nelayan</option>
-											<option value="Pembudidaya">Pembudidaya</option>
-										</select>
+									<div class="col-md-6">
+										<input type="hidden" name="_token" value="{{ csrf_token() }}">
+
+										<br>
+										<h6><b>Provinsi</b></h6>
+										<div class="form-group form-group-default input-group">
+											<input type="email" class="form-control" value="073" style="margin-top: 13px;">
+											<span class="input-group-addon" style="width: 85%; text-align: left; background: transparent; font-weight: bold;">Sulawesi Selatan</span>
+										</div>
+
+										<br>
+										<h6><b>Kecamatan</b></h6>
+										<div class="form-group form-group-default input-group">
+											<input type="email" class="form-control" value="073" style="margin-top: 13px;">
+											<span class="input-group-addon" style="width: 85%; text-align: left; background: transparent; font-weight: bold;">Nama Kecamatan</span>
+										</div>
+										<div class="form-group form-group-default input-group">
+											<input type="email" class="form-control" value="073" style="margin-top: 13px;">
+											<span class="input-group-addon" style="width: 85%; text-align: left; background: transparent; font-weight: bold;">Nama Kecamatan</span>
+										</div>
+										<div class="form-group form-group-default input-group">
+											<input type="email" class="form-control" value="073" style="margin-top: 13px;">
+											<span class="input-group-addon" style="width: 85%; text-align: left; background: transparent; font-weight: bold;">Nama Kecamatan</span>
+										</div>
+										<div class="form-group form-group-default input-group">
+											<input type="email" class="form-control" value="073" style="margin-top: 13px;">
+											<span class="input-group-addon" style="width: 85%; text-align: left; background: transparent; font-weight: bold;">Nama Kecamatan</span>
+										</div>
+										<div class="form-group form-group-default input-group">
+											<input type="email" class="form-control" value="073" style="margin-top: 13px;">
+											<span class="input-group-addon" style="width: 85%; text-align: left; background: transparent; font-weight: bold;">Nama Kecamatan</span>
+										</div>
+										<div class="form-group form-group-default input-group">
+											<input type="email" class="form-control" value="073" style="margin-top: 13px;">
+											<span class="input-group-addon" style="width: 85%; text-align: left; background: transparent; font-weight: bold;">Nama Kecamatan</span>
+										</div>
 									</div>
-									<div class="form-group form-group-default required">
-										<label>Nama Bantuan</label>
-										<input type="text" name="nama" class="form-control" required>
+
+									<div class="col-md-6">
+										<br>
+										<h6><b>Kabupaten</b></h6>
+										<div class="form-group form-group-default input-group">
+											<input type="email" class="form-control" value="073" style="margin-top: 13px;">
+											<span class="input-group-addon" style="width: 85%; text-align: left; background: transparent; font-weight: bold;">Kab. Bantaeng</span>
+										</div>
+										
+										<br>
+										<h6><b>Desa</b></h6>
+
+										<div class="form-group form-group-default input-group">
+											<input type="email" class="form-control" value="073" style="margin-top: 13px;">
+											<span class="input-group-addon" style="width: 85%; text-align: left; background: transparent; font-weight: bold;">Nama Desa</span>
+										</div>
+										<div class="form-group form-group-default input-group">
+											<input type="email" class="form-control" value="073" style="margin-top: 13px;">
+											<span class="input-group-addon" style="width: 85%; text-align: left; background: transparent; font-weight: bold;">Nama Desa</span>
+										</div>
+										<div class="form-group form-group-default input-group">
+											<input type="email" class="form-control" value="073" style="margin-top: 13px;">
+											<span class="input-group-addon" style="width: 85%; text-align: left; background: transparent; font-weight: bold;">Nama Desa</span>
+										</div>
+										<div class="form-group form-group-default input-group">
+											<input type="email" class="form-control" value="073" style="margin-top: 13px;">
+											<span class="input-group-addon" style="width: 85%; text-align: left; background: transparent; font-weight: bold;">Nama Desa</span>
+										</div>
+										<div class="form-group form-group-default input-group">
+											<input type="email" class="form-control" value="073" style="margin-top: 13px;">
+											<span class="input-group-addon" style="width: 85%; text-align: left; background: transparent; font-weight: bold;">Nama Desa</span>
+										</div>
+										<div class="form-group form-group-default input-group">
+											<input type="email" class="form-control" value="073" style="margin-top: 13px;">
+											<span class="input-group-addon" style="width: 85%; text-align: left; background: transparent; font-weight: bold;">Nama Desa</span>
+										</div>
 									</div>
-									<div class="form-group">
-										<button type="submit" class="btn btn-primary btn-cons">Tambah</button>
+
+									<div class="col-md-12">
+										<hr>
+										<div class="form-group pull-right">
+											<button type="submit" class="btn btn-primary btn-cons">Simpan</button>
+										</div>
 									</div>
 								</form>
-							</div>
-						</div>
-						<!-- END PANEL -->
-					</div>
-
-					<div class="col-md-6">
-						<!-- START PANEL -->
-						<div class="panel panel-default">
-							<div class="panel-body">
-								<table class="table table-hover demo-table-dynamic custom">
-									<thead>
-										<tr>
-											<th width="70">
-												<button class="btn btn-check" data-toggle="modal" data-target="#modal-hapus" disabled id="hapus"><i class="pg-trash"></i></button>
-											</th>
-											<th>No.</th>
-											<th>Kabupaten</th>
-											<th>Kecamatan</th>
-											<th>Desa/Kelurahan</th>
-										</tr>
-									</thead>
-									<tbody>
-
-										<?php
-											if ( isset($_GET['page']) ) {
-												$i = ($_GET['page'] - 1) * $limit + 1;
-											} else {
-												$i = 1;
-											}
-										?>
-											
-											<td>{{ $i++ }}</td>
-											<td></td>
-											<td></td>
-											<td></td>
-											<td><button class="btn btn-default btn-xs btn-edit" data-id="" data-jenis="" data-nama=""><i class="fa fa-pencil"></i></button></td>
-										</tr>
-									</tbody>
-								</table>
-								<center></center>
 							</div>
 						</div>
 						<!-- END PANEL -->
