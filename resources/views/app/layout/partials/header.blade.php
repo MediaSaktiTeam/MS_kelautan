@@ -33,16 +33,6 @@
 						</a>
 					</div>
 				</div>
-				<div class="row">
-					<div class="col-xs-6 m-t-20 no-padding">
-						<a href="/social-media" class="p-l-40"><img src="{{ url('resources/assets/app/img/modules/3.jpg') }}" alt="Social Media" width="83px">
-						</a>
-					</div>
-					<div class="col-xs-6 m-t-20 no-padding">
-						<a href="#" class="p-l-10"><img src="{{ url('resources/assets/app/img/demo/add_more.svg') }}" alt="socail">
-						</a>
-					</div>
-				</div>
 			</div>
 			<!-- END SIDEBAR MENU TOP TRAY CONTENT-->
 

@@ -113,11 +113,11 @@ class AirTawarController extends Controller
 											'app_air_tawar.*',
 											'desa.nama as nama_desa')
 												->where(function($query) use ($cari) {
-													$query->where('app_air_tawar.kecamatan','LIKE', '%'.$cari.'%')
-															->orWhere('app_air_tawar.desa','LIKE', '%'.$cari.'%');
+													$query->where('kecamatan.nama','LIKE', '%'.$cari.'%')
+															->orWhere('desa.nama','LIKE', '%'.$cari.'%');
 												})
 									->take(40)->get();
-		return view('app.laporan-produksi.airtawar.cari', $data);
+		return view('app.laporan-produksi.air-tawar.cari', $data);
 	}
 
 	public function getExportExcel()

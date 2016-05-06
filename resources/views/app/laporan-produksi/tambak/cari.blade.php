@@ -2,7 +2,7 @@
 $(function(){
 	$(".btn-hapus-single").click(function(){
 		var id = $(this).data('id');
-		$(".btn-hapus").attr('href',"{{ route('kelompok_hapus') }}/"+id);
+		$(".btn-hapus").attr('href',"{{ url('/app/tambak/hapus') }}/"+id);
 		$("#modal-hapus").modal('hapus');
 	});
 });
@@ -14,46 +14,34 @@ $(function(){
 			<th>
 				<center>#</center>
 			</th>
-			<th>ID Kelompok</th>
-			<th>Nama Kelompok</th>
-			<th>Bidang Usaha</th>
+			<th>Kecamatan</th>
+			<th>Desa</th>
+			<th>Petani/RTP</th>
+			<th>Panjang Pantai</th>
+			<th>Potensi</th>
+			<th>Luas Tanam (Ha)</th>
 			<th>Aksi</th>
 		</tr>
 	</thead>
 	<tbody>
 
-		@if ( count($kelompok) > 0 )
+		@if ( count($tambak) > 0 )
 
-			@foreach($kelompok as $kel)
+			@foreach($tambak as $at)
 
 				<tr>
 					<td>
-					<?php $data_user = App\User::where('id_kelompok', $kel->id_kelompok)->count(); ?>
-
-						<?php
-							$title = "";
-							$disabled = "";
-							if ( $data_user >= 1 ):
-								$title = "Kelompok sedang terpakai";
-								$disabled = "disabled";
-							endif
-						?>
-						<button class="btn btn-xs btn-danger btn-hapus-single"  title="{{ $title }}" data-toggle="modal" data-target="#modal-hapus" data-id="{{ $kel->id_kelompok }}" {{ $disabled }}><i class="pg-trash"></i></button>
-					
+						<button class="btn btn-xs btn-danger btn-hapus-single" data-toggle="modal" data-target="#modal-hapus" data-id="{{ $at->id }}"><i class="pg-trash"></i></button>
 					</td>
-					<td>{{ $kel->id_kelompok }}</td>
-					<td>{{ $kel->nama }}</td>
-					<td>{{ $kel->tipe }}</td>
+					<td>{{ $at->nama_kecamatan }}</td>
+					<td>{{ $at->nama_desa }}</td>
+					<td>{{ $at->rtp }}</td>
+					<td>{{ $at->panjang_pantai }} Ha</td>
+					<td>{{ $at->potensi }}</td>
+					<td>{{ $at->luas_tanam }} Ha</td>
 					<td>
-						<a class="btn btn-default btn-xs view" data-id="{{ $kel->id_kelompok }}" data-toggle="modal" data-target="#modal-view"><i class="fa fa-search-plus"></i></a>
-						<a href="javascript:;"
-							data-id="{{ $kel->id_kelompok }}"
-							data-nama="{{ $kel->nama }}"
-							data-tipe="{{ $kel->tipe }}"
-							data-alamat="{{ $kel->alamat }}"
-							data-norek="{{ $kel->no_rekening }}"
-							data-narek="{{ $kel->nama_rekening }}"
-							data-bank="{{ $kel->nama_bank }}" class="btn btn-edit btn-primary btn-xs"><i class="fa fa-pencil"></i></a>
+						<a class="btn btn-default btn-xs view" data-id="{{ $at->id }}" data-toggle="modal" data-target="#modal-view"><i class="fa fa-search-plus"></i></a>
+						<a href="{{ route('tambak_edit',$at->id) }}" class="btn btn-edit btn-primary btn-xs"><i class="fa fa-pencil"></i></a>
 					</td>
 				</tr>
 
