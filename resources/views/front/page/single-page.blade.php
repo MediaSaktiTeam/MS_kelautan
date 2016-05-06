@@ -37,10 +37,6 @@
 
                     <div class="separator"><i class="fa fa-anchor"></i></div>
 
-                    <h4 class="description">
-                        {{ $deskripsi }}
-                    </h4>
-
                 </div> <!-- end headline -->
 
             </div> <!-- end col-sm-8 -->
@@ -56,7 +52,7 @@
         
         <div class="container">
             
-            <div class="about-left col-sm-12">
+            <div class="col-sm-12">
                 
                 <!-- <h3 class="about-title">{{ $page->judul }}</h3> -->
 

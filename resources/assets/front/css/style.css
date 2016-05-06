@@ -3392,3 +3392,11 @@ img.under-image{
 	margin-left: 248px !important;
 	margin-top: -82px;
 }
+
+.blog-header {
+	height: 400px;
+}
+
+.section-about {
+	padding-top: 50px;
+}
