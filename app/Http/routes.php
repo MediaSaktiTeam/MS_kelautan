@@ -84,7 +84,11 @@
 			[
 				'getIndex' => 'mangrovemilik',
 				'getAdd' => 'mangrovemilik_add',
-				'getDelete' => 'mangrovemilik_delete'
+				'getDelete' => 'mangrovemilik_delete',
+				'getDetail' => 'mangrovemilik_detail',
+				'getUpdate' => 'mangrovemilik_update',
+				'getEdit' => 'mangrovemilik_edit',
+				'getSearch' => 'mangrovemilik_search'
 			]);
 		Route::controller('app/mangrove/rehabilitasi', 'MangroveRehabilitasiController', 
 			[

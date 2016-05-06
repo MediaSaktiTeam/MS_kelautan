@@ -42,7 +42,7 @@
 
 						<div id="tambah-mangrove" style="display:none">
 							<div class="col-lg-7 col-md-6 ">
-
+								
 								<!-- START PANEL -->
 								<div class="panel panel-transparent">
 									<div class="panel-body">
@@ -146,7 +146,19 @@
 														<th style="text-align:center">Aksi</th>
 													</tr>
 												</thead>
+												@if ( Session::has('success') ) 
+												    	@include('app/layout/partials/alert-sukses', ['message' => session('success')])
+												@endif
+												@if ( Session::has('delete') ) 
+												    	@include('app/layout/partials/alert-sukses', ['message' => session('delete')])
+												@endif
+												@if ( Session::has('gagal') ) 
+												    	@include('app/layout/partials/alert-danger', ['message' => session('gagal')])
+												@endif
 
+												@if ( count($errors) > 0 )
+														@include('app/layout/partials/alert-danger', ['errors' => $errors])
+												@endif	
 												<tbody>
 												<?php
 														if ( isset($_GET['page']) ) {
@@ -172,7 +184,7 @@
 															<td>{{ $mi->kondisi_baik }} M<sup>2</sup></td>
 															<td style="text-align:center">
 																<a class="btn btn-default btn-xs view" data-id="{{ $mi->id }}"><i class="fa fa-search-plus"></i></a>
-																<a href="" class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i></a>
+																<a href="{{ route('mangrovemilik_update') }}" class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i></a>
 															</td>
 														</tr>
 												@endforeach
@@ -220,7 +232,7 @@
 			<div class="modal-content">
 				<div class="modal-header clearfix text-left">
 					<button type="button" class="close" data-dismiss="modal"  aria-hidden="true"><i class="pg-close fs-14"></i></button>
-					<h5>Detail pengolah</h5>
+					<h5>Detail Mangrove</h5>
 				</div>
 				<div class="modal-body" id="view-detail">
 
@@ -303,23 +315,10 @@
 				<div class="modal-content">
 					<div class="modal-header clearfix text-left">
 						<button type="button" class="close" data-dismiss="modal"  aria-hidden="true"><i class="pg-close fs-14"></i></button>
-						<h5>Data</h5>
+						<h5>Data Mangrove</h5>
 					</div>
 					<div class="modal-body" id="view-detail">
-						<table class="table">
-							<tr>
-								<td style="width:100px">NIK</td><td>: {{ $user->nik }}</td>
-							</tr>
-							<tr>
-								<td style="width:100px">Nama</td><td>: {{ $user->name }}</td>
-							</tr>
-							<tr>
-								<td style="width:100px">Kelompok</td><td>: {{ $user->kelompok->nama }}</td>
-							</tr>
-							<tr>
-								<td style="width:100px">Profesi</td><td>: {{ $user->profesi }}</td>
-							</tr>
-						</table>
+						
 					</div>
 					<div class="modal-footer">
 						<button type="button" class="btn btn-default btn-cons no-margin inline" data-dismiss="modal">Kembali</button>
@@ -398,7 +397,7 @@
 			// Show detail
 			$(".panel").on('click', '.view', function(){
 				var id = $(this).data('id');
-				var url = "{{ url('app/mangrovemilik/detail') }}";
+				var url = "{{ route('mangrovemilik_detail') }}";
 				var url = url+'/'+id;
 				$.get(url, {id:id, _token:_token}, function(data){
 					$("#view-detail").html(data);

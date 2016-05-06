@@ -386,20 +386,7 @@
 						<h5>Data</h5>
 					</div>
 					<div class="modal-body" id="view-detail">
-						<table class="table">
-							<tr>
-								<td style="width:100px">NIK</td><td>: {{ $user->nik }}</td>
-							</tr>
-							<tr>
-								<td style="width:100px">Nama</td><td>: {{ $user->name }}</td>
-							</tr>
-							<tr>
-								<td style="width:100px">Kelompok</td><td>: {{ $user->kelompok->nama }}</td>
-							</tr>
-							<tr>
-								<td style="width:100px">Profesi</td><td>: {{ $user->profesi }}</td>
-							</tr>
-						</table>
+						
 					</div>
 					<div class="modal-footer">
 						<button type="button" class="btn btn-default btn-cons no-margin inline" data-dismiss="modal">Kembali</button>
