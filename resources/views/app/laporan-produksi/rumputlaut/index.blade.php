@@ -49,7 +49,7 @@
 										<form id="form-personal" method="GET" action="{{ route('rumputlaut_tambah') }}" role="form">
 											
 											<input type="hidden" id="token" name="_token" value="{{ csrf_token() }}">
-											<label>KETERANGAN IDENTITAS</label>
+											<label><b>KETERANGAN IDENTITAS</b></label>
 											<div class="row">
 												
 												<?php $provinsi = App\Provinsi::get() ?>
@@ -62,9 +62,9 @@
 													<input type="hidden" name="kabupaten" value="{{ $kab->id }}">
 												@endforeach
 
-												<div class="col-md-3">
+												<div class="col-md-6">
+													<label>Kecamatan</label>
 													<div class="form-group">
-														<label>Kecamatan</label>
 														<div id="kecamatan">
 															<select class="full-width" onchange="get_desa(this.value)" data-init-plugin="select2" name="kecamatan" required>
 																<option value="">Pilih Kecamatan...</option>
@@ -76,9 +76,9 @@
 														</div>
 													</div>
 												</div>
-												<div class="col-sm-3">
+												<div class="col-sm-6">
+													<label>Desa/Kelurahan</label>
 													<div class="form-group">
-														<label>Desa/Kelurahan</label>
 														<span id="desa">
 														<select class="full-width" name="desa" data-init-plugin="select2" required>
 															<option value="">Pilih Desa/Kelurahan...</option>
@@ -89,88 +89,100 @@
 											</div>
 
 											<hr>
-											<label>KETERANGAN PRODUKSI</label>
+											<label><b>KETERANGAN PRODUKSI</b></label>
 											<div class="row">
-												<div class="col-md-2">
-													<div class="form-group">
-														<label>Petani/RTP</label>
+												<div class="col-md-4">
+													<label>Petani/RTP</label>
+													<div class="form-group input-group">
 														<input type="number" name="rtp" value="{{ Input::old('rtp') }}" class="form-control" placeholder="Jumlah" required="">
+														<span class="input-group-addon">RTP</span>
 													</div>
 												</div>
-												<div class="col-md-2">
-													<div class="form-group">
-														<label>Panjang Garis Pantai</label>
-														<input type="number" name="panjang_pantai" value="{{ Input::old('panjang_pantai') }}" class="form-control" placeholder="Km" required="">
+												<div class="col-md-4">
+													<label>Panjang Garis Pantai</label>
+													<div class="form-group input-group">
+														<input type="number" name="panjang_pantai" value="{{ Input::old('panjang_pantai') }}" class="form-control" placeholder="Panjang" required="">
+														<span class="input-group-addon">Km</span>
 													</div>
 												</div>
-												<div class="col-md-2">
-													<div class="form-group">
-														<label>Potensi</label>
-														<input type="number" name="potensi" value="{{ Input::old('potensi') }}" class="form-control" placeholder="Ha" required="">
+												<div class="col-md-4">
+													<label>Potensi</label>
+													<div class="form-group input-group">
+														<input type="number" name="potensi" value="{{ Input::old('potensi') }}" class="form-control" placeholder="Luas" required="">
+														<span class="input-group-addon">Ha</span>
 													</div>
 												</div>
-												<div class="col-md-2">
-													<div class="form-group">
-														<label>Luas Tanam</label>
-														<input type="number" name="luas_tanam" value="{{ Input::old('luas_tanam') }}" class="form-control" placeholder="Ha" required="">
+											</div>
+											<div class="row">
+												<div class="col-md-4">
+													<label>Luas Tanam</label>
+													<div class="form-group input-group">
+														<input type="number" name="luas_tanam" value="{{ Input::old('luas_tanam') }}" class="form-control" placeholder="Luas" required="">
+														<span class="input-group-addon">Ha</span>
 													</div>
 												</div>
-												<div class="col-md-2">
+												<div class="col-md-4">
+													<label>Bentangan</label>
 													<div class="form-group">
-														<label>Bentangan</label>
 														<input type="number" name="bentangan" value="{{ Input::old('bentangan') }}" class="form-control" placeholder="Jumlah" required="">
 													</div>
 												</div>
 											</div>
-
 											<hr>
-											<label>Bibit</label>
+											<label><b>DATA BIBIT</b></label>
 											<div class="row">
 												<div class="col-md-3">
-													<div class="form-group">
 														<label>Bibit cottoni</label>
-														<input type="number" name="bibit_cottoni" value="{{ Input::old('bibit_cottoni') }}" class="form-control" placeholder="Jumlah (Kg)" required="">
+													<div class="form-group input-group">
+														<input type="number" name="bibit_cottoni" value="{{ Input::old('bibit_cottoni') }}" class="form-control" placeholder="Jumlah" required="">
+														<span class="input-group-addon">Kg</span>
 													</div>
 												</div>
 												<div class="col-md-3">
-													<div class="form-group">
 														<label>bibit spinosum</label>
-														<input type="number" name="bibit_spinosum" value="{{ Input::old('bibit_spinosum') }}" class="form-control" placeholder="Jumlah (Kg)" required="">
+													<div class="form-group input-group">
+														<input type="number" name="bibit_spinosum" value="{{ Input::old('bibit_spinosum') }}" class="form-control" placeholder="Jumlah" required="">
+														<span class="input-group-addon">Kg</span>
 													</div>
 												</div>
 												<div class="col-md-3">
-													<div class="form-group">
 														<label>cottoni basah</label>
-														<input type="number" name="cottoni_basah" value="{{ Input::old('cottoni_basah') }}" class="form-control" placeholder="Jumlah (Kg)" required="">
+													<div class="form-group input-group">
+														<input type="number" name="cottoni_basah" value="{{ Input::old('cottoni_basah') }}" class="form-control" placeholder="Jumlah" required="">
+														<span class="input-group-addon">Kg</span>
 													</div>
 												</div>
 												<div class="col-md-3">
-													<div class="form-group">
 														<label>cottoni kering</label>
-														<input type="number" name="cottoni_kering" value="{{ Input::old('cottoni_kering') }}" class="form-control" placeholder="Jumlah (Kg)" required="">
+													<div class="form-group input-group">
+														<input type="number" name="cottoni_kering" value="{{ Input::old('cottoni_kering') }}" class="form-control" placeholder="Jumlah" required="">
+														<span class="input-group-addon">Kg</span>
 													</div>
 												</div>
 											</div>
 											<hr>
-											<label>JUMLAH HIDUP</label>
+											<label><b>JUMLAH HIDUP</b></label>
 											<div class="row">
 												<div class="col-md-3">
-													<div class="form-group">
 														<label>spinosum basah</label>
-														<input type="number" name="spinosum_basah" value="{{ Input::old('spinosum_basah') }}" class="form-control" placeholder="Jumlah (Kg)" required="">
+													<div class="form-group input-group">
+														<input type="number" name="spinosum_basah" value="{{ Input::old('spinosum_basah') }}" class="form-control" placeholder="Jumlah" required="">
+														<span class="input-group-addon">Kg</span>
 													</div>
 												</div>
 												<div class="col-md-3">
-													<div class="form-group">
 														<label>spinosum kering</label>
-														<input type="number" name="spinosum_kering" value="{{ Input::old('spinosum_kering') }}" class="form-control" placeholder="Jumlah (Kg)" required="">
+													<div class="form-group input-group">
+														<input type="number" name="spinosum_kering" value="{{ Input::old('spinosum_kering') }}" class="form-control" placeholder="Jumlah" required="">
+														<span class="input-group-addon">Kg</span>
 													</div>
 												</div>
 											</div>
+											<hr>
+											<label><b>KETERANGAN</b></label>
 											<div class="row">
 												<div class="col-md-12">
 													<div class="form-group">
-														<label>Keterangan</label>
 														<textarea name="keterangan" id="" cols="30" rows="10" value="{{ Input::old('keterangan') }}" class="form-control" placeholder="Masukkan Keterangan" required=""></textarea>
 													</div>
 												</div>

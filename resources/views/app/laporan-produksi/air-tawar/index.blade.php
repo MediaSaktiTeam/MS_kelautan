@@ -60,13 +60,13 @@
 												<input type="hidden" name="kabupaten" value="{{ $kab->id }}">
 											@endforeach
 
-											<label>KETERANGAN IDENTITAS</label>
+											<label><b>KETERANGAN IDENTITAS</b></label>
 											
 
 											<div class="row">
 												<div class="col-md-6">
+													<label>Kecamatan</label>
 													<div class="form-group">
-														<label>Kecamatan</label>
 														<div id="kecamatan">
 															<select class="full-width" data-init-plugin="select2" name="kecamatan" onchange="get_desa(this.value)" required>
 																<option value="">Pilih Kecamatan...</option>
@@ -79,8 +79,8 @@
 													</div>
 												</div>
 												<div class="col-sm-6">
+													<label>Desa/Kelurahan</label>
 													<div class="form-group">
-														<label>Desa/Kelurahan</label>
 														<span id="desa">
 														<select class="full-width" name="desa" data-init-plugin="select2" required>
 															<option value="">Pilih Desa/Kelurahan...</option>
@@ -91,7 +91,7 @@
 											</div>
 
 											<hr>
-											<label>KETERANGAN PRODUKSI</label>
+											<label><b>KETERANGAN PRODUKSI</b></label>
 											<div class="row">
 												<div class="col-md-4">
 													<label>Petani/RTP</label>
@@ -117,7 +117,7 @@
 											</div>
 
 											<hr>
-											<label>PENEBARAN (Ekor)</label>
+											<label><b>PENEBARAN</b></label>
 											<div class="row">
 												<div class="col-md-3">
 														<label>MAS</label>
@@ -149,7 +149,7 @@
 												</div>
 											</div>
 											<hr>
-											<label>JUMLAH HIDUP</label>
+											<label><b>JUMLAH HIDUP</b></label>
 											<div class="row">
 												<div class="col-md-3">
 														<label>MAS</label>
@@ -180,10 +180,11 @@
 													</div>
 												</div>
 											</div>
+											<hr>
+											<label><b>KETERANGAN</b></label>
 											<div class="row">
 												<div class="col-md-12">
 													<div class="form-group">
-														<label>Keterangan</label>
 														<textarea name="keterangan" id="" cols="30" rows="10" value="{{ Input::old('keterangan') }}" class="form-control" required=""></textarea>
 													</div>
 												</div>

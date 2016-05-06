@@ -51,8 +51,7 @@
 										<form id="form-personal" method="GET" action="{{ route('rumputlaut_update') }}" role="form">
 											
 											<input type="hidden" id="token" name="_token" value="{{ csrf_token() }}">
-											<label>KETERANGAN IDENTITAS</label>
-											<div class="row">
+											<label><b>KETERANGAN IDENTITAS</b></label>
 
 												<?php $provinsi = App\Provinsi::get() ?>
 												@foreach ( $provinsi as $prov )
@@ -63,9 +62,11 @@
 												@foreach ( $kabupaten as $kab )
 													<input type="hidden" name="kabupaten" value="{{ $kab->id }}">
 												@endforeach	
-																							<div class="col-md-3">
+												
+											<div class="row">
+												<div class="col-md-6">
+													<label>Kecamatan</label>
 													<div class="form-group">
-														<label>Kecamatan</label>
 														<div id="kecamatan">
 															<select class="full-width" data-init-plugin="select2" onchange="get_desa(this.value)" name="kecamatan" required>
 																<?php $kecamatan = App\Kecamatan::get() ?>
@@ -76,9 +77,9 @@
 														</div>
 													</div>
 												</div>
-												<div class="col-sm-3">
+												<div class="col-sm-6">
+													<label>Desa/Kelurahan</label>
 													<div class="form-group">
-														<label>Desa/Kelurahan</label>
 														<span id="desa">
 														<select class="full-width" name="desa" data-init-plugin="select2" required>
 															<option value="{{ $rumputlaut->desa }}" {{ Input::old('desa') == $rumputlaut->desa ? "selected":"" }}>{{ $rumputlaut->datadesa->nama }}</option>
@@ -89,81 +90,95 @@
 											</div>
 
 											<hr>
-											<label>KETERANGAN PRODUKSI</label>
+											<label><b>KETERANGAN PRODUKSI</b></label>
 											<div class="row">
-												<div class="col-md-2">
-													<div class="form-group">
-														<label>Petani/RTP</label>
+												<div class="col-md-4">
+													<label>Petani/RTP</label>
+													<div class="form-group input-group">
 														<input type="number" name="rtp" value="{{ $rumputlaut->rtp }}" class="form-control" placeholder="Jumlah" required="">
+														<span class="input-group-addon">RTP</span>
+
 													</div>
 												</div>
-												<div class="col-md-2">
-													<div class="form-group">
-														<label>Panjang Pantai</label>
-														<input type="number" name="panjang_pantai" value="{{ $rumputlaut->panjang_pantai }}" class="form-control" placeholder="Km" required="">
+												<div class="col-md-4">
+													<label>Panjang Pantai</label>
+													<div class="form-group input-group">
+														<input type="number" name="panjang_pantai" value="{{ $rumputlaut->panjang_pantai }}" class="form-control" placeholder="Panjang" required="">
+														<span class="input-group-addon">Km</span>
 													</div>
 												</div>
-												<div class="col-md-2">
-													<div class="form-group">
-														<label>Potensi</label>
-														<input type="number" name="potensi" value="{{ $rumputlaut->potensi }}" class="form-control" placeholder="Ha" required="">
+												<div class="col-md-4">
+													<label>Potensi</label>
+													<div class="form-group input-group">
+														<input type="number" name="potensi" value="{{ $rumputlaut->potensi }}" class="form-control" placeholder="Luas" required="">
+														<span class="input-group-addon">Ha</span>
 													</div>
 												</div>
-												<div class="col-md-2">
-													<div class="form-group">
-														<label>Luas Tanam</label>
-														<input type="number" name="luas_tanam" value="{{ $rumputlaut->luas_tanam }}" class="form-control" placeholder="Ha" required="">
+											</div>
+
+											<div class="row">
+												<div class="col-md-4">
+													<label>Luas Tanam</label>
+													<div class="form-group input-group">
+														<input type="number" name="luas_tanam" value="{{ $rumputlaut->luas_tanam }}" class="form-control" placeholder="Luas" required="">
+														<span class="input-group-addon">Ha</span>
 													</div>
 												</div>
-												<div class="col-md-2">
+												<div class="col-md-4">
+													<label>Bentangan</label>
 													<div class="form-group">
-														<label>Bentangan</label>
 														<input type="number" name="bentangan" value="{{ $rumputlaut->bentangan }}" class="form-control" placeholder="Jumlah" required="">
 													</div>
 												</div>
 											</div>
 
 											<hr>
-											<label>Bibit</label>
+											<label><b>DATA BIBIT</b></label>
 											<div class="row">
 												<div class="col-md-3">
-													<div class="form-group">
-														<label>Bibit cottoni</label>
-														<input type="number" name="bibit_cottoni" value="{{ $rumputlaut->bibit_cottoni }}" class="form-control" placeholder="Jumlah (Kg)" required="">
+													<label>Bibit cottoni</label>
+													<div class="form-group input-group">
+														<input type="number" name="bibit_cottoni" value="{{ $rumputlaut->bibit_cottoni }}" class="form-control" placeholder="Jumlah" required="">
+														<span class="input-group-addon">Kg</span>
 													</div>
 												</div>
 												<div class="col-md-3">
-													<div class="form-group">
-														<label>bibit spinosum</label>
-														<input type="number" name="bibit_spinosum" value="{{ $rumputlaut->bibit_spinosum }}" class="form-control" placeholder="Jumlah (Kg)" required="">
+													<label>bibit spinosum</label>
+													<div class="form-group input-group">
+														<input type="number" name="bibit_spinosum" value="{{ $rumputlaut->bibit_spinosum }}" class="form-control" placeholder="Jumlah" required="">
+														<span class="input-group-addon">Kg</span>
 													</div>
 												</div>
 												<div class="col-md-3">
-													<div class="form-group">
-														<label>cottoni basah</label>
-														<input type="number" name="cottoni_basah" value="{{ $rumputlaut->cottoni_basah }}" class="form-control" placeholder="Jumlah (Kg)" required="">
+													<label>cottoni basah</label>
+													<div class="form-group input-group">
+														<input type="number" name="cottoni_basah" value="{{ $rumputlaut->cottoni_basah }}" class="form-control" placeholder="Jumlah" required="">
+														<span class="input-group-addon">Kg</span>
 													</div>
 												</div>
 												<div class="col-md-3">
-													<div class="form-group">
-														<label>cottoni kering</label>
-														<input type="number" name="cottoni_kering" value="{{ $rumputlaut->cottoni_kering }}" class="form-control" placeholder="Jumlah (Kg)" required="">
+													<label>cottoni kering</label>
+													<div class="form-group input-group">
+														<input type="number" name="cottoni_kering" value="{{ $rumputlaut->cottoni_kering }}" class="form-control" placeholder="Jumlah" required="">
+														<span class="input-group-addon">Kg</span>
 													</div>
 												</div>
 											</div>
 											<hr>
-											<label>JUMLAH HIDUP</label>
+											<label><b>JUMLAH HIDUP</b></label>
 											<div class="row">
 												<div class="col-md-3">
-													<div class="form-group">
-														<label>spinosum basah</label>
-														<input type="number" name="spinosum_basah" value="{{ $rumputlaut->spinosum_basah }}" class="form-control" placeholder="Jumlah (Kg)" required="">
+													<label>spinosum basah</label>
+													<div class="form-group input-group">
+														<input type="number" name="spinosum_basah" value="{{ $rumputlaut->spinosum_basah }}" class="form-control" placeholder="Jumlah" required="">
+														<span class="input-group-addon">Kg</span>
 													</div>
 												</div>
 												<div class="col-md-3">
-													<div class="form-group">
-														<label>spinosum kering</label>
-														<input type="number" name="spinosum_kering" value="{{ $rumputlaut->spinosum_kering }}" class="form-control" placeholder="Jumlah (Kg)" required="">
+													<label>spinosum kering</label>
+													<div class="form-group input-group">
+														<input type="number" name="spinosum_kering" value="{{ $rumputlaut->spinosum_kering }}" class="form-control" placeholder="Jumlah" required="">
+														<span class="input-group-addon">Kg</span>
 													</div>
 												</div>
 											</div>

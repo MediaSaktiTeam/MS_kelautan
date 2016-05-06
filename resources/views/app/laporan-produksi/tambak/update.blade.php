@@ -50,7 +50,7 @@
 									<div class="panel-body">
 										<form id="form-personal" method="GET" action="{{ route('tambak_update') }}" role="form">
 											
-											<label>KETERANGAN IDENTITAS</label>
+											<label><b>KETERANGAN IDENTITAS</b></label>
 											<div class="row">
 												<?php $provinsi = App\Provinsi::get() ?>
 												@foreach ( $provinsi as $prov )
@@ -62,7 +62,7 @@
 													<input type="hidden" name="kabupaten" value="{{ $kab->id }}">
 												@endforeach
 
-												<div class="col-md-3">
+												<div class="col-md-6">
 													<div class="form-group">
 														<label>Kecamatan</label>
 														<div id="kecamatan">
@@ -76,7 +76,7 @@
 														</div>
 													</div>
 												</div>
-												<div class="col-sm-3">
+												<div class="col-sm-6">
 													<div class="form-group">
 														<label>Desa/Kelurahan</label>
 														<span id="desa">
@@ -88,100 +88,112 @@
 												</div>
 											</div>
 											<hr>
-											<label>KETERANGAN LAHAN</label>
+											<label><b>KETERANGAN LAHAN</b></label>
 											<div class="row">
 												<div class="col-md-6">
+												<label>Panjang Garis Pantai</label>
 													<div class="form-group">
-														<label>Panjang Garis Pantai</label>
-														<input type="number" name="panjang_pantai" value="{{ $tambak->rtp }}" class="form-control" required="">
+														<input type="number" name="panjang_pantai" value="{{ $tambak->rtp }}" class="form-control" placeholder="Panjang Garis Pantai" required="">
 													</div>
 												</div>
+												<label>Petani/RTP</label>
 												<div class="col-md-6">
-													<div class="form-group">
-														<label>Petani/RTP</label>
-														<input type="number" name="rtp" value="{{ $tambak->rtp }}" class="form-control" required="">
+													<div class="form-group input-group">
+														<input type="number" name="rtp" value="{{ $tambak->rtp }}" class="form-control" placeholder="Jumlah" required="">
+														<span class="input-group-addon">RTP</span>
 													</div>
 												</div>
 											</div>
 
 											<div class="row">
 												<div class="col-md-6">
-													<div class="form-group">
-														<label>Luas Potensi</label>
-														<input type="number" name="potensi" value="{{ $tambak->potensi }}" class="form-control" required="">
+													<label>Luas Potensi</label>
+													<div class="form-group input-group">
+														<input type="number" name="potensi" value="{{ $tambak->potensi }}" class="form-control" placeholder="Luas" required="">
+														<span class="input-group-addon">Ha</span>
 													</div>
 												</div>
 												<div class="col-md-6">
-													<div class="form-group">
-														<label>Luas Tanam</label>
-														<input type="number" name="luas_tanam" value="{{ $tambak->luas_tanam }}" class="form-control" required="">
+													<label>Luas Tanam</label>
+													<div class="form-group input-group">
+														<input type="number" name="luas_tanam" value="{{ $tambak->luas_tanam }}" class="form-control" placeholder="Luas" required="">
+														<span class="input-group-addon">Ha</span>
 													</div>
 												</div>
 											</div>
 
 											<hr>
-											<label>PENEBARAN</label>
+											<label><b>PENEBARAN</b></label>
 											<div class="row">
 												<div class="col-md-4">
-													<div class="form-group">
-														<label>Windu</label>
+													<label>Windu</label>
+													<div class="form-group input-group">
 														<input type="number" name="penebaran_windu" value="{{ $tambak->penebaran_windu }}" class="form-control" required="">
+														<span class="input-group-addon">Ekor</span>
 													</div>
 												</div>
 												<div class="col-md-4">
-													<div class="form-group">
-														<label>Vanamae</label>
+													<label>Vanamae</label>
+													<div class="form-group input-group">
 														<input type="number" name="penebaran_vanamae" value="{{ $tambak->penebaran_vanamae }}" class="form-control" required="">
+														<span class="input-group-addon">Ekor</span>
 													</div>
 												</div>
 												<div class="col-md-4">
-													<div class="form-group">
-														<label>Bandeng</label>
+													<label>Bandeng</label>
+													<div class="form-group input-group">
 														<input type="number" name="penebaran_bandeng" value="{{ $tambak->penebaran_bandeng }}" class="form-control" required="">
+														<span class="input-group-addon">Ekor</span>
 													</div>
 												</div>
 											</div>
 											<hr>
-											<label>JUMLAH HIDUP</label>
+											<label><b>JUMLAH HIDUP</b></label>
 											<div class="row">
 												<div class="col-md-4">
-													<div class="form-group">
-														<label>Windu</label>
+													<label>Windu</label>
+													<div class="form-group input-group">
 														<input type="number" name="jumlah_hidup_windu" value="{{ $tambak->jumlah_hidup_windu }}" class="form-control" required="">
+														<span class="input-group-addon">Ekor</span>
 													</div>
 												</div>
 												<div class="col-md-4">
-													<div class="form-group">
-														<label>Vanamae</label>
+													<label>Vanamae</label>
+													<div class="form-group input-group">
 														<input type="number" name="jumlah_hidup_vanamae" value="{{ $tambak->jumlah_hidup_vanamae }}" class="form-control" required="">
+														<span class="input-group-addon">Ekor</span>
 													</div>
 												</div>
 												<div class="col-md-4">
-													<div class="form-group">
-														<label>Bandeng</label>
+													<label>Bandeng</label>
+													<div class="form-group input-group">
 														<input type="number" name="jumlah_hidup_bandeng" value="{{ $tambak->jumlah_hidup_bandeng }}" class="form-control" required="">
+														<span class="input-group-addon">Ekor</span>
 													</div>
 												</div>
 											</div>
-											<label>PAKAN</label>
+											<label><b>PAKAN</b></label>
 											<div class="row">
 												<div class="col-md-4">
-													<div class="form-group">
-														<label>Pellet</label>
+													<label>Pellet</label>
+													<div class="form-group input-group">
 														<input type="number" name="pakan_pelet" value="{{ $tambak->pakan_pelet }}" class="form-control" required="">
+														<span class="input-group-addon">Kg</span>
 													</div>
 												</div>
 												<div class="col-md-4">
-													<div class="form-group">
-														<label>Dedak</label>
+													<label>Dedak</label>
+													<div class="form-group input-group">
 														<input type="number" name="pakan_dedak" value="{{ $tambak->pakan_dedak }}" class="form-control" required="">
+														<span class="input-group-addon">Kg</span>
 													</div>
 												</div>											
 											</div>
+											<hr>
+											<label><b>KETERANGAN</b></label>
 											<div class="row">
 												<div class="col-md-12">
 													<div class="form-group">
-														<label>Keterangan</label>
 														<textarea name="keterangan" cols="30" rows="10" class="form-control" required="">{{ $tambak->keterangan }}</textarea>
 													</div>
 												</div>

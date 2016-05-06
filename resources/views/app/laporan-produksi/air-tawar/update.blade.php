@@ -50,8 +50,6 @@
 									<div class="panel-body">
 										<form id="form-personal" method="GET" action="{{ route('airtawar_update') }}" role="form">
 											
-											<label>KETERANGAN IDENTITAS</label>
-											<div class="row">
 												<?php $provinsi = App\Provinsi::get() ?>
 												@foreach ( $provinsi as $prov )
 													<input type="hidden" name="provinsi" value="{{ $prov->id }}">
@@ -62,9 +60,11 @@
 													<input type="hidden" name="kabupaten" value="{{ $kab->id }}">
 												@endforeach
 
-												<div class="col-md-3">
+											<label><b>KETERANGAN IDENTITAS</b></label>
+											<div class="row">
+												<div class="col-md-6">
+													<label>Kecamatan</label>
 													<div class="form-group">
-														<label>Kecamatan</label>
 														<div id="kecamatan">
 															<select class="full-width" data-init-plugin="select2" onchange="get_desa(this.value)" name="kecamatan" required>
 																<?php $kecamatan = App\Kecamatan::get() ?>
@@ -76,9 +76,9 @@
 														</div>
 													</div>
 												</div>
-												<div class="col-sm-3">
+												<div class="col-sm-6">
+													<label>Desa/Kelurahan</label>
 													<div class="form-group">
-														<label>Desa/Kelurahan</label>
 														<span id="desa">
 														<select class="full-width" name="desa" data-init-plugin="select2" required>
 															<option value="{{ $airtawar->desa }}" {{ Input::old('desa') == $airtawar->desa ? "selected":"" }}>{{ $airtawar->datadesa->nama }}</option>
@@ -89,7 +89,7 @@
 											</div>
 
 											<hr>
-											<label>KETERANGAN PRODUKSI</label>
+											<label><b>KETERANGAN PRODUKSI</b></label>
 											<div class="row">
 												<div class="col-md-4">
 														<label>Petani/RTP</label>
@@ -115,7 +115,7 @@
 											</div>
 
 											<hr>
-											<label>PENEBARAN</label>
+											<label><b>PENEBARAN</b></label>
 											<div class="row">
 												<div class="col-md-3">
 														<label>MAS</label>
@@ -147,7 +147,7 @@
 												</div>
 											</div>
 											<hr>
-											<label>JUMLAH HIDUP</label>
+											<label><b>JUMLAH HIDUP</b></label>
 											<div class="row">
 												<div class="col-md-3">
 														<label>MAS</label>
@@ -178,10 +178,11 @@
 													</div>
 												</div>
 											</div>
+											<hr>
+											<label><b>KETERANGAN</b></label>
 											<div class="row">
 												<div class="col-md-12">
-													<div class="form-group input-group">
-														<label>Keterangan</label>
+													<div class="form-group">
 														<textarea name="keterangan" cols="30" rows="10" class="form-control" required="">{{ $airtawar->keterangan }}</textarea>
 													</div>
 												</div>

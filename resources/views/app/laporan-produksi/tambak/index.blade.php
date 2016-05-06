@@ -50,7 +50,7 @@
 											
 											<input type="hidden" id="token" name="_token" value="{{ csrf_token() }}">
 
-											<label>KETERANGAN IDENTITAS</label>
+											<label><b>KETERANGAN IDENTITAS</b></label>
 											
 
 											<div class="row">
@@ -66,8 +66,8 @@
 											@endforeach
 											
 												<div class="col-md-6">
+													<label>Kecamatan</label>
 													<div class="form-group">
-														<label>Kecamatan</label>
 														<div id="kecamatan">
 															<select class="full-width" data-init-plugin="select2" name="kecamatan" onchange="get_desa(this.value)" required>
 																<option value="">Pilih Kecamatan...</option>
@@ -80,8 +80,8 @@
 													</div>
 												</div>
 												<div class="col-sm-6">
+													<label>Desa/Kelurahan</label>
 													<div class="form-group">
-														<label>Desa/Kelurahan</label>
 														<span id="desa">
 														<select class="full-width" name="desa" data-init-plugin="select2" required>
 															<option value="">Pilih Desa/Kelurahan...</option>
@@ -92,100 +92,112 @@
 											</div>
 
 											<hr>
-											<label>KETERANGAN LAHAN</label>
+											<label><b>KETERANGAN LAHAN</b></label>
 											<div class="row">
 												<div class="col-md-6">
+													<label>Panjang Garis Pantai</label>
 													<div class="form-group">
-														<label>Panjang Garis Pantai</label>
-														<input type="number" name="panjang_pantai" value="{{ Input::old('rtp') }}" class="form-control" required="">
+														<input type="number" name="panjang_pantai" value="{{ Input::old('rtp') }}" class="form-control" placeholder="Panjang Garis Pantai" required="">
 													</div>
 												</div>
 												<div class="col-md-6">
-													<div class="form-group">
-														<label>Petani/RTP</label>
-														<input type="number" name="rtp" value="{{ Input::old('luas_areal') }}" class="form-control" placeholder="Km" required="">
+													<label>Petani/RTP</label>
+													<div class="form-group input-group">
+														<input type="number" name="rtp" value="{{ Input::old('luas_areal') }}" class="form-control" placeholder="Panjang" required="">
+														<span class="input-group-addon">Km</span>
 													</div>
 												</div>
 											</div>
 
 											<div class="row">
 												<div class="col-md-6">
-													<div class="form-group">
-														<label>Luas Potensi</label>
-														<input type="number" name="potensi" value="{{ Input::old('potensi') }}" class="form-control" placeholder="Ha" required="">
+													<label>Luas Potensi</label>
+													<div class="form-group input-group">
+														<input type="number" name="potensi" value="{{ Input::old('potensi') }}" class="form-control" placeholder="Luas" required="">
+														<span class="input-group-addon">Ha</span>
 													</div>
 												</div>
 												<div class="col-md-6">
-													<div class="form-group">
-														<label>Luas Tanam</label>
-														<input type="number" name="luas_tanam" value="{{ Input::old('luas_tanam') }}" class="form-control" placeholder="Ha" required="">
+													<label>Luas Tanam</label>
+													<div class="form-group input-group">
+														<input type="number" name="luas_tanam" value="{{ Input::old('luas_tanam') }}" class="form-control" placeholder="Luas" required="">
+														<span class="input-group-addon">Ha</span>
 													</div>
 												</div>
 											</div>
 
 											<hr>
-											<label>PENEBARAN</label>
+											<label><b>PENEBARAN</b></label>
 											<div class="row">
 												<div class="col-md-4">
-													<div class="form-group">
-														<label>Windu</label>
-														<input type="number" name="penebaran_windu" value="{{ Input::old('penebaran_windu') }}" class="form-control" placeholder="Jumlah (Ekor)" required="">
+													<label>Windu</label>
+													<div class="form-group input-group">
+														<input type="number" name="penebaran_windu" value="{{ Input::old('penebaran_windu') }}" class="form-control" placeholder="Jumlah" required="">
+														<span class="input-group-addon">Ekor</span>
 													</div>
 												</div>
 												<div class="col-md-4">
-													<div class="form-group">
-														<label>Vanamae</label>
-														<input type="number" name="penebaran_vanamae" value="{{ Input::old('penebaran_vanamae') }}" class="form-control" placeholder="Jumlah (Ekor)" required="">
+													<label>Vanamae</label>
+													<div class="form-group input-group">
+														<input type="number" name="penebaran_vanamae" value="{{ Input::old('penebaran_vanamae') }}" class="form-control" placeholder="Jumlah" required="">
+														<span class="input-group-addon">Ekor</span>
 													</div>
 												</div>
 												<div class="col-md-4">
-													<div class="form-group">
-														<label>Bandeng</label>
-														<input type="number" name="penebaran_bandeng" value="{{ Input::old('penebaran_bandeng') }}" class="form-control" placeholder="Jumlah (Ekor)" required="">
+													<label>Bandeng</label>
+													<div class="form-group input-group">
+														<input type="number" name="penebaran_bandeng" value="{{ Input::old('penebaran_bandeng') }}" class="form-control" placeholder="Jumlah" required="">
+														<span class="input-group-addon">Ekor</span>
 													</div>
 												</div>
 											</div>
 											<hr>
-											<label>JUMLAH HIDUP</label>
+											<label><b>JUMLAH HIDUP</b></label>
 											<div class="row">
 												<div class="col-md-4">
-													<div class="form-group">
-														<label>Windu</label>
-														<input type="number" name="jumlah_hidup_windu" value="{{ Input::old('jumlah_hidup_windu') }}" class="form-control" placeholder="Jumlah (Ekor)" required="">
+													<label>Windu</label>
+													<div class="form-group input-group">
+														<input type="number" name="jumlah_hidup_windu" value="{{ Input::old('jumlah_hidup_windu') }}" class="form-control" placeholder="Jumlah" required="">
+														<span class="input-group-addon">Ekor</span>
 													</div>
 												</div>
 												<div class="col-md-4">
-													<div class="form-group">
-														<label>Vanamae</label>
-														<input type="number" name="jumlah_hidup_vanamae" value="{{ Input::old('jumlah_hidup_vanamae') }}" class="form-control" placeholder="Jumlah (Ekor)" required="">
+													<label>Vanamae</label>
+													<div class="form-group input-group">
+														<input type="number" name="jumlah_hidup_vanamae" value="{{ Input::old('jumlah_hidup_vanamae') }}" class="form-control" placeholder="Jumlah" required="">
+														<span class="input-group-addon">Ekor</span>
 													</div>
 												</div>
 												<div class="col-md-4">
-													<div class="form-group">
-														<label>Bandeng</label>
-														<input type="number" name="jumlah_hidup_bandeng" value="{{ Input::old('jumlah_hidup_bandeng') }}" class="form-control" placeholder="Jumlah (Ekor)" required="">
+													<label>Bandeng</label>
+													<div class="form-group input-group">
+														<input type="number" name="jumlah_hidup_bandeng" value="{{ Input::old('jumlah_hidup_bandeng') }}" class="form-control" placeholder="Jumlah" required="">
+														<span class="input-group-addon">Ekor</span>
 													</div>
 												</div>
 											</div>
-											<label>PAKAN</label>
+											<hr>
+											<label><b>PAKAN</b></label>
 											<div class="row">
 												<div class="col-md-4">
-													<div class="form-group">
-														<label>Pellet</label>
-														<input type="number" name="pakan_pelet" value="{{ Input::old('pakan_pelet') }}" class="form-control" placeholder="Jumlah (Kg)" required="">
+													<label>Pellet</label>
+													<div class="form-group input-group">
+														<input type="number" name="pakan_pelet" value="{{ Input::old('pakan_pelet') }}" class="form-control" placeholder="Jumlah" required="">
+														<span class="input-group-addon">Kg</span>
 													</div>
 												</div>
 												<div class="col-md-4">
-													<div class="form-group">
-														<label>Dedak</label>
-														<input type="number" name="pakan_dedak" value="{{ Input::old('pakan_dedak') }}" class="form-control" placeholder="Jumlah (Kg)" required="">
+													<label>Dedak</label>
+													<div class="form-group input-group">
+														<input type="number" name="pakan_dedak" value="{{ Input::old('pakan_dedak') }}" class="form-control" placeholder="Jumlah" required="">
+														<span class="input-group-addon">Kg</span>
 													</div>
 												</div>											
 											</div>
 											<div class="row">
+												<label><b>KETERANGAN</b></label>
 												<div class="col-md-12">
 													<div class="form-group">
-														<label>Keterangan</label>
 														<textarea name="keterangan" id="" cols="30" rows="10" value="{{ Input::old('keterangan') }}" class="form-control" placeholder="masukkan keterangan..." required=""></textarea>
 													</div>
 												</div>
