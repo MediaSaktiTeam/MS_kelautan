@@ -147,6 +147,12 @@
 
 			]);
 
+		Route::controller('app/master/lokasi', 'MasterLokasiController',
+			[
+				'getIndex' => 'lokasi',
+				'getTambah' => 'lokasi_tambah',
+			]);
+
 		Route::get('/app/master/bantuan', function () {
 			return view('app.master.bantuan');
 		});

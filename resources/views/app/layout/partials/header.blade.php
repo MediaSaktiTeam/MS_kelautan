@@ -198,6 +198,10 @@
 								<a href="/app/master/bantuan">Bantuan</a>
 								<span class="icon-thumbnail">Bn</span>
 							</li>
+							<li class="sub-lokasi">
+								<a href="/app/master/lokasi">Lokasi</a>
+								<span class="icon-thumbnail">L</span>
+							</li>
 
 							@if ( Permissions::pembudidaya() )
 								<li class="sub-saranapembudidaya">
