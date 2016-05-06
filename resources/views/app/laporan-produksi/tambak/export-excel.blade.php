@@ -41,7 +41,7 @@
 			<tr>
 				<td><?php echo $i  ?></td>
 				<td>{{ $tb->datakecamatan->nama }}</td>
-				<td>{{ $tb->desa }}</td>
+				<td>{{ $tb->datadesa->nama }}</td>
 				<td>{{ $tb->rtp }}</td>
 				<td>{{ $tb->panjang_pantai }}</td>
 				<td>{{ $tb->potensi }}</td>

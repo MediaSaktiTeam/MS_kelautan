@@ -18,17 +18,17 @@ class TableAirTawar extends Migration
             $table->string('kabupaten');
             $table->string('kecamatan');
             $table->string('desa');
-            $table->string('rtp');
-            $table->string('luas_areal');
-            $table->string('luas_tanam');
-            $table->string('penebaran_mas');
-            $table->string('penebaran_nila');
-            $table->string('penebaran_lele');
-            $table->string('penebaran_bawal');
-            $table->string('jumlah_hidup_mas');
-            $table->string('jumlah_hidup_nila');
-            $table->string('jumlah_hidup_lele');
-            $table->string('jumlah_hidup_bawal');
+            $table->integer('rtp');
+            $table->integer('luas_areal');
+            $table->integer('luas_tanam');
+            $table->integer('penebaran_mas');
+            $table->integer('penebaran_nila');
+            $table->integer('penebaran_lele');
+            $table->integer('penebaran_bawal');
+            $table->integer('jumlah_hidup_mas');
+            $table->integer('jumlah_hidup_nila');
+            $table->integer('jumlah_hidup_lele');
+            $table->integer('jumlah_hidup_bawal');
             $table->string('keterangan');
         });
     }

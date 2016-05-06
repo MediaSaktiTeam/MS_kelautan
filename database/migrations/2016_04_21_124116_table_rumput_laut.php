@@ -18,17 +18,17 @@ class TableRumputLaut extends Migration
             $table->string('kabupaten');
             $table->string('kecamatan');
             $table->string('desa');
-            $table->string('rtp');
-            $table->string('panjang_pantai');
-            $table->string('potensi');
-            $table->string('luas_tanam');
-            $table->string('bentangan');
-            $table->string('bibit_cottoni');
-            $table->string('bibit_spinosum');
-            $table->string('cottoni_basah');
-            $table->string('cottoni_kering');
-            $table->string('spinosum_basah');
-            $table->string('spinosum_kering');
+            $table->integer('rtp');
+            $table->integer('panjang_pantai');
+            $table->integer('potensi');
+            $table->integer('luas_tanam');
+            $table->integer('bentangan');
+            $table->integer('bibit_cottoni');
+            $table->integer('bibit_spinosum');
+            $table->integer('cottoni_basah');
+            $table->integer('cottoni_kering');
+            $table->integer('spinosum_basah');
+            $table->integer('spinosum_kering');
             $table->string('keterangan');
         });
     }

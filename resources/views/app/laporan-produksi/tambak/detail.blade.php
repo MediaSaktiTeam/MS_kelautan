@@ -12,7 +12,7 @@
 	<tbody>
 		<tr>
 			<td><b>{{ $tambak->datakecamatan->nama }}</b></td>
-			<td><b>{{ $tambak->desa }}</b></td>
+			<td><b>{{ $tambak->datadesa->nama }}</b></td>
 			<td><b>{{ $tambak->rtp }}</b></td>
 			<td><b>{{ $tambak->luas_areal }} Ha</b></td>
 			<td><b>{{ $tambak->luas_tanam}} Ha</b></td>

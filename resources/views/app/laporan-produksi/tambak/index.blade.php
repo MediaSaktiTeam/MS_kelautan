@@ -49,43 +49,37 @@
 										<form id="form-personal" method="GET" action="{{ route('tambak_tambah') }}" role="form">
 											
 											<input type="hidden" id="token" name="_token" value="{{ csrf_token() }}">
+
 											<label>KETERANGAN IDENTITAS</label>
+											
+
 											<div class="row">
-												<div class="col-sm-3">
-													<div class="form-group">
-														<label>Provinsi</label>
-														<span id="provinsi">
-															<select class="full-width"  name="provinsi" data-init-plugin="select2" onchange="get_kabupaten(this.value)" required>
-																<option value="">Pilih Provinsi</option>
-																<?php $provinsi = App\Provinsi::where('nama','Sulawesi Selatan')->get() ?>
-																@foreach ( $provinsi as $prov )
-																	<option value="{{ $prov->id }}" {{ Input::old('provinsi') == $prov->id ? "selected":"" }}>{{ $prov->nama }}</option>
-																@endforeach
-															</select>
-														</span>
-													</div>
-												</div>
-												<div class="col-md-3">
-													<div class="form-group">
-														<label>Kabupaten/Kota</label>
-														<span id="kabupaten">
-															<select class="full-width" data-init-plugin="select2" name="kabupaten" required>
-																<option value="">Pilih Kabupaten/Kota...</option>
-															</select>
-														</span>
-													</div>
-												</div>
-												<div class="col-md-3">
+											
+											<?php $provinsi = App\Provinsi::get() ?>
+											@foreach ( $provinsi as $prov )
+												<input type="hidden" name="provinsi" value="{{ $prov->id }}">
+											@endforeach
+
+											<?php $kabupaten = App\Kabupaten::get() ?>
+											@foreach ( $kabupaten as $kab )
+												<input type="hidden" name="kabupaten" value="{{ $kab->id }}">
+											@endforeach
+											
+												<div class="col-md-6">
 													<div class="form-group">
 														<label>Kecamatan</label>
 														<div id="kecamatan">
-															<select class="full-width" data-init-plugin="select2" name="kecamatan" required>
+															<select class="full-width" data-init-plugin="select2" name="kecamatan" onchange="get_desa(this.value)" required>
 																<option value="">Pilih Kecamatan...</option>
+																<?php $kecamatan = App\Kecamatan::get() ?>
+																@foreach ( $kecamatan as $kec )
+																	<option value="{{ $kec->id }}">{{ $kec->nama }}</option>
+																@endforeach
 															</select>
 														</div>
 													</div>
 												</div>
-												<div class="col-sm-3">
+												<div class="col-sm-6">
 													<div class="form-group">
 														<label>Desa/Kelurahan</label>
 														<span id="desa">
@@ -109,7 +103,7 @@
 												<div class="col-md-6">
 													<div class="form-group">
 														<label>Petani/RTP</label>
-														<input type="number" name="rtp" value="{{ Input::old('luas_areal') }}" class="form-control" required="">
+														<input type="number" name="rtp" value="{{ Input::old('luas_areal') }}" class="form-control" placeholder="Km" required="">
 													</div>
 												</div>
 											</div>
@@ -118,13 +112,13 @@
 												<div class="col-md-6">
 													<div class="form-group">
 														<label>Luas Potensi</label>
-														<input type="number" name="potensi" value="{{ Input::old('potensi') }}" class="form-control" required="">
+														<input type="number" name="potensi" value="{{ Input::old('potensi') }}" class="form-control" placeholder="Ha" required="">
 													</div>
 												</div>
 												<div class="col-md-6">
 													<div class="form-group">
 														<label>Luas Tanam</label>
-														<input type="number" name="luas_tanam" value="{{ Input::old('luas_tanam') }}" class="form-control" required="">
+														<input type="number" name="luas_tanam" value="{{ Input::old('luas_tanam') }}" class="form-control" placeholder="Ha" required="">
 													</div>
 												</div>
 											</div>
@@ -135,19 +129,19 @@
 												<div class="col-md-4">
 													<div class="form-group">
 														<label>Windu</label>
-														<input type="number" name="penebaran_windu" value="{{ Input::old('penebaran_windu') }}" class="form-control" required="">
+														<input type="number" name="penebaran_windu" value="{{ Input::old('penebaran_windu') }}" class="form-control" placeholder="Jumlah (Ekor)" required="">
 													</div>
 												</div>
 												<div class="col-md-4">
 													<div class="form-group">
 														<label>Vanamae</label>
-														<input type="number" name="penebaran_vanamae" value="{{ Input::old('penebaran_vanamae') }}" class="form-control" required="">
+														<input type="number" name="penebaran_vanamae" value="{{ Input::old('penebaran_vanamae') }}" class="form-control" placeholder="Jumlah (Ekor)" required="">
 													</div>
 												</div>
 												<div class="col-md-4">
 													<div class="form-group">
 														<label>Bandeng</label>
-														<input type="number" name="penebaran_bandeng" value="{{ Input::old('penebaran_bandeng') }}" class="form-control" required="">
+														<input type="number" name="penebaran_bandeng" value="{{ Input::old('penebaran_bandeng') }}" class="form-control" placeholder="Jumlah (Ekor)" required="">
 													</div>
 												</div>
 											</div>
@@ -157,19 +151,19 @@
 												<div class="col-md-4">
 													<div class="form-group">
 														<label>Windu</label>
-														<input type="number" name="jumlah_hidup_windu" value="{{ Input::old('jumlah_hidup_windu') }}" class="form-control" required="">
+														<input type="number" name="jumlah_hidup_windu" value="{{ Input::old('jumlah_hidup_windu') }}" class="form-control" placeholder="Jumlah (Ekor)" required="">
 													</div>
 												</div>
 												<div class="col-md-4">
 													<div class="form-group">
 														<label>Vanamae</label>
-														<input type="number" name="jumlah_hidup_vanamae" value="{{ Input::old('jumlah_hidup_vanamae') }}" class="form-control" required="">
+														<input type="number" name="jumlah_hidup_vanamae" value="{{ Input::old('jumlah_hidup_vanamae') }}" class="form-control" placeholder="Jumlah (Ekor)" required="">
 													</div>
 												</div>
 												<div class="col-md-4">
 													<div class="form-group">
 														<label>Bandeng</label>
-														<input type="number" name="jumlah_hidup_bandeng" value="{{ Input::old('jumlah_hidup_bandeng') }}" class="form-control" required="">
+														<input type="number" name="jumlah_hidup_bandeng" value="{{ Input::old('jumlah_hidup_bandeng') }}" class="form-control" placeholder="Jumlah (Ekor)" required="">
 													</div>
 												</div>
 											</div>
@@ -178,13 +172,13 @@
 												<div class="col-md-4">
 													<div class="form-group">
 														<label>Pellet</label>
-														<input type="number" name="pakan_pelet" value="{{ Input::old('pakan_pelet') }}" class="form-control" required="">
+														<input type="number" name="pakan_pelet" value="{{ Input::old('pakan_pelet') }}" class="form-control" placeholder="Jumlah (Kg)" required="">
 													</div>
 												</div>
 												<div class="col-md-4">
 													<div class="form-group">
 														<label>Dedak</label>
-														<input type="number" name="pakan_dedak" value="{{ Input::old('pakan_dedak') }}" class="form-control" required="">
+														<input type="number" name="pakan_dedak" value="{{ Input::old('pakan_dedak') }}" class="form-control" placeholder="Jumlah (Kg)" required="">
 													</div>
 												</div>											
 											</div>
@@ -192,7 +186,7 @@
 												<div class="col-md-12">
 													<div class="form-group">
 														<label>Keterangan</label>
-														<textarea name="keterangan" id="" cols="30" rows="10" value="{{ Input::old('keterangan') }}" class="form-control" required=""></textarea>
+														<textarea name="keterangan" id="" cols="30" rows="10" value="{{ Input::old('keterangan') }}" class="form-control" placeholder="masukkan keterangan..." required=""></textarea>
 													</div>
 												</div>
 											</div>
@@ -261,7 +255,7 @@
 															</td>
 															<td>{{ $i++ }}</td>
 															<td>{{ $at->datakecamatan->nama }}</td>
-															<td>{{ $at->desa }}</td>
+															<td>{{ $at->datadesa->nama }}</td>
 															<td>{{ $at->rtp }}</td>
 															<td>{{ $at->panjang_pantai }} Ha</td>
 															<td>{{ $at->potensi }}</td>

@@ -52,42 +52,26 @@
 											
 											<label>KETERANGAN IDENTITAS</label>
 											<div class="row">
-												<div class="col-sm-3">
-													<div class="form-group">
-														<label>Provinsi</label>
-														<span id="provinsi">
-															<select class="full-width"  name="provinsi" data-init-plugin="select2" onchange="get_kabupaten(this.value)" required>
-																<option value="">Pilih Provinsi</option>
-																<?php $provinsi = App\Provinsi::where('nama','Sulawesi Selatan')->get() ?>
-																@foreach ( $provinsi as $prov )
-																	<option value="{{ $prov->id }}" {{ Input::old('provinsi') == $prov->id ? "selected":"" }}>{{ $prov->nama }}</option>
-																@endforeach
-															</select>
-														</span>
-													</div>
-												</div>
-												<div class="col-md-3">
-													<div class="form-group">
-														<label>Kabupaten/Kota</label>
-														<span id="kabupaten">
-															<select class="full-width" data-init-plugin="select2" name="kabupaten" required>
-																<?php $kabupaten = App\Kabupaten::where('nama','Kab. Bantaeng')->get() ?>
-																@foreach ( $kabupaten as $kab )
-																	<option value="{{ $tambak->kabupaten }}" {{ $kab->id == $tambak->kabupaten ? "selected":"" }}>{{ $kab->nama }}</option>
-																@endforeach
-															</select>
-														</span>
-													</div>
-												</div>
+												<?php $provinsi = App\Provinsi::get() ?>
+												@foreach ( $provinsi as $prov )
+													<input type="hidden" name="provinsi" value="{{ $prov->id }}">
+												@endforeach
+
+												<?php $kabupaten = App\Kabupaten::get() ?>
+												@foreach ( $kabupaten as $kab )
+													<input type="hidden" name="kabupaten" value="{{ $kab->id }}">
+												@endforeach
+
 												<div class="col-md-3">
 													<div class="form-group">
 														<label>Kecamatan</label>
 														<div id="kecamatan">
-															<select class="full-width" data-init-plugin="select2" name="kecamatan" required>
-																<?php $kecamatan = App\Kecamatan::where('id_kabupaten','7303')->get() ?>
+															<select class="full-width" data-init-plugin="select2" onchange="get_desa(this.value)" name="kecamatan" required>
+																<?php $kecamatan = App\Kecamatan::get() ?>
 																@foreach ( $kecamatan as $kec )
-																	<option value="{{ $tambak->kecamatan }}" {{ $kec->id == $tambak->kecamatan ? "selected":"" }}>{{ $kec->nama }}</option>
+																	<option value="{{ $kec->id }}" {{ $kec->id == $tambak->kecamatan ? "selected":"" }}>{{ $kec->nama }}</option>
 																@endforeach
+
 															</select>
 														</div>
 													</div>
@@ -97,13 +81,12 @@
 														<label>Desa/Kelurahan</label>
 														<span id="desa">
 														<select class="full-width" name="desa" data-init-plugin="select2" required>
-															<option value="{{ $tambak->desa }}" {{ Input::old('desa') == $tambak->desa ? "selected":"" }}>{{ $tambak->desa }}</option>
+															<option value="{{ $tambak->desa }}" {{ Input::old('desa') == $tambak->desa ? "selected":"" }}>{{ $tambak->datadesa->nama }}</option>
 														</select>
 														</span>
 													</div>
 												</div>
 											</div>
-
 											<hr>
 											<label>KETERANGAN LAHAN</label>
 											<div class="row">

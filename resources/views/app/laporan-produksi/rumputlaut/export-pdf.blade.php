@@ -88,7 +88,7 @@
 			<tr>
 				<td><?php echo $i  ?></td>
 				<td>{{ $rl->datakecamatan->nama }}</td>
-				<td>{{ $rl->desa }}</td>
+				<td>{{ $rl->datadesa->nama }}</td>
 				<td>{{ $rl->rtp }}</td>
 				<td>{{ $rl->panjang_pantai }}</td>
 				<td>{{ $rl->potensi }} Ha</td>
