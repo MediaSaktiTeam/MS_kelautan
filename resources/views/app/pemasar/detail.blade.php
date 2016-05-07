@@ -13,7 +13,7 @@
 			<td><b>{{ $pemasar->dataprovinsi->nama }}</b></td>
 			<td><b>{{ $pemasar->datakabupaten->nama }}</b></td>
 			<td><b>{{ $pemasar->datakecamatan->nama }}</b></td>
-			<td><b>{{ $pemasar->desa }}</b></td>
+			<td><b>{{ $pemasar->datadesa->nama }}</b></td>
 		</tr>
 	</tbody>
 </table>

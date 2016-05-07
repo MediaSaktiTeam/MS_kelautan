@@ -177,7 +177,7 @@
 															</td>
 															<td>{{ $i++ }}</td>
 															<td>{{ $mi->datakecamatan->nama }}</td>
-															<td>{{ $mi->desa }}</td>
+															<td>{{ $mi->datadesa->nama }}</td>
 															<td>{{ $mi->luas_lahan }} M<sup>2</sup></td>
 															<td>{{ $mi->kondisi_rusak }} M<sup>2</sup></td>
 															<td>{{ $mi->kondisi_sedang }} M<sup>2</sup></td>
