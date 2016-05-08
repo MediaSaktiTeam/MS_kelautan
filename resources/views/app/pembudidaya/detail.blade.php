@@ -15,6 +15,18 @@
 			<td><b>{{ $pembudidaya->alamat }}</b></td>
 		</tr>
 		<tr>
+			<td>RT</td>
+			<td><b>{{ $pembudidaya->erte }}</b></td>
+		</tr>
+		<tr>
+			<td>Telepon</td>
+			<td><b>{{ $pembudidaya->tlp }}</b></td>
+		</tr>
+		<tr>
+			<td>Kode POS</td>
+			<td><b>{{ $pembudidaya->pos }}</b></td>
+		</tr>
+		<tr>
 			<td>Nama Kelompok</td>
 			<td><b>{{ $pembudidaya->kelompok->nama }}</b></td>
 		</tr>

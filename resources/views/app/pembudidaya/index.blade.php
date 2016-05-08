@@ -91,19 +91,19 @@
 												<div class="col-sm-4">
 													<div class="form-group">
 														<label>RT/RW</label>
-														<input type="text" class="form-control" name="alamat_erte" value="">
+														<input type="text" class="form-control" name="erte" value="">
 													</div>
 												</div>
 												<div class="col-sm-4">
 													<div class="form-group">
 														<label>Telepon</label>
-														<input type="text" class="form-control" name="telepon" value="">
+														<input type="text" class="form-control" name="tlp" value="">
 													</div>
 												</div>
 												<div class="col-sm-4">
 													<div class="form-group">
 														<label>Kode POS</label>
-														<input type="text" class="form-control" name="kode_pos" value="">
+														<input type="text" class="form-control" name="pos" value="">
 													</div>
 												</div>
 											</div>

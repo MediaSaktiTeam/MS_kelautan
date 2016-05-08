@@ -5,6 +5,9 @@
 				<th>NIK</th>
 				<th>Nama Lengkap</th>
 				<th>Alamat</th>
+				<th>RT</th>
+				<th>Telepon</th>
+				<th>Kode POS</th>
 				<th>Nama Kelompok</th>
 				<th>Jabatan Kelompok</th>
 				<th>Jenis Usaha</th>
@@ -26,6 +29,9 @@
 					<td>{{ $pb->nik }}</td>
 					<td>{{ $pb->name }}</td>
 					<td>{{ $pb->alamat }}</td>
+					<td>{{ $pb->erte }}</td>
+					<td>{{ $pb->tlp }}</td>
+					<td>{{ $pb->pos }}</td>
 					<td>{{ $pb->kelompok->nama }}</td>
 					<td>{{ $pb->jabatan->nama }}</td>
 					<td>{{ $pb->usaha->jenis }}</td>
