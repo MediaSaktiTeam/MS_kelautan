@@ -167,7 +167,10 @@
 															$i = 1;
 														}
 
-														$total="";
+														$luas_lahan="";
+														$kondisi_baik="";
+														$kondisi_sedang="";
+														$kondisi_rusak="";
 													?>
 												@foreach($mangrovemilik as $mi)
 														<tr>
@@ -190,17 +193,22 @@
 															</td>
 														</tr>
 
-														<?php $total += $mi->luas_lahan * 0.0001 ?>
+														<?php 
+															$luas_lahan += $mi->luas_lahan * 0.0001;
+															$kondisi_baik += $mi->kondisi_baik * 0.0001;
+															$kondisi_sedang += $mi->kondisi_sedang * 0.0001;
+															$kondisi_rusak += $mi->kondisi_rusak * 0.0001;
+															 ?>
 												@endforeach
 														<tr>
 															<td><b>Jumlah</b></td>
 															<td></td>
 															<td></td>
 															<td></td>
-															<td class="text-right"><b><?php echo $total; ?> Ha</b></td>
-															<td class="text-right"><b>8,82 Ha</b></td>
-															<td class="text-right"><b>8,82 Ha</b></td>
-															<td class="text-right"><b>8,82 Ha</b></td>
+															<td class="text-right"><b><?php echo $luas_lahan; ?> Ha</b></td>
+															<td class="text-right"><b><?php echo $kondisi_rusak; ?> Ha</b></td>
+															<td class="text-right"><b><?php echo $kondisi_sedang; ?> Ha</b></td>
+															<td class="text-right"><b><?php echo $kondisi_baik; ?> Ha</b></td>
 															<td></td>
 														</tr>
 												</tbody>
