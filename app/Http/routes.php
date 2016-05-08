@@ -93,7 +93,12 @@
 		Route::controller('app/mangrove/rehabilitasi', 'MangroveRehabilitasiController', 
 			[
 				'getIndex' => 'mangroverehabilitasi',
-				'getTambah' => 'mangroverehabilitasi_tambah'
+				'getAdd' => 'mangroverehabilitasi_add',
+				'getDelete' => 'mangroverehabilitasi_delete',
+				'getDetail' => 'mangroverehabilitasi_detail',
+				'getUpdate' => 'mangroverehabilitasi_update',
+				'getEdit' => 'mangroverehabilitasi_edit',
+				'getSearch' => 'mangroverehabilitasi_search'
 			]);
 		Route::controller('app/mangrove/jenis', 'MangroveJenisController', 
 			[
