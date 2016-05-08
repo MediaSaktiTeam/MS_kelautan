@@ -18,6 +18,9 @@ class TabelKelompok extends Migration
             $t->string('id_kelompok',5)->primary();
             $t->string('nama',50);
             $t->string('alamat')->nullable();
+            $t->string('erte')->nullable();
+            $t->string('tlp')->nullable();
+            $t->string('pos')->nullable();
             $t->string('no_rekening',30)->nullable();
             $t->string('nama_rekening', 50)->nullable();
             $t->string('nama_bank',50)->nullable();

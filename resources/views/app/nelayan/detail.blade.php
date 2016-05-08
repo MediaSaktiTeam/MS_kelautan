@@ -19,6 +19,18 @@
 			<td><b>{{ $nelayan->alamat }}</b></td>
 		</tr>
 		<tr>
+			<td>RT</td>
+			<td><b>{{ $nelayan->erte }}</b></td>
+		</tr>
+		<tr>
+			<td>Telepon</td>
+			<td><b>{{ $nelayan->tlp }}</b></td>
+		</tr>
+		<tr>
+			<td>Kode POS</td>
+			<td><b>{{ $nelayan->pos }}</b></td>
+		</tr>
+		<tr>
 			<td>Nama Kelompok</td>
 			<td><b>{{ $nelayan->kelompok->nama }}</b></td>
 		</tr>

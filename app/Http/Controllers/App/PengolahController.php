@@ -67,6 +67,9 @@ class PengolahController extends Controller
 		$pb->password   = bcrypt($r->nik);
 		$pb->nik        = $r->nik;
 		$pb->alamat     = $r->alamat;
+		$pb->erte       = $r->erte;
+		$pb->tlp        = $r->tlp;
+		$pb->pos        = $r->pos;
 		$pb->id_kelompok  = $r->id_kelompok;
 		$pb->id_jabatan   = $r->id_jabatan;
 		$pb->id_jenis_olahan    = $r->jenis_olahan;
@@ -147,6 +150,9 @@ class PengolahController extends Controller
 		$pb->name       = $r->name;
 		$pb->nik        = $r->nik;
 		$pb->alamat     = $r->alamat;
+		$pb->erte       = $r->erte;
+		$pb->tlp        = $r->tlp;
+		$pb->pos        = $r->pos;
 		$pb->id_kelompok  = $r->id_kelompok;
 		$pb->id_jabatan   = $r->id_jabatan;
 		$pb->id_jenis_olahan    = $r->jenis_olahan;

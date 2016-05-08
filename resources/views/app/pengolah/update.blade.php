@@ -89,6 +89,27 @@
 													</div>
 												</div>
 											</div>
+
+											<div class="row">
+												<div class="col-sm-4">
+													<div class="form-group">
+														<label>RT/RW</label>
+														<input type="text" class="form-control" name="erte" value="{{ $pe->erte }}">
+													</div>
+												</div>
+												<div class="col-sm-4">
+													<div class="form-group">
+														<label>Telepon</label>
+														<input type="text" class="form-control" name="tlp" value="{{ $pe->tlp }}">
+													</div>
+												</div>
+												<div class="col-sm-4">
+													<div class="form-group">
+														<label>Kode POS</label>
+														<input type="text" class="form-control" name="pos" value="{{ $pe->pos }}">
+													</div>
+												</div>
+											</div>
 											
 											<div class="row">
 												<div class="col-sm-6">
