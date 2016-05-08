@@ -166,6 +166,8 @@
 														} else {
 															$i = 1;
 														}
+
+														$total="";
 													?>
 												@foreach($mangrovemilik as $mi)
 														<tr>
@@ -187,13 +189,15 @@
 																<a href="{{ route('mangrovemilik_edit', $mi->id) }}" class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i></a>
 															</td>
 														</tr>
+
+														<?php $total += $mi->luas_lahan * 0.0001 ?>
 												@endforeach
 														<tr>
 															<td><b>Jumlah</b></td>
 															<td></td>
 															<td></td>
 															<td></td>
-															<td class="text-right"><b>$total</b></td>
+															<td class="text-right"><b><?php echo $total; ?> Ha</b></td>
 															<td class="text-right"><b>8,82 Ha</b></td>
 															<td class="text-right"><b>8,82 Ha</b></td>
 															<td class="text-right"><b>8,82 Ha</b></td>
