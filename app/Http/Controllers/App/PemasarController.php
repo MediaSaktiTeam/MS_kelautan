@@ -87,7 +87,6 @@ class PemasarController extends Controller
 		$dt->tahun_mulai = $request->tahun_mulai;
 		$dt->save();
 		$data['pemasar'] = Pemasar::paginate(1);
-
 		return redirect()->route('pemasar', $data)->with(session()->flash('success','Data Berhasil diupdate !!'));
 	}
 

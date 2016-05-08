@@ -12,8 +12,9 @@ use App\User,App\MangroveMilik,App\Provinsi,App\Kabupaten,App\Kecamatan,App\Desa
 class MangroveMilikController extends Controller
 {
 
-	public function getIndex()
+	public function getIndex(Request $r)
 	{
+	
 		$data['mangrovemilik'] = MangroveMilik::paginate(10);
 		return view ('app.mangrove.milik.index',$data);
 	}
@@ -32,7 +33,8 @@ public function getAdd(Request $request)
 		return redirect()->route('mangrovemilik')->with(session()->flash('success','Data Berhasil Tersimpan !!'));
 	}
 
-	public function getDelete($id){
+	public function getDelete($id)
+	{
 
 		$val = explode(",", $id);
 
@@ -52,12 +54,13 @@ public function getAdd(Request $request)
 	{
 		$data['provinsi'] = Provinsi::all();
 		$data['kabupaten'] = Kabupaten::all();
+		$data['desa'] = Desa::all();
 		$data['mangrovemilik'] = MangroveMilik::find($id);
 		return view('app.mangrove.milik.update', $data);
 	}
 
 
-	public function getUpdate(Request $request)
+public function getUpdate(Request $request)
 	{
 
 		$dt = MangroveMilik::find($request->id);
