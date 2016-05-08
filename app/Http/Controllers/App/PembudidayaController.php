@@ -84,6 +84,9 @@ class PembudidayaController extends Controller
 		$pb->email      = $r->nik."@mail.com";
 		$pb->password   = bcrypt($r->nik);
 		$pb->nik        = $r->nik;
+		$pb->erte       = $r->erte;
+		$pb->tlp        = $r->tlp;
+		$pb->pos        = $r->pos;
 		$pb->alamat     = $r->alamat;
 		$pb->id_kelompok  = $r->id_kelompok;
 		$pb->id_jabatan   = $r->id_jabatan;
@@ -157,6 +160,9 @@ class PembudidayaController extends Controller
 		$pb->password   = bcrypt($r->nik);
 		$pb->nik        = $r->nik;
 		$pb->alamat     = $r->alamat;
+		$pb->erte       = $r->erte;
+		$pb->tlp        = $r->tlp;
+		$pb->pos        = $r->pos;
 		$pb->id_kelompok  = $r->id_kelompok;
 		$pb->id_jabatan   = $r->id_jabatan;
 		$pb->id_usaha     = $r->id_usaha;

@@ -36,6 +36,9 @@
 				<th>No Kartu Nelayan</th>
 				<th>Nama</th>
 				<th>Alamat</th>
+				<th>RT</th>
+				<th>Telepon</th>
+				<th>Kode POS</th>
 				<th>Kelompok</th>
 			</tr>
 		</thead>
@@ -51,6 +54,9 @@
 					<td>{{ $nel->no_kartu_nelayan }}</td>
 					<td>{{ $nel->name }}</td>
 					<td>{{ $nel->alamat }}</td>
+					<td>{{ $nel->erte }}</td>
+					<td>{{ $nel->tlp }}</td>
+					<td>{{ $nel->pos }}</td>
 					<td>{{ $nel->kelompok->nama }} ({{ $nel->jabatan->nama }})</td>
 				</tr>
 

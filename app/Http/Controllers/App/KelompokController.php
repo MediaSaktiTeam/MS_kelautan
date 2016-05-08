@@ -47,6 +47,9 @@ class KelompokController extends Controller
 		$dt->id_kelompok = $request->id;
 		$dt->nama = $request->nama;
 		$dt->alamat = $request->alamat;
+		$dt->erte       = $request->erte;
+		$dt->tlp        = $request->tlp;
+		$dt->pos        = $request->pos;
 		$dt->no_rekening = $request->no_rekening;
 		$dt->nama_rekening = $request->nama_rekening;
 		$dt->nama_bank = $request->nama_bank;
@@ -60,6 +63,9 @@ class KelompokController extends Controller
 		$dt['id_kelompok']  = $request->id;
 		$dt['nama']         = $request->nama;
 		$dt['alamat']       = $request->alamat;
+		$dt['erte']       = $request->erte;
+		$dt['tlp']        = $request->tlp;
+		$dt['pos']        = $request->pos;
 		$dt['no_rekening']  = $request->no_rekening;
 		$dt['nama_rekening'] = $request->nama_rekening;
 		$dt['nama_bank']     = $request->nama_bank;

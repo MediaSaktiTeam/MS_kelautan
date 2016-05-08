@@ -98,15 +98,15 @@
 									</div>
 									<div class="form-group form-group-default required">
 										<label>RT/RW</label>
-										<input type="text" id="rt" name="rt" class="form-control" required>
+										<input type="text" id="erte" name="erte" class="form-control" required>
 									</div>
 									<div class="form-group form-group-default required">
 										<label>Telepon</label>
-										<input type="text" id="telepon" name="telepon" class="form-control" required>
+										<input type="text" id="tlp" name="tlp" class="form-control" required>
 									</div>
 									<div class="form-group form-group-default required">
 										<label>Kode POS</label>
-										<input type="text" id="kode_pos" name="kode_pos" class="form-control" required>
+										<input type="text" id="pos" name="pos" class="form-control" required>
 									</div>
 									<div class="form-group form-group-default required">
 										<label>Nomor Rekening</label>
@@ -198,6 +198,9 @@
 														data-nama="{{ $kel->nama }}"
 														data-tipe="{{ $kel->tipe }}"
 														data-alamat="{{ $kel->alamat }}"
+														data-erte="{{ $kel->erte }}"
+														data-tlp="{{ $kel->tlp }}"
+														data-pos="{{ $kel->pos }}"
 														data-norek="{{ $kel->no_rekening }}"
 														data-narek="{{ $kel->nama_rekening }}"
 														data-bank="{{ $kel->nama_bank }}" class="btn btn-edit btn-primary btn-xs"><i class="fa fa-pencil"></i></a>
@@ -416,6 +419,9 @@
 				var nama 	= $(this).data('nama');
 				var tipe 	= $(this).data('tipe');
 				var alamat 	= $(this).data('alamat');
+				var erte 	= $(this).data('erte');
+				var tlp 	= $(this).data('tlp');
+				var pos 	= $(this).data('pos');
 				var norek 	= $(this).data('norek');
 				var narek 	= $(this).data('narek');
 				var bank 	= $(this).data('bank');
@@ -432,6 +438,9 @@
 				$("#id-kelompok").val(id);
 				$("#nama").val(nama);
 				$("#alamat").val(alamat);
+				$("#erte").val(erte);
+				$("#tlp").val(tlp);
+				$("#pos").val(pos);
 				$("#narek").val(narek);
 				$("#norek").val(norek);
 				$("#nama-bank").val(bank);

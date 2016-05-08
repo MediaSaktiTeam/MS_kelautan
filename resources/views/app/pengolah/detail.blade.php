@@ -15,6 +15,18 @@
 			<td><b>{{ $pengolah->alamat }}</b></td>
 		</tr>
 		<tr>
+			<td>RT</td>
+			<td><b>{{ $pengolah->erte }}</b></td>
+		</tr>
+		<tr>
+			<td>Telepon</td>
+			<td><b>{{ $pengolah->tlp }}</b></td>
+		</tr>
+		<tr>
+			<td>Kode POS</td>
+			<td><b>{{ $pengolah->pos }}</b></td>
+		</tr>
+		<tr>
 			<td>Nama Kelompok</td>
 			<td><b>{{ $pengolah->kelompok->nama }}</b></td>
 		</tr>

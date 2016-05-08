@@ -6,6 +6,9 @@
 				<th>No Kartu Nelayan</th>
 				<th>Nama Lengkap</th>
 				<th>Alamat</th>
+				<th>RT</th>
+				<th>Telepon</th>
+				<th>Kode POS</th>
 				<th>Nama Kelompok</th>
 				<th>Jabatan Kelompok</th>
 				<th>Sarana/Prasarana yang dimiliki</th>
@@ -26,6 +29,9 @@
 					<td>{{ $nel->no_kartu_nelayan }}</td>
 					<td>{{ $nel->name }}</td>
 					<td>{{ $nel->alamat }}</td>
+					<td>{{ $nel->erte }}</td>
+					<td>{{ $nel->tlp }}</td>
+					<td>{{ $nel->pos }}</td>
 					<td>{{ $nel->kelompok->nama }}</td>
 					<td>{{ $nel->jabatan->nama }}</td>
 					<td>

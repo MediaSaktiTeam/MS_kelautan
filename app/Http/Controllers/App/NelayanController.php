@@ -81,6 +81,9 @@ class NelayanController extends Controller
 		$pb->nik        = $r->nik;
 		$pb->no_kartu_nelayan  = $r->no_kartu_nelayan;
 		$pb->alamat       = $r->alamat;
+		$pb->erte       = $r->erte;
+		$pb->tlp        = $r->tlp;
+		$pb->pos        = $r->pos;
 		$pb->id_kelompok  = $r->id_kelompok;
 		$pb->id_jabatan   = $r->id_jabatan;
 		$pb->profesi      = "Nelayan";
@@ -157,6 +160,9 @@ class NelayanController extends Controller
 		$pb->nik        = $r->nik;
 		$pb->no_kartu_nelayan = $r->no_kartu_nelayan;
 		$pb->alamat     = $r->alamat;
+		$pb->erte       = $r->erte;
+		$pb->tlp        = $r->tlp;
+		$pb->pos        = $r->pos;
 		$pb->id_kelompok  = $r->id_kelompok;
 		$pb->id_jabatan   = $r->id_jabatan;
 

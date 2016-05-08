@@ -13,6 +13,18 @@
 			<td><b>{{ $kelompok->alamat }}</b></td>
 		</tr>
 		<tr>
+			<td>RT</td>
+			<td><b>{{ $kelompok->erte }}</b></td>
+		</tr>
+		<tr>
+			<td>Telepon</td>
+			<td><b>{{ $kelompok->tlp }}</b></td>
+		</tr>
+		<tr>
+			<td>Kode POS</td>
+			<td><b>{{ $kelompok->pos }}</b></td>
+		</tr>
+		<tr>
 			<td>Nomor Rekening</td>
 			<td><b>{{ $kelompok->no_rekening }}</b></td>
 		</tr>

@@ -264,6 +264,15 @@
 		
 														</tr>
 													@endforeach
+														<tr>
+															<td colspan="4"><b>Jumlah</b></td>
+															<td class="text-right"><b>{{ collect([$at->rtp])->sum() }} Ha</b></td>
+															<td class="text-right"><b>8,82 Ha</b></td>
+															<td class="text-right"><b>8,82 Ha</b></td>
+														</tr>
+														
+
+
 												</tbody>
 
 											</table>

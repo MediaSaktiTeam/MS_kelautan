@@ -6,6 +6,9 @@
 				<th>Id Kelompok</th>
 				<th>Nama Kelompok</th>
 				<th>Alamat Sekretariat</th>
+				<th>RT</th>
+				<th>Telepon</th>
+				<th>Kode POS</th>
 				<th>No. Rekening</th>
 				<th>Nama Rekening</th>
 				<th>Nama Bank</th>
@@ -24,6 +27,9 @@
 					<td>{{ $kl->id_kelompok }}</td>
 					<td>{{ $kl->nama }}</td>
 					<td>{{ $kl->alamat }}</td>
+					<td>{{ $kl->erte }}</td>
+					<td>{{ $kl->tlp }}</td>
+					<td>{{ $kl->pos }}</td>
 					<td>{{ $kl->no_rek }}</td>
 					<td>{{ $kl->nama_rekening }}</td>
 					<td>{{ $kl->nama_bank }}</td>
