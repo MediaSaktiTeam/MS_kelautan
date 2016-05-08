@@ -66,7 +66,7 @@
 														<label>Kecamatan</label>
 														<div id="kecamatan">
 															<select class="full-width" data-init-plugin="select2" name="kecamatan" required  onchange="get_desa(this.value)">
-																<option value="">Pilih Kecamatan...</option>
+																<option value="{{ $mangroverehabilitasi->kecamatan }}" {{ Input::old('kecamatan') == $mangroverehabilitasi->kecamatan ? "selected":"" }}>{{ $mangroverehabilitasi->datakecamatan->nama }}</option>
 																<?php $kecamatan = App\Kecamatan::where('id_kabupaten','7303')->get() ?>
 																@foreach ( $kecamatan as $kec )
 																	<option value="{{ $kec->id }}" {{ Input::old('kecamatan') == $kec->id ? "selected":"" }}>{{ $kec->nama }}</option>

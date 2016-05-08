@@ -103,7 +103,12 @@
 		Route::controller('app/mangrove/jenis', 'MangroveJenisController', 
 			[
 				'getIndex' => 'mangrovejenis',
-				'getTambah' => 'mangrovejenis_tambah'
+				'getAdd' => 'mangrovejenis_add',
+				'getDelete' => 'mangrovejenis_delete',
+				'getDetail' => 'mangrovejenis_detail',
+				'getUpdate' => 'mangrovejenis_update',
+				'getEdit' => 'mangrovejenis_edit',
+				'getSearch' => 'mangrovejenis_search'
 			]);
 
 		Route::get('get-kabupaten/{id}', 'LokasiController@get_kabupaten');

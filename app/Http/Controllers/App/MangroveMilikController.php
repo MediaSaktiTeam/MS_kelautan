@@ -19,19 +19,19 @@ class MangroveMilikController extends Controller
 		return view ('app.mangrove.milik.index',$data);
 	}
 
-public function getAdd(Request $request)
-	{
-		$dt = new MangroveMilik;
-		$dt->id = $request->id;
-		$dt->kecamatan = $request->kecamatan;
-		$dt->desa = $request->desa;
-		$dt->luas_lahan = $request->luas_lahan;
-		$dt->kondisi_rusak = $request->kondisi_rusak;
-		$dt->kondisi_sedang = $request->kondisi_sedang;
-		$dt->kondisi_baik = $request->kondisi_baik;
-		$dt->save();
-		return redirect()->route('mangrovemilik')->with(session()->flash('success','Data Berhasil Tersimpan !!'));
-	}
+	public function getAdd(Request $request)
+		{
+			$dt = new MangroveMilik;
+			$dt->id = $request->id;
+			$dt->kecamatan = $request->kecamatan;
+			$dt->desa = $request->desa;
+			$dt->luas_lahan = $request->luas_lahan;
+			$dt->kondisi_rusak = $request->kondisi_rusak;
+			$dt->kondisi_sedang = $request->kondisi_sedang;
+			$dt->kondisi_baik = $request->kondisi_baik;
+			$dt->save();
+			return redirect()->route('mangrovemilik')->with(session()->flash('success','Data Berhasil Tersimpan !!'));
+		}
 
 	public function getDelete($id)
 	{
@@ -54,6 +54,7 @@ public function getAdd(Request $request)
 	{
 		$data['provinsi'] = Provinsi::all();
 		$data['kabupaten'] = Kabupaten::all();
+		$data['kecamatan'] = Kecamatan::all();
 		$data['desa'] = Desa::all();
 		$data['mangrovemilik'] = MangroveMilik::find($id);
 		return view('app.mangrove.milik.update', $data);

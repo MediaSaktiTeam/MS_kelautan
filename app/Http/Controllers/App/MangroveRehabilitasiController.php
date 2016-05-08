@@ -52,6 +52,7 @@ class MangroveRehabilitasiController extends Controller
 	{
 		$data['provinsi'] = Provinsi::all();
 		$data['kabupaten'] = Kabupaten::all();
+		$data['kecamatan'] = Kecamatan::all();
 		$data['desa'] = Desa::all();
 		$data['mangroverehabilitasi'] = MangroveRehabilitasi::find($id);
 		return view('app.mangrove.rehabilitasi.update', $data);

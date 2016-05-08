@@ -14,7 +14,6 @@ class CreateTableMangroveJenis extends Migration
     {
         Schema::create('app_mangrove_jenis', function (Blueprint $table) {
             $table->increments('id');
-            $table->timestamps();
             $table->string('kecamatan');
             $table->string('jenis_mangrove');
         });

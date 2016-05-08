@@ -1,7 +1,7 @@
 @extends('app.layout.main')
 
 @section('title')
-	Nama nama Jenis Mangrove | Tambah
+	Nama-nama Jenis Mangrove | Tambah
 @endsection
 
 
@@ -23,7 +23,7 @@
 						<!-- START BREADCRUMB -->
 						<ul class="breadcrumb pull-left">
 							<li>
-								<a href="{{ route('mangrovejenis') }}">Nama nama Jenis Mangrove</a>
+								<a href="{{ route('mangrovejenis') }}">Nama-nama Jenis Mangrove</a>
 							</li>
 						</ul>
 						
@@ -42,16 +42,16 @@
 
 						<div id="tambah-mangrove" style="display:none">
 							<div class="col-lg-7 col-md-6 ">
-
+								
 								<!-- START PANEL -->
 								<div class="panel panel-transparent">
 									<div class="panel-body">
-										<form id="form-personal" method="GET" action="{{ route('mangrovejenis_tambah') }}" role="form">
+										<form id="form-personal" method="GET" action="{{ route('mangrovejenis_add') }}" role="form">
 											
 											<input type="hidden" id="token" name="_token" value="{{ csrf_token() }}">
 											<label>KETERANGAN IDENTITAS</label>
 											<div class="row">
-												<div class="col-sm-4">
+												<div class="col-sm-6">
 													<div class="form-group">
 														<label>Kecamatan</label>
 														<div id="kecamatan">
@@ -67,8 +67,8 @@
 												</div>
 												<div class="col-sm-6">
 													<div class="form-group">
-														<label>Jenis Jenis Mangrove</label>
-														<input type="text" class="form-control number" name="jenis_mangrove" value="">
+														<label>Jenis Mangrove</label>
+														<input type="text" class="form-control" name="jenis_mangrove" value="">
 													</div>
 												</div>
 											</div>
@@ -107,38 +107,52 @@
 														</th>
 														<th>No.</th>
 														<th>Nama Kecamatan</th>
-														<th>Jenis Jenis Mangrove</th>
+														<th>Jenis Mangrove</th>
 														<th style="text-align:center">Aksi</th>
 													</tr>
 												</thead>
+												@if ( Session::has('success') ) 
+												    	@include('app/layout/partials/alert-sukses', ['message' => session('success')])
+												@endif
+												@if ( Session::has('delete') ) 
+												    	@include('app/layout/partials/alert-sukses', ['message' => session('delete')])
+												@endif
+												@if ( Session::has('gagal') ) 
+												    	@include('app/layout/partials/alert-danger', ['message' => session('gagal')])
+												@endif
 
+												@if ( count($errors) > 0 )
+														@include('app/layout/partials/alert-danger', ['errors' => $errors])
+												@endif	
 												<tbody>
+												<?php
+														if ( isset($_GET['page']) ) {
+															$i = ($_GET['page'] - 1) * $limit + 1;
+														} else {
+															$i = 1;
+														}
+													?>
+												@foreach($mangrovejenis as $jen)
 														<tr>
 															<td>
 																<div class="checkbox">
-																	<input type="checkbox" class="pilih" value="" id="">
-																	<label for="" class="m-l-20"></label>
+																	<input type="checkbox" class="pilih" value="{{ $jen->id }}" id="jen{{ $jen->id }}">
+																	<label for="jen{{ $jen->id }}" class="m-l-20"></label>
 																</div>
 															</td>
-															<td></td>
-															<td></td>
-															<td></td>
+															<td>{{ $i++ }}</td>
+															<td>{{ $jen->datakecamatan->nama }}</td>
+															<td>{{ $jen->jenis_mangrove }}</td>
 															<td style="text-align:center">
-																<a class="btn btn-default btn-xs view" data-id=""><i class="fa fa-search-plus"></i></a>
-																<a href="" class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i></a>
+																<a class="btn btn-default btn-xs view" data-id="{{ $jen->id }}"><i class="fa fa-search-plus"></i></a>
+																<a href="{{ route('mangrovejenis_edit', $jen->id) }}" class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i></a>
 															</td>
 														</tr>
-
-														<tr>
-															<td><b>Jumlah</b></td>
-															<td></td>
-															<td class="text-right"><b>8,82 Ha</b></td>
-															<td></td>
-														</tr>
+												@endforeach
 												</tbody>
 
 											</table>
-											<center></center>
+											<center>{!! $mangrovejenis->links() !!}</center>
 										</div>
 
 									</div>
@@ -168,7 +182,7 @@
 			<div class="modal-content">
 				<div class="modal-header clearfix text-left">
 					<button type="button" class="close" data-dismiss="modal"  aria-hidden="true"><i class="pg-close fs-14"></i></button>
-					<h5>Detail pengolah</h5>
+					<h5>Detail Mangrove</h5>
 				</div>
 				<div class="modal-body" id="view-detail">
 
@@ -251,23 +265,10 @@
 				<div class="modal-content">
 					<div class="modal-header clearfix text-left">
 						<button type="button" class="close" data-dismiss="modal"  aria-hidden="true"><i class="pg-close fs-14"></i></button>
-						<h5>Data</h5>
+						<h5>Data Mangrove</h5>
 					</div>
 					<div class="modal-body" id="view-detail">
-						<table class="table">
-							<tr>
-								<td style="width:100px">NIK</td><td>: {{ $user->nik }}</td>
-							</tr>
-							<tr>
-								<td style="width:100px">Nama</td><td>: {{ $user->name }}</td>
-							</tr>
-							<tr>
-								<td style="width:100px">Kelompok</td><td>: {{ $user->kelompok->nama }}</td>
-							</tr>
-							<tr>
-								<td style="width:100px">Profesi</td><td>: {{ $user->profesi }}</td>
-							</tr>
-						</table>
+						
 					</div>
 					<div class="modal-footer">
 						<button type="button" class="btn btn-default btn-cons no-margin inline" data-dismiss="modal">Kembali</button>
@@ -287,8 +288,8 @@
 @section('registerscript')
 	<script>
 		$(".menu-items .link-pesisir").addClass("active open");
-		$(".menu-items .link-pengolah .sub-mangrove").addClass("active open");
-		$(".menu-items .link-pengolah .sub-mangrove .sub-mangrove-jenis").addClass("active");
+		$(".menu-items .link-pesisir .sub-mangrove").addClass("active open");
+		$(".menu-items .link-pesisir .sub-mangrove .sub-mangrove-jenis").addClass("active");
 
 		function get_kabupaten(id_prov){
 			var _token = $('meta[name="csrf-token"]').attr('content');
@@ -333,20 +334,20 @@
 				else {
 				  return false;
 				}
-				$(".btn-hapus").attr('href',"{{ url('/app/mangrovejenis/hapus') }}/"+id);
+				$(".btn-hapus").attr('href',"{{route('mangrovejenis_delete') }}/"+id);
 
 			});
 
 			$("#show-tambah-mangrove").click(function(){
 				$("#tambah-mangrove").fadeIn();
-				$("input[name='nik']").focus();
+				$("input[name='kecamatan']").focus();
 				$(this).hide();
 			});
 
 			// Show detail
 			$(".panel").on('click', '.view', function(){
 				var id = $(this).data('id');
-				var url = "{{ url('app/mangrovejenis/detail') }}";
+				var url = "{{ route('mangrovejenis_detail') }}";
 				var url = url+'/'+id;
 				$.get(url, {id:id, _token:_token}, function(data){
 					$("#view-detail").html(data);

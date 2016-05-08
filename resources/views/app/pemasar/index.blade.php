@@ -263,7 +263,7 @@
 															<td>{{ $pem->tahun_mulai }}</td>
 															<td style="text-align:center">
 																<a class="btn btn-default btn-xs view" data-id="{{ $pem->id }}"><i class="fa fa-search-plus"></i></a>
-																<a href="{{ route('mangrovemilik_update',$pem->id) }}" class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i></a>
+																<a href="{{ route('pemasar_edit',$pem->id) }}" class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i></a>
 															</td>
 														</tr>
 													@endforeach
