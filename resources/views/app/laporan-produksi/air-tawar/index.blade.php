@@ -234,7 +234,19 @@
 														<th style="text-align:center">Aksi</th>
 													</tr>
 												</thead>
+												@if ( Session::has('success') ) 
+												    	@include('app/layout/partials/alert-sukses', ['message' => session('success')])
+												@endif
+												@if ( Session::has('delete') ) 
+												    	@include('app/layout/partials/alert-sukses', ['message' => session('delete')])
+												@endif
+												@if ( Session::has('gagal') ) 
+												    	@include('app/layout/partials/alert-danger', ['message' => session('gagal')])
+												@endif
 
+												@if ( count($errors) > 0 )
+														@include('app/layout/partials/alert-danger', ['errors' => $errors])
+												@endif	
 												<tbody>
 													<?php
 														if ( isset($_GET['page']) ) {
