@@ -69,7 +69,7 @@
 															<select class="full-width" name="provinsi" data-init-plugin="select2" onchange="get_kabupaten(this.value)" required>
 																<?php $provinsi = App\Provinsi::get() ?>
 																@foreach ( $provinsi as $prov )
-																	<option value="{{ $prov->id }}" {{ $prov->id == $pemasar->provinsi ? "selected":"" }}>{{ $prov->dataprovinsi->nama }}</option>
+																	<option value="{{ $prov->id }}" {{ $prov->id == $pemasar->provinsi ? "selected":"" }}>{{ $prov->nama }}</option>
 																@endforeach
 															</select>
 														</span>

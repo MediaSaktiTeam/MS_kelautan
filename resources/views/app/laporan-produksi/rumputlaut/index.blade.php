@@ -242,6 +242,11 @@
 														} else {
 															$i = 1;
 														}
+														$jumlahrtp = "";
+														$panjang_pantai = "";
+														$potensi = "";
+														$luas_tanam = "";
+														$bentangan = "";
 													?>
 													@foreach($rumputlaut as $rl)
 														<tr>
@@ -265,7 +270,29 @@
 															</td>
 		
 														</tr>
+
+														<?php 
+															$jumlahrtp += $rl->rtp;
+															$panjang_pantai += $rl->panjang_pantai;
+															$potensi += $rl->potensi;
+															$luas_tanam += $rl->luas_tanam;
+															$bentangan += $rl->bentangan;
+														 ?>
 													@endforeach
+														<tr>
+															<td><b>Jumlah</b></td>
+															<td></td>
+															<td></td>
+															<td></td>
+															<td><b><?php echo round($jumlahrtp,2); ?></b></td>
+															<td><b><?php echo round($panjang_pantai,2); ?> Ha</b></td>
+															<td><b><?php echo round($potensi,2); ?> Ha</b></td>
+															<td><b><?php echo round($luas_tanam,2); ?> Ha</b></td>
+															<td><b><?php echo round($bentangan,2); ?> Ha</b></td>
+															<td></td>
+														</tr>	
+													
+
 												</tbody>
 
 											</table>

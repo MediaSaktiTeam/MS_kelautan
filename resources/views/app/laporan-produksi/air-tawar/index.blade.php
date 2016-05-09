@@ -242,6 +242,10 @@
 														} else {
 															$i = 1;
 														}
+
+														$jumlahrtp = "";
+														$luas_areal = "";
+														$luas_tanam = "";
 													?>
 													@foreach($airtawar as $at)
 														<tr>
@@ -263,8 +267,22 @@
 															</td>
 		
 														</tr>
+														<?php 
+															$jumlahrtp += $at->rtp;
+															$luas_areal += $at->luas_areal;
+															$luas_tanam += $at->luas_tanam;
+														?>
 													@endforeach
-
+														<tr>
+															<td><b>Jumlah</b></td>
+															<td></td>
+															<td></td>
+															<td></td>
+															<td><b><?php echo round($jumlahrtp,2); ?></b></td>
+															<td><b><?php echo round($luas_areal,2); ?> Ha</b></td>
+															<td><b><?php echo round($luas_tanam,2); ?> Ha</b></td>
+															<td></td>
+														</tr>
 														
 														
 

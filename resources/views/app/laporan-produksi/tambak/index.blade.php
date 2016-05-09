@@ -256,29 +256,50 @@
 														} else {
 															$i = 1;
 														}
+														$jumlahrtp = "";
+														$panjang_pantai = "";
+														$potensi = "";
+														$luas_tanam = "";
 													?>
-													@foreach($tambak as $at)
+													@foreach($tambak as $tb)
 														<tr>
 															<td>
 																<div class="checkbox">
-																	<input type="checkbox" class="pilih" value="{{ $at->id }}" id="at{{ $at->id }}">
-																	<label for="at{{ $at->id }}" class="m-l-20"></label>
+																	<input type="checkbox" class="pilih" value="{{ $tb->id }}" id="at{{ $tb->id }}">
+																	<label for="at{{ $tb->id }}" class="m-l-20"></label>
 																</div>
 															</td>
 															<td>{{ $i++ }}</td>
-															<td>{{ $at->datakecamatan->nama }}</td>
-															<td>{{ $at->datadesa->nama }}</td>
-															<td>{{ $at->rtp }}</td>
-															<td>{{ $at->panjang_pantai }} Ha</td>
-															<td>{{ $at->potensi }}</td>
-															<td>{{ $at->luas_tanam }} Ha</td>
+															<td>{{ $tb->datakecamatan->nama }}</td>
+															<td>{{ $tb->datadesa->nama }}</td>
+															<td>{{ $tb->rtp }}</td>
+															<td>{{ $tb->panjang_pantai }} Ha</td>
+															<td>{{ $tb->potensi }}</td>
+															<td>{{ $tb->luas_tanam }} Ha</td>
 															<td style="text-align:center">
-																<a class="btn btn-default btn-xs view" data-id="{{ $at->id }}"><i class="fa fa-search-plus"></i></a>
-																<a href="{{ route('tambak_edit',$at->id) }}" class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i></a>
+																<a class="btn btn-default btn-xs view" data-id="{{ $tb->id }}"><i class="fa fa-search-plus"></i></a>
+																<a href="{{ route('tambak_edit',$tb->id) }}" class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i></a>
 															</td>
 		
 														</tr>
+														<?php 
+															$jumlahrtp += $tb->rtp;
+															$panjang_pantai += $tb->panjang_pantai;
+															$potensi += $tb->potensi;
+															$luas_tanam += $tb->luas_tanam;
+														 ?>
 													@endforeach
+														<tr>
+															<td><b>Jumlah</b></td>
+															<td></td>
+															<td></td>
+															<td></td>
+															<td><b><?php echo round($jumlahrtp,2); ?></b></td>
+															<td><b><?php echo round($panjang_pantai,2); ?> Ha</b></td>
+															<td><b><?php echo round($potensi,2); ?> Ha</b></td>
+															<td><b><?php echo round($luas_tanam,2); ?> Ha</b></td>
+															<td></td>
+														</tr>
 												</tbody>
 
 											</table>
