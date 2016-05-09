@@ -1,7 +1,7 @@
 @extends('app.layout.main')
 
 @section('title')
-	Luas Lahan Mangrove yang direhabilitasi| Tambah
+	Nama-nama Jenis Ikan Karang | Tambah
 @endsection
 
 
@@ -23,11 +23,11 @@
 						<!-- START BREADCRUMB -->
 						<ul class="breadcrumb pull-left">
 							<li>
-								<a href="{{ route('mangroverehabilitasi') }}">Luas Lahan Mangrove yang direhabilitasi</a>
+								<a href="{{ route('terumbujenis') }}">Nama-nama Jenis Ikan Karang yang Dominan di Terumbu Karang</a>
 							</li>
 						</ul>
 						
-						<button id="show-tambah-mangrove" class="btn btn-primary bg-blueblur m-t-10 m-b-10 pull-right">Tambah</button>
+						<button id="show-tambah-terumbu" class="btn btn-primary bg-blueblur m-t-10 m-b-10 pull-right">Tambah</button>
 					</div>
 				</div>
 
@@ -40,18 +40,18 @@
 
 					<div class="row">
 
-						<div id="tambah-mangrove" style="display:none">
+						<div id="tambah-terumbu" style="display:none">
 							<div class="col-lg-7 col-md-6 ">
 								
 								<!-- START PANEL -->
 								<div class="panel panel-transparent">
 									<div class="panel-body">
-										<form id="form-personal" method="GET" action="{{ route('mangroverehabilitasi_add') }}" role="form">
+										<form id="form-personal" method="GET" action="{{ route('terumbujenis_add') }}" role="form">
 											
 											<input type="hidden" id="token" name="_token" value="{{ csrf_token() }}">
 											<label>KETERANGAN IDENTITAS</label>
 											<div class="row">
-												<div class="col-sm-4">
+												<div class="col-sm-6">
 													<div class="form-group">
 														<label>Kecamatan</label>
 														<div id="kecamatan">
@@ -65,41 +65,10 @@
 														</div>
 													</div>
 												</div>
-												<div class="col-sm-4">
+												<div class="col-sm-6">
 													<div class="form-group">
-														<label>Desa/Kelurahan</label>
-														<span id="desa">
-														<select class="full-width" name="desa" data-init-plugin="select2" required>
-															<option value="">Pilih Desa/Kelurahan...</option>
-														</select>
-														</span>
-													</div>
-												</div>
-												<div class="col-sm-4">
-													<div class="form-group">
-														<label>Direhabilitasi</label>
-														<input type="number" class="form-control number" name="direhabilitasi" value="">
-													</div>
-												</div>
-											</div>
-
-											<div class="row">
-												<div class="col-sm-4">
-													<div class="form-group">
-														<label>Berubah Fungsi</label>
-														<input type="number" class="form-control number" name="berubah_fungsi" value="">
-													</div>
-												</div>
-												<div class="col-sm-4">
-													<div class="form-group">
-														<label>Lahan Tambak</label>
-														<input type="number" class="form-control number" name="lahan_tambak" value="">
-													</div>
-												</div>
-												<div class="col-sm-4">
-													<div class="form-group">
-														<label>Penggaraman</label>
-														<input type="number" class="form-control number" name="penggaraman" value="">
+														<label>Jenis Ikan Karang</label>
+														<input type="text" class="form-control" name="jenis_ikan" value="">
 													</div>
 												</div>
 											</div>
@@ -138,11 +107,7 @@
 														</th>
 														<th>No.</th>
 														<th>Nama Kecamatan</th>
-														<th>Nama Desa</th>
-														<th>Direhabilitasi</th>
-														<th>Berubah Fungsi</th>
-														<th>Lahan Tambak</th>
-														<th>Penggaraman</th>
+														<th>Jenis Ikan Karang</th>
 														<th style="text-align:center">Aksi</th>
 													</tr>
 												</thead>
@@ -166,55 +131,28 @@
 														} else {
 															$i = 1;
 														}
-
-														$direhabilitasi="";
-														$berubah_fungsi="";
-														$lahan_tambak="";
-														$penggaraman="";
 													?>
-												@foreach($mangroverehabilitasi as $rehab)
+												@foreach($terumbujenis as $jen)
 														<tr>
 															<td>
 																<div class="checkbox">
-																	<input type="checkbox" class="pilih" value="{{ $rehab->id }}" id="rehab{{ $rehab->id }}">
-																	<label for="rehab{{ $rehab->id }}" class="m-l-20"></label>
+																	<input type="checkbox" class="pilih" value="{{ $jen->id }}" id="jen{{ $jen->id }}">
+																	<label for="jen{{ $jen->id }}" class="m-l-20"></label>
 																</div>
 															</td>
 															<td>{{ $i++ }}</td>
-															<td>{{ $rehab->datakecamatan->nama }}</td>
-															<td>{{ $rehab->datadesa->nama }}</td>
-															<td>{{ $rehab->direhabilitasi }} M<sup>2</sup></td>
-															<td>{{ $rehab->berubah_fungsi }} M<sup>2</sup></td>
-															<td>{{ $rehab->lahan_tambak }} M<sup>2</sup></td>
-															<td>{{ $rehab->penggaraman }} M<sup>2</sup></td>
+															<td>{{ $jen->datakecamatan->nama }}</td>
+															<td>{{ $jen->jenis_ikan }}</td>
 															<td style="text-align:center">
-																<a class="btn btn-default btn-xs view" data-id="{{ $rehab->id }}"><i class="fa fa-search-plus"></i></a>
-																<a href="{{ route('mangroverehabilitasi_edit', $rehab->id) }}" class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i></a>
+																<a class="btn btn-default btn-xs view" data-id="{{ $jen->id }}"><i class="fa fa-search-plus"></i></a>
+																<a href="{{ route('terumbujenis_edit', $jen->id) }}" class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i></a>
 															</td>
 														</tr>
-
-														<?php 
-															$direhabilitasi += $rehab->direhabilitasi * 0.0001;
-															$berubah_fungsi += $rehab->berubah_fungsi * 0.0001;
-															$lahan_tambak += $rehab->lahan_tambak * 0.0001;
-															$penggaraman += $rehab->penggaraman * 0.0001;
-															 ?>
 												@endforeach
-														<tr>
-															<td><b>Jumlah</b></td>
-															<td></td>
-															<td></td>
-															<td></td>
-															<td><b><?php echo round($direhabilitasi,2);  ?> Ha</b></td>
-															<td><b><?php echo round($berubah_fungsi,2); ?> Ha</b></td>
-															<td><b><?php echo round($lahan_tambak,2); ?> Ha</b></td>
-															<td><b><?php echo round($penggaraman,2); ?> Ha</b></td>
-															<td></td>
-														</tr>
 												</tbody>
 
 											</table>
-											<center>{!! $mangroverehabilitasi->links() !!}</center>
+											<center>{!! $terumbujenis->links() !!}</center>
 										</div>
 
 									</div>
@@ -244,7 +182,7 @@
 			<div class="modal-content">
 				<div class="modal-header clearfix text-left">
 					<button type="button" class="close" data-dismiss="modal"  aria-hidden="true"><i class="pg-close fs-14"></i></button>
-					<h5>Detail Mangrove</h5>
+					<h5>Detail terumbu</h5>
 				</div>
 				<div class="modal-body" id="view-detail">
 
@@ -297,13 +235,13 @@
 				<div class="modal-body">
 					<div class="row">
 						<div class="col-md-6">
-							<a href="{{ url('/app/mangroverehabilitasi/export-excel') }}">
+							<a href="{{ url('/app/terumbujenis/export-excel') }}">
 								<i class="fa fa-file-excel-o export-excel"></i>
 								Unduh Dalam Format Mic.Excel
 							</a>
 						</div>
 						<div class="col-md-6">
-							<a href="{{ url('/app/mangroverehabilitasi/export-pdf') }}">
+							<a href="{{ url('/app/terumbujenis/export-pdf') }}">
 								<i class="fa fa-file-pdf-o export-pdf"></i>
 								Unduh Dalam Format PDF
 							</a>
@@ -327,7 +265,7 @@
 				<div class="modal-content">
 					<div class="modal-header clearfix text-left">
 						<button type="button" class="close" data-dismiss="modal"  aria-hidden="true"><i class="pg-close fs-14"></i></button>
-						<h5>Data Mangrove</h5>
+						<h5>Data terumbu</h5>
 					</div>
 					<div class="modal-body" id="view-detail">
 						
@@ -350,8 +288,8 @@
 @section('registerscript')
 	<script>
 		$(".menu-items .link-pesisir").addClass("active open");
-		$(".menu-items .link-pesisir .sub-mangrove").addClass("active open");
-		$(".menu-items .link-pesisir .sub-mangrove .sub-mangrove-rehabilitasi").addClass("active");
+		$(".menu-items .link-pesisir .sub-terumbu").addClass("active open");
+		$(".menu-items .link-pesisir .sub-terumbu .sub-terumbu-jenis").addClass("active");
 
 		function get_kabupaten(id_prov){
 			var _token = $('meta[name="csrf-token"]').attr('content');
@@ -396,12 +334,12 @@
 				else {
 				  return false;
 				}
-				$(".btn-hapus").attr('href',"{{route('mangroverehabilitasi_delete') }}/"+id);
+				$(".btn-hapus").attr('href',"{{route('terumbujenis_delete') }}/"+id);
 
 			});
 
-			$("#show-tambah-mangrove").click(function(){
-				$("#tambah-mangrove").fadeIn();
+			$("#show-tambah-terumbu").click(function(){
+				$("#tambah-terumbu").fadeIn();
 				$("input[name='kecamatan']").focus();
 				$(this).hide();
 			});
@@ -409,7 +347,7 @@
 			// Show detail
 			$(".panel").on('click', '.view', function(){
 				var id = $(this).data('id');
-				var url = "{{ route('mangroverehabilitasi_detail') }}";
+				var url = "{{ route('terumbujenis_detail') }}";
 				var url = url+'/'+id;
 				$.get(url, {id:id, _token:_token}, function(data){
 					$("#view-detail").html(data);
@@ -418,7 +356,7 @@
 			});
 
 			@if ( count($errors) > 0 || Session::has('gagal') || Session::has('error_nik') )
-				$("#tambah-mangrove").fadeIn();
+				$("#tambah-terumbu").fadeIn();
 			@endif
 
 		});
@@ -433,7 +371,7 @@
 				$("#show-pencarian").show();
 				$("#show-pencarian").html('<tr><td colspan="6"><i class="fa fa-spinner fa-spin"></i></td></tr>');
 				var _token = $('meta[name="csrf-token"]').attr('content');
-				var url = "{{ url('app/mangroverehabilitasi/search') }}";
+				var url = "{{ url('app/terumbujenis/search') }}";
 				var url = url+"/"+cari;
 				$.get(url, { cari:cari, _token:_token}, function(data){
 					$('#show-pencarian').html(data);

@@ -1,7 +1,7 @@
 @extends('app.layout.main')
 
 @section('title')
-	Nama-nama Jenis Mangrove | Sunting
+	Luas Lahan Terumbu Karang yang direhabilitasi | Sunting
 @endsection
 
 
@@ -23,7 +23,7 @@
 						<!-- START BREADCRUMB -->
 						<ul class="breadcrumb">
 							<li>
-								<a href="{{ route('mangrovejenis') }}">Nama-nama Jenis Mangrove</a>
+								<a href="{{ route('terumburehabilitasi') }}">Luas Lahan Terumbu Karang yang direhabilitasi</a>
 							</li>
 							<li>
 								<a href="#" class="active">Sunting</a>
@@ -57,16 +57,16 @@
 							<!-- START PANEL -->
 							<div class="panel panel-transparent">
 								<div class="panel-body">
-									<form id="form-personal" method="GET" action="{{ route('mangrovejenis_update') }}" role="form">
+									<form id="form-personal" method="GET" action="{{ route('terumburehabilitasi_update') }}" role="form">
 											<input type="hidden" id="token" name="_token" value="{{ csrf_token() }}">
 											<label>KETERANGAN IDENTITAS</label>
 											<div class="row">
-												<div class="col-sm-6">
+												<div class="col-sm-4">
 													<div class="form-group">
 														<label>Kecamatan</label>
 														<div id="kecamatan">
 															<select class="full-width" data-init-plugin="select2" name="kecamatan" required  onchange="get_desa(this.value)">
-																<option value="{{ $mangrovejenis->kecamatan }}" {{ Input::old('kecamatan') == $mangrovejenis->kecamatan ? "selected":"" }}>{{ $mangrovejenis->datakecamatan->nama }}</option>
+																<option value="{{ $terumburehabilitasi->kecamatan }}" {{ Input::old('kecamatan') == $terumburehabilitasi->kecamatan ? "selected":"" }}>{{ $terumburehabilitasi->datakecamatan->nama }}</option>
 																<?php $kecamatan = App\Kecamatan::where('id_kabupaten','7303')->get() ?>
 																@foreach ( $kecamatan as $kec )
 																	<option value="{{ $kec->id }}" {{ Input::old('kecamatan') == $kec->id ? "selected":"" }}>{{ $kec->nama }}</option>
@@ -75,13 +75,24 @@
 														</div>
 													</div>
 												</div>
-												<div class="col-sm-6">
+												<div class="col-sm-4">
 													<div class="form-group">
-														<label>Jenis Mangrove</label>
-														<input type="text" class="form-control" name="jenis_mangrove" value="{{ $mangrovejenis->jenis_mangrove }}">
+														<label>Desa/Kelurahan</label>
+														<span id="desa">
+														<select class="full-width" name="desa" data-init-plugin="select2" required>
+															<option value="{{ $terumburehabilitasi->desa }}" {{ Input::old('desa') == $terumburehabilitasi->desa ? "selected":"" }}>{{ $terumburehabilitasi->datadesa->nama }}</option>
+														</select>
+														</span>
 													</div>
+												</div>
+												<div class="col-sm-4">
+													<div class="form-group">
+														<label>Direhabilitasi</label>
+														<input type="number" class="form-control number" name="direhabilitasi" value="{{ $terumburehabilitasi->direhabilitasi }}">
+													</div>
+												</div>	
 											</div>
-											<input type="hidden" id="mangrovejenis" name="id" value="{{ $mangrovejenis->id }}">
+											<input type="hidden" id="terumburehabilitasi" name="id" value="{{ $terumburehabilitasi->id }}">
 											<div class="clearfix"></div>
 											<br>
 											<button class="btn btn-primary" type="submit">Simpan</button>
@@ -117,8 +128,8 @@
 @section('registerscript')
 	<script>
 		$(".menu-items .link-pesisir").addClass("active open");
-		$(".menu-items .link-pesisir .sub-mangrove").addClass("active open");
-		$(".menu-items .link-pesisir .sub-mangrove .sub-mangrove-jenis").addClass("active");
+		$(".menu-items .link-pesisir .sub-terumbu").addClass("active open");
+		$(".menu-items .link-pesisir .sub-terumbu .sub-terumbu-rehabilitasi").addClass("active");
 
 		$(function(){
 
@@ -134,7 +145,7 @@
 		        else {
 				  return false;
 		        }
-		        $(".btn-hapus").attr('href',"{{ route('mangrovejenis_delete') }}/"+id);
+		        $(".btn-hapus").attr('href',"{{ route('terumburehabilitasi_delete') }}/"+id);
 
 			});
 

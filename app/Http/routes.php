@@ -111,6 +111,37 @@
 				'getSearch' => 'mangrovejenis_search'
 			]);
 
+		Route::controller('app/terumbu/milik', 'TerumbuMilikController', 
+			[
+				'getIndex' => 'terumbumilik',
+				'getAdd' => 'terumbumilik_add',
+				'getDelete' => 'terumbumilik_delete',
+				'getDetail' => 'terumbumilik_detail',
+				'getUpdate' => 'terumbumilik_update',
+				'getEdit' => 'terumbumilik_edit',
+				'getSearch' => 'terumbumilik_search'
+			]);
+		Route::controller('app/terumbu/rehabilitasi', 'TerumbuRehabilitasiController', 
+			[
+				'getIndex' => 'terumburehabilitasi',
+				'getAdd' => 'terumburehabilitasi_add',
+				'getDelete' => 'terumburehabilitasi_delete',
+				'getDetail' => 'terumburehabilitasi_detail',
+				'getUpdate' => 'terumburehabilitasi_update',
+				'getEdit' => 'terumburehabilitasi_edit',
+				'getSearch' => 'terumburehabilitasi_search'
+			]);
+		Route::controller('app/terumbu/jenis', 'TerumbuJenisController', 
+			[
+				'getIndex' => 'terumbujenis',
+				'getAdd' => 'terumbujenis_add',
+				'getDelete' => 'terumbujenis_delete',
+				'getDetail' => 'terumbujenis_detail',
+				'getUpdate' => 'terumbujenis_update',
+				'getEdit' => 'terumbujenis_edit',
+				'getSearch' => 'terumbujenis_search'
+			]);
+
 		Route::get('get-kabupaten/{id}', 'LokasiController@get_kabupaten');
 		Route::get('get-kecamatan/{id}', 'LokasiController@get_kecamatan');
 		Route::get('get-desa/{id}', 'LokasiController@get_desa');

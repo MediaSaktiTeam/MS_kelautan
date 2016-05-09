@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateTableTembakau extends Migration
+class CreateTableJenisIkan extends Migration
 {
     /**
      * Run the migrations.
@@ -12,7 +12,11 @@ class CreateTableTembakau extends Migration
      */
     public function up()
     {
-        //
+        Schema::create('app_terumbu_jenis_ikan', function(Blueprint $table){
+            $table->increments('id');
+            $table->string('kecamatan');
+            $table->string('jenis_ikan');
+        });
     }
 
     /**

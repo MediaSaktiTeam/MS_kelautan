@@ -4,9 +4,9 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class MangroveMilik extends Model
+class TerumbuRehabilitasi extends Model
 {
-    protected $table = "app_mangrove_milik";
+    protected $table = "app_terumbu_rehabilitasi";
     
     public $timestamps = false;
    

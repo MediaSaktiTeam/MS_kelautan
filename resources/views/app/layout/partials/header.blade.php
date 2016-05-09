@@ -173,8 +173,23 @@
 									</ul>
 								</li>
 								<li class="sub-terumbu">
-									<a href="/app/terumbu">Terumbu Karang</a>
+									<a href="javascript:;"><span class="title">Terumbu Karang</span>
+									<span class="arrow"></span></a>
 									<span class="icon-thumbnail">TK</span>
+									<ul class="sub-menu">
+										<li class="sub-terumbu-milik">
+											<a href="/app/terumbu/milik">Dimiliki</a>
+											<span class="icon-thumbnail">DM</span>
+										</li>
+										<li class="sub-terumbu-rehabilitasi">
+											<a href="/app/terumbu/rehabilitasi">Direhabilitasi</a>
+											<span class="icon-thumbnail">DR</span>
+										</li>
+										<li class="sub-terumbu-jenis">
+											<a href="/app/terumbu/jenis">Jenis Ikan</a>
+											<span class="icon-thumbnail">JI</span>
+										</li>
+									</ul>
 								</li>
 							</ul>
 						</li>

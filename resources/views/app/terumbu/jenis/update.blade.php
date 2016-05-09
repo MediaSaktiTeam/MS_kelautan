@@ -1,7 +1,7 @@
 @extends('app.layout.main')
 
 @section('title')
-	Nama-nama Jenis Mangrove | Sunting
+	Nama-nama Jenis Ikan Karang | Sunting
 @endsection
 
 
@@ -23,7 +23,7 @@
 						<!-- START BREADCRUMB -->
 						<ul class="breadcrumb">
 							<li>
-								<a href="{{ route('mangrovejenis') }}">Nama-nama Jenis Mangrove</a>
+								<a href="{{ route('terumbujenis') }}">Nama-nama Jenis Ikan yang dominan di Terumbu Karang</a>
 							</li>
 							<li>
 								<a href="#" class="active">Sunting</a>
@@ -57,7 +57,7 @@
 							<!-- START PANEL -->
 							<div class="panel panel-transparent">
 								<div class="panel-body">
-									<form id="form-personal" method="GET" action="{{ route('mangrovejenis_update') }}" role="form">
+									<form id="form-personal" method="GET" action="{{ route('terumbujenis_update') }}" role="form">
 											<input type="hidden" id="token" name="_token" value="{{ csrf_token() }}">
 											<label>KETERANGAN IDENTITAS</label>
 											<div class="row">
@@ -66,7 +66,7 @@
 														<label>Kecamatan</label>
 														<div id="kecamatan">
 															<select class="full-width" data-init-plugin="select2" name="kecamatan" required  onchange="get_desa(this.value)">
-																<option value="{{ $mangrovejenis->kecamatan }}" {{ Input::old('kecamatan') == $mangrovejenis->kecamatan ? "selected":"" }}>{{ $mangrovejenis->datakecamatan->nama }}</option>
+																<option value="{{ $terumbujenis->kecamatan }}" {{ Input::old('kecamatan') == $terumbujenis->kecamatan ? "selected":"" }}>{{ $terumbujenis->datakecamatan->nama }}</option>
 																<?php $kecamatan = App\Kecamatan::where('id_kabupaten','7303')->get() ?>
 																@foreach ( $kecamatan as $kec )
 																	<option value="{{ $kec->id }}" {{ Input::old('kecamatan') == $kec->id ? "selected":"" }}>{{ $kec->nama }}</option>
@@ -77,11 +77,11 @@
 												</div>
 												<div class="col-sm-6">
 													<div class="form-group">
-														<label>Jenis Mangrove</label>
-														<input type="text" class="form-control" name="jenis_mangrove" value="{{ $mangrovejenis->jenis_mangrove }}">
+														<label>Jenis Ikan Karang</label>
+														<input type="text" class="form-control" name="jenis_ikan" value="{{ $terumbujenis->jenis_ikan }}">
 													</div>
 											</div>
-											<input type="hidden" id="mangrovejenis" name="id" value="{{ $mangrovejenis->id }}">
+											<input type="hidden" id="terumbujenis" name="id" value="{{ $terumbujenis->id }}">
 											<div class="clearfix"></div>
 											<br>
 											<button class="btn btn-primary" type="submit">Simpan</button>
@@ -117,8 +117,8 @@
 @section('registerscript')
 	<script>
 		$(".menu-items .link-pesisir").addClass("active open");
-		$(".menu-items .link-pesisir .sub-mangrove").addClass("active open");
-		$(".menu-items .link-pesisir .sub-mangrove .sub-mangrove-jenis").addClass("active");
+		$(".menu-items .link-pesisir .sub-terumbu").addClass("active open");
+		$(".menu-items .link-pesisir .sub-terumbu .sub-terumbu-jenis").addClass("active");
 
 		$(function(){
 
@@ -134,7 +134,7 @@
 		        else {
 				  return false;
 		        }
-		        $(".btn-hapus").attr('href',"{{ route('mangrovejenis_delete') }}/"+id);
+		        $(".btn-hapus").attr('href',"{{ route('terumbujenis_delete') }}/"+id);
 
 			});
 
