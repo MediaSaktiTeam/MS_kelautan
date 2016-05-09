@@ -14,7 +14,6 @@ class CreateTableMangroveRehabilitasi extends Migration
     {
         Schema::create('app_mangrove_rehabilitasi', function (Blueprint $table) {
             $table->increments('id');
-            $table->timestamps();
             $table->string('kecamatan');
             $table->string('desa');
             $table->integer('direhabilitasi');

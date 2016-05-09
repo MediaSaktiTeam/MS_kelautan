@@ -166,6 +166,11 @@
 														} else {
 															$i = 1;
 														}
+
+														$luas_lahan="";
+														$kondisi_baik="";
+														$kondisi_sedang="";
+														$kondisi_rusak="";
 													?>
 												@foreach($mangrovemilik as $mi)
 														<tr>
@@ -184,19 +189,26 @@
 															<td>{{ $mi->kondisi_baik }} M<sup>2</sup></td>
 															<td style="text-align:center">
 																<a class="btn btn-default btn-xs view" data-id="{{ $mi->id }}"><i class="fa fa-search-plus"></i></a>
-																<a href="{{ route('mangrovemilik_update') }}" class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i></a>
+																<a href="{{ route('mangrovemilik_edit', $mi->id) }}" class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i></a>
 															</td>
 														</tr>
+
+														<?php 
+															$luas_lahan += $mi->luas_lahan * 0.0001;
+															$kondisi_baik += $mi->kondisi_baik * 0.0001;
+															$kondisi_sedang += $mi->kondisi_sedang * 0.0001;
+															$kondisi_rusak += $mi->kondisi_rusak * 0.0001;
+															 ?>
 												@endforeach
 														<tr>
 															<td><b>Jumlah</b></td>
 															<td></td>
 															<td></td>
 															<td></td>
-															<td class="text-right"><b>8,82 Ha</b></td>
-															<td class="text-right"><b>8,82 Ha</b></td>
-															<td class="text-right"><b>8,82 Ha</b></td>
-															<td class="text-right"><b>8,82 Ha</b></td>
+															<td><b><?php echo round($luas_lahan,2);  ?> Ha</b></td>
+															<td><b><?php echo round($kondisi_rusak,2); ?> Ha</b></td>
+															<td><b><?php echo round($kondisi_sedang,2); ?> Ha</b></td>
+															<td><b><?php echo round($kondisi_baik,2); ?> Ha</b></td>
 															<td></td>
 														</tr>
 												</tbody>
@@ -338,8 +350,8 @@
 @section('registerscript')
 	<script>
 		$(".menu-items .link-pesisir").addClass("active open");
-		$(".menu-items .link-pengolah .sub-mangrove").addClass("active open");
-		$(".menu-items .link-pengolah .sub-mangrove .sub-mangrove-milik").addClass("active");
+		$(".menu-items .link-pesisir .sub-mangrove").addClass("active open");
+		$(".menu-items .link-pesisir .sub-mangrove .sub-mangrove-milik").addClass("active");
 
 		function get_kabupaten(id_prov){
 			var _token = $('meta[name="csrf-token"]').attr('content');

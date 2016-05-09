@@ -1,7 +1,7 @@
 @extends('app.layout.main')
 
 @section('title')
-	Luas Lahan Mangrove yang direhabilitasi dan berubah fungsi | Tambah
+	Luas Lahan Mangrove yang direhabilitasi| Tambah
 @endsection
 
 
@@ -23,7 +23,7 @@
 						<!-- START BREADCRUMB -->
 						<ul class="breadcrumb pull-left">
 							<li>
-								<a href="{{ route('mangroverehabilitasi') }}">Luas Lahan Mangrove yang direhabilitasi dan berubah fungsi</a>
+								<a href="{{ route('mangroverehabilitasi') }}">Luas Lahan Mangrove yang direhabilitasi</a>
 							</li>
 						</ul>
 						
@@ -42,11 +42,11 @@
 
 						<div id="tambah-mangrove" style="display:none">
 							<div class="col-lg-7 col-md-6 ">
-
+								
 								<!-- START PANEL -->
 								<div class="panel panel-transparent">
 									<div class="panel-body">
-										<form id="form-personal" method="GET" action="{{ route('mangrovemilik_tambah') }}" role="form">
+										<form id="form-personal" method="GET" action="{{ route('mangroverehabilitasi_add') }}" role="form">
 											
 											<input type="hidden" id="token" name="_token" value="{{ csrf_token() }}">
 											<label>KETERANGAN IDENTITAS</label>
@@ -71,7 +71,6 @@
 														<span id="desa">
 														<select class="full-width" name="desa" data-init-plugin="select2" required>
 															<option value="">Pilih Desa/Kelurahan...</option>
-															
 														</select>
 														</span>
 													</div>
@@ -79,7 +78,7 @@
 												<div class="col-sm-4">
 													<div class="form-group">
 														<label>Direhabilitasi</label>
-														<input type="text" class="form-control number" name="luas_lahan" value="">
+														<input type="number" class="form-control number" name="direhabilitasi" value="">
 													</div>
 												</div>
 											</div>
@@ -88,19 +87,19 @@
 												<div class="col-sm-4">
 													<div class="form-group">
 														<label>Berubah Fungsi</label>
-														<input type="text" class="form-control number" name="berubah_fungsi" value="">
+														<input type="number" class="form-control number" name="berubah_fungsi" value="">
 													</div>
 												</div>
 												<div class="col-sm-4">
 													<div class="form-group">
 														<label>Lahan Tambak</label>
-														<input type="text" class="form-control number" name="lahan_tambak" value="">
+														<input type="number" class="form-control number" name="lahan_tambak" value="">
 													</div>
 												</div>
 												<div class="col-sm-4">
 													<div class="form-group">
 														<label>Penggaraman</label>
-														<input type="text" class="form-control number" name="penggaraman" value="">
+														<input type="number" class="form-control number" name="penggaraman" value="">
 													</div>
 												</div>
 											</div>
@@ -147,43 +146,75 @@
 														<th style="text-align:center">Aksi</th>
 													</tr>
 												</thead>
+												@if ( Session::has('success') ) 
+												    	@include('app/layout/partials/alert-sukses', ['message' => session('success')])
+												@endif
+												@if ( Session::has('delete') ) 
+												    	@include('app/layout/partials/alert-sukses', ['message' => session('delete')])
+												@endif
+												@if ( Session::has('gagal') ) 
+												    	@include('app/layout/partials/alert-danger', ['message' => session('gagal')])
+												@endif
 
+												@if ( count($errors) > 0 )
+														@include('app/layout/partials/alert-danger', ['errors' => $errors])
+												@endif	
 												<tbody>
+												<?php
+														if ( isset($_GET['page']) ) {
+															$i = ($_GET['page'] - 1) * $limit + 1;
+														} else {
+															$i = 1;
+														}
+
+														$direhabilitasi="";
+														$berubah_fungsi="";
+														$lahan_tambak="";
+														$penggaraman="";
+													?>
+												@foreach($mangroverehabilitasi as $rehab)
 														<tr>
 															<td>
 																<div class="checkbox">
-																	<input type="checkbox" class="pilih" value="" id="">
-																	<label for="" class="m-l-20"></label>
+																	<input type="checkbox" class="pilih" value="{{ $rehab->id }}" id="rehab{{ $rehab->id }}">
+																	<label for="rehab{{ $rehab->id }}" class="m-l-20"></label>
 																</div>
 															</td>
-															<td></td>
-															<td></td>
-															<td></td>
-															<td></td>
-															<td></td>
-															<td></td>
-															<td></td>
+															<td>{{ $i++ }}</td>
+															<td>{{ $rehab->datakecamatan->nama }}</td>
+															<td>{{ $rehab->datadesa->nama }}</td>
+															<td>{{ $rehab->direhabilitasi }} M<sup>2</sup></td>
+															<td>{{ $rehab->berubah_fungsi }} M<sup>2</sup></td>
+															<td>{{ $rehab->lahan_tambak }} M<sup>2</sup></td>
+															<td>{{ $rehab->penggaraman }} M<sup>2</sup></td>
 															<td style="text-align:center">
-																<a class="btn btn-default btn-xs view" data-id=""><i class="fa fa-search-plus"></i></a>
-																<a href="" class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i></a>
+																<a class="btn btn-default btn-xs view" data-id="{{ $rehab->id }}"><i class="fa fa-search-plus"></i></a>
+																<a href="{{ route('mangroverehabilitasi_edit', $rehab->id) }}" class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i></a>
 															</td>
 														</tr>
 
+														<?php 
+															$direhabilitasi += $rehab->direhabilitasi * 0.0001;
+															$berubah_fungsi += $rehab->berubah_fungsi * 0.0001;
+															$lahan_tambak += $rehab->lahan_tambak * 0.0001;
+															$penggaraman += $rehab->penggaraman * 0.0001;
+															 ?>
+												@endforeach
 														<tr>
 															<td><b>Jumlah</b></td>
 															<td></td>
 															<td></td>
 															<td></td>
-															<td class="text-right"><b>8,82 Ha</b></td>
-															<td class="text-right"><b>8,82 Ha</b></td>
-															<td class="text-right"><b>8,82 Ha</b></td>
-															<td class="text-right"><b>8,82 Ha</b></td>
+															<td class="text-right"><b><?php echo round($direhabilitasi,2);  ?> Ha</b></td>
+															<td class="text-right"><b><?php echo round($berubah_fungsi,2); ?> Ha</b></td>
+															<td class="text-right"><b><?php echo round($lahan_tambak,2); ?> Ha</b></td>
+															<td class="text-right"><b><?php echo round($penggaraman,2); ?> Ha</b></td>
 															<td></td>
 														</tr>
 												</tbody>
 
 											</table>
-											<center></center>
+											<center>{!! $mangroverehabilitasi->links() !!}</center>
 										</div>
 
 									</div>
@@ -213,7 +244,7 @@
 			<div class="modal-content">
 				<div class="modal-header clearfix text-left">
 					<button type="button" class="close" data-dismiss="modal"  aria-hidden="true"><i class="pg-close fs-14"></i></button>
-					<h5>Detail pengolah</h5>
+					<h5>Detail Mangrove</h5>
 				</div>
 				<div class="modal-body" id="view-detail">
 
@@ -266,13 +297,13 @@
 				<div class="modal-body">
 					<div class="row">
 						<div class="col-md-6">
-							<a href="{{ url('/app/mangrovemilik/export-excel') }}">
+							<a href="{{ url('/app/mangroverehabilitasi/export-excel') }}">
 								<i class="fa fa-file-excel-o export-excel"></i>
 								Unduh Dalam Format Mic.Excel
 							</a>
 						</div>
 						<div class="col-md-6">
-							<a href="{{ url('/app/mangrovemilik/export-pdf') }}">
+							<a href="{{ url('/app/mangroverehabilitasi/export-pdf') }}">
 								<i class="fa fa-file-pdf-o export-pdf"></i>
 								Unduh Dalam Format PDF
 							</a>
@@ -296,23 +327,10 @@
 				<div class="modal-content">
 					<div class="modal-header clearfix text-left">
 						<button type="button" class="close" data-dismiss="modal"  aria-hidden="true"><i class="pg-close fs-14"></i></button>
-						<h5>Data</h5>
+						<h5>Data Mangrove</h5>
 					</div>
 					<div class="modal-body" id="view-detail">
-						<table class="table">
-							<tr>
-								<td style="width:100px">NIK</td><td>: {{ $user->nik }}</td>
-							</tr>
-							<tr>
-								<td style="width:100px">Nama</td><td>: {{ $user->name }}</td>
-							</tr>
-							<tr>
-								<td style="width:100px">Kelompok</td><td>: {{ $user->kelompok->nama }}</td>
-							</tr>
-							<tr>
-								<td style="width:100px">Profesi</td><td>: {{ $user->profesi }}</td>
-							</tr>
-						</table>
+						
 					</div>
 					<div class="modal-footer">
 						<button type="button" class="btn btn-default btn-cons no-margin inline" data-dismiss="modal">Kembali</button>
@@ -332,8 +350,8 @@
 @section('registerscript')
 	<script>
 		$(".menu-items .link-pesisir").addClass("active open");
-		$(".menu-items .link-pengolah .sub-mangrove").addClass("active open");
-		$(".menu-items .link-pengolah .sub-mangrove .sub-mangrove-rehabilitasi").addClass("active");
+		$(".menu-items .link-pesisir .sub-mangrove").addClass("active open");
+		$(".menu-items .link-pesisir .sub-mangrove .sub-mangrove-milik").addClass("active");
 
 		function get_kabupaten(id_prov){
 			var _token = $('meta[name="csrf-token"]').attr('content');
@@ -378,20 +396,20 @@
 				else {
 				  return false;
 				}
-				$(".btn-hapus").attr('href',"{{ url('/app/mangroverehabilitasi/hapus') }}/"+id);
+				$(".btn-hapus").attr('href',"{{route('mangroverehabilitasi_delete') }}/"+id);
 
 			});
 
 			$("#show-tambah-mangrove").click(function(){
 				$("#tambah-mangrove").fadeIn();
-				$("input[name='nik']").focus();
+				$("input[name='kecamatan']").focus();
 				$(this).hide();
 			});
 
 			// Show detail
 			$(".panel").on('click', '.view', function(){
 				var id = $(this).data('id');
-				var url = "{{ url('app/mangroverehabilitasi/detail') }}";
+				var url = "{{ route('mangroverehabilitasi_detail') }}";
 				var url = url+'/'+id;
 				$.get(url, {id:id, _token:_token}, function(data){
 					$("#view-detail").html(data);
