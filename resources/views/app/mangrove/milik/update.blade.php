@@ -80,7 +80,7 @@
 														<label>Desa/Kelurahan</label>
 														<span id="desa">
 														<select class="full-width" name="desa" data-init-plugin="select2" required>
-															<option value="{{ $mangrovemilik->desa }}" {{ Input::old('desa') == $mangrovemilik->kecamatan ? "selected":"" }}>{{ $mangrovemilik->datadesa->nama }}</option>
+															<option value="{{ $mangrovemilik->desa }}" {{ Input::old('desa') == $mangrovemilik->desa ? "selected":"" }}>{{ $mangrovemilik->datadesa->nama }}</option>
 														</select>
 														</span>
 													</div>

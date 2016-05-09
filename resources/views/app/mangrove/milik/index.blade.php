@@ -205,10 +205,10 @@
 															<td></td>
 															<td></td>
 															<td></td>
-															<td class="text-right"><b><?php echo round($luas_lahan,2);  ?> Ha</b></td>
-															<td class="text-right"><b><?php echo round($kondisi_rusak,2); ?> Ha</b></td>
-															<td class="text-right"><b><?php echo round($kondisi_sedang,2); ?> Ha</b></td>
-															<td class="text-right"><b><?php echo round($kondisi_baik,2); ?> Ha</b></td>
+															<td><b><?php echo round($luas_lahan,2);  ?> Ha</b></td>
+															<td><b><?php echo round($kondisi_rusak,2); ?> Ha</b></td>
+															<td><b><?php echo round($kondisi_sedang,2); ?> Ha</b></td>
+															<td><b><?php echo round($kondisi_baik,2); ?> Ha</b></td>
 															<td></td>
 														</tr>
 												</tbody>

@@ -14,9 +14,9 @@ class MangroveMilikController extends Controller
 
 	public function getIndex(Request $r)
 	{
-	
+		$limit = 10;
 		$data['mangrovemilik'] = MangroveMilik::paginate(10);
-		return view ('app.mangrove.milik.index',$data);
+		return view ('app.mangrove.milik.index',$data)->with('limit', $limit);
 	}
 
 	public function getAdd(Request $request)

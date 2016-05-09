@@ -14,8 +14,9 @@ class MangroveJenisController extends Controller
 
 	public function getIndex()
 	{
+		$limit="10";
 		$data['mangrovejenis'] = MangroveJenis::paginate(10);
-		return view ('app.mangrove.jenis.index',$data);
+		return view ('app.mangrove.jenis.index',$data)->with('limit', $limit);
 	}
 
 	public function getAdd(Request $request)

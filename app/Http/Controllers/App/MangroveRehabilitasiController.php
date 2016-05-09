@@ -15,8 +15,9 @@ class MangroveRehabilitasiController extends Controller
 	public function getIndex(Request $r)
 	{
 	
+		$limit="10";
 		$data['mangroverehabilitasi'] = MangroveRehabilitasi::paginate(10);
-		return view ('app.mangrove.rehabilitasi.index',$data);
+		return view ('app.mangrove.rehabilitasi.index',$data)->with('limit', $limit);
 	}
 
 	public function getAdd(Request $request)
