@@ -17,13 +17,6 @@ class AirTawarController extends Controller
 	{
 		$limit = 10;
 		$data['airtawar'] = AirTawar::paginate($limit);
-		// $data['airtawar'] = DB::table('app_air_tawar')
-		// 							->leftJoin('kecamatan', 'app_air_tawar.kecamatan', '=', 'kecamatan.id')
-		// 							->leftJoin('desa', 'app_air_tawar.desa', '=', 'desa.id')
-		// 								->select(
-		// 									'kecamatan.nama as nama_kecamatan',
-		// 									'app_air_tawar.*',
-		// 									'desa.nama as nama_desa')->paginate($limit);
 		return view ('app.laporan-produksi.air-tawar.index',$data)->with('limit', $limit);
 	}
 
