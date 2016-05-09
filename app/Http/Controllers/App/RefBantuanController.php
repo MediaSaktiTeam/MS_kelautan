@@ -11,11 +11,7 @@ use DB,Excel,PDF,Permissions;
 
 class RefBantuanController extends Controller
 {
-	/**
-	 * Display a listing of the resource.
-	 *
-	 * @return \Illuminate\Http\Response
-	 */
+
 	 public function getIndex(Request $r)
 	{
 
@@ -75,6 +71,7 @@ class RefBantuanController extends Controller
 			$dt = new RefBantuan;
 			$dt->id_user = $request->id_user;   
 			$dt->id_bantuan = $val;
+			$dt->nama_program = $request->nama_program;
 			$dt->tahun = $request->tahun;
 			$dt->save();   
 		}
