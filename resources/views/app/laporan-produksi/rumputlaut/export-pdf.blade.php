@@ -58,7 +58,20 @@
 		
 		<tbody>
 
-		<?php $i = 1 ?>
+		<?php 
+			$i = 1;
+				$jumlahrtp =""; 	
+				$panjang_pantai =""; 	
+				$potensi =""; 	
+				$luas_tanam =""; 
+				$bentangan =""; 
+				$bibit_cottoni =""; 
+				$bibit_spinosum =""; 
+				$cottoni_basah =""; 
+				$cottoni_kering =""; 
+				$spinosum_basah =""; 
+				$spinosum_kering ="";
+		 ?>
 
 		@foreach( $rumputlaut as $rl )
 
@@ -80,26 +93,41 @@
 				<td>{{ $rl->keterangan }}</td>
 			</tr>
 				
-			<tr>
-				<td colspan="3"><b>JUMLAH</b></td>
-				<td><b>14.4</b></td>
-				<td><b>23.5</b> Ha</td>
-				<td><b>23.5</b> Ha</td>
-				<td><b>234</b></td>
-				<td><b>234</b></td>
-				<td><b>234</b></td>
-				<td><b>234</b></td>
-				<td><b>234</b></td>
-				<td><b>234</b></td>
-				<td><b>234</b></td>
-				<td><b>234</b></td>
-				<td></td>
-			</tr>
+			
 				
-			<?php $i = $i + 1 ?>
+			<?php 
+
+				$i = $i + 1; 
+				$jumlahrtp += $rl->rtp;
+				$panjang_pantai += $rl->panjang_pantai;
+				$potensi += $rl->potensi;
+				$luas_tanam += $rl->luas_tanam;
+				$bentangan += $rl->bentangan;
+				$bibit_cottoni += $rl->bibit_cottoni;
+				$bibit_spinosum += $rl->bibit_spinosum;
+				$cottoni_basah += $rl->cottoni_basah;
+				$cottoni_kering += $rl->cottoni_kering;
+				$spinosum_basah += $rl->spinosum_basah;
+				$spinosum_kering += $rl->spinosum_kering;
+
+			?>
 
 		@endforeach
-			
+			<tr>
+				<td colspan="3"><b>JUMLAH</b></td>
+				<td><b><?php echo round($jumlahrtp,2); ?></b></td>
+				<td><b><?php echo round($panjang_pantai,2); ?></b> Ha</td>
+				<td><b><?php echo round($potensi,2); ?></b> Ha</td>
+				<td><b><?php echo round($luas_tanam,2); ?></b></td>
+				<td><b><?php echo round($bentangan,2); ?></b></td>
+				<td><b><?php echo round($bibit_cottoni,2); ?></b></td>
+				<td><b><?php echo round($bibit_spinosum,2); ?></b></td>
+				<td><b><?php echo round($cottoni_basah,2); ?></b></td>
+				<td><b><?php echo round($cottoni_kering,2); ?></b></td>
+				<td><b><?php echo round($spinosum_basah,2); ?></b></td>
+				<td><b><?php echo round($spinosum_kering,2); ?></b></td>
+				<td></td>
+			</tr>
 		</tbody>
 	</table>
 

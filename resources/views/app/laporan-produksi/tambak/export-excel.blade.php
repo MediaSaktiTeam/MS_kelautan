@@ -34,7 +34,23 @@
 		</thead>
 		
 		<tbody>
-			<?php $i = 1 ?>
+			<?php 
+
+				$i = 1; 
+				$jumlahrtp ="";
+				$panjang_pantai ="";
+				$potensi ="";
+				$luas_tanam ="";
+				$penebaran_windu ="";
+				$penebaran_vanamae ="";
+				$penebaran_bandeng ="";
+				$jumlah_hidup_windu ="";
+				$jumlah_hidup_vanamae ="";
+				$jumlah_hidup_bandeng ="";
+				$pakan_pelet ="";
+				$pakan_dedak ="";
+
+			?>
 
 		@foreach( $tambak as $tb )
 
@@ -57,8 +73,40 @@
 				<td>{{ $tb->keterangan }}</td>
 			</tr>
 				
-			<?php $i = $i + 1 ?>
+			<?php 
 
-		@endforeach			
+				$i = $i + 1; 
+				$jumlahrtp += $tb->rtp;
+				$panjang_pantai += $tb->panjang_pantai;
+				$potensi += $tb->potensi;
+				$luas_tanam += $tb->luas_tanam;
+				$penebaran_windu += $tb->penebaran_windu;
+				$penebaran_vanamae += $tb->penebaran_vanamae;
+				$penebaran_bandeng += $tb->penebaran_bandeng;
+				$jumlah_hidup_windu += $tb->jumlah_hidup_windu;
+				$jumlah_hidup_vanamae += $tb->jumlah_hidup_vanamae;
+				$jumlah_hidup_bandeng += $tb->jumlah_hidup_bandeng;
+				$pakan_pelet += $tb->pakan_pelet;
+				$pakan_dedak += $tb->pakan_dedak;
+
+			?>
+
+		@endforeach
+			<tr>
+				<td colspan="3"><b>JUMLAH</b></td>
+				<td><b><?php echo round($jumlahrtp,2); ?></b></td>
+				<td><b><?php echo round($panjang_pantai,2); ?></b> Ha</td>
+				<td><b><?php echo round($potensi,2); ?></b> Ha</td>
+				<td><b><?php echo round($luas_tanam,2); ?></b> Ha</td>
+				<td><b><?php echo round($penebaran_windu,2); ?></b></td>
+				<td><b><?php echo round($penebaran_vanamae,2); ?></b></td>
+				<td><b><?php echo round($penebaran_bandeng,2); ?></b></td>
+				<td><b><?php echo round($jumlah_hidup_windu,2); ?></b></td>
+				<td><b><?php echo round($jumlah_hidup_vanamae,2); ?></b></td>
+				<td><b><?php echo round($jumlah_hidup_bandeng,2); ?></b></td>
+				<td><b><?php echo round($pakan_pelet,2); ?></b></td>
+				<td><b><?php echo round($pakan_dedak,2); ?></b></td>
+				<td></td>
+			</tr>		
 		</tbody>
 	</table>
