@@ -142,6 +142,16 @@
 				'getSearch' => 'terumbujenis_search'
 			]);
 
+		Route::controller('app/jumlah-penduduk', 'JumlahPendudukController',
+			[
+				'getIndex' => 'jumlahpenduduk',
+				'getAdd' => 'jumlahpenduduk_add',
+				'getDelete' => 'jumlahpenduduk_delete',
+				'getDetail' => 'jumlahpenduduk_detail',
+				'getEdit' => 'jumlahpenduduk_edit',
+				'getUpdate' => 'jumlahpenduduk_update',
+				'getSearch' => 'jumlahpenduduk_search'
+			]);
 		Route::get('get-kabupaten/{id}', 'LokasiController@get_kabupaten');
 		Route::get('get-kecamatan/{id}', 'LokasiController@get_kecamatan');
 		Route::get('get-desa/{id}', 'LokasiController@get_desa');

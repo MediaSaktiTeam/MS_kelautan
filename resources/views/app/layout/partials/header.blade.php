@@ -191,6 +191,10 @@
 										</li>
 									</ul>
 								</li>
+								<li class="sub-jumlah-penduduk">
+									<a href="/app/jumlah-penduduk"><span class="title">Jumlah Penduduk</span></a>
+									<span class="icon-thumbnail">JP</span>
+								</li>
 							</ul>
 						</li>
 
