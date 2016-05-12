@@ -1,6 +1,6 @@
 <table class="table table-hover demo-table-dynamic custom" id="tableWithDynamicRows">
 	<tbody>
-	<?php $total= $jumlahpenduduk->laki + $jumlahpenduduk->perempuan + $jumlahpenduduk->jumlah_kk; ?>
+	<?php $total= $jumlahpenduduk->laki + $jumlahpenduduk->perempuan; ?>
 	
 		<tr>
 			<td><b>Nama Kecamatan</b></td>
