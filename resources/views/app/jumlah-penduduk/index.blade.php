@@ -158,7 +158,7 @@
 																$laki += $jp->laki;
 																$perempuan += $jp->perempuan;
 																$jumlah_kk += $jp->jumlah_kk;
-																$total2= $laki + $perempuan;
+																$total2= $jp->laki + $jp->perempuan;
 																$total += $total2;
 																
 															 ?>
