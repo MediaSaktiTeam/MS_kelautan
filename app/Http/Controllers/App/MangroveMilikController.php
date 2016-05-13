@@ -77,10 +77,46 @@ public function getUpdate(Request $request)
 		return redirect()->route('mangrovemilik', $data)->with(session()->flash('success','Data Berhasil diupdate !!'));
 	}
 
-	public function getSearch(Request $request)
+	public function getSearch($cari)
 	{
-		$data['mangrovemilik'] = MangroveMilik::where('kecamatan  ', 'LIKE', '%'.$request->cari.'%')->get();
+		$data['mangrovemilik'] = DB::table('app_mangrove_milik as mm')
+									->leftJoin('kecamatan as k', 'mm.kecamatan', '=', 'k.id')
+									->leftJoin('desa', 'mm.desa', '=', 'desa.id')
+										->select(
+											'k.nama as nama_kecamatan',
+											'mm.*',
+											'desa.nama as nama_desa')
+												->where(function($query) use ($cari) {
+													$query->where('k.nama','LIKE', '%'.$cari.'%')
+															->orWhere('desa.nama','LIKE', '%'.$cari.'%');
+												})
+									->take(40)->get();
+
 		return view('app.mangrove.milik.search', $data);
+	}
+
+	public function getExportExcel()
+	{
+		$data['mangrovemilik'] = MangroveMilik::orderBy('desa','asc')->get();
+
+        Excel::create('Data Mangrove yang dimiliki');
+
+        Excel::create('Data Mangrove yang dimiliki', function($excel) use($data)
+        {
+            
+            $excel->sheet('New sheet', function($sheet) use($data)
+            {
+                $sheet->loadView('app.mangrove.milik.export-excel', $data);
+            }); 
+        })->download('xlsx');
+	}
+
+	public function getExportPdf()
+	{
+		$data['mangrovemilik'] = MangroveMilik::orderBy('desa','asc')->get();
+		
+        $pdf = PDF::loadView('app.mangrove.milik.export-pdf', $data);
+        return $pdf->setPaper('legal')->setOrientation('potrait')->setWarnings(false)->download('Data Mangrove yang dimiliki.pdf');
 	}
 	
 }

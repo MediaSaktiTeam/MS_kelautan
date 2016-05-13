@@ -297,13 +297,13 @@
 				<div class="modal-body">
 					<div class="row">
 						<div class="col-md-6">
-							<a href="{{ url('/app/mangrovemilik/export-excel') }}">
+							<a href="{{ url('/app/mangrove/milik/export-excel') }}">
 								<i class="fa fa-file-excel-o export-excel"></i>
 								Unduh Dalam Format Mic.Excel
 							</a>
 						</div>
 						<div class="col-md-6">
-							<a href="{{ url('/app/mangrovemilik/export-pdf') }}">
+							<a href="{{ url('/app/mangrove/milik/export-pdf') }}">
 								<i class="fa fa-file-pdf-o export-pdf"></i>
 								Unduh Dalam Format PDF
 							</a>
@@ -432,10 +432,9 @@
 				$("#show-data").hide();
 				$("#show-pencarian").show();
 				$("#show-pencarian").html('<tr><td colspan="6"><i class="fa fa-spinner fa-spin"></i></td></tr>');
-				var _token = $('meta[name="csrf-token"]').attr('content');
-				var url = "{{ url('app/mangrovemilik/search') }}";
+				var url = "{{ url('app/mangrove/milik/search') }}";
 				var url = url+"/"+cari;
-				$.get(url, { cari:cari, _token:_token}, function(data){
+				$.get(url, { cari:cari}, function(data){
 					$('#show-pencarian').html(data);
 				});
 			}

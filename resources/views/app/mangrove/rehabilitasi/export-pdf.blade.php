@@ -11,7 +11,7 @@
 
 <body>
 
-<center><h2>Data Pnegolah <br> <small>Dinas Perikanan dan Kelautan Kab. Bantaeng</small></h2></center>
+<center><h2>Data Mangrove yang direhabilitasi <br> <small>Dinas Perikanan dan Kelautan Kab. Bantaeng</small></h2></center>
 
 	<table class="table table-no-border" style="width: 40%">
 		<tr>
@@ -31,42 +31,30 @@
 	<table class="table table-bordered">
 		<thead>
 			<tr>
-				<th>No.</th>
-				<th>NIK</th>
-				<th>Nama Lengkap</th>
-				<th>Alamat</th>
-				<th>Nama Kelompok</th>
-				<th>Jabatan Kelompok</th>
-				<th>Jenis Olahan</th>
-				<th>Legalitas Produksi</th>
-				<th>Merek Dagang</th>
-				<th>Modal yang dimiliki</th>
-				<th>Modal Pinjaman</th>
-				<th>Omzet Perbulan</th>
+				<th width="15">No.</th>
+				<th>Nama Kecamatan</th>
+				<th>Nama Desa</th>
+				<th>Direhabilitasi</th>
+				<th>Berubah Fungsi</th>
+				<th>Lahan Tambak</th>
+				<th>Penggaraman</th>
 			</tr>
 		</thead>
 		
 		<tbody>
 			<?php $i = 1 ?>
 
-			@foreach( $pengolah as $pe )
+			@foreach( $mangroverehabilitasi as $rehab )
 
 				<tr>
-					<td><?php echo $i  ?></td>
-					<td>{{ $pe->nik }}</td>
-					<td>{{ $pe->name }}</td>
-					<td>{{ $pe->alamat }}</td>
-					<td>{{ $pe->kelompok->nama }}</td>
-					<td>{{ $pe->jabatan->nama }}</td>
-					<td>{{ $pe->olahan->jenis }}</td>
-					<td>{{ $pe->legalitas_produksi }}</td>
-					<td>{{ $pe->merekdagang->merek }}</td>
-					<td>{{ $pe->modal_dimiliki }}</td>
-					<td>{{ $pe->modal_pinjaman }}</td>
-					<td>{{ $pe->omzet_perbulan }}</td>
+					<td><?php echo $i++ ?></td>
+					<td>{{ $rehab->datakecamatan->nama }}</td>
+					<td>{{ $rehab->datadesa->nama }}</td>
+					<td>{{ $rehab->direhabilitasi }} M<sup>2</sup></td>
+					<td>{{ $rehab->berubah_fungsi }} M<sup>2</sup></td>
+					<td>{{ $rehab->lahan_tambak }} M<sup>2</sup></td>
+					<td>{{ $rehab->penggaraman }} M<sup>2</sup></td>
 				</tr>
-
-				<?php $i = $i + 1 ?>
 
 			@endforeach
 		</tbody>
@@ -79,7 +67,10 @@
 				<br>
 				<br>
 			</td>
-			<td>Bantaeng, 4 April 2016<br>Petugas Statistik Budidaya
+
+			<?php $Ms = new App\Custom; ?>
+
+			<td>Bantaeng, {{ $Ms->tgl_indo(date('Y-m-d')) }}<br>Petugas Statistik Budidaya
 				<br>
 				<br>
 				<br>

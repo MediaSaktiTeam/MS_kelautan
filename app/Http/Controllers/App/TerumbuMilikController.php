@@ -77,10 +77,46 @@ public function getUpdate(Request $request)
 		return redirect()->route('terumbumilik', $data)->with(session()->flash('success','Data Berhasil diupdate !!'));
 	}
 
-	public function getSearch(Request $request)
+	public function getSearch($cari)
 	{
-		$data['terumbumilik'] = TerumbuMilik::where('kecamatan  ', 'LIKE', '%'.$request->cari.'%')->get();
+		$data['terumbumilik'] = DB::table('app_terumbu_milik as t')
+									->leftJoin('kecamatan as k', 't.kecamatan', '=', 'k.id')
+									->leftJoin('desa', 't.desa', '=', 'desa.id')
+										->select(
+											'k.nama as nama_kecamatan',
+											't.*',
+											'desa.nama as nama_desa')
+												->where(function($query) use ($cari) {
+													$query->where('k.nama','LIKE', '%'.$cari.'%')
+															->orWhere('desa.nama','LIKE', '%'.$cari.'%');
+												})
+									->take(40)->get();
+
 		return view('app.terumbu.milik.search', $data);
+	}
+
+	public function getExportExcel()
+	{
+		$data['terumbumilik'] = TerumbuMilik::orderBy('desa','asc')->get();
+
+        Excel::create('Data terumbu karang yang dimiliki');
+
+        Excel::create('Data terumbu karang yang dimiliki', function($excel) use($data)
+        {
+            
+            $excel->sheet('New sheet', function($sheet) use($data)
+            {
+                $sheet->loadView('app.terumbu.milik.export-excel', $data);
+            }); 
+        })->download('xlsx');
+	}
+
+	public function getExportPdf()
+	{
+		$data['terumbumilik'] = terumbuMilik::orderBy('desa','asc')->get();
+		
+        $pdf = PDF::loadView('app.terumbu.milik.export-pdf', $data);
+        return $pdf->setPaper('legal')->setOrientation('potrait')->setWarnings(false)->download('Data Mangrove yang dimiliki.pdf');
 	}
 	
 }

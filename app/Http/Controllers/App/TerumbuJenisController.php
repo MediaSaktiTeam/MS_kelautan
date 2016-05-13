@@ -69,10 +69,43 @@ public function getUpdate(Request $request)
 		return redirect()->route('terumbujenis', $data)->with(session()->flash('success','Data Berhasil diupdate !!'));
 	}
 
-	public function getSearch(Request $request)
+	public function getSearch($cari)
 	{
-		$data['terumbujenis'] = TerumbuJenis::where('kecamatan  ', 'LIKE', '%'.$request->cari.'%')->get();
+		$data['terumbujenis'] = DB::table('app_terumbu_jenis_ikan as m')
+									->leftJoin('kecamatan as k', 'm.kecamatan', '=', 'k.id')
+										->select(
+											'k.nama as nama_kecamatan', 'm.*')
+												->where(function($query) use ($cari) {
+													$query->where('k.nama','LIKE', '%'.$cari.'%')
+															->orWhere('m.jenis_ikan','LIKE', '%'.$cari.'%');
+												})
+									->take(40)->get();
+
 		return view('app.terumbu.jenis.search', $data);
+	}
+
+	public function getExportExcel()
+	{
+		$data['terumbujenis'] = TerumbuJenis::all();
+
+        Excel::create('Jenis Ikan');
+
+        Excel::create('Jenis Ikan', function($excel) use($data)
+        {
+            
+            $excel->sheet('New sheet', function($sheet) use($data)
+            {
+                $sheet->loadView('app.terumbu.jenis.export-excel', $data);
+            }); 
+        })->download('xlsx');
+	}
+
+	public function getExportPdf()
+	{
+		$data['terumbujenis'] = TerumbuJenis::all();
+		
+        $pdf = PDF::loadView('app.terumbu.jenis.export-pdf', $data);
+        return $pdf->setPaper('legal')->setOrientation('potrait')->setWarnings(false)->download('Jenis Ikan.pdf');
 	}
 	
 }

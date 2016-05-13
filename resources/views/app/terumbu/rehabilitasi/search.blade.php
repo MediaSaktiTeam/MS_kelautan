@@ -2,7 +2,7 @@
 $(function(){
 	$(".btn-hapus-single").click(function(){
 		var id = $(this).data('id');
-		$(".btn-hapus").attr('href',"{{ route('mangroverehabilitasi_delete') }}/"+id);
+		$(".btn-hapus").attr('href',"{{ route('terumburehabilitasi_delete') }}/"+id);
 		$("#modal-hapus").modal('hapus');
 	});
 });
@@ -16,31 +16,25 @@ $(function(){
 			<th>Nama Kecamatan</th>
 			<th>Nama Desa</th>
 			<th>Direhabilitasi</th>
-			<th>Berubah Fungsi</th>
-			<th>Lahan Tambak</th>
-			<th>rehabnggraman</th>
 			<th style="text-align:center">Aksi</th>
 		</tr>
 	</thead>
 
 	<tbody>
 
-		@if ( count($mangroverehabilitasi) > 0 )
+		@if ( count($terumburehabilitasi) > 0 )
 
-			@foreach( $mangroverehabilitasi as $rehab )
+			@foreach( $terumburehabilitasi as $rehab )
 				<tr>
 					<td>
 						<button class="btn btn-xs btn-danger btn-hapus-single"  data-toggle="modal" data-target="#modal-hapus" data-id="{{ $rehab->id }}" ><i class="pg-trash"></i></button>
 					</td>
-					<td>{{ $rehab->datakecamatan->nama }}</td>
-					<td>{{ $rehab->datadesa->nama }}</td>
-					<td>{{ $rehab->direhabilitasi }}</td>
-					<td>{{ $rehab->berubah_fungsi }}</td>
-					<td>{{ $rehab->lahan_tambak }}</td>
-					<td>{{ $rehab->penggaraman }}</td>
+					<td>{{ $rehab->nama_kecamatan }}</td>
+					<td>{{ $rehab->nama_desa }}</td>
+					<td>{{ $rehab->direhabilitasi }} M<sup>2</sup></td>
 					<td style="text-align:center">
 						<a class="btn btn-default btn-xs view" data-id="{{ $rehab->id }}"><i class="fa fa-search-plus"></i></a>
-						<a href="{{ route('mangroverehabilitasi_edit'.$rehab->id) }}" class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i></a>
+						<a href="{{ route('terumburehabilitasi_edit', $rehab->id) }}" class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i></a>
 					</td>
 				</tr>
 			@endforeach

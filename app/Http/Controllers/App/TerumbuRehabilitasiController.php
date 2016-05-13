@@ -71,10 +71,47 @@ public function getUpdate(Request $request)
 		return redirect()->route('terumburehabilitasi', $data)->with(session()->flash('success','Data Berhasil diupdate !!'));
 	}
 
-	public function getSearch(Request $request)
+	public function getSearch($cari)
 	{
-		$data['terumburehabilitasi'] = TerumbuRehabilitasi::where('kecamatan  ', 'LIKE', '%'.$request->cari.'%')->get();
+		$data['terumburehabilitasi'] = DB::table('app_terumbu_rehabilitasi as t')
+									->leftJoin('kecamatan as k', 't.kecamatan', '=', 'k.id')
+									->leftJoin('desa', 't.desa', '=', 'desa.id')
+										->select(
+											'k.nama as nama_kecamatan',
+											't.*',
+											'desa.nama as nama_desa')
+												->where(function($query) use ($cari) {
+													$query->where('k.nama','LIKE', '%'.$cari.'%')
+															->orWhere('desa.nama','LIKE', '%'.$cari.'%');
+												})
+									->take(40)->get();
+
 		return view('app.terumbu.rehabilitasi.search', $data);
 	}
+
+	public function getExportExcel()
+	{
+		$data['terumburehabilitasi'] = TerumbuRehabilitasi::orderBy('desa','asc')->get();
+
+        Excel::create('Data terumbu karang yang direhabilitasi');
+
+        Excel::create('Data terumbu karang yang direhabilitasi', function($excel) use($data)
+        {
+            
+            $excel->sheet('New sheet', function($sheet) use($data)
+            {
+                $sheet->loadView('app.terumbu.rehabilitasi.export-excel', $data);
+            }); 
+        })->download('xlsx');
+	}
+
+	public function getExportPdf()
+	{
+		$data['terumburehabilitasi'] = terumburehabilitasi::orderBy('desa','asc')->get();
+		
+        $pdf = PDF::loadView('app.terumbu.rehabilitasi.export-pdf', $data);
+        return $pdf->setPaper('legal')->setOrientation('potrait')->setWarnings(false)->download('Data Mangrove yang direhabilitasi.pdf');
+	}
+
 	
 }

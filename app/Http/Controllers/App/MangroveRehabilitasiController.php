@@ -75,10 +75,46 @@ class MangroveRehabilitasiController extends Controller
 		return redirect()->route('mangroverehabilitasi', $data)->with(session()->flash('success','Data Berhasil diupdate !!'));
 	}
 
-	public function getSearch(Request $request)
+	public function getSearch($cari)
 	{
-		$data['mangroverehabilitasi'] = MangroveRehabilitasi::where('kecamatan  ', 'LIKE', '%'.$request->cari.'%')->get();
+		$data['mangroverehabilitasi'] = DB::table('app_mangrove_rehabilitasi as m')
+									->leftJoin('kecamatan as k', 'm.kecamatan', '=', 'k.id')
+									->leftJoin('desa', 'm.desa', '=', 'desa.id')
+										->select(
+											'k.nama as nama_kecamatan',
+											'm.*',
+											'desa.nama as nama_desa')
+												->where(function($query) use ($cari) {
+													$query->where('k.nama','LIKE', '%'.$cari.'%')
+															->orWhere('desa.nama','LIKE', '%'.$cari.'%');
+												})
+									->take(40)->get();
+
 		return view('app.mangrove.rehabilitasi.search', $data);
+	}
+
+	public function getExportExcel()
+	{
+		$data['mangroverehabilitasi'] = MangroveRehabilitasi::orderBy('desa','asc')->get();
+
+        Excel::create('Data Mangrove yang direhabilitasi');
+
+        Excel::create('Data Mangrove yang direhabilitasi', function($excel) use($data)
+        {
+            
+            $excel->sheet('New sheet', function($sheet) use($data)
+            {
+                $sheet->loadView('app.mangrove.rehabilitasi.export-excel', $data);
+            }); 
+        })->download('xlsx');
+	}
+
+	public function getExportPdf()
+	{
+		$data['mangroverehabilitasi'] = MangroveRehabilitasi::orderBy('desa','asc')->get();
+		
+        $pdf = PDF::loadView('app.mangrove.rehabilitasi.export-pdf', $data);
+        return $pdf->setPaper('legal')->setOrientation('potrait')->setWarnings(false)->download('Data Mangrove yang direhabilitasi.pdf');
 	}
 
 }

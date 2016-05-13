@@ -68,9 +68,42 @@ class MangroveJenisController extends Controller
 		return redirect()->route('mangrovejenis', $data)->with(session()->flash('success','Data Berhasil diupdate !!'));
 	}
 
-	public function getSearch(Request $request)
+	public function getSearch($cari)
 	{
-		$data['mangrovejenis'] = MangroveJenis::where('kecamatan  ', 'LIKE', '%'.$request->cari.'%')->get();
+		$data['mangrovejenis'] = DB::table('app_mangrove_jenis as m')
+									->leftJoin('kecamatan as k', 'm.kecamatan', '=', 'k.id')
+										->select(
+											'k.nama as nama_kecamatan', 'm.*')
+												->where(function($query) use ($cari) {
+													$query->where('k.nama','LIKE', '%'.$cari.'%')
+															->orWhere('m.jenis_mangrove','LIKE', '%'.$cari.'%');
+												})
+									->take(40)->get();
+
 		return view('app.mangrove.jenis.search', $data);
+	}
+
+	public function getExportExcel()
+	{
+		$data['mangrovejenis'] = MangroveJenis::all();
+
+        Excel::create('Jenis Mangrove');
+
+        Excel::create('Jenis Mangrove', function($excel) use($data)
+        {
+            
+            $excel->sheet('New sheet', function($sheet) use($data)
+            {
+                $sheet->loadView('app.mangrove.jenis.export-excel', $data);
+            }); 
+        })->download('xlsx');
+	}
+
+	public function getExportPdf()
+	{
+		$data['mangrovejenis'] = MangroveJenis::all();
+		
+        $pdf = PDF::loadView('app.mangrove.jenis.export-pdf', $data);
+        return $pdf->setPaper('legal')->setOrientation('potrait')->setWarnings(false)->download('Jenis Mangrove.pdf');
 	}
 }
