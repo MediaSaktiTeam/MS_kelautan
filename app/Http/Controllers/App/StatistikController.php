@@ -10,6 +10,7 @@ use DB,Excel,PDF;
 use App\User, App\Kelompok, App\Jabatan, App\Usaha, App\Sarana, App\KepemilikanSarana;
 use App\Bantuan, App\RefBantuan, App\JenisOlahan, App\Produksi, App\Kecamatan, App\Desa;
 use App\AirTawar, App\RumputLaut, App\Tambak, App\MangroveMilik, App\MangroveRehabilitasi;
+use App\TerumbuMilik, App\TerumbuRehabilitasi;
 
 class StatistikController extends Controller
 {
@@ -125,6 +126,8 @@ class StatistikController extends Controller
 		$data['tambak'] = Tambak::where('desa', $id)->get();
 		$data['mangrovemilik'] = MangroveMilik::where('desa', $id)->get();
 		$data['mangroverehabilitasi'] = MangroveRehabilitasi::where('desa', $id)->get();
+		$data['terumbumilik'] = TerumbuMilik::where('desa', $id)->get();
+		$data['terumburehabilitasi'] = TerumbuRehabilitasi::where('desa', $id)->get();
 		return view('app.statistik.detail-desa', $data);
 	}
 

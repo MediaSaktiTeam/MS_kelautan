@@ -42,8 +42,8 @@
 
 		@else
 			<p>Tidak ada data</p>
+			<hr>
 		@endif
-		<hr>
 
 	<!-- Rumput Laut -->
 		<p><b>Produksi Rumput Laut</b></p>
@@ -85,8 +85,8 @@
 
 		@else
 			<p>Tidak ada data</p>
+			<hr>
 		@endif
-		<hr>
 
 	<!-- Tambak -->
 		<p><b>Produksi Tambak</b></p>
@@ -129,13 +129,14 @@
 
 		@else
 			<p>Tidak ada data</p>
+			<hr>
 		@endif
-		<hr>
 
 
 	<!-- Pesisir -->
 
-		<h5>Lahan Mangrove</5>
+		<br>
+		<h4>Lahan Mangrove</5>
 
 		<!-- Mangrove Dimiliki -->
 			<p style="margin-top: 10px"><b>Lahan Mangrove Yang Dimiliki</b></p>
@@ -173,8 +174,8 @@
 
 			@else
 				<p>Tidak ada data</p>
+				<hr>
 			@endif
-			<hr>
 
 		<!-- Mangrove Direhabilitasi -->
 			<p style="margin-top: 10px"><b>Lahan Mangrove Yang Direhabilitasi</b></p>
@@ -210,9 +211,81 @@
 
 			@else
 				<p>Tidak ada data</p>
+				<hr>
 			@endif
-			<hr>
 
+		<br>
+		<h4>Terumbu Karang</h4>
+
+		<!-- Terumbu karang dimiliki -->
+			<p style="margin-top: 10px"><b>Terumbu Karang Yang Dimiliki</b></p>
+
+			@if ( count($terumbumilik) > 0 )
+
+				<table class="table table-hover">
+					<thead>
+						<tr>
+							<th>Nama Desa</th>
+							<th>Luas Lahan T.Karang</th>
+							<th>Kondisi Rusak</th>
+							<th>Kondisi Sedang</th>
+							<th>Kondisi Baik</th>
+						</tr>
+					</thead>
+
+					<tbody>
+
+					@foreach($terumbumilik as $mil)
+						<tr>
+							<td>{{ $mil->datadesa->nama }}</td>
+							<td>{{ $mil->luas_lahan }} M<sup>2</sup></td>
+							<td>{{ $mil->kondisi_rusak }} M<sup>2</sup></td>
+							<td>{{ $mil->kondisi_sedang }} M<sup>2</sup></td>
+							<td>{{ $mil->kondisi_baik }} M<sup>2</sup></td>
+						</tr>
+					@endforeach
+
+					</tbody>
+
+				</table>
+
+			@else
+				<p>Tidak ada data</p>
+				<hr>
+			@endif
+
+		<!-- Terumbu karang Direhabilitasi -->
+			<p style="margin-top: 10px"><b>Terumbu Karang Direhabilitasi</b></p>
+
+			@if ( count($terumburehabilitasi) > 0 )
+
+				<table class="table table-hover">
+					<thead>
+						<tr>
+							<th>Nama Kecamatan</th>
+							<th>Nama Desa</th>
+							<th>Direhabilitasi</th>
+						</tr>
+					</thead>
+
+					<tbody>
+
+					@foreach($terumburehabilitasi as $rehab)
+						<tr>
+							<td>{{ $rehab->datakecamatan->nama }}</td>
+							<td>{{ $rehab->datadesa->nama }}</td>
+							<td>{{ $rehab->direhabilitasi }} M<sup>2</sup></td>
+						</tr>
+					@endforeach
+
+					</tbody>
+
+				</table>
+
+			@else
+				<p>Tidak ada data</p>
+				<hr>
+			@endif
 	</div>
 
 </div>
