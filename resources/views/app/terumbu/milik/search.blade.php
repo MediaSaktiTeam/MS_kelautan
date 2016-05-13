@@ -2,7 +2,7 @@
 $(function(){
 	$(".btn-hapus-single").click(function(){
 		var id = $(this).data('id');
-		$(".btn-hapus").attr('href',"{{ url('/app/terumbu/milik/delete') }}/"+id);
+		$(".btn-hapus").attr('href',"{{ route('terumbumilik_delete') }}/"+id);
 		$("#modal-hapus").modal('hapus');
 	});
 });
