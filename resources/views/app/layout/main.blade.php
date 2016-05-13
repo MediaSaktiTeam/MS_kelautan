@@ -7,6 +7,7 @@
 		<title>@yield('title')</title>
 
 		@include('app/layout/partials/meta')
+		@yield('meta')
 
 	</head>
 

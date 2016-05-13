@@ -8,7 +8,8 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use DB,Excel,PDF;
 use App\User, App\Kelompok, App\Jabatan, App\Usaha, App\Sarana, App\KepemilikanSarana;
-use App\Bantuan, App\RefBantuan, App\JenisOlahan;
+use App\Bantuan, App\RefBantuan, App\JenisOlahan, App\Produksi, App\Kecamatan, App\Desa;
+use App\AirTawar, App\RumputLaut, App\Tambak, App\MangroveMilik, App\MangroveRehabilitasi;
 
 class StatistikController extends Controller
 {
@@ -16,8 +17,26 @@ class StatistikController extends Controller
 	public function getIndex(Request $r)
 	{
 
-		if ( !$r->tahun ) {
-			return redirect()->route('app.statistik', ['tahun' => date('Y')]);
+		if ( !$r->tahun || !$r->offset ) {
+			// Default value of date filter on produksi
+				$sql = Produksi::orderBy('id', 'desc')->first();
+
+				if ( $sql ) {
+
+					$limit1 = date_format(date_create($sql->created_at), "Y-m-d");
+					$limit = strtotime("$limit1 +1 day");
+					$limit = date("Y-m-d", $limit);
+
+					$offset = strtotime("$limit1 -3 months");
+					$offset = date("Y-m-d", $offset);
+
+				} else {
+					$offset = date('Y-m-d');
+					$limit = strtotime("$offset +3 months");
+					$limit = date("Y-m-d", $limit);
+				}
+
+			return redirect()->route('app.statistik', ['tahun' => date('Y'), 'offset' => $offset, 'limit' => $limit]);
 		}
 
 		// Statistik Jenis Usaha
@@ -58,11 +77,55 @@ class StatistikController extends Controller
 										->join('app_sarana as as', 'as.id', '=', 'aks.id_sarana')
 											->where('as.jenis', 'Alat Tangkap')->count();
 
-		// Statistik Pengolah
+	// Statistik Pengolah
 		$data['total_pengolah'] = User::where('profesi','Pengolah')->count();
 		$data['jenis_olahan'] = JenisOlahan::all();
 
+	// Statistik Jenis Produksi
+		$data['jp_pembudidaya'] = DB::table('users as u')
+									->leftJoin('produksi as pr', 'u.id', '=', 'pr.id_user')
+									->select('pr.jenis_produksi', DB::raw('(select count(*) from produksi where jenis_produksi = pr.jenis_produksi) as jml'))
+									->where('u.profesi', 'Pembudidaya')
+									->whereBetween('pr.created_at', [ $r->offset, $r->limit ])
+									->groupBy('pr.jenis_produksi')->get();
+
+		$data['jp_nelayan'] = DB::table('users as u')
+									->leftJoin('produksi as pr', 'u.id', '=', 'pr.id_user')
+									->select('pr.jenis_produksi', DB::raw('(select count(*) from produksi where jenis_produksi = pr.jenis_produksi) as jml'))
+									->where('u.profesi', 'Nelayan')
+									->whereBetween('pr.created_at', [ $r->offset, $r->limit ])
+									->groupBy('pr.jenis_produksi')->get();
+
+		$data['jp_pengolah'] = DB::table('users as u')
+									->leftJoin('produksi as pr', 'u.id', '=', 'pr.id_user')
+									->select('pr.jenis_produksi', DB::raw('(select count(*) from produksi where jenis_produksi = pr.jenis_produksi) as jml'))
+									->where('u.profesi', 'Pengolah')
+									->whereBetween('pr.created_at', [ $r->offset, $r->limit ])
+									->groupBy('pr.jenis_produksi')->get();
+
+		$kec = Kecamatan::orderBy('id', 'asc')->first();
+		$data['id_kec'] = $kec->id;
+		$data['kecamatan'] = Kecamatan::orderBy('nama', 'asc')->get();
+
 		return view ('app.statistik.index',$data);
+	}
+
+	public function getListDesa(Request $r)
+	{
+		$data['desa'] = Desa::where('id_kecamatan', $r->id)->orderBy('nama','asc')->get();
+
+		return view('app.statistik.list-desa', $data);
+	}
+
+	public function getDetailDesa($id)
+	{
+		$data['desa'] = Desa::find($id);
+		$data['airtawar'] = AirTawar::where('desa', $id)->get();
+		$data['rumputlaut'] = RumputLaut::where('desa', $id)->get();
+		$data['tambak'] = Tambak::where('desa', $id)->get();
+		$data['mangrovemilik'] = MangroveMilik::where('desa', $id)->get();
+		$data['mangroverehabilitasi'] = MangroveRehabilitasi::where('desa', $id)->get();
+		return view('app.statistik.detail-desa', $data);
 	}
 
 }
