@@ -81,7 +81,7 @@ class JumlahPendudukController extends Controller
 											'k.nama as nama_kecamatan', 'm.*')
 												->where(function($query) use ($cari) {
 													$query->where('k.nama','LIKE', '%'.$cari.'%')
-															->orWhere('m.luas_lahan','LIKE', '%'.$cari.'%');
+															->orWhere('m.laki','LIKE', '%'.$cari.'%');
 												})
 									->take(40)->get();
 
@@ -93,5 +93,29 @@ class JumlahPendudukController extends Controller
 	// 	$data['jumlahpenduduk'] = JumlahPenduduk::where('kecamatan  ', 'LIKE', '%'.$request->cari.'%')->get();
 	// 	return view('app.jumlah-penduduk.search', $data);
 	// }
+
+	public function getExportPdf()
+	{
+		$data['jumlahpenduduk'] = JumlahPenduduk::all();
+		
+        $pdf = PDF::loadView('app.jumlah-penduduk.export-pdf', $data);
+        return $pdf->setPaper('legal')->setOrientation('potrait')->setWarnings(false)->download('Jumlah Penduduk Pesisir.pdf');
+	}
+
+	public function getExportExcel()
+	{
+		$data['jumlahpenduduk'] = JumlahPenduduk::all();
+
+        Excel::create('Jumlah Penduduk Pesisir');
+
+        Excel::create('Jumlah Penduduk Pesisir', function($excel) use($data)
+        {
+            
+            $excel->sheet('New sheet', function($sheet) use($data)
+            {
+                $sheet->loadView('app.jumlah-penduduk.export-excel', $data);
+            }); 
+        })->download('xlsx');
+	}
 	
 }
