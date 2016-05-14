@@ -46,7 +46,7 @@ class TerumbuMilikController extends Controller
 
 	public function getDetail($id)
 	{
-		$data['terumbumilik'] = terumbuMilik::where('id',$id)->first();
+		$data['terumbumilik'] = TerumbuMilik::where('id',$id)->first();
 		return view('app.terumbu.milik.detail', $data);
 	}
 
@@ -113,7 +113,7 @@ public function getUpdate(Request $request)
 
 	public function getExportPdf()
 	{
-		$data['terumbumilik'] = terumbuMilik::orderBy('desa','asc')->get();
+		$data['terumbumilik'] = TerumbuMilik::orderBy('desa','asc')->get();
 		
         $pdf = PDF::loadView('app.terumbu.milik.export-pdf', $data);
         return $pdf->setPaper('legal')->setOrientation('potrait')->setWarnings(false)->download('Data Mangrove yang dimiliki.pdf');

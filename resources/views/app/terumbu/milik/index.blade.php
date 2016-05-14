@@ -172,7 +172,7 @@
 														$kondisi_sedang="";
 														$kondisi_rusak="";
 													?>
-												@foreach($terumbumilik as $mil)
+												@foreach ($terumbumilik as $mil)
 														<tr>
 															<td>
 																<div class="checkbox">
@@ -433,7 +433,7 @@
 				$("#show-pencarian").show();
 				$("#show-pencarian").html('<tr><td colspan="6"><i class="fa fa-spinner fa-spin"></i></td></tr>');
 				var _token = $('meta[name="csrf-token"]').attr('content');
-				var url = "{{ url('app/terumbu/milik/search') }}";
+				var url = "{{ route('terumbumilik_search') }}";
 				var url = url+"/"+cari;
 				$.get(url, { cari:cari, _token:_token}, function(data){
 					$('#show-pencarian').html(data);

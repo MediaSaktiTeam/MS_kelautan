@@ -59,24 +59,39 @@ class JumlahPendudukController extends Controller
 	}
 
 
-public function getUpdate(Request $request)
-	{
+	public function getUpdate(Request $request)
+		{
 
-		$dt = JumlahPenduduk::find($request->id);
-		$dt->id = $request->id;
-		$dt->kecamatan = $request->kecamatan;
-		$dt->laki = $request->laki;
-		$dt->perempuan = $request->perempuan;
-		$dt->jumlah_kk = $request->jumlah_kk;
-		$dt->save();
-		$data['jumlahpenduduk'] = JumlahPenduduk::paginate(1);
-		return redirect()->route('jumlahpenduduk', $data)->with(session()->flash('success','Data Berhasil diupdate !!'));
-	}
+			$dt = JumlahPenduduk::find($request->id);
+			$dt->id = $request->id;
+			$dt->kecamatan = $request->kecamatan;
+			$dt->laki = $request->laki;
+			$dt->perempuan = $request->perempuan;
+			$dt->jumlah_kk = $request->jumlah_kk;
+			$dt->save();
+			$data['jumlahpenduduk'] = JumlahPenduduk::paginate(1);
+			return redirect()->route('jumlahpenduduk', $data)->with(session()->flash('success','Data Berhasil diupdate !!'));
+		}
 
-	public function getSearch(Request $request)
+	public function getSearch($cari)
 	{
-		$data['jumlahpenduduk'] = JumlahPenduduk::where('kecamatan  ', 'LIKE', '%'.$request->cari.'%')->get();
+		$data['jumlahpenduduk'] = DB::table('app_jumlah_penduduk as m')
+									->leftJoin('kecamatan as k', 'm.kecamatan', '=', 'k.id')
+										->select(
+											'k.nama as nama_kecamatan', 'm.*')
+												->where(function($query) use ($cari) {
+													$query->where('k.nama','LIKE', '%'.$cari.'%')
+															->orWhere('m.luas_lahan','LIKE', '%'.$cari.'%');
+												})
+									->take(40)->get();
+
 		return view('app.jumlah-penduduk.search', $data);
 	}
+
+	// public function getSearch(Request $request)
+	// {
+	// 	$data['jumlahpenduduk'] = JumlahPenduduk::where('kecamatan  ', 'LIKE', '%'.$request->cari.'%')->get();
+	// 	return view('app.jumlah-penduduk.search', $data);
+	// }
 	
 }
