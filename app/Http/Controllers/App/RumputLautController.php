@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use DB,Excel,PDF;
-use App\User,App\RumputLaut,App\Provinsi,App\Kabupaten,App\Kecamatan,App\Desa;
+use App\User,App\RumputLaut,App\Laporan,App\Provinsi,App\Kabupaten,App\Kecamatan,App\Desa;
 use App\Permissions;
 
 class RumputLautController extends Controller
@@ -132,7 +132,8 @@ class RumputLautController extends Controller
 	public function getExportPdf()
 	{
 		$data['rumputlaut'] = RumputLaut::get();
-		
+		$data['kasi'] = Laporan::where('jabatan','Kasi Budidaya Laut. Payau dan Air Tawar')->get();
+		$data['petugas'] = Laporan::where('jabatan','Petugas Statistik')->get();
         $pdf = PDF::loadView('app.laporan-produksi.rumputlaut.export-pdf', $data);
         return $pdf->setPaper('legal')->setOrientation('landscape')->setWarnings(false)->download('Data rumputlaut.pdf');
 	}

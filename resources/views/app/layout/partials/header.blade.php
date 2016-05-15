@@ -221,6 +221,10 @@
 								<a href="/app/master/lokasi">Lokasi</a>
 								<span class="icon-thumbnail">L</span>
 							</li>
+							<li class="sub-laporan">
+								<a href="/app/master/laporan">Laporan</a>
+								<span class="icon-thumbnail">L</span>
+							</li>
 
 							@if ( Permissions::pembudidaya() )
 								<li class="sub-saranapembudidaya">

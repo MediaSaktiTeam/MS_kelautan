@@ -269,6 +269,13 @@
 				'getHapus'  => 'bantuan_hapus',
 				'getUpdate'  => 'bantuan_update',
 			]);
+		Route::controller('app/master/laporan', 'LaporanController',
+			[
+				'getIndex'  => 'laporan',
+				'getAdd' => 'laporan_tambah',
+				'getDelete'  => 'laporan_hapus',
+				'getUpdate'  => 'laporan_update',
+			]);
 		Route::controller('app/master/jabatan', 'JabatanController',
 			[
 				'getIndex'  => 'jabatan',

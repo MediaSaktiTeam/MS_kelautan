@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use DB,Excel,PDF;
-use App\User,App\AirTawar,App\Provinsi,App\Kabupaten,App\Kecamatan,App\Desa;
+use App\User,App\AirTawar,App\Laporan,App\Provinsi,App\Kabupaten,App\Kecamatan,App\Desa;
 use App\Permissions;
 
 class AirTawarController extends Controller
@@ -132,7 +132,8 @@ class AirTawarController extends Controller
 	public function getExportPdf()
 	{
 		$data['airtawar'] = AirTawar::get();
-		
+		$data['kasi'] = Laporan::where('jabatan','Kasi Budidaya Laut. Payau dan Air Tawar')->get();
+		$data['petugas'] = Laporan::where('jabatan','Petugas Statistik')->get();
         $pdf = PDF::loadView('app.laporan-produksi.air-tawar.export-pdf', $data);
         return $pdf->setPaper('legal')->setOrientation('landscape')->setWarnings(false)->download('Data airtawar.pdf');
 	}

@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use DB,Excel,PDF;
-use App\User,App\Tambak,App\Provinsi,App\Kabupaten,App\Kecamatan,App\Desa;
+use App\User,App\Tambak,App\Laporan,App\Provinsi,App\Kabupaten,App\Kecamatan,App\Desa;
 use App\Permissions;
 
 class TambakController extends Controller
@@ -134,7 +134,8 @@ class TambakController extends Controller
 	public function getExportPdf()
 	{
 		$data['tambak'] = Tambak::get();
-		
+		$data['kasi'] = Laporan::where('jabatan','Kasi Budidaya Laut. Payau dan Air Tawar')->get();
+		$data['petugas'] = Laporan::where('jabatan','Petugas Statistik')->get();
         $pdf = PDF::loadView('app.laporan-produksi.tambak.export-pdf', $data);
         return $pdf->setPaper('legal')->setOrientation('landscape')->setWarnings(false)->download('Data Tambak.pdf');
 	}
