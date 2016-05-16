@@ -15,7 +15,7 @@ class JumlahPendudukController extends Controller
 	public function getIndex(Request $r)
 	{
 		$limit = 10;
-		$data['jumlahpenduduk'] = JumlahPenduduk::paginate(10);
+		$data['jumlahpenduduk'] = JumlahPenduduk::paginate(20);
 		return view ('app.jumlah-penduduk.index',$data)->with('limit', $limit);
 	}
 
@@ -73,10 +73,39 @@ public function getUpdate(Request $request)
 		return redirect()->route('jumlahpenduduk', $data)->with(session()->flash('success','Data Berhasil diupdate !!'));
 	}
 
-	public function getSearch(Request $request)
+	public function getSearch($cari)
 	{
-		$data['jumlahpenduduk'] = JumlahPenduduk::where('kecamatan  ', 'LIKE', '%'.$request->cari.'%')->get();
+		$data['jumlah_penduduk'] = DB::table('app_jumlah_penduduk as t')
+									->leftJoin('kecamatan as k', 't.kecamatan', '=', 'k.id')
+										->select('k.nama as nama_kecamatan', 't.*')
+										->where('k.nama','LIKE', '%'.$cari.'%')
+									->take(40)->get();
+
 		return view('app.jumlah-penduduk.search', $data);
+	}
+
+	public function getExportExcel()
+	{
+		$data['jumlah_penduduk'] = JumlahPenduduk::all();
+
+        Excel::create('Data Jumlah Penduduk Wilayah Pesisir dan P3K');
+
+        Excel::create('Data Jumlah Penduduk Wilayah Pesisir dan P3K', function($excel) use($data)
+        {
+            
+            $excel->sheet('New sheet', function($sheet) use($data)
+            {
+                $sheet->loadView('app.jumlah-penduduk.export-excel', $data);
+            }); 
+        })->download('xlsx');
+	}
+
+	public function getExportPdf()
+	{
+		$data['jumlah_penduduk'] = JumlahPenduduk::all();
+		
+        $pdf = PDF::loadView('app.jumlah-penduduk.export-pdf', $data);
+        return $pdf->setPaper('legal')->setOrientation('potrait')->setWarnings(false)->download('Data Jumlah Penduduk Wilayah Pesisir dan P3K.pdf');
 	}
 	
 }
