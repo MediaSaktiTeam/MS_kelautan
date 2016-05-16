@@ -2,7 +2,7 @@
 $(function(){
 	$(".btn-hapus-single").click(function(){
 		var id = $(this).data('id');
-		$(".btn-hapus").attr('href',"{{ url('/app/terumbu/milik/delete') }}/"+id);
+		$(".btn-hapus").attr('href',"{{ route('terumbumilik_delete') }}/"+id);
 		$("#modal-hapus").modal('hapus');
 	});
 });
@@ -40,7 +40,7 @@ $(function(){
 					<td>{{ $mil->kondisi_baik }} M<sup>2</sup></td>
 					<td style="text-align:center">
 						<a class="btn btn-default btn-xs view" data-id="{{ $mil->id }}"><i class="fa fa-search-plus"></i></a>
-						<a href="{{ url('/app/pengolah/edit/'.$mil->id) }}" class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i></a>
+						<a href="{{ route('terumburehabilitasi_edit'.$mil->id) }}" class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i></a>
 					</td>
 				</tr>
 			@endforeach

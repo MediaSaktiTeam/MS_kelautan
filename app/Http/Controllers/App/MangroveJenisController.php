@@ -70,6 +70,7 @@ class MangroveJenisController extends Controller
 
 	public function getSearch($cari)
 	{
+		$data['mangrovejenis'] = MangroveJenis::where('kecamatan  ', 'LIKE', '%'.$request->cari.'%')->get();
 		$data['mangrovejenis'] = DB::table('app_mangrove_jenis as m')
 									->leftJoin('kecamatan as k', 'm.kecamatan', '=', 'k.id')
 										->select(

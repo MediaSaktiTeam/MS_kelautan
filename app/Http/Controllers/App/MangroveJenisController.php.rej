@@ -1,0 +1,9 @@
+diff a/app/Http/Controllers/App/MangroveJenisController.php b/app/Http/Controllers/App/MangroveJenisController.php	(rejected hunks)
+@@ -70,7 +70,6 @@
+ 
+ 	public function getSearch($cari)
+ 	{
+-		$data['mangrovejenis'] = MangroveJenis::where('kecamatan  ', 'LIKE', '%'.$request->cari.'%')->get();
+ 		$data['mangrovejenis'] = DB::table('app_mangrove_jenis as m')
+ 									->leftJoin('kecamatan as k', 'm.kecamatan', '=', 'k.id')
+ 										->select(

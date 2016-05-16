@@ -150,7 +150,9 @@
 				'getDetail' => 'jumlahpenduduk_detail',
 				'getEdit' => 'jumlahpenduduk_edit',
 				'getUpdate' => 'jumlahpenduduk_update',
-				'getSearch' => 'jumlahpenduduk_search'
+				'getSearch' => 'jumlahpenduduk_search',
+				'getExportExcel' => 'jumlahpenduduk_xl',
+				'getExportPdf' => 'jumlahpenduduk_pdf'
 			]);
 		Route::get('get-kabupaten/{id}', 'LokasiController@get_kabupaten');
 		Route::get('get-kecamatan/{id}', 'LokasiController@get_kecamatan');
@@ -266,6 +268,13 @@
 				'getTambah'  => 'bantuan_tambah',
 				'getHapus'  => 'bantuan_hapus',
 				'getUpdate'  => 'bantuan_update',
+			]);
+		Route::controller('app/master/laporan', 'LaporanController',
+			[
+				'getIndex'  => 'laporan',
+				'getAdd' => 'laporan_tambah',
+				'getDelete'  => 'laporan_hapus',
+				'getUpdate'  => 'laporan_update',
 			]);
 		Route::controller('app/master/jabatan', 'JabatanController',
 			[

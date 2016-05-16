@@ -147,7 +147,8 @@
 							</ul>
 						</li>
 					@endif
-	
+					
+					@if ( Permissions::admin() )
 					<li class="link-pesisir">
 							<a href="javascript:;"><span class="title">Pesisir</span>
 							<span class=" arrow"></span></a>
@@ -197,7 +198,8 @@
 								</li>
 							</ul>
 						</li>
-
+					@endif
+					
 					<li class="link-kelompok">
 						<a href="/app/kelompok"><span class="title">Kelompok</span></a>
 						<span class="icon-thumbnail">K</span>
@@ -217,10 +219,16 @@
 								<a href="/app/master/bantuan">Bantuan</a>
 								<span class="icon-thumbnail">Bn</span>
 							</li>
+							@if ( Permissions::admin() )
 							<li class="sub-lokasi">
 								<a href="/app/master/lokasi">Lokasi</a>
 								<span class="icon-thumbnail">L</span>
 							</li>
+							<li class="sub-laporan">
+								<a href="/app/master/laporan">Laporan</a>
+								<span class="icon-thumbnail">L</span>
+							</li>
+							@endif
 
 							@if ( Permissions::pembudidaya() )
 								<li class="sub-saranapembudidaya">

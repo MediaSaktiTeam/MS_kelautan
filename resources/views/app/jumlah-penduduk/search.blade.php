@@ -2,7 +2,7 @@
 $(function(){
 	$(".btn-hapus-single").click(function(){
 		var id = $(this).data('id');
-		$(".btn-hapus").attr('href',"{{ url('/app/jumlah-penduduk/delete') }}/"+id);
+		$(".btn-hapus").attr('href',"{{ route('jumlahpenduduk_delete') }}/"+id);
 		$("#modal-hapus").modal('hapus');
 	});
 });
@@ -27,7 +27,8 @@ $(function(){
 		@if ( count($jumlah_penduduk) > 0 )
 
 			@foreach( $jumlah_penduduk as $jp )
-				@php($total2= $jp->laki + $jp->perempuan)
+				@php($total= $jp->laki + $jp->perempuan)
+
 				<tr>
 					<td>
 						<button class="btn btn-xs btn-danger btn-hapus-single"  data-toggle="modal" data-target="#modal-hapus" data-id="{{ $jp->id }}" ><i class="pg-trash"></i></button>
@@ -36,10 +37,10 @@ $(function(){
 					<td>{{ $jp->laki }}</td>
 					<td>{{ $jp->perempuan }}</td>
 					<td>{{ $jp->jumlah_kk }}</td>
-					<td><?php echo $total2; ?></td>
+					<td>{{ $total }}</td>
 					<td style="text-align:center">
 						<a class="btn btn-default btn-xs view" data-id="{{ $jp->id }}"><i class="fa fa-search-plus"></i></a>
-						<a href="{{ url('/app/pengolah/edit/'.$jp->id) }}" class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i></a>
+						<a href="{{ route('jumlahpenduduk_edit',$jp->id) }}" class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i></a>
 					</td>
 				</tr>
 			@endforeach

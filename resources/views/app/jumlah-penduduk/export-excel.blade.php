@@ -13,7 +13,7 @@
 		
 		<tbody>
 
-			<?php $i = 1 ?>
+			<?php $i = 1; ?>
 			
 			@foreach( $jumlah_penduduk as $jp )
 

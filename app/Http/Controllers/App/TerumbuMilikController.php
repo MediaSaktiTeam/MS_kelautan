@@ -46,7 +46,7 @@ class TerumbuMilikController extends Controller
 
 	public function getDetail($id)
 	{
-		$data['terumbumilik'] = terumbuMilik::where('id',$id)->first();
+		$data['terumbumilik'] = TerumbuMilik::where('id',$id)->first();
 		return view('app.terumbu.milik.detail', $data);
 	}
 

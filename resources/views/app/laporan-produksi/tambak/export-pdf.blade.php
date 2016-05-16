@@ -136,11 +136,13 @@
 
 	<table class="table table-no-border" style="width: 100%;">
 		<tr>
+			
 			<td width="70%">Mengetahui:<br>Kasie Budidaya Laut, Payau<br>dan Air Tawar
 				<br>
 				<br>
 				<br>
 			</td>
+			
 			<td>Bantaeng, 4 April 2016<br>Petugas Statistik Budidaya
 				<br>
 				<br>
@@ -148,8 +150,12 @@
 			</td>
 		</tr>
 		<tr>
-			<td width="70%"><b>MARWAH, SP.</b><br>NIP. 12309812980310192</td>
-			<td><b>AHMAD</b><br>NIP. 12309812980310192</td>
+			@foreach( $kasi as $ks )
+			<td width="70%"><b>{{ $ks->nama }}</b><br>NIP. {{ $ks->nip }}</td>
+			@endforeach
+			@foreach( $petugas as $pt )
+			<td><b>{{ $pt->nama }}</b><br>NIP. {{ $pt->nip }}</td>
+			@endforeach
 		</tr>
 	</table>
 

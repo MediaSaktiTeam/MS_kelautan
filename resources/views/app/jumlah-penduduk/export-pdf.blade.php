@@ -11,7 +11,9 @@
 
 <body>
 
-<center><h2>Data Jumlah Penduduk Wilayah Pesisir dan P3K <br> <small>Dinas Perikanan dan Kelautan Kab. Bantaeng</small></h2></center>
+
+<center><h2>Data Jumlah Penduduk Pesisir <br> <small>Dinas Perikanan dan Kelautan Kab. Bantaeng</small></h2></center>
+
 
 	<table class="table table-bordered">
 		<thead>
@@ -24,13 +26,23 @@
 				<th>Total</th>
 			</tr>
 		</thead>
-		
+		<?php 
+		$laki="";
+		$perempuan="";
+		$jumlah_kk="";
+		$total2="";
+		 ?>
 		<tbody>
-			<?php $i = 1 ?>
+			<?php $i = 1; ?>
 
 			@foreach( $jumlah_penduduk as $jp )
-
-				@php($total2= $jp->laki + $jp->perempuan)
+				<?php 
+					$total= $jp->laki + $jp->perempuan; 
+					$laki += $jp->laki;
+					$perempuan += $jp->perempuan;
+					$jumlah_kk += $jp->jumlah_kk;
+					$total2 += $total;
+				?>
 
 				<tr>
 					<td>{{ $i++ }}</td>
@@ -38,10 +50,19 @@
 					<td>{{ $jp->laki }}</td>
 					<td>{{ $jp->perempuan }}</td>
 					<td>{{ $jp->jumlah_kk }}</td>
-					<td>{{ $total2 }}</td>
+
+					<td>{{ $total }}</td>
 				</tr>
 
 			@endforeach
+			<tr>
+					<td><b>Jumlah</b></td>
+					<td></td>
+					<td><b><?php echo round($laki,2);  ?></b></td>
+					<td><b><?php echo round($perempuan,2); ?></b></td>
+					<td><b><?php echo round($jumlah_kk,2); ?></b></td>
+					<td><b><?php echo round($total2,2); ?></b></td>
+					</tr>
 		</tbody>
 	</table>
 

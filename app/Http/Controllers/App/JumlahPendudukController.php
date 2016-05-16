@@ -59,19 +59,19 @@ class JumlahPendudukController extends Controller
 	}
 
 
-public function getUpdate(Request $request)
-	{
+	public function getUpdate(Request $request)
+		{
 
-		$dt = JumlahPenduduk::find($request->id);
-		$dt->id = $request->id;
-		$dt->kecamatan = $request->kecamatan;
-		$dt->laki = $request->laki;
-		$dt->perempuan = $request->perempuan;
-		$dt->jumlah_kk = $request->jumlah_kk;
-		$dt->save();
-		$data['jumlahpenduduk'] = JumlahPenduduk::paginate(1);
-		return redirect()->route('jumlahpenduduk', $data)->with(session()->flash('success','Data Berhasil diupdate !!'));
-	}
+			$dt = JumlahPenduduk::find($request->id);
+			$dt->id = $request->id;
+			$dt->kecamatan = $request->kecamatan;
+			$dt->laki = $request->laki;
+			$dt->perempuan = $request->perempuan;
+			$dt->jumlah_kk = $request->jumlah_kk;
+			$dt->save();
+			$data['jumlahpenduduk'] = JumlahPenduduk::paginate(1);
+			return redirect()->route('jumlahpenduduk', $data)->with(session()->flash('success','Data Berhasil diupdate !!'));
+		}
 
 	public function getSearch($cari)
 	{
@@ -82,6 +82,7 @@ public function getUpdate(Request $request)
 									->take(40)->get();
 
 		return view('app.jumlah-penduduk.search', $data);
+
 	}
 
 	public function getExportExcel()

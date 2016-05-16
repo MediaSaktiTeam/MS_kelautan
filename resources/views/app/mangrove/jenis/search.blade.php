@@ -2,7 +2,7 @@
 $(function(){
 	$(".btn-hapus-single").click(function(){
 		var id = $(this).data('id');
-		$(".btn-hapus").attr('href',"{{ url('/app/mangrove/jenis/hapus') }}/"+id);
+		$(".btn-hapus").attr('href',"{{ route('mangrovejenis_delete') }}/"+id);
 		$("#modal-hapus").modal('hapus');
 	});
 });
