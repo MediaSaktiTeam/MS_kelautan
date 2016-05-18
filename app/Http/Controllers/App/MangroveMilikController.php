@@ -8,9 +8,15 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use DB,Excel,PDF;
 use App\User,App\MangroveMilik,App\Provinsi,App\Kabupaten,App\Kecamatan,App\Desa;
+use App\Permissions;
 
 class MangroveMilikController extends Controller
 {
+
+	public function __construct()
+	{
+		$this->middleware('Pesisir');
+	}
 
 	public function getIndex(Request $r)
 	{

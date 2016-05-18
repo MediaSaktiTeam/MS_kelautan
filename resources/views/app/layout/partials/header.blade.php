@@ -148,7 +148,7 @@
 						</li>
 					@endif
 					
-					@if ( Permissions::admin() )
+					@if ( Permissions::pesisir() )
 					<li class="link-pesisir">
 							<a href="javascript:;"><span class="title">Pesisir</span>
 							<span class=" arrow"></span></a>

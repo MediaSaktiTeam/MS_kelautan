@@ -8,6 +8,7 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use DB,Excel,PDF;
 use App\User,App\JumlahPenduduk,App\Provinsi,App\Kabupaten,App\Kecamatan,App\Desa;
+use App\Permissions;
 
 class JumlahPendudukController extends Controller
 {

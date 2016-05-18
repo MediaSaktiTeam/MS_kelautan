@@ -27,6 +27,12 @@ class Permissions
 		return $sql->pengolah == 1 ? true : false; 
 	}
 
+	public function pesisir()
+	{
+		$sql = DB::table('permissions')->where('id_user', Auth::user()->id)->first();
+		return $sql->pesisir == 1 ? true : false; 
+	}
+
 	public function admin()
 	{
 		$sql = DB::table('permissions')->where('id_user', Auth::user()->id)->first();
