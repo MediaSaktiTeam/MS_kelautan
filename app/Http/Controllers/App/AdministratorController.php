@@ -24,7 +24,8 @@ class AdministratorController extends Controller
 								->select('u.*')
 								->where('p.pembudidaya', 1)
 								->orWhere('p.nelayan', 1)
-								->orWhere('p.pengolah', 1)->paginate($limit);
+								->orWhere('p.pengolah', 1)
+								->orWhere('p.pesisir', 1)->paginate($limit);
 								
 		return view('app.administrator.index', $data)->with('limit', $limit);
 	}
@@ -39,6 +40,7 @@ class AdministratorController extends Controller
 		$nelayan 		= $r->nelayan 		== 'on' ? 1 : 0;
 		$pembudidaya 	= $r->pembudidaya 	== 'on' ? 1 : 0;
 		$pengolah 		= $r->pengolah 		== 'on' ? 1 : 0;
+		$pesisir 		= $r->pesisir 		== 'on' ? 1 : 0;
 
 		$data = new User;
 		$data->username = $r->username;
@@ -55,6 +57,7 @@ class AdministratorController extends Controller
 		$data->pembudidaya = $pembudidaya;
 		$data->nelayan = $nelayan;
 		$data->pengolah = $pengolah;
+		$data->pesisir = $pesisir;
 		$data->save();
 
 		$r->session()->flash('success', 'Berhasil menyimpan data');
@@ -72,6 +75,7 @@ class AdministratorController extends Controller
 		$nelayan 		= $r->nelayan 		== 'on' ? 1 : 0;
 		$pembudidaya 	= $r->pembudidaya 	== 'on' ? 1 : 0;
 		$pengolah 		= $r->pengolah 		== 'on' ? 1 : 0;
+		$pesisir 		= $r->pesisir 		== 'on' ? 1 : 0;
 
 		$data = User::find($r->id);
 		$data->username = $r->username;
@@ -84,6 +88,7 @@ class AdministratorController extends Controller
 		$data->pembudidaya = $pembudidaya;
 		$data->nelayan = $nelayan;
 		$data->pengolah = $pengolah;
+		$data->pesisir = $pesisir;
 		$data->save();
 
 		$r->session()->flash('success', 'Berhasil menyimpan data');

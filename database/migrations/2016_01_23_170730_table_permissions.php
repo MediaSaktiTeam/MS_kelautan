@@ -17,6 +17,7 @@ class TablePermissions extends Migration
             $table->enum('pembudidaya', ['0', '1'])->default(0);
             $table->enum('nelayan', ['0', '1'])->default(0);
             $table->enum('pengolah', ['0', '1'])->default(0);
+            $table->enum('pesisir', ['0', '1'])->default(0);
             $table->enum('blog', ['0', '1'])->default(0);
             $table->enum('admin', ['0', '1'])->default(0);
         });

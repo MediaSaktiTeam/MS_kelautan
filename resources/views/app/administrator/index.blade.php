@@ -87,6 +87,11 @@
 											<input type="checkbox" name="pengolah" id="pengolah">
 											<label for="pengolah">Pengolah</label>
 										</div>
+
+										<div class="checkbox" title="hak_akses">
+											<input type="checkbox" name="pesisir" id="pesisir">
+											<label for="pesisir">Pesisir</label>
+										</div>
 									</div>
 									<br>
 									<div class="form-group">

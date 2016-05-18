@@ -35,7 +35,7 @@ class CreateUsersTable extends Migration
             $table->float('modal_dimiliki')->nullable();
             $table->float('modal_pinjaman')->nullable();
             $table->float('omzet_perbulan')->nullable();
-            $table->enum('profesi', ['Pembudidaya','Nelayan','Admin', 'Pengolah', 'Blog']);
+            $table->enum('profesi', ['Pembudidaya','Nelayan','Admin', 'Pengolah', 'Blog', 'Pesisir']);
             $table->dateTime('tgl_password')->nullable();
             $table->rememberToken();
             $table->timestamps();

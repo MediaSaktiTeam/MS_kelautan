@@ -22,6 +22,11 @@
 		<input type="checkbox" id="pengolah2" name="pengolah" {{ $role->pengolah == 1 ? "checked=''":"" }}>
 		<label for="pengolah2">Pengolah</label>
 	</div>
+
+	<div class="checkbox" title="hak_akses">
+		<input type="checkbox" id="pengolah2" name="pesisir" {{ $role->pesisir == 1 ? "checked=''":"" }}>
+		<label for="pengolah2">pesisir</label>
+	</div>
 </div>
 
 <div class="form-group">
