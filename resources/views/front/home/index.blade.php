@@ -54,13 +54,13 @@
 						Ucapan terima kasih kepada semua pihak yang telah mendukung Pembuatan Website Perikanan ini. Semoga Website ini dapat menjadi salah satu referensi dalam upaya mengembangkan potensi sumber daya alam dan sumber daya manusia di Kabupaten Bantaeng. Insya Allah.
 					</p>
 
-					<img src="{{ url('resources/assets/front') }}/img/signature.png" alt="" class="u-photo">
+					<a href="#" data-toggle="modal" data-target="#bupati">~ Selengkapnya ~</a>
 
 				</div> <!-- end col-sm-6 -->
 
 				<div class="col-sm-6">
 					
-					<img src="{{ url('resources/assets/front') }}/img/man.png" alt="" class="u-photo quote-image">
+					<img src="{{ url('resources/assets/front') }}/img/bupati_diskanlutbantaeng.png" alt="" class="u-photo quote-image">
 
 				</div> <!-- end col-sm-6 -->			
 
@@ -77,7 +77,7 @@
 
 				<div class="col-sm-6">
 					
-					<img src="{{ url('resources/assets/front') }}/img/man.png" alt="" class="u-photo quote-image">
+					<img src="{{ url('resources/assets/front') }}/img/kadis_diskanlutbantaeng.png" alt="" class="u-photo quote-image">
 
 				</div> <!-- end col-sm-6 -->			
 				
@@ -93,7 +93,7 @@
 						Insya Allah kedepannya dengan terbentuknya website ini akan kami lengkapi semua data diwilayah pesisir Bantaeng. Kepada semua Pihak yang telah mendukung terbentuknya Website Dinas Perikanan dan Kelautan Kabupaten Bantaeng ini saya menyampaikan Terima Kasih yang Tak terhingga. Semoga mendapatkan amalan disisi-NYA.
 					</p>
 
-					<img src="{{ url('resources/assets/front') }}/img/signature.png" alt="" class="u-photo">
+					<a href="#" data-toggle="modal" data-target="#kadis">~ Selengkapnya ~</a>
 
 				</div> <!-- end col-sm-6 -->
 
@@ -258,6 +258,7 @@
 
 
 				<div style="display:none;color:#21366c" class="alert alert-success">
+					<i class="fa fa-check" style="font-size: 60px;color: #C09575;"></i>
 					<h5>Terimakasih, Pesan Anda Telah Terkirim</h5>
 				</div>
 
@@ -285,6 +286,92 @@
 
 	</section>
 	<!-- END CONTACT -->
+
+
+
+
+	<!-- Modal -->
+	<div class="modal fade" id="bupati" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+					<h2 class="quote-name">Prof. Dr. Ir. H. M. Nurdin Abdullah, M.A</h2>
+					<h5 class="sub-info">Bupati Kab. Bantaeng</h5>
+				</div>
+				<div class="modal-body">
+
+					<p class="quote-role">
+						<b>Assalamu Alaikum Warahmatullahi Wabarakatu</b>
+					</p>
+
+					<p class="quote-role">
+						Saya menyambut baik website Perikanan Kabupaten Bantaeng karena website ini akan memberikan banyak informasi kepada semua pihak, khususnya pada stakeholder yang membutuhkan data perikanan sebagai dasar untuk mendukung pengembangan sub sektor perikanan di Kabupaten Bantaeng.
+					</p>
+
+					<p class="quote-role">
+						Kabupaten Bantaeng saat ini terus melakukan berbagai terobosan di bidang perikanan dan kelautan yang sifatnya menyentuh langsung kepada pelaku bisnis mulai skala kecil hingga skala besar (Industri Perikanan). Bentuk dukungan ini telah tertuang dalam berbagai kerjasama dengan stakeholder daerah dan provinsi.
+					</p>
+
+					<p class="quote-role">
+						Ucapan terima kasih kepada semua pihak yang telah mendukung Pembuatan Website Perikanan ini. Semoga Website ini dapat menjadi salah satu referensi dalam upaya mengembangkan potensi sumber daya alam dan sumber daya manusia di Kabupaten Bantaeng. Insya Allah.
+					</p>
+
+					<div class="row" style="font-size: 12px">	
+						<p class="col-sm-offset-6 col-sm-6 col-xs-offset-6 col-xs-6">
+							Bantaeng, Agustus 2015 <br>
+
+							<b>BUPATI <br>
+
+							Prof.Dr.Ir.H.M.Nurdin Abdullah, M.A</b>
+						</p>
+					</div>
+
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="modal fade" id="kadis" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+					<h2 class="quote-name">Ir. Muh. Dimiati Nongpa, M.P</h2>
+					<h5 class="sub-info">Kepala Dinas Perikanan dan Kelautan Kab. Bantaeng</h5>
+				</div>
+				<div class="modal-body">
+
+					<p class="quote-role">
+						<b>Assalamu Alaikum Warahmatullahi Wabarakatu</b>
+					</p>
+
+					<p class="quote-role">
+						Syukur Alhamdulillah dipanjatkan kepada Allah SWT yang telah memberi kesempatan dan kemampuan kepada kita sehingga pembuatan Website Dinas Perikanan dan Kelautan Kab. Bantaeng ini dapat diselesaikan. Website ini dibuat dengan tujuan agar ketersediaan informasi terupdate data perikanan dan kelautan Kabupaten Bantaeng bisa lebih dikenal oleh seluruh masyarakat sekitar. Disadari bahwa masih terbatasnya data ditingkat kelurahan dan desa sehingga beberapa bagian dari website Dinas Perikanan dan Kelautan ini belum terisi dengan lengkap. Insya Allah kedepannya dengan terbentuknya website ini akan kami lengkapi semua data diwilayah pesisir Bantaeng. Kepada semua Pihak yang telah mendukung terbentuknya Website Dinas Perikanan dan Kelautan Kabupaten Bantaeng ini saya menyampaikan Terima Kasih yang Tak terhingga. Semoga mendapatkan amalan disisi-NYA. Akhirnya saya harap Website ini dapat bermanfaat bagi kita semua yang membutuhkan informasi seputar Dinas Perikanan dan Kelautan Kabupaten Bantaeng.
+					</p>
+
+					<div class="row" style="font-size: 12px">	
+						<p class="col-sm-offset-6 col-sm-6 col-xs-offset-6 col-xs-6">
+							Bantaeng, Agustus 2015 <br>
+
+							Kepala Dinas Perikanan dan Kelautan,<br>
+
+							<b>Ir.MUH. DIMIATI NONGPA, M.P<br>
+
+							NIP:19640715199303 1 016</b>
+						</p>
+					</div>
+
+				</div>
+			</div>
+		</div>
+	</div>
+
+
 @endsection
 
 @section('registerscript')
