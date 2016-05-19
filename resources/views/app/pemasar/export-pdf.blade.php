@@ -1,4 +1,4 @@
-<!DOCTYPE htm>
+<!DOCTYPE html>
 
 <head>
 
@@ -11,62 +11,57 @@
 
 <body>
 
-<center><h2>Data Pemasar <br> <small>Dinas Perikanan dan Kelautan Kab. Bantaeng</small></h2></center>
-
-	<table class="table table-no-border" style="width: 40%">
-		<tr>
-			<td><b>KABUPATEN</b></td>
-			<td><b>BANTAENG</b></td>
-		</tr>
-		<tr>
-			<td><b>KWARTAL</b></td>
-			<td><b>1 (Satu) Januari s/d Maret</b></td>
-		</tr>
-		<tr>
-			<td><b>TAHUN</b></td>
-			<td><b>2016</b></td>
-		</tr>
-	</table>
+<center><h2>Survei Pengolahan dan Pemasaran Hasil Perikanan <br> <small>Dinas Perikanan dan Kelautan Kab. Bantaeng</small></h2></center>
 
 	<table class="table table-bordered">
 		<thead>
 			<tr>
 				<th>No.</th>
-				<th>NIK</th>
-				<th>Nama Lengkap</th>
-				<th>Alamat</th>
-				<th>Nama Kelompok</th>
-				<th>Jabatan Kelompok</th>
-				<th>Jenis Olahan</th>
-				<th>Legalitas Produksi</th>
-				<th>Merek Dagang</th>
-				<th>Modal yang dimiliki</th>
-				<th>Modal Pinjaman</th>
-				<th>Omzet Perbulan</th>
+				<th>Provinsi</th>
+				<th>Kabupaten</th>
+				<th>Kecamatan</th>
+				<th>Desa</th>
+				<th>Kode Jenis Kegiatan</th>
+				<th>Nomor Urut Direktori</th>
+				<th>Nama Unit Pemasar</th>
+				<th>Pemilik Unit Pemasar</th>
+				<th>Alamat Unit Pemasar</th>
+				<th>RT/RW</th>
+				<th>Telepon</th>
+				<th>Kode POS</th>
+				<th>Jenis Kegiatan Pemasaran</th>
+				<th>Tahun Mulai Usaha</th>
 			</tr>
+			
 		</thead>
 		
 		<tbody>
-			
-	</table>
+			<?php $i = 1; ?>
 
-	<table class="table table-no-border" style="width: 100%;">
-		<tr>
-			<td width="70%">Mengetahui:<br>Kasie Budidaya Laut, Payau<br>dan Air Tawar
-				<br>
-				<br>
-				<br>
-			</td>
-			<td>Bantaeng, 4 April 2016<br>Petugas Statistik Budidaya
-				<br>
-				<br>
-				<br>
-			</td>
-		</tr>
-		<tr>
-			<td width="70%"><b>MARWAH, SP.</b><br>NIP. 12309812980310192</td>
-			<td><b>AHMAD</b><br>NIP. 12309812980310192</td>
-		</tr>
+
+		@foreach( $pemasar as $ps )
+
+			<tr>
+				<td>{{ $i++ }}</td>
+				<td>{{ $ps->provinsi }}</td>
+				<td>{{ $ps->kabupaten }}</td>
+				<td>{{ $ps->kecamatan }}</td>
+				<td>{{ $ps->desa }}</td>
+				<td>{{ $ps->kode_kegiatan }}</td>
+				<td>{{ $ps->nomor_direktori }}</td>
+				<td>{{ $ps->unit_pemasar }}</td>
+				<td>{{ $ps->pemilik_pemasar }}</td>
+				<td>{{ $ps->alamat_pemasar }}</td>
+				<td>{{ $ps->erte }}</td>
+				<td>{{ $ps->tlp }}</td>
+				<td>{{ $ps->pos }}</td>
+				<td>{{ $ps->tipe }}</td>
+				<td>{{ $ps->tahun_mulai }}</td>
+			</tr>
+
+		@endforeach
+			
+		</tbody>
 	</table>
 
 </body>

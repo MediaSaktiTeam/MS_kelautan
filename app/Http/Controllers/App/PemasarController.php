@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use DB,Excel,PDF;
-use App\User,App\Pemasar,App\Provinsi,App\Kabupaten,App\Kecamatan,App\Desa;
+use App\User,App\Pemasar,App\Laporan,App\Provinsi,App\Kabupaten,App\Kecamatan,App\Desa;
 use App\Permissions;
 
 class PemasarController extends Controller
@@ -101,7 +101,7 @@ class PemasarController extends Controller
 		$data['pemasar'] = Pemasar::get();
 
         Excel::create('Data pemasar');
- 
+
         Excel::create('Data pemasar', function($excel) use($data)
         {
             
@@ -114,8 +114,7 @@ class PemasarController extends Controller
 
 	public function getExportPdf()
 	{
-		$data['pemasar'] = Pemasar::get();
-		
+		$data['pemasar'] = pemasar::get();
         $pdf = PDF::loadView('app.pemasar.export-pdf', $data);
         return $pdf->setPaper('legal')->setOrientation('landscape')->setWarnings(false)->download('Data pemasar.pdf');
 	}
