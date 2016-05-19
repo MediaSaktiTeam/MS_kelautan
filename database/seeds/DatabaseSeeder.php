@@ -739,8 +739,8 @@ class PermissionsSeeder extends Seeder
         array('id_user' => 2, 'pembudidaya' => 1, 'nelayan' => 0, 'pengolah' => 0, 'admin' => 0, 'blog' => 0, 'pesisir' => 0),
         array('id_user' => 3, 'pembudidaya' => 0, 'nelayan' => 1, 'pengolah' => 0, 'admin' => 0, 'blog' => 0, 'pesisir' => 0),
         array('id_user' => 4, 'pembudidaya' => 0, 'nelayan' => 0, 'pengolah' => 1, 'admin' => 0, 'blog' => 0, 'pesisir' => 0),
-        array('id_user' => 6, 'pembudidaya' => 0, 'nelayan' => 0, 'pengolah' => 0, 'admin' => 0, 'blog' => 0, 'pesisir' => 1),
-        array('id_user' => 5, 'pembudidaya' => 0, 'nelayan' => 0, 'pengolah' => 0, 'admin' => 0, 'blog' => 1, 'pesisir' => 0)
+        array('id_user' => 5, 'pembudidaya' => 0, 'nelayan' => 0, 'pengolah' => 0, 'admin' => 0, 'blog' => 1, 'pesisir' => 0),
+        array('id_user' => 6, 'pembudidaya' => 0, 'nelayan' => 0, 'pengolah' => 0, 'admin' => 0, 'blog' => 0, 'pesisir' => 1)
       );
 
       DB::table('permissions')->insert($data);

@@ -17,6 +17,7 @@ class MangroveJenisController extends Controller
 	{
 		$this->middleware('Pesisir');
 	}
+	
 	public function getIndex()
 	{
 		$limit="10";
