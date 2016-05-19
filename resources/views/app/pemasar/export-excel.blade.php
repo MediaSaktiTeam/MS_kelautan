@@ -45,7 +45,6 @@
 				<td>{{ $ps->tahun_mulai }}</td>
 			</tr>
 			<?php $i = $i + 1; ?>
-		@endforea
 		@endforeach
 
 			
