@@ -231,7 +231,7 @@
 												</tbody>
 
 											</table>
-											<center>{!! $terumbumilik->links() !!}</center>
+											<center>{!! $terumbumilik->appends([ 'offset' => $_GET['offset'], 'limit' => $_GET['limit'] ])->links() !!}</center>
 										</div>
 
 									</div>
@@ -314,13 +314,13 @@
 				<div class="modal-body">
 					<div class="row">
 						<div class="col-md-6">
-							<a href="{{ url('/app/terumbu/milik/export-excel') }}">
+							<a href="{{ url('/app/terumbu/milik/export-excel?offset='.$_GET['offset'].'&limit='.$_GET['limit']) }}">
 								<i class="fa fa-file-excel-o export-excel"></i>
 								Unduh Dalam Format Mic.Excel
 							</a>
 						</div>
 						<div class="col-md-6">
-							<a href="{{ url('/app/terumbu/milik/export-pdf') }}">
+							<a href="{{ url('/app/terumbu/milik/export-pdf?offset='.$_GET['offset'].'&limit='.$_GET['limit']) }}">
 								<i class="fa fa-file-pdf-o export-pdf"></i>
 								Unduh Dalam Format PDF
 							</a>

@@ -335,7 +335,7 @@
 												</tbody>
 
 											</table>
-											<center>{!! $tambak->links() !!}</center>
+											<center>{!! $tambak->appends([ 'offset' => $_GET['offset'], 'limit' => $_GET['limit'] ])->links() !!}</center>
 										</div>
 
 									</div>

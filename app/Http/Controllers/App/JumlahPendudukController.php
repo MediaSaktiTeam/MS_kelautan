@@ -15,8 +15,33 @@ class JumlahPendudukController extends Controller
 
 	public function getIndex(Request $r)
 	{
+		if ( !isset( $r->offset ) || !isset( $r->limit ) ) {
+
+			$sql = JumlahPenduduk::orderBy('id', 'desc')->first();
+
+			if ( $sql ) {
+			// Jika sudah ada data
+
+				// limit = Tanggal terbaru
+				// offset = Limit - 3 bulan
+				$limit1 = date_format(date_create($sql->created_at), "Y-m-d");
+				$limit = strtotime("$limit1 +1 day");
+				$limit = date("Y-m-d", $limit);
+
+				$offset = strtotime("$limit1 -3 months");
+				$offset = date("Y-m-d", $offset);
+
+			} else {
+			// Jika belum ada data offset = tgl skrang, limit = offset + 3 bulan
+				$offset = date('Y-m-d');
+				$limit = strtotime("$offset +3 months");
+				$limit = date("Y-m-d", $limit);
+			}
+
+			 return redirect( '/app/jumlah-penduduk?offset='.$offset.'&limit='.$limit );
+		}
 		$limit = 10;
-		$data['jumlahpenduduk'] = JumlahPenduduk::paginate(20);
+		$data['jumlahpenduduk'] = JumlahPenduduk::whereBetween('created_at', [ $r->offset, $r->limit ])->paginate(20);
 		return view ('app.jumlah-penduduk.index',$data)->with('limit', $limit);
 	}
 
@@ -86,9 +111,9 @@ class JumlahPendudukController extends Controller
 
 	}
 
-	public function getExportExcel()
+	public function getExportExcel(Request $r)
 	{
-		$data['jumlah_penduduk'] = JumlahPenduduk::all();
+		$data['jumlah_penduduk'] = JumlahPenduduk::whereBetween('created_at', [ $r->offset, $r->limit ])->get();
 
         Excel::create('Data Jumlah Penduduk Wilayah Pesisir dan P3K');
 
@@ -102,9 +127,9 @@ class JumlahPendudukController extends Controller
         })->download('xlsx');
 	}
 
-	public function getExportPdf()
+	public function getExportPdf(Request $r)
 	{
-		$data['jumlah_penduduk'] = JumlahPenduduk::all();
+		$data['jumlah_penduduk'] = JumlahPenduduk::whereBetween('created_at', [ $r->offset, $r->limit ])->get();
 		
         $pdf = PDF::loadView('app.jumlah-penduduk.export-pdf', $data);
         return $pdf->setPaper('legal')->setOrientation('potrait')->setWarnings(false)->download('Data Jumlah Penduduk Wilayah Pesisir dan P3K.pdf');
