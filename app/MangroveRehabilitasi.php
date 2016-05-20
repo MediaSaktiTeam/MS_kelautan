@@ -7,8 +7,6 @@ use Illuminate\Database\Eloquent\Model;
 class MangroveRehabilitasi extends Model
 {
     protected $table = "app_mangrove_rehabilitasi";
-    
-    public $timestamps = false;
    
     public function dataprovinsi(){
     	return $this->belongsTo('App\Provinsi', 'provinsi');

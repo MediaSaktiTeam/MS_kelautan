@@ -8,8 +8,6 @@ class MangroveJenis extends Model
 {
     protected $table = "app_mangrove_jenis";
     
-    public $timestamps = false;
-
     public function dataprovinsi(){
     	return $this->belongsTo('App\Provinsi', 'provinsi');
     }

@@ -8,8 +8,6 @@ class TerumbuJenis extends Model
 {
     protected $table = "app_terumbu_jenis_ikan";
     
-    public $timestamps = false;
-   
     public function dataprovinsi(){
     	return $this->belongsTo('App\Provinsi', 'provinsi');
     }
