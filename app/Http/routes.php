@@ -32,7 +32,7 @@
 
 	});
 
-	Route::group(['middleware' => 'MustLogin', 'namespace' => 'App' ], function () {
+	Route::group(['middleware' => ['MustLogin', 'AdminApp'], 'namespace' => 'App' ], function () {
 
 		Route::get('/app/beranda', 'BerandaController@index');
 
