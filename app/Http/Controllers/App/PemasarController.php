@@ -142,6 +142,8 @@ class PemasarController extends Controller
 	public function getExportPdf(Request $r)
 	{
 		$data['pemasar'] = Pemasar::whereBetween('created_at', [ $r->offset, $r->limit ])->get();
+        $data['tgl_awal']		= $r->offset;
+		$data['tgl_akhir']		= $r->limit;
         $pdf = PDF::loadView('app.pemasar.export-pdf', $data);
         return $pdf->setPaper('legal')->setOrientation('landscape')->setWarnings(false)->download('Data pemasar.pdf');
 	}

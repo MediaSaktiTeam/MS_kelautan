@@ -291,6 +291,8 @@ class NelayanController extends Controller
 		$data['nelayan'] = $nelayan->get();
 		$data['kelompok'] = Kelompok::where('tipe','nelayan')->get();
 		$data['jabatan'] = Jabatan::all();
+		$data['tgl_awal']		= $r->offset;
+		$data['tgl_akhir']		= $r->limit;
 		
         $pdf = PDF::loadView('app.nelayan.export-pdf', $data);
         return $pdf->setPaper('legal')->setOrientation('landscape')->setWarnings(false)->download('Data Nelayan.pdf');

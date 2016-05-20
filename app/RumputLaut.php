@@ -8,8 +8,6 @@ class RumputLaut extends Model
 {
     protected $table = "app_rumput_laut";
 
-    public $timestamps = false;
-
      public function dataprovinsi(){
     	return $this->belongsTo('App\Provinsi', 'provinsi');
     }

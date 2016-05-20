@@ -8,8 +8,6 @@ class Tambak extends Model
 {
     protected $table = "app_tambak";
 
-    public $timestamps = false;
-
      public function dataprovinsi(){
     	return $this->belongsTo('App\Provinsi', 'provinsi');
     }
