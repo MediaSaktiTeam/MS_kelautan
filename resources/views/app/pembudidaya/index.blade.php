@@ -198,18 +198,36 @@
 
 									<div class="">
 
-										<div class="col-md-4">
+										<form action="{{ url('/app/pembudidaya') }}">
+
+											<input type="hidden" name="f" value="{{ $_GET['f'] }}">
+
+											<div class="col-md-4">
+												<div class="input-group">
+													<input type="date" class="form-control" name="offset" value="{{ $_GET['offset'] }}"/>
+													<span class="input-group-addon" style="border: 0;">-</span>
+													<input type="date" class="form-control" name="limit" value="{{ $_GET['limit'] }}"/>
+												</div>
+											</div>
+
+											<div class="col-md-1">
+												<button class="btn btn-default">Tampilkan</button>
+											</div>
+
+										</form>
+
+										<div class="col-md-offset-1 col-md-2">
 											<div class="form-group">
 												<select onchange="window.open(this.options[this.selectedIndex].value,'_top')" class="full-width" data-init-plugin="select2">
-														<option value="{{ route('pembudidaya', ['f' => '']) }}" {{ $_GET['f'] == '' ? 'selected' : '' }}>Semua Jenis Usaha</option> 
-														<option value="{{ route('pembudidaya', ['f' => 'Budidaya Air Laut']) }}" {{ $_GET['f'] == 'Budidaya Air Laut' ? 'selected' : '' }}>Budidaya Air Laut</option> 
-														<option value="{{ route('pembudidaya', ['f' => 'Budidaya Air Tawar']) }}" {{ $_GET['f'] == 'Budidaya Air Tawar' ? 'selected' : '' }}>Budidaya Air Tawar</option> 
-														<option value="{{ route('pembudidaya', ['f' => 'Budidaya Air Payau']) }}" {{ $_GET['f'] == 'Budidaya Air Payau' ? 'selected' : '' }}>Budidaya Air Payau</option> 
+														<option value="{{ route('pembudidaya', ['f' => '', 'offset' => $_GET['offset'], 'limit' => $_GET['limit'] ]) }}" {{ $_GET['f'] == '' ? 'selected' : '' }}>Semua Jenis Usaha</option> 
+														<option value="{{ route('pembudidaya', ['f' => 'Budidaya Air Laut', 'offset' => $_GET['offset'], 'limit' => $_GET['limit'] ]) }}" {{ $_GET['f'] == 'Budidaya Air Laut' ? 'selected' : '' }}>Budidaya Air Laut</option> 
+														<option value="{{ route('pembudidaya', ['f' => 'Budidaya Air Tawar', 'offset' => $_GET['offset'], 'limit' => $_GET['limit'] ]) }}" {{ $_GET['f'] == 'Budidaya Air Tawar' ? 'selected' : '' }}>Budidaya Air Tawar</option> 
+														<option value="{{ route('pembudidaya', ['f' => 'Budidaya Air Payau', 'offset' => $_GET['offset'], 'limit' => $_GET['limit'] ]) }}" {{ $_GET['f'] == 'Budidaya Air Payau' ? 'selected' : '' }}>Budidaya Air Payau</option> 
 												</select>
 											</div>
 										</div>
 
-										<div class="col-md-8">
+										<div class="col-md-4">
 											<div class="input-group">
 												<input type="text" onkeyup="cari_data(this.value)" class="form-control" placeholder="Pencarian">
 												<span class="input-group-btn">
@@ -282,7 +300,7 @@
 												</tbody>
 
 											</table>
-											<center>{!! $pembudidaya->links() !!}</center>
+											<center>{!! $pembudidaya->appends([ 'f' => $_GET['f'], 'offset' => $_GET['offset'], 'limit' => $_GET['limit'] ])->links() !!}</center>
 										</div>
 
 									</div>
@@ -365,13 +383,13 @@
 				<div class="modal-body">
 					<div class="row">
 						<div class="col-md-6">
-							<a href="{{ url('/app/pembudidaya/export-excel?f='.$_GET['f']) }}">
+							<a href="{{ url('/app/pembudidaya/export-excel?f='.$_GET['f'].'&offset='.$_GET['offset'].'&limit='.$_GET['limit']) }}">
 								<i class="fa fa-file-excel-o export-excel"></i>
 								Unduh Dalam Format Mic.Excel
 							</a>
 						</div>
 						<div class="col-md-6">
-							<a href="{{ url('/app/pembudidaya/export-pdf?f='.$_GET['f']) }}">
+							<a href="{{ url('/app/pembudidaya/export-pdf?f='.$_GET['f'].'&offset='.$_GET['offset'].'&limit='.$_GET['limit']) }}">
 								<i class="fa fa-file-pdf-o export-pdf"></i>
 								Unduh Dalam Format PDF
 							</a>

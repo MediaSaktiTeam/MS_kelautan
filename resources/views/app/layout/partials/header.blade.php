@@ -28,10 +28,12 @@
 						<a href="/" target="_blank" class="p-l-40"><img src="{{ url('resources/assets/app/img/modules/2.jpg') }}" alt="Front Site" width="83px">
 						</a>
 					</div>
+					@if ( Permissions::admin() )
 					<div class="col-xs-6 no-padding">
 						<a href="/admin" class="p-l-10"><img src="{{ url('resources/assets/app/img/modules/1.jpg') }}" alt="Content Management System" width="83px">
 						</a>
 					</div>
+					@endif
 				</div>
 			</div>
 			<!-- END SIDEBAR MENU TOP TRAY CONTENT-->
@@ -148,7 +150,7 @@
 						</li>
 					@endif
 					
-					@if ( Permissions::admin() )
+					@if ( Permissions::pesisir() )
 					<li class="link-pesisir">
 							<a href="javascript:;"><span class="title">Pesisir</span>
 							<span class=" arrow"></span></a>

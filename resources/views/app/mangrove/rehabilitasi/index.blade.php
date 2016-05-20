@@ -205,10 +205,10 @@
 															<td></td>
 															<td></td>
 															<td></td>
-															<td><b>{{ $rehab->direhabilitasi }} M<sup>2</sup> <?php echo "(", round($direhabilitasi,2), "Ha)";  ?></b></td>
-															<td><b>{{ $rehab->berubah_fungsi }} M<sup>2</sup> <?php echo "(", round($berubah_fungsi,2), "Ha)"; ?></b></td>
-															<td><b>{{ $rehab->lahan_tambak }} M<sup>2</sup> <?php echo "(", round($lahan_tambak,2), "Ha)"; ?></b></td>
-															<td><b>{{ $rehab->penggaraman }} M<sup>2</sup> <?php echo "(", round($penggaraman,2), "Ha)"; ?> Ha</b></td>
+															<td><b><?php echo "(", round($direhabilitasi,2), "Ha)";  ?></b></td>
+															<td><b><?php echo "(", round($berubah_fungsi,2), "Ha)"; ?></b></td>
+															<td><b><?php echo "(", round($lahan_tambak,2), "Ha)"; ?></b></td>
+															<td><b><?php echo "(", round($penggaraman,2), "Ha)"; ?> Ha</b></td>
 															<td></td>
 														</tr>
 												</tbody>

@@ -16,11 +16,13 @@ class KelompokController extends Controller
 	 *
 	 * @return \Illuminate\Http\Response
 	 */
-	public function getIndex()
+	public function getIndex(Request $r)
 	{
+		if ( !isset( $r->f ) ) return redirect()->route('kelompok', ['f' => '']);
+
 		$limit = 10;
 		if ( Permissions::admin() ) {
-			$data['kelompok'] = Kelompok::paginate($limit);
+			$data['kelompok'] = Kelompok::where('tipe', $r->f)->paginate($limit);
 		} else {
 			$data['kelompok'] = Kelompok::where('tipe', Permissions::pnp_role())->paginate($limit);
 		}

@@ -31,6 +31,7 @@ class TableTambak extends Migration
             $table->integer('pakan_pelet');
             $table->integer('pakan_dedak');
             $table->string('keterangan');
+            $table->timestamps();
         });
     }
 

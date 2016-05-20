@@ -30,6 +30,7 @@ class TableRumputLaut extends Migration
             $table->integer('spinosum_basah');
             $table->integer('spinosum_kering');
             $table->string('keterangan');
+            $table->timestamps();
         });
     }
 

@@ -13,10 +13,38 @@ use App\Permissions;
 class AirTawarController extends Controller
 {
 
-	public function getIndex()
+	public function getIndex(Request $r)
 	{
+
+		if ( !isset( $r->offset ) || !isset( $r->limit ) ) {
+
+			$sql = AirTawar::orderBy('id', 'desc')->first();
+
+			if ( $sql ) {
+			// Jika sudah ada pembudidaya
+
+				// limit = Tanggal terbaru
+				// offset = Limit - 3 bulan
+				$limit1 = date_format(date_create($sql->created_at), "Y-m-d");
+				$limit = strtotime("$limit1 +1 day");
+				$limit = date("Y-m-d", $limit);
+
+				$offset = strtotime("$limit1 -3 months");
+				$offset = date("Y-m-d", $offset);
+
+			} else {
+			// Jika belum ada data pembudidaya offset = tgl skrang, limit = offset + 3 bulan
+				$offset = date('Y-m-d');
+				$limit = strtotime("$offset +3 months");
+				$limit = date("Y-m-d", $limit);
+			}
+
+			 return redirect( '/app/airtawar?offset='.$offset.'&limit='.$limit );
+		}
 		$limit = 10;
-		$data['airtawar'] = AirTawar::paginate($limit);
+		$data['airtawar'] = AirTawar::whereBetween('created_at', [ $r->offset, $r->limit ])
+									->paginate($limit);
+
 		return view ('app.laporan-produksi.air-tawar.index',$data)->with('limit', $limit);
 	}
 
@@ -113,9 +141,9 @@ class AirTawarController extends Controller
 		return view('app.laporan-produksi.air-tawar.cari', $data);
 	}
 
-	public function getExportExcel()
+	public function getExportExcel(Request $r)
 	{
-		$data['airtawar'] = AirTawar::get();
+		$data['airtawar'] = AirTawar::whereBetween('created_at', [ $r->offset, $r->limit ])->get();
 
         Excel::create('Data airtawar');
 
@@ -129,11 +157,13 @@ class AirTawarController extends Controller
         })->download('xlsx');
 	}
 
-	public function getExportPdf()
+	public function getExportPdf(Request $r)
 	{
-		$data['airtawar'] = AirTawar::get();
+		$data['airtawar'] = AirTawar::whereBetween('created_at', [ $r->offset, $r->limit ])->get();
 		$data['kasi'] = Laporan::where('jabatan','Kasi Budidaya Laut. Payau dan Air Tawar')->get();
 		$data['petugas'] = Laporan::where('jabatan','Petugas Statistik')->get();
+		$data['tgl_awal']		= $r->offset;
+		$data['tgl_akhir']		= $r->limit;
         $pdf = PDF::loadView('app.laporan-produksi.air-tawar.export-pdf', $data);
         return $pdf->setPaper('legal')->setOrientation('landscape')->setWarnings(false)->download('Data airtawar.pdf');
 	}

@@ -20,11 +20,12 @@
 		</tr>
 		<tr>
 			<td><b>KWARTAL</b></td>
-			<td><b>1 (Satu) Januari s/d Maret</b></td>
+			<?php $tgl = Sakti::TglLaporan($tgl_awal, $tgl_akhir) ?>
+			<td><b>{{  $tgl['tgl_awal'] }} s/d {{ $tgl['tgl_akhir'] }}</b></td>
 		</tr>
 		<tr>
 			<td><b>TAHUN</b></td>
-			<td><b>2016</b></td>
+			<td><b>{{ $tgl['tahun'] }}</b></td>
 		</tr>
 	</table>
 
@@ -76,7 +77,9 @@
 				<br>
 				<br>
 			</td>
-			<td>Bantaeng, 4 April 2016<br>Petugas Statistik Budidaya
+			<?php $Ms = new App\Custom; ?>
+
+			<td>Bantaeng, {{ $Ms->tgl_indo(date('Y-m-d')) }}<br>Petugas Statistik Budidaya
 				<br>
 				<br>
 				<br>

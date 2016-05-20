@@ -159,6 +159,7 @@ return [
         Barryvdh\DomPDF\ServiceProvider::class,
         App\Providers\PermissionsServiceProvider::class,
         'Orangehill\Iseed\IseedServiceProvider',
+        App\Providers\SaktiServiceProvider::class,
 
     ],
 
@@ -208,7 +209,8 @@ return [
         'View'      => Illuminate\Support\Facades\View::class,
         'Excel'     => 'Maatwebsite\Excel\Facades\Excel',
         'PDF'       => Barryvdh\DomPDF\Facade::class,
-        'Permissions' => App\Facades\Permissions::class
+        'Permissions' => App\Facades\Permissions::class,
+        'Sakti'     => App\Facades\Sakti::class
 
     ],
 

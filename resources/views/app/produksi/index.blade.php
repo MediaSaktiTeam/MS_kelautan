@@ -122,19 +122,15 @@
 
 										<form action="{{ url('/app/produksi') }}">
 
-											<div class="col-md-2" style="padding-right: 0">
-												<input type="date" name="offset" value="{{ $_GET['offset'] }}" class="form-control">
+											<div class="col-md-4">
+												<div class="input-group">
+													<input type="date" class="form-control" name="offset" value="{{ $_GET['offset'] }}"/>
+													<span class="input-group-addon" style="border: 0;">-</span>
+													<input type="date" class="form-control" name="limit" value="{{ $_GET['limit'] }}"/>
+												</div>
 											</div>
 
-											<div class="col-md-1" style="padding-left: 0">
-												<button type="button" class="btn btn-default" style="background: none;border: none;cursor: default">Sampai Tgl</button>
-											</div>
-
-											<div class="col-md-2">
-												<input type="date" name="limit" value="{{ $_GET['limit'] }}" class="form-control">
-											</div>
-
-											<div class="col-md-1" style="padding: 0">
+											<div class="col-md-1">
 												<button class="btn btn-default">Tampilkan</button>
 											</div>
 
@@ -142,7 +138,7 @@
 
 										</form>
 
-										<div class="col-md-offset-2 col-md-4">
+										<div class="col-md-offset-2 col-md-5">
 											<div class="input-group">
 												<input type="text" onkeyup="cari_data(this.value)" class="form-control" placeholder="Pencarian">
 												<span class="input-group-btn">

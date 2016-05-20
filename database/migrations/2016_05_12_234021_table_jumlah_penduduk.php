@@ -18,6 +18,7 @@ class TableJumlahPenduduk extends Migration
             $table->integer('laki');
             $table->integer('perempuan');
             $table->integer('jumlah_kk');
+            $table->timestamps();
         });
     }
 

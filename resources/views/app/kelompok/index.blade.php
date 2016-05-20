@@ -133,12 +133,38 @@
 						<!-- START PANEL -->
 						<div class="panel panel-default">
 							<div class="panel-body">
-								<div class="input-group">
-									<input type="text" class="form-control" onkeyup="cari_data(this.value)" placeholder="Pencarian">
-									<span class="input-group-btn">
-										<a href="" class="btn btn-default" data-toggle="modal" data-target="#modal-ekspor"><i class="fa fa-file-archive-o"></i> &nbsp;Ekspor</a>
-									</span>
-								</div>
+
+								@if ( Permissions::admin() )
+
+									<div class="col-md-4">
+										<div class="form-group">
+											<select onchange="window.open(this.options[this.selectedIndex].value,'_top')" class="full-width" data-init-plugin="select2">
+												<option value="{{ route('kelompok', ['f' => '']) }}" {{ $_GET['f'] == '' ? 'selected' : '' }}>Semua Jenis Usaha</option> 
+												<option value="{{ route('kelompok', ['f' => 'Pembudidaya']) }}" {{ $_GET['f'] == 'Pembudidaya' ? 'selected' : '' }}>Pembudidaya</option> 
+												<option value="{{ route('kelompok', ['f' => 'Nelayan']) }}" {{ $_GET['f'] == 'Nelayan' ? 'selected' : '' }}>Nelayan</option> 
+												<option value="{{ route('kelompok', ['f' => 'Pengolah']) }}" {{ $_GET['f'] == 'Pengolah' ? 'selected' : '' }}>Pengolah</option> 
+											</select>
+										</div>
+									</div>
+
+									<div class="col-md-offset-1 col-md-7">
+										<div class="input-group">
+											<input type="text" class="form-control" onkeyup="cari_data(this.value)" placeholder="Pencarian">
+											<span class="input-group-btn">
+												<a href="" class="btn btn-default" data-toggle="modal" data-target="#modal-ekspor"><i class="fa fa-file-archive-o"></i> &nbsp;Ekspor</a>
+											</span>
+										</div>
+									</div>
+
+								@else
+									<div class="input-group">
+										<input type="text" class="form-control" onkeyup="cari_data(this.value)" placeholder="Pencarian">
+										<span class="input-group-btn">
+											<a href="" class="btn btn-default" data-toggle="modal" data-target="#modal-ekspor"><i class="fa fa-file-archive-o"></i> &nbsp;Ekspor</a>
+										</span>
+									</div>
+								@endif
+
 								<br>
 
 								<div id="show-pencarian"></div>
@@ -209,7 +235,7 @@
 											@endforeach
 										</tbody>
 									</table>
-									<center>{!! $kelompok->links() !!}</center>
+									<center>{!! $kelompok->appends([ 'f' => $_GET['f'] ])->links() !!}</center>
 								</div>
 
 							</div>

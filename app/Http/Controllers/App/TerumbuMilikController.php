@@ -8,14 +8,47 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use DB,Excel,PDF;
 use App\User,App\TerumbuMilik,App\Provinsi,App\Kabupaten,App\Kecamatan,App\Desa;
+use App\Permissions;
 
 class TerumbuMilikController extends Controller
 {
 
+	public function __construct()
+	{
+		$this->middleware('Pesisir');
+	}
+	
 	public function getIndex(Request $r)
 	{
+
+		if ( !isset( $r->offset ) || !isset( $r->limit ) ) {
+
+			$sql = TerumbuMilik::orderBy('id', 'desc')->first();
+
+			if ( $sql ) {
+			// Jika sudah ada data
+
+				// limit = Tanggal terbaru
+				// offset = Limit - 3 bulan
+				$limit1 = date_format(date_create($sql->created_at), "Y-m-d");
+				$limit = strtotime("$limit1 +1 day");
+				$limit = date("Y-m-d", $limit);
+
+				$offset = strtotime("$limit1 -3 months");
+				$offset = date("Y-m-d", $offset);
+
+			} else {
+			// Jika belum ada data offset = tgl skrang, limit = offset + 3 bulan
+				$offset = date('Y-m-d');
+				$limit = strtotime("$offset +3 months");
+				$limit = date("Y-m-d", $limit);
+			}
+
+			return redirect( '/app/terumbu/milik?offset='.$offset.'&limit='.$limit );
+		}
+
 		$limit = 10;
-		$data['terumbumilik'] = TerumbuMilik::paginate(10);
+		$data['terumbumilik'] = TerumbuMilik::whereBetween('created_at', [ $r->offset, $r->limit ])->paginate($limit);
 		return view ('app.terumbu.milik.index',$data)->with('limit', $limit);
 	}
 
@@ -95,9 +128,9 @@ public function getUpdate(Request $request)
 		return view('app.terumbu.milik.search', $data);
 	}
 
-	public function getExportExcel()
+	public function getExportExcel(Request $r)
 	{
-		$data['terumbumilik'] = TerumbuMilik::orderBy('desa','asc')->get();
+		$data['terumbumilik'] = TerumbuMilik::whereBetween('created_at', [ $r->offset, $r->limit ])->orderBy('desa','asc')->get();
 
         Excel::create('Data terumbu karang yang dimiliki');
 
@@ -111,10 +144,11 @@ public function getUpdate(Request $request)
         })->download('xlsx');
 	}
 
-	public function getExportPdf()
+	public function getExportPdf(Request $r)
 	{
-		$data['terumbumilik'] = TerumbuMilik::orderBy('desa','asc')->get();
-		
+		$data['terumbumilik'] = TerumbuMilik::whereBetween('created_at', [ $r->offset, $r->limit ])->orderBy('desa','asc')->get();
+		$data['tgl_awal']		= $r->offset;
+		$data['tgl_akhir']		= $r->limit;
         $pdf = PDF::loadView('app.terumbu.milik.export-pdf', $data);
         return $pdf->setPaper('legal')->setOrientation('potrait')->setWarnings(false)->download('Data Mangrove yang dimiliki.pdf');
 	}

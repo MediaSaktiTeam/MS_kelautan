@@ -63,6 +63,7 @@
 	
 	<!-- JQUERY -->
 	<script src="{{ url('resources/assets/front/js/jquery.js') }}"></script>
+	<script src="{{ url('resources/assets/front/js/bootstrap.js') }}"></script>
 	<script src="{{ url('resources/assets/front/js/freetile.js') }}"></script>
 	<script src="{{ url('resources/assets/front/js/html5.js') }}"></script>
 	<script src="{{ url('resources/assets/front/js/smoothscroll.js') }}"></script>	

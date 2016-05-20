@@ -14,7 +14,22 @@
 
 <center><h2>Data Jumlah Penduduk Pesisir <br> <small>Dinas Perikanan dan Kelautan Kab. Bantaeng</small></h2></center>
 
-
+	<table class="table table-no-border" style="width: 40%">
+		<tr>
+			<td><b>KABUPATEN</b></td>
+			<td><b>BANTAENG</b></td>
+		</tr>
+		<tr>
+			<td><b>KWARTAL</b></td>
+			<?php $tgl = Sakti::TglLaporan($tgl_awal, $tgl_akhir) ?>
+			<td><b>{{  $tgl['tgl_awal'] }} s/d {{ $tgl['tgl_akhir'] }}</b></td>
+		</tr>
+		<tr>
+			<td><b>TAHUN</b></td>
+			<td><b>{{ $tgl['tahun'] }}</b></td>
+		</tr>
+	</table>
+	
 	<table class="table table-bordered">
 		<thead>
 			<tr>
