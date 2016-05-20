@@ -7,8 +7,6 @@ use Illuminate\Database\Eloquent\Model;
 class JumlahPenduduk extends Model
 {
     protected $table = "app_jumlah_penduduk";
-    
-    public $timestamps = false;
    
     public function dataprovinsi(){
     	return $this->belongsTo('App\Provinsi', 'provinsi');

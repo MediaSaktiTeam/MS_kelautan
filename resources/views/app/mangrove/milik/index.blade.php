@@ -328,7 +328,7 @@
 							</a>
 						</div>
 						<div class="col-md-6">
-							<a href="{{ url('/app/mangrove/milik/export-pd?offset='.$_GET['offset'].'&limit='.$_GET['limit']) }}">
+							<a href="{{ url('/app/mangrove/milik/export-pdf?offset='.$_GET['offset'].'&limit='.$_GET['limit']) }}">
 								<i class="fa fa-file-pdf-o export-pdf"></i>
 								Unduh Dalam Format PDF
 							</a>
