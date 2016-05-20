@@ -40,7 +40,11 @@
 		</thead>
 		
 		<tbody>
-			<?php $i = 1 ?>
+			<?php 
+				$i = 1;
+				$direhabilitasi="";
+				$to_rehab="";
+			?>
 
 			@foreach( $terumburehabilitasi as $rehab )
 
@@ -51,7 +55,17 @@
 					<td>{{ $rehab->direhabilitasi }} M<sup>2</sup></td>
 				</tr>
 
+				<?php 
+					$direhabilitasi += $rehab->direhabilitasi * 0.0001;
+					$to_rehab += $rehab->direhabilitasi;
+				?>
 			@endforeach
+			<tr>
+				<td><b>Jumlah</b></td>
+				<td></td>
+				<td></td>
+				<td><b>{{ $to_rehab }} M<sup>2</sup><?php echo "(", round($direhabilitasi,2), "Ha)";  ?></b></td>
+			</tr>
 		</tbody>
 	</table>
 
