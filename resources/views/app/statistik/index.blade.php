@@ -10,6 +10,7 @@
 <?php $total_bantuan = App\RefBantuan::where('tahun', $_GET['tahun'])->count() ?>
 <?php $total_sarana_nelayan = $jml_perahu + $jml_mesin + $jml_alat_tangkap ?>
 <?php $Sc = new App\custom ?>
+<?php $tampilan_grafik = isset( $_GET['view'] ) ? $_GET['view'] : 'batang'; ?>
 
 <!-- START PAGE-CONTAINER -->
 <div class="page-container">
@@ -50,9 +51,17 @@
 										Statistik Pembudidaya Tahun 
 										<select name="" id="" class="years" onchange="window.open(this.options[this.selectedIndex].value,'_top')">
 											@for( $i = 2011; $i <= date('Y')+1; $i++ )
-												<option value="{{ url('/app/statistik') }}?tahun={{ $i }}&offset={{ $_GET['offset'] }}&limit={{ $_GET['limit'] }}" {{ $_GET['tahun'] == $i ? "selected":"" }}>{{ $i }}</option>
+												<option value="{{ url('/app/statistik') }}?tahun={{ $i }}&offset={{ $_GET['offset'] }}&limit={{ $_GET['limit'] }}&view={{ $tampilan_grafik }}" {{ $_GET['tahun'] == $i ? "selected":"" }}>{{ $i }}</option>
 											@endfor
 										</select>
+
+										<div class="pull-right">
+											&nbsp; &nbsp; &nbsp;Tampilan Grafik
+											<select name="" id="" class="years" onchange="window.open(this.options[this.selectedIndex].value,'_top')">
+												<option value="{{ url('/app/statistik') }}?tahun={{ $_GET['tahun'] }}&offset={{ $_GET['offset'] }}&limit={{ $_GET['limit'] }}&view=pie" {{ $tampilan_grafik == 'pie' ? 'selected':'' }}>Grafik Pie</option>
+												<option value="{{ url('/app/statistik') }}?tahun={{ $_GET['tahun'] }}&offset={{ $_GET['offset'] }}&limit={{ $_GET['limit'] }}&view=batang" {{ $tampilan_grafik == 'batang' ? 'selected':'' }}>Grafik Batang</option>
+											</select>
+										</div>
 									</div>
 									<hr>
 								</div>
@@ -63,7 +72,7 @@
 											@if( $total_pembudidaya == 0 ) 
 												<div class="alert alert-info"><center>Data Kosong</center></div>
 											@endif
-											<div id="pbdy-usaha" style="margin-top:20px; margin-left:20px; width:100%; height:auto;"></div>
+											<div id="pbdy-usaha" style="margin-top:20px; margin-left:20px; width:100%;height:auto;"></div>
 											<br>
 										</div>
 										<div class="col-sm-6">
@@ -164,11 +173,11 @@
 									<h5>Statistik Jenis Produksi</h5>
 									
 									<div class="row">
+										<p><b><center>Jenis Produksi Pembudidaya ({{ $Sc->tgl_indo($_GET['offset']) }} - {{ $Sc->tgl_indo($_GET['limit']) }})</center></b></p>
 										@if ( count($jp_pembudidaya) > 0 )
-										<div id="chartContainer_pembudidaya" style="height: 300px; width: 100%;"></div>
+											<div id="chartContainer_pembudidaya" style="height: 300px; width: 100%;"></div>
 										@else
 											<center>
-												<p><b>Jenis Produksi Pembudidaya ({{ $Sc->tgl_indo($_GET['offset']) }} - {{ $Sc->tgl_indo($_GET['limit']) }})</b></p>
 												<p>Tidak ada data</p>
 											</center>
 										@endif
@@ -177,11 +186,11 @@
 									<br>
 									<br>
 									<div class="row">
+										<p><b><center>Jenis Produksi Nelayan ({{ $Sc->tgl_indo($_GET['offset']) }} - {{ $Sc->tgl_indo($_GET['limit']) }})</center></b></p>
 										@if ( count($jp_nelayan) > 0 )
 											<div id="chartContainer_nelayan" style="height: 300px; width: 100%;"></div>
 										@else
 											<center>
-												<p><b>Jenis Produksi Nelayan ({{ $Sc->tgl_indo($_GET['offset']) }} - {{ $Sc->tgl_indo($_GET['limit']) }})</b></p>
 												<p>Tidak ada data</p>
 											</center>
 										@endif
@@ -190,11 +199,11 @@
 									<br>
 									<br>
 									<div class="row">
+										<p><b><center>Jenis Produksi Pengolah ({{ $Sc->tgl_indo($_GET['offset']) }} - {{ $Sc->tgl_indo($_GET['limit']) }})</center></b></p>
 										@if ( count($jp_pengolah) > 0 )
 											<div id="chartContainer_pengolah" style="height: 300px; width: 100%;"></div>
 										@else
 											<center>
-												<p><b>Jenis Produksi Pengolah ({{ $Sc->tgl_indo($_GET['offset']) }} - {{ $Sc->tgl_indo($_GET['limit']) }})</b></p>
 												<p>Tidak ada data</p>
 											</center>
 										@endif
@@ -326,6 +335,8 @@
 	<script src="{{ url('resources/assets/app/js/canvasjs.min.js') }}"></script>
 	
 	<script>
+
+	/* Pie Chart */
 
 		/* Pembudidaya - PIE Chart */
 			$(document).ready(function(){
@@ -476,302 +487,433 @@
 				@endif
 
 			});
+
+
+		/* Jenis Produksi Pembudidaya */
+			$(document).ready(function(){
+
+				@if( count($jp_pembudidaya) > 0 )
+
+
+					var plot4 = $.jqplot('chartContainer_pembudidaya', [[
+
+							<?php $i = 1 ?>
+				        	@foreach( $jp_pembudidaya as $jpp )
+				        		@if ( $i++ != count($jp_pembudidaya) )
+						        	[ '{{ $jpp->jenis_produksi }}', '{{ $jpp->jml }}' ],
+						        @else
+						        	[ '{{ $jpp->jenis_produksi }}', '{{ $jpp->jml }}' ]
+						        @endif
+						    @endforeach 
+						]], 
+
+						{
+						gridPadding: {top:0, bottom:38, left:0, right:0},
+						seriesDefaults:{
+							renderer:$.jqplot.PieRenderer,
+							trendline:{ show:false },
+							rendererOptions: { padding: 8, showDataLabels: true, dataLabels :'value' }
+						},
+						legend:{
+							show:true,
+							placement: 'outside',
+							rendererOptions: {
+								numberRows: 1
+							},
+							location:'s',
+							marginTop: '15px'
+						}
+					});
+
+				@endif
+
+			});
+
+		/* Jenis Produksi Nelayan */
+			$(document).ready(function(){
+
+				@if( count($jp_nelayan) > 0 )
+
+
+					var plot4 = $.jqplot('chartContainer_nelayan', [[
+
+						    <?php $i = 1 ?>
+				        	@foreach( $jp_nelayan as $jpn )
+				        		@if ( $i++ != count($jp_nelayan) )
+						        	[ "{{ $jpn->jenis_produksi }}", {{ $jpn->jml }} ],
+						        @else
+						        	[ "{{ $jpn->jenis_produksi }}", {{ $jpn->jml }} ]
+						        @endif
+						    @endforeach 
+						]], 
+
+						{
+						gridPadding: {top:0, bottom:38, left:0, right:0},
+						seriesDefaults:{
+							renderer:$.jqplot.PieRenderer,
+							trendline:{ show:false },
+							rendererOptions: { padding: 8, showDataLabels: true, dataLabels :'value' }
+						},
+						legend:{
+							show:true,
+							placement: 'outside',
+							rendererOptions: {
+								numberRows: 1
+							},
+							location:'s',
+							marginTop: '15px'
+						}
+					});
+
+				@endif
+
+			});
+
+		/* Jenis Produksi Pengolah */
+			$(document).ready(function(){
+
+				@if( count($jp_pengolah) > 0 )
+
+
+					var plot4 = $.jqplot('chartContainer_pengolah', [[
+
+						    <?php $i = 1 ?>
+				        	@foreach( $jp_pengolah as $jpe )
+				        		@if ( $i++ != count($jp_pengolah) )
+						        	[ "{{ $jpe->jenis_produksi }}", {{ $jpe->jml }} ],
+						        @else
+						        	[ "{{ $jpe->jenis_produksi }}", {{ $jpe->jml }} ]
+						        @endif
+						    @endforeach   
+						]], 
+
+						{
+						gridPadding: {top:0, bottom:38, left:0, right:0},
+						seriesDefaults:{
+							renderer:$.jqplot.PieRenderer,
+							trendline:{ show:false },
+							rendererOptions: { padding: 8, showDataLabels: true, dataLabels :'value' }
+						},
+						legend:{
+							show:true,
+							placement: 'outside',
+							rendererOptions: {
+								numberRows: 1
+							},
+							location:'s',
+							marginTop: '15px'
+						}
+					});
+
+				@endif
+
+			});
 		
 
-		window.onload = function () {
+	/* Bar Chart */
 
-			/* Jumlah Pembudidaya - BAR Chart */
-				@if ( $total_pembudidaya != 0 )
+		@if ( $tampilan_grafik == "batang" )
+
+			window.onload = function () {
+
+					/* Jumlah Pembudidaya - BAR Chart */
+					@if ( $total_pembudidaya != 0 )
+					
+					    var chart = new CanvasJS.Chart("pbdy-usaha",
+					    {
+
+					      title:{
+					      	fontSize: 16,
+					        text: ""    
+					      },
+					      animationEnabled: true,
+					      axisY: {
+					        title: ""
+					      },
+					      legend: {
+					        verticalAlign: "bottom",
+					        horizontalAlign: "center"
+					      },
+					      theme: "theme1",
+					      data: [
+
+					      {        
+					        type: "column",  
+					        showInLegend: false, 
+					        legendMarkerColor: "grey",
+					        dataPoints: [
+							    { y:{{ $pembudidaya_air_laut }}, label: 'Budidaya Air Laut' },
+								{ y:{{ $pembudidaya_air_tawar }}, label: 'Budidaya Air Tawar' },
+								{ y:{{ $pembudidaya_air_payau }}, label: 'Budidaya Air Payau' }     
+					        ]
+					      }   
+					      ]
+					    });
+
+					    chart.render();
+				    @endif
+
+				    @if ( $total_bantuan != 0 )
+					
+					    var chart = new CanvasJS.Chart("pbdy-bantuan",
+					    {
+
+					      title:{
+					      	fontSize: 16,
+					        text: ""    
+					      },
+					      animationEnabled: true,
+					      axisY: {
+					        title: ""
+					      },
+					      legend: {
+					        verticalAlign: "bottom",
+					        horizontalAlign: "center"
+					      },
+					      theme: "theme1",
+					      data: [
+
+					      {        
+					        type: "column",  
+					        showInLegend: false, 
+					        legendMarkerColor: "grey",
+					        dataPoints: [
+								@foreach( $bantuan_master_pembudidaya as $bmp )
+									<?php
+										$jumlah = DB::table('app_bantuan as ab')
+														->join('users as u', 'u.id', '=', 'ab.id_user')
+															->where('ab.id_bantuan', $bmp->id)
+															->where(DB::raw('left(ab.tahun, 4)'), '<=', $_GET['tahun'])
+															->count(); ?>
+										{ y: {{ $jumlah }}, label: '{{ $bmp->nama }}'},
+
+								@endforeach
+							]
+					      }   
+					      ]
+					    });
+
+					    chart.render();
+				    @endif
 				
-				    var chart = new CanvasJS.Chart("pbdy-usaha",
-				    {
 
-				      title:{
-				      	fontSize: 16,
-				        text: ""    
-				      },
-				      animationEnabled: true,
-				      axisY: {
-				        title: ""
-				      },
-				      legend: {
-				        verticalAlign: "bottom",
-				        horizontalAlign: "center"
-				      },
-				      theme: "theme1",
-				      data: [
+				    @if ( $total_pengolah != 0 )
+					
+					/* Jumlah Pengolah - BAR Chart */
+					    var chart = new CanvasJS.Chart("pglh-usaha",
+					    {
 
-				      {        
-				        type: "column",  
-				        showInLegend: false, 
-				        legendMarkerColor: "grey",
-				        dataPoints: [
-						    { y:{{ $pembudidaya_air_laut }}, label: 'Budidaya Air Laut' },
-							{ y:{{ $pembudidaya_air_tawar }}, label: 'Budidaya Air Tawar' },
-							{ y:{{ $pembudidaya_air_payau }}, label: 'Budidaya Air Payau' }     
-				        ]
-				      }   
-				      ]
-				    });
+					      title:{
+					      	fontSize: 16,
+					        text: ""    
+					      },
+					      animationEnabled: true,
+					      axisY: {
+					        title: ""
+					      },
+					      legend: {
+					        verticalAlign: "bottom",
+					        horizontalAlign: "center"
+					      },
+					      theme: "theme1",
+					      data: [
 
-				    chart.render();
-			    @endif
+					      {        
+					        type: "column",  
+					        showInLegend: false, 
+					        legendMarkerColor: "grey",
+					        dataPoints: [
+								
+								<?php $no = 1 ?>
+								@foreach( $jenis_olahan as $jo )
 
-			    @if ( $total_bantuan != 0 )
-				
-				    var chart = new CanvasJS.Chart("pbdy-bantuan",
-				    {
+									<?php $jml_jo = App\User::where('id_jenis_olahan', $jo->id)->count() ?>
 
-				      title:{
-				      	fontSize: 16,
-				        text: ""    
-				      },
-				      animationEnabled: true,
-				      axisY: {
-				        title: ""
-				      },
-				      legend: {
-				        verticalAlign: "bottom",
-				        horizontalAlign: "center"
-				      },
-				      theme: "theme1",
-				      data: [
+									@if ( $jml_jo < 1 ) 
+										<?php continue ?>
+									@endif
 
-				      {        
-				        type: "column",  
-				        showInLegend: false, 
-				        legendMarkerColor: "grey",
-				        dataPoints: [
-							@foreach( $bantuan_master_pembudidaya as $bmp )
-								<?php
-									$jumlah = DB::table('app_bantuan as ab')
-													->join('users as u', 'u.id', '=', 'ab.id_user')
-														->where('ab.id_bantuan', $bmp->id)
-														->where(DB::raw('left(ab.tahun, 4)'), '<=', $_GET['tahun'])
-														->count(); ?>
-									{ y: {{ $jumlah }}, label: '{{ $bmp->nama }}'},
+									@if ( count($jenis_olahan) == $no )
+										{ y: {{ $jml_jo }}, label:'{{ $jo->jenis }}' }
+									@else
+										{ y: {{ $jml_jo }}, label:'{{ $jo->jenis }}' },
+									@endif
 
-							@endforeach
-						]
-				      }   
-				      ]
-				    });
+									<?php $no++ ?>
+								@endforeach
+							]
+					      }   
+					      ]
+					    });
 
-				    chart.render();
-			    @endif
+					    chart.render();
+				    @endif
 
-		    @if ( $total_pengolah != 0 )
-			
-			/* Jumlah Pengolah - BAR Chart */
-			    var chart = new CanvasJS.Chart("pglh-usaha",
-			    {
+				    @if ( $total_sarana_nelayan != 0 )
+					
+					/* Nelayan - BAR Chart */
+					    var chart = new CanvasJS.Chart("nlyn-sarana",
+					    {
 
-			      title:{
-			      	fontSize: 16,
-			        text: ""    
-			      },
-			      animationEnabled: true,
-			      axisY: {
-			        title: ""
-			      },
-			      legend: {
-			        verticalAlign: "bottom",
-			        horizontalAlign: "center"
-			      },
-			      theme: "theme1",
-			      data: [
+					      title:{
+					      	fontSize: 16,
+					        text: ""    
+					      },
+					      animationEnabled: true,
+					      axisY: {
+					        title: ""
+					      },
+					      legend: {
+					        verticalAlign: "bottom",
+					        horizontalAlign: "center"
+					      },
+					      theme: "theme1",
+					      data: [
 
-			      {        
-			        type: "column",  
-			        showInLegend: false, 
-			        legendMarkerColor: "grey",
-			        dataPoints: [
-						
-						<?php $no = 1 ?>
-						@foreach( $jenis_olahan as $jo )
+					      {        
+					        type: "column",  
+					        showInLegend: false, 
+					        legendMarkerColor: "grey",
+					        dataPoints: [
+					        { y: {{ $jml_perahu }}, label : 'Perahu' },
+					        { y: {{ $jml_alat_tangkap }}, label: 'Alat Tangkap' },
+					        { y: {{ $jml_mesin }}, label: 'Mesin'}
+							]
+					      }   
+					      ]
+					    });
 
-							<?php $jml_jo = App\User::where('id_jenis_olahan', $jo->id)->count() ?>
+					    chart.render();
+				    @endif
 
-							@if ( $jml_jo < 1 ) 
-								<?php continue ?>
-							@endif
 
-							@if ( count($jenis_olahan) == $no )
-								{ y: {{ $jml_jo }}, label:'{{ $jo->jenis }}' }
-							@else
-								{ y: {{ $jml_jo }}, label:'{{ $jo->jenis }}' },
-							@endif
+					@if ( count($jp_pembudidaya) > 0 )
+					
+					/* Jenis Produksi Pembudidaya */
+					    var chart = new CanvasJS.Chart("chartContainer_pembudidaya",
+					    {
+					      title:{
+					      	fontSize: 16,
+					      	text: " "
+					      },
+					      animationEnabled: true,
+					      axisY: {
+					        title: "Jumlah pembudidaya"
+					      },
+					      legend: {
+					        verticalAlign: "bottom",
+					        horizontalAlign: "center"
+					      },
+					      theme: "theme1",
+					      data: [
 
-							<?php $no++ ?>
-						@endforeach
-					]
-			      }   
-			      ]
-			    });
+					      {        
+					        type: "column",  
+					        showInLegend: false, 
+					        legendMarkerColor: "grey",
+					        dataPoints: [
+					        	<?php $i = 1 ?>
+					        	@foreach( $jp_pembudidaya as $jpp )
+					        		@if ( $i++ != count($jp_pembudidaya) )
+							        	{y: {{ $jpp->jml }}, label: "{{ $jpp->jenis_produksi }}"},
+							        @else
+							        	{y: {{ $jpp->jml }}, label: "{{ $jpp->jenis_produksi }}"}
+							        @endif
+							    @endforeach       
+					        ]
+					      }   
+					      ]
+					    });
 
-			    chart.render();
-		    @endif
+					    chart.render();
 
-		    @if ( $total_sarana_nelayan != 0 )
-			
-			/* Nelayan - BAR Chart */
-			    var chart = new CanvasJS.Chart("nlyn-sarana",
-			    {
+					@endif
 
-			      title:{
-			      	fontSize: 16,
-			        text: ""    
-			      },
-			      animationEnabled: true,
-			      axisY: {
-			        title: ""
-			      },
-			      legend: {
-			        verticalAlign: "bottom",
-			        horizontalAlign: "center"
-			      },
-			      theme: "theme1",
-			      data: [
+					@if ( count($jp_nelayan) > 0 )
+					
+					/* Jenis Produksi Nelayan */
+					    var chart = new CanvasJS.Chart("chartContainer_nelayan",
+					    {
+					      title:{
+					      	fontSize: 16,
+					      	text: " "
+					      },
+					      animationEnabled: true,
+					      axisY: {
+					        title: "Jumlah nelayan"
+					      },
+					      legend: {
+					        verticalAlign: "bottom",
+					        horizontalAlign: "center"
+					      },
+					      theme: "theme1",
+					      data: [
 
-			      {        
-			        type: "column",  
-			        showInLegend: false, 
-			        legendMarkerColor: "grey",
-			        dataPoints: [
-			        { y: {{ $jml_perahu }}, label : 'Perahu' },
-			        { y: {{ $jml_alat_tangkap }}, label: 'Alat Tangkap' },
-			        { y: {{ $jml_mesin }}, label: 'Mesin'}
-					]
-			      }   
-			      ]
-			    });
+					      {        
+					        type: "column",  
+					        showInLegend: false, 
+					        legendMarkerColor: "grey",
+					        dataPoints: [
+					        	<?php $i = 1 ?>
+					        	@foreach( $jp_nelayan as $jpn )
+					        		@if ( $i++ != count($jp_nelayan) )
+							        	{y: {{ $jpn->jml }}, label: "{{ $jpn->jenis_produksi }}"},
+							        @else
+							        	{y: {{ $jpn->jml }}, label: "{{ $jpn->jenis_produksi }}"}
+							        @endif
+							    @endforeach       
+					        ]
+					      }   
+					      ]
+					    });
 
-			    chart.render();
-		    @endif
+					    chart.render();
+				    @endif
 
-			@if ( count($jp_pembudidaya) > 0 )
-			
-			/* Jenis Produksi Pembudidaya */
-			    var chart = new CanvasJS.Chart("chartContainer_pembudidaya",
-			    {
-			      title:{
-			      	fontSize: 16,
-			        text: "Jenis Produksi Pembudidaya ({{ $Sc->tgl_indo($_GET['offset']) }} - {{ $Sc->tgl_indo($_GET['limit']) }})"    
-			      },
-			      animationEnabled: true,
-			      axisY: {
-			        title: "Jumlah pembudidaya"
-			      },
-			      legend: {
-			        verticalAlign: "bottom",
-			        horizontalAlign: "center"
-			      },
-			      theme: "theme1",
-			      data: [
+					@if ( count($jp_pengolah) > 0 )
+					
+					/* Jenis Produksi Pengolah */
+					    var chart = new CanvasJS.Chart("chartContainer_pengolah",
+					    {
+					      title:{
+					      	fontSize: 16,
+					      	text: " "
+					      },
+					      animationEnabled: true,
+					      axisY: {
+					        title: "Jumlah Pengolah"
+					      },
+					      legend: {
+					        verticalAlign: "bottom",
+					        horizontalAlign: "center"
+					      },
+					      theme: "theme1",
+					      data: [
 
-			      {        
-			        type: "column",  
-			        showInLegend: false, 
-			        legendMarkerColor: "grey",
-			        dataPoints: [
-			        	<?php $i = 1 ?>
-			        	@foreach( $jp_pembudidaya as $jpp )
-			        		@if ( $i++ != count($jp_pembudidaya) )
-					        	{y: {{ $jpp->jml }}, label: "{{ $jpp->jenis_produksi }}"},
-					        @else
-					        	{y: {{ $jpp->jml }}, label: "{{ $jpp->jenis_produksi }}"}
-					        @endif
-					    @endforeach       
-			        ]
-			      }   
-			      ]
-			    });
+					      {        
+					        type: "column",  
+					        showInLegend: false, 
+					        legendMarkerColor: "grey",
+					        dataPoints: [
+					        	<?php $i = 1 ?>
+					        	@foreach( $jp_pengolah as $jpe )
+					        		@if ( $i++ != count($jp_pengolah) )
+							        	{y: {{ $jpe->jml }}, label: "{{ $jpe->jenis_produksi }}"},
+							        @else
+							        	{y: {{ $jpe->jml }}, label: "{{ $jpe->jenis_produksi }}"}
+							        @endif
+							    @endforeach       
+					        ]
+					      }   
+					      ]
+					    });
 
-			    chart.render();
-		    @endif
+					    chart.render();
+				    @endif
 
-			@if ( count($jp_nelayan) > 0 )
-			
-			/* Jenis Produksi Nelayan */
-			    var chart = new CanvasJS.Chart("chartContainer_nelayan",
-			    {
-			      title:{
-			      	fontSize: 16,
-			        text: "Jenis Produksi Nelayan ({{ $Sc->tgl_indo($_GET['offset']) }} - {{ $Sc->tgl_indo($_GET['limit']) }})"    
-			      },
-			      animationEnabled: true,
-			      axisY: {
-			        title: "Jumlah nelayan"
-			      },
-			      legend: {
-			        verticalAlign: "bottom",
-			        horizontalAlign: "center"
-			      },
-			      theme: "theme1",
-			      data: [
+			}
 
-			      {        
-			        type: "column",  
-			        showInLegend: false, 
-			        legendMarkerColor: "grey",
-			        dataPoints: [
-			        	<?php $i = 1 ?>
-			        	@foreach( $jp_nelayan as $jpn )
-			        		@if ( $i++ != count($jp_nelayan) )
-					        	{y: {{ $jpn->jml }}, label: "{{ $jpn->jenis_produksi }}"},
-					        @else
-					        	{y: {{ $jpn->jml }}, label: "{{ $jpn->jenis_produksi }}"}
-					        @endif
-					    @endforeach       
-			        ]
-			      }   
-			      ]
-			    });
-
-			    chart.render();
-		    @endif
-
-			@if ( count($jp_nelayan) > 0 )
-			
-			/* Jenis Produksi Pengolah */
-			    var chart = new CanvasJS.Chart("chartContainer_pengolah",
-			    {
-			      title:{
-			      	fontSize: 16,
-			        text: "Jenis Produksi Pengolah ({{ $Sc->tgl_indo($_GET['offset']) }} - {{ $Sc->tgl_indo($_GET['limit']) }})"    
-			      },
-			      animationEnabled: true,
-			      axisY: {
-			        title: "Jumlah Pengolah"
-			      },
-			      legend: {
-			        verticalAlign: "bottom",
-			        horizontalAlign: "center"
-			      },
-			      theme: "theme1",
-			      data: [
-
-			      {        
-			        type: "column",  
-			        showInLegend: false, 
-			        legendMarkerColor: "grey",
-			        dataPoints: [
-			        	<?php $i = 1 ?>
-			        	@foreach( $jp_pengolah as $jpe )
-			        		@if ( $i++ != count($jp_pengolah) )
-					        	{y: {{ $jpe->jml }}, label: "{{ $jpe->jenis_produksi }}"},
-					        @else
-					        	{y: {{ $jpe->jml }}, label: "{{ $jpe->jenis_produksi }}"}
-					        @endif
-					    @endforeach       
-			        ]
-			      }   
-			      ]
-			    });
-
-			    chart.render();
-		    @endif
-		}
+		 @endif
 
 		// Get List Desa
 		function get_desa(id)
