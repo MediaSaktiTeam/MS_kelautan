@@ -24,7 +24,7 @@ class DatabaseSeeder extends Seeder
         $this->call('MenuTableSeeder');
         $this->call('BantuanMasterSeeder');
         $this->call('KelompokSeeder');
-        $this->call('SubUsahaSeeder');
+        // $this->call('SubUsahaSeeder');
         $this->call('SubSaranaSeeder');
         $this->call('JabatanSeeder');
         $this->call('ValidasiTableSeeder');
@@ -33,9 +33,6 @@ class DatabaseSeeder extends Seeder
         $this->call('KabupatenTableSeeder');
         $this->call('KecamatanTableSeeder');
         $this->call('DesaTableSeeder');
-        
-        $this->call('SitePagesTableSeeder');
-        $this->call('SiteMenuTableSeeder');
     }
 }
 
@@ -52,10 +49,6 @@ class ProvinsiTableSeeder extends Seeder
                 'nama' => 'Sulawesi Selatan',
             ),
         ));
-
-        
-        $this->call('SitePagesTableSeeder');
-        $this->call('SiteMenuTableSeeder');
     }
 }
 
@@ -72,9 +65,6 @@ class KabupatenTableSeeder extends Seeder
                 'nama' => 'Kab. Bantaeng',
             ),
         ));
-        
-        $this->call('SitePagesTableSeeder');
-        $this->call('SiteMenuTableSeeder');
     }
 }
 
@@ -133,9 +123,6 @@ class KecamatanTableSeeder extends Seeder
                 'nama' => ' Gantarangkeke',
             ),
         ));
-        
-        $this->call('SitePagesTableSeeder');
-        $this->call('SiteMenuTableSeeder');
     }
 }
 
@@ -481,10 +468,6 @@ class DesaTableSeeder extends Seeder
                 'nama' => 'Gantarangkeke',
             ),
         ));
-
-        
-        $this->call('SitePagesTableSeeder');
-        $this->call('SiteMenuTableSeeder');
     }
 }
 
@@ -495,11 +478,6 @@ class BlogTableSeeder extends Seeder
     App\Blog::truncate();
 
     factory(App\Blog::class, 20)->create();
-       
-        
-        
-        $this->call('SitePagesTableSeeder');
-        $this->call('SiteMenuTableSeeder');
     }
 }
 
@@ -510,11 +488,6 @@ class BlogKategoriTableSeeder extends Seeder
     App\BlogKategori::truncate();
 
     factory(App\BlogKategori::class, 25)->create();
-       
-        
-        
-        $this->call('SitePagesTableSeeder');
-        $this->call('SiteMenuTableSeeder');
     }
 }
 
@@ -525,11 +498,6 @@ class PageTableSeeder extends Seeder
     App\Page::truncate();
 
     factory(App\Page::class, 1)->create();
-       
-        
-        
-        $this->call('SitePagesTableSeeder');
-        $this->call('SiteMenuTableSeeder');
     }
 }
 
@@ -540,11 +508,6 @@ class PesanTableSeeder extends Seeder
     App\Pesan::truncate();
 
     factory(App\Pesan::class, 20)->create();
-       
-        
-        
-        $this->call('SitePagesTableSeeder');
-        $this->call('SiteMenuTableSeeder');
     }
 }
 
@@ -565,12 +528,6 @@ class UserTableSeeder extends Seeder
     );
 
     DB::table('users')->insert($data);
-
-       
-        
-        
-        $this->call('SitePagesTableSeeder');
-        $this->call('SiteMenuTableSeeder');
     }
 }
 
@@ -581,11 +538,6 @@ class KategoriTableSeeder extends Seeder
     App\Kategori::truncate();
 
     factory(App\Kategori::class, 5)->create();
-       
-        
-        
-        $this->call('SitePagesTableSeeder');
-        $this->call('SiteMenuTableSeeder');
     }
 }
 
@@ -596,11 +548,6 @@ class SettingTableSeeder extends Seeder
     App\Setting::truncate();
 
     factory(App\Setting::class, 2)->create();
-       
-        
-        
-        $this->call('SitePagesTableSeeder');
-        $this->call('SiteMenuTableSeeder');
     }
 }
 
@@ -611,11 +558,6 @@ class MenuTableSeeder extends Seeder
     App\Menu::truncate();
 
     factory(App\Menu::class, 1)->create();
-       
-        
-        
-        $this->call('SitePagesTableSeeder');
-        $this->call('SiteMenuTableSeeder');
     }
 }
 
@@ -638,12 +580,6 @@ class BantuanMasterSeeder extends Seeder
       );
 
       DB::table('app_bantuan_master')->insert($data);
-
-       
-        
-        
-        $this->call('SitePagesTableSeeder');
-        $this->call('SiteMenuTableSeeder');
     }
 }
 
@@ -664,12 +600,6 @@ class SubSaranaSeeder extends Seeder
       );
 
       DB::table('app_sarana')->insert($data);
-
-       
-        
-        
-        $this->call('SitePagesTableSeeder');
-        $this->call('SiteMenuTableSeeder');
     }
 }
 
@@ -688,12 +618,6 @@ class SubUsahaSeeder extends Seeder
       );
 
       DB::table('app_usaha')->insert($data);
-
-       
-        
-        
-        $this->call('SitePagesTableSeeder');
-        $this->call('SiteMenuTableSeeder');
     }
 }
 
@@ -713,12 +637,6 @@ class JabatanSeeder extends Seeder
     );
 
     DB::table('app_jabatan')->insert($data);
-
-       
-        
-        
-        $this->call('SitePagesTableSeeder');
-        $this->call('SiteMenuTableSeeder');
     }
 }
 
@@ -737,11 +655,6 @@ class KelompokSeeder extends Seeder
       );
 
       DB::table('app_kelompok')->insert($data);
-       
-        
-        
-        $this->call('SitePagesTableSeeder');
-        $this->call('SiteMenuTableSeeder');
     }
 }
 
@@ -757,12 +670,6 @@ class ValidasiTableSeeder extends Seeder
     );
 
     DB::table('validasi')->insert($data);
-
-       
-        
-        
-        $this->call('SitePagesTableSeeder');
-        $this->call('SiteMenuTableSeeder');
     }
 }
 
@@ -782,10 +689,5 @@ class PermissionsSeeder extends Seeder
       );
 
       DB::table('permissions')->insert($data);
-       
-        
-        
-        $this->call('SitePagesTableSeeder');
-        $this->call('SiteMenuTableSeeder');
     }
 }
