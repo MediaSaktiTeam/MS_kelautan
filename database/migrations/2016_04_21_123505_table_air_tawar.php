@@ -30,6 +30,7 @@ class TableAirTawar extends Migration
             $table->integer('jumlah_hidup_lele');
             $table->integer('jumlah_hidup_bawal');
             $table->string('keterangan');
+            $table->timestamps();
         });
     }
 
