@@ -13,10 +13,35 @@ use App\Permissions;
 class TambakController extends Controller
 {
 
-	public function getIndex()
+	public function getIndex(Request $r)
 	{
+		if ( !isset( $r->offset ) || !isset( $r->limit ) ) {
+
+			$sql = Tambak::orderBy('id', 'desc')->first();
+
+			if ( $sql ) {
+			// Jika sudah ada data
+
+				// limit = Tanggal terbaru
+				// offset = Limit - 3 bulan
+				$limit1 = date_format(date_create($sql->created_at), "Y-m-d");
+				$limit = strtotime("$limit1 +1 day");
+				$limit = date("Y-m-d", $limit);
+
+				$offset = strtotime("$limit1 -3 months");
+				$offset = date("Y-m-d", $offset);
+
+			} else {
+			// Jika belum ada data offset = tgl skrang, limit = offset + 3 bulan
+				$offset = date('Y-m-d');
+				$limit = strtotime("$offset +3 months");
+				$limit = date("Y-m-d", $limit);
+			}
+
+			 return redirect( '/app/tambak?offset='.$offset.'&limit='.$limit );
+		}
 		$limit = 10;
-		$data['tambak'] = Tambak::paginate($limit);
+		$data['tambak'] = Tambak::whereBetween('created_at', [ $r->offset, $r->limit ])->paginate($limit);
 		return view ('app.laporan-produksi.tambak.index',$data)->with('limit', $limit);
 	}
 
@@ -115,9 +140,9 @@ class TambakController extends Controller
 		return view('app.laporan-produksi.tambak.cari', $data);
 	}
 
-	public function getExportExcel()
+	public function getExportExcel(Request $r)
 	{
-		$data['tambak'] = Tambak::get();
+		$data['tambak'] = Tambak::whereBetween('created_at', [ $r->offset, $r->limit ])->get();
 
         Excel::create('Data Tambak');
 
@@ -131,9 +156,9 @@ class TambakController extends Controller
         })->download('xlsx');
 	}
 
-	public function getExportPdf()
+	public function getExportPdf(Request $r)
 	{
-		$data['tambak'] = Tambak::get();
+		$data['tambak'] = Tambak::whereBetween('created_at', [ $r->offset, $r->limit ])->get();
 		$data['kasi'] = Laporan::where('jabatan','Kasi Budidaya Laut. Payau dan Air Tawar')->get();
 		$data['petugas'] = Laporan::where('jabatan','Petugas Statistik')->get();
         $pdf = PDF::loadView('app.laporan-produksi.tambak.export-pdf', $data);
