@@ -383,13 +383,13 @@
 				<div class="modal-body">
 					<div class="row">
 						<div class="col-md-6">
-							<a href="{{ url('/app/pembudidaya/export-excel?f='.$_GET['f']) }}">
+							<a href="{{ url('/app/pembudidaya/export-excel?f='.$_GET['f'].'&offset='.$_GET['offset'].'&limit='.$_GET['limit']) }}">
 								<i class="fa fa-file-excel-o export-excel"></i>
 								Unduh Dalam Format Mic.Excel
 							</a>
 						</div>
 						<div class="col-md-6">
-							<a href="{{ url('/app/pembudidaya/export-pdf?f='.$_GET['f']) }}">
+							<a href="{{ url('/app/pembudidaya/export-pdf?f='.$_GET['f'].'&offset='.$_GET['offset'].'&limit='.$_GET['limit']) }}">
 								<i class="fa fa-file-pdf-o export-pdf"></i>
 								Unduh Dalam Format PDF
 							</a>

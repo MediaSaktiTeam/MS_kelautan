@@ -45,7 +45,7 @@ class PembudidayaController extends Controller
 
 			 return redirect()->route('pembudidaya', ['f' => '', 'offset' => $offset, 'limit' => $limit]);
 		}
-		
+
 
 		$pembudidaya = User::where('profesi','Pembudidaya')
 								->whereBetween('created_at', [ $r->offset, $r->limit ])
@@ -274,26 +274,12 @@ class PembudidayaController extends Controller
 		return view('app.pembudidaya.data-pencarian', $data);
 	}
 
-	public function getPrintAll()
-	{
-		$data['pembudidaya'] = DB::table('users')
-									->leftJoin('app_kelompok', 'users.id_kelompok', '=', 'app_kelompok.id_kelompok')
-									->leftJoin('app_usaha', 'users.id_usaha', '=', 'app_usaha.id')
-									->leftJoin('app_jabatan', 'users.id_jabatan', '=', 'app_jabatan.id')
-										->select(
-											'app_jabatan.nama as nama_jabatan',
-											'users.*', 'app_usaha.jenis as jenis_usaha',
-											'app_kelompok.nama as nama_kelompok')
-												->where('users.profesi','Pembudidaya')
-									->orderBy('app_kelompok.nama','asc')
-									->orderBy('app_jabatan.id','asc')
-									->get();
-		return view('app.pembudidaya.print-all', $data);
-	}
-
 	public function getExportExcel(Request $r)
 	{
-		$pembudidaya 	= User::where('profesi','Pembudidaya')->orderBy('id','desc');
+
+		$pembudidaya 	= User::where('profesi','Pembudidaya')
+								->whereBetween('created_at', [ $r->offset, $r->limit ])
+								->orderBy('id','desc');
 
 		if ( $r->f != "" ) $pembudidaya->where('jenis_usaha', $r->f);
 
@@ -316,7 +302,9 @@ class PembudidayaController extends Controller
 
 	public function getExportPdf(Request $r)
 	{
-		$pembudidaya 	= User::where('profesi','Pembudidaya')->orderBy('id','desc');
+		$pembudidaya 	= User::where('profesi','Pembudidaya')
+								->whereBetween('created_at', [ $r->offset, $r->limit ])
+								->orderBy('id','desc');
 
 		if ( $r->f != "" ) $pembudidaya->where('jenis_usaha', $r->f);
 
