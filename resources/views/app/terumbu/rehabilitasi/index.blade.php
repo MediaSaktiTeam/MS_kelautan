@@ -172,7 +172,7 @@
 															<td></td>
 															<td></td>
 															<td></td>
-															<td><b>{{ $rehab->direhabilitasi }} M<sup>2</sup> <?php echo "(", round($direhabilitasi,2), "Ha)";  ?></b></td>
+															<td><b><?php echo "(", round($direhabilitasi,2), "Ha)";  ?></b></td>
 															<td></td>
 														</tr>
 												</tbody>
