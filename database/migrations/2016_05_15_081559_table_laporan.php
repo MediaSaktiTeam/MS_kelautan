@@ -17,6 +17,7 @@ class TableLaporan extends Migration
             $table->string('nama');
             $table->string('nip');
             $table->string('jabatan');
+            $table->timestamps();
 
         });
     }

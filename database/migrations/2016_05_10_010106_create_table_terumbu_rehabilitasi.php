@@ -17,6 +17,7 @@ class CreateTableTerumbuRehabilitasi extends Migration
             $table->string('kecamatan');
             $table->string('desa');
             $table->integer('direhabilitasi');
+            $table->timestamps();
         });
     }
 

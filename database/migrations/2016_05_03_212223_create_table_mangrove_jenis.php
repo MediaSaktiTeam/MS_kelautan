@@ -16,6 +16,7 @@ class CreateTableMangroveJenis extends Migration
             $table->increments('id');
             $table->string('kecamatan');
             $table->string('jenis_mangrove');
+            $table->timestamps();
         });
         
     }

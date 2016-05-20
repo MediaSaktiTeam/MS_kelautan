@@ -16,6 +16,7 @@ class CreateTableJenisIkan extends Migration
             $table->increments('id');
             $table->string('kecamatan');
             $table->string('jenis_ikan');
+            $table->timestamps();
         });
     }
 

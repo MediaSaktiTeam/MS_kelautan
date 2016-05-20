@@ -20,6 +20,7 @@ class CreateTableTerumbuMilik extends Migration
             $table->integer('kondisi_rusak');
             $table->integer('kondisi_sedang');
             $table->integer('kondisi_baik');
+            $table->timestamps();
         });
     }
 

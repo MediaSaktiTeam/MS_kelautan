@@ -20,6 +20,7 @@ class CreateTableMangroveRehabilitasi extends Migration
             $table->integer('berubah_fungsi');
             $table->integer('lahan_tambak');
             $table->integer('penggaraman');
+            $table->timestamps();
         });
         
     }
