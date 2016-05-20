@@ -13,9 +13,36 @@ use App\Permissions;
 class PemasarController extends Controller
 {
 
-	public function getIndex()
-	{
-		$data['pemasar'] = Pemasar::paginate(10);
+	public function getIndex(Request $r)
+	{	
+		if ( !isset( $r->offset ) || !isset( $r->limit ) ) {
+
+			$sql = Pemasar::orderBy('id', 'desc')->first();
+
+			if ( $sql ) {
+			// Jika sudah ada pembudidaya
+
+				// limit = Tanggal terbaru
+				// offset = Limit - 3 bulan
+				$limit1 = date_format(date_create($sql->created_at), "Y-m-d");
+				$limit = strtotime("$limit1 +1 day");
+				$limit = date("Y-m-d", $limit);
+
+				$offset = strtotime("$limit1 -3 months");
+				$offset = date("Y-m-d", $offset);
+
+			} else {
+			// Jika belum ada data pembudidaya offset = tgl skrang, limit = offset + 3 bulan
+				$offset = date('Y-m-d');
+				$limit = strtotime("$offset +3 months");
+				$limit = date("Y-m-d", $limit);
+			}
+
+			 return redirect( '/app/pemasar?offset='.$offset.'&limit='.$limit );
+		}
+		$limit = 10;
+		$data['pemasar'] = Pemasar::whereBetween('created_at', [ $r->offset, $r->limit ])
+									->paginate($limit);
 		return view ('app.pemasar.index',$data);
 	}
 
@@ -96,9 +123,9 @@ class PemasarController extends Controller
 		return view('app.pemasar.search', $data);
 	}
 
-	public function getExportExcel()
+	public function getExportExcel(Request $r)
 	{
-		$data['pemasar'] = Pemasar::get();
+		$data['pemasar'] = Pemasar::whereBetween('created_at', [ $r->offset, $r->limit ])->get();
 
         Excel::create('Data pemasar');
 
@@ -112,9 +139,9 @@ class PemasarController extends Controller
         })->download('xlsx');
 	}
 
-	public function getExportPdf()
+	public function getExportPdf(Request $r)
 	{
-		$data['pemasar'] = pemasar::get();
+		$data['pemasar'] = Pemasar::whereBetween('created_at', [ $r->offset, $r->limit ])->get();
         $pdf = PDF::loadView('app.pemasar.export-pdf', $data);
         return $pdf->setPaper('legal')->setOrientation('landscape')->setWarnings(false)->download('Data pemasar.pdf');
 	}
