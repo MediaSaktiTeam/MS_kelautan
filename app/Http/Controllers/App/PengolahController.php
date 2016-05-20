@@ -285,6 +285,8 @@ class PengolahController extends Controller
 		$data['pengolah'] = $pengolah->get();
 		$data['kelompok'] = Kelompok::where('tipe','pengolah')->get();
 		$data['jabatan'] = Jabatan::all();
+		$data['tgl_awal']		= $r->offset;
+		$data['tgl_akhir']		= $r->limit;
 		
         $pdf = PDF::loadView('app.pengolah.export-pdf', $data);
         return $pdf->setPaper('legal')->setOrientation('landscape')->setWarnings(false)->download('Data Pengolah.pdf');

@@ -141,7 +141,9 @@
 				<br>
 			</td>
 			
-			<td>Bantaeng, 4 April 2016<br>Petugas Statistik Budidaya
+			<?php $Ms = new App\Custom; ?>
+
+			<td>Bantaeng, {{ $Ms->tgl_indo(date('Y-m-d')) }}<br>Petugas Statistik Budidaya
 				<br>
 				<br>
 				<br>

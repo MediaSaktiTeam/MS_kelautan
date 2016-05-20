@@ -7,8 +7,6 @@ use Illuminate\Database\Eloquent\Model;
 class Pemasar extends Model
 {
     protected $table = "app_pemasar";
-    
-    public $timestamps = false;
 
     public function dataprovinsi(){
     	return $this->belongsTo('App\Provinsi', 'provinsi');

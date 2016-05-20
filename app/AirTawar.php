@@ -8,8 +8,6 @@ class AirTawar extends Model
 {
     protected $table = "app_air_tawar";
 
-    public $timestamps = false;
-
      public function dataprovinsi(){
     	return $this->belongsTo('App\Provinsi', 'provinsi');
     }
