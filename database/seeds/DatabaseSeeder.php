@@ -34,6 +34,8 @@ class DatabaseSeeder extends Seeder
         $this->call('KecamatanTableSeeder');
         $this->call('DesaTableSeeder');
         
+        $this->call('SitePagesTableSeeder');
+        $this->call('SiteMenuTableSeeder');
     }
 }
 
@@ -52,6 +54,8 @@ class ProvinsiTableSeeder extends Seeder
         ));
 
         
+        $this->call('SitePagesTableSeeder');
+        $this->call('SiteMenuTableSeeder');
     }
 }
 
@@ -69,6 +73,8 @@ class KabupatenTableSeeder extends Seeder
             ),
         ));
         
+        $this->call('SitePagesTableSeeder');
+        $this->call('SiteMenuTableSeeder');
     }
 }
 
@@ -128,6 +134,8 @@ class KecamatanTableSeeder extends Seeder
             ),
         ));
         
+        $this->call('SitePagesTableSeeder');
+        $this->call('SiteMenuTableSeeder');
     }
 }
 
@@ -475,6 +483,8 @@ class DesaTableSeeder extends Seeder
         ));
 
         
+        $this->call('SitePagesTableSeeder');
+        $this->call('SiteMenuTableSeeder');
     }
 }
 
@@ -488,6 +498,8 @@ class BlogTableSeeder extends Seeder
        
         
         
+        $this->call('SitePagesTableSeeder');
+        $this->call('SiteMenuTableSeeder');
     }
 }
 
@@ -501,6 +513,8 @@ class BlogKategoriTableSeeder extends Seeder
        
         
         
+        $this->call('SitePagesTableSeeder');
+        $this->call('SiteMenuTableSeeder');
     }
 }
 
@@ -514,6 +528,8 @@ class PageTableSeeder extends Seeder
        
         
         
+        $this->call('SitePagesTableSeeder');
+        $this->call('SiteMenuTableSeeder');
     }
 }
 
@@ -527,6 +543,8 @@ class PesanTableSeeder extends Seeder
        
         
         
+        $this->call('SitePagesTableSeeder');
+        $this->call('SiteMenuTableSeeder');
     }
 }
 
@@ -551,6 +569,8 @@ class UserTableSeeder extends Seeder
        
         
         
+        $this->call('SitePagesTableSeeder');
+        $this->call('SiteMenuTableSeeder');
     }
 }
 
@@ -564,6 +584,8 @@ class KategoriTableSeeder extends Seeder
        
         
         
+        $this->call('SitePagesTableSeeder');
+        $this->call('SiteMenuTableSeeder');
     }
 }
 
@@ -577,6 +599,8 @@ class SettingTableSeeder extends Seeder
        
         
         
+        $this->call('SitePagesTableSeeder');
+        $this->call('SiteMenuTableSeeder');
     }
 }
 
@@ -590,6 +614,8 @@ class MenuTableSeeder extends Seeder
        
         
         
+        $this->call('SitePagesTableSeeder');
+        $this->call('SiteMenuTableSeeder');
     }
 }
 
@@ -616,6 +642,8 @@ class BantuanMasterSeeder extends Seeder
        
         
         
+        $this->call('SitePagesTableSeeder');
+        $this->call('SiteMenuTableSeeder');
     }
 }
 
@@ -640,6 +668,8 @@ class SubSaranaSeeder extends Seeder
        
         
         
+        $this->call('SitePagesTableSeeder');
+        $this->call('SiteMenuTableSeeder');
     }
 }
 
@@ -662,6 +692,8 @@ class SubUsahaSeeder extends Seeder
        
         
         
+        $this->call('SitePagesTableSeeder');
+        $this->call('SiteMenuTableSeeder');
     }
 }
 
@@ -685,6 +717,8 @@ class JabatanSeeder extends Seeder
        
         
         
+        $this->call('SitePagesTableSeeder');
+        $this->call('SiteMenuTableSeeder');
     }
 }
 
@@ -706,6 +740,8 @@ class KelompokSeeder extends Seeder
        
         
         
+        $this->call('SitePagesTableSeeder');
+        $this->call('SiteMenuTableSeeder');
     }
 }
 
@@ -725,6 +761,8 @@ class ValidasiTableSeeder extends Seeder
        
         
         
+        $this->call('SitePagesTableSeeder');
+        $this->call('SiteMenuTableSeeder');
     }
 }
 
@@ -747,5 +785,7 @@ class PermissionsSeeder extends Seeder
        
         
         
+        $this->call('SitePagesTableSeeder');
+        $this->call('SiteMenuTableSeeder');
     }
 }
