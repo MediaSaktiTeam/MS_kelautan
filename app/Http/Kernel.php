@@ -60,5 +60,6 @@ class Kernel extends HttpKernel
         'Nelayan' => \App\Http\Middleware\Nelayan::class,
         'Pengolah' => \App\Http\Middleware\Pengolah::class,
         'Blog' => \App\Http\Middleware\Blog::class,
+        'Pesisir' => \App\Http\Middleware\Pesisir::class,
     ];
 }
