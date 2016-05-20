@@ -51,14 +51,10 @@
     <section class="section-about">
         
         <div class="container">
-            
-            <div class="col-sm-12">
                 
-                <!-- <h3 class="about-title">{{ $page->judul }}</h3> -->
+            <!-- <h3 class="about-title">{{ $page->judul }}</h3> -->
 
-                <p class="about-p">{!! $page->konten !!}</p>
-
-            </div> <!-- end col-sm-6 -->
+            {!! $page->konten !!}
 
         </div> <!-- end container -->
     
