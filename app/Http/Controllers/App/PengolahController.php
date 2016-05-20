@@ -18,10 +18,42 @@ class PengolahController extends Controller
 		$this->middleware('Pengolah');
 	}
 
-	public function getIndex()
+	public function getIndex(Request $r)
 	{
+		if ( !isset( $r->offset ) || !isset( $r->limit ) ) {
+
+			$sql = User::where('profesi', 'Pengolah')->orderBy('id', 'desc')->first();
+
+			if ( $sql ) {
+			// Jika sudah ada pengolah
+
+				// limit = Tanggal terbaru
+				// offset = Limit - 3 bulan
+				$limit1 = date_format(date_create($sql->created_at), "Y-m-d");
+				$limit = strtotime("$limit1 +1 day");
+				$limit = date("Y-m-d", $limit);
+
+				$offset = strtotime("$limit1 -3 months");
+				$offset = date("Y-m-d", $offset);
+
+			} else {
+			// Jika belum ada data pengolah offset = tgl skrang, limit = offset + 3 bulan
+				$offset = date('Y-m-d');
+				$limit = strtotime("$offset +3 months");
+				$limit = date("Y-m-d", $limit);
+			}
+
+			 return redirect( '/app/pengolah?offset='.$offset.'&limit='.$limit );
+		}
+
+
+		$pengolah = User::where('profesi','Pengolah')
+								->whereBetween('created_at', [ $r->offset, $r->limit ])
+								->orderBy('id','desc');
+
 		$limit = 10;
-		$data['pengolah'] = User::where('profesi','Pengolah')->orderBy('id','desc')->paginate($limit);
+
+		$data['pengolah'] = $pengolah->paginate($limit);
 		$data['kelompok'] = Kelompok::where('tipe','Pengolah')->paginate($limit);
 		$data['jabatan'] = Jabatan::paginate($limit);
 		return view ('app.pengolah.index',$data)->with('limit', $limit);
@@ -224,9 +256,12 @@ class PengolahController extends Controller
 		return redirect()->route('pengolah');
 	}
 
-	public function getExportExcel()
+	public function getExportExcel(Request $r)
 	{
-		$data['pengolah'] = User::where('profesi','Pengolah')->orderBy('id','desc')->get();
+		$pengolah 	= User::where('profesi','Pengolah')
+								->whereBetween('created_at', [ $r->offset, $r->limit ])
+								->orderBy('id','desc');
+		$data['pengolah'] = $pengolah->get();
 		$data['kelompok'] = Kelompok::where('tipe','pengolah')->get();
 		$data['jabatan'] = Jabatan::all();
 
@@ -242,9 +277,12 @@ class PengolahController extends Controller
         })->download('xlsx');
 	}
 
-	public function getExportPdf()
+	public function getExportPdf(Request $r)
 	{
-		$data['pengolah'] = User::where('profesi','Pengolah')->orderBy('id','desc')->get();
+		$pengolah 	= User::where('profesi','Pengolah')
+								->whereBetween('created_at', [ $r->offset, $r->limit ])
+								->orderBy('id','desc');
+		$data['pengolah'] = $pengolah->get();
 		$data['kelompok'] = Kelompok::where('tipe','pengolah')->get();
 		$data['jabatan'] = Jabatan::all();
 		

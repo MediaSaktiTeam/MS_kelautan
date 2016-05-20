@@ -19,12 +19,43 @@ class NelayanController extends Controller
 		$this->middleware('Nelayan');
 	}
 
-	public function getIndex()
+	public function getIndex(Request $r)
 	{
-		$data['nelayan'] = User::where('profesi','Nelayan')->orderBy('id','desc')->paginate(10);
-		$data['kelompok'] = Kelompok::where('tipe','nelayan')->paginate(10);
-		
+		if ( !isset( $r->offset ) || !isset( $r->limit ) ) {
+
+			$sql = User::where('profesi', 'Nelayan')->orderBy('id', 'desc')->first();
+
+			if ( $sql ) {
+			// Jika sudah ada nelayan
+
+				// limit = Tanggal terbaru
+				// offset = Limit - 3 bulan
+				$limit1 = date_format(date_create($sql->created_at), "Y-m-d");
+				$limit = strtotime("$limit1 +1 day");
+				$limit = date("Y-m-d", $limit);
+
+				$offset = strtotime("$limit1 -3 months");
+				$offset = date("Y-m-d", $offset);
+
+			} else {
+			// Jika belum ada data nelayan offset = tgl skrang, limit = offset + 3 bulan
+				$offset = date('Y-m-d');
+				$limit = strtotime("$offset +3 months");
+				$limit = date("Y-m-d", $limit);
+			}
+
+			 return redirect( '/app/nelayan?offset='.$offset.'&limit='.$limit );
+		}
+
+
+		$nelayan = User::where('profesi','Nelayan')
+								->whereBetween('created_at', [ $r->offset, $r->limit ])
+								->orderBy('id','desc');
+
 		$limit = 10;
+
+		$data['nelayan'] = $nelayan->paginate($limit);
+		$data['kelompok'] = Kelompok::where('tipe','nelayan')->paginate(10);
 		$data['jabatan'] = Jabatan::paginate($limit);
 		return view ('app.nelayan.index',$data)->with('limit', $limit);
 	}
@@ -229,9 +260,13 @@ class NelayanController extends Controller
 		return view('app.nelayan.data-pencarian', $data);
 	}
 
-	public function getExportExcel()
+	public function getExportExcel(Request $r)
 	{
-		$data['nelayan'] = User::where('profesi','Nelayan')->orderBy('id','desc')->get();
+
+		$nelayan 	= User::where('profesi','Nelayan')
+								->whereBetween('created_at', [ $r->offset, $r->limit ])
+								->orderBy('id','desc');
+		$data['nelayan'] = $nelayan->get();
 		$data['kelompok'] = Kelompok::where('tipe','nelayan')->get();
 		$data['jabatan'] = Jabatan::all();
 
@@ -247,9 +282,13 @@ class NelayanController extends Controller
         })->download('xlsx');
 	}
 
-	public function getExportPdf()
+	public function getExportPdf(Request $r)
 	{
-		$data['nelayan'] = User::where('profesi','Nelayan')->orderBy('id','desc')->get();
+		$nelayan 	= User::where('profesi','Nelayan')
+								->whereBetween('created_at', [ $r->offset, $r->limit ])
+								->orderBy('id','desc');
+
+		$data['nelayan'] = $nelayan->get();
 		$data['kelompok'] = Kelompok::where('tipe','nelayan')->get();
 		$data['jabatan'] = Jabatan::all();
 		
