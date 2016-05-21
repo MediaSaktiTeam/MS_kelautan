@@ -78,19 +78,19 @@
 												<div class="col-sm-3">
 													<div class="form-group">
 														<label>Laki-laki (org)</label>
-														<input type="number" class="form-control number" name="laki" value="{{ $jumlahpenduduk->laki }}">
+														<input type="number" class="form-control number" name="laki" value="{{ $jumlahpenduduk->laki }}" min="0">
 													</div>
 												</div>	
 												<div class="col-sm-3">
 													<div class="form-group">
 														<label>Perempuan (org)</label>
-														<input type="number" class="form-control number" name="perempuan" value="{{ $jumlahpenduduk->perempuan }}">
+														<input type="number" class="form-control number" name="perempuan" value="{{ $jumlahpenduduk->perempuan }}" min="0">
 													</div>
 												</div>
 												<div class="col-sm-3">
 													<div class="form-group">
 														<label>Jumlah KK</label>
-														<input type="number" class="form-control number" name="jumlah_kk" value="{{ $jumlahpenduduk->jumlah_kk }}">
+														<input type="number" class="form-control number" name="jumlah_kk" value="{{ $jumlahpenduduk->jumlah_kk }}" min="0">
 													</div>
 												</div>
 											</div>
