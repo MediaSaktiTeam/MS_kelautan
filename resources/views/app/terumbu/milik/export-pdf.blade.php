@@ -43,7 +43,17 @@
 		</thead>
 		
 		<tbody>
-			<?php $i = 1 ?>
+			<?php 
+				$i = 1;
+				$luas_lahan="";
+				$kondisi_baik="";
+				$kondisi_sedang="";
+				$kondisi_rusak="";
+				$to_lahan="";
+				$to_baik="";
+				$to_sedang="";
+				$to_rusak="";
+			?>
 
 			@foreach( $terumbumilik as $mil )
 
@@ -56,8 +66,26 @@
 					<td>{{ $mil->kondisi_sedang }} M<sup>2</sup></td>
 					<td>{{ $mil->kondisi_baik }} M<sup>2</sup></td>
 				</tr>
-
+				<?php 
+					$luas_lahan += $mil->luas_lahan * 0.0001;
+					$kondisi_baik += $mil->kondisi_baik * 0.0001;
+					$kondisi_sedang += $mil->kondisi_sedang * 0.0001;
+					$kondisi_rusak += $mil->kondisi_rusak * 0.0001;
+					$to_lahan += $mil->luas_lahan;
+					$to_rusak += $mil->kondisi_rusak;
+					$to_sedang += $mil->kondisi_sedang;
+					$to_baik += $mil->kondisi_baik;
+				?>
 			@endforeach
+			<tr>
+				<td><b>Jumlah</b></td>
+				<td></td>
+				<td></td>
+				<td><b>{{ $to_lahan }} M<sup>2</sup> <?php echo "(", round($luas_lahan,2), "Ha)";  ?></b></td>
+				<td><b>{{ $to_rusak }} M<sup>2</sup> <?php echo "(", round($kondisi_rusak,2), "Ha)"; ?></b></td>
+				<td><b>{{ $to_sedang }} M<sup>2</sup> <?php echo "(", round($kondisi_sedang,2), "Ha)"; ?></b></td>
+				<td><b>{{ $to_baik }} M<sup>2</sup> <?php echo "(", round($kondisi_baik,2), "Ha)"; ?></b></td>
+			</tr>
 		</tbody>
 	</table>
 

@@ -24,7 +24,7 @@ class DatabaseSeeder extends Seeder
         $this->call('MenuTableSeeder');
         $this->call('BantuanMasterSeeder');
         $this->call('KelompokSeeder');
-        $this->call('SubUsahaSeeder');
+        // $this->call('SubUsahaSeeder');
         $this->call('SubSaranaSeeder');
         $this->call('JabatanSeeder');
         $this->call('ValidasiTableSeeder');
@@ -34,8 +34,7 @@ class DatabaseSeeder extends Seeder
         $this->call('KecamatanTableSeeder');
         $this->call('DesaTableSeeder');
         
-        $this->call('SitePagesTableSeeder');
-        $this->call('SiteMenuTableSeeder');
+        
     }
 }
 
@@ -54,8 +53,7 @@ class ProvinsiTableSeeder extends Seeder
         ));
 
         
-        $this->call('SitePagesTableSeeder');
-        $this->call('SiteMenuTableSeeder');
+        
     }
 }
 
@@ -73,8 +71,7 @@ class KabupatenTableSeeder extends Seeder
             ),
         ));
         
-        $this->call('SitePagesTableSeeder');
-        $this->call('SiteMenuTableSeeder');
+        
     }
 }
 
@@ -134,8 +131,7 @@ class KecamatanTableSeeder extends Seeder
             ),
         ));
         
-        $this->call('SitePagesTableSeeder');
-        $this->call('SiteMenuTableSeeder');
+        
     }
 }
 
@@ -483,8 +479,7 @@ class DesaTableSeeder extends Seeder
         ));
 
         
-        $this->call('SitePagesTableSeeder');
-        $this->call('SiteMenuTableSeeder');
+        
     }
 }
 
@@ -498,8 +493,7 @@ class BlogTableSeeder extends Seeder
        
         
         
-        $this->call('SitePagesTableSeeder');
-        $this->call('SiteMenuTableSeeder');
+        
     }
 }
 
@@ -513,8 +507,7 @@ class BlogKategoriTableSeeder extends Seeder
        
         
         
-        $this->call('SitePagesTableSeeder');
-        $this->call('SiteMenuTableSeeder');
+        
     }
 }
 
@@ -528,8 +521,7 @@ class PageTableSeeder extends Seeder
        
         
         
-        $this->call('SitePagesTableSeeder');
-        $this->call('SiteMenuTableSeeder');
+        
     }
 }
 
@@ -543,8 +535,7 @@ class PesanTableSeeder extends Seeder
        
         
         
-        $this->call('SitePagesTableSeeder');
-        $this->call('SiteMenuTableSeeder');
+        
     }
 }
 
@@ -569,8 +560,7 @@ class UserTableSeeder extends Seeder
        
         
         
-        $this->call('SitePagesTableSeeder');
-        $this->call('SiteMenuTableSeeder');
+        
     }
 }
 
@@ -584,8 +574,7 @@ class KategoriTableSeeder extends Seeder
        
         
         
-        $this->call('SitePagesTableSeeder');
-        $this->call('SiteMenuTableSeeder');
+        
     }
 }
 
@@ -599,8 +588,7 @@ class SettingTableSeeder extends Seeder
        
         
         
-        $this->call('SitePagesTableSeeder');
-        $this->call('SiteMenuTableSeeder');
+        
     }
 }
 
@@ -614,8 +602,7 @@ class MenuTableSeeder extends Seeder
        
         
         
-        $this->call('SitePagesTableSeeder');
-        $this->call('SiteMenuTableSeeder');
+        
     }
 }
 
@@ -642,8 +629,7 @@ class BantuanMasterSeeder extends Seeder
        
         
         
-        $this->call('SitePagesTableSeeder');
-        $this->call('SiteMenuTableSeeder');
+        
     }
 }
 
@@ -668,8 +654,7 @@ class SubSaranaSeeder extends Seeder
        
         
         
-        $this->call('SitePagesTableSeeder');
-        $this->call('SiteMenuTableSeeder');
+        
     }
 }
 
@@ -678,22 +663,17 @@ class SubUsahaSeeder extends Seeder
 
   public function run() {
 
-  App\Usaha::truncate();
+    App\Usaha::truncate();
 
     $data = array(
         array('nama' => 'KJA', 'jenis' => 'Budidaya Air Laut'),
         array('nama' => 'Kolam Tanah', 'jenis' => 'Budidaya Air Tawar'),
         array('nama' => 'Kolam Terpal', 'jenis' => 'Budidaya Air Tawar'),
-        array('nama' => 'Tambak', 'jenis' => 'Budidaya Air Payau'),
+        array('nama' => 'Tambak', 'jenis' => 'Budidaya Air Payau')
       );
 
       DB::table('app_usaha')->insert($data);
-
-       
         
-        
-        $this->call('SitePagesTableSeeder');
-        $this->call('SiteMenuTableSeeder');
     }
 }
 
@@ -717,8 +697,7 @@ class JabatanSeeder extends Seeder
        
         
         
-        $this->call('SitePagesTableSeeder');
-        $this->call('SiteMenuTableSeeder');
+        
     }
 }
 
@@ -740,8 +719,7 @@ class KelompokSeeder extends Seeder
        
         
         
-        $this->call('SitePagesTableSeeder');
-        $this->call('SiteMenuTableSeeder');
+        
     }
 }
 
@@ -756,13 +734,8 @@ class ValidasiTableSeeder extends Seeder
       array('key' => 'UEVCYnRqVWVtOEg0dHMxZ3ZRS3JFZXZkU0E2WmxiaWhMQThPYlR0TTc2UT0=')
     );
 
-    DB::table('validasi')->insert($data);
-
-       
+    DB::table('validasi')->insert($data);        
         
-        
-        $this->call('SitePagesTableSeeder');
-        $this->call('SiteMenuTableSeeder');
     }
 }
 
@@ -782,10 +755,6 @@ class PermissionsSeeder extends Seeder
       );
 
       DB::table('permissions')->insert($data);
-       
         
-        
-        $this->call('SitePagesTableSeeder');
-        $this->call('SiteMenuTableSeeder');
     }
 }
