@@ -208,7 +208,7 @@
 		Route::controller('app/master/lokasi/prov', 'LokasiProvController',
 			[
 				'getIndex' => 'prov',
-				'getAdd' => 'prov_tambah',
+				'getAdd' => 'prov_add',
 				'getDelete' => 'prov_delete',
 				'getUpdate' => 'prov_update',
 				'getEdit' => 'prov_edit',

@@ -33,6 +33,7 @@
 				</div>
 			</div>
 
+
 			<!-- START CONTAINER FLUID -->
 			<div class="container-fluid padding-25 sm-padding-10">
 
@@ -65,16 +66,45 @@
 								<h5>Keterangan Lokasi</h5>
 								<p>Berikut adalah berbagai lokasi di bantaeng. Mulai dari Provinsi sampai desa, silahkan sunting ID lokasi sesuai kebutuhan Anda!</p>
 
-								<form class="style-form" method="GET" action="{{ route('prov_add') }}">
+								<form class="style-form" method="GET" action="{{ route('lokasi_tambah') }}">
 									<div class="col-md-6">
 										<input type="hidden" name="_token" value="{{ csrf_token() }}">
-										<br/>
+
+										<br>
 										<h6><b>Provinsi</b></h6>
 										<div class="form-group form-group-default input-group">
 											<input type="email" class="form-control" value="073" style="margin-top: 13px;">
 											<span class="input-group-addon" style="width: 85%; text-align: left; background: transparent; font-weight: bold;">Sulawesi Selatan</span>
 										</div>
+
+										<br>
+										<h6><b>Kecamatan</b></h6>
+										<div class="form-group form-group-default input-group">
+											<input type="email" class="form-control" value="073" style="margin-top: 13px;">
+											<span class="input-group-addon" style="width: 85%; text-align: left; background: transparent; font-weight: bold;">Nama Kecamatan</span>
+										</div>
+										<div class="form-group form-group-default input-group">
+											<input type="email" class="form-control" value="073" style="margin-top: 13px;">
+											<span class="input-group-addon" style="width: 85%; text-align: left; background: transparent; font-weight: bold;">Nama Kecamatan</span>
+										</div>
+										<div class="form-group form-group-default input-group">
+											<input type="email" class="form-control" value="073" style="margin-top: 13px;">
+											<span class="input-group-addon" style="width: 85%; text-align: left; background: transparent; font-weight: bold;">Nama Kecamatan</span>
+										</div>
+										<div class="form-group form-group-default input-group">
+											<input type="email" class="form-control" value="073" style="margin-top: 13px;">
+											<span class="input-group-addon" style="width: 85%; text-align: left; background: transparent; font-weight: bold;">Nama Kecamatan</span>
+										</div>
+										<div class="form-group form-group-default input-group">
+											<input type="email" class="form-control" value="073" style="margin-top: 13px;">
+											<span class="input-group-addon" style="width: 85%; text-align: left; background: transparent; font-weight: bold;">Nama Kecamatan</span>
+										</div>
+										<div class="form-group form-group-default input-group">
+											<input type="email" class="form-control" value="073" style="margin-top: 13px;">
+											<span class="input-group-addon" style="width: 85%; text-align: left; background: transparent; font-weight: bold;">Nama Kecamatan</span>
+										</div>
 									</div>
+
 									<div class="col-md-6">
 										<br>
 										<h6><b>Kabupaten</b></h6>
@@ -82,8 +112,38 @@
 											<input type="email" class="form-control" value="073" style="margin-top: 13px;">
 											<span class="input-group-addon" style="width: 85%; text-align: left; background: transparent; font-weight: bold;">Kab. Bantaeng</span>
 										</div>
+										
+										<br>
+										<h6><b>Desa</b></h6>
+
+										<div class="form-group form-group-default input-group">
+											<input type="email" class="form-control" value="073" style="margin-top: 13px;">
+											<span class="input-group-addon" style="width: 85%; text-align: left; background: transparent; font-weight: bold;">Nama Desa</span>
+										</div>
+										<div class="form-group form-group-default input-group">
+											<input type="email" class="form-control" value="073" style="margin-top: 13px;">
+											<span class="input-group-addon" style="width: 85%; text-align: left; background: transparent; font-weight: bold;">Nama Desa</span>
+										</div>
+										<div class="form-group form-group-default input-group">
+											<input type="email" class="form-control" value="073" style="margin-top: 13px;">
+											<span class="input-group-addon" style="width: 85%; text-align: left; background: transparent; font-weight: bold;">Nama Desa</span>
+										</div>
+										<div class="form-group form-group-default input-group">
+											<input type="email" class="form-control" value="073" style="margin-top: 13px;">
+											<span class="input-group-addon" style="width: 85%; text-align: left; background: transparent; font-weight: bold;">Nama Desa</span>
+										</div>
+										<div class="form-group form-group-default input-group">
+											<input type="email" class="form-control" value="073" style="margin-top: 13px;">
+											<span class="input-group-addon" style="width: 85%; text-align: left; background: transparent; font-weight: bold;">Nama Desa</span>
+										</div>
+										<div class="form-group form-group-default input-group">
+											<input type="email" class="form-control" value="073" style="margin-top: 13px;">
+											<span class="input-group-addon" style="width: 85%; text-align: left; background: transparent; font-weight: bold;">Nama Desa</span>
+										</div>
 									</div>
+
 									<div class="col-md-12">
+										<hr>
 										<div class="form-group pull-right">
 											<button type="submit" class="btn btn-primary btn-cons">Simpan</button>
 										</div>
@@ -159,7 +219,7 @@
 					<h5>Sunting Data</h5>
 				</div>
 				<div class="modal-body">
-					<form class="style-form" method="GET" action="{{ route('prov_update') }}">
+					<form class="style-form" method="GET" action="{{ route('bantuan_update') }}">
 						<input type="hidden" name="_token" value="{{ csrf_token() }}">
 						<div class="form-group form-group-default required">
 							<label>Bidang Usaha</label>
@@ -192,9 +252,8 @@
 
 @section('registerscript')
 	<script>
-		$(".menu-items .link-lokasi").addClass("active open");
-		$(".menu-items .link-lokasi .sub-menu ").addClass("active open");
-		$(".menu-items .link-lokasi .sub-menu .sub-prov").addClass("active");
+		$(".menu-items .link-master").addClass("active open");
+		$(".menu-items .link-master .sub-lokasi").addClass("active");
 
 		$(function(){
 
