@@ -222,7 +222,7 @@
 								<span class="icon-thumbnail">Bn</span>
 							</li>
 							@if ( Permissions::admin() )
-							<li class="sub-lokasi">
+							<li class="link-lokasi">
 								<a href="javascript:;"><span class="title">Lokasi</span>
 								<span class=" arrow"></span></a>
 								<span class="icon-thumbnail">L</span>

@@ -17,6 +17,9 @@
 			<?php $i = 1 ?>
 			
 			@foreach( $mangrovemilik as $mi )
+			<?php 
+			$k_baik = $mi->luas_lahan - $mi->kondisi_rusak - $mi->kondisi_sedang;
+			 ?>
 
 				<tr>
 					<td><?php echo $i  ?></td>
@@ -25,7 +28,7 @@
 					<td>{{ $mi->luas_lahan }} M<sup>2</sup></td>
 					<td>{{ $mi->kondisi_rusak }} M<sup>2</sup></td>
 					<td>{{ $mi->kondisi_sedang }} M<sup>2</sup></td>
-					<td>{{ $mi->kondisi_baik }} M<sup>2</sup></td>
+					<td>{{ $k_baik }} M<sup>2</sup></td>
 				</tr>
 
 				<?php $i = $i + 1 ?>

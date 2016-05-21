@@ -78,28 +78,22 @@
 												<div class="col-sm-4">
 													<div class="form-group">
 														<label>Luas Lahan Mangrove</label>
-														<input type="number" class="form-control number" name="luas_lahan" value="">
+														<input type="number" class="form-control number" name="luas_lahan" value="" min="0">
 													</div>
 												</div>
 											</div>
 
 											<div class="row">
-												<div class="col-sm-4">
+												<div class="col-sm-6">
 													<div class="form-group">
 														<label>Kondisi Rusak</label>
-														<input type="number" class="form-control number" name="kondisi_rusak" value="">
+														<input type="number" class="form-control number" name="kondisi_rusak" value="" min="0">
 													</div>
 												</div>
-												<div class="col-sm-4">
+												<div class="col-sm-6">
 													<div class="form-group">
 														<label>Kondisi Sedang</label>
-														<input type="number" class="form-control number" name="kondisi_sedang" value="">
-													</div>
-												</div>
-												<div class="col-sm-4">
-													<div class="form-group">
-														<label>Kondisi Baik</label>
-														<input type="number" class="form-control number" name="kondisi_baik" value="">
+														<input type="number" class="form-control number" name="kondisi_sedang" value="" min="0">
 													</div>
 												</div>
 											</div>
@@ -194,6 +188,9 @@
 														$to_baik ="";
 													?>
 												@foreach($mangrovemilik as $mi)
+												<?php 
+												$k_baik = $mi->luas_lahan - $mi->kondisi_rusak - $mi->kondisi_sedang;
+												 ?>
 														<tr>
 															<td>
 																<div class="checkbox">
@@ -207,7 +204,7 @@
 															<td>{{ $mi->luas_lahan }} M<sup>2</sup></td>
 															<td>{{ $mi->kondisi_rusak }} M<sup>2</sup></td>
 															<td>{{ $mi->kondisi_sedang }} M<sup>2</sup></td>
-															<td>{{ $mi->kondisi_baik }} M<sup>2</sup></td>
+															<td>{{ $k_baik }} M<sup>2</sup></td>
 															<td style="text-align:center">
 																<a class="btn btn-default btn-xs view" data-id="{{ $mi->id }}"><i class="fa fa-search-plus"></i></a>
 																<a href="{{ route('mangrovemilik_edit', $mi->id) }}" class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i></a>
@@ -216,13 +213,13 @@
 
 														<?php 
 															$luas_lahan += $mi->luas_lahan * 0.0001;
-															$kondisi_baik += $mi->kondisi_baik * 0.0001;
+															$kondisi_baik += $k_baik * 0.0001;
 															$kondisi_sedang += $mi->kondisi_sedang * 0.0001;
 															$kondisi_rusak += $mi->kondisi_rusak * 0.0001;
 															$to_lahan += $mi->luas_lahan;
 															$to_rusak += $mi->kondisi_rusak;
 															$to_sedang += $mi->kondisi_sedang;
-															$to_baik += $mi->kondisi_baik
+															$to_baik += $k_baik;
 															 ?>
 												@endforeach
 														<tr>
