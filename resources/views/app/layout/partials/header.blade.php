@@ -223,8 +223,23 @@
 							</li>
 							@if ( Permissions::admin() )
 							<li class="sub-lokasi">
-								<a href="/app/master/lokasi">Lokasi</a>
+								<a href="javascript:;"><span class="title">Lokasi</span>
+								<span class=" arrow"></span></a>
 								<span class="icon-thumbnail">L</span>
+								<ul class="sub-menu">
+									<li class="sub-prov">
+										<a href="/app/master/lokasi/prov">Prov dan Kab</a>
+										<span class="icon-thumbnail">PK</span>
+									</li>
+									<li class="sub-desa">
+										<a href="#">Kecamatan</a>
+										<span class="icon-thumbnail">K</span>
+									</li>
+									<li class="sub-desa">
+										<a href="#">Desa</a>
+										<span class="icon-thumbnail">D</span>
+									</li>
+								</ul>
 							</li>
 							<li class="sub-laporan">
 								<a href="/app/master/laporan">Laporan</a>

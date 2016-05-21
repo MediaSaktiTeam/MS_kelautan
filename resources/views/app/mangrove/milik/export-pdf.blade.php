@@ -12,7 +12,23 @@
 <body>
 
 <center><h2>Data Mangrove yang dimiliki <br> <small>Dinas Perikanan dan Kelautan Kab. Bantaeng</small></h2></center>
-
+	
+	<table class="table table-no-border" style="width: 40%">
+		<tr>
+			<td><b>KABUPATEN</b></td>
+			<td><b>BANTAENG</b></td>
+		</tr>
+		<tr>
+			<td><b>KWARTAL</b></td>
+			<?php $tgl = Sakti::TglLaporan($tgl_awal, $tgl_akhir) ?>
+			<td><b>{{  $tgl['tgl_awal'] }} s/d {{ $tgl['tgl_akhir'] }}</b></td>
+		</tr>
+		<tr>
+			<td><b>TAHUN</b></td>
+			<td><b>{{ $tgl['tahun'] }}</b></td>
+		</tr>
+	</table>
+	
 	<table class="table table-bordered">
 		<thead>
 			<tr>
@@ -27,7 +43,16 @@
 		</thead>
 		
 		<tbody>
-			<?php $i = 1 ?>
+			<?php $i = 1 ;
+				$luas_lahan="";
+				$kondisi_baik="";
+				$kondisi_sedang="";
+				$kondisi_rusak="";
+				$to_lahan ="";
+				$to_rusak= "";
+				$to_sedang= "";
+				$to_baik ="";
+			?>
 
 			@foreach( $mangrovemilik as $mi )
 
@@ -40,8 +65,28 @@
 					<td>{{ $mi->kondisi_sedang }} M<sup>2</sup></td>
 					<td>{{ $mi->kondisi_baik }} M<sup>2</sup></td>
 				</tr>
+				<?php 
+				$luas_lahan += $mi->luas_lahan * 0.0001;
+				$kondisi_baik += $mi->kondisi_baik * 0.0001;
+				$kondisi_sedang += $mi->kondisi_sedang * 0.0001;
+				$kondisi_rusak += $mi->kondisi_rusak * 0.0001;
+				$to_lahan += $mi->luas_lahan;
+				$to_rusak += $mi->kondisi_rusak;
+				$to_sedang += $mi->kondisi_sedang;
+				$to_baik += $mi->kondisi_baik
+				 ?>	
 
 			@endforeach
+			<tr>
+			<td><b>Jumlah</b></td>
+			<td></td>
+			<td></td>
+			<td><b>{{ $to_lahan }} M<sup>2</sup> <?php echo "(", round($luas_lahan,2), "Ha)";  ?></b></td>
+			<td><b>{{ $to_rusak }} M<sup>2</sup> <?php echo "(", round($kondisi_rusak,2), "Ha)"; ?></b></td>
+			<td><b>{{ $to_sedang }} M<sup>2</sup> <?php echo "(", round($kondisi_sedang,2), "Ha)"; ?></b></td>
+			<td><b>{{ $to_baik }} M<sup>2</sup> <?php echo "(", round($kondisi_baik,2), "Ha)"; ?></b></td>
+			
+			</tr>
 		</tbody>
 	</table>
 

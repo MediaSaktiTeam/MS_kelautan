@@ -18,22 +18,48 @@ class MangroveJenisController extends Controller
 		$this->middleware('Pesisir');
 	}
 	
-	public function getIndex()
+	public function getIndex(Request $r)
 	{
+		if ( !isset( $r->offset ) || !isset( $r->limit ) ) {
+
+			$sql = MangroveJenis::orderBy('id', 'desc')->first();
+
+			if ( $sql ) {
+			// Jika sudah ada data
+
+				// limit = Tanggal terbaru
+				// offset = Limit - 3 bulan
+				$limit1 = date_format(date_create($sql->created_at), "Y-m-d");
+				$limit = strtotime("$limit1 +1 day");
+				$limit = date("Y-m-d", $limit);
+
+				$offset = strtotime("$limit1 -3 months");
+				$offset = date("Y-m-d", $offset);
+
+			} else {
+			// Jika belum ada data offset = tgl skrang, limit = offset + 3 bulan
+				$offset = date('Y-m-d');
+				$limit = strtotime("$offset +3 months");
+				$limit = date("Y-m-d", $limit);
+			}
+
+			return redirect( '/app/mangrove/jenis?offset='.$offset.'&limit='.$limit );
+		}
+
 		$limit="10";
-		$data['mangrovejenis'] = MangroveJenis::paginate(10);
+		$data['mangrovejenis'] = MangroveJenis::whereBetween('created_at', [ $r->offset, $r->limit ])->paginate($limit);
 		return view ('app.mangrove.jenis.index',$data)->with('limit', $limit);
 	}
 
 	public function getAdd(Request $request)
-			{
-				$dt = new MangroveJenis;
-				$dt->id = $request->id;
-				$dt->kecamatan = $request->kecamatan;
-				$dt->jenis_mangrove = $request->jenis_mangrove;
-				$dt->save();
-				return redirect()->route('mangrovejenis')->with(session()->flash('success','Data Berhasil Tersimpan !!'));
-			}
+	{
+		$dt = new MangroveJenis;
+		$dt->id = $request->id;
+		$dt->kecamatan = $request->kecamatan;
+		$dt->jenis_mangrove = $request->jenis_mangrove;
+		$dt->save();
+		return redirect()->route('mangrovejenis')->with(session()->flash('success','Data Berhasil Tersimpan !!'));
+	}
 
 	public function getDelete($id)
 	{
@@ -90,9 +116,9 @@ class MangroveJenisController extends Controller
 		return view('app.mangrove.jenis.search', $data);
 	}
 
-	public function getExportExcel()
+	public function getExportExcel(Request $r)
 	{
-		$data['mangrovejenis'] = MangroveJenis::all();
+		$data['mangrovejenis'] = MangroveJenis::whereBetween('created_at', [ $r->offset, $r->limit ])->get();
 
         Excel::create('Jenis Mangrove');
 
@@ -106,10 +132,11 @@ class MangroveJenisController extends Controller
         })->download('xlsx');
 	}
 
-	public function getExportPdf()
+	public function getExportPdf(Request $r)
 	{
-		$data['mangrovejenis'] = MangroveJenis::all();
-		
+		$data['mangrovejenis'] = MangroveJenis::whereBetween('created_at', [ $r->offset, $r->limit ])->get();
+		$data['tgl_awal']		= $r->offset;
+		$data['tgl_akhir']		= $r->limit;
         $pdf = PDF::loadView('app.mangrove.jenis.export-pdf', $data);
         return $pdf->setPaper('legal')->setOrientation('potrait')->setWarnings(false)->download('Jenis Mangrove.pdf');
 	}

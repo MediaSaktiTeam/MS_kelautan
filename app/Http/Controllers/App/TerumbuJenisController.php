@@ -88,7 +88,7 @@ class TerumbuJenisController extends Controller
 	}
 
 
-public function getUpdate(Request $request)
+	public function getUpdate(Request $request)
 	{
 
 		$dt = TerumbuJenis::find($request->id);

@@ -20,11 +20,12 @@
 		</tr>
 		<tr>
 			<td><b>KWARTAL</b></td>
-			<td><b>1 (Satu) Januari s/d Maret</b></td>
+			<?php $tgl = Sakti::TglLaporan($tgl_awal, $tgl_akhir) ?>
+			<td><b>{{  $tgl['tgl_awal'] }} s/d {{ $tgl['tgl_akhir'] }}</b></td>
 		</tr>
 		<tr>
 			<td><b>TAHUN</b></td>
-			<td><b>2016</b></td>
+			<td><b>{{ $tgl['tahun'] }}</b></td>
 		</tr>
 	</table>
 
@@ -42,7 +43,19 @@
 		</thead>
 		
 		<tbody>
-			<?php $i = 1 ?>
+			<?php 
+
+				$i = 1;
+				$direhabilitasi="";
+				$berubah_fungsi="";
+				$lahan_tambak="";
+				$penggaraman="";
+				$to_rehab ="";
+				$to_fungsi = "";
+				$to_tambak ="";
+				$to_garam ="";
+			?>
+
 
 			@foreach( $mangroverehabilitasi as $rehab )
 
@@ -56,7 +69,29 @@
 					<td>{{ $rehab->penggaraman }} M<sup>2</sup></td>
 				</tr>
 
+				<?php 
+					$direhabilitasi += $rehab->direhabilitasi * 0.0001;
+					$berubah_fungsi += $rehab->berubah_fungsi * 0.0001;
+					$lahan_tambak += $rehab->lahan_tambak * 0.0001;
+					$penggaraman += $rehab->penggaraman * 0.0001;
+					$to_rehab += $rehab->direhabilitasi;
+					$to_fungsi += $rehab->berubah_fungsi;
+					$to_tambak += $rehab->lahan_tambak;
+					$to_garam ="";
+				?>
+
 			@endforeach
+
+				<tr>
+					<td><b>Jumlah</b></td>
+					<td></td>
+					<td></td>
+					<td><b> {{ $to_rehab }} M<sup>2</sup> <?php echo "(", round($direhabilitasi,2), "Ha)";  ?></b></td>
+					<td><b> {{ $to_fungsi }} M<sup>2</sup><?php echo "(", round($berubah_fungsi,2), "Ha)"; ?></b></td>
+					<td><b>	{{ $to_tambak }} M<sup>2</sup><?php echo "(", round($lahan_tambak,2), "Ha)"; ?></b></td>
+					<td><b> {{ $to_garam }} M<sup>2</sup><?php echo "(", round($penggaraman,2), "Ha)"; ?></b></td>
+					<td></td>
+				</tr>
 		</tbody>
 	</table>
 

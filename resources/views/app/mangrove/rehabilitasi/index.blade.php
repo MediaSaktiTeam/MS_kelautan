@@ -119,11 +119,28 @@
 							<div class="panel panel-default">
 								<div class="panel-body">
 									<div class="">
-										<div class="input-group">
-											<input type="text" onkeyup="cari_data(this.value)" class="form-control" placeholder="Pencarian">
-											<span class="input-group-btn">
-												<a href="" class="btn btn-default" data-toggle="modal" data-target="#modal-ekspor"><i class="fa fa-file-archive-o"></i> &nbsp;Ekspor</a>
-											</span>
+										<form action="{{ url('/app/mangrove/jenis') }}">
+											<div class="col-md-4">
+												<div class="input-group">
+													<input type="date" class="form-control" name="offset" value="{{ $_GET['offset'] }}"/>
+													<span class="input-group-addon" style="border: 0;">-</span>
+													<input type="date" class="form-control" name="limit" value="{{ $_GET['limit'] }}"/>
+												</div>
+											</div>
+
+											<div class="col-md-1">
+												<button class="btn btn-default">Tampilkan</button>
+											</div>
+
+										</form>
+
+										<div class="col-md-offset-1 col-md-6">
+											<div class="input-group">
+												<input type="text" onkeyup="cari_data(this.value)" class="form-control" placeholder="Pencarian">
+												<span class="input-group-btn">
+													<a href="" class="btn btn-default" data-toggle="modal" data-target="#modal-ekspor"><i class="fa fa-file-archive-o"></i> &nbsp;Ekspor</a>
+												</span>
+											</div>
 										</div>
 										<br>
 
@@ -223,7 +240,7 @@
 												</tbody>
 
 											</table>
-											<center>{!! $mangroverehabilitasi->links() !!}</center>
+											<center>{!! $mangroverehabilitasi->appends([ 'offset' => $_GET['offset'], 'limit' => $_GET['limit'] ])->links() !!}</center>
 										</div>
 
 									</div>
@@ -306,13 +323,13 @@
 				<div class="modal-body">
 					<div class="row">
 						<div class="col-md-6">
-							<a href="{{ url('/app/mangrove/rehabilitasi/export-excel') }}">
+							<a href="{{ url('/app/mangrove/rehabilitasi/export-excel?offset='.$_GET['offset'].'&limit='.$_GET['limit']) }}">
 								<i class="fa fa-file-excel-o export-excel"></i>
 								Unduh Dalam Format Mic.Excel
 							</a>
 						</div>
 						<div class="col-md-6">
-							<a href="{{ url('/app/mangrove/rehabilitasi/export-pdf') }}">
+							<a href="{{ url('/app/mangrove/rehabilitasi/export-pdf?offset='.$_GET['offset'].'&limit='.$_GET['limit']) }}">
 								<i class="fa fa-file-pdf-o export-pdf"></i>
 								Unduh Dalam Format PDF
 							</a>

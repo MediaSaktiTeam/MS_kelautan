@@ -20,8 +20,33 @@ class MangroveMilikController extends Controller
 
 	public function getIndex(Request $r)
 	{
+		if ( !isset( $r->offset ) || !isset( $r->limit ) ) {
+
+			$sql = MangroveMilik::orderBy('id', 'desc')->first();
+
+			if ( $sql ) {
+			// Jika sudah ada data
+
+				// limit = Tanggal terbaru
+				// offset = Limit - 3 bulan
+				$limit1 = date_format(date_create($sql->created_at), "Y-m-d");
+				$limit = strtotime("$limit1 +1 day");
+				$limit = date("Y-m-d", $limit);
+
+				$offset = strtotime("$limit1 -3 months");
+				$offset = date("Y-m-d", $offset);
+
+			} else {
+			// Jika belum ada data offset = tgl skrang, limit = offset + 3 bulan
+				$offset = date('Y-m-d');
+				$limit = strtotime("$offset +3 months");
+				$limit = date("Y-m-d", $limit);
+			}
+
+			return redirect( '/app/mangrove/milik?offset='.$offset.'&limit='.$limit );
+		}
 		$limit = 10;
-		$data['mangrovemilik'] = MangroveMilik::paginate(10);
+		$data['mangrovemilik'] = MangroveMilik::whereBetween('created_at', [ $r->offset, $r->limit ])->paginate(10);
 		return view ('app.mangrove.milik.index',$data)->with('limit', $limit);
 	}
 
@@ -101,9 +126,9 @@ public function getUpdate(Request $request)
 		return view('app.mangrove.milik.search', $data);
 	}
 
-	public function getExportExcel()
+	public function getExportExcel(Request $r)
 	{
-		$data['mangrovemilik'] = MangroveMilik::orderBy('desa','asc')->get();
+		$data['mangrovemilik'] = MangroveMilik::whereBetween('created_at', [ $r->offset, $r->limit ])->orderBy('desa','asc')->get();
 
         Excel::create('Data Mangrove yang dimiliki');
 
@@ -117,10 +142,11 @@ public function getUpdate(Request $request)
         })->download('xlsx');
 	}
 
-	public function getExportPdf()
+	public function getExportPdf(Request $r)
 	{
-		$data['mangrovemilik'] = MangroveMilik::orderBy('desa','asc')->get();
-		
+		$data['mangrovemilik'] = MangroveMilik::whereBetween('created_at', [ $r->offset, $r->limit ])->orderBy('desa','asc')->get();
+		$data['tgl_awal']		= $r->offset;
+		$data['tgl_akhir']		= $r->limit;
         $pdf = PDF::loadView('app.mangrove.milik.export-pdf', $data);
         return $pdf->setPaper('legal')->setOrientation('potrait')->setWarnings(false)->download('Data Mangrove yang dimiliki.pdf');
 	}
