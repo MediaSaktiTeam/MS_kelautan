@@ -147,6 +147,8 @@ class ProduksiController extends Controller
 								->get();
 
 		$data['profesi'] = $profesi;
+		$data['tgl_awal']		= $r->offset;
+		$data['tgl_akhir']		= $r->limit;
 		
         $pdf = PDF::loadView('app.produksi.export-pdf', $data);
         return $pdf->setPaper('legal')->setOrientation('potrait')->setWarnings(false)->download('Data Produksi '.$profesi.'.pdf');

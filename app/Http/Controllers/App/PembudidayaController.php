@@ -312,7 +312,9 @@ class PembudidayaController extends Controller
 
 		$data['kelompok'] 		= Kelompok::where('tipe','Pembudidaya')->get();
 		$data['jabatan'] 		= Jabatan::all();
-		
+		$data['tgl_awal']		= $r->offset;
+		$data['tgl_akhir']		= $r->limit;
+
         $pdf = PDF::loadView('app.pembudidaya.export-pdf', $data);
         return $pdf->setPaper('legal')->setOrientation('landscape')->setWarnings(false)->download('Data Pembudidaya.pdf');
 	}

@@ -162,6 +162,8 @@ class AirTawarController extends Controller
 		$data['airtawar'] = AirTawar::whereBetween('created_at', [ $r->offset, $r->limit ])->get();
 		$data['kasi'] = Laporan::where('jabatan','Kasi Budidaya Laut. Payau dan Air Tawar')->get();
 		$data['petugas'] = Laporan::where('jabatan','Petugas Statistik')->get();
+		$data['tgl_awal']		= $r->offset;
+		$data['tgl_akhir']		= $r->limit;
         $pdf = PDF::loadView('app.laporan-produksi.air-tawar.export-pdf', $data);
         return $pdf->setPaper('legal')->setOrientation('landscape')->setWarnings(false)->download('Data airtawar.pdf');
 	}

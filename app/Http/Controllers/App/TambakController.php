@@ -161,6 +161,8 @@ class TambakController extends Controller
 		$data['tambak'] = Tambak::whereBetween('created_at', [ $r->offset, $r->limit ])->get();
 		$data['kasi'] = Laporan::where('jabatan','Kasi Budidaya Laut. Payau dan Air Tawar')->get();
 		$data['petugas'] = Laporan::where('jabatan','Petugas Statistik')->get();
+		$data['tgl_awal']		= $r->offset;
+		$data['tgl_akhir']		= $r->limit;
         $pdf = PDF::loadView('app.laporan-produksi.tambak.export-pdf', $data);
         return $pdf->setPaper('legal')->setOrientation('landscape')->setWarnings(false)->download('Data Tambak.pdf');
 	}

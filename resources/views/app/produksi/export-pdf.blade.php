@@ -22,11 +22,12 @@
 		</tr>
 		<tr>
 			<td><b>KWARTAL</b></td>
-			<td><b>1 (Satu) Januari s/d Maret</b></td>
+			<?php $tgl = Sakti::TglLaporan($tgl_awal, $tgl_akhir) ?>
+			<td><b>{{  $tgl['tgl_awal'] }} s/d {{ $tgl['tgl_akhir'] }}</b></td>
 		</tr>
 		<tr>
 			<td><b>TAHUN</b></td>
-			<td><b>2016</b></td>
+			<td><b>{{ $tgl['tahun'] }}</b></td>
 		</tr>
 	</table>
 

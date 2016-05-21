@@ -2,6 +2,8 @@
 
 namespace App;
 
+use DB;
+
 class Custom
 {
 
@@ -259,4 +261,5 @@ class Custom
 	  return "Rp ".$rupiah;
 
 	}
+
 }
