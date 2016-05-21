@@ -147,7 +147,8 @@ public function getUpdate(Request $request)
 	public function getExportPdf(Request $r)
 	{
 		$data['terumbumilik'] = TerumbuMilik::whereBetween('created_at', [ $r->offset, $r->limit ])->orderBy('desa','asc')->get();
-		
+		$data['tgl_awal']		= $r->offset;
+		$data['tgl_akhir']		= $r->limit;
         $pdf = PDF::loadView('app.terumbu.milik.export-pdf', $data);
         return $pdf->setPaper('legal')->setOrientation('potrait')->setWarnings(false)->download('Data Mangrove yang dimiliki.pdf');
 	}

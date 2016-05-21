@@ -134,7 +134,8 @@ public function getUpdate(Request $request)
 	public function getExportPdf(Request $r)
 	{
 		$data['terumbujenis'] = TerumbuJenis::whereBetween('created_at', [ $r->offset, $r->limit ])->get();
-		
+		$data['tgl_awal']		= $r->offset;
+		$data['tgl_akhir']		= $r->limit;
         $pdf = PDF::loadView('app.terumbu.jenis.export-pdf', $data);
         return $pdf->setPaper('legal')->setOrientation('potrait')->setWarnings(false)->download('Jenis Ikan.pdf');
 	}

@@ -139,7 +139,8 @@ public function getUpdate(Request $request)
 	public function getExportPdf(Request $r)
 	{
 		$data['terumburehabilitasi'] = terumburehabilitasi::whereBetween('created_at', [ $r->offset, $r->limit ])->orderBy('desa','asc')->get();
-		
+		$data['tgl_awal']		= $r->offset;
+		$data['tgl_akhir']		= $r->limit;
         $pdf = PDF::loadView('app.terumbu.rehabilitasi.export-pdf', $data);
         return $pdf->setPaper('legal')->setOrientation('potrait')->setWarnings(false)->download('Data Mangrove yang direhabilitasi.pdf');
 	}

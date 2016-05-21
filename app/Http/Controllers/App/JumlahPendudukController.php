@@ -130,7 +130,8 @@ class JumlahPendudukController extends Controller
 	public function getExportPdf(Request $r)
 	{
 		$data['jumlah_penduduk'] = JumlahPenduduk::whereBetween('created_at', [ $r->offset, $r->limit ])->get();
-		
+		$data['tgl_awal']		= $r->offset;
+		$data['tgl_akhir']		= $r->limit;
         $pdf = PDF::loadView('app.jumlah-penduduk.export-pdf', $data);
         return $pdf->setPaper('legal')->setOrientation('potrait')->setWarnings(false)->download('Data Jumlah Penduduk Wilayah Pesisir dan P3K.pdf');
 	}
