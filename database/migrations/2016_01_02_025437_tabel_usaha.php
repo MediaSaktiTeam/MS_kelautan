@@ -16,6 +16,7 @@ class TabelUsaha extends Migration
             $table->bigIncrements('id');
             $table->string('nama');
             $table->string('jenis');
+            $table->timestamps();
         });
     }
 
