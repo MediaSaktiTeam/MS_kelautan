@@ -28,8 +28,8 @@ class LaporanController extends Controller
 		/* Validasi */
 
 			$this->validate($request,[
-					'nama' => 'required|unique:app_laporan',
-					'nip' => 'required',
+					'nama' => 'required',
+					'nip' => 'required|unique:app_laporan',
 					'jabatan' => 'required',
 				]);
 

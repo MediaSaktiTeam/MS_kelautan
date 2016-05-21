@@ -28,10 +28,14 @@ class UsahaController extends Controller
 		/* Validasi */
 
 			$this->validate($request,[
-					'nama' => 'required|unique:app_usaha',
+					'nama' => 'required',
 					'jenis' => 'required',
 				]);
 
+			$vb	=	Usaha::where('nama',$request->nama)->where('jenis',$request->jenis)->count();
+			if ($vb > 0 ) {
+				return redirect()->route('usaha')->with(session()->flash('gagal','Data Sudah ada !!'));
+			}
 		/* end validasi */
 
 		$dt = new Usaha;
