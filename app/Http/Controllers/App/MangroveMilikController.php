@@ -62,6 +62,7 @@ class MangroveMilikController extends Controller
 
 		/* end validasi */
 
+
 			$dt = new MangroveMilik;
 			$dt->id = $request->id;
 			$dt->kecamatan = $request->kecamatan;
@@ -71,6 +72,8 @@ class MangroveMilikController extends Controller
 			$dt->kondisi_sedang = $request->kondisi_sedang;
 			$dt->save();
 			return redirect()->route('mangrovemilik')->with(session()->flash('success','Data Berhasil Tersimpan !!'));
+			
+
 		}
 
 	public function getDelete($id)

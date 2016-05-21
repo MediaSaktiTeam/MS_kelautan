@@ -78,7 +78,7 @@
 												<div class="col-sm-4">
 													<div class="form-group">
 														<label>Luas Lahan Mangrove</label>
-														<input type="number" class="form-control number" name="luas_lahan" value="" min="0">
+														<input type="number" class="form-control number" name="luas_lahan" value="" min="0" onchange="$('#k_rusak, #k_sedang').attr('max',$(this).val());" id="luas">
 													</div>
 												</div>
 											</div>
@@ -87,13 +87,13 @@
 												<div class="col-sm-6">
 													<div class="form-group">
 														<label>Kondisi Rusak</label>
-														<input type="number" class="form-control number" name="kondisi_rusak" value="" min="0">
+														<input type="number" class="form-control number" name="kondisi_rusak" value="" min="0" id="k_rusak" onchange="$('#k_sedang').attr('max',$('#luas').val() - $(this).val());">
 													</div>
 												</div>
 												<div class="col-sm-6">
 													<div class="form-group">
 														<label>Kondisi Sedang</label>
-														<input type="number" class="form-control number" name="kondisi_sedang" value="" min="0">
+														<input type="number" class="form-control number" name="kondisi_sedang" value="" min="0" id="k_sedang">
 													</div>
 												</div>
 											</div>
