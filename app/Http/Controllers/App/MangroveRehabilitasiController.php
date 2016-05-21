@@ -20,9 +20,33 @@ class MangroveRehabilitasiController extends Controller
 	
 	public function getIndex(Request $r)
 	{
-	
+		if ( !isset( $r->offset ) || !isset( $r->limit ) ) {
+
+			$sql = MangroveRehabilitasi::orderBy('id', 'desc')->first();
+
+			if ( $sql ) {
+			// Jika sudah ada data
+
+				// limit = Tanggal terbaru
+				// offset = Limit - 3 bulan
+				$limit1 = date_format(date_create($sql->created_at), "Y-m-d");
+				$limit = strtotime("$limit1 +1 day");
+				$limit = date("Y-m-d", $limit);
+
+				$offset = strtotime("$limit1 -3 months");
+				$offset = date("Y-m-d", $offset);
+
+			} else {
+			// Jika belum ada data offset = tgl skrang, limit = offset + 3 bulan
+				$offset = date('Y-m-d');
+				$limit = strtotime("$offset +3 months");
+				$limit = date("Y-m-d", $limit);
+			}
+
+			return redirect( '/app/mangrove/rehabilitasi?offset='.$offset.'&limit='.$limit );
+		}
 		$limit="10";
-		$data['mangroverehabilitasi'] = MangroveRehabilitasi::paginate(10);
+		$data['mangroverehabilitasi'] = MangroveRehabilitasi::whereBetween('created_at', [ $r->offset, $r->limit ])->paginate($limit);
 		return view ('app.mangrove.rehabilitasi.index',$data)->with('limit', $limit);
 	}
 
@@ -99,9 +123,9 @@ class MangroveRehabilitasiController extends Controller
 		return view('app.mangrove.rehabilitasi.search', $data);
 	}
 
-	public function getExportExcel()
+	public function getExportExcel(Request $r)
 	{
-		$data['mangroverehabilitasi'] = MangroveRehabilitasi::orderBy('desa','asc')->get();
+		$data['mangroverehabilitasi'] = MangroveRehabilitasi::whereBetween('created_at', [ $r->offset, $r->limit ])->orderBy('desa','asc')->get();
 
         Excel::create('Data Mangrove yang direhabilitasi');
 
@@ -115,10 +139,11 @@ class MangroveRehabilitasiController extends Controller
         })->download('xlsx');
 	}
 
-	public function getExportPdf()
+	public function getExportPdf(Request $r)
 	{
-		$data['mangroverehabilitasi'] = MangroveRehabilitasi::orderBy('desa','asc')->get();
-		
+		$data['mangroverehabilitasi'] = MangroveRehabilitasi::whereBetween('created_at', [ $r->offset, $r->limit ])->orderBy('desa','asc')->get();
+		$data['tgl_awal']		= $r->offset;
+		$data['tgl_akhir']		= $r->limit;
         $pdf = PDF::loadView('app.mangrove.rehabilitasi.export-pdf', $data);
         return $pdf->setPaper('legal')->setOrientation('potrait')->setWarnings(false)->download('Data Mangrove yang direhabilitasi.pdf');
 	}
