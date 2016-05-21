@@ -68,19 +68,19 @@
 												<div class="col-sm-3">
 													<div class="form-group">
 														<label>Laki Laki (org)</label>
-														<input type="number" class="form-control number" name="laki" value="">
+														<input type="number" class="form-control number" name="laki" value="" min="0">
 													</div>
 												</div>
 												<div class="col-sm-3">
 													<div class="form-group">
 														<label>Perempuan (org)</label>
-														<input type="number" class="form-control number" name="perempuan" value="">
+														<input type="number" class="form-control number" name="perempuan" value="" min="0">
 													</div>
 												</div>												
 												<div class="col-sm-3">
 													<div class="form-group">
 														<label>Jumlah KK</label>
-														<input type="number" class="form-control number" name="jumlah_kk" value="">
+														<input type="number" class="form-control number" name="jumlah_kk" value="" min="0" >
 													</div>
 												</div>
 											</div>
