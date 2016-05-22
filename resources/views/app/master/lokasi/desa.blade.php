@@ -101,7 +101,6 @@
 										<input type="hidden" name="_token" value="{{ csrf_token() }}">
 
 										<br>
-										<h6><b>Desa</b></h6>
 										<div class="form-group form-group-default input-group">
 											<input type="email" class="form-control" value="073" style="margin-top: 13px;">
 											<span class="input-group-addon" style="width: 85%; text-align: left; background: transparent; font-weight: bold;">Nama Desa</span>
