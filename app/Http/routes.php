@@ -205,13 +205,13 @@
 
 			]);
 
-		Route::controller('app/master/lokasi/prov', 'LokasiProvController',
+		Route::controller('app/master/lokasi/prov', 'LokasiKecamatanController',
 			[
-				'getIndex' => 'prov',
-				'getAdd' => 'prov_add',
-				'getDelete' => 'prov_delete',
-				'getUpdate' => 'prov_update',
-				'getEdit' => 'prov_edit',
+				'getIndex' => 'kec',
+				'getAdd' => 'kec_add',
+				'getDelete' => 'kec_delete',
+				'getUpdate' => 'kec_update',
+				'getEdit' => 'kec_edit',
 			]);
 
 		Route::get('/app/master/bantuan', function () {
