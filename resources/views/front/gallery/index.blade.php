@@ -56,7 +56,7 @@ Galeri Dinas Perikanan dan Kelautan Kab. Bantaeng
 						  			
 						  			<img src="{{ url('resources/assets') }}/img/gallery/{{ $gal->nama_file }}" alt="{{ str_replace('-',' ', $gal->judul) }}"/>
 
-						  			<a class="image-zoom" href="{{ url('resources/assets') }}/img/gallery/{{ $gal->nama_file }}" title="{{ str_replace('-',' ', $gal->judul) }}">
+						  			<a class="image-zoom" href="{{ url('resources/assets') }}/img/gallery/{{ $gal->nama_file }}">
 						  				<i class="fa fa-search"></i>
 						  			</a>
 
@@ -114,5 +114,8 @@ Galeri Dinas Perikanan dan Kelautan Kab. Bantaeng
 	
 	</div>
 	<!-- END GALLERY INNER -->
+
+	<br>
+	<br>
 
 @endsection
