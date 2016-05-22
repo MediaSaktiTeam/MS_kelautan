@@ -192,9 +192,10 @@
 
 @section('registerscript')
 	<script>
-		$(".menu-items .link-lokasi").addClass("active open");
-		$(".menu-items .link-lokasi .sub-menu ").addClass("active open");
-		$(".menu-items .link-lokasi .sub-menu .sub-prov").addClass("active");
+		$(".menu-items .link-master").addClass("active open");
+		$(".menu-items .link-master .link-lokasi").addClass("active open");
+		$(".menu-items .link-master .link-lokasi .sub-menu ").addClass("active open");
+		$(".menu-items .link-master .link-lokasi .sub-menu .sub-prov").addClass("active");
 
 		$(function(){
 
