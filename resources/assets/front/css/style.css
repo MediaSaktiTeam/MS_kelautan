@@ -3433,3 +3433,22 @@ img.under-image{
 	position: fixed;
 	z-index: 999;
 }
+
+.pegawai td {
+	padding: 10px;
+	text-align: center;
+	font-weight: bold;
+	font-size: 12px;
+}
+
+.section-gallery-inner .image-zoom {
+	margin-left: -20px !important;
+}
+
+.mfp-bg {
+	background: rgba(0,0,0,.8) !important;
+}
+
+img.mfp-img {
+	padding: 0 !important;
+}

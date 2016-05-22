@@ -67,7 +67,7 @@ Berita dan Kegiatan Dinas Perikanan dan Kelautan Kab. Bantaeng
 				<div class="top-title-wrap col-sm-6">
 					
 					<h2 class="top-title">
-						Berita dan Kegiatan Terbaru
+						
 					</h2>
 
 				</div> <!-- end top-title-wrap -->

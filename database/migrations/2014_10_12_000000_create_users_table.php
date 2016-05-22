@@ -28,7 +28,7 @@ class CreateUsersTable extends Migration
             $table->string('id_kelompok')->nullable();
             $table->integer('id_jabatan')->nullable();
             $table->integer('id_usaha')->nullable();
-            $table->integer('jenis_usaha')->nullable();
+            $table->string('jenis_usaha')->nullable();
             $table->integer('id_jenis_olahan')->nullable();
             $table->integer('id_merek_dagang')->nullable();
             $table->string('legalitas_produksi')->nullable();
