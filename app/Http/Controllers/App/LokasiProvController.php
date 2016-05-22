@@ -9,7 +9,7 @@ use App\Http\Controllers\Controller;
 use DB,Excel,PDF;
 use App\User, App\Kecamatan;
 
-class LokasiKecamatanController extends Controller
+class LokasiController extends Controller
 {
 
 	public function getIndex()

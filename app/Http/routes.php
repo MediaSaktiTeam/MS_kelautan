@@ -205,7 +205,7 @@
 
 			]);
 
-		Route::controller('app/master/lokasi/prov', 'LokasiKecamatanController',
+		Route::controller('app/master/lokasi/prov', 'LokasiProvController',
 			[
 				'getIndex' => 'kec',
 				'getAdd' => 'kec_add',
