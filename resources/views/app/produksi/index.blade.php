@@ -46,7 +46,9 @@
 
 						<div id="tambah-produksi" style="display:none">
 							<div class="col-lg-7 col-md-6 ">
-
+								@if ( Session::has('gagal') )
+						    		@include('app/layout/partials/alert-danger', ['message' => session('gagal')])
+								@endif
 								<!-- START PANEL -->
 								<div class="panel panel-transparent">
 									<div class="panel-body">
@@ -64,7 +66,7 @@
 														<select class="full-width" onchange="get_data(this.value)" data-init-plugin="select2" name="id_user" required>
 															<option value="">Pilih Pengguna</option>
 															@foreach( $users as $u )
-																<option value="{{ $u->id }}">{{ $u->nik }} <b>-</b> {{ $u->name }} <b>-</b> {{ $u->nama_kelompok }}</option>
+																<option value="{{ $u->id }}" {{ Input::old('id_user') == $u->id ? "selected":"" }} >{{ $u->nik }} <b>-</b> {{ $u->name }} <b>-</b> {{ $u->nama_kelompok }}</option>
 															@endforeach
 														</select>
 													</div>
@@ -75,13 +77,13 @@
 												<div class="col-md-6">
 													<div class="form-group">
 														<label>Jenis Produksi</label>
-														<input type="text" class="form-control" name="jenis_produksi" value="">
+														<input type="text" class="form-control" name="jenis_produksi" value="{{ Input::old('jenis_produksi') }}">
 													</div>
 												</div>
 												<div class="col-md-6">
 													<div class="form-group">
 														<label>Biaya Produksi</label>
-														<input type="number" class="form-control" name="biaya_produksi" value="">
+														<input type="number" class="form-control" name="biaya_produksi" value="{{ Input::old('biaya_produksi') }}">
 													</div>
 												</div>
 											</div>
@@ -91,7 +93,7 @@
 													<div class="col-md-12">
 														<div class="form-group">
 															<label>Jenis Ikan</label>
-															<input type="text" class="form-control" name="jenis_ikan" value="">
+															<input type="text" class="form-control" name="jenis_ikan" value="{{ Input::old('jenis_ikan') }}">
 														</div>
 													</div>
 												</div>
@@ -341,6 +343,10 @@
 				$("input[name='nik']").focus();
 				$(this).hide();
 			});
+
+			@if ( Session::has('gagal') )
+				$("#tambah-produksi").fadeIn();
+			@endif
 
 
 		});
