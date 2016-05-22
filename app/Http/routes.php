@@ -207,11 +207,27 @@
 
 		Route::controller('app/master/lokasi/prov', 'LokasiProvController',
 			[
+				'getIndex' => 'prov',
+				'getAdd' => 'prov_add',
+				'getDelete' => 'prov_delete',
+				'getUpdate' => 'prov_update',
+				'getEdit' => 'prov_edit',
+			]);
+		Route::controller('app/master/lokasi/kec', 'LokasiKecController',
+			[
 				'getIndex' => 'kec',
 				'getAdd' => 'kec_add',
 				'getDelete' => 'kec_delete',
 				'getUpdate' => 'kec_update',
 				'getEdit' => 'kec_edit',
+			]);
+		Route::controller('app/master/lokasi/desa', 'LokasiDesaController',
+			[
+				'getIndex' => 'desa',
+				'getAdd' => 'desa_add',
+				'getDelete' => 'desa_delete',
+				'getUpdate' => 'desa_update',
+				'getEdit' => 'desa_edit',
 			]);
 
 		Route::get('/app/master/bantuan', function () {

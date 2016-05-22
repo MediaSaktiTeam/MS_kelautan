@@ -9,28 +9,28 @@ use App\Http\Controllers\Controller;
 use DB,Excel,PDF;
 use App\User, App\Provinsi, App\Kabupaten;
 
-class LokasiProvController extends Controller
+class LokasiKecController extends Controller
 {
 
 	public function getIndex()
 	{
-		return view ('app.master.lokasi.prov');
+		return view ('app.master.lokasi.kec');
 	}
 	public function getAdd()
 	{
-		return view ('app.master.lokasi.prov');
+		return view ('app.master.lokasi.kec');
 	}
 	public function getDelete()
 	{
-		return view ('app.master.lokasi.prov');
+		return view ('app.master.lokasi.kec');
 	}
 	public function getEdit()
 	{
-		return view ('app.master.lokasi.prov');
+		return view ('app.master.lokasi.kec');
 	}
 	public function getUpdate()
 	{
-		return view ('app.master.lokasi.prov');
+		return view ('app.master.lokasi.kec');
 	}
 	
 }

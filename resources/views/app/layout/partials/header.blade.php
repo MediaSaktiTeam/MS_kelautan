@@ -231,12 +231,12 @@
 										<a href="/app/master/lokasi/prov">Prov dan Kab</a>
 										<span class="icon-thumbnail">PK</span>
 									</li>
-									<li class="sub-desa">
-										<a href="#">Kecamatan</a>
+									<li class="sub-kecamatan">
+										<a href="/app/master/lokasi/kec">Kecamatan</a>
 										<span class="icon-thumbnail">K</span>
 									</li>
 									<li class="sub-desa">
-										<a href="#">Desa</a>
+										<a href="/app/master/lokasi/desa">Desa</a>
 										<span class="icon-thumbnail">D</span>
 									</li>
 								</ul>

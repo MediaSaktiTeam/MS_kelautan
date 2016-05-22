@@ -66,26 +66,37 @@
 								<h5>Keterangan Lokasi</h5>
 								<p>Berikut adalah berbagai lokasi di bantaeng. Mulai dari Provinsi sampai desa, silahkan sunting ID lokasi sesuai kebutuhan Anda!</p>
 
-								<form class="style-form" method="GET" action="{{ route('prov_add') }}">
+								<form class="style-form" method="GET" action="{{ route('kec_add') }}">
 									<div class="col-md-6">
 										<input type="hidden" name="_token" value="{{ csrf_token() }}">
 
 										<br>
-										<h6><b>Provinsi</b></h6>
+										<h6><b>Kecamatan</b></h6>
 										<div class="form-group form-group-default input-group">
 											<input type="email" class="form-control" value="073" style="margin-top: 13px;">
-											<span class="input-group-addon" style="width: 85%; text-align: left; background: transparent; font-weight: bold;">Sulawesi Selatan</span>
+											<span class="input-group-addon" style="width: 85%; text-align: left; background: transparent; font-weight: bold;">Nama Kecamatan</span>
 										</div>
-									</div>
-									<div class="col-md-6">
-										<br>
-										<h6><b>Kabupaten</b></h6>
 										<div class="form-group form-group-default input-group">
 											<input type="email" class="form-control" value="073" style="margin-top: 13px;">
-											<span class="input-group-addon" style="width: 85%; text-align: left; background: transparent; font-weight: bold;">Kab. Bantaeng</span>
+											<span class="input-group-addon" style="width: 85%; text-align: left; background: transparent; font-weight: bold;">Nama Kecamatan</span>
+										</div>
+										<div class="form-group form-group-default input-group">
+											<input type="email" class="form-control" value="073" style="margin-top: 13px;">
+											<span class="input-group-addon" style="width: 85%; text-align: left; background: transparent; font-weight: bold;">Nama Kecamatan</span>
+										</div>
+										<div class="form-group form-group-default input-group">
+											<input type="email" class="form-control" value="073" style="margin-top: 13px;">
+											<span class="input-group-addon" style="width: 85%; text-align: left; background: transparent; font-weight: bold;">Nama Kecamatan</span>
+										</div>
+										<div class="form-group form-group-default input-group">
+											<input type="email" class="form-control" value="073" style="margin-top: 13px;">
+											<span class="input-group-addon" style="width: 85%; text-align: left; background: transparent; font-weight: bold;">Nama Kecamatan</span>
+										</div>
+										<div class="form-group form-group-default input-group">
+											<input type="email" class="form-control" value="073" style="margin-top: 13px;">
+											<span class="input-group-addon" style="width: 85%; text-align: left; background: transparent; font-weight: bold;">Nama Kecamatan</span>
 										</div>
 									</div>
-
 									<div class="col-md-12">
 										<hr>
 										<div class="form-group pull-right">
@@ -94,6 +105,7 @@
 									</div>
 								</form>
 							</div>
+						</div
 						</div>
 						<!-- END PANEL -->
 					</div>
@@ -199,7 +211,7 @@
 		$(".menu-items .link-master").addClass("active open");
 		$(".menu-items .link-master .link-lokasi").addClass("active open");
 		$(".menu-items .link-master .link-lokasi .sub-menu ").addClass("active open");
-		$(".menu-items .link-master .link-lokasi .sub-menu .sub-prov").addClass("active");
+		$(".menu-items .link-master .link-lokasi .sub-menu .sub-kecamatan").addClass("active");
 		$(function(){
 
 			$("#hapus").click(function(){
