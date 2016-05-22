@@ -79,7 +79,7 @@
 			</div>
 			
 			<!-- menu -->
-			<ul class="mail-menu">
+			<!-- <ul class="mail-menu">
 				<li class="custom">
 					<div class="panel panel-primary" data-collapsed="0">
 						<div class="panel-heading">
@@ -117,7 +117,7 @@
 					</div>
 				</li>
 
-			</ul>
+			</ul> -->
 
 		</form>
 		
