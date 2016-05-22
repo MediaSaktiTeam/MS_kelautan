@@ -50,6 +50,14 @@
 											
 											<input type="hidden" id="token" name="_token" value="{{ csrf_token() }}">
 											<label>KETERANGAN IDENTITAS</label>
+											
+												@if ( Session::has('gagal') ) 
+												    	@include('app/layout/partials/alert-danger', ['message' => session('gagal')])
+												@endif
+
+												@if ( count($errors) > 0 )
+														@include('app/layout/partials/alert-danger', ['errors' => $errors])
+												@endif
 											<div class="row">
 												<div class="col-sm-4">
 													<div class="form-group">
@@ -162,13 +170,6 @@
 												@endif
 												@if ( Session::has('delete') ) 
 												    	@include('app/layout/partials/alert-sukses', ['message' => session('delete')])
-												@endif
-												@if ( Session::has('gagal') ) 
-												    	@include('app/layout/partials/alert-danger', ['message' => session('gagal')])
-												@endif
-
-												@if ( count($errors) > 0 )
-														@include('app/layout/partials/alert-danger', ['errors' => $errors])
 												@endif	
 												<tbody>
 												<?php

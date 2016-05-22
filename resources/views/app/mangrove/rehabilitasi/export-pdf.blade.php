@@ -77,7 +77,7 @@
 					$to_rehab += $rehab->direhabilitasi;
 					$to_fungsi += $rehab->berubah_fungsi;
 					$to_tambak += $rehab->lahan_tambak;
-					$to_garam ="";
+					$to_garam += $rehab->penggaraman;;
 				?>
 
 			@endforeach

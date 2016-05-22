@@ -78,7 +78,7 @@
 												<div class="col-sm-4">
 													<div class="form-group">
 														<label>Direhabilitasi</label>
-														<input type="number" class="form-control number" name="direhabilitasi" value="">
+														<input type="number" class="form-control number" name="direhabilitasi" value="" min="0">
 													</div>
 												</div>
 											</div>
@@ -87,19 +87,19 @@
 												<div class="col-sm-4">
 													<div class="form-group">
 														<label>Berubah Fungsi</label>
-														<input type="number" class="form-control number" name="berubah_fungsi" value="">
+														<input type="number" class="form-control number" name="berubah_fungsi" value="" min="0">
 													</div>
 												</div>
 												<div class="col-sm-4">
 													<div class="form-group">
 														<label>Lahan Tambak</label>
-														<input type="number" class="form-control number" name="lahan_tambak" value="">
+														<input type="number" class="form-control number" name="lahan_tambak" value="" min="0">
 													</div>
 												</div>
 												<div class="col-sm-4">
 													<div class="form-group">
 														<label>Penggaraman</label>
-														<input type="number" class="form-control number" name="penggaraman" value="">
+														<input type="number" class="form-control number" name="penggaraman" value="" min="0">
 													</div>
 												</div>
 											</div>
@@ -222,7 +222,7 @@
 															$to_rehab += $rehab->direhabilitasi;
 															$to_fungsi += $rehab->berubah_fungsi;
 															$to_tambak += $rehab->lahan_tambak;
-															$to_garam ="";
+															$to_garam += $rehab->penggaraman;
 
 															 ?>
 												@endforeach
@@ -234,7 +234,7 @@
 															<td><b> {{ $to_rehab }} M<sup>2</sup> <?php echo "(", round($direhabilitasi,2), "Ha)";  ?></b></td>
 															<td><b> {{ $to_fungsi }} M<sup>2</sup><?php echo "(", round($berubah_fungsi,2), "Ha)"; ?></b></td>
 															<td><b>	{{ $to_tambak }} M<sup>2</sup><?php echo "(", round($lahan_tambak,2), "Ha)"; ?></b></td>
-															<td><b> {{ $to_garam }} M<sup>2</sup><?php echo "(", round($penggaraman,2), "Ha)"; ?> Ha</b></td>
+															<td><b> {{ $to_garam }} M<sup>2</sup><?php echo "(", round($penggaraman,2), "Ha)"; ?></b></td>
 															<td></td>
 														</tr>
 												</tbody>

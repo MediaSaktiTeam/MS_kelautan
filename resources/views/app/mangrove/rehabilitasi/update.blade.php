@@ -46,14 +46,6 @@
 					    		@include('app/layout/partials/alert-sukses', ['message' => session('success')])
 							@endif
 
-							@if ( Session::has('gagal') ) 
-					    		@include('app/layout/partials/alert-danger', ['message' => session('gagal')])
-							@endif
-
-							@if ( count($errors) > 0 )
-								@include('app/layout/partials/alert-danger', ['errors' => $errors])
-							@endif
-
 							<!-- START PANEL -->
 							<div class="panel panel-transparent">
 								<div class="panel-body">
@@ -61,6 +53,13 @@
 											<input type="hidden" id="token" name="_token" value="{{ csrf_token() }}">
 											<label>KETERANGAN IDENTITAS</label>
 											<div class="row">
+												@if ( Session::has('gagal') ) 
+										    		@include('app/layout/partials/alert-danger', ['message' => session('gagal')])
+												@endif
+
+												@if ( count($errors) > 0 )
+													@include('app/layout/partials/alert-danger', ['errors' => $errors])
+												@endif
 												<div class="col-sm-4">
 													<div class="form-group">
 														<label>Kecamatan</label>
@@ -88,7 +87,7 @@
 												<div class="col-sm-4">
 													<div class="form-group">
 														<label>Direhabilitasi</label>
-														<input type="number" class="form-control number" name="direhabilitasi" value="{{ $mangroverehabilitasi->direhabilitasi }}">
+														<input type="number" class="form-control number" name="direhabilitasi" value="{{ $mangroverehabilitasi->direhabilitasi }}" min="0">
 													</div>
 												</div>	
 											</div>
@@ -96,19 +95,19 @@
 												<div class="col-sm-4">
 													<div class="form-group">
 														<label>Berubah Fungsi</label>
-														<input type="number" class="form-control number" name="berubah_fungsi" value="{{ $mangroverehabilitasi->berubah_fungsi }}">
+														<input type="number" class="form-control number" name="berubah_fungsi" value="{{ $mangroverehabilitasi->berubah_fungsi }}" min="0">
 													</div>
 												</div>
 												<div class="col-sm-4">
 													<div class="form-group">
 														<label>Lahan Tambak</label>
-														<input type="number" class="form-control number" name="lahan_tambak" value="{{ $mangroverehabilitasi->lahan_tambak }}">
+														<input type="number" class="form-control number" name="lahan_tambak" value="{{ $mangroverehabilitasi->lahan_tambak }}" min="0">
 													</div>
 												</div>
 												<div class="col-sm-4">
 													<div class="form-group">
 														<label>Penggaraman</label>
-														<input type="number" class="form-control number" name="penggaraman" value="{{ $mangroverehabilitasi->penggaraman }}">
+														<input type="number" class="form-control number" name="penggaraman" value="{{ $mangroverehabilitasi->penggaraman }}" min="0">
 													</div>
 												</div>
 											</div>
