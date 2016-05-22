@@ -14,24 +14,23 @@ class LokasiController extends Controller
 
 	public function getIndex()
 	{
-		$data['kecamatan'] = Kecamatan::paginate(10);
-		return view ('app.master.lokasi.kec',$data);
+		return view ('app.master.lokasi.prov',$data);
 	}
 	public function getAdd()
 	{
-		return view ('app.master.lokasi.kec');
+		return view ('app.master.lokasi.prov');
 	}
 	public function getDelete()
 	{
-		return view ('app.master.lokasi.kec');
+		return view ('app.master.lokasi.prov');
 	}
 	public function getEdit()
 	{
-		return view ('app.master.lokasi.kec');
+		return view ('app.master.lokasi.prov');
 	}
 	public function getUpdate()
 	{
-		return view ('app.master.lokasi.kec');
+		return view ('app.master.lokasi.prov');
 	}
 	
 }
