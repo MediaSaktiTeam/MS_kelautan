@@ -69,7 +69,7 @@ class PengolahController extends Controller
 			if ( $vn > 0 )
 			{
 				$r->session()->flash('error_nik', $r->nik);
-				return redirect(route('pengolah'))->withInput();
+				return redirect()->back()->withInput();
 			}
 
 			// Validasi Jabatan
@@ -86,7 +86,7 @@ class PengolahController extends Controller
 
 				$r->session()->flash('gagal','GAGAL!!! Jabatan <b>'.$vj->nama_jabatan.'</b> pada kelompok <b>'.$vj->nama_kelompok.'</b> telah ada');
 
-				return redirect(route('pengolah'))->withInput();
+				return redirect()->back()->withInput();
 				exit;
 			}
 		/* end validasi */
@@ -135,7 +135,7 @@ class PengolahController extends Controller
 
 		$r->session()->flash('success','Data tersimpan');
 
-		return redirect(route('pengolah'));
+		return redirect()->back();
 	}
 
 	public function getEdit(Request $r, $id)
@@ -149,7 +149,7 @@ class PengolahController extends Controller
 		/* Validasi */
 
 			// Validasi NIK
-			$vn = User::where('nik', $r->nik)->where('id', '<>', $r->id)->count();
+			$vn = User::where('nik', $r->nik)->where('id', '<>', $id)->count();
 
 			if ( $vn > 0 )
 			{
@@ -212,7 +212,7 @@ class PengolahController extends Controller
 
 		$r->session()->flash('success','Data tersimpan');
 
-		return redirect(route('pengolah'));
+		return redirect()->back();
 	}
 
 	public function getDetail($id)

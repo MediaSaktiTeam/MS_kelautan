@@ -60,6 +60,9 @@
 												@if ( Session::has('success') ) 
 										    		@include('app/layout/partials/alert-sukses', ['message' => session('success')])
 												@endif
+												@if ( Session::has('gagal') )
+										    		@include('app/layout/partials/alert-danger', ['message' => session('gagal')])
+												@endif
 												<div class="form-group">
 													<label>NIK / Nama / Kelompok</label>
 													<select class="full-width" onchange="get_data(this.value); get_jenis_bantuan(this.value)" data-init-plugin="select2" name="id_user" disabled="">

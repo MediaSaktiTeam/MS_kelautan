@@ -82,7 +82,7 @@ class NelayanController extends Controller
 		if ( $vn > 0 )
 		{
 			$r->session()->flash('error_nik', $r->nik);
-			return redirect(route('nelayan'))->withInput();
+			return redirect()->back()->withInput();
 		}
 		
 		// Validasi Jabatan
@@ -99,7 +99,7 @@ class NelayanController extends Controller
 
 			$r->session()->flash('gagal','GAGAL!!! Jabatan <b>'.$vj->nama_jabatan.'</b> pada kelompok <b>'.$vj->nama_kelompok.'</b> telah ada');
 
-			return redirect(route('nelayan'))->withInput();
+			return redirect()->back()->withInput();
 			exit;
 		}
 
@@ -218,7 +218,7 @@ class NelayanController extends Controller
 
 		$r->session()->flash('success','Data tersimpan');
 
-		return redirect(route('nelayan'));
+		return redirect()->back();
 	}
 
 	public function getHapus(Request $r, $id)
