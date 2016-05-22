@@ -17,6 +17,9 @@
 			<?php $i = 1 ?>
 			
 			@foreach( $terumbumilik as $mil )
+			<?php 
+			$k_baik = $mil->luas_lahan - $mil->kondisi_rusak - $mil->kondisi_sedang;
+			 ?>
 
 				<tr>
 					<td>{{ $i++ }}</td>
@@ -25,7 +28,7 @@
 					<td>{{ $mil->luas_lahan }} M<sup>2</sup></td>
 					<td>{{ $mil->kondisi_rusak }} M<sup>2</sup></td>
 					<td>{{ $mil->kondisi_sedang }} M<sup>2</sup></td>
-					<td>{{ $mil->kondisi_baik }} M<sup>2</sup></td>
+					<td>{{ $k_baik }} M<sup>2</sup></td>
 				</tr>
 
 			@endforeach

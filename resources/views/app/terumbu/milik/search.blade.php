@@ -28,6 +28,9 @@ $(function(){
 		@if ( count($terumbumilik) > 0 )
 
 			@foreach( $terumbumilik as $mil )
+			<?php 
+			$k_baik = $mil->luas_lahan - $mil->kondisi_rusak - $mil->kondisi_sedang;
+			 ?>
 				<tr>
 					<td>
 						<button class="btn btn-xs btn-danger btn-hapus-single"  data-toggle="modal" data-target="#modal-hapus" data-id="{{ $mil->id }}" ><i class="pg-trash"></i></button>
@@ -37,7 +40,7 @@ $(function(){
 					<td>{{ $mil->luas_lahan }} M<sup>2</sup></td>
 					<td>{{ $mil->kondisi_rusak }} M<sup>2</sup></td>
 					<td>{{ $mil->kondisi_sedang }} M<sup>2</sup></td>
-					<td>{{ $mil->kondisi_baik }} M<sup>2</sup></td>
+					<td>{{ $k_baik }} M<sup>2</sup></td>
 					<td style="text-align:center">
 						<a class="btn btn-default btn-xs view" data-id="{{ $mil->id }}"><i class="fa fa-search-plus"></i></a>
 						<a href="{{ route('terumburehabilitasi_edit'.$mil->id) }}" class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i></a>

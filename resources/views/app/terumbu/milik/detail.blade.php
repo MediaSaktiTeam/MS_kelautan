@@ -1,5 +1,8 @@
 <table class="table table-hover demo-table-dynamic custom" id="tableWithDynamicRows">
 	<tbody>
+	<?php 
+	$k_baik = $terumbumilik->luas_lahan - $terumbumilik->kondisi_rusak - $terumbumilik->kondisi_sedang;
+	 ?>
 		<tr>
 			<td>Nama Kecamatan</td>
 			<td><b>{{ $terumbumilik->datakecamatan->nama }}</b></td>
@@ -22,7 +25,7 @@
 		</tr>
 		<tr>
 			<td>Kondisi Baik</td>
-			<td><b>{{ $terumbumilik->kondisi_baik }} M<sup>2</sup></b></td>
+			<td><b>{{ $k_baik }} M<sup>2</sup></b></td>
 		</tr>
 	</tbody>
 </table>

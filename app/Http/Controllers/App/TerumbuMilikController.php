@@ -61,7 +61,6 @@ class TerumbuMilikController extends Controller
 			$dt->luas_lahan = $request->luas_lahan;
 			$dt->kondisi_rusak = $request->kondisi_rusak;
 			$dt->kondisi_sedang = $request->kondisi_sedang;
-			$dt->kondisi_baik = $request->kondisi_baik;
 			$dt->save();
 			return redirect()->route('terumbumilik')->with(session()->flash('success','Data Berhasil Tersimpan !!'));
 		}
@@ -104,7 +103,6 @@ public function getUpdate(Request $request)
 		$dt->luas_lahan = $request->luas_lahan;
 		$dt->kondisi_rusak = $request->kondisi_rusak;
 		$dt->kondisi_sedang = $request->kondisi_sedang;
-		$dt->kondisi_baik = $request->kondisi_baik;
 		$dt->save();
 		$data['terumbumilik'] = TerumbuMilik::paginate(1);
 		return redirect()->route('terumbumilik', $data)->with(session()->flash('success','Data Berhasil diupdate !!'));
@@ -150,7 +148,7 @@ public function getUpdate(Request $request)
 		$data['tgl_awal']		= $r->offset;
 		$data['tgl_akhir']		= $r->limit;
         $pdf = PDF::loadView('app.terumbu.milik.export-pdf', $data);
-        return $pdf->setPaper('legal')->setOrientation('potrait')->setWarnings(false)->download('Data Mangrove yang dimiliki.pdf');
+        return $pdf->setPaper('legal')->setOrientation('potrait')->setWarnings(false)->download('Data Terumbu Karang yang dimiliki.pdf');
 	}
 	
 }
