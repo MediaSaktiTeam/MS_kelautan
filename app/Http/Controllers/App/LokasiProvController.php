@@ -16,6 +16,21 @@ class LokasiProvController extends Controller
 	{
 		return view ('app.master.lokasi.prov');
 	}
-
+	public function getAdd()
+	{
+		return view ('app.master.lokasi.prov');
+	}
+	public function getDelete()
+	{
+		return view ('app.master.lokasi.prov');
+	}
+	public function getEdit()
+	{
+		return view ('app.master.lokasi.prov');
+	}
+	public function getUpdate()
+	{
+		return view ('app.master.lokasi.prov');
+	}
 	
 }

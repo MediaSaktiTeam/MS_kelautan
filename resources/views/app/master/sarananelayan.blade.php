@@ -162,6 +162,29 @@
 
 </div>
 <!-- END PAGE CONTAINER -->
+<!-- MODAL STICK UP SMALL ALERT -->
+<div class="modal fade stick-up" id="modal-hapus" tabindex="-1" role="dialog" aria-hidden="true">
+	<div class="modal-dialog modal-sm">
+		<div class="modal-content-wrapper">
+			<div class="modal-content">
+				<div class="modal-header clearfix text-left">
+					<button type="button" class="close" data-dismiss="modal"  aria-hidden="true"><i class="pg-close fs-14"></i></button>
+					<h5>Hapus Data</h5>
+				</div>
+				<div class="modal-body">
+					<p class="no-margin">Data akan dihapus. Apakah Anda yakin?</p>
+				</div>
+				<div class="modal-footer">
+					<a class="btn btn-danger btn-hapus btn-cons pull-left inline">Ya</a>
+					<button type="button" class="btn btn-default btn-cons no-margin pull-left inline" data-dismiss="modal">Tidak</button>
+				</div>
+			</div>
+		</div>
+		<!-- /.modal-content -->
+	</div>
+	<!-- /.modal-dialog -->
+</div>
+<!-- END MODAL STICK UP SMALL ALERT -->
 
 
 <!-- MODAL STICK UP EDIT -->

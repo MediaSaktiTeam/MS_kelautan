@@ -88,30 +88,24 @@
 												<div class="col-sm-4">
 													<div class="form-group">
 														<label>Luas Lahan Mangrove</label>
-														<input type="number" class="form-control number" name="luas_lahan" value="{{ $mangrovemilik->luas_lahan }}">
+														<input type="number" class="form-control number" name="luas_lahan" value="{{ $mangrovemilik->luas_lahan }}" min="0">
 													</div>
 												</div>	
 											</div>
 											<div class="row">
-												<div class="col-sm-4">
+												<div class="col-sm-6">
 													<div class="form-group">
 														<label>Kondisi Rusak</label>
-														<input type="number" class="form-control number" name="kondisi_rusak" value="{{ $mangrovemilik->kondisi_rusak }}">
+														<input type="number" class="form-control number" name="kondisi_rusak" value="{{ $mangrovemilik->kondisi_rusak }}" min="0">
 													</div>
 												</div>
-												<div class="col-sm-4">
+												<div class="col-sm-6">
 													<div class="form-group">
 														<label>Kondisi Sedang</label>
-														<input type="number" class="form-control number" name="kondisi_sedang" value="{{ $mangrovemilik->kondisi_sedang }}">
+														<input type="number" class="form-control number" name="kondisi_sedang" value="{{ $mangrovemilik->kondisi_sedang }}" min="0">
 													</div>
 												</div>
-												<div class="col-sm-4">
-													<div class="form-group">
-														<label>Kondisi Baik</label>
-														<input type="number" class="form-control number" name="kondisi_baik" value="{{ $mangrovemilik->kondisi_baik }}">
-													</div>
-												</div>
-											</div>
+											</div>
 											<input type="hidden" id="mangrovemilik" name="id" value="{{ $mangrovemilik->id }}">
 											<div class="clearfix"></div>
 											<br>

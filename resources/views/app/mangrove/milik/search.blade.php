@@ -28,6 +28,9 @@ $(function(){
 		@if ( count($mangrovemilik) > 0 )
 
 			@foreach( $mangrovemilik as $mi )
+			<?php 
+			$k_baik = $mi->luas_lahan - $mi->kondisi_rusak - $mi->kondisi_sedang;
+			 ?>
 				<tr>
 					<td>
 						<button class="btn btn-xs btn-danger btn-hapus-single"  data-toggle="modal" data-target="#modal-hapus" data-id="{{ $mi->id }}" ><i class="pg-trash"></i></button>
@@ -37,7 +40,7 @@ $(function(){
 					<td>{{ $mi->luas_lahan }} M<sup>2</sup></td>
 					<td>{{ $mi->kondisi_rusak }} M<sup>2</sup></td>
 					<td>{{ $mi->kondisi_sedang }} M<sup>2</sup></td>
-					<td>{{ $mi->kondisi_baik }} M<sup>2</sup></td>
+					<td>{{ $k_baik }} M<sup>2</sup></td>
 					<td style="text-align:center">
 						<a class="btn btn-default btn-xs view" data-id="{{ $mi->id }}"><i class="fa fa-search-plus"></i></a>
 						<a href="{{ route('mangrovemilik_edit', $mi->id) }}" class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i></a>

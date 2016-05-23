@@ -19,7 +19,6 @@ class CreateTableMangroveMilik extends Migration
             $table->integer('luas_lahan');
             $table->integer('kondisi_rusak');
             $table->integer('kondisi_sedang');
-            $table->integer('kondisi_baik');
             $table->timestamps();
         });
         

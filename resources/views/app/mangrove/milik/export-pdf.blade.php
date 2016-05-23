@@ -55,6 +55,9 @@
 			?>
 
 			@foreach( $mangrovemilik as $mi )
+			<?php 
+			$k_baik = $mi->luas_lahan - $mi->kondisi_rusak - $mi->kondisi_sedang;
+			 ?>
 
 				<tr>
 					<td><?php echo $i++  ?></td>
@@ -63,18 +66,18 @@
 					<td>{{ $mi->luas_lahan }} M<sup>2</sup></td>
 					<td>{{ $mi->kondisi_rusak }} M<sup>2</sup></td>
 					<td>{{ $mi->kondisi_sedang }} M<sup>2</sup></td>
-					<td>{{ $mi->kondisi_baik }} M<sup>2</sup></td>
+					<td>{{ $k_baik }} M<sup>2</sup></td>
 				</tr>
-				<?php 
-				$luas_lahan += $mi->luas_lahan * 0.0001;
-				$kondisi_baik += $mi->kondisi_baik * 0.0001;
-				$kondisi_sedang += $mi->kondisi_sedang * 0.0001;
-				$kondisi_rusak += $mi->kondisi_rusak * 0.0001;
-				$to_lahan += $mi->luas_lahan;
-				$to_rusak += $mi->kondisi_rusak;
-				$to_sedang += $mi->kondisi_sedang;
-				$to_baik += $mi->kondisi_baik
-				 ?>	
+			<?php 
+			$luas_lahan += $mi->luas_lahan * 0.0001;
+			$kondisi_baik += $k_baik * 0.0001;
+			$kondisi_sedang += $mi->kondisi_sedang * 0.0001;
+			$kondisi_rusak += $mi->kondisi_rusak * 0.0001;
+			$to_lahan += $mi->luas_lahan;
+			$to_rusak += $mi->kondisi_rusak;
+			$to_sedang += $mi->kondisi_sedang;
+			$to_baik += $k_baik;
+			 ?>
 
 			@endforeach
 			<tr>
