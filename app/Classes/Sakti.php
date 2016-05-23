@@ -88,7 +88,7 @@ class Sakti
 		$tgl_2 = explode("-",$tgl_2[0]);
 
 		$data['tgl_awal'] 	= $tgl_1[2] ." ". $this->getBulan($tgl_1[1]);
-		$data['tgl_akhir'] 	= $this->getBulan($tgl_2[1]);
+		$data['tgl_akhir'] 	= $tgl_2[2] ." ". $this->getBulan($tgl_2[1]);
 		$data['tahun'] 		= $tgl_1[0];
 
 		return $data;

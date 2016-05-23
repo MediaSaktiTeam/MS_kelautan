@@ -116,6 +116,8 @@
 															<select class="full-width" name="id_kelompok" data-init-plugin="select2" required>
 																<option value="">Pilih Kelompok...</option>
 																@foreach( $kelompok as $klp )
+																	<?php $count = App\User::where('id_kelompok', $klp->id_kelompok)->count() ?>
+																	<?php if ( $count >= 10 ) continue ?>
 																	<option value="{{ $klp->id_kelompok }}" {{ Input::old('id_kelompok') == $klp->id_kelompok ? "selected":"" }}>{{ $klp->nama }}</option>
 																@endforeach
 															</select>
