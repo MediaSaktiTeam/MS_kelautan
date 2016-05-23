@@ -40,6 +40,16 @@ class ProduksiController extends Controller
 
 	public function postStore(Request $r)
 	{
+		$tgl_pertama = date('Y-m-01');
+		$tgl_akhir  = date('Y-m-t');
+		$cek = Produksi::where('jenis_produksi', $r->jenis_produksi)
+							->where('id_user', $r->id_user)
+							->whereBetween('created_at', [$tgl_pertama, $tgl_akhir])->count();
+		if ( $cek > 0 ) {
+			\Session::flash('gagal', 'Gagal!! Data ini telah ada bulan ini');
+			return redirect('/app/produksi?offset='.$r->offset.'&limit='.$r->limit.'&pr='.$r->pr)->withInput();
+		}
+
 		$data = new Produksi;
 		$data->id_user = $r->id_user;
 		$data->jenis_produksi = $r->jenis_produksi;
