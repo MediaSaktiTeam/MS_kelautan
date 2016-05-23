@@ -83,7 +83,7 @@ class PembudidayaController extends Controller
 			if ( $vn > 0 )
 			{
 				$r->session()->flash('error_nik', $r->nik);
-				return redirect(route('pembudidaya'))->withInput();
+				return redirect()->back()->withInput();
 			}
 
 			// Validasi Jabatan
@@ -100,7 +100,7 @@ class PembudidayaController extends Controller
 
 				$r->session()->flash('gagal','GAGAL!!! Jabatan <b>'.$vj->nama_jabatan.'</b> pada kelompok <b>'.$vj->nama_kelompok.'</b> telah ada');
 
-				return redirect(route('pembudidaya'))->withInput();
+				return redirect()->back()->withInput();
 				exit;
 			}
 		/* end validasi */
@@ -215,7 +215,7 @@ class PembudidayaController extends Controller
 
 		$r->session()->flash('success','Data tersimpan');
 
-		return redirect(route('pembudidaya'));
+		return redirect()->back();
 	}
 
 	public function getHapus(Request $r, $id)

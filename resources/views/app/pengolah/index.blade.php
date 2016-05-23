@@ -91,19 +91,19 @@
 												<div class="col-sm-4">
 													<div class="form-group">
 														<label>RT/RW</label>
-														<input type="text" class="form-control" name="erte" value="">
+														<input type="text" class="form-control" name="erte" value="{{ Input::old('erte') }}">
 													</div>
 												</div>
 												<div class="col-sm-4">
 													<div class="form-group">
 														<label>Telepon</label>
-														<input type="text" class="form-control number" name="tlp" value="">
+														<input type="text" class="form-control number" name="tlp" value="{{ Input::old('tlp') }}">
 													</div>
 												</div>
 												<div class="col-sm-4">
 													<div class="form-group">
 														<label>Kode POS</label>
-														<input type="text" class="form-control" name="pos" value="">
+														<input type="text" class="form-control" name="pos" value="{{ Input::old('pos') }}">
 													</div>
 												</div>
 											</div>

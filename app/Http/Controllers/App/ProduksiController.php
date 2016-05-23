@@ -69,6 +69,16 @@ class ProduksiController extends Controller
 
 	public function postUpdate(Request $r)
 	{
+		$tgl_pertama = date('Y-m-01');
+		$tgl_akhir  = date('Y-m-t');
+		$cek = Produksi::where('jenis_produksi', $r->jenis_produksi)
+							->where('id', '<>', $r->id)
+							->whereBetween('created_at', [$tgl_pertama, $tgl_akhir])->count();
+		if ( $cek > 0 ) {
+			\Session::flash('gagal', 'Gagal!! Data yang anda masukkan telah diinput bulan ini');
+			return redirect()->back()->withInput();
+		}
+
 		$data = Produksi::find($r->id);
 		$data->jenis_produksi = $r->jenis_produksi;
 		$data->biaya_produksi = $r->biaya_produksi;
