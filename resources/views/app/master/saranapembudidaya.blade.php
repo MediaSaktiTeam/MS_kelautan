@@ -68,11 +68,7 @@
 									<input type="hidden" name="_token" value="{{ csrf_token() }}">
 									<div class="form-group form-group-default required">
 										<label>Jenis Usaha Budidaya</label>
-										<select class="full-width" data-init-plugin="select2" name="jenis">
-											<option value="Budidaya Air Laut">Budidaya Air Laut</option>
-											<option value="Budidaya Air Tawar">Budidaya Air Tawar</option>
-											<option value="Budidaya Air Payau">Budidaya Air Payau</option>
-										</select>
+										<input type="text" name="jenis" class="form-control" required>
 									</div>
 									<div class="form-group form-group-default required">
 										<label>Sarana / Prasarana</label>
@@ -203,11 +199,7 @@
 						<input type="hidden" name="_token" value="{{ csrf_token() }}">
 						<div class="form-group form-group-default required">
 							<label>Jenis Usaha Budidaya</label>
-							<select class="full-width" data-init-plugin="select2" name="jenis" id="jenis">
-								<option value="Budidaya Air Laut">Budidaya Air Laut</option>
-								<option value="Budidaya Air Tawar">Budidaya Air Tawar</option>
-								<option value="Budidaya Air Payau">Budidaya Air Payau</option>
-							</select>
+							<input type="text" name="jenis" id="jenis" class="form-control" required>
 						</div>
 						<div class="form-group form-group-default required">
 							<label>Sarana / Prasarana</label>
