@@ -160,6 +160,7 @@ return [
         App\Providers\PermissionsServiceProvider::class,
         'Orangehill\Iseed\IseedServiceProvider',
         App\Providers\SaktiServiceProvider::class,
+        App\Providers\DetectBotServiceProvider::class,
 
     ],
 
@@ -210,7 +211,8 @@ return [
         'Excel'     => 'Maatwebsite\Excel\Facades\Excel',
         'PDF'       => Barryvdh\DomPDF\Facade::class,
         'Permissions' => App\Facades\Permissions::class,
-        'Sakti'     => App\Facades\Sakti::class
+        'Sakti'     => App\Facades\Sakti::class,
+        'IsBot'     => App\Facades\DetectBotFacades::class,
 
     ],
 

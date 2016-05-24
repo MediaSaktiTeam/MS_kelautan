@@ -142,7 +142,7 @@
 						/* Visitor */
 					  $tgl_pengujung = strtotime("+$i2 day",strtotime($hasil_tgl_bawah2));
 					  $hasil_tgl_pengujung = date('Y-m-d', $tgl_pengujung);
-					  $jml_pengunjung	= App\Statistik::where('tanggal',$hasil_tgl_pengujung)->groupBy('ip')->count();
+					  $jml_pengunjung	= App\Statistik::where('tanggal',$hasil_tgl_pengujung)->groupBy('ip')->get();
 					  
 					  /* Hits */
 					  $tgl_hits = strtotime("+$i2 day",strtotime($hasil_tgl_bawah3));
@@ -153,9 +153,9 @@
 					  			->groupBy('tanggal')->first();
 					  $hits_hari_ini = empty($hit->hit) ? 0 : $hit->hit;
 					  if ( $i2 != 6 ) { ?>
-						{ y: '<?php echo $hasil_urutan; ?>', a: <?php echo $jml_pengunjung; ?>, b: <?php echo $hits_hari_ini;?> },
+						{ y: '<?php echo $hasil_urutan; ?>', a: <?php echo count($jml_pengunjung); ?>, b: <?php echo $hits_hari_ini;?> },
 					<?php } else { ?>
-						{ y: '<?php echo $hasil_urutan; ?>', a: <?php echo $jml_pengunjung; ?>, b: <?php echo $hits_hari_ini;?> } <?php }
+						{ y: '<?php echo $hasil_urutan; ?>', a: <?php echo count($jml_pengunjung); ?>, b: <?php echo $hits_hari_ini;?> } <?php }
 				} ?>
 				],
 				xkey: 'y',

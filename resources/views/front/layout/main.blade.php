@@ -29,3 +29,32 @@
 	</body>
 
 </html>
+
+<?php
+
+	if ( !IsBot::isThatBot() ) {
+
+		$ip      = $_SERVER['REMOTE_ADDR'];
+
+		$tanggal = date('Y-m-d');
+
+		$waktu   = time();  
+
+		$s = App\Statistik::where('ip', $ip)->where('tanggal', $tanggal)->count();
+
+
+		if( $s == 0 ){
+
+			$data = [ ['ip' => $ip, 'tanggal' => $tanggal, 'hits' => 1, 'online' => $waktu] ];
+
+			DB::table('site_statistik')->insert($data);
+
+		} else {
+
+			App\Statistik::where('ip', $ip)->where('tanggal', $tanggal)->update(['hits' => DB::raw('hits + 1')]);
+
+		}
+
+	}
+
+?>
