@@ -59,44 +59,37 @@
 						<div class="panel panel-default">
 							<div class="panel-heading">
 								<div class="panel-title">
-									Master
+									Master Kecamatan
 								</div>
 							</div>
 							<div class="panel-body">
 								<h5>Keterangan Lokasi</h5>
-								<p>Berikut adalah berbagai lokasi di bantaeng. Mulai dari Provinsi sampai desa, silahkan sunting ID lokasi sesuai kebutuhan Anda!</p>
+								<p>Berikut adalah daftar kecamatan di Kab. Bantaeng, silahkan sunting ID lokasi sesuai kebutuhan Anda!</p>
 
-								<form class="style-form" method="GET" action="{{ route('kec_add') }}">
-									<div class="col-md-6">
-										<input type="hidden" name="_token" value="{{ csrf_token() }}">
+								<form class="style-form" method="GET" action="{{ route('kec_update') }}">
+									<?php
+										$i = 1;
+										$bagi_dua = ceil(count($kecamatan)/2);
+									?>
+									@foreach( $kecamatan as $kec )
+									
+										@if ( $i == 1 )
+											<div class="col-md-6">
+										@endif
 
-										<br>
-										<h6><b>Kecamatan</b></h6>
-										<div class="form-group form-group-default input-group">
-											<input type="email" class="form-control" value="073" style="margin-top: 13px;">
-											<span class="input-group-addon" style="width: 85%; text-align: left; background: transparent; font-weight: bold;">Nama Kecamatan</span>
-										</div>
-										<div class="form-group form-group-default input-group">
-											<input type="email" class="form-control" value="073" style="margin-top: 13px;">
-											<span class="input-group-addon" style="width: 85%; text-align: left; background: transparent; font-weight: bold;">Nama Kecamatan</span>
-										</div>
-										<div class="form-group form-group-default input-group">
-											<input type="email" class="form-control" value="073" style="margin-top: 13px;">
-											<span class="input-group-addon" style="width: 85%; text-align: left; background: transparent; font-weight: bold;">Nama Kecamatan</span>
-										</div>
-										<div class="form-group form-group-default input-group">
-											<input type="email" class="form-control" value="073" style="margin-top: 13px;">
-											<span class="input-group-addon" style="width: 85%; text-align: left; background: transparent; font-weight: bold;">Nama Kecamatan</span>
-										</div>
-										<div class="form-group form-group-default input-group">
-											<input type="email" class="form-control" value="073" style="margin-top: 13px;">
-											<span class="input-group-addon" style="width: 85%; text-align: left; background: transparent; font-weight: bold;">Nama Kecamatan</span>
-										</div>
-										<div class="form-group form-group-default input-group">
-											<input type="email" class="form-control" value="073" style="margin-top: 13px;">
-											<span class="input-group-addon" style="width: 85%; text-align: left; background: transparent; font-weight: bold;">Nama Kecamatan</span>
-										</div>
-									</div>
+											<div class="form-group form-group-default input-group">
+												<input type="hidden" name="id_kec[]" value="{{ $kec['id'] }}">
+												<input type="text" name="kec[]" class="form-control" value="{{ $kec->id }}" style="margin-top: 13px;">
+												<span class="input-group-addon" style="width: 85%; text-align: left; background: transparent; font-weight: bold;">{{ $kec->nama }}</span>
+											</div>
+
+										@if ( $i == $bagi_dua )
+											</div>
+										@endif
+
+										@php($i++)
+									@endforeach
+
 									<div class="col-md-12">
 										<hr>
 										<div class="form-group pull-right">
