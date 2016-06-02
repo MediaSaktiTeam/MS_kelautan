@@ -26,7 +26,7 @@
 								<a href="#">Master</a>
 							</li>
 							<li>
-								<a href="#" class="active">Jenis Usaha Budidaya</a>
+								<a href="#" class="active">Jenis Produksi</a>
 							</li>
 						</ul>
 					</div>
@@ -62,8 +62,8 @@
 								</div>
 							</div>
 							<div class="panel-body">
-								<h5>Jenis Usaha Budidaya</h5>
-								<p>* Jenis Usaha Budidaya digunakan pada halaman pembudidaya dan nelayan.</p>
+								<h5>Jenis Produksi</h5>
+								<p>* Jenis Produksi digunakan pada halaman pembudidaya dan nelayan.</p>
 								<form class="style-form" method="GET" action="{{ route('usaha_tambah') }}">
 									<input type="hidden" name="_token" value="{{ csrf_token() }}">
 									<div class="form-group form-group-default required">
@@ -75,7 +75,7 @@
 										</select>
 									</div>
 									<div class="form-group form-group-default required">
-										<label>Nama Usaha</label>
+										<label>Jenis Produksi</label>
 										<input type="text" name="nama" class="form-control" required>
 									</div>
 									<div class="form-group">
@@ -98,7 +98,7 @@
 												<button class="btn btn-check" data-toggle="modal" data-target="#modal-hapus" disabled id="hapus"><i class="pg-trash"></i></button>
 											</th>
 											<th>Jenis Usaha Budidaya</th>
-											<th>Nama Usaha</th>
+											<th>Jenis Produksi</th>
 											<th>Aksi</th>
 										</tr>
 									</thead>
@@ -202,7 +202,7 @@
 					<form class="style-form" method="GET" action="{{ route('usaha_update') }}">
 						<input type="hidden" name="_token" value="{{ csrf_token() }}">
 						<div class="form-group form-group-default required">
-							<label>Jenis Usaha Budidaya</label>
+							<label>Jenis Produksi</label>
 							<select class="full-width" data-init-plugin="select2" name="jenis" id="jenis">
 								<option value="Budidaya Air Laut">Budidaya Air Laut</option>
 								<option value="Budidaya Air Tawar">Budidaya Air Tawar</option>
