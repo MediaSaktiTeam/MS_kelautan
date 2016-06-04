@@ -203,6 +203,7 @@
 					<form class="style-form" method="GET" action="{{ route('saranapembudidaya_update') }}">
 						<input type="hidden" name="_token" value="{{ csrf_token() }}">
 						<div class="form-group form-group-default required">
+
 							<label>Jenis Usaha Budidaya</label>
 							<select class="full-width" data-init-plugin="select2" name="jenis" id="jenis">
 								@foreach( $jenisUsaha as $ju )
@@ -210,6 +211,7 @@
 								@endforeach
 							</select>
 						</div>
+
 						<div class="form-group form-group-default required">
 							<label>Sarana / Prasarana</label>
 							<input type="text" id="sub" name="sub" class="form-control" required>
