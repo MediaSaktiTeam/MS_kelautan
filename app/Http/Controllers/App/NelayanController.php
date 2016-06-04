@@ -111,7 +111,8 @@ class NelayanController extends Controller
 		$pb->password   = bcrypt($r->nik);
 		$pb->nik        = $r->nik;
 		$pb->no_kartu_nelayan  = $r->no_kartu_nelayan;
-		$pb->alamat       = $r->alamat;
+		$pb->alamat     = $r->alamat;
+		$pb->id_desa    = $r->desa;
 		$pb->erte       = $r->erte;
 		$pb->tlp        = $r->tlp;
 		$pb->pos        = $r->pos;
@@ -191,6 +192,7 @@ class NelayanController extends Controller
 		$pb->nik        = $r->nik;
 		$pb->no_kartu_nelayan = $r->no_kartu_nelayan;
 		$pb->alamat     = $r->alamat;
+		$pb->id_desa    = $r->desa;
 		$pb->erte       = $r->erte;
 		$pb->tlp        = $r->tlp;
 		$pb->pos        = $r->pos;

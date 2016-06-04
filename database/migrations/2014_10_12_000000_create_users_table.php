@@ -21,6 +21,7 @@ class CreateUsersTable extends Migration
             $table->enum('active',['1','0']);
             $table->string('nik', 30)->nullable();
             $table->string('alamat')->nullable();
+            $table->integer('id_desa')->nullable();
             $table->string('erte')->nullable();
             $table->string('tlp')->nullable();
             $table->string('pos')->nullable();

@@ -99,25 +99,56 @@
 										</div>
 
 										<div class="row">
-												<div class="col-sm-4">
-													<div class="form-group">
-														<label>RT/RW</label>
-														<input type="text" class="form-control" name="erte" value="{{ $nelayan->erte }}">
-													</div>
-												</div>
-												<div class="col-sm-4">
-													<div class="form-group">
-														<label>Telepon</label>
-														<input type="text" class="form-control" name="tlp" value="{{ $nelayan->tlp }}">
-													</div>
-												</div>
-												<div class="col-sm-4">
-													<div class="form-group">
-														<label>Kode POS</label>
-														<input type="text" class="form-control" name="pos" value="{{ $nelayan->pos }}">
+											<div class="col-md-6">
+												<div class="form-group">
+												<label>Kecamatan</label>
+													<div id="kecamatan">
+														<select class="full-width" data-init-plugin="select2" name="kecamatan" onchange="get_desa(this.value)" required>
+															<option value="">Pilih Kecamatan...</option>
+															<?php $kecamatan = App\Kecamatan::get() ?>
+															@foreach ( $kecamatan as $kec )
+																<option value="{{ $kec->id }}" {{ $kec->id == $nelayan->desa->kecamatan->id ? 'selected':'' }}>{{ $kec->nama }}</option>
+															@endforeach
+														</select>
 													</div>
 												</div>
 											</div>
+
+											<div class="col-sm-6">
+												<label><b>Desa/Kelurahan</b></label>
+												<div class="form-group">
+													<span id="desa">
+													<select class="full-width" name="desa" data-init-plugin="select2" required>
+														<?php $desa = App\Desa::all() ?>
+														@foreach ( $desa as $des )
+															<option value="{{ $des->id }}" {{ $des->id == $nelayan->id_desa ? 'selected':'' }}>{{ $des->nama }}</option>
+														@endforeach
+													</select>
+													</span>
+												</div>
+											</div>
+										</div>
+
+										<div class="row">
+											<div class="col-sm-4">
+												<div class="form-group">
+													<label>RT/RW</label>
+													<input type="text" class="form-control" name="erte" value="{{ $nelayan->erte }}">
+												</div>
+											</div>
+											<div class="col-sm-4">
+												<div class="form-group">
+													<label>Telepon</label>
+													<input type="text" class="form-control" name="tlp" value="{{ $nelayan->tlp }}">
+												</div>
+											</div>
+											<div class="col-sm-4">
+												<div class="form-group">
+													<label>Kode POS</label>
+													<input type="text" class="form-control" name="pos" value="{{ $nelayan->pos }}">
+												</div>
+											</div>
+										</div>
 										
 										<div class="row">
 											<div class="col-sm-6">
@@ -325,6 +356,15 @@
 			var url = url+"/"+id;
 			$.get(url, { id:id, _token:_token}, function(data){
 				$('#sarana').html(data);
+			});
+		}
+
+		function get_desa(id_kecamatan){
+			$('#desa').html("<i class='fa fa-spinner fa-spin'></i>");
+			var url = "{{ url('get-desa') }}";
+			var url = url+"/"+id_kecamatan;
+			$.get(url, { id_kecamatan:id_kecamatan}, function(data){
+				$('#desa').html(data);
 			});
 		}
 

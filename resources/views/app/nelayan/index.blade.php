@@ -95,6 +95,33 @@
 											</div>
 
 											<div class="row">
+												<div class="col-md-6">
+													<div class="form-group">
+													<label>Kecamatan</label>
+														<div id="kecamatan">
+															<select class="full-width" data-init-plugin="select2" name="kecamatan" onchange="get_desa(this.value)" required>
+																<option value="">Pilih Kecamatan...</option>
+																<?php $kecamatan = App\Kecamatan::get() ?>
+																@foreach ( $kecamatan as $kec )
+																	<option value="{{ $kec->id }}">{{ $kec->nama }}</option>
+																@endforeach
+															</select>
+														</div>
+													</div>
+												</div>
+												<div class="col-sm-6">
+														<label><b>Desa/Kelurahan</b></label>
+													<div class="form-group">
+														<span id="desa">
+														<select class="full-width" name="desa" data-init-plugin="select2" required>
+															<option value="">Pilih Desa/Kelurahan...</option>
+														</select>
+														</span>
+													</div>
+												</div>
+											</div>
+
+											<div class="row">
 												<div class="col-sm-4">
 													<div class="form-group">
 														<label>RT/RW</label>
@@ -234,14 +261,20 @@
 											<table class="table table-hover demo-table-dynamic custom">
 												<thead>
 													<tr>
-														<th>
+														<th rowspan="2">
 															<button class="btn btn-check" data-toggle="modal" data-target="#modal-hapus" disabled id="hapus"><i class="pg-trash"></i></button>
 														</th>
-														<th>No.</th>
-														<th>Nama Lengkap</th>
-														<th>Nama Kelompok</th>
-														<th>Jabatan Kelompok</th>
-														<th style="text-align:center">Aksi</th>
+														<th rowspan="2">No.</th>
+														<th rowspan="2">Nama Lengkap</th>
+														<th rowspan="2">Nama Kelompok</th>
+														<th rowspan="2">Jabatan Kelompok</th>
+														<th colspan="3"><center>Alamat</center></th>
+														<th rowspan="2" style="text-align:center">Aksi</th>
+													</tr>
+													<tr>
+														<th>RT/RW</th>
+														<th>Desa/Kel.</th>
+														<th>Kecamatan</th>
 													</tr>
 												</thead>
 												<tbody>
@@ -266,6 +299,9 @@
 															<td>{{ $nel->name }}</td>
 															<td>{{ $nel->kelompok->nama }}</td>
 															<td>{{ $nel->jabatan->nama }}</td>
+															<td>{{ $nel->erte }}</td>
+															<td>{{ $nel->desa->nama }}</td>
+															<td>{{ $nel->desa->kecamatan->nama }}</td>
 															<td style="text-align:center">
 																<a class="btn btn-default btn-xs view" data-id="{{ $nel->id }}"><i class="fa fa-search-plus"></i></a>
 																<a href="{{ route('nelayan_edit',$nel->id) }}" class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i></a>
@@ -496,5 +532,15 @@
 				});
 			}
 		}
+
+		function get_desa(id_kecamatan){
+			$('#desa').html("<i class='fa fa-spinner fa-spin'></i>");
+			var url = "{{ url('get-desa') }}";
+			var url = url+"/"+id_kecamatan;
+			$.get(url, { id_kecamatan:id_kecamatan}, function(data){
+				$('#desa').html(data);
+			});
+		}
+
 	</script>
 @endsection

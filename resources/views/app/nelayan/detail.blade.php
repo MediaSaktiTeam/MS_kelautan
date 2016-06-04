@@ -19,8 +19,16 @@
 			<td><b>{{ $nelayan->alamat }}</b></td>
 		</tr>
 		<tr>
-			<td>RT</td>
+			<td>RT/RW</td>
 			<td><b>{{ $nelayan->erte }}</b></td>
+		</tr>
+		<tr>
+			<td>Kecamatan</td>
+			<td><b>{{ $nelayan->desa->kecamatan->nama }}</b></td>
+		</tr>
+		<tr>
+			<td>Desa/Kelurahan</td>
+			<td><b>{{ $nelayan->desa->nama }}</b></td>
 		</tr>
 		<tr>
 			<td>Telepon</td>

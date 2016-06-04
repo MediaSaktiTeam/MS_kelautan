@@ -56,4 +56,9 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
     {
         return $this->belongsTo('App\MerekDagang', 'id_merek_dagang');
     }
+
+    public function desa()
+    {
+        return $this->belongsTo('App\Desa', 'id_desa');
+    }
 }
