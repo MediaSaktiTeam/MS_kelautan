@@ -59,7 +59,7 @@
 					<td>{{ $pb->erte }}</td>
 					<td>{{ $pb->tlp }}</td>
 					<td>{{ $pb->pos }}</td>
-					<td>{{ $pb->usaha->jenis }}</td>
+					<td>{{ $pb->usaha->jenisusaha->nama }}</td>
 					<td>{{ $pb->usaha->nama }}</td>
 					<td>{{ $pb->kelompok->nama }} ({{ $pb->jabatan->nama }})</td>
 				</tr>

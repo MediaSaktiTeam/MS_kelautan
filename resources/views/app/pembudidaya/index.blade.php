@@ -146,9 +146,10 @@
 														<label>Jenis Usaha Budidaya</label>
 														<select onchange="get_usaha(this.value)" class="full-width" name="jenis_usaha" required data-init-plugin="select2">
 															<option value="">Pilih Jenis Usaha...</option>
-															<option value="Budidaya Air Laut" {{ Input::old('jenis_usaha') == "Budidaya Air Laut" ? "selected":"" }}>Budidaya Air Laut</option>
-															<option value="Budidaya Air Tawar" {{ Input::old('jenis_usaha') == "Budidaya Air Tawar" ? "selected":"" }}>Budidaya Air Tawar</option>
-															<option value="Budidaya Air Payau" {{ Input::old('jenis_usaha') == "Budidaya Air Payau" ? "selected":"" }}>Budidaya Air Payau</option>
+															<?php $jenisUsaha = App\JenisUsaha::all() ?>
+															@foreach( $jenisUsaha as $ju )
+																<option value="{{ $ju->id }}" {{ Input::old('jenis_usaha') ==  $ju->id ? 'selected':'' }}>{{ $ju->nama }}</option>
+															@endforeach
 														</select>
 													</div>
 												</div>
@@ -222,9 +223,9 @@
 											<div class="form-group">
 												<select onchange="window.open(this.options[this.selectedIndex].value,'_top')" class="full-width" data-init-plugin="select2">
 														<option value="{{ route('pembudidaya', ['f' => '', 'offset' => $_GET['offset'], 'limit' => $_GET['limit'] ]) }}" {{ $_GET['f'] == '' ? 'selected' : '' }}>Semua Jenis Usaha</option> 
-														<option value="{{ route('pembudidaya', ['f' => 'Budidaya Air Laut', 'offset' => $_GET['offset'], 'limit' => $_GET['limit'] ]) }}" {{ $_GET['f'] == 'Budidaya Air Laut' ? 'selected' : '' }}>Budidaya Air Laut</option> 
-														<option value="{{ route('pembudidaya', ['f' => 'Budidaya Air Tawar', 'offset' => $_GET['offset'], 'limit' => $_GET['limit'] ]) }}" {{ $_GET['f'] == 'Budidaya Air Tawar' ? 'selected' : '' }}>Budidaya Air Tawar</option> 
-														<option value="{{ route('pembudidaya', ['f' => 'Budidaya Air Payau', 'offset' => $_GET['offset'], 'limit' => $_GET['limit'] ]) }}" {{ $_GET['f'] == 'Budidaya Air Payau' ? 'selected' : '' }}>Budidaya Air Payau</option> 
+														@foreach( $jenisUsaha as $ju )
+															<option value="{{ route('pembudidaya', ['f' => $ju->id, 'offset' => $_GET['offset'], 'limit' => $_GET['limit'] ]) }}" {{ $_GET['f'] == $ju->id ? 'selected' : '' }}>{{ $ju->nama }}</option> 
+														@endforeach
 												</select>
 											</div>
 										</div>
@@ -281,7 +282,7 @@
 																<td>{{ $pb->name }}</td>
 																<td>{{ $pb->kelompok->nama }}</td>
 																<td>{{ $pb->jabatan->nama }}</td>
-																<td>{{ $pb->usaha->jenis }}</td>
+																<td>{{ $pb->usaha->jenisusaha->nama }}</td>
 																<td style="text-align:center">
 																	<a class="btn btn-default btn-xs view" data-id="{{ $pb->id }}"><i class="fa fa-search-plus"></i></a>
 																	<a href="{{ route('pembudidaya_edit',$pb->id) }}" class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i></a>

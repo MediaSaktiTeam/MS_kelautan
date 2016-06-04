@@ -151,9 +151,10 @@
 													<label>Jenis Usaha Budidaya</label>
 													<select onchange="get_usaha(this.value)" class="full-width" required data-init-plugin="select2">
 														<option value="">Pilih Jenis Usaha...</option>
-														<option value="Budidaya Air Laut" {{ $pembudidaya->usaha->jenis == "Budidaya Air Laut" ? "selected":"" }}>Budidaya Air Laut</option>
-														<option value="Budidaya Air Tawar" {{ $pembudidaya->usaha->jenis == "Budidaya Air Tawar" ? "selected":"" }}>Budidaya Air Tawar</option>
-														<option value="Budidaya Air Payau" {{ $pembudidaya->usaha->jenis == "Budidaya Air Payau" ? "selected":"" }}>Budidaya Air Payau</option>
+														<?php $jenisUsaha = App\JenisUsaha::all() ?>
+														@foreach( $jenisUsaha as $ju )
+															<option value="{{ $ju->id }}" {{ $pembudidaya->jenis_usaha ==  $ju->id ? 'selected':'' }}>{{ $ju->nama }}</option>
+														@endforeach
 													</select>
 												</div>
 											</div>
@@ -166,7 +167,7 @@
 													<div id="usaha">
 														<select class="full-width" data-init-plugin="select2" name="id_usaha" required>
 															<option value="">Pilih Spesifik Usaha...</option>
-															<?php $usaha = App\Usaha::where('jenis', $pembudidaya->usaha->jenis)->get(); ?>
+															<?php $usaha = App\Usaha::where('jenis_usaha', $pembudidaya->usaha->jenisusaha->id)->get(); ?>
 															@foreach( $usaha as $us )
 																<option value="{{ $us->id }}" {{ $pembudidaya->usaha->nama == $us->nama ? "selected":"" }}>{{ $us->nama }}</option>
 															@endforeach
@@ -179,7 +180,7 @@
 													<label>Kepemilikan Sarana dan Prasarana</label>
 													<div id="sarana">
 														<select name="id_sarana[]" class="full-width" data-init-plugin="select2" multiple="">
-															<?php $sarana = App\Sarana::where('jenis', $pembudidaya->usaha->jenis)->get(); ?>
+															<?php $sarana = App\Sarana::where('jenis', $pembudidaya->usaha->jenisusaha->nama)->get(); ?>
 															<?php $Ksarana = App\KepemilikanSarana::where('id_user', $pembudidaya->id)->get(); ?>
 															<?php $Ksarana_arr = []; ?>
 															@foreach ( $Ksarana as $val )

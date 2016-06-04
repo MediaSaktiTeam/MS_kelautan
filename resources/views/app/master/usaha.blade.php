@@ -65,13 +65,13 @@
 								<h5>Jenis Usaha Budidaya</h5>
 								<p>* Jenis Usaha Budidaya digunakan pada halaman pembudidaya dan nelayan.</p>
 								<form class="style-form" method="GET" action="{{ route('usaha_tambah') }}">
-									<input type="hidden" name="_token" value="{{ csrf_token() }}">
 									<div class="form-group form-group-default required">
 										<label>Jenis Usaha Budidaya</label>
 										<select class="full-width" data-init-plugin="select2" name="jenis">
-											<option value="Budidaya Air Laut">Budidaya Air Laut</option>
-											<option value="Budidaya Air Tawar">Budidaya Air Tawar</option>
-											<option value="Budidaya Air Payau">Budidaya Air Payau</option>
+											<?php $jenisUsaha = App\JenisUsaha::all() ?>
+											@foreach( $jenisUsaha as $ju )
+												<option value="{{ $ju->id }}">{{ $ju->nama }}</option>
+											@endforeach
 										</select>
 									</div>
 									<div class="form-group form-group-default required">
@@ -121,9 +121,9 @@
 													<label for="checkbox{{ $us->id }}" class="m-l-20"></label>
 												</div>
 											</td>
-											<td>{{ $us->jenis }}</td>
+											<td>{{ $us->jenisusaha->nama }}</td>
 											<td>{{ $us->nama }}</td>
-											<td><button class="btn btn-default btn-xs btn-edit" data-id="{{ $us->id }}" data-jenis="{{ $us->jenis }}" data-nama="{{ $us->nama }}"><i class="fa fa-pencil"></i></button></td>
+											<td><button class="btn btn-default btn-xs btn-edit" data-namajenis="{{ $us->jenisusaha->nama }}" data-id="{{ $us->id }}" data-jenis="{{ $us->jenis_usaha }}" data-nama="{{ $us->nama }}"><i class="fa fa-pencil"></i></button></td>
 										</tr>
 										@endforeach
 									</tbody>
@@ -204,9 +204,9 @@
 						<div class="form-group form-group-default required">
 							<label>Jenis Usaha Budidaya</label>
 							<select class="full-width" data-init-plugin="select2" name="jenis" id="jenis">
-								<option value="Budidaya Air Laut">Budidaya Air Laut</option>
-								<option value="Budidaya Air Tawar">Budidaya Air Tawar</option>
-								<option value="Budidaya Air Payau">Budidaya Air Payau</option>
+								@foreach( $jenisUsaha as $ju )
+									<option value="{{ $ju->id }}">{{ $ju->nama }}</option>
+								@endforeach
 							</select>
 						</div>
 						<div class="form-group form-group-default required">
@@ -258,6 +258,7 @@
 				var id = $(this).data('id');
 				var nama = $(this).data('nama');
 				var jenis = $(this).data('jenis');
+				var namajenis = $(this).data('namajenis');
 				$('#id-jenis').val(id);
 				$('#nama').val(nama);
 				$('#modal-sunting').modal('show');
@@ -265,7 +266,7 @@
 				$("select option").filter(function() {
 				    if( $(this).val().trim() == jenis ){
 				    	$(this).prop('selected', true);
-				    	$(".select2-chosen").html(jenis);
+				    	$(".select2-chosen").html(namajenis);
 				    }
 				});
 			});

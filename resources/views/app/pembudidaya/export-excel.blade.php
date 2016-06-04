@@ -34,7 +34,7 @@
 					<td>{{ $pb->pos }}</td>
 					<td>{{ $pb->kelompok->nama }}</td>
 					<td>{{ $pb->jabatan->nama }}</td>
-					<td>{{ $pb->usaha->jenis }}</td>
+					<td>{{ $pb->usaha->jenisusaha->nama }}</td>
 					<td>{{ $pb->usaha->nama }}</td>
 					<td>
 						<?php $Ksarana = App\KepemilikanSarana::where('id_user', $pb->id)->get(); ?>

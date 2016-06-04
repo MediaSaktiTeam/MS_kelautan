@@ -14,8 +14,8 @@ class TableJenisUsaha extends Migration
     {
         Schema::create('app_jenis_usaha', function(Blueprint $t)
         {
-            $t->integer('id_sub_usaha');
-            $t->integer('id_user');
+            $t->Increments('id');
+            $t->string('nama');
         });
     }
 

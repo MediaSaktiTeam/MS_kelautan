@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use DB,Excel,PDF;
-use App\User, App\Kelompok, App\Jabatan, App\Usaha, App\Sarana, App\KepemilikanSarana;
+use App\User, App\Kelompok, App\Jabatan, App\Usaha, App\Sarana, App\KepemilikanSarana, App\JenisUsaha;
 use App\RefBantuan;
 
 class PembudidayaController extends Controller
@@ -146,7 +146,6 @@ class PembudidayaController extends Controller
 	{
 		$data['kelompok'] = Kelompok::where('tipe','Pembudidaya')->get();
 		$data['jabatan'] = Jabatan::all();
-		$data['sarana'] = Sarana::where('jenis','Budidaya Air laut')->where('tipe','Pembudidaya')->get();
 		$data['pembudidaya'] = User::find($id);
 		return view('app.pembudidaya.update', $data);
 	}
@@ -242,13 +241,14 @@ class PembudidayaController extends Controller
 
 	public function getUsaha($jenis)
 	{
-		$data['usaha'] = Usaha::where('jenis', $jenis)->get();
+		$data['usaha'] = Usaha::where('jenis_usaha', $jenis)->get();
 		return view('app.pembudidaya.data-usaha', $data);
 	}
 
 	public function getSarana($jenis)
 	{
-		$data['sarana'] = Sarana::where('jenis', $jenis)->where('tipe', 'Pembudidaya')->get();
+		$jenisUsaha = JenisUsaha::where('id', $jenis)->first();
+		$data['sarana'] = Sarana::where('jenis', $jenisUsaha->nama)->where('tipe', 'Pembudidaya')->get();
 		return view('app.pembudidaya.data-sarana', $data);
 	}
 
@@ -257,18 +257,18 @@ class PembudidayaController extends Controller
 		$data['pembudidaya'] = DB::table('users')
 									->leftJoin('app_kelompok', 'users.id_kelompok', '=', 'app_kelompok.id_kelompok')
 									->leftJoin('app_usaha', 'users.id_usaha', '=', 'app_usaha.id')
+									->leftJoin('app_jenis_usaha', 'app_usaha.jenis_usaha', '=', 'app_jenis_usaha.id')
 									->leftJoin('app_jabatan', 'users.id_jabatan', '=', 'app_jabatan.id')
 										->select(
 											'app_jabatan.nama as nama_jabatan',
-											'users.*', 'app_usaha.jenis as jenis_usaha',
+											'users.*', 'app_jenis_usaha.nama as jenis_usaha',
 											'app_kelompok.nama as nama_kelompok')
 												->where('users.profesi','Pembudidaya')
 												->where(function($query) use ($cari) {
 													$query->where('users.name','LIKE', '%'.$cari.'%')
 															->orWhere('app_kelompok.nama','LIKE', '%'.$cari.'%')
 															->orWhere('app_jabatan.nama','LIKE', '%'.$cari.'%')
-															->orWhere('app_usaha.nama','LIKE', '%'.$cari.'%')
-															->orWhere('app_usaha.jenis','LIKE', '%'.$cari.'%');
+															->orWhere('app_usaha.nama','LIKE', '%'.$cari.'%');
 												})
 									->take(40)->get();
 		return view('app.pembudidaya.data-pencarian', $data);

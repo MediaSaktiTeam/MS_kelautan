@@ -32,7 +32,7 @@ class UsahaController extends Controller
 					'jenis' => 'required',
 				]);
 
-			$vb	=	Usaha::where('nama',$request->nama)->where('jenis',$request->jenis)->count();
+			$vb	=	Usaha::where('nama',$request->nama)->where('jenis_usaha',$request->jenis)->count();
 			if ($vb > 0 ) {
 				return redirect()->route('usaha')->with(session()->flash('gagal','Data Sudah ada !!'));
 			}
@@ -40,7 +40,7 @@ class UsahaController extends Controller
 
 		$dt = new Usaha;
 		$dt->nama = $request->nama;
-		$dt->jenis = $request->jenis;
+		$dt->jenis_usaha = $request->jenis;
 		$dt->save();
 		return redirect()->route('usaha', $data)->with(session()->flash('success','Data Berhasil Tersimpan !!'));
 	}
@@ -59,7 +59,7 @@ class UsahaController extends Controller
 	{
 
 		$data = Usaha::find($request->id);
-		$data->jenis = $request->jenis;
+		$data->jenis_usaha = $request->jenis;
 		$data->nama = $request->nama;
 		$data->save();
 		$data['usaha'] = Usaha::paginate(1);

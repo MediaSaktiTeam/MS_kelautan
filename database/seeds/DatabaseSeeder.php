@@ -35,6 +35,7 @@ class DatabaseSeeder extends Seeder
         $this->call('DesaTableSeeder');
         $this->call('SiteMenuTableSeeder');
         $this->call('SitePagesTableSeeder');
+        $this->call('JenisUsahaTableSeeder');
     }
 }
 
@@ -60,6 +61,27 @@ class KabupatenTableSeeder extends Seeder
   {
     App\Kabupaten::truncate();
     DB::table('kabupaten')->insert(array (
+            0 => 
+            array (
+                'id' => '7303',
+                'id_prov' => '73',
+                'nama' => 'Kab. Bantaeng',
+            ),
+        ));
+    }
+}
+
+class JenisUsahaTableSeeder extends Seeder
+{
+  public function run()
+  {
+    App\JenisUsaha::truncate();
+    $data = [
+        ['nama' => 'Budidaya Air Laut'],
+        ['nama' => 'Budidaya Air Tawar'],
+        ['nama' => 'Budidaya Air Payau']
+    ];
+    DB::table('app_jenis_usaha')->insert(array (
             0 => 
             array (
                 'id' => '7303',

@@ -69,9 +69,10 @@
 									<div class="form-group form-group-default required">
 										<label>Jenis Usaha Budidaya</label>
 										<select class="full-width" data-init-plugin="select2" name="jenis">
-											<option value="Budidaya Air Laut">Budidaya Air Laut</option>
-											<option value="Budidaya Air Tawar">Budidaya Air Tawar</option>
-											<option value="Budidaya Air Payau">Budidaya Air Payau</option>
+											<?php $jenisUsaha = App\JenisUsaha::all() ?>
+											@foreach( $jenisUsaha as $ju )
+												<option value="{{ $ju->nama }}">{{ $ju->nama }}</option>
+											@endforeach
 										</select>
 									</div>
 									<div class="form-group form-group-default required">
@@ -204,9 +205,9 @@
 						<div class="form-group form-group-default required">
 							<label>Jenis Usaha Budidaya</label>
 							<select class="full-width" data-init-plugin="select2" name="jenis" id="jenis">
-								<option value="Budidaya Air Laut">Budidaya Air Laut</option>
-								<option value="Budidaya Air Tawar">Budidaya Air Tawar</option>
-								<option value="Budidaya Air Payau">Budidaya Air Payau</option>
+								@foreach( $jenisUsaha as $ju )
+									<option value="{{ $ju->nama }}">{{ $ju->nama }}</option>
+								@endforeach
 							</select>
 						</div>
 						<div class="form-group form-group-default required">

@@ -38,7 +38,7 @@
 		<tr>
 			<td>Jenis Usaha</td>
 			<td><b>
-					{{ $pembudidaya->usaha->jenis }} 
+					{{ $pembudidaya->usaha->jenisusaha->nama }} 
 					&nbsp; <i class="fa fa-angle-double-right"></i> &nbsp; 
 					{{ $pembudidaya->usaha->nama }}
 				</b>

@@ -15,7 +15,7 @@ class TabelUsaha extends Migration
         Schema::create('app_usaha', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('nama');
-            $table->string('jenis');
+            $table->string('jenis_usaha',5);
             $table->timestamps();
         });
     }
