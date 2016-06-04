@@ -116,6 +116,7 @@ class PembudidayaController extends Controller
 		$pb->tlp        = $r->tlp;
 		$pb->pos        = $r->pos;
 		$pb->alamat     = $r->alamat;
+		$pb->id_desa     = $r->desa;
 		$pb->id_kelompok  = $r->id_kelompok;
 		$pb->id_jabatan   = $r->id_jabatan;
 		$pb->id_usaha     = $r->id_usaha;
@@ -187,6 +188,7 @@ class PembudidayaController extends Controller
 		$pb->password   = bcrypt($r->nik);
 		$pb->nik        = $r->nik;
 		$pb->alamat     = $r->alamat;
+		$pb->id_desa     = $r->desa;
 		$pb->erte       = $r->erte;
 		$pb->tlp        = $r->tlp;
 		$pb->pos        = $r->pos;

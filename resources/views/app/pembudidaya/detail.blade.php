@@ -19,12 +19,20 @@
 			<td><b>{{ $pembudidaya->erte }}</b></td>
 		</tr>
 		<tr>
-			<td>Telepon</td>
-			<td><b>{{ $pembudidaya->tlp }}</b></td>
+			<td>Desa/Kelurahan</td>
+			<td><b>{{ $pembudidaya->desa->nama }}</b></td>
+		</tr>
+		<tr>
+			<td>Kecamatan</td>
+			<td><b>{{ $pembudidaya->desa->kecamatan->nama }}</b></td>
 		</tr>
 		<tr>
 			<td>Kode POS</td>
 			<td><b>{{ $pembudidaya->pos }}</b></td>
+		</tr>
+		<tr>
+			<td>Telepon</td>
+			<td><b>{{ $pembudidaya->tlp }}</b></td>
 		</tr>
 		<tr>
 			<td>Nama Kelompok</td>

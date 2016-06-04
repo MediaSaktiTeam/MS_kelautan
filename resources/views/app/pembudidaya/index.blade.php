@@ -86,6 +86,33 @@
 													</div>
 												</div>
 											</div>
+
+											<div class="row">
+												<div class="col-md-6">
+													<div class="form-group">
+													<label>Kecamatan</label>
+														<div id="kecamatan">
+															<select class="full-width" data-init-plugin="select2" name="kecamatan" onchange="get_desa(this.value)" required>
+																<option value="">Pilih Kecamatan...</option>
+																<?php $kecamatan = App\Kecamatan::get() ?>
+																@foreach ( $kecamatan as $kec )
+																	<option value="{{ $kec->id }}" {{ Input::old('kecamatan') == $kec->id ? 'selected':'' }}>{{ $kec->nama }}</option>
+																@endforeach
+															</select>
+														</div>
+													</div>
+												</div>
+												<div class="col-sm-6">
+														<label><b>Desa/Kelurahan</b></label>
+													<div class="form-group">
+														<span id="desa">
+														<select class="full-width" name="desa" data-init-plugin="select2" required>
+															<option value="">Pilih Desa/Kelurahan...</option>
+														</select>
+														</span>
+													</div>
+												</div>
+											</div>
 											
 											<div class="row">
 												<div class="col-sm-4">
@@ -536,6 +563,15 @@
 					$('#show-pencarian').html(data);
 				});
 			}
+		}
+
+		function get_desa(id_kecamatan){
+			$('#desa').html("<i class='fa fa-spinner fa-spin'></i>");
+			var url = "{{ url('get-desa') }}";
+			var url = url+"/"+id_kecamatan;
+			$.get(url, { id_kecamatan:id_kecamatan}, function(data){
+				$('#desa').html(data);
+			});
 		}
 
 	</script>
