@@ -165,7 +165,8 @@
 														@if ( $Ms->dek($_GET['pr']) == 'Nelayan' )
 															<th>Jenis Ikan</th>
 														@endif
-														<th>Biaya Produksi</th>
+														<th>Jumlah Produksi</th>
+														<th>Waktu Produksi</th>
 														<th style="text-align:center">Aksi</th>
 													</tr>
 												</thead>
@@ -190,9 +191,11 @@
 																	<td>{{ $per->jenis_ikan }}</td>
 																@endif
 																<td>{{ $Ms->rupiah($per->biaya_produksi) }}</td>
+																<td>{{ $per->created_at }}</td>
 																<td style="text-align:center">
 																	<a href="{{ url('/app/produksi/edit') }}/{{ $per->id }}?offset={{ $_GET['offset'] }}&limit={{ $_GET['limit'] }}&pr={{ $_GET['pr'] }}" class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i></a>
 																</td>
+
 															</tr>
 														@endforeach
 

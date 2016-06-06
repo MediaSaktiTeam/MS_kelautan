@@ -273,15 +273,20 @@
 											<table class="table table-hover demo-table-dynamic custom">
 												<thead>
 													<tr>
-														<th>
+														<th rowspan="2">
 															<button class="btn btn-check" data-toggle="modal" data-target="#modal-hapus" disabled id="hapus"><i class="pg-trash"></i></button>
 														</th>
-														<th>No.</th>
-														<th>Nama Lengkap</th>
-														<th>Nama Kelompok</th>
-														<th>Jabatan Kelompok</th>
-														<th>Jenis Usaha</th>
-														<th style="text-align:center">Aksi</th>
+														<th rowspan="2">No.</th>
+														<th rowspan="2">Nama Lengkap</th>
+														<th rowspan="2">Nama Kelompok</th>
+														<th rowspan="2">Jabatan Dalam Kelompok</th>
+														<th colspan="3" style="text-align:center">Alamat</th>
+														<th rowspan="2" style="text-align:center">Aksi</th>
+													</tr>
+													<tr>
+														<th>Rt/Rw</th>
+														<th>Desa/Kelurahan</th>
+														<th>Kec</th>
 													</tr>
 												</thead>
 
@@ -309,7 +314,9 @@
 																<td>{{ $pb->name }}</td>
 																<td>{{ $pb->kelompok->nama }}</td>
 																<td>{{ $pb->jabatan->nama }}</td>
-																<td>{{ $pb->usaha->jenisusaha->nama }}</td>
+																<td>{{ $pb->erte }}</td>
+																<td>{{ $pb->datadesa->nama }}</td>
+																<td>{{ $pb->datakecamatan->nama }}</td>
 																<td style="text-align:center">
 																	<a class="btn btn-default btn-xs view" data-id="{{ $pb->id }}"><i class="fa fa-search-plus"></i></a>
 																	<a href="{{ route('pembudidaya_edit',$pb->id) }}" class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i></a>

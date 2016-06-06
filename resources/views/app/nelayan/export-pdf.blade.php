@@ -32,15 +32,19 @@
 	<table class="table table-bordered">
 		<thead>
 			<tr>
-				<th>No.</th>
-				<th>NIK</th>
-				<th>No Kartu Nelayan</th>
-				<th>Nama</th>
-				<th>Alamat</th>
-				<th>RT</th>
-				<th>Telepon</th>
-				<th>Kode POS</th>
-				<th>Kelompok</th>
+				<th rowspan="2">No.</th>
+				<th rowspan="2">NIK</th>
+				<th rowspan="2">No Kartu Nelayan</th>
+				<th rowspan="2">Nama</th>
+				<th colspan="3"><center>Alamat</center></th>
+				<th colspan="2"><center>Sarana Yang dimiliki</center></th>
+			</tr>
+			<tr>
+				<th>RT/RW</th>
+				<th>Desa/Kel</th>
+				<th>Kec</th>
+				<th>Tipe Mesin</th>
+				<th>Jenis Perahu</th>
 			</tr>
 		</thead>
 		
@@ -54,11 +58,14 @@
 					<td>{{ $nel->nik }}</td>
 					<td>{{ $nel->no_kartu_nelayan }}</td>
 					<td>{{ $nel->name }}</td>
-					<td>{{ $nel->alamat }}</td>
 					<td>{{ $nel->erte }}</td>
-					<td>{{ $nel->tlp }}</td>
-					<td>{{ $nel->pos }}</td>
-					<td>{{ $nel->kelompok->nama }} ({{ $nel->jabatan->nama }})</td>
+					<td>{{ $nel->desa->nama }}</td>
+					<td>{{ $nel->desa->kecamatan->nama }}</td>
+					<?php $Ksarana = App\KepemilikanSarana::where('id_user', $nel->id)->get(); ?>
+					@foreach ( $Ksarana as $ks )
+					<td>{{ $ks->sarana->jenis }}</td>
+					<td>{{ $ks->sarana->sub }}</td> 
+					@endforeach
 				</tr>
 
 				<?php $i = $i + 1 ?>
