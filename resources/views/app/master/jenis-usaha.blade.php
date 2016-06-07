@@ -26,7 +26,7 @@
 								<a href="#">Master</a>
 							</li>
 							<li>
-								<a href="#" class="active">Jenis Produksi</a>
+								<a href="#" class="active">Jenis Usaha</a>
 							</li>
 						</ul>
 					</div>
@@ -62,20 +62,10 @@
 								</div>
 							</div>
 							<div class="panel-body">
-								<h5>Jenis Produksi</h5>
-								<p>* Jenis Produksi digunakan pada halaman pembudidaya dan nelayan.</p>
-								<form class="style-form" method="GET" action="{{ route('usaha_tambah') }}">
+								<h5>Jenis Usaha</h5>
+								<form class="style-form" method="GET" action="{{ route('jenis_usaha_tambah') }}">
 									<div class="form-group form-group-default required">
-										<label>Jenis Usaha Budidaya</label>
-										<select class="full-width" data-init-plugin="select2" name="jenis">
-											<?php $jenisUsaha = App\JenisUsaha::all() ?>
-											@foreach( $jenisUsaha as $ju )
-												<option value="{{ $ju->id }}">{{ $ju->nama }}</option>
-											@endforeach
-										</select>
-									</div>
-									<div class="form-group form-group-default required">
-										<label>Jenis Produksi</label>
+										<label>Nama Jenis Usaha</label>
 										<input type="text" name="nama" class="form-control" required>
 									</div>
 									<div class="form-group">
@@ -97,8 +87,7 @@
 											<th width="70">
 												<button class="btn btn-check" data-toggle="modal" data-target="#modal-hapus" disabled id="hapus"><i class="pg-trash"></i></button>
 											</th>
-											<th>Jenis Usaha Budidaya</th>
-											<th>Jenis Produksi</th>
+											<th>Jenis Usaha</th>
 											<th>Aksi</th>
 										</tr>
 									</thead>
@@ -107,11 +96,12 @@
 										<tr>
 											<td>
 											<?php $data_master = App\User::where('id_usaha', $us->id)->count(); ?>
+											<?php $data_master2 = App\Usaha::where('jenis_usaha', $us->id)->count(); ?>
 
 													<?php
 														$title = "";
 														$disabled = "";
-														if ( $data_master >= 1 ):
+														if ( $data_master + $data_master2 >= 1 ):
 															$title = "Usaha sedang terpakai";
 															$disabled = "disabled";
 														endif
@@ -121,9 +111,8 @@
 													<label for="checkbox{{ $us->id }}" class="m-l-20"></label>
 												</div>
 											</td>
-											<td>{{ $us->jenisusaha->nama }}</td>
 											<td>{{ $us->nama }}</td>
-											<td><button class="btn btn-default btn-xs btn-edit" data-namajenis="{{ $us->jenisusaha->nama }}" data-id="{{ $us->id }}" data-jenis="{{ $us->jenis_usaha }}" data-nama="{{ $us->nama }}"><i class="fa fa-pencil"></i></button></td>
+											<td><button class="btn btn-default btn-xs btn-edit" data-nama="{{ $us->nama }}" data-id="{{ $us->id }}"><i class="fa fa-pencil"></i></button></td>
 										</tr>
 										@endforeach
 									</tbody>
@@ -199,18 +188,9 @@
 					<h5>Sunting Data</h5>
 				</div>
 				<div class="modal-body">
-					<form class="style-form" method="GET" action="{{ route('usaha_update') }}">
-						<input type="hidden" name="_token" value="{{ csrf_token() }}">
+					<form class="style-form" method="GET" action="{{ route('jenis_usaha_update') }}">
 						<div class="form-group form-group-default required">
-							<label>Jenis Produksi</label>
-							<select class="full-width" data-init-plugin="select2" name="jenis" id="jenis">
-								@foreach( $jenisUsaha as $ju )
-									<option value="{{ $ju->id }}">{{ $ju->nama }}</option>
-								@endforeach
-							</select>
-						</div>
-						<div class="form-group form-group-default required">
-							<label>Nama Usaha</label>
+							<label>Nama Jenis Usaha</label>
 							<input type="text" id="nama" name="nama" class="form-control" required>
 						</div>
 						<div class="form-group">
@@ -235,7 +215,7 @@
 	<script>
 		$(".menu-items .link-master").addClass("active open");
 		$(".menu-items .link-master .sub-usaha").addClass("active open");
-		$(".menu-items .link-master .sub-usaha .sub-nama-usaha").addClass("active");
+		$(".menu-items .link-master .sub-usaha .sub-jenis").addClass("active");
 		
 		$(function(){
 
@@ -252,24 +232,15 @@
 					return false;
 				}
 
-				$(".btn-hapus").attr('href',"{{ route('usaha_hapus') }}/"+id);
+				$(".btn-hapus").attr('href',"{{ route('jenis_usaha_hapus') }}/"+id);
 			});
 			$(".btn-edit").click(function(){
 
 				var id = $(this).data('id');
 				var nama = $(this).data('nama');
-				var jenis = $(this).data('jenis');
-				var namajenis = $(this).data('namajenis');
 				$('#id-jenis').val(id);
 				$('#nama').val(nama);
 				$('#modal-sunting').modal('show');
-
-				$("select option").filter(function() {
-				    if( $(this).val().trim() == jenis ){
-				    	$(this).prop('selected', true);
-				    	$(".select2-chosen").html(namajenis);
-				    }
-				});
 			});
 		})();
 	</script>

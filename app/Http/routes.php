@@ -289,23 +289,23 @@
 				'getEdit' => 'desa_edit',
 			]);
 
-		Route::get('/app/master/bantuan', function () {
-			return view('app.master.bantuan');
-		});
+		// Route::get('/app/master/bantuan', function () {
+		// 	return view('app.master.bantuan');
+		// });
 	 
 
-		Route::get('/app/master/jabatan', function () {
-			return view('app.master.jabatan');
-		});
+		// Route::get('/app/master/jabatan', function () {
+		// 	return view('app.master.jabatan');
+		// });
 
-		Route::get('/app/master/jenis-usaha', function () {
-			return view('app.master.jenis-usaha');
-		});
+		// Route::get('/app/master/jenis-usaha', function () {
+		// 	return view('app.master.jenis-usaha');
+		// });
 
 
-		Route::get('/app/master/usaha', function () {
-			return view('app.master.usaha');
-		});
+		// Route::get('/app/master/usaha', function () {
+		// 	return view('app.master.usaha');
+		// });
 
 		Route::controller('/app/pengaturan', 'PengaturanController',
 			[
@@ -367,6 +367,13 @@
 				'getTambah' => 'usaha_tambah',
 				'getHapus'  => 'usaha_hapus',
 				'getUpdate'  => 'usaha_update',
+			]);
+		Route::controller('app/master/jenis-usaha', 'JenisUsahaController',
+			[
+				'getIndex'  => 'jenis_usaha',
+				'getTambah' => 'jenis_usaha_tambah',
+				'getHapus'  => 'jenis_usaha_hapus',
+				'getUpdate'  => 'jenis_usaha_update',
 			]);
 		Route::controller('app/master/sarana-pembudidaya', 'SaranaPembudidayaController',
 			[

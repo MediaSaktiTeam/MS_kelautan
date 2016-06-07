@@ -308,9 +308,20 @@
 							@endif
 
 							@if ( Permissions::pembudidaya() )
+
 								<li class="sub-usaha">
-									<a href="/app/master/usaha">Usaha</a>
+									<a href="javascript:;"><span class="title">Usaha</span><span class=" arrow"></span></a>
 									<span class="icon-thumbnail">U</span>
+									<ul class="sub-menu">
+										<li class="sub-jenis">
+											<a href="/app/master/jenis-usaha">Jenis Usaha</a>
+											<span class="icon-thumbnail">JU</span>
+										</li>
+										<li class="sub-nama-usaha">
+											<a href="/app/master/usaha">Usaha</a>
+											<span class="icon-thumbnail">U</span>
+										</li>
+									</ul>
 								</li>
 							@endif
 							<!-- <li class="sub-jabatan">
