@@ -455,33 +455,5 @@
 			}
 		}
 
-		$(function(){
-
-			$(".btn-edit").click(function(){
-
-				var id = $(this).data('id');
-				var provinsi = $(this).data('provinsi');
-				var kabupaten = $(this).data('kabupaten');
-				var kecamatan = $(this).data('kecamatan');
-				var desa = $(this).data('desa');
-				var areal = $(this).data('areal');
-				var tanam = $(this).data('tanam');
-				$('#id-airtawar').val(id);
-				$('#provinsi').val(provinsi);
-				$('#kabupaten').val(kabupaten);
-				$('#kecamatan').val(kecamatan);
-				$('#desa').val(desa);
-				$('#areal').val(areal);
-				$('#tanam').val(tanam);
-				$('#modal-sunting').modal('show');
-
-				$("select option").filter(function() {
-				    if( $(this).val().trim() == jenis ){
-				    	$(this).prop('selected', true);
-				    	$(".select2-chosen").html(jenis);
-				    }
-				});
-			});
-		})();
 	</script>
 @endsection

@@ -116,7 +116,7 @@ class BudidayaKolamAirtawarController extends Controller
 		return redirect()->route('kolamairtawar', $data)->with(session()->flash('success','Data Berhasil diupdate !!'));
 	}
 
-	public function getSearch(Request $r)
+	public function getCari(Request $r)
 	{
 		$data['kolamairtawar'] = KolamAirTawar::where('lokasi', 'LIKE', '%'.$r->cari.'%')->get();
 		return view('app.produksi-pembudidaya.budidaya-kolamairtawar.cari', $data);

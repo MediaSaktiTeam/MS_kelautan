@@ -196,18 +196,8 @@
 @section('registerscript')
 	<script>
 		$(".menu-items .link-pembudidaya").addClass("active open");
-		$(".menu-items .link-pembudidaya .sub-laporan-produksi").addClass("active");
-		$(".menu-items .link-pembudidaya .sub-laporan-produksi .sub-kolamairtawar").addClass("active");
-
-
-		function get_desa(id_kecamatan){
-			var _token = $('meta[name="csrf-token"]').attr('content');
-			var url = "{{ url('get-desa') }}";
-			var url = url+"/"+id_kecamatan;
-			$.get(url, { id_kecamatan:id_kecamatan, _token:_token}, function(data){
-				$('#desa').html(data);
-			});
-		}
+		$(".menu-items .link-pembudidaya .sub-produksi").addClass("active");
+		$(".menu-items .link-pembudidaya .sub-produksi .sub-kolamairtawar").addClass("active");
 
 		$(function(){
 
