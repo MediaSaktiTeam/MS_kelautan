@@ -170,6 +170,18 @@
 
 			]);
 
+		Route::controller('app/kjaairtawar', 'BudidayaKJAairTawarController', 
+			[
+
+				'getIndex' => 'kjaairtawar',
+				'getAdd'  => 'kjaairtawar_tambah',
+				'getEdit' => 'kjaairtawar_edit',
+				'getUpdate'  => 'kjaairtawar_update',
+				'getDelete' => 'kjaairtawar_hapus',
+				'getDetail'  => 'kjaairtawar_detail',
+
+			]);
+
 		Route::controller('app/airtawar', 'AirTawarController', 
 			[
 

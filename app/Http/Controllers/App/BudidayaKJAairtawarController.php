@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use DB,Excel,PDF;
-use App\User,App\KjaAirTawar,App\Laporan;
+use App\User,App\KjaAirtawar,App\Laporan;
 use App\Permissions;
 
 class BudidayaKJAairtawarController extends Controller
@@ -18,7 +18,7 @@ class BudidayaKJAairtawarController extends Controller
 
 		if ( !isset( $r->offset ) || !isset( $r->limit ) ) {
 
-			$sql = KjaAirTawar::orderBy('id', 'desc')->first();
+			$sql = KjaAirtawar::orderBy('id', 'desc')->first();
 
 			if ( $sql ) {
 			// Jika sudah ada pembudidaya
@@ -50,14 +50,14 @@ class BudidayaKJAairtawarController extends Controller
 
 	public function getDetail($id)
 	{
-		$data['kjaairtawar'] = KjaAirTawar::where('id',$id)->first();
+		$data['kjaairtawar'] = KjaAirtawar::where('id',$id)->first();
 
 		return view('app.produksi-pembudidaya.budidaya-kjaairtawar.detail', $data);
 	}
 
-	public function getTambah(Request $request)
+	public function getAdd(Request $request)
 	{
-		$dt = new KjaAirTawar;
+		$dt = new KjaAirtawar;
 		$dt->id = $request->id;
 		$dt->lokasi = $request->lokasi;
 		$dt->rtp = $request->rtp;
@@ -76,26 +76,26 @@ class BudidayaKJAairtawarController extends Controller
 		return redirect()->route('kjaairtawar')->with(session()->flash('success','Data Berhasil Tersimpan !!'));
 	}
 
-	public function getHapus($id){
+	public function getDelete($id){
 
 		$val = explode(",", $id);
 
 		foreach ($val as $value) {
-			KjaAirTawar::where('id', $value)->delete();           
+			KjaAirtawar::where('id', $value)->delete();           
 		}
 		return redirect()->route('kjaairtawar')->with(session()->flash('success','Data Berhasil Terhapus !!'));
 	}
 
 	public function getEdit($id)
 	{
-		$data['kjaairtawar'] = KjaAirTawar::find($id);
+		$data['kjaairtawar'] = KjaAirtawar::find($id);
 		return view('app.produksi-pembudidaya.budidaya-kjaairtawar.update', $data);
 	}
 
 	public function getUpdate(Request $request)
 	{
 
-		$dt = KjaAirTawar::find($request->id);
+		$dt = KjaAirtawar::find($request->id);
 		$dt->id = $request->id;
 		$dt->lokasi = $request->lokasi;
 		$dt->rtp = $request->rtp;
@@ -111,35 +111,24 @@ class BudidayaKJAairtawarController extends Controller
 		$dt->produksi_lainnya = $request->produksi_lainnya;
 		$dt->keterangan = $request->keterangan;
 		$dt->save();
-		$data['kjaairtawar'] = KjaAirTawar::paginate(1);
+		$data['kjaairtawar'] = kjaAirTawar::paginate(1);
 
 		return redirect()->route('kjaairtawar', $data)->with(session()->flash('success','Data Berhasil diupdate !!'));
 	}
 
-	public function getCari($cari = NULL)
+	public function getCari(Request $r)
 	{
-		$data['kjaairtawar'] = DB::table('app_kolam_air_tawar')
-									->leftJoin('kecamatan', 'app_kolam_air_tawar.kecamatan', '=', 'kecamatan.id')
-									->leftJoin('desa', 'app_kolam_air_tawar.desa', '=', 'desa.id')
-										->select(
-											'kecamatan.nama as nama_kecamatan',
-											'app_kolam_air_tawar.*',
-											'desa.nama as nama_desa')
-												->where(function($query) use ($cari) {
-													$query->where('kecamatan.nama','LIKE', '%'.$cari.'%')
-															->orWhere('desa.nama','LIKE', '%'.$cari.'%');
-												})
-									->take(40)->get();
+		$data['kjaairtawar'] = KjaAirTawar::where('lokasi', 'LIKE', '%'.$r->cari.'%')->get();
 		return view('app.produksi-pembudidaya.budidaya-kjaairtawar.cari', $data);
 	}
 
 	public function getExportExcel(Request $r)
 	{
-		$data['kjaairtawar'] = KjaAirTawar::whereBetween('created_at', [ $r->offset, $r->limit ])->get();
+		$data['kjaairtawar'] = KjaAirtawar::whereBetween('created_at', [ $r->offset, $r->limit ])->get();
 
         Excel::create('Data kjaairtawar');
 
-        Excel::create('Data KjaAirTawar', function($excel) use($data)
+        Excel::create('Data kjaairtawar', function($excel) use($data)
         {
             
             $excel->sheet('New sheet', function($sheet) use($data)
@@ -151,11 +140,11 @@ class BudidayaKJAairtawarController extends Controller
 
 	public function getExportPdf(Request $r)
 	{
-		$data['kjaairtawar'] = KjaAirTawar::whereBetween('created_at', [ $r->offset, $r->limit ])->get();
+		$data['kjaairtawar'] = KjaAirtawar::whereBetween('created_at', [ $r->offset, $r->limit ])->get();
 		$data['tgl_awal']		= $r->offset;
 		$data['tgl_akhir']		= $r->limit;
         $pdf = PDF::loadView('app.produksi-pembudidaya.budidaya-kjaairtawar.export-pdf', $data);
-        return $pdf->setPaper('legal')->setOrientation('landscape')->setWarnings(false)->download('Data KjaAirTawar.pdf');
+        return $pdf->setPaper('legal')->setOrientation('landscape')->setWarnings(false)->download('Data kjaAirtawar.pdf');
 	}
 
 }
