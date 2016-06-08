@@ -71,10 +71,35 @@
 								</li>
 								
 								<li class="sub-produksi">
-									<a href="/app/produksi?offset={{ $offset }}&limit={{ $limit }}&pr={{ $Ms->enk('Pembudidaya') }}">Produksi</a>
+									<a href="javascript:;">Produksi <span class=" arrow"></span></a>
 									<span class="icon-thumbnail">PR</span>
+									<ul class="sub-menu">
+										<li class="sub-produksi-produksi">
+											<a href="/app/produksi?offset={{ $offset }}&limit={{ $limit }}&pr={{ $Ms->enk('Pembudidaya') }}">Produksi</a>
+											<span class="icon-thumbnail">P</span>
+										</li>
+										<li class="sub-rumput-laut">
+											<a href="/app/rumput-laut">Rumput Laut</a>
+											<span class="icon-thumbnail">RL</span>
+										</li>
+										<li class="sub-kja-airlaut">
+											<a href="/app/kja-airlaut">KJA air laut</a>
+											<span class="icon-thumbnail">KL</span>
+										</li>
+										<li class="sub-kolam-airtawar">
+											<a href="/app/kolam-airtawar">Kolam air tawar</a>
+											<span class="icon-thumbnail">KT</span>
+										</li>
+										<li class="sub-kja-airtawar">
+											<a href="/app/kja-airtawar">KJA air tawar</a>
+											<span class="icon-thumbnail">KAT</span>
+										</li>
+										<li class="sub-airpayau">
+											<a href="/app/air-payau">Air payau</a>
+											<span class="icon-thumbnail">AP</span>
+										</li>
+									</ul>
 								</li>
-								<li class="sub-pemasar">
 
 								<li class="sub-laporan-produksi">
 									<a href="javascript:;">Laporan Produksi <span class=" arrow"></span></a>
