@@ -27,7 +27,7 @@
 							</li>
 						</ul>
 						
-						<button id="show-tambah-pemasar" class="btn btn-primary bg-blueblur m-t-10 m-b-10 pull-right">Tambah</button>
+						<button id="show-tambah-kolamairtawar" class="btn btn-primary bg-blueblur m-t-10 m-b-10 pull-right">Tambah</button>
 					</div>
 				</div>
 
@@ -40,13 +40,13 @@
 
 					<div class="row">
 
-						<div id="tambah-pemasar" style="display:none">
+						<div id="tambah-kolamairtawar" style="display:none">
 							<div class="col-lg-7 col-md-6 ">
 
 								<!-- START PANEL -->
 								<div class="panel panel-transparent">
 									<div class="panel-body">
-										<form id="form-personal" method="GET" action="{{ route('air_tawar_tambah') }}" role="form">
+										<form id="form-personal" method="GET" action="{{ route('kolamairtawar_tambah') }}" role="form">
 											
 											<input type="hidden" id="token" name="_token" value="{{ csrf_token() }}">
 											<label><b>KETERANGAN PRODUKSI</b></label>
@@ -54,10 +54,18 @@
 												<div class="col-md-4">
 													<label>Lokasi</label>
 													<div class="form-group input-group">
-														<input type="text" name="lokasi" value="{{ Input::old('lokasi') }}" class="form-control" placeholder="Jumlah" required="">
-														<span class="input-group-addon">Lokasi</span>
+														<input type="text" name="lokasi" value="{{ Input::old('lokasi') }}" class="form-control" placeholder="Lokasi" required="">
 													</div>
 												</div>
+												<div class="col-md-4">
+													<label>Potensi</label>
+													<div class="form-group input-group">
+														<input type="number" name="potensi" value="{{ Input::old('potensi') }}" class="form-control" placeholder="Jumlah" required="">
+														<span class="input-group-addon">Ha</span>
+													</div>
+												</div>
+											</div>
+											<div class="row">
 												<div class="col-md-4">
 													<label>Petani/RTP</label>
 													<div class="form-group input-group">
@@ -166,7 +174,7 @@
 							<div class="panel panel-default">
 								<div class="panel-body">
 									<div class="">
-										<form action="{{ url('/app/airtawar') }}">
+										<form action="{{ url('/app/kolamairtawar') }}">
 											<div class="col-md-4">
 												<div class="input-group">
 													<input type="date" class="form-control" name="offset" value="{{ $_GET['offset'] }}"/>
@@ -197,16 +205,28 @@
 											<table class="table table-hover demo-table-dynamic custom">
 												<thead>
 													<tr>
-														<th>
+														<th rowspan="2">
 															<button class="btn btn-check" data-toggle="modal" data-target="#modal-hapus" disabled id="hapus"><i class="pg-trash"></i></button>
 														</th>
-														<th>No.</th>
-														<th>Kecamatan</th>
-														<th>Desa</th>
-														<th>Petani/RTP</th>
-														<th>Luas Areal (Ha)</th>
-														<th>Luas Tanam (Ha)</th>
-														<th style="text-align:center">Aksi</th>
+														<th style="font-size: 11px;" rowspan="2">No.</th>
+														<th style="font-size: 11px;" rowspan="2">Lokasi</th>
+														<th style="font-size: 11px;" rowspan="2">Jumlah RTP</th>
+														<th style="font-size: 11px;" rowspan="2">Potensi</th>
+														<th style="font-size: 11px;" rowspan="2">Luas Tanam</th>
+														<th style="font-size: 11px;text-align: center;" colspan="4">Jumlah Bibit</th>
+														<th style="font-size: 11px;text-align: center;" colspan="4">Produksi</th>
+														<th style="font-size: 11px;" rowspan="2">Keterangan</th>
+														<th style="font-size: 11px;" rowspan="2" style="text-align:center">Aksi</th>
+													</tr>
+													<tr>
+														<th style="font-size: 10px;">Nila</th>
+														<th style="font-size: 10px;">Lele</th>
+														<th style="font-size: 10px;">Udang</th>
+														<th style="font-size: 10px;">Ikan lainnya</th>
+														<th style="font-size: 10px;">Nila</th>
+														<th style="font-size: 10px;">Lele</th>
+														<th style="font-size: 10px;">Udang</th>
+														<th style="font-size: 10px;">Ikan lainnya</th>
 													</tr>
 												</thead>
 												@if ( Session::has('success') ) 
@@ -230,11 +250,8 @@
 															$i = 1;
 														}
 
-														$jumlahrtp = "";
-														$luas_areal = "";
-														$luas_tanam = "";
 													?>
-													@foreach($airtawar as $at)
+													@foreach($kolamairtawar as $at)
 														<tr>
 															<td>
 																<div class="checkbox">
@@ -242,42 +259,33 @@
 																	<label for="at{{ $at->id }}" class="m-l-20"></label>
 																</div>
 															</td>
-															<td>{{ $i++ }}</td>
-															<td>{{ $at->datakecamatan->nama }}</td>
-															<td>{{ $at->datadesa->nama }}</td>
-															<td>{{ $at->rtp }}</td>
-															<td>{{ $at->luas_areal }} Ha</td>
-															<td>{{ $at->luas_tanam }} Ha</td>
+															<td style="font-size: 10px;">{{ $i++ }}</td>
+															<td style="font-size: 10px;">{{ $at->lokasi }}</td>
+															<td style="font-size: 10px;">{{ $at->rtp }}</td>
+															<td style="font-size: 10px;">{{ $at->potensi }}</td>
+															<td style="font-size: 10px;">{{ $at->luas_tanam }}</td>
+															<td style="font-size: 10px;">{{ $at->jumlah_bibit }}</td>
+															<td style="font-size: 10px;">{{ $at->bibit_nila }}</td>
+															<td style="font-size: 10px;">{{ $at->bibit_lele }}</td>
+															<td style="font-size: 10px;">{{ $at->bibit_udang }}</td>
+															<td style="font-size: 10px;">{{ $at->bibit_lainnya }}</td>
+															<td style="font-size: 10px;">{{ $at->produksi_nila }}</td>
+															<td style="font-size: 10px;">{{ $at->produksi_lele }}</td>
+															<td style="font-size: 10px;">{{ $at->produksi_udang }}</td>
+															<td style="font-size: 10px;">{{ $at->produksi_lainnya }}</td>
+															<td style="font-size: 10px;">{{ $at->keterangan }}</td>
 															<td style="text-align:center">
 																<a class="btn btn-default btn-xs view" data-id="{{ $at->id }}"><i class="fa fa-search-plus"></i></a>
 																<a href="{{ route('kolamairtawar_edit',$at->id) }}" class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i></a>
 															</td>
 		
 														</tr>
-														<?php 
-															$jumlahrtp += $at->rtp;
-															$luas_areal += $at->luas_areal;
-															$luas_tanam += $at->luas_tanam;
-														?>
 													@endforeach
-														<tr>
-															<td><b>Jumlah</b></td>
-															<td></td>
-															<td></td>
-															<td></td>
-															<td><b><?php echo round($jumlahrtp,2); ?></b></td>
-															<td><b><?php echo round($luas_areal,2); ?> Ha</b></td>
-															<td><b><?php echo round($luas_tanam,2); ?> Ha</b></td>
-															<td></td>
-														</tr>
-														
-														
-
 
 												</tbody>
 
 											</table>
-											<center>{!! $airtawar->appends([ 'offset' => $_GET['offset'], 'limit' => $_GET['limit'] ])->links() !!}</center>
+											<center>{!! $kolamairtawar->appends([ 'offset' => $_GET['offset'], 'limit' => $_GET['limit'] ])->links() !!}</center>
 										</div>
 
 									</div>
@@ -380,63 +388,15 @@
 	<!-- /.modal-dialog -->
 </div>
 <!-- END MODAL STICK UP SMALL ALERT -->
-
-@if ( Session::has('error_nik') )
-
-	<!-- MODAL STICK UP VIEW -->
-	<div class="modal fade stick-up" id="modal-double-nik" tabindex="-1" role="dialog" aria-hidden="true">
-		<div class="modal-dialog modal-md">
-			<div class="modal-content-wrapper">
-				<div class="modal-content">
-					<div class="modal-header clearfix text-left">
-						<button type="button" class="close" data-dismiss="modal"  aria-hidden="true"><i class="pg-close fs-14"></i></button>
-						<h5>Data</h5>
-					</div>
-					<div class="modal-body" id="view-detail">
-						<table class="table">
-							<tr>
-								<td style="width:100px">NIK</td><td>: {{ $user->nik }}</td>
-							</tr>
-							<tr>
-								<td style="width:100px">Nama</td><td>: {{ $user->name }}</td>
-							</tr>
-							<tr>
-								<td style="width:100px">Kelompok</td><td>: {{ $user->kelompok->nama }}</td>
-							</tr>
-							<tr>
-								<td style="width:100px">Profesi</td><td>: {{ $user->profesi }}</td>
-							</tr>
-						</table>
-					</div>
-					<div class="modal-footer">
-						<button type="button" class="btn btn-default btn-cons no-margin inline" data-dismiss="modal">Kembali</button>
-					</div>
-				</div>
-			</div>
-			<!-- /.modal-content -->
-		</div>
-		<!-- /.modal-dialog -->
-	</div>
-
-@endif
-
 @endsection
 
 
 @section('registerscript')
 	<script>
 		$(".menu-items .link-pembudidaya").addClass("active open");
-		$(".menu-items .link-pembudidaya .sub-laporan-produksi").addClass("active");
-		$(".menu-items .link-pembudidaya .sub-laporan-produksi .sub-airtawar").addClass("active");
+		$(".menu-items .link-pembudidaya .sub-produksi").addClass("active");
+		$(".menu-items .link-pembudidaya .sub-produksi .sub-kolamairtawar").addClass("active");
 
-		function get_desa(id_kecamatan){
-			var _token = $('meta[name="csrf-token"]').attr('content');
-			var url = "{{ url('get-desa') }}";
-			var url = url+"/"+id_kecamatan;
-			$.get(url, { id_kecamatan:id_kecamatan, _token:_token}, function(data){
-				$('#desa').html(data);
-			});
-		}
 
 		$(function(){
 
@@ -454,20 +414,20 @@
 		        else {
 				  return false;
 		        }
-		        $(".btn-hapus").attr('href',"{{ url('/app/airtawar/hapus') }}/"+id);
+		        $(".btn-hapus").attr('href',"{{ url('/app/kolamairtawar/hapus') }}/"+id);
 
 			});
 
-			$("#show-tambah-pemasar").click(function(){
-				$("#tambah-pemasar").fadeIn();
-				$("input[name='nik']").focus();
+			$("#show-tambah-kolamairtawar").click(function(){
+				$("#tambah-kolamairtawar").fadeIn();
+				$("input[name='lokasi']").focus();
 				$(this).hide();
 			});
 
 			// Show detail
 			$(".panel").on('click', '.view', function(){
 				var id = $(this).data('id');
-				var url = "{{ url('app/airtawar/detail') }}";
+				var url = "{{ url('app/kolamairtawar/detail') }}";
 				var url = url+'/'+id;
 				$.get(url, {id:id, _token:_token}, function(data){
 					$("#view-detail").html(data);
@@ -476,7 +436,7 @@
 			});
 
 			@if ( count($errors) > 0 || Session::has('gagal') || Session::has('error_nik') )
-				$("#tambah-pemasar").fadeIn();
+				$("#tambah-kolamairtawar").fadeIn();
 			@endif
 
 		});

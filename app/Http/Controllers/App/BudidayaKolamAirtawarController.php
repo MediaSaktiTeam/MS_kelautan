@@ -39,10 +39,10 @@ class BudidayaKolamAirtawarController extends Controller
 				$limit = date("Y-m-d", $limit);
 			}
 
-			 return redirect( '/app/KolamAirtawar?offset='.$offset.'&limit='.$limit );
+			 return redirect( '/app/kolamairtawar?offset='.$offset.'&limit='.$limit );
 		}
 		$limit = 10;
-		$data['kolamairtawar'] = KolamAirtawar::whereBetween('created_at', [ $r->offset, $r->limit ])
+		$data['kolamairtawar'] = KolamAirTawar::whereBetween('created_at', [ $r->offset, $r->limit ])
 									->paginate($limit);
 
 		return view ('app.produksi-pembudidaya.budidaya-kolamairtawar.index',$data)->with('limit', $limit);
@@ -55,7 +55,7 @@ class BudidayaKolamAirtawarController extends Controller
 		return view('app.produksi-pembudidaya.budidaya-kolamairtawar.detail', $data);
 	}
 
-	public function getTambah(Request $request)
+	public function getAdd(Request $request)
 	{
 		$dt = new KolamAirtawar;
 		$dt->id = $request->id;
@@ -73,10 +73,10 @@ class BudidayaKolamAirtawarController extends Controller
 		$dt->produksi_lainnya = $request->produksi_lainnya;
 		$dt->keterangan = $request->keterangan;
 		$dt->save();
-		return redirect()->route('KolamAirtawar')->with(session()->flash('success','Data Berhasil Tersimpan !!'));
+		return redirect()->route('kolamairtawar')->with(session()->flash('success','Data Berhasil Tersimpan !!'));
 	}
 
-	public function getHapus($id){
+	public function getDelete($id){
 
 		$val = explode(",", $id);
 
@@ -116,7 +116,7 @@ class BudidayaKolamAirtawarController extends Controller
 		return redirect()->route('KolamAirtawar', $data)->with(session()->flash('success','Data Berhasil diupdate !!'));
 	}
 
-	public function getCari($cari = NULL)
+	public function getSearch($cari = NULL)
 	{
 		$data['KolamAirtawar'] = DB::table('app_kolam_air_tawar')
 									->leftJoin('kecamatan', 'app_kolam_air_tawar.kecamatan', '=', 'kecamatan.id')

@@ -158,6 +158,17 @@
 		Route::get('get-kecamatan/{id}', 'LokasiController@get_kecamatan');
 		Route::get('get-desa/{id}', 'LokasiController@get_desa');
 
+		Route::controller('app/kolamairtawar', 'BudidayaKolamAirTawarController', 
+			[
+
+				'getIndex' => 'kolamairtawar',
+				'getAdd'  => 'kolamairtawar_tambah',
+				'getEdit' => 'kolamairtawar_edit',
+				'getUpdate'  => 'kolamairtawar_update',
+				'getDelete' => 'kolamairtawar_hapus',
+				'getDetail'  => 'kolamairtawar_detail',
+
+			]);
 
 		Route::controller('app/airtawar', 'AirTawarController', 
 			[
