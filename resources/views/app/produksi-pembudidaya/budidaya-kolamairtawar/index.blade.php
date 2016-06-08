@@ -364,13 +364,13 @@
 				<div class="modal-body">
 					<div class="row">
 						<div class="col-md-6">
-							<a href="{{ url('/app/airtawar/export-excel?offset='.$_GET['offset'].'&limit='.$_GET['limit']) }}">
+							<a href="{{ url('/app/kolamairtawar/export-excel?offset='.$_GET['offset'].'&limit='.$_GET['limit']) }}">
 								<i class="fa fa-file-excel-o export-excel"></i>
 								Unduh Dalam Format Mic.Excel
 							</a>
 						</div>
 						<div class="col-md-6">
-							<a href="{{ url('/app/airtawar/export-pdf?offset='.$_GET['offset'].'&limit='.$_GET['limit']) }}">
+							<a href="{{ url('/app/kolamairtawar/export-pdf?offset='.$_GET['offset'].'&limit='.$_GET['limit']) }}">
 								<i class="fa fa-file-pdf-o export-pdf"></i>
 								Unduh Dalam Format PDF
 							</a>
@@ -410,7 +410,7 @@
 		        else {
 				  return false;
 		        }
-		        $(".btn-hapus").attr('href',"{{ url('/app/kolamairtawar/hapus') }}/"+id);
+		        $(".btn-hapus").attr('href',"{{ route('kolamairtawar_hapus') }}/"+id);
 
 			});
 

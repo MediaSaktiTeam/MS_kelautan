@@ -83,7 +83,7 @@ class BudidayaKolamAirtawarController extends Controller
 		foreach ($val as $value) {
 			KolamAirtawar::where('id', $value)->delete();           
 		}
-		return redirect()->route('KolamAirtawar')->with(session()->flash('success','Data Berhasil Terhapus !!'));
+		return redirect()->route('kolamairtawar')->with(session()->flash('success','Data Berhasil Terhapus !!'));
 	}
 
 	public function getEdit($id)
@@ -124,7 +124,7 @@ class BudidayaKolamAirtawarController extends Controller
 
 	public function getExportExcel(Request $r)
 	{
-		$data['kolaairtawar'] = KolamAirtawar::whereBetween('created_at', [ $r->offset, $r->limit ])->get();
+		$data['kolamairtawar'] = KolamAirtawar::whereBetween('created_at', [ $r->offset, $r->limit ])->get();
 
         Excel::create('Data kolamairtawar');
 
