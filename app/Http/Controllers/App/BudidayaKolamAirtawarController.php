@@ -88,7 +88,7 @@ class BudidayaKolamAirtawarController extends Controller
 
 	public function getEdit($id)
 	{
-		$data['KolamAirtawar'] = KolamAirtawar::find($id);
+		$data['kolamairtawar'] = KolamAirtawar::find($id);
 		return view('app.produksi-pembudidaya.budidaya-kolamairtawar.update', $data);
 	}
 
@@ -111,35 +111,24 @@ class BudidayaKolamAirtawarController extends Controller
 		$dt->produksi_lainnya = $request->produksi_lainnya;
 		$dt->keterangan = $request->keterangan;
 		$dt->save();
-		$data['KolamAirtawar'] = KolamAirtawar::paginate(1);
+		$data['kolamairtawar'] = KolamAirTawar::paginate(1);
 
-		return redirect()->route('KolamAirtawar', $data)->with(session()->flash('success','Data Berhasil diupdate !!'));
+		return redirect()->route('kolamairtawar', $data)->with(session()->flash('success','Data Berhasil diupdate !!'));
 	}
 
-	public function getSearch($cari = NULL)
+	public function getSearch(Request $r)
 	{
-		$data['KolamAirtawar'] = DB::table('app_kolam_air_tawar')
-									->leftJoin('kecamatan', 'app_kolam_air_tawar.kecamatan', '=', 'kecamatan.id')
-									->leftJoin('desa', 'app_kolam_air_tawar.desa', '=', 'desa.id')
-										->select(
-											'kecamatan.nama as nama_kecamatan',
-											'app_kolam_air_tawar.*',
-											'desa.nama as nama_desa')
-												->where(function($query) use ($cari) {
-													$query->where('kecamatan.nama','LIKE', '%'.$cari.'%')
-															->orWhere('desa.nama','LIKE', '%'.$cari.'%');
-												})
-									->take(40)->get();
+		$data['kolamairtawar'] = KolamAirTawar::where('lokasi', 'LIKE', '%'.$r->cari.'%')->get();
 		return view('app.produksi-pembudidaya.budidaya-kolamairtawar.cari', $data);
 	}
 
 	public function getExportExcel(Request $r)
 	{
-		$data['KolamAirtawar'] = KolamAirtawar::whereBetween('created_at', [ $r->offset, $r->limit ])->get();
+		$data['kolaairtawar'] = KolamAirtawar::whereBetween('created_at', [ $r->offset, $r->limit ])->get();
 
-        Excel::create('Data KolamAirtawar');
+        Excel::create('Data kolamairtawar');
 
-        Excel::create('Data KolamAirtawar', function($excel) use($data)
+        Excel::create('Data kolamairtawar', function($excel) use($data)
         {
             
             $excel->sheet('New sheet', function($sheet) use($data)
@@ -151,7 +140,7 @@ class BudidayaKolamAirtawarController extends Controller
 
 	public function getExportPdf(Request $r)
 	{
-		$data['KolamAirtawar'] = KolamAirtawar::whereBetween('created_at', [ $r->offset, $r->limit ])->get();
+		$data['kolamairtawar'] = KolamAirtawar::whereBetween('created_at', [ $r->offset, $r->limit ])->get();
 		$data['tgl_awal']		= $r->offset;
 		$data['tgl_akhir']		= $r->limit;
         $pdf = PDF::loadView('app.produksi-pembudidaya.budidaya-kolamairtawar.export-pdf', $data);

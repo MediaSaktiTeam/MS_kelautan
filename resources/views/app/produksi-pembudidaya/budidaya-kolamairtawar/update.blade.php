@@ -1,7 +1,7 @@
 @extends('app.layout.main')
 
 @section('title')
-	Produksi Air Tawar
+	Produksi Kolam Air Tawar
 @endsection
 
 
@@ -23,10 +23,10 @@
 						<!-- START BREADCRUMB -->
 						<ul class="breadcrumb pull-left">
 							<li>
-								<a href="{{ route('airtawar') }}">Air Tawar</a>
+								<a href="{{ route('kolamairtawar') }}">Kolam Air Tawar</a>
 							</li>
 							<li>
-								<a href="#" class="active">Sunting Air Tawar</a>
+								<a href="#" class="active">Sunting Kolam Air Tawar</a>
 							</li>
 						</ul>
 						
@@ -42,138 +42,107 @@
 
 					<div class="row">
 
-						<div id="edit-airtawar">
+						<div id="edit-kolamairtawar">
 							<div class="col-lg-7 col-md-6 ">
 
 								<!-- START PANEL -->
 								<div class="panel panel-transparent">
 									<div class="panel-body">
-										<form id="form-personal" method="GET" action="{{ route('airtawar_update') }}" role="form">
-											
-												<?php $provinsi = App\Provinsi::get() ?>
-												@foreach ( $provinsi as $prov )
-													<input type="hidden" name="provinsi" value="{{ $prov->id }}">
-												@endforeach
+										<form id="form-personal" method="GET" action="{{ route('kolamairtawar_update') }}" role="form">
 
-												<?php $kabupaten = App\Kabupaten::get() ?>
-												@foreach ( $kabupaten as $kab )
-													<input type="hidden" name="kabupaten" value="{{ $kab->id }}">
-												@endforeach
-
-											<label><b>KETERANGAN IDENTITAS</b></label>
+											<label><b>KETERANGAN PRODUKSI</b></label>
 											<div class="row">
 												<div class="col-md-6">
-													<label>Kecamatan</label>
+													<label>Lokasi</label>
 													<div class="form-group">
-														<div id="kecamatan">
-															<select class="full-width" data-init-plugin="select2" onchange="get_desa(this.value)" name="kecamatan" required>
-																<?php $kecamatan = App\Kecamatan::get() ?>
-																@foreach ( $kecamatan as $kec )
-																	<option value="{{ $kec->id }}" {{ $kec->id == $airtawar->kecamatan ? "selected":"" }}>{{ $kec->nama }}</option>
-																@endforeach
-
-															</select>
-														</div>
+														<input type="text" name="lokasi" value="{{ $kolamairtawar->lokasi }}" class="form-control" placeholder="Lokasi" required="">
 													</div>
 												</div>
-												<div class="col-sm-6">
-													<label>Desa/Kelurahan</label>
-													<div class="form-group">
-														<span id="desa">
-														<select class="full-width" name="desa" data-init-plugin="select2" required>
-															<option value="{{ $airtawar->desa }}" {{ Input::old('desa') == $airtawar->desa ? "selected":"" }}>{{ $airtawar->datadesa->nama }}</option>
-														</select>
-														</span>
+												<div class="col-md-6">
+													<label>Potensi</label>
+													<div class="form-group input-group">
+														<input type="number" name="potensi" value="{{ $kolamairtawar->potensi }}" class="form-control" placeholder="Jumlah" required="">
+														<span class="input-group-addon">Ha</span>
 													</div>
 												</div>
 											</div>
-
-											<hr>
-											<label><b>KETERANGAN PRODUKSI</b></label>
 											<div class="row">
-												<div class="col-md-4">
-														<label>Petani/RTP</label>
+												<div class="col-md-6">
+													<label>Petani/RTP</label>
 													<div class="form-group input-group">
-														<input type="number" name="rtp" value="{{ $airtawar->rtp }}" class="form-control" placeholder="Jumlah" required="">
+														<input type="number" name="rtp" value="{{ $kolamairtawar->rtp }}" class="form-control" placeholder="Jumlah" required="">
 														<span class="input-group-addon">RTP</span>
 													</div>
 												</div>
-												<div class="col-md-4">
-														<label>Luas Areal</label>
+												<div class="col-md-6">
+													<label>Luas Tanam</label>
 													<div class="form-group input-group">
-														<input type="number" name="luas_areal" value="{{ $airtawar->luas_areal }}" class="form-control" placeholder="Luas" required="">
-														<span class="input-group-addon">Ha</span>
-													</div>
-												</div>
-												<div class="col-md-4">
-														<label>Luas Tanam</label>
-													<div class="form-group input-group">
-														<input type="number" name="luas_tanam" value="{{ $airtawar->luas_tanam }}" class="form-control" placeholder="Luas" required="">
+														<input type="number" name="luas_tanam" value="{{ $kolamairtawar->luas_tanam }}" class="form-control" placeholder="Luas" required="">
 														<span class="input-group-addon">Ha</span>
 													</div>
 												</div>
 											</div>
 
 											<hr>
-											<label><b>PENEBARAN</b></label>
+											<label><b>Bibit</b></label>
 											<div class="row">
 												<div class="col-md-3">
-														<label>MAS</label>
+														<label>Nila</label>
 													<div class="form-group input-group">
-														<input type="number" name="penebaran_mas" value="{{ $airtawar->penebaran_mas }}" class="form-control" placeholder="Jumlah" required="">
+														<input type="number" name="bibit_nila" value="{{ $kolamairtawar->bibit_nila }}" class="form-control" placeholder="Jumlah" required="">
 														<span class="input-group-addon">Ekor</span>
 													</div>
 												</div>
 												<div class="col-md-3">
-														<label>NILA</label>
+														<label>Lele</label>
 													<div class="form-group input-group">
-														<input type="number" name="penebaran_nila" value="{{ $airtawar->penebaran_nila }}" class="form-control" placeholder="Jumlah" required="">
+														<input type="number" name="bibit_lele" value="{{ $kolamairtawar->bibit_lele }}" class="form-control" placeholder="Jumlah" required="">
 														<span class="input-group-addon">Ekor</span>
 													</div>
 												</div>
 												<div class="col-md-3">
-														<label>LELE</label>
+														<label>Udang</label>
 													<div class="form-group input-group">
-														<input type="number" name="penebaran_lele" value="{{ $airtawar->penebaran_lele }}" class="form-control" placeholder="Jumlah" required="">
+														<input type="number" name="bibit_udang" value="{{ $kolamairtawar->bibit_udang }}" class="form-control" placeholder="Jumlah" required="">
 														<span class="input-group-addon">Ekor</span>
 													</div>
 												</div>
 												<div class="col-md-3">
-														<label>BAWAL</label>
+														<label>Bibit Lainnya</label>
 													<div class="form-group input-group">
-														<input type="number" name="penebaran_bawal" value="{{ $airtawar->penebaran_bawal }}" class="form-control" placeholder="Jumlah" required="">
+														<input type="number" name="bibit_lainnya" value="{{ $kolamairtawar->bibit_lainnya }}" class="form-control" placeholder="Jumlah" required="">
 														<span class="input-group-addon">Ekor</span>
 													</div>
 												</div>
 											</div>
 											<hr>
-											<label><b>JUMLAH HIDUP</b></label>
+											<label><b>Produksi</b></label>
 											<div class="row">
 												<div class="col-md-3">
-														<label>MAS</label>
+														<label>Nila</label>
 													<div class="form-group input-group">
-														<input type="number" name="jumlah_hidup_mas" value="{{ $airtawar->jumlah_hidup_mas }}" class="form-control" placeholder="Jumlah" required="">
+														<input type="number" name="produksi_nila" value="{{ $kolamairtawar->produksi_nila }}" class="form-control" placeholder="Jumlah" required="">
 														<span class="input-group-addon">Ekor</span>
 													</div>
 												</div>
 												<div class="col-md-3">
-														<label>NILA</label>
+														<label>Lele</label>
 													<div class="form-group input-group">
-														<input type="number" name="jumlah_hidup_nila" value="{{ $airtawar->jumlah_hidup_nila }}" class="form-control" placeholder="Jumlah" required="">
+														<input type="number" name="produksi_lele" value="{{ $kolamairtawar->produksi_lele }}" class="form-control" placeholder="Jumlah" required="">
 														<span class="input-group-addon">Ekor</span>
 													</div>
 												</div>
 												<div class="col-md-3">
-														<label>LELE</label>
+														<label>Udang</label>
 													<div class="form-group input-group">
-														<input type="number" name="jumlah_hidup_lele" value="{{ $airtawar->jumlah_hidup_lele }}" class="form-control" placeholder="Jumlah" required="">
+														<input type="number" name="produksi_udang" value="{{ $kolamairtawar->produksi_udang }}" class="form-control" placeholder="Jumlah" required="">
 														<span class="input-group-addon">Ekor</span>
 													</div>
 												</div>
 												<div class="col-md-3">
-														<label>BAWAL</label>
+														<label>Produksi Lainnya</label>
 													<div class="form-group input-group">
-														<input type="number" name="jumlah_hidup_bawal" value="{{ $airtawar->jumlah_hidup_bawal }}" class="form-control" placeholder="Jumlah" required="">
+														<input type="number" name="produksi_lainnya" value="{{ $kolamairtawar->produksi_lainnya }}" class="form-control" placeholder="Jumlah" required="">
 														<span class="input-group-addon">Ekor</span>
 													</div>
 												</div>
@@ -183,11 +152,11 @@
 											<div class="row">
 												<div class="col-md-12">
 													<div class="form-group">
-														<textarea name="keterangan" cols="30" rows="10" class="form-control" required="">{{ $airtawar->keterangan }}</textarea>
+														<textarea name="keterangan" id="" cols="30" rows="10" class="form-control" required="">{{ $kolamairtawar->keterangan }}</textarea>
 													</div>
 												</div>
 											</div>
-											<input type="hidden" id="id-airtawar" name="id" value="{{ $airtawar->id }}">
+											<input type="hidden" id="id-kolamairtawar" name="id" value="{{ $kolamairtawar->id }}">
 
 			
 											
@@ -228,7 +197,7 @@
 	<script>
 		$(".menu-items .link-pembudidaya").addClass("active open");
 		$(".menu-items .link-pembudidaya .sub-laporan-produksi").addClass("active");
-		$(".menu-items .link-pembudidaya .sub-laporan-produksi .sub-airtawar").addClass("active");
+		$(".menu-items .link-pembudidaya .sub-laporan-produksi .sub-kolamairtawar").addClass("active");
 
 
 		function get_desa(id_kecamatan){
@@ -312,7 +281,7 @@
 				var desa = $(this).data('desa');
 				var areal = $(this).data('areal');
 				var tanam = $(this).data('tanam');
-				$('#id-airtawar').val(id);
+				$('#id-kolamairtawar').val(id);
 				$('#provinsi').val(provinsi);
 				$('#kabupaten').val(kabupaten);
 				$('#kecamatan').val(kecamatan);

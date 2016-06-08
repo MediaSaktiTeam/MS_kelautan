@@ -51,13 +51,13 @@
 											<input type="hidden" id="token" name="_token" value="{{ csrf_token() }}">
 											<label><b>KETERANGAN PRODUKSI</b></label>
 											<div class="row">
-												<div class="col-md-4">
+												<div class="col-md-6">
 													<label>Lokasi</label>
-													<div class="form-group input-group">
+													<div class="form-group">
 														<input type="text" name="lokasi" value="{{ Input::old('lokasi') }}" class="form-control" placeholder="Lokasi" required="">
 													</div>
 												</div>
-												<div class="col-md-4">
+												<div class="col-md-6">
 													<label>Potensi</label>
 													<div class="form-group input-group">
 														<input type="number" name="potensi" value="{{ Input::old('potensi') }}" class="form-control" placeholder="Jumlah" required="">
@@ -66,14 +66,14 @@
 												</div>
 											</div>
 											<div class="row">
-												<div class="col-md-4">
+												<div class="col-md-6">
 													<label>Petani/RTP</label>
 													<div class="form-group input-group">
 														<input type="number" name="rtp" value="{{ Input::old('rtp') }}" class="form-control" placeholder="Jumlah" required="">
 														<span class="input-group-addon">RTP</span>
 													</div>
 												</div>
-												<div class="col-md-4">
+												<div class="col-md-6">
 													<label>Luas Tanam</label>
 													<div class="form-group input-group">
 														<input type="number" name="luas_tanam" value="{{ Input::old('luas_tanam') }}" class="form-control" placeholder="Luas" required="">
@@ -208,25 +208,13 @@
 														<th rowspan="2">
 															<button class="btn btn-check" data-toggle="modal" data-target="#modal-hapus" disabled id="hapus"><i class="pg-trash"></i></button>
 														</th>
-														<th style="font-size: 11px;" rowspan="2">No.</th>
-														<th style="font-size: 11px;" rowspan="2">Lokasi</th>
-														<th style="font-size: 11px;" rowspan="2">Jumlah RTP</th>
-														<th style="font-size: 11px;" rowspan="2">Potensi</th>
-														<th style="font-size: 11px;" rowspan="2">Luas Tanam</th>
-														<th style="font-size: 11px;text-align: center;" colspan="4">Jumlah Bibit</th>
-														<th style="font-size: 11px;text-align: center;" colspan="4">Produksi</th>
-														<th style="font-size: 11px;" rowspan="2">Keterangan</th>
-														<th style="font-size: 11px;" rowspan="2" style="text-align:center">Aksi</th>
-													</tr>
-													<tr>
-														<th style="font-size: 10px;">Nila</th>
-														<th style="font-size: 10px;">Lele</th>
-														<th style="font-size: 10px;">Udang</th>
-														<th style="font-size: 10px;">Ikan lainnya</th>
-														<th style="font-size: 10px;">Nila</th>
-														<th style="font-size: 10px;">Lele</th>
-														<th style="font-size: 10px;">Udang</th>
-														<th style="font-size: 10px;">Ikan lainnya</th>
+														<th>No.</th>
+														<th>Lokasi</th>
+														<th>Jumlah RTP</th>
+														<th>Potensi</th>
+														<th>Luas Tanam</th>
+														<th>Keterangan</th>
+														<th style="text-align:center">Aksi</th>
 													</tr>
 												</thead>
 												@if ( Session::has('success') ) 
@@ -249,6 +237,9 @@
 														} else {
 															$i = 1;
 														}
+														$jumlahrtp = "";
+														$potensi = "";
+														$luas_tanam = "";
 
 													?>
 													@foreach($kolamairtawar as $at)
@@ -259,28 +250,33 @@
 																	<label for="at{{ $at->id }}" class="m-l-20"></label>
 																</div>
 															</td>
-															<td style="font-size: 10px;">{{ $i++ }}</td>
-															<td style="font-size: 10px;">{{ $at->lokasi }}</td>
-															<td style="font-size: 10px;">{{ $at->rtp }}</td>
-															<td style="font-size: 10px;">{{ $at->potensi }}</td>
-															<td style="font-size: 10px;">{{ $at->luas_tanam }}</td>
-															<td style="font-size: 10px;">{{ $at->jumlah_bibit }}</td>
-															<td style="font-size: 10px;">{{ $at->bibit_nila }}</td>
-															<td style="font-size: 10px;">{{ $at->bibit_lele }}</td>
-															<td style="font-size: 10px;">{{ $at->bibit_udang }}</td>
-															<td style="font-size: 10px;">{{ $at->bibit_lainnya }}</td>
-															<td style="font-size: 10px;">{{ $at->produksi_nila }}</td>
-															<td style="font-size: 10px;">{{ $at->produksi_lele }}</td>
-															<td style="font-size: 10px;">{{ $at->produksi_udang }}</td>
-															<td style="font-size: 10px;">{{ $at->produksi_lainnya }}</td>
-															<td style="font-size: 10px;">{{ $at->keterangan }}</td>
+															<td>{{ $i++ }}</td>
+															<td>{{ $at->lokasi }}</td>
+															<td>{{ $at->rtp }}</td>
+															<td>{{ $at->potensi }}</td>
+															<td>{{ $at->luas_tanam }}</td>
+															<td>{{ $at->keterangan }}</td>
 															<td style="text-align:center">
 																<a class="btn btn-default btn-xs view" data-id="{{ $at->id }}"><i class="fa fa-search-plus"></i></a>
 																<a href="{{ route('kolamairtawar_edit',$at->id) }}" class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i></a>
 															</td>
 		
 														</tr>
+														<?php 
+															$jumlahrtp += $at->rtp;
+															$potensi += $at->potensi;
+															$luas_tanam += $at->luas_tanam;
+														?>
 													@endforeach
+														<tr>
+															<td><b>Jumlah</b></td>
+															<td></td>
+															<td></td>
+															<td><b><?php echo round($jumlahrtp,2); ?></b></td>
+															<td><b><?php echo round($potensi,2); ?> Ha</b></td>
+															<td><b><?php echo round($luas_tanam,2); ?> Ha</b></td>
+															<td></td>
+														</tr>
 
 												</tbody>
 
@@ -451,7 +447,7 @@
 				$("#show-pencarian").show();
 				$("#show-pencarian").html('<tr><td colspan="6"><i class="fa fa-spinner fa-spin"></i></td></tr>');
 				var _token = $('meta[name="csrf-token"]').attr('content');
-				var url = "{{ url('app/airtawar/cari') }}";
+				var url = "{{ url('app/kolamairtawar/cari') }}";
 				var url = url+"/"+cari;
 				$.get(url, { cari:cari, _token:_token}, function(data){
 					$('#show-pencarian').html(data);
