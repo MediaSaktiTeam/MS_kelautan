@@ -78,8 +78,8 @@
 											<a href="/app/produksi?offset={{ $offset }}&limit={{ $limit }}&pr={{ $Ms->enk('Pembudidaya') }}">Produksi</a>
 											<span class="icon-thumbnail">P</span>
 										</li>
-										<li class="sub-rumputlaut">
-											<a href="/app/rumputlaut">Rumput Laut</a>
+										<li class="sub-budidayarumputlaut">
+											<a href="/app/budidayarumputlaut">Rumput Laut</a>
 											<span class="icon-thumbnail">RL</span>
 										</li>
 										<li class="sub-kja-airlaut">
@@ -94,8 +94,8 @@
 											<a href="/app/kjaairtawar">KJA air tawar</a>
 											<span class="icon-thumbnail">KAT</span>
 										</li>
-										<li class="sub-airpayau">
-											<a href="/app/airpayau">Air payau</a>
+										<li class="sub-budidayaairpayau">
+											<a href="/app/budidayaairpayau">Air payau</a>
 											<span class="icon-thumbnail">AP</span>
 										</li>
 									</ul>

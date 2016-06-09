@@ -7,10 +7,10 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use DB,Excel,PDF;
-use App\User,App\KolamAirtawar,App\Laporan;
+use App\User,App\BudidayaAirPayau,App\Laporan;
 use App\Permissions;
 
-class BudidayaKolamAirtawarController extends Controller
+class BudidayaAirPayauController extends Controller
 {
 
 	public function getIndex(Request $r)
@@ -18,7 +18,7 @@ class BudidayaKolamAirtawarController extends Controller
 
 		if ( !isset( $r->offset ) || !isset( $r->limit ) ) {
 
-			$sql = KolamAirtawar::orderBy('id', 'desc')->first();
+			$sql = BudidayaAirPayau::orderBy('id', 'desc')->first();
 
 			if ( $sql ) {
 			// Jika sudah ada pembudidaya
@@ -39,41 +39,41 @@ class BudidayaKolamAirtawarController extends Controller
 				$limit = date("Y-m-d", $limit);
 			}
 
-			 return redirect( '/app/kolamairtawar?offset='.$offset.'&limit='.$limit );
+			 return redirect( '/app/budidayaairpayau?offset='.$offset.'&limit='.$limit );
 		}
 		$limit = 10;
-		$data['kolamairtawar'] = KolamAirTawar::whereBetween('created_at', [ $r->offset, $r->limit ])
+		$data['budidayaairpayau'] = BudidayaAirPayau::whereBetween('created_at', [ $r->offset, $r->limit ])
 									->paginate($limit);
 
-		return view ('app.produksi-pembudidaya.budidaya-kolamairtawar.index',$data)->with('limit', $limit);
+		return view ('app.produksi-pembudidaya.budidaya-airpayau.index',$data)->with('limit', $limit);
 	}
 
 	public function getDetail($id)
 	{
-		$data['kolamairtawar'] = KolamAirtawar::where('id',$id)->first();
+		$data['budidayaairpayau'] = BudidayaAirPayau::where('id',$id)->first();
 
-		return view('app.produksi-pembudidaya.budidaya-kolamairtawar.detail', $data);
+		return view('app.produksi-pembudidaya.budidaya-airpayau.detail', $data);
 	}
 
 	public function getAdd(Request $request)
 	{
-		$dt = new KolamAirtawar;
+		$dt = new BudidayaAirPayau;
 		$dt->id = $request->id;
 		$dt->lokasi = $request->lokasi;
 		$dt->rtp = $request->rtp;
 		$dt->potensi = $request->potensi;
 		$dt->luas_tanam = $request->luas_tanam;
-		$dt->bibit_nila = $request->bibit_nila;
-		$dt->bibit_lele = $request->bibit_lele;
-		$dt->bibit_udang = $request->bibit_udang;
+		$dt->bibit_bandeng = $request->bibit_bandeng;
+		$dt->bibit_windu = $request->bibit_windu;
+		$dt->bibit_vannamae = $request->bibit_vannamae;
 		$dt->bibit_lainnya = $request->bibit_lainnya;
-		$dt->produksi_nila = $request->produksi_nila;
-		$dt->produksi_lele = $request->produksi_lele;
-		$dt->produksi_udang = $request->produksi_udang;
+		$dt->produksi_bandeng = $request->produksi_bandeng;
+		$dt->produksi_windu = $request->produksi_windu;
+		$dt->produksi_vannamae = $request->produksi_vannamae;
 		$dt->produksi_lainnya = $request->produksi_lainnya;
 		$dt->keterangan = $request->keterangan;
 		$dt->save();
-		return redirect()->route('kolamairtawar')->with(session()->flash('success','Data Berhasil Tersimpan !!'));
+		return redirect()->route('budidayaairpayau')->with(session()->flash('success','Data Berhasil Tersimpan !!'));
 	}
 
 	public function getDelete($id){
@@ -81,70 +81,70 @@ class BudidayaKolamAirtawarController extends Controller
 		$val = explode(",", $id);
 
 		foreach ($val as $value) {
-			KolamAirtawar::where('id', $value)->delete();           
+			BudidayaAirPayau::where('id', $value)->delete();           
 		}
-		return redirect()->route('kolamairtawar')->with(session()->flash('success','Data Berhasil Terhapus !!'));
+		return redirect()->route('budidayaairpayau')->with(session()->flash('success','Data Berhasil Terhapus !!'));
 	}
 
 	public function getEdit($id)
 	{
-		$data['kolamairtawar'] = KolamAirtawar::find($id);
-		return view('app.produksi-pembudidaya.budidaya-kolamairtawar.update', $data);
+		$data['budidayaairpayau'] = BudidayaAirPayau::find($id);
+		return view('app.produksi-pembudidaya.budidaya-airpayau.update', $data);
 	}
 
 	public function getUpdate(Request $request)
 	{
 
-		$dt = KolamAirtawar::find($request->id);
+		$dt = BudidayaAirPayau::find($request->id);
 		$dt->id = $request->id;
 		$dt->lokasi = $request->lokasi;
 		$dt->rtp = $request->rtp;
 		$dt->potensi = $request->potensi;
 		$dt->luas_tanam = $request->luas_tanam;
-		$dt->bibit_nila = $request->bibit_nila;
-		$dt->bibit_lele = $request->bibit_lele;
-		$dt->bibit_udang = $request->bibit_udang;
+		$dt->bibit_bandeng = $request->bibit_bandeng;
+		$dt->bibit_windu = $request->bibit_windu;
+		$dt->bibit_vannamae = $request->bibit_vannamae;
 		$dt->bibit_lainnya = $request->bibit_lainnya;
-		$dt->produksi_nila = $request->produksi_nila;
-		$dt->produksi_lele = $request->produksi_lele;
-		$dt->produksi_udang = $request->produksi_udang;
+		$dt->produksi_bandeng = $request->produksi_bandeng;
+		$dt->produksi_windu = $request->produksi_windu;
+		$dt->produksi_vannamae = $request->produksi_vannamae;
 		$dt->produksi_lainnya = $request->produksi_lainnya;
 		$dt->keterangan = $request->keterangan;
 		$dt->save();
-		$data['kolamairtawar'] = KolamAirTawar::paginate(1);
+		$data['budidayaairpayau'] = BudidayaAirPayau::paginate(1);
 
-		return redirect()->route('kolamairtawar', $data)->with(session()->flash('success','Data Berhasil diupdate !!'));
+		return redirect()->route('budidayaairpayau', $data)->with(session()->flash('success','Data Berhasil diupdate !!'));
 	}
 
 	public function getCari(Request $r)
 	{
-		$data['kolamairtawar'] = KolamAirTawar::where('lokasi', 'LIKE', '%'.$r->cari.'%')->get();
-		return view('app.produksi-pembudidaya.budidaya-kolamairtawar.cari', $data);
+		$data['budidayaairpayau'] = BudidayaAirPayau::where('lokasi', 'LIKE', '%'.$r->cari.'%')->get();
+		return view('app.produksi-pembudidaya.budidaya-airpayau.cari', $data);
 	}
 
 	public function getExportExcel(Request $r)
 	{
-		$data['kolamairtawar'] = KolamAirtawar::whereBetween('created_at', [ $r->offset, $r->limit ])->get();
+		$data['budidayaairpayau'] = BudidayaAirPayau::whereBetween('created_at', [ $r->offset, $r->limit ])->get();
 
-        Excel::create('Data kolamairtawar');
+        Excel::create('Data budidayaairpayau');
 
-        Excel::create('Data kolamairtawar', function($excel) use($data)
+        Excel::create('Data budidayaairpayau', function($excel) use($data)
         {
             
             $excel->sheet('New sheet', function($sheet) use($data)
             {
-                $sheet->loadView('app.produksi-pembudidaya.budidaya-kolamairtawar.export-excel', $data);
+                $sheet->loadView('app.produksi-pembudidaya.budidaya-airpayau.export-excel', $data);
             }); 
         })->download('xlsx');
 	}
 
 	public function getExportPdf(Request $r)
 	{
-		$data['kolamairtawar'] = KolamAirtawar::whereBetween('created_at', [ $r->offset, $r->limit ])->get();
+		$data['budidayaairpayau'] = BudidayaAirPayau::whereBetween('created_at', [ $r->offset, $r->limit ])->get();
 		$data['tgl_awal']		= $r->offset;
 		$data['tgl_akhir']		= $r->limit;
-        $pdf = PDF::loadView('app.produksi-pembudidaya.budidaya-kolamairtawar.export-pdf', $data);
-        return $pdf->setPaper('legal')->setOrientation('landscape')->setWarnings(false)->download('Data KolamAirtawar.pdf');
+        $pdf = PDF::loadView('app.produksi-pembudidaya.budidaya-airpayau.export-pdf', $data);
+        return $pdf->setPaper('legal')->setOrientation('landscape')->setWarnings(false)->download('Data budidayaairpayau.pdf');
 	}
 
 }

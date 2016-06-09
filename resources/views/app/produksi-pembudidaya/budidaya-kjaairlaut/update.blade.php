@@ -1,7 +1,7 @@
 @extends('app.layout.main')
 
 @section('title')
-	Produksi Budidaya Rumput Laut
+	Produksi KJA Air Laut
 @endsection
 
 
@@ -23,10 +23,10 @@
 						<!-- START BREADCRUMB -->
 						<ul class="breadcrumb pull-left">
 							<li>
-								<a href="{{ route('budidayarumputlaut') }}">Budidaya Rumput Laut</a>
+								<a href="{{ route('kjaairlaut') }}">KJA Air Laut</a>
 							</li>
 							<li>
-								<a href="#" class="active">Sunting Budidaya Rumput Laut</a>
+								<a href="#" class="active">Sunting KJA Air Laut</a>
 							</li>
 						</ul>
 						
@@ -42,26 +42,26 @@
 
 					<div class="row">
 
-						<div id="edit-budidayarumputlaut">
+						<div id="edit-kjaairlaut">
 							<div class="col-lg-7 col-md-6 ">
 
 								<!-- START PANEL -->
 								<div class="panel panel-transparent">
 									<div class="panel-body">
-										<form id="form-personal" method="GET" action="{{ route('budidayarumputlaut_update') }}" role="form">
+										<form id="form-personal" method="GET" action="{{ route('kjaairlaut_update') }}" role="form">
 
 											<label><b>KETERANGAN PRODUKSI</b></label>
 											<div class="row">
 												<div class="col-md-6">
 													<label>Lokasi</label>
 													<div class="form-group">
-														<input type="text" name="lokasi" value="{{ $budidayarumputlaut->lokasi }}" class="form-control" placeholder="Lokasi" required="">
+														<input type="text" name="lokasi" value="{{ $kjaairlaut->lokasi }}" class="form-control" placeholder="Lokasi" required="">
 													</div>
 												</div>
 												<div class="col-md-6">
 													<label>Potensi</label>
 													<div class="form-group input-group">
-														<input type="number" name="potensi" value="{{ $budidayarumputlaut->potensi }}" class="form-control" placeholder="Jumlah" required="">
+														<input type="number" name="potensi" value="{{ $kjaairlaut->potensi }}" class="form-control" placeholder="Jumlah" required="">
 														<span class="input-group-addon">Ha</span>
 													</div>
 												</div>
@@ -70,14 +70,14 @@
 												<div class="col-md-6">
 													<label>Petani/RTP</label>
 													<div class="form-group input-group">
-														<input type="number" name="rtp" value="{{ $budidayarumputlaut->rtp }}" class="form-control" placeholder="Jumlah" required="">
+														<input type="number" name="rtp" value="{{ $kjaairlaut->rtp }}" class="form-control" placeholder="Jumlah" required="">
 														<span class="input-group-addon">RTP</span>
 													</div>
 												</div>
 												<div class="col-md-6">
 													<label>Luas Tanam</label>
 													<div class="form-group input-group">
-														<input type="number" name="luas_tanam" value="{{ $budidayarumputlaut->luas_tanam }}" class="form-control" placeholder="Luas" required="">
+														<input type="number" name="luas_tanam" value="{{ $kjaairlaut->luas_tanam }}" class="form-control" placeholder="Luas" required="">
 														<span class="input-group-addon">Ha</span>
 													</div>
 												</div>
@@ -86,10 +86,24 @@
 											<hr>
 											<label><b>Bibit</b></label>
 											<div class="row">
-												<div class="col-md-6">
-														<label>Jumlah bibit</label>
+												<div class="col-md-3">
+														<label>Kakap</label>
 													<div class="form-group input-group">
-														<input type="number" name="jumlah_bibit" value="{{ $budidayarumputlaut->jumlah_bibit }}" class="form-control" placeholder="Jumlah" required="">
+														<input type="number" name="bibit_kakap" value="{{ $kjaairlaut->bibit_kakap }}" class="form-control" placeholder="Jumlah" required="">
+														<span class="input-group-addon">Ekor</span>
+													</div>
+												</div>
+												<div class="col-md-3">
+														<label>Udang</label>
+													<div class="form-group input-group">
+														<input type="number" name="bibit_udang" value="{{ $kjaairlaut->bibit_udang }}" class="form-control" placeholder="Jumlah" required="">
+														<span class="input-group-addon">Ekor</span>
+													</div>
+												</div>
+												<div class="col-md-3">
+														<label>Bibit Lainnya</label>
+													<div class="form-group input-group">
+														<input type="number" name="bibit_lainnya" value="{{ $kjaairlaut->bibit_lainnya }}" class="form-control" placeholder="Jumlah" required="">
 														<span class="input-group-addon">Ekor</span>
 													</div>
 												</div>
@@ -98,16 +112,23 @@
 											<label><b>Produksi</b></label>
 											<div class="row">
 												<div class="col-md-3">
-														<label>Catoni</label>
+														<label>Kakap</label>
 													<div class="form-group input-group">
-														<input type="number" name="produksi_catoni" value="{{ $budidayarumputlaut->produksi_catoni }}" class="form-control" placeholder="Jumlah" required="">
+														<input type="number" name="produksi_kakap" value="{{ $kjaairlaut->produksi_kakap }}" class="form-control" placeholder="Jumlah" required="">
 														<span class="input-group-addon">Ekor</span>
 													</div>
 												</div>
 												<div class="col-md-3">
-														<label>Produksi Spenosun</label>
+														<label>Udang</label>
 													<div class="form-group input-group">
-														<input type="number" name="produksi_spenosun" value="{{ $budidayarumputlaut->produksi_spenosun }}" class="form-control" placeholder="Jumlah" required="">
+														<input type="number" name="produksi_udang" value="{{ $kjaairlaut->produksi_udang }}" class="form-control" placeholder="Jumlah" required="">
+														<span class="input-group-addon">Ekor</span>
+													</div>
+												</div>
+												<div class="col-md-3">
+														<label>Produksi Lainnya</label>
+													<div class="form-group input-group">
+														<input type="number" name="produksi_lainnya" value="{{ $kjaairlaut->produksi_lainnya }}" class="form-control" placeholder="Jumlah" required="">
 														<span class="input-group-addon">Ekor</span>
 													</div>
 												</div>
@@ -117,11 +138,11 @@
 											<div class="row">
 												<div class="col-md-12">
 													<div class="form-group">
-														<textarea name="keterangan" id="" cols="30" rows="10" class="form-control" required="">{{ $budidayarumputlaut->keterangan }}</textarea>
+														<textarea name="keterangan" id="" cols="30" rows="10" class="form-control" required="">{{ $kjaairlaut->keterangan }}</textarea>
 													</div>
 												</div>
 											</div>
-											<input type="hidden" id="id-budidayarumputlaut" name="id" value="{{ $budidayarumputlaut->id }}">
+											<input type="hidden" id="id-kjaairlaut" name="id" value="{{ $kjaairlaut->id }}">
 
 			
 											
@@ -162,7 +183,7 @@
 	<script>
 		$(".menu-items .link-pembudidaya").addClass("active open");
 		$(".menu-items .link-pembudidaya .sub-produksi").addClass("active");
-		$(".menu-items .link-pembudidaya .sub-produksi .sub-budidayarumputlaut").addClass("active");
+		$(".menu-items .link-pembudidaya .sub-produksi .sub-kjaairlaut").addClass("active");
 
 		$(function(){
 
@@ -236,7 +257,7 @@
 				var desa = $(this).data('desa');
 				var areal = $(this).data('areal');
 				var tanam = $(this).data('tanam');
-				$('#id-budidayarumputlaut').val(id);
+				$('#id-kjaairlaut').val(id);
 				$('#provinsi').val(provinsi);
 				$('#kabupaten').val(kabupaten);
 				$('#kecamatan').val(kecamatan);

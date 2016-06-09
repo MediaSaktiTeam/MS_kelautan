@@ -2,7 +2,7 @@
 $(function(){
 	$(".btn-hapus-single").click(function(){
 		var id = $(this).data('id');
-		$(".btn-hapus").attr('href',"{{ url('/app/budidayarumputlaut/hapus') }}/"+id);
+		$(".btn-hapus").attr('href',"{{ url('/app/kjaairlaut/hapus') }}/"+id);
 		$("#modal-hapus").modal('hapus');
 	});
 });
@@ -24,9 +24,9 @@ $(function(){
 	</thead>
 	<tbody>
 
-		@if ( count($budidayarumputlaut) > 0 )
+		@if ( count($kjaairlaut) > 0 )
 
-			@foreach($budidayarumputlaut as $kal)
+			@foreach($kjaairlaut as $kal)
 
 				<tr>
 					<td>
@@ -39,7 +39,7 @@ $(function(){
 					<td>{{ $kal->keterangan }}</td>
 					<td style="text-align:center">
 					<a class="btn btn-default btn-xs view" data-id="{{ $kal->id }}"><i class="fa fa-search-plus"></i></a>
-					<a href="{{ route('budidayarumputlaut_edit',$kal->id) }}" class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i></a>
+					<a href="{{ route('kjaairlaut_edit',$kal->id) }}" class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i></a>
 					</td>
 				</tr>
 

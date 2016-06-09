@@ -1,7 +1,7 @@
 @extends('app.layout.main')
 
 @section('title')
-	Produksi Kolam Air Tawar
+	Produksi Budidaya Air Payau
 @endsection
 
 
@@ -23,11 +23,11 @@
 						<!-- START BREADCRUMB -->
 						<ul class="breadcrumb pull-left">
 							<li>
-								<a href="{{ route('kolamairtawar') }}">Kolam Air Tawar</a>
+								<a href="{{ route('budidayaairpayau') }}">Budidaya Air Payau</a>
 							</li>
 						</ul>
 						
-						<button id="show-tambah-kolamairtawar" class="btn btn-primary bg-blueblur m-t-10 m-b-10 pull-right">Tambah</button>
+						<button id="show-tambah-budidayaairpayau" class="btn btn-primary bg-blueblur m-t-10 m-b-10 pull-right">Tambah</button>
 					</div>
 				</div>
 
@@ -40,13 +40,13 @@
 
 					<div class="row">
 
-						<div id="tambah-kolamairtawar" style="display:none">
+						<div id="tambah-budidayaairpayau" style="display:none">
 							<div class="col-lg-7 col-md-6 ">
 
 								<!-- START PANEL -->
 								<div class="panel panel-transparent">
 									<div class="panel-body">
-										<form id="form-personal" method="GET" action="{{ route('kolamairtawar_tambah') }}" role="form">
+										<form id="form-personal" method="GET" action="{{ route('budidayaairpayau_tambah') }}" role="form">
 											
 											<input type="hidden" id="token" name="_token" value="{{ csrf_token() }}">
 											<label><b>KETERANGAN PRODUKSI</b></label>
@@ -86,28 +86,28 @@
 											<label><b>Bibit</b></label>
 											<div class="row">
 												<div class="col-md-3">
-														<label>Nila</label>
+														<label>Bandeng</label>
 													<div class="form-group input-group">
-														<input type="number" name="bibit_nila" value="{{ Input::old('bibit_nila') }}" class="form-control" placeholder="Jumlah" required="">
+														<input type="number" name="bibit_bandeng" value="{{ Input::old('bibit_bandeng') }}" class="form-control" placeholder="Jumlah" required="">
 														<span class="input-group-addon">Ekor</span>
 													</div>
 												</div>
 												<div class="col-md-3">
-														<label>Lele</label>
+														<label>U. Windu</label>
 													<div class="form-group input-group">
-														<input type="number" name="bibit_lele" value="{{ Input::old('bibit_lele') }}" class="form-control" placeholder="Jumlah" required="">
+														<input type="number" name="bibit_windu" value="{{ Input::old('bibit_windu') }}" class="form-control" placeholder="Jumlah" required="">
 														<span class="input-group-addon">Ekor</span>
 													</div>
 												</div>
 												<div class="col-md-3">
-														<label>Udang</label>
+														<label>U. Vannamae</label>
 													<div class="form-group input-group">
-														<input type="number" name="bibit_udang" value="{{ Input::old('bibit_udang') }}" class="form-control" placeholder="Jumlah" required="">
+														<input type="number" name="bibit_vannamae" value="{{ Input::old('bibit_vannamae') }}" class="form-control" placeholder="Jumlah" required="">
 														<span class="input-group-addon">Ekor</span>
 													</div>
 												</div>
 												<div class="col-md-3">
-														<label>Bibit Lainnya</label>
+														<label>Ikan Lainnya</label>
 													<div class="form-group input-group">
 														<input type="number" name="bibit_lainnya" value="{{ Input::old('bibit_lainnya') }}" class="form-control" placeholder="Jumlah" required="">
 														<span class="input-group-addon">Ekor</span>
@@ -118,28 +118,28 @@
 											<label><b>Produksi</b></label>
 											<div class="row">
 												<div class="col-md-3">
-														<label>Nila</label>
+														<label>Bandeng</label>
 													<div class="form-group input-group">
-														<input type="number" name="produksi_nila" value="{{ Input::old('produksi_nila') }}" class="form-control" placeholder="Jumlah" required="">
+														<input type="number" name="produksi_bandeng" value="{{ Input::old('produksi_bandeng') }}" class="form-control" placeholder="Jumlah" required="">
 														<span class="input-group-addon">Ekor</span>
 													</div>
 												</div>
 												<div class="col-md-3">
-														<label>Lele</label>
+														<label>U. Windu</label>
 													<div class="form-group input-group">
-														<input type="number" name="produksi_lele" value="{{ Input::old('produksi_lele') }}" class="form-control" placeholder="Jumlah" required="">
+														<input type="number" name="produksi_windu" value="{{ Input::old('produksi_windu') }}" class="form-control" placeholder="Jumlah" required="">
 														<span class="input-group-addon">Ekor</span>
 													</div>
 												</div>
 												<div class="col-md-3">
-														<label>Udang</label>
+														<label>U. Vannamae</label>
 													<div class="form-group input-group">
-														<input type="number" name="produksi_udang" value="{{ Input::old('produksi_udang') }}" class="form-control" placeholder="Jumlah" required="">
+														<input type="number" name="produksi_vannamae" value="{{ Input::old('produksi_vannamae') }}" class="form-control" placeholder="Jumlah" required="">
 														<span class="input-group-addon">Ekor</span>
 													</div>
 												</div>
 												<div class="col-md-3">
-														<label>Produksi Lainnya</label>
+														<label>Ikan Lainnya</label>
 													<div class="form-group input-group">
 														<input type="number" name="produksi_lainnya" value="{{ Input::old('produksi_lainnya') }}" class="form-control" placeholder="Jumlah" required="">
 														<span class="input-group-addon">Ekor</span>
@@ -174,7 +174,7 @@
 							<div class="panel panel-default">
 								<div class="panel-body">
 									<div class="">
-										<form action="{{ url('/app/kolamairtawar') }}">
+										<form action="{{ url('/app/budidayaairpayau') }}">
 											<div class="col-md-4">
 												<div class="input-group">
 													<input type="date" class="form-control" name="offset" value="{{ $_GET['offset'] }}"/>
@@ -242,30 +242,30 @@
 														$luas_tanam = "";
 
 													?>
-													@foreach($kolamairtawar as $at)
+													@foreach($budidayaairpayau as $ap)
 														<tr>
 															<td>
 																<div class="checkbox">
-																	<input type="checkbox" class="pilih" value="{{ $at->id }}" id="at{{ $at->id }}">
-																	<label for="at{{ $at->id }}" class="m-l-20"></label>
+																	<input type="checkbox" class="pilih" value="{{ $ap->id }}" id="at{{ $ap->id }}">
+																	<label for="at{{ $ap->id }}" class="m-l-20"></label>
 																</div>
 															</td>
 															<td>{{ $i++ }}</td>
-															<td>{{ $at->lokasi }}</td>
-															<td>{{ $at->rtp }}</td>
-															<td>{{ $at->potensi }}</td>
-															<td>{{ $at->luas_tanam }}</td>
-															<td>{{ $at->keterangan }}</td>
+															<td>{{ $ap->lokasi }}</td>
+															<td>{{ $ap->rtp }}</td>
+															<td>{{ $ap->potensi }}</td>
+															<td>{{ $ap->luas_tanam }}</td>
+															<td>{{ $ap->keterangan }}</td>
 															<td style="text-align:center">
-																<a class="btn btn-default btn-xs view" data-id="{{ $at->id }}"><i class="fa fa-search-plus"></i></a>
-																<a href="{{ route('kolamairtawar_edit',$at->id) }}" class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i></a>
+																<a class="btn btn-default btn-xs view" data-id="{{ $ap->id }}"><i class="fa fa-search-plus"></i></a>
+																<a href="{{ route('budidayaairpayau_edit',$ap->id) }}" class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i></a>
 															</td>
 		
 														</tr>
 														<?php 
-															$jumlahrtp += $at->rtp;
-															$potensi += $at->potensi;
-															$luas_tanam += $at->luas_tanam;
+															$jumlahrtp += $ap->rtp;
+															$potensi += $ap->potensi;
+															$luas_tanam += $ap->luas_tanam;
 														?>
 													@endforeach
 														<tr>
@@ -281,7 +281,7 @@
 												</tbody>
 
 											</table>
-											<center>{!! $kolamairtawar->appends([ 'offset' => $_GET['offset'], 'limit' => $_GET['limit'] ])->links() !!}</center>
+											<center>{!! $budidayaairpayau->appends([ 'offset' => $_GET['offset'], 'limit' => $_GET['limit'] ])->links() !!}</center>
 										</div>
 
 									</div>
@@ -311,7 +311,7 @@
 			<div class="modal-content">
 				<div class="modal-header clearfix text-left">
 					<button type="button" class="close" data-dismiss="modal"  aria-hidden="true"><i class="pg-close fs-14"></i></button>
-					<h5>Detail Laporan Produksi Kolam Air Tawar</h5>
+					<h5>Detail Laporan Produksi Budidaya Air Payau</h5>
 				</div>
 				<div class="modal-body" id="view-detail">
 
@@ -364,13 +364,13 @@
 				<div class="modal-body">
 					<div class="row">
 						<div class="col-md-6">
-							<a href="{{ url('/app/kolamairtawar/export-excel?offset='.$_GET['offset'].'&limit='.$_GET['limit']) }}">
+							<a href="{{ url('/app/budidayaairpayau/export-excel?offset='.$_GET['offset'].'&limit='.$_GET['limit']) }}">
 								<i class="fa fa-file-excel-o export-excel"></i>
 								Unduh Dalam Format Mic.Excel
 							</a>
 						</div>
 						<div class="col-md-6">
-							<a href="{{ url('/app/kolamairtawar/export-pdf?offset='.$_GET['offset'].'&limit='.$_GET['limit']) }}">
+							<a href="{{ url('/app/budidayaairpayau/export-pdf?offset='.$_GET['offset'].'&limit='.$_GET['limit']) }}">
 								<i class="fa fa-file-pdf-o export-pdf"></i>
 								Unduh Dalam Format PDF
 							</a>
@@ -391,7 +391,7 @@
 	<script>
 		$(".menu-items .link-pembudidaya").addClass("active open");
 		$(".menu-items .link-pembudidaya .sub-produksi").addClass("active");
-		$(".menu-items .link-pembudidaya .sub-produksi .sub-kolamairtawar").addClass("active");
+		$(".menu-items .link-pembudidaya .sub-produksi .sub-budidayaairpayau").addClass("active");
 
 
 		$(function(){
@@ -410,12 +410,12 @@
 		        else {
 				  return false;
 		        }
-		        $(".btn-hapus").attr('href',"{{ route('kolamairtawar_hapus') }}/"+id);
+		        $(".btn-hapus").attr('href',"{{ route('budidayaairpayau_hapus') }}/"+id);
 
 			});
 
-			$("#show-tambah-kolamairtawar").click(function(){
-				$("#tambah-kolamairtawar").fadeIn();
+			$("#show-tambah-budidayaairpayau").click(function(){
+				$("#tambah-budidayaairpayau").fadeIn();
 				$("input[name='lokasi']").focus();
 				$(this).hide();
 			});
@@ -423,7 +423,7 @@
 			// Show detail
 			$(".panel").on('click', '.view', function(){
 				var id = $(this).data('id');
-				var url = "{{ url('app/kolamairtawar/detail') }}";
+				var url = "{{ url('app/budidayaairpayau/detail') }}";
 				var url = url+'/'+id;
 				$.get(url, {id:id, _token:_token}, function(data){
 					$("#view-detail").html(data);
@@ -432,7 +432,7 @@
 			});
 
 			@if ( count($errors) > 0 || Session::has('gagal') || Session::has('error_nik') )
-				$("#tambah-kolamairtawar").fadeIn();
+				$("#tambah-budidayaairpayau").fadeIn();
 			@endif
 
 		});
@@ -447,7 +447,7 @@
 				$("#show-pencarian").show();
 				$("#show-pencarian").html('<tr><td colspan="6"><i class="fa fa-spinner fa-spin"></i></td></tr>');
 				var _token = $('meta[name="csrf-token"]').attr('content');
-				var url = "{{ url('app/kolamairtawar/cari') }}";
+				var url = "{{ url('app/budidayaairpayau/cari') }}";
 				var url = url+"/"+cari;
 				$.get(url, { cari:cari, _token:_token}, function(data){
 					$('#show-pencarian').html(data);

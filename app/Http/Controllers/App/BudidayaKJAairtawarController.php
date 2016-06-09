@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use DB,Excel,PDF;
-use App\User,App\KjaAirtawar,App\Laporan;
+use App\User,App\KjaAirTawar,App\Laporan;
 use App\Permissions;
 
 class BudidayaKJAairtawarController extends Controller
