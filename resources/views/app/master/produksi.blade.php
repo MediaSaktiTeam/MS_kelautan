@@ -1,7 +1,7 @@
 @extends('app.layout.main')
 
 @section('title')
-	Master | Jenis Usaha
+	Master | Jenis Produksi
 @endsection
 
 
@@ -26,7 +26,7 @@
 								<a href="#">Master</a>
 							</li>
 							<li>
-								<a href="#" class="active">Jenis Usaha</a>
+								<a href="#" class="active">Jenis Produksi</a>
 							</li>
 						</ul>
 					</div>
@@ -62,9 +62,18 @@
 								</div>
 							</div>
 							<div class="panel-body">
-								<h5>Jenis Usaha</h5>
-								<p>* Jenis Usaha digunakan pada halaman pembudidaya dan nelayan.</p>
-								<form class="style-form" method="GET" action="{{ route('usaha_tambah') }}">
+								<h5>Jenis Produksi</h5>
+								<p>* Jenis Produksi digunakan pada halaman pembudidaya dan nelayan.</p>
+								<form class="style-form" method="GET" action="{{ route('produksi_tambah') }}">
+									<div class="form-group form-group-default required">
+										<label>Jenis Usaha Budidaya</label>
+										<select class="full-width" data-init-plugin="select2" name="jenis">
+											<?php $jenisUsaha = App\JenisUsaha::all() ?>
+											@foreach( $jenisUsaha as $ju )
+												<option value="{{ $ju->id }}">{{ $ju->nama }}</option>
+											@endforeach
+										</select>
+									</div>
 									<div class="form-group form-group-default required">
 										<label>Jenis Produksi</label>
 										<input type="text" name="nama" class="form-control" required>
@@ -88,36 +97,24 @@
 											<th width="70">
 												<button class="btn btn-check" data-toggle="modal" data-target="#modal-hapus" disabled id="hapus"><i class="pg-trash"></i></button>
 											</th>
-											<th>Jenis Usaha</th>
+											<th>Jenis Usaha Budidaya</th>
+											<th>Jenis Produksi</th>
 											<th>Aksi</th>
 										</tr>
 									</thead>
 									<tbody>
-										@foreach($masterusaha as $pd)
+										@foreach($masterproduksi as $pd)
 										<tr>
-											<td>
-											<?php $data_master = App\User::where('id_usaha', $pd->id)->count(); ?>
-
-													<?php
-														$title = "";
-														$disabled = "";
-														if ( $data_master >= 1 ):
-															$title = "Produksi sedang terpakai";
-															$disabled = "disabled";
-														endif
-													?>
-												<div class="checkbox" title="<?php echo $title ?>">
-													<input type="checkbox" class="pilih" value="{{ $pd->id }}" id="checkbox{{ $pd->id }}" <?php echo $disabled ?> >
-													<label for="checkbox{{ $pd->id }}" class="m-l-20"></label>
-												</div>
-											</td>
+											
+											<td>{{ $pd->jenis_produksi }}</td>
 											<td>{{ $pd->nama }}</td>
-											<td><button class="btn btn-default btn-xs btn-edit"  data-id="{{ $pd->id }}"  data-nama="{{ $pd->nama }}"><i class="fa fa-pencil"></i></button></td>
+											
 										</tr>
 										@endforeach
 									</tbody>
+									</tbody>
 								</table>
-								<center>{!! $masterusaha->links() !!}</center>
+								<center>{!! $masterproduksi->links() !!}</center>
 							</div>
 						</div>
 						<!-- END PANEL -->
@@ -188,8 +185,16 @@
 					<h5>Sunting Data</h5>
 				</div>
 				<div class="modal-body">
-					<form class="style-form" method="GET" action="{{ route('usaha_update') }}">
+					<form class="style-form" method="GET" action="{{ route('produksi_update') }}">
 						<input type="hidden" name="_token" value="{{ csrf_token() }}">
+						<div class="form-group form-group-default required">
+							<label>Jenis Usaha Budidaya</label>
+							<select class="full-width" data-init-plugin="select2" name="jenis" id="jenis">
+								@foreach( $jenisUsaha as $ju )
+									<option value="{{ $ju->id }}">{{ $ju->nama }}</option>
+								@endforeach
+							</select>
+						</div>
 						<div class="form-group form-group-default required">
 							<label>Nama Usaha</label>
 							<input type="text" id="nama" name="nama" class="form-control" required>
@@ -215,7 +220,7 @@
 @section('registerscript')
 	<script>
 		$(".menu-items .link-master").addClass("active open");
-		$(".menu-items .link-master .sub-master-usaha").addClass("active");
+		$(".menu-items .link-master .sub-master-produksi").addClass("active");
 		
 		$(function(){
 
@@ -232,7 +237,7 @@
 					return false;
 				}
 
-				$(".btn-hapus").attr('href',"{{ route('usaha_hapus') }}/"+id);
+				$(".btn-hapus").attr('href',"{{ route('produksi_hapus') }}/"+id);
 			});
 			$(".btn-edit").click(function(){
 

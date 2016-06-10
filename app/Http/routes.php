@@ -267,6 +267,10 @@
 		});
 
 
+		Route::get('/app/master/produksi', function () {
+			return view('app.master.produksi');
+		});
+
 		Route::get('/app/master/usaha', function () {
 			return view('app.master.usaha');
 		});
@@ -325,7 +329,14 @@
 				'getHapus'  => 'jabatan_hapus',
 				'getUpdate'  => 'jabatan_update',
 			]);
-		Route::controller('app/master/usaha', 'UsahaController',
+		Route::controller('app/master/produksi', 'MasterProduksiController',
+			[
+				'getIndex'  => 'produksi',
+				'getTambah' => 'produksi_tambah',
+				'getHapus'  => 'produksi_hapus',
+				'getUpdate'  => 'produksi_update',
+			]);
+		Route::controller('app/master/usaha', 'MasterUsahaController',
 			[
 				'getIndex'  => 'usaha',
 				'getTambah' => 'usaha_tambah',

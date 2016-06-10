@@ -308,7 +308,11 @@
 							@endif
 
 							@if ( Permissions::pembudidaya() )
-								<li class="sub-usaha">
+								<li class="sub-master-produksi">
+									<a href="/app/master/produksi">Produksi</a>
+									<span class="icon-thumbnail">P</span>
+								</li>
+								<li class="sub-master-usaha">
 									<a href="/app/master/usaha">Usaha</a>
 									<span class="icon-thumbnail">U</span>
 								</li>

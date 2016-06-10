@@ -4,14 +4,14 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Usaha extends Model
+class MasterProduksi extends Model
 {
-    protected $table = "app_usaha";
+    protected $table = "app_master_produksi";
 
     public $timestamps = false;
 
     public function jenisusaha()
     {
-    	return $this->belongsTo('App\JenisUsaha', 'jenis_usaha');
+    	return $this->belongsTo('App\JenisUsaha', 'nama');
     }
 }

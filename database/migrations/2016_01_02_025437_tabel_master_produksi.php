@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class TabelUsaha extends Migration
+class TabelMasterProduksi extends Migration
 {
     /**
      * Run the migrations.
@@ -12,10 +12,10 @@ class TabelUsaha extends Migration
      */
     public function up()
     {
-        Schema::create('app_usaha', function (Blueprint $table) {
+        Schema::create('app_master_produksi', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('nama');
-            $table->string('jenis_usaha',5);
+            $table->string('jenis_produksi',5);
             $table->timestamps();
         });
     }
@@ -27,6 +27,6 @@ class TabelUsaha extends Migration
      */
     public function down()
     {
-        Schema::drop('app_usaha');
+        Schema::drop('app_master_produksi');
     }
 }
