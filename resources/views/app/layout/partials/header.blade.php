@@ -78,8 +78,8 @@
 											<a href="/app/produksi?offset={{ $offset }}&limit={{ $limit }}&pr={{ $Ms->enk('Pembudidaya') }}">Produksi</a>
 											<span class="icon-thumbnail">P</span>
 										</li>
-										<li class="sub-rumputlaut">
-											<a href="/app/rumputlaut">Rumput Laut</a>
+										<li class="sub-budidayarumputlaut">
+											<a href="/app/budidayarumputlaut">Rumput Laut</a>
 											<span class="icon-thumbnail">RL</span>
 										</li>
 										<li class="sub-kja-airlaut">
@@ -94,8 +94,8 @@
 											<a href="/app/kjaairtawar">KJA air tawar</a>
 											<span class="icon-thumbnail">KAT</span>
 										</li>
-										<li class="sub-airpayau">
-											<a href="/app/airpayau">Air payau</a>
+										<li class="sub-budidayaairpayau">
+											<a href="/app/budidayaairpayau">Air payau</a>
 											<span class="icon-thumbnail">AP</span>
 										</li>
 									</ul>
@@ -308,13 +308,29 @@
 							@endif
 
 							@if ( Permissions::pembudidaya() )
+<<<<<<< HEAD
 								<li class="sub-master-produksi">
 									<a href="/app/master/produksi">Produksi</a>
 									<span class="icon-thumbnail">P</span>
 								</li>
 								<li class="sub-master-usaha">
 									<a href="/app/master/usaha">Usaha</a>
+=======
+
+								<li class="sub-usaha">
+									<a href="javascript:;"><span class="title">Usaha</span><span class=" arrow"></span></a>
+>>>>>>> 7fe22a21693ab23eb1490df1ac271ab18315d4fc
 									<span class="icon-thumbnail">U</span>
+									<ul class="sub-menu">
+										<li class="sub-jenis">
+											<a href="/app/master/jenis-usaha">Jenis Usaha</a>
+											<span class="icon-thumbnail">JU</span>
+										</li>
+										<li class="sub-nama-usaha">
+											<a href="/app/master/usaha">Usaha</a>
+											<span class="icon-thumbnail">U</span>
+										</li>
+									</ul>
 								</li>
 							@endif
 							<!-- <li class="sub-jabatan">

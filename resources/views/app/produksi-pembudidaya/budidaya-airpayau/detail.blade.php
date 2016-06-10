@@ -10,10 +10,10 @@
 	</thead>
 	<tbody>
 		<tr>
-			<td><b>{{ $kolamairtawar->lokasi }}</b></td>
-			<td><b>{{ $kolamairtawar->rtp }}</b></td>
-			<td><b>{{ $kolamairtawar->potensi }}</b></td>
-			<td><b>{{ $kolamairtawar->luas_tanam}} Ha</b></td>
+			<td><b>{{ $budidayaairpayau->lokasi }}</b></td>
+			<td><b>{{ $budidayaairpayau->rtp }}</b></td>
+			<td><b>{{ $budidayaairpayau->potensi }}</b></td>
+			<td><b>{{ $budidayaairpayau->luas_tanam}} Ha</b></td>
 		</tr>
 	</tbody>
 </table>
@@ -21,18 +21,18 @@
 <table class="table table-hover">
 	<thead>
 		<tr>
-			<th>Nila</th>
-			<th>Lele</th>
-			<th>Udang</th>
+			<th>Bandeng</th>
+			<th>U. Windu</th>
+			<th>U. Vannamae</th>
 			<th>Lainnya</th>
 		</tr>
 	</thead>
 	<tbody>
 		<tr>
-			<td><b>{{ $kolamairtawar->bibit_nila }} Ekor</b></td>
-			<td><b>{{ $kolamairtawar->bibit_lele }} Ekor</b></td>
-			<td><b>{{ $kolamairtawar->bibit_udang }} Ekor</b></td>
-			<td><b>{{ $kolamairtawar->bibit_lainnya }} Ekor</b></td>
+			<td><b>{{ $budidayaairpayau->bibit_bandeng }} Ekor</b></td>
+			<td><b>{{ $budidayaairpayau->bibit_windu }} Ekor</b></td>
+			<td><b>{{ $budidayaairpayau->bibit_vannamae }} Ekor</b></td>
+			<td><b>{{ $budidayaairpayau->bibit_lainnya }} Ekor</b></td>
 		</tr>
 	</tbody>
 </table>
@@ -40,18 +40,18 @@
 <table class="table table-hover">
 	<thead>
 		<tr>
-			<th>Nila</th>
-			<th>Lele</th>
-			<th>Udang</th>
+			<th>Bandeng</th>
+			<th>U. windu</th>
+			<th>U. vannamae</th>
 			<th>Lainnya</th>
 		</tr>
 	</thead>
 	<tbody>
 		<tr>
-			<td><b>{{ $kolamairtawar->produksi_nila }} Ekor</b></td>
-			<td><b>{{ $kolamairtawar->produksi_lele }} Ekor</b></td>
-			<td><b>{{ $kolamairtawar->produksi_udang }} Ekor</b></td>
-			<td><b>{{ $kolamairtawar->produksi_lainnya }} Ekor</b></td>
+			<td><b>{{ $budidayaairpayau->produksi_bandeng }} Ekor</b></td>
+			<td><b>{{ $budidayaairpayau->produksi_windu }} Ekor</b></td>
+			<td><b>{{ $budidayaairpayau->produksi_vannamae }} Ekor</b></td>
+			<td><b>{{ $budidayaairpayau->produksi_lainnya }} Ekor</b></td>
 		</tr>
 	</tbody>
 </table>
@@ -63,7 +63,7 @@
 	</thead>
 	<tbody>
 		<tr>
-			<td><b>{{ $kolamairtawar->keterangan }}</b></td>
+			<td><b>{{ $budidayaairpayau->keterangan }}</b></td>
 		</tr>
 	</tbody>
 </table>

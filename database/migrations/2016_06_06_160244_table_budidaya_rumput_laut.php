@@ -21,7 +21,7 @@ class TableBudidayaRumputLaut extends Migration
             $table->integer('luas_tanam');
             $table->integer('jumlah_bibit');
             $table->integer('produksi_catoni');
-            $table->integer('produksi_spenosum');
+            $table->integer('produksi_spenosun');
             $table->string('keterangan');
             $table->timestamps();
         });

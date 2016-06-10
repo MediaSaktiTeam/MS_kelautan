@@ -2,7 +2,7 @@
 $(function(){
 	$(".btn-hapus-single").click(function(){
 		var id = $(this).data('id');
-		$(".btn-hapus").attr('href',"{{ url('/app/kolamairtawar/hapus') }}/"+id);
+		$(".btn-hapus").attr('href',"{{ url('/app/budidayaairpayau/hapus') }}/"+id);
 		$("#modal-hapus").modal('hapus');
 	});
 });
@@ -24,9 +24,9 @@ $(function(){
 	</thead>
 	<tbody>
 
-		@if ( count($kolamairtawar) > 0 )
+		@if ( count($budidayaairpayau) > 0 )
 
-			@foreach($kolamairtawar as $at)
+			@foreach($budidayaairpayau as $at)
 
 				<tr>
 					<td>
@@ -39,7 +39,7 @@ $(function(){
 					<td>{{ $at->keterangan }}</td>
 					<td style="text-align:center">
 					<a class="btn btn-default btn-xs view" data-id="{{ $at->id }}"><i class="fa fa-search-plus"></i></a>
-					<a href="{{ route('kolamairtawar_edit',$at->id) }}" class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i></a>
+					<a href="{{ route('budidayaairpayau_edit',$at->id) }}" class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i></a>
 					</td>
 				</tr>
 

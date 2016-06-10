@@ -42,13 +42,13 @@
 				<th rowspan="2">Keterangan</th>
 			</tr>
 			<tr>
-				<th>Nila</th>
-				<th>Lele</th>
-				<th>Udang</th>
+				<th>Bandeng</th>
+				<th>U. Windu</th>
+				<th>U. Vannamae</th>
 				<th>Lainnya</th>
-				<th>Nila</th>
-				<th>Lele</th>
-				<th>Udang</th>
+				<th>Bandeng</th>
+				<th>U. Windu</th>
+				<th>U. Vannamae</th>
 				<th>Lainnya</th>
 			</tr>
 		</thead>
@@ -60,50 +60,50 @@
 			$potensi = "";
 			$jumlahrtp = "";
 			$luas_tanam = "";
-			$bibit_nila = "";
-			$bibit_lele = "";
-			$bibit_udang = "";
+			$bibit_bandeng = "";
+			$bibit_windu = "";
+			$bibit_vannamae = "";
 			$bibit_lainnya = "";
-			$produksi_nila = "";
-			$produksi_lele = "";
-			$produksi_udang = "";
+			$produksi_bandeng = "";
+			$produksi_windu = "";
+			$produksi_vannamae = "";
 			$produksi_lainnya = "";
 		?>
 
-		@foreach( $kolamairtawar as $at )
+		@foreach( $budidayaairpayau as $ap )
 
 			<tr>
 				<td><?php echo $i  ?></td>
-				<td>{{ $at->lokasi }}</td>
-				<td>{{ $at->potensi }}</td>
-				<td>{{ $at->rtp }}</td>
-				<td>{{ $at->luas_tanam }} Ha</td>
-				<td>{{ $at->bibit_nila }}</td>
-				<td>{{ $at->bibit_lele }}</td>
-				<td>{{ $at->bibit_udang }}</td>
-				<td>{{ $at->bibit_lainnya }}</td>
-				<td>{{ $at->produksi_nila }}</td>
-				<td>{{ $at->produksi_lele }}</td>
-				<td>{{ $at->produksi_udang }}</td>
-				<td>{{ $at->produksi_lainnya }}</td>
-				<td>{{ $at->keterangan }}</td>
+				<td>{{ $ap->lokasi }}</td>
+				<td>{{ $ap->potensi }}</td>
+				<td>{{ $ap->rtp }}</td>
+				<td>{{ $ap->luas_tanam }} Ha</td>
+				<td>{{ $ap->bibit_bandeng }}</td>
+				<td>{{ $ap->bibit_windu }}</td>
+				<td>{{ $ap->bibit_vannamae }}</td>
+				<td>{{ $ap->bibit_lainnya }}</td>
+				<td>{{ $ap->produksi_bandeng }}</td>
+				<td>{{ $ap->produksi_windu }}</td>
+				<td>{{ $ap->produksi_vannamae }}</td>
+				<td>{{ $ap->produksi_lainnya }}</td>
+				<td>{{ $ap->keterangan }}</td>
 			</tr>
 
 				
 			<?php 
 
 				$i = $i + 1;
-				$potensi += $at->potensi;
-				$jumlahrtp += $at->rtp;
-				$luas_tanam += $at->luas_tanam;
-				$bibit_nila += $at->bibit_nila;
-				$bibit_lele += $at->bibit_lele;
-				$bibit_udang += $at->bibit_udang;
-				$bibit_lainnya += $at->bibit_lainnya;
-				$produksi_nila += $at->produksi_nila;
-				$produksi_lele += $at->produksi_lele;
-				$produksi_udang += $at->produksi_udang;
-				$produksi_lainnya += $at->produksi_lainnya;
+				$potensi += $ap->potensi;
+				$jumlahrtp += $ap->rtp;
+				$luas_tanam += $ap->luas_tanam;
+				$bibit_bandeng += $ap->bibit_bandeng;
+				$bibit_windu += $ap->bibit_windu;
+				$bibit_vannamae += $ap->bibit_vannamae;
+				$bibit_lainnya += $ap->bibit_lainnya;
+				$produksi_bandeng += $ap->produksi_bandeng;
+				$produksi_windu += $ap->produksi_windu;
+				$produksi_vannamae += $ap->produksi_vannamae;
+				$produksi_lainnya += $ap->produksi_lainnya;
 			?>
 
 		@endforeach
@@ -112,13 +112,13 @@
 				<td><b><?php echo round($potensi,2); ?></b> Ha</td>
 				<td><b><?php echo round($jumlahrtp,2); ?></b></td>
 				<td><b><?php echo round($luas_tanam,2); ?></b> Ha</td>
-				<td><b><?php echo round($bibit_nila,2); ?></b></td>
-				<td><b><?php echo round($bibit_lele,2); ?></b></td>
-				<td><b><?php echo round($bibit_udang,2); ?></b></td>
+				<td><b><?php echo round($bibit_bandeng,2); ?></b></td>
+				<td><b><?php echo round($bibit_windu,2); ?></b></td>
+				<td><b><?php echo round($bibit_vannamae,2); ?></b></td>
 				<td><b><?php echo round($bibit_lainnya,2); ?></b></td>
-				<td><b><?php echo round($produksi_nila,2); ?></b></td>
-				<td><b><?php echo round($produksi_lele,2); ?></b></td>
-				<td><b><?php echo round($produksi_udang,2); ?></b></td>
+				<td><b><?php echo round($produksi_bandeng,2); ?></b></td>
+				<td><b><?php echo round($produksi_windu,2); ?></b></td>
+				<td><b><?php echo round($produksi_vannamae,2); ?></b></td>
 				<td><b><?php echo round($produksi_lainnya,2); ?></b></td>
 				<td></td>
 			</tr>

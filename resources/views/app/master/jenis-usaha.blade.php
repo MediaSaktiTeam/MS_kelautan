@@ -63,10 +63,9 @@
 							</div>
 							<div class="panel-body">
 								<h5>Jenis Usaha</h5>
-								<p>* Jenis Usaha digunakan pada halaman pembudidaya dan nelayan.</p>
-								<form class="style-form" method="GET" action="{{ route('usaha_tambah') }}">
+								<form class="style-form" method="GET" action="{{ route('jenis_usaha_tambah') }}">
 									<div class="form-group form-group-default required">
-										<label>Jenis Produksi</label>
+										<label>Nama Jenis Usaha</label>
 										<input type="text" name="nama" class="form-control" required>
 									</div>
 									<div class="form-group">
@@ -93,31 +92,32 @@
 										</tr>
 									</thead>
 									<tbody>
-										@foreach($masterusaha as $pd)
+										@foreach($usaha as $us)
 										<tr>
 											<td>
-											<?php $data_master = App\User::where('id_usaha', $pd->id)->count(); ?>
+											<?php $data_master = App\User::where('id_usaha', $us->id)->count(); ?>
+											<?php $data_master2 = App\Usaha::where('jenis_usaha', $us->id)->count(); ?>
 
 													<?php
 														$title = "";
 														$disabled = "";
-														if ( $data_master >= 1 ):
-															$title = "Produksi sedang terpakai";
+														if ( $data_master + $data_master2 >= 1 ):
+															$title = "Usaha sedang terpakai";
 															$disabled = "disabled";
 														endif
 													?>
 												<div class="checkbox" title="<?php echo $title ?>">
-													<input type="checkbox" class="pilih" value="{{ $pd->id }}" id="checkbox{{ $pd->id }}" <?php echo $disabled ?> >
-													<label for="checkbox{{ $pd->id }}" class="m-l-20"></label>
+													<input type="checkbox" class="pilih" value="{{ $us->id }}" id="checkbox{{ $us->id }}" <?php echo $disabled ?> >
+													<label for="checkbox{{ $us->id }}" class="m-l-20"></label>
 												</div>
 											</td>
-											<td>{{ $pd->nama }}</td>
-											<td><button class="btn btn-default btn-xs btn-edit"  data-id="{{ $pd->id }}"  data-nama="{{ $pd->nama }}"><i class="fa fa-pencil"></i></button></td>
+											<td>{{ $us->nama }}</td>
+											<td><button class="btn btn-default btn-xs btn-edit" data-nama="{{ $us->nama }}" data-id="{{ $us->id }}"><i class="fa fa-pencil"></i></button></td>
 										</tr>
 										@endforeach
 									</tbody>
 								</table>
-								<center>{!! $masterusaha->links() !!}</center>
+								<center>{!! $usaha->links() !!}</center>
 							</div>
 						</div>
 						<!-- END PANEL -->
@@ -188,10 +188,9 @@
 					<h5>Sunting Data</h5>
 				</div>
 				<div class="modal-body">
-					<form class="style-form" method="GET" action="{{ route('usaha_update') }}">
-						<input type="hidden" name="_token" value="{{ csrf_token() }}">
+					<form class="style-form" method="GET" action="{{ route('jenis_usaha_update') }}">
 						<div class="form-group form-group-default required">
-							<label>Nama Usaha</label>
+							<label>Nama Jenis Usaha</label>
 							<input type="text" id="nama" name="nama" class="form-control" required>
 						</div>
 						<div class="form-group">
@@ -215,12 +214,8 @@
 @section('registerscript')
 	<script>
 		$(".menu-items .link-master").addClass("active open");
-<<<<<<< HEAD
-		$(".menu-items .link-master .sub-master-usaha").addClass("active");
-=======
 		$(".menu-items .link-master .sub-usaha").addClass("active open");
-		$(".menu-items .link-master .sub-usaha .sub-nama-usaha").addClass("active");
->>>>>>> 7fe22a21693ab23eb1490df1ac271ab18315d4fc
+		$(".menu-items .link-master .sub-usaha .sub-jenis").addClass("active");
 		
 		$(function(){
 
@@ -237,24 +232,15 @@
 					return false;
 				}
 
-				$(".btn-hapus").attr('href',"{{ route('usaha_hapus') }}/"+id);
+				$(".btn-hapus").attr('href',"{{ route('jenis_usaha_hapus') }}/"+id);
 			});
 			$(".btn-edit").click(function(){
 
 				var id = $(this).data('id');
 				var nama = $(this).data('nama');
-				var jenis = $(this).data('jenis');
-				var namajenis = $(this).data('namajenis');
 				$('#id-jenis').val(id);
 				$('#nama').val(nama);
 				$('#modal-sunting').modal('show');
-
-				$("select option").filter(function() {
-				    if( $(this).val().trim() == jenis ){
-				    	$(this).prop('selected', true);
-				    	$(".select2-chosen").html(namajenis);
-				    }
-				});
 			});
 		})();
 	</script>

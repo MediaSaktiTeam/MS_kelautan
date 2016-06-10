@@ -158,6 +158,18 @@
 		Route::get('get-kecamatan/{id}', 'LokasiController@get_kecamatan');
 		Route::get('get-desa/{id}', 'LokasiController@get_desa');
 
+		Route::controller('app/budidayarumputlaut', 'BudidayaRumputLautController', 
+			[
+
+				'getIndex' => 'budidayarumputlaut',
+				'getAdd'  => 'budidayarumputlaut_tambah',
+				'getEdit' => 'budidayarumputlaut_edit',
+				'getUpdate'  => 'budidayarumputlaut_update',
+				'getDelete' => 'budidayarumputlaut_hapus',
+				'getDetail'  => 'budidayarumputlaut_detail',
+
+			]);
+
 		Route::controller('app/kolamairtawar', 'BudidayaKolamAirTawarController', 
 			[
 
@@ -170,7 +182,7 @@
 
 			]);
 
-		Route::controller('app/kjaairtawar', 'BudidayaKJAairTawarController', 
+		Route::controller('app/kjaairtawar', 'BudidayaKJAairtawarController', 
 			[
 
 				'getIndex' => 'kjaairtawar',
@@ -179,6 +191,30 @@
 				'getUpdate'  => 'kjaairtawar_update',
 				'getDelete' => 'kjaairtawar_hapus',
 				'getDetail'  => 'kjaairtawar_detail',
+
+			]);
+
+		Route::controller('app/kjaairlaut', 'BudidayaKJAairlautController', 
+			[
+
+				'getIndex' => 'kjaairlaut',
+				'getAdd'  => 'kjaairlaut_tambah',
+				'getEdit' => 'kjaairlaut_edit',
+				'getUpdate'  => 'kjaairlaut_update',
+				'getDelete' => 'kjaairlaut_hapus',
+				'getDetail'  => 'kjaairlaut_detail',
+
+			]);
+
+		Route::controller('app/budidayaairpayau', 'BudidayaAirPayauController', 
+			[
+
+				'getIndex' => 'budidayaairpayau',
+				'getAdd'  => 'budidayaairpayau_tambah',
+				'getEdit' => 'budidayaairpayau_edit',
+				'getUpdate'  => 'budidayaairpayau_update',
+				'getDelete' => 'budidayaairpayau_hapus',
+				'getDetail'  => 'budidayaairpayau_detail',
 
 			]);
 
@@ -275,6 +311,11 @@
 			return view('app.master.usaha');
 		});
 
+		Route::get('/app/master/usaha', function () {
+			return view('app.master.usaha');
+		});
+
+
 		Route::controller('/app/pengaturan', 'PengaturanController',
 			[
 				'getIndex'  => 'pengaturan',
@@ -298,7 +339,7 @@
 				'getHapus'		=>	'merekdagang_hapus',
 			]);
 
-		Route::controller('app/kelompok', 'KelompokController',
+		Route::controller('app/kelompok', 'KelompokController',
 			[
 				'getIndex'  => 'kelompok',
 				'getTambah'  => 'kelompok_tambah',
@@ -342,6 +383,13 @@
 				'getTambah' => 'usaha_tambah',
 				'getHapus'  => 'usaha_hapus',
 				'getUpdate'  => 'usaha_update',
+			]);
+		Route::controller('app/master/jenis-usaha', 'JenisUsahaController',
+			[
+				'getIndex'  => 'jenis_usaha',
+				'getTambah' => 'jenis_usaha_tambah',
+				'getHapus'  => 'jenis_usaha_hapus',
+				'getUpdate'  => 'jenis_usaha_update',
 			]);
 		Route::controller('app/master/sarana-pembudidaya', 'SaranaPembudidayaController',
 			[
