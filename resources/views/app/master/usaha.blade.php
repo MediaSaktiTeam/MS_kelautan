@@ -215,12 +215,7 @@
 @section('registerscript')
 	<script>
 		$(".menu-items .link-master").addClass("active open");
-<<<<<<< HEAD
 		$(".menu-items .link-master .sub-master-usaha").addClass("active");
-=======
-		$(".menu-items .link-master .sub-usaha").addClass("active open");
-		$(".menu-items .link-master .sub-usaha .sub-nama-usaha").addClass("active");
->>>>>>> 7fe22a21693ab23eb1490df1ac271ab18315d4fc
 		
 		$(function(){
 

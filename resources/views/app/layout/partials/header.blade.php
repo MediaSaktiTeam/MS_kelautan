@@ -308,18 +308,16 @@
 							@endif
 
 							@if ( Permissions::pembudidaya() )
-<<<<<<< HEAD
 								<li class="sub-master-produksi">
-									<a href="/app/master/produksi">Produksi</a>
-									<span class="icon-thumbnail">P</span>
+									<a href="/app/master/produksi">Jenis Produksi</a>
+									<span class="icon-thumbnail">JP</span>
 								</li>
 								<li class="sub-master-usaha">
-									<a href="/app/master/usaha">Usaha</a>
-=======
-
-								<li class="sub-usaha">
+									<a href="/app/master/usaha">Jenis Usaha</a>
+									<span class="icon-thumbnail">JU</span>
+								</li>
+								<!-- <li class="sub-usaha">
 									<a href="javascript:;"><span class="title">Usaha</span><span class=" arrow"></span></a>
->>>>>>> 7fe22a21693ab23eb1490df1ac271ab18315d4fc
 									<span class="icon-thumbnail">U</span>
 									<ul class="sub-menu">
 										<li class="sub-jenis">
@@ -331,7 +329,7 @@
 											<span class="icon-thumbnail">U</span>
 										</li>
 									</ul>
-								</li>
+								</li> -->
 							@endif
 							<!-- <li class="sub-jabatan">
 								<a href="/app/master/jabatan">Jabatan</a>

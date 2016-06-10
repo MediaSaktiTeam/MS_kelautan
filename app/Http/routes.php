@@ -339,7 +339,7 @@
 				'getHapus'		=>	'merekdagang_hapus',
 			]);
 
-		Route::controller('app/kelompok', 'KelompokController',
+		Route::controller('app/kelompok', 'KelompokController',
 			[
 				'getIndex'  => 'kelompok',
 				'getTambah'  => 'kelompok_tambah',
