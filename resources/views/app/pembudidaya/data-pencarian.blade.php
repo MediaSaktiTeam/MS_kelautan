@@ -16,7 +16,6 @@ $(function(){
 			<th>Nama Lengkap</th>
 			<th>Nama Kelompok</th>
 			<th>Jabatan Kelompok</th>
-			<th>Jenis Usaha</th>
 			<th style="text-align:center">Aksi</th>
 		</tr>
 	</thead>
@@ -33,7 +32,6 @@ $(function(){
 					<td>{{ $pb->name }}</td>
 					<td>{{ $pb->nama_kelompok }}</td>
 					<td>{{ $pb->nama_jabatan }}</td>
-					<td>{{ $pb->jenis_usaha }}</td>
 					<td style="text-align:center">
 						<a class="btn btn-default btn-xs view" data-id="{{ $pb->id }}"><i class="fa fa-search-plus"></i></a>
 						<a href="{{ route('pembudidaya_edit',$pb->id) }}" class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i></a>
