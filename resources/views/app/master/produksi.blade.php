@@ -122,7 +122,7 @@
 													<label for="checkbox{{ $pd->id }}" class="m-l-20"></label>
 												</div>
 											</td>
-											<td>{{ $pd->jenisusaha->id }}</td>
+											<td>{{ $pd->jenisusaha->nama }}</td>
 											<td>{{ $pd->nama }}</td>
 											
 										</tr>

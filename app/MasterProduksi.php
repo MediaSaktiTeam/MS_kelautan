@@ -12,6 +12,6 @@ class MasterProduksi extends Model
 
     public function jenisusaha()
     {
-    	return $this->belongsTo('App\JenisUsaha', 'nama');
+    	return $this->belongsTo('App\JenisUsaha', 'id');
     }
 }
