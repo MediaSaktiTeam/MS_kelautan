@@ -45,7 +45,7 @@
 			'postUpdate'  => 'pembudidaya_update',
 			'getHapus'  => 'pembudidaya_hapus',
 			'getSarana'  => 'pembudidaya_get_sarana',
-			'getUsaha'  => 'pembudidaya_get_usaha',
+			'getProduksi'  => 'pembudidaya_get_produksi',
 			'getDetail'  => 'pembudidaya_get_detail',
 		]);
 
