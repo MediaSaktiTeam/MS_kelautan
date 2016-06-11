@@ -5,5 +5,7 @@
 
 <select class="full-width" data-init-plugin="select2" name="id_usaha" required>
 	<option value="">Pilih Jenis Usaha...</option>
+	@foreach( $produksi as $p )
+		<option value="{{ $p->id }}">{{ $p->nama }}</option>
 	@endforeach
 </select>

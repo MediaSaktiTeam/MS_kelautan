@@ -171,7 +171,7 @@
 												<div class="col-md-12">
 													<div class="form-group">
 														<label>Jenis Usaha Budidaya</label>
-														<select onchange="get_usaha(this.value)" class="full-width" name="jenis_usaha" required data-init-plugin="select2">
+														<select onchange="get_produksi(this.value)" class="full-width" name="jenis_usaha" required data-init-plugin="select2">
 															<option value="">Pilih Jenis Usaha...</option>
 															<?php $jenisUsaha = App\JenisUsaha::all() ?>
 															@foreach( $jenisUsaha as $ju )
@@ -186,7 +186,7 @@
 												<div class="col-md-6">
 													<div class="form-group">
 														<label>Jenis Produksi</label>
-														<div id="usaha">
+														<div id="jenis-produksi">
 															<select class="full-width" data-init-plugin="select2" disabled>
 																<option value="">Pilih Jenis Produksi...</option>
 															</select>
@@ -533,14 +533,13 @@
 
 		});
 
-		function get_usaha(id){
-			$('#usaha').html('<i class="fa fa-spinner fa-spin"></i>');
+		function get_produksi(id){
+			$('#jenis-produksi').html('<i class="fa fa-spinner fa-spin"></i>');
 			var _token = $('meta[name="csrf-token"]').attr('content');
-			var url = "{{ url('app/pembudidaya/usaha') }}";
+			var url = "{{ url('app/pembudidaya/produksi') }}";
 			var url = url+"/"+id;
 			$.get(url, { id:id, _token:_token}, function(data){
-				$('#usaha').html(data);
-				get_sarana(id);
+				$('#jenis-produksi').html(data);
 			});
 		}
 

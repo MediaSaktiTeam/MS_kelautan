@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use DB,Excel,PDF;
-use App\User, App\Kelompok, App\Jabatan, App\Usaha, App\Sarana, App\KepemilikanSarana, App\JenisUsaha;
+use App\User, App\Kelompok, App\Jabatan, App\MasterProduksi, App\Sarana, App\KepemilikanSarana, App\JenisUsaha;
 use App\RefBantuan;
 
 class PembudidayaController extends Controller
@@ -241,10 +241,10 @@ class PembudidayaController extends Controller
 		return view('app.pembudidaya.detail', $data);
 	}
 
-	public function getUsaha($jenis)
+	public function getProduksi($jenis_produksi)
 	{
-		$data['usaha'] = Usaha::where('jenis_usaha', $jenis)->get();
-		return view('app.pembudidaya.data-usaha', $data);
+		$data['produksi'] = MasterProduksi::where('jenis_produksi', $jenis_produksi)->get();
+		return view('app.pembudidaya.data-produksi', $data);
 	}
 
 	public function getSarana($jenis)
