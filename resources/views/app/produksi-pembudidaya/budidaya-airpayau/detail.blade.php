@@ -17,7 +17,7 @@
 		</tr>
 	</tbody>
 </table>
-<h5>Bibit</h5>
+<h5>JUmlah Bibit</h5>
 <table class="table table-hover">
 	<thead>
 		<tr>

@@ -51,26 +51,34 @@
 											<input type="hidden" id="token" name="_token" value="{{ csrf_token() }}">
 											<label><b>KETERANGAN PRODUKSI</b></label>
 											<div class="row">
-												<div class="col-md-6">
+												<div class="col-md-4">
 													<label>Lokasi</label>
 													<div class="form-group">
 														<input type="text" name="lokasi" value="{{ Input::old('lokasi') }}" class="form-control" placeholder="Lokasi" required="">
 													</div>
 												</div>
+												<div class="col-md-4">
+													<label>Panjang Garis Pantai</label>
+													<div class="form-group input-group">
+														<input type="number" name="panjang_pantai" value="{{ Input::old('panjang_pantai') }}" class="form-control" placeholder="Jumlah" required="">
+														<span class="input-group-addon">Ha</span>
+													</div>
+												</div>
+												<div class="col-md-4">
+													<label>Petani/RTP</label>
+													<div class="form-group input-group">
+														<input type="number" name="rtp" value="{{ Input::old('rtp') }}" class="form-control" placeholder="Jumlah" required="">
+														<span class="input-group-addon">RTP</span>
+													</div>
+												</div>
+												
+											</div>
+											<div class="row">
 												<div class="col-md-6">
 													<label>Potensi</label>
 													<div class="form-group input-group">
 														<input type="number" name="potensi" value="{{ Input::old('potensi') }}" class="form-control" placeholder="Jumlah" required="">
 														<span class="input-group-addon">Ha</span>
-													</div>
-												</div>
-											</div>
-											<div class="row">
-												<div class="col-md-6">
-													<label>Petani/RTP</label>
-													<div class="form-group input-group">
-														<input type="number" name="rtp" value="{{ Input::old('rtp') }}" class="form-control" placeholder="Jumlah" required="">
-														<span class="input-group-addon">RTP</span>
 													</div>
 												</div>
 												<div class="col-md-6">
@@ -196,6 +204,7 @@
 														</th>
 														<th>No.</th>
 														<th>Lokasi</th>
+														<th>Panjang Garis Pantai</th>
 														<th>Jumlah RTP</th>
 														<th>Potensi</th>
 														<th>Luas Tanam</th>
@@ -223,6 +232,7 @@
 														} else {
 															$i = 1;
 														}
+														$panjang_pantai = "";
 														$jumlahrtp = "";
 														$potensi = "";
 														$luas_tanam = "";
@@ -238,6 +248,7 @@
 															</td>
 															<td>{{ $i++ }}</td>
 															<td>{{ $kal->lokasi }}</td>
+															<td>{{ $kal->panjang_pantai}}</td>
 															<td>{{ $kal->rtp }}</td>
 															<td>{{ $kal->potensi }}</td>
 															<td>{{ $kal->luas_tanam }}</td>
@@ -249,6 +260,7 @@
 		
 														</tr>
 														<?php 
+															$panjang_pantai += $kal->panjang_pantai;
 															$jumlahrtp += $kal->rtp;
 															$potensi += $kal->potensi;
 															$luas_tanam += $kal->luas_tanam;
@@ -258,6 +270,7 @@
 															<td><b>Jumlah</b></td>
 															<td></td>
 															<td></td>
+															<td><b><?php echo round($panjang_pantai,2); ?></b></td>
 															<td><b><?php echo round($jumlahrtp,2); ?></b></td>
 															<td><b><?php echo round($potensi,2); ?> Ha</b></td>
 															<td><b><?php echo round($luas_tanam,2); ?> Ha</b></td>

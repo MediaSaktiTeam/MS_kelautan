@@ -59,6 +59,13 @@
 													</div>
 												</div>
 												<div class="col-md-6">
+													<label>Panjang Garis pantai</label>
+													<div class="form-group input-group">
+														<input type="number" name="panjang_pantai" value="{{ $budidayarumputlaut->panjang_pantai }}" class="form-control" placeholder="Jumlah" required="">
+														<span class="input-group-addon">Ha</span>
+													</div>
+												</div>
+												<div class="col-md-6">
 													<label>Potensi</label>
 													<div class="form-group input-group">
 														<input type="number" name="potensi" value="{{ $budidayarumputlaut->potensi }}" class="form-control" placeholder="Jumlah" required="">
