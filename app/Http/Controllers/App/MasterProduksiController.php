@@ -59,7 +59,7 @@ class MasterProduksiController extends Controller
 	{
 
 		$data = MasterProduksi::find($request->id);
-		$data->jenis_produksi= $request->jenis;
+		$data->jenis_produksi = $request->jenis;
 		$data->nama = $request->nama;
 		$data->save();
 		$data['masterproduksi'] = MasterProduksi::paginate(1);

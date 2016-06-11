@@ -63,6 +63,7 @@
 							</div>
 							<div class="panel-body">
 								<h5>Jenis Produksi</h5>
+								<h5> <strong>Sementara Dalam tahap perbaikan</strong> </h5>
 								<p>* Jenis Produksi digunakan pada halaman pembudidaya dan nelayan.</p>
 								<form class="style-form" method="GET" action="{{ route('produksi_tambah') }}">
 									<div class="form-group form-group-default required">
@@ -105,8 +106,23 @@
 									<tbody>
 										@foreach($masterproduksi as $pd)
 										<tr>
-											
-											<td>{{ $pd->jenis_produksi }}</td>
+											<td>
+											<?php $data_master = App\User::where('id_usaha', $pd->id)->count(); ?>
+
+													<?php
+														$title = "";
+														$disabled = "";
+														if ( $data_master >= 1 ):
+															$title = "Produksi sedang terpakai";
+															$disabled = "disabled";
+														endif
+													?>
+												<div class="checkbox" title="<?php echo $title ?>">
+													<input type="checkbox" class="pilih" value="{{ $pd->id }}" id="checkbox{{ $pd->id }}" <?php echo $disabled ?> >
+													<label for="checkbox{{ $pd->id }}" class="m-l-20"></label>
+												</div>
+											</td>
+											<td>{{ $pd->jenisusaha->id }}</td>
 											<td>{{ $pd->nama }}</td>
 											
 										</tr>
