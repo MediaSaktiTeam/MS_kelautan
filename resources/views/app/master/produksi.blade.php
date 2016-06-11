@@ -124,6 +124,9 @@
 											</td>
 											<td>{{ $pd->jenisusaha->nama }}</td>
 											<td>{{ $pd->nama }}</td>
+											<td style="text-align:center">
+												
+											</td>
 											
 										</tr>
 										@endforeach
