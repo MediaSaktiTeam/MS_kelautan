@@ -83,19 +83,19 @@
 											<span class="icon-thumbnail">RL</span>
 										</li>
 										<li class="sub-kja-airlaut">
-											<a href="/app/kjaairlaut">KJA air laut</a>
+											<a href="/app/kjaairlaut">KJA Air Laut</a>
 											<span class="icon-thumbnail">KL</span>
 										</li>
 										<li class="sub-kolamairtawar">
-											<a href="/app/kolamairtawar">Kolam air tawar</a>
+											<a href="/app/kolamairtawar">Kolam Air Tawar</a>
 											<span class="icon-thumbnail">KT</span>
 										</li>
 										<li class="sub-kjaairtawar">
-											<a href="/app/kjaairtawar">KJA air tawar</a>
+											<a href="/app/kjaairtawar">KJA Air Tawar</a>
 											<span class="icon-thumbnail">KAT</span>
 										</li>
 										<li class="sub-budidayaairpayau">
-											<a href="/app/budidayaairpayau">Air payau</a>
+											<a href="/app/budidayaairpayau">Air Payau</a>
 											<span class="icon-thumbnail">AP</span>
 										</li>
 									</ul>
