@@ -241,6 +241,7 @@
 															<td><b><?php echo round($potensi,2); ?> Ha</b></td>
 															<td><b><?php echo round($luas_tanam,2); ?> Ha</b></td>
 															<td></td>
+															<td></td>
 														</tr>
 
 												</tbody>

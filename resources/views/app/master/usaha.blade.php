@@ -66,7 +66,7 @@
 								<p>* Jenis Usaha digunakan pada halaman pembudidaya dan nelayan.</p>
 								<form class="style-form" method="GET" action="{{ route('usaha_tambah') }}">
 									<div class="form-group form-group-default required">
-										<label>Jenis Produksi</label>
+										<label>Jenis Usaha</label>
 										<input type="text" name="nama" class="form-control" required>
 									</div>
 									<div class="form-group">
