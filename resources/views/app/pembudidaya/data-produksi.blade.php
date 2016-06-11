@@ -3,7 +3,7 @@
   $('select').select2();
 </script>
 
-<select class="full-width" data-init-plugin="select2" name="id_usaha" required>
+<select onchange="get_sarana(this.value)" class="full-width" data-init-plugin="select2" name="id_usaha" required>
 	<option value="">Pilih Jenis Usaha...</option>
 	@foreach( $produksi as $p )
 		<option value="{{ $p->id }}">{{ $p->nama }}</option>
