@@ -185,10 +185,10 @@
 											<div class="row">
 												<div class="col-md-6">
 													<div class="form-group">
-														<label>Jenis Usaha</label>
+														<label>Jenis Produksi</label>
 														<div id="usaha">
 															<select class="full-width" data-init-plugin="select2" disabled>
-																<option value="">Pilih Jenis Usaha...</option>
+																<option value="">Pilih Jenis Produksi...</option>
 															</select>
 														</div>
 													</div>
