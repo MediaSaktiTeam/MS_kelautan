@@ -84,16 +84,22 @@
 										</div>
 
 										<div class="row">
-											<div class="col-md-6">
+											<div class="col-md-4">
 												<div class="form-group">
 													<label>Jenis Produksi</label>
 													<input type="text" class="form-control" name="jenis_produksi" value="{{ $produksi->jenis_produksi }}">
 												</div>
 											</div>
-											<div class="col-md-6">
+											<div class="col-md-4">
 												<div class="form-group">
 													<label>Biaya Produksi</label>
 													<input type="number" class="form-control" name="biaya_produksi" value="{{ $produksi->biaya_produksi }}">
+												</div>
+											</div>
+											<div class="col-md-4">
+												<div class="form-group">
+													<label>Waktu Produksi</label>
+													<input type="date" class="form-control" name="waktu_produksi" value="{{ $produksi->waktu_produksi }}">
 												</div>
 											</div>
 										</div>

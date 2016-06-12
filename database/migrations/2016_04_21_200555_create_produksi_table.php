@@ -14,7 +14,7 @@ class CreateProduksiTable extends Migration
             $table->string('jenis_produksi');
             $table->string('biaya_produksi');
             $table->string('jenis_ikan')->nullable();
-            $table->timestamps();
+            $table->date('waktu_produksi');
         });
     }
 

@@ -28,7 +28,7 @@
 						<td>{{ $per->jenis_ikan }}</td>
 					@endif
 					<td>{{ $per->biaya_produksi }}</td>
-					<td>{{ $per->created_at }}</td>
+					<td>{{ $per->waktu_produksi }}</td>
 				</tr>
 
 				<?php $i = $i + 1 ?>
