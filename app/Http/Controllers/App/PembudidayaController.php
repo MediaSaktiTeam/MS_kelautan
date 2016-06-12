@@ -60,6 +60,7 @@ class PembudidayaController extends Controller
 		$data['kelompok'] = Kelompok::where('tipe','Pembudidaya')->get();
 		
 		$data['jabatan'] = Jabatan::paginate($limit);
+		
 		return view ('app.pembudidaya.index',$data)->with('limit', $limit);
 	}
 

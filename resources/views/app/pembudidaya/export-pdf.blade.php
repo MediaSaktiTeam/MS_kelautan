@@ -40,7 +40,7 @@
 				<th>Telepon</th>
 				<th>Pos</th>
 				<th>Jenis Usaha</th>
-				<th>Spesifik Usaha</th>
+				<th>Jenis Produksi</th>
 				<th>Kelompok</th>
 			</tr>
 		</thead>
@@ -59,8 +59,8 @@
 					<td>{{ $pb->erte }}</td>
 					<td>{{ $pb->tlp }}</td>
 					<td>{{ $pb->pos }}</td>
-					<td>{{ $pb->usaha->jenisusaha->nama }}</td>
-					<td>{{ $pb->usaha->nama }}</td>
+					<td>{{ $pb->jenisusaha->nama }}</td>
+					<td>{{ $pb->produksi->nama }}</td>
 					<td>{{ $pb->kelompok->nama }} ({{ $pb->jabatan->nama }})</td>
 				</tr>
 

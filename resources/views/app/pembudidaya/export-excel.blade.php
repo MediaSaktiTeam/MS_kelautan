@@ -11,7 +11,7 @@
 				<th>Nama Kelompok</th>
 				<th>Jabatan Kelompok</th>
 				<th>Jenis Usaha</th>
-				<th>Spesifik Usaha</th>
+				<th>Jenis Produksi</th>
 				<th>Sarana/Prasarana yang dimiliki</th>
 				<th>Bantuan yang pernah didapatkan</th>
 
@@ -34,8 +34,8 @@
 					<td>{{ $pb->pos }}</td>
 					<td>{{ $pb->kelompok->nama }}</td>
 					<td>{{ $pb->jabatan->nama }}</td>
-					<td>{{ $pb->usaha->jenisusaha->nama }}</td>
-					<td>{{ $pb->usaha->nama }}</td>
+					<td>{{ $pb->jenisusaha->nama }}</td>
+					<td>{{ $pb->produksi->nama }}</td>
 					<td>
 						<?php $Ksarana = App\KepemilikanSarana::where('id_user', $pb->id)->get(); ?>
 						<?php $nmr = 1 ?>
