@@ -372,7 +372,7 @@
 			]);
 		Route::controller('app/master/produksi', 'MasterProduksiController',
 			[
-				'getIndex'  => 'produksi',
+				'getIndex'  => 'produksi_index',
 				'getTambah' => 'produksi_tambah',
 				'getHapus'  => 'produksi_hapus',
 				'getUpdate'  => 'produksi_update',

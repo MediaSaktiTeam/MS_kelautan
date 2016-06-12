@@ -124,8 +124,7 @@
 											</td>
 											<td>{{ $pd->jenisusaha->nama }}</td>
 											<td>{{ $pd->nama }}</td>
-											<td style="text-align:center">
-												
+											<td><button class="btn btn-default btn-xs btn-edit" data-id="{{ $pd->id }}" data-jenis="{{ $pd->jenisusaha->nama }}" data-nama="{{ $pd->nama }}"><i class="fa fa-pencil"></i></button></td>
 											</td>
 											
 										</tr>
@@ -263,7 +262,6 @@
 				var id = $(this).data('id');
 				var nama = $(this).data('nama');
 				var jenis = $(this).data('jenis');
-				var namajenis = $(this).data('namajenis');
 				$('#id-jenis').val(id);
 				$('#nama').val(nama);
 				$('#modal-sunting').modal('show');
@@ -271,7 +269,7 @@
 				$("select option").filter(function() {
 				    if( $(this).val().trim() == jenis ){
 				    	$(this).prop('selected', true);
-				    	$(".select2-chosen").html(namajenis);
+				    	$(".select2-chosen").html(jenis);
 				    }
 				});
 			});

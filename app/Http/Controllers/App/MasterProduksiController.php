@@ -34,7 +34,7 @@ class MasterProduksiController extends Controller
 
 			$vb	=	MasterProduksi::where('nama',$request->nama)->where('jenis_produksi',$request->jenis)->count();
 			if ($vb > 0 ) {
-				return redirect()->route('produksi')->with(session()->flash('gagal','Data Sudah ada !!'));
+				return redirect()->route('produksi_index')->with(session()->flash('gagal','Data Sudah ada !!'));
 			}
 		/* end validasi */
 
@@ -42,7 +42,7 @@ class MasterProduksiController extends Controller
 		$dt->nama = $request->nama;
 		$dt->jenis_produksi = $request->jenis;
 		$dt->save();
-		return redirect()->route('produksi', $data)->with(session()->flash('success','Data Berhasil Tersimpan !!'));
+		return redirect()->route('produksi_index', $data)->with(session()->flash('success','Data Berhasil Tersimpan !!'));
 	}
 
 	public function getHapus($id){
@@ -52,7 +52,7 @@ class MasterProduksiController extends Controller
 		foreach ($val as $value) {
 			MasterProduksi::where('id', $value)->delete();           
 		}
-		return redirect()->route('produksi')->with(session()->flash('success','Data Berhasil Terhapus !!'));
+		return redirect()->route('produksi_index')->with(session()->flash('success','Data Berhasil Terhapus !!'));
 	}
 
 	public function getUpdate(Request $request)
@@ -64,6 +64,6 @@ class MasterProduksiController extends Controller
 		$data->save();
 		$data['masterproduksi'] = MasterProduksi::paginate(1);
 
-		return redirect()->route('produksi', $data)->with(session()->flash('success','Data Berhasil diupdate !!'));
+		return redirect()->route('produksi_index', $data)->with(session()->flash('success','Data Berhasil diupdate !!'));
 	}
 }
