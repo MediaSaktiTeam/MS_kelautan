@@ -1,4 +1,4 @@
-@extends('app.layout.main')
+@extends('app.layout.main')
 
 @section('title')
 	Luas Lahan Mangrove yang dimiliki | Sunting
@@ -93,16 +93,22 @@
 												</div>	
 											</div>
 											<div class="row">
-												<div class="col-sm-6">
+												<div class="col-sm-4">
 													<div class="form-group">
 														<label>Kondisi Rusak</label>
 														<input type="number" class="form-control number" name="kondisi_rusak" value="{{ $mangrovemilik->kondisi_rusak }}" min="0" id="k_rusak" onchange="$('#k_sedang').attr('max',$('#luas').val() - $(this).val());">
 													</div>
 												</div>
-												<div class="col-sm-6">
+												<div class="col-sm-4">
 													<div class="form-group">
 														<label>Kondisi Sedang</label>
 														<input type="number" class="form-control number" name="kondisi_sedang" value="{{ $mangrovemilik->kondisi_sedang }}" min="0" id="k_sedang">
+													</div>
+												</div>
+												<div class="col-sm-4">
+													<div class="form-group">
+														<label>Kondisi Baik</label>
+														<input type="number" class="form-control number" name="kondisi_baik" value="{{ $mangrovemilik->kondisi_baik }}" min="0" id="k_baik">
 													</div>
 												</div>
 											</div>

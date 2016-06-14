@@ -40,7 +40,7 @@ $(function(){
 					<td>{{ $mi->luas_lahan }} M<sup>2</sup></td>
 					<td>{{ $mi->kondisi_rusak }} M<sup>2</sup></td>
 					<td>{{ $mi->kondisi_sedang }} M<sup>2</sup></td>
-					<td>{{ $k_baik }} M<sup>2</sup></td>
+					<td>{{ $mi->kondisi_baik }} M<sup>2</sup></td>
 					<td style="text-align:center">
 						<a class="btn btn-default btn-xs view" data-id="{{ $mi->id }}"><i class="fa fa-search-plus"></i></a>
 						<a href="{{ route('mangrovemilik_edit', $mi->id) }}" class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i></a>

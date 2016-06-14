@@ -28,7 +28,7 @@
 					<td>{{ $mi->luas_lahan }} M<sup>2</sup></td>
 					<td>{{ $mi->kondisi_rusak }} M<sup>2</sup></td>
 					<td>{{ $mi->kondisi_sedang }} M<sup>2</sup></td>
-					<td>{{ $k_baik }} M<sup>2</sup></td>
+					<td>{{ $mi->kondisi_baik }} M<sup>2</sup></td>
 				</tr>
 
 				<?php $i = $i + 1 ?>
