@@ -61,6 +61,7 @@ class TerumbuMilikController extends Controller
 			$dt->luas_lahan = $request->luas_lahan;
 			$dt->kondisi_rusak = $request->kondisi_rusak;
 			$dt->kondisi_sedang = $request->kondisi_sedang;
+			$dt->kondisi_baik = $request->kondisi_baik;
 			$dt->save();
 			return redirect()->route('terumbumilik')->with(session()->flash('success','Data Berhasil Tersimpan !!'));
 		}
@@ -103,6 +104,7 @@ public function getUpdate(Request $request)
 		$dt->luas_lahan = $request->luas_lahan;
 		$dt->kondisi_rusak = $request->kondisi_rusak;
 		$dt->kondisi_sedang = $request->kondisi_sedang;
+		$dt->kondisi_baik = $request->kondisi_baik;
 		$dt->save();
 		$data['terumbumilik'] = TerumbuMilik::paginate(1);
 		return redirect()->route('terumbumilik', $data)->with(session()->flash('success','Data Berhasil diupdate !!'));

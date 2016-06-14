@@ -67,17 +67,18 @@
 					<td>{{ $mil->luas_lahan }} M<sup>2</sup></td>
 					<td>{{ $mil->kondisi_rusak }} M<sup>2</sup></td>
 					<td>{{ $mil->kondisi_sedang }} M<sup>2</sup></td>
-					<td>{{ $k_baik }} M<sup>2</sup></td>
+					<td>{{ $mil->kondisi_baik }} M<sup>2</sup></td>
 				</tr>
 				<?php 
 					$luas_lahan += $mil->luas_lahan * 0.0001;
 					$kondisi_baik += $k_baik * 0.0001;
 					$kondisi_sedang += $mil->kondisi_sedang * 0.0001;
 					$kondisi_rusak += $mil->kondisi_rusak * 0.0001;
+					$kondisi_baik += $mil->kondisi_baik * 0.0001;
 					$to_lahan += $mil->luas_lahan;
 					$to_rusak += $mil->kondisi_rusak;
 					$to_sedang += $mil->kondisi_sedang;
-					$to_baik += $k_baik;
+					$to_baik += $mil->kondisi_baik;
 				?>
 			@endforeach
 			<tr>
