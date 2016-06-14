@@ -3,6 +3,7 @@
 			<tr>
 				<th>No.</th>
 				<th>Nama Kecamatan</th>
+				<th>Nama Desa</th>
 				<th>Laki Laki (org)</th>
 				<th>Perempuan (org)</th>
 				<th>Jumlah KK</th>
@@ -22,6 +23,7 @@
 				<tr>
 					<td>{{ $i++ }}</td>
 					<td>{{ $jp->datakecamatan->nama }}</td>
+					<td>{{ $jp->datadesa->nama }}</td>
 					<td>{{ $jp->laki }}</td>
 					<td>{{ $jp->perempuan }}</td>
 					<td>{{ $jp->jumlah_kk }}</td>

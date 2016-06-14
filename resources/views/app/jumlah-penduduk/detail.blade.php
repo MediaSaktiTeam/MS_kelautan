@@ -4,6 +4,7 @@
 	
 		<tr>
 			<td><b>Nama Kecamatan</b></td>
+			<td><b>Nama Desa</b></td>
 			<td><b>Laki-laki (org)</b></td>
 			<td><b>Perempuan (org)</b></td>
 			<td><b>Jumlah KK</b></td>
@@ -12,6 +13,7 @@
 		<tr>
 		
 			<td>{{ $jumlahpenduduk->datakecamatan->nama }}</td>
+			<td>{{ $jumlahpenduduk->datadesa->nama }}</td>
 			<td>{{ $jumlahpenduduk->laki }}</td>
 			<td>{{ $jumlahpenduduk->perempuan }}</td>
 			<td>{{ $jumlahpenduduk->jumlah_kk }}</td>

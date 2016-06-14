@@ -172,7 +172,7 @@
 														@if ( $Ms->dek($_GET['pr']) == 'Nelayan' )
 															<th>Jenis Ikan</th>
 														@endif
-														<th>Jumlah Produksi</th>
+														<th>Biaya Produksi</th>
 														<th>Waktu Produksi</th>
 														<th style="text-align:center">Aksi</th>
 													</tr>

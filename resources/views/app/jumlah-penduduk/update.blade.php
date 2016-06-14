@@ -61,7 +61,7 @@
 											<input type="hidden" id="token" name="_token" value="{{ csrf_token() }}">
 											<label>KETERANGAN IDENTITAS</label>
 											<div class="row">
-												<div class="col-sm-3">
+												<div class="col-sm-6">
 													<div class="form-group">
 														<label>Kecamatan</label>
 														<div id="kecamatan">
@@ -75,19 +75,31 @@
 														</div>
 													</div>
 												</div>
-												<div class="col-sm-3">
+												<div class="col-sm-6">
+													<div class="form-group">
+														<label>Desa/Kelurahan</label>
+														<span id="desa">
+														<select class="full-width" name="desa" data-init-plugin="select2" required>
+															<option value="{{ $jumlahpenduduk->desa }}" {{ Input::old('desa') == $jumlahpenduduk->desa ? "selected":"" }}>{{ $jumlahpenduduk->datadesa->nama }}</option>
+														</select>
+														</span>
+													</div>
+												</div>
+											</div>
+											<div class="row">
+												<div class="col-sm-4">
 													<div class="form-group">
 														<label>Laki-laki (org)</label>
 														<input type="number" class="form-control number" name="laki" value="{{ $jumlahpenduduk->laki }}" min="0" id="x">
 													</div>
 												</div>	
-												<div class="col-sm-3">
+												<div class="col-sm-4">
 													<div class="form-group">
 														<label>Perempuan (org)</label>
 														<input type="number" class="form-control number" name="perempuan" value="{{ $jumlahpenduduk->perempuan }}" min="0" id="y">
 													</div>
 												</div>
-												<div class="col-sm-3">
+												<div class="col-sm-4">
 													<div class="form-group">
 														<label>Jumlah KK</label>
 														<input type="number" class="form-control number" name="jumlah_kk" value="{{ $jumlahpenduduk->jumlah_kk }}" min="0" id="kk">

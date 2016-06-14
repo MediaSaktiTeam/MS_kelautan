@@ -35,6 +35,7 @@
 			<tr>
 				<th width="10">No.</th>
 				<th>Nama Kecamatan</th>
+				<th>Nama Desa</th>
 				<th>Laki Laki (org)</th>
 				<th>Perempuan (org)</th>
 				<th>Jumlah KK</th>
@@ -62,6 +63,7 @@
 				<tr>
 					<td>{{ $i++ }}</td>
 					<td>{{ $jp->datakecamatan->nama }}</td>
+					<td>{{ $jp->datadesa->nama }}</td>
 					<td>{{ $jp->laki }}</td>
 					<td>{{ $jp->perempuan }}</td>
 					<td>{{ $jp->jumlah_kk }}</td>
@@ -72,6 +74,7 @@
 			@endforeach
 			<tr>
 					<td><b>Jumlah</b></td>
+					<td></td>
 					<td></td>
 					<td><b><?php echo round($laki,2);  ?></b></td>
 					<td><b><?php echo round($perempuan,2); ?></b></td>
