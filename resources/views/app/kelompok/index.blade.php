@@ -143,7 +143,10 @@
 										<div class="form-group">
 											<select onchange="window.open(this.options[this.selectedIndex].value,'_top')" class="full-width" data-init-plugin="select2">
 												<option value="{{ route('kelompok', ['f' => '']) }}" {{ $_GET['f'] == '' ? 'selected' : '' }}>Semua Jenis Usaha</option> 
-												<option value="{{ route('kelompok', ['f' => 'Pembudidaya']) }}" {{ $_GET['f'] == 'Pembudidaya' ? 'selected' : '' }}>Pembudidaya</option> 
+												<?php $jenisUsaha = App\JenisUsaha::all() ?>
+												@foreach( $jenisUsaha as $ju )
+													<option value="{{ route('kelompok', ['f' => $ju->nama ]) }}" {{ $ju->nama == 'Pembudidaya' ? 'selected' : '' }}>{{ $ju->nama }}</option> 
+												@endforeach
 												<option value="{{ route('kelompok', ['f' => 'Nelayan']) }}" {{ $_GET['f'] == 'Nelayan' ? 'selected' : '' }}>Nelayan</option> 
 												<option value="{{ route('kelompok', ['f' => 'Pengolah']) }}" {{ $_GET['f'] == 'Pengolah' ? 'selected' : '' }}>Pengolah</option> 
 											</select>
@@ -219,7 +222,7 @@
 												<td>{{ $i++ }}</td>
 												<td>{{ $kel->id_kelompok }}</td>
 												<td>{{ $kel->nama }}</td>
-												<td>{{ $kel->jenisusaha->nama }}</td>
+												<td></td>
 												<td>
 													<a class="btn btn-default btn-xs view" data-id="{{ $kel->id_kelompok }}" data-toggle="modal" data-target="#modal-view"><i class="fa fa-search-plus"></i></a>
 													<a href="javascript:;"
