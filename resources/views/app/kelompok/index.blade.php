@@ -89,6 +89,15 @@
 									@endif
 
 									<div class="form-group form-group-default required">
+										<label>Jenis Usaha Budidaya</label>
+										<select id="bidang-usaha" class="full-width" data-init-plugin="select2" name="tipe">
+											<option value="Nelayan">Budidaya Air Laut</option>
+											<option value="Pembudidaya">KJA Air Tawar</option>
+											<option value="Pengolah">Budidaya Rumput Laut</option>
+										</select>
+									</div>
+
+									<div class="form-group form-group-default required">
 										<label>Nama Kelompok</label>
 										<input type="text" id="nama" name="nama" class="form-control" required>
 									</div>
