@@ -308,13 +308,13 @@
 							@endif
 
 							@if ( Permissions::pembudidaya() )
+								<li class="sub-master-usaha">
+									<a href="/app/master/usaha">Jenis Usaha Budidaya</a>
+									<span class="icon-thumbnail">JU</span>
+								</li>
 								<li class="sub-master-produksi">
 									<a href="/app/master/produksi">Jenis Produksi</a>
 									<span class="icon-thumbnail">JP</span>
-								</li>
-								<li class="sub-master-usaha">
-									<a href="/app/master/usaha">Jenis Usaha</a>
-									<span class="icon-thumbnail">JU</span>
 								</li>
 								<!-- <li class="sub-usaha">
 									<a href="javascript:;"><span class="title">Usaha</span><span class=" arrow"></span></a>
