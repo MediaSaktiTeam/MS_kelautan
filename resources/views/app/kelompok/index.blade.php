@@ -80,24 +80,16 @@
 											<label>Bidang Usaha</label>
 											<select id="bidang-usaha" class="full-width" data-init-plugin="select2" name="tipe">
 													<option value="Nelayan">Nelayan</option>
-													<option value="Pembudidaya">Pembudidaya</option>
+													<?php $jenisUsaha = App\JenisUsaha::all() ?>
+											@foreach( $jenisUsaha as $ju )
+												<option value="{{ $ju->id }}">{{ $ju->nama }}</option>
+											@endforeach
 													<option value="Pengolah">Pengolah</option>
 											</select>
 										</div>
 									@else
 										<input type="hidden" name="tipe" value="{{ Permissions::pnp_role() }}">
 									@endif
-
-									<div class="form-group form-group-default required">
-										<label>Jenis Usaha Budidaya</label>
-										<select id="bidang-usaha" class="full-width" data-init-plugin="select2" name="tipe">
-											<option value="Budidaya Rumput Laut">Budidaya Rumput Laut</option>
-											<option value="Budidaya Air Laut">Budidaya Air Laut</option>
-											<option value="Budidaya Kolam Air Tawar">Budidaya Kolam Air Tawar</option>
-											<option value="Budidaya KJA Air Tawar">Budidaya KJA Air Tawar</option>
-											<option value="Budidaya Air Payau">Budidaya Air Payau</option>
-										</select>
-									</div>
 
 									<div class="form-group form-group-default required">
 										<label>Nama Kelompok</label>
@@ -227,7 +219,7 @@
 												<td>{{ $i++ }}</td>
 												<td>{{ $kel->id_kelompok }}</td>
 												<td>{{ $kel->nama }}</td>
-												<td>{{ $kel->tipe }}</td>
+												<td>{{ $kel->jenisusaha->nama }}</td>
 												<td>
 													<a class="btn btn-default btn-xs view" data-id="{{ $kel->id_kelompok }}" data-toggle="modal" data-target="#modal-view"><i class="fa fa-search-plus"></i></a>
 													<a href="javascript:;"
