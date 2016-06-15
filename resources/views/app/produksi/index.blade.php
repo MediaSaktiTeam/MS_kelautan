@@ -220,7 +220,7 @@
 
 													@else
 														<tr>
-															<td colspan="8"  class="not-found">
+															<td colspan="9"  class="not-found">
 																<img src="{{ url('resources/assets/app/img/not_found.png') }}" alt="">
 																<span>Tidak ada data</span>
 															</td>
