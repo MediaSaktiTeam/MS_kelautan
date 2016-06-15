@@ -91,9 +91,11 @@
 									<div class="form-group form-group-default required">
 										<label>Jenis Usaha Budidaya</label>
 										<select id="bidang-usaha" class="full-width" data-init-plugin="select2" name="tipe">
-											<option value="Nelayan">Budidaya Air Laut</option>
-											<option value="Pembudidaya">KJA Air Tawar</option>
-											<option value="Pengolah">Budidaya Rumput Laut</option>
+											<option value="Budidaya Rumput Laut">Budidaya Rumput Laut</option>
+											<option value="Budidaya Air Laut">Budidaya Air Laut</option>
+											<option value="Budidaya Kolam Air Tawar">Budidaya Kolam Air Tawar</option>
+											<option value="Budidaya KJA Air Tawar">Budidaya KJA Air Tawar</option>
+											<option value="Budidaya Air Payau">Budidaya Air Payau</option>
 										</select>
 									</div>
 

@@ -26,7 +26,7 @@
 								<a href="#">Master</a>
 							</li>
 							<li>
-								<a href="#" class="active">Jenis Usaha</a>
+								<a href="#" class="active">Jenis Usaha Pembudidaya</a>
 							</li>
 						</ul>
 					</div>
@@ -62,8 +62,8 @@
 								</div>
 							</div>
 							<div class="panel-body">
-								<h5>Jenis Usaha</h5>
-								<p>* Jenis Usaha digunakan pada halaman pembudidaya dan nelayan.</p>
+								<h5>Jenis Usaha Pembudidaya</h5>
+								<p>* Jenis Usaha Pembudidaya digunakan pada halaman pembudidaya.</p>
 								<form class="style-form" method="GET" action="{{ route('usaha_tambah') }}">
 									<div class="form-group form-group-default required">
 										<label>Jenis Usaha</label>
