@@ -322,7 +322,7 @@
 														 ?>
 													@endforeach
 														<tr>
-															<td><b>Jumlah</b></td>
+															<td><b>Jumlah Produksi</b></td>
 															<td></td>
 															<td></td>
 															<td></td>

@@ -74,19 +74,28 @@
 											</div>
 
 											<div class="row">
-												<div class="col-md-4">
+												<div class="col-md-6">
 													<div class="form-group">
 														<label>Jenis Produksi</label>
 														<input type="text" class="form-control" name="jenis_produksi" value="{{ Input::old('jenis_produksi') }}">
 													</div>
 												</div>
-												<div class="col-md-4">
+												<div class="col-md-6">
 													<div class="form-group">
 														<label>Biaya Produksi</label>
 														<input type="number" class="form-control" name="biaya_produksi" value="{{ Input::old('biaya_produksi') }}">
 													</div>
 												</div>
-												<div class="col-md-4">
+											</div>
+
+											<div class="row">
+												<div class="col-md-6">
+													<div class="form-group">
+														<label>Jumlah Produksi</label>
+														<input type="number" class="form-control" name="jumlah_produksi" value="{{ Input::old('jumlah_produksi') }}">
+													</div>
+												</div>
+												<div class="col-md-6">
 													<div class="form-group">
 														<label>Waktu Produksi</label>
 														<input type="date" class="form-control" name="waktu_produksi" value="{{ Input::old('waktu_produksi') }}">
@@ -173,6 +182,7 @@
 															<th>Jenis Ikan</th>
 														@endif
 														<th>Biaya Produksi</th>
+														<th>Jumlah Produksi</th>
 														<th>Waktu Produksi</th>
 														<th style="text-align:center">Aksi</th>
 													</tr>
@@ -197,7 +207,9 @@
 																@if ( $Ms->dek($_GET['pr']) == 'Nelayan' )
 																	<td>{{ $per->jenis_ikan }}</td>
 																@endif
+
 																<td>{{ $Ms->rupiah($per->biaya_produksi) }}</td>
+																<td>{{ $per->jumlah_produksi }}</td>
 																<td>{{ $per->waktu_produksi }}</td>
 																<td style="text-align:center">
 																	<a href="{{ url('/app/produksi/edit') }}/{{ $per->id }}?offset={{ $_GET['offset'] }}&limit={{ $_GET['limit'] }}&pr={{ $_GET['pr'] }}" class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i></a>

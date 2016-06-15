@@ -40,6 +40,7 @@
 				@if ( $Ms->dek($_GET['pr']) == 'Nelayan' )
 					<th>Jenis Ikan</th>
 				@endif
+				<th>Biaya Produki</th>
 				<th>Jumlah Produki</th>
 				<th>Waktu Produksi</th>
 			</tr>
@@ -58,6 +59,7 @@
 						<td>{{ $per->jenis_ikan }}</td>
 					@endif
 					<td>{{ $Ms->rupiah($per->biaya_produksi) }}</td>
+					<td>{{ $per->jumlah_produksi }}</td>
 					<td>{{ $per->waktu_produksi }}</td>
 				</tr>
 

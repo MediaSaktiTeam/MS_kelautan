@@ -56,6 +56,7 @@ class ProduksiController extends Controller
 		$data->biaya_produksi = $r->biaya_produksi;
 		$data->jenis_ikan = $r->jenis_ikan;
 		$data->waktu_produksi = $r->waktu_produksi;
+		$data->jumlah_produksi = $r->jumlah_produksi;
 		$data->save();
 
 		\Session::flash('success', 'Berhasil menyimpan data');
@@ -85,6 +86,7 @@ class ProduksiController extends Controller
 		$data->biaya_produksi = $r->biaya_produksi;
 		$data->waktu_produksi = $r->waktu_produksi;
 		$data->jenis_ikan = $r->jenis_ikan;
+		$data->jumlah_produksi = $r->jumlah_produksi;
 		$data->save();
 
 		\Session::flash('success', 'Berhasil menyimpan data');
