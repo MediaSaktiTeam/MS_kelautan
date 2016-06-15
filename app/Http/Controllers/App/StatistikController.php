@@ -41,21 +41,21 @@ class StatistikController extends Controller
 		}
 
 		// Statistik Jenis Usaha
-		$data['pembudidaya_air_tawar'] = DB::table('app_usaha as au')
+		$data['pembudidaya_air_tawar'] = DB::table('app_master_produksi as au')
 												->join('users as u', 'u.id_usaha', '=', 'au.id')
-												->where('au.jenis', 'Budidaya Air Tawar')
+												->where('au.jenis_produksi', 'Budidaya Air Tawar')
 												->where(DB::raw('left(u.created_at, 4)'), '<=', $r->tahun)
 												->count();
 
-		$data['pembudidaya_air_laut'] = DB::table('app_usaha as au')
+		$data['pembudidaya_air_laut'] = DB::table('app_master_produksi as au')
 												->join('users as u', 'u.id_usaha', '=', 'au.id')
-												->where('au.jenis', 'Budidaya Air Laut')
+												->where('au.jenis_produksi', 'Budidaya Air Laut')
 												->where(DB::raw('left(u.created_at, 4)'), '<=', $r->tahun)
 												->count();
 
-		$data['pembudidaya_air_payau'] = DB::table('app_usaha as au')
+		$data['pembudidaya_air_payau'] = DB::table('app_master_produksi as au')
 												->join('users as u', 'u.id_usaha', '=', 'au.id')
-												->where('au.jenis', 'Budidaya Air Payau')
+												->where('au.jenis_produksi', 'Budidaya Air Payau')
 												->where(DB::raw('left(u.created_at, 4)'), '<=', $r->tahun)
 												->count();
 
