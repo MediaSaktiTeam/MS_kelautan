@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
-use App\User, App\Kelompok;
+use App\User, App\Kelompok, App\MasterProduksi, App\JenisUsaha;
 use Excel, PDF, Permissions;
 
 class KelompokController extends Controller
@@ -26,6 +26,7 @@ class KelompokController extends Controller
 		} else {
 			$data['kelompok'] = Kelompok::where('tipe', Permissions::pnp_role())->paginate($limit);
 		}
+		// $data['kelompok'] = Kelompok::paginate($limit);
 		return view('app.kelompok.index', $data)->with('limit', $limit);
 	}
 

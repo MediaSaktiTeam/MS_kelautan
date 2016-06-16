@@ -222,7 +222,7 @@
 												<td>{{ $i++ }}</td>
 												<td>{{ $kel->id_kelompok }}</td>
 												<td>{{ $kel->nama }}</td>
-												<td></td>
+												<td>{{ $kel->tipe }}</td>
 												<td>
 													<a class="btn btn-default btn-xs view" data-id="{{ $kel->id_kelompok }}" data-toggle="modal" data-target="#modal-view"><i class="fa fa-search-plus"></i></a>
 													<a href="javascript:;"
