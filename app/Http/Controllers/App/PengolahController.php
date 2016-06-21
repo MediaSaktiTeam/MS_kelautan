@@ -54,7 +54,7 @@ class PengolahController extends Controller
 		$limit = 10;
 
 		$data['pengolah'] = $pengolah->paginate($limit);
-		$data['kelompok'] = Kelompok::where('tipe','Pengolah')->paginate($limit);
+		$data['kelompok'] = Kelompok::where('tipe','2')->paginate($limit);
 		$data['jabatan'] = Jabatan::paginate($limit);
 		return view ('app.pengolah.index',$data)->with('limit', $limit);
 	}
@@ -262,7 +262,7 @@ class PengolahController extends Controller
 								->whereBetween('created_at', [ $r->offset, $r->limit ])
 								->orderBy('id','desc');
 		$data['pengolah'] = $pengolah->get();
-		$data['kelompok'] = Kelompok::where('tipe','pengolah')->get();
+		$data['kelompok'] = Kelompok::where('tipe','2')->get();
 		$data['jabatan'] = Jabatan::all();
 
         Excel::create('Data Pengolah');
@@ -283,7 +283,7 @@ class PengolahController extends Controller
 								->whereBetween('created_at', [ $r->offset, $r->limit ])
 								->orderBy('id','desc');
 		$data['pengolah'] = $pengolah->get();
-		$data['kelompok'] = Kelompok::where('tipe','pengolah')->get();
+		$data['kelompok'] = Kelompok::where('tipe','2')->get();
 		$data['jabatan'] = Jabatan::all();
 		$data['tgl_awal']		= $r->offset;
 		$data['tgl_akhir']		= $r->limit;
