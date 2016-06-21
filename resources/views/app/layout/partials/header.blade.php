@@ -309,7 +309,7 @@
 
 							@if ( Permissions::pembudidaya() )
 								<li class="sub-master-usaha">
-									<a href="/app/master/usaha">Jenis Usaha Budidaya</a>
+									<a href="/app/master/usaha">Jenis Usaha</a>
 									<span class="icon-thumbnail">JU</span>
 								</li>
 								<li class="sub-master-produksi">
