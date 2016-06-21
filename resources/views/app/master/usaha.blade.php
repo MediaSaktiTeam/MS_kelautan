@@ -62,8 +62,7 @@
 								</div>
 							</div>
 							<div class="panel-body">
-								<h5>Jenis Usaha Pembudidaya</h5>
-								<p>* Jenis Usaha Pembudidaya digunakan pada halaman pembudidaya.</p>
+								<h5>Jenis Usaha</h5>
 								<form class="style-form" method="GET" action="{{ route('usaha_tambah') }}">
 									<div class="form-group form-group-default required">
 										<label>Jenis Usaha</label>
@@ -95,24 +94,37 @@
 									<tbody>
 										@foreach($masterusaha as $pd)
 										<tr>
-											<td>
-											<?php $data_master = App\User::where('id_usaha', $pd->id)->count(); ?>
+											<?php
+												$id = $pd->id;
+												if ($id < 3) {
+											?>
+												<td></td>
+												<td>{{ $pd->nama }}</td>
+												<td></td>
+											<?php
+												} else {
+											?>
+												<td>
+												<?php $data_master = App\User::where('id_usaha', $pd->id)->count(); ?>
 
-													<?php
-														$title = "";
-														$disabled = "";
-														if ( $data_master >= 1 ):
-															$title = "Produksi sedang terpakai";
-															$disabled = "disabled";
-														endif
-													?>
-												<div class="checkbox" title="<?php echo $title ?>">
-													<input type="checkbox" class="pilih" value="{{ $pd->id }}" id="checkbox{{ $pd->id }}" <?php echo $disabled ?> >
-													<label for="checkbox{{ $pd->id }}" class="m-l-20"></label>
-												</div>
-											</td>
-											<td>{{ $pd->nama }}</td>
-											<td><button class="btn btn-default btn-xs btn-edit"  data-id="{{ $pd->id }}"  data-nama="{{ $pd->nama }}"><i class="fa fa-pencil"></i></button></td>
+														<?php
+															$title = "";
+															$disabled = "";
+															if ( $data_master >= 1 ):
+																$title = "Produksi sedang terpakai";
+																$disabled = "disabled";
+															endif
+														?>
+													<div class="checkbox" title="<?php echo $title ?>">
+														<input type="checkbox" class="pilih" value="{{ $pd->id }}" id="checkbox{{ $pd->id }}" <?php echo $disabled ?> >
+														<label for="checkbox{{ $pd->id }}" class="m-l-20"></label>
+													</div>
+												</td>
+												<td>{{ $pd->nama }}</td>
+												<td><button class="btn btn-default btn-xs btn-edit"  data-id="{{ $pd->id }}"  data-nama="{{ $pd->nama }}"><i class="fa fa-pencil"></i></button></td>
+											<?php
+												}
+											?>
 										</tr>
 										@endforeach
 									</tbody>
