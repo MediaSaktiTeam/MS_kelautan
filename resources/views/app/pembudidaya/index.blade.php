@@ -315,8 +315,8 @@
 																<td>{{ $pb->kelompok->nama }}</td>
 																<td>{{ $pb->jabatan->nama }}</td>
 																<td>{{ $pb->erte }}</td>
-																<td>{{ $pb->datadesa->nama }}</td>
-																<td>{{ $pb->datakecamatan->nama }}</td>
+																<td>{{ $pb->datadesa }}</td>
+																<td>{{ $pb->datakecamatan }}</td>
 																<td style="text-align:center">
 																	<a class="btn btn-default btn-xs view" data-id="{{ $pb->id }}"><i class="fa fa-search-plus"></i></a>
 																	<a href="{{ route('pembudidaya_edit',$pb->id) }}" class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i></a>
