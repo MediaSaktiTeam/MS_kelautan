@@ -25,7 +25,7 @@ class ProduksiController extends Controller
 								->leftJoin('users as u', 'p.id_user', '=', 'u.id')
 								->select('p.*','u.id as id_user', 'u.name')
 								->where('u.profesi', $profesi)
-								->whereBetween('p.created_at', [ $r->offset, $r->limit ])
+								->whereBetween('p.waktu_produksi', [ $r->offset, $r->limit ])
 								->orderBy('id','desc')
 								->paginate(10);
 
@@ -44,7 +44,7 @@ class ProduksiController extends Controller
 		$tgl_akhir  = date('Y-m-t');
 		$cek = Produksi::where('jenis_produksi', $r->jenis_produksi)
 							->where('id_user', $r->id_user)
-							->whereBetween('created_at', [$tgl_pertama, $tgl_akhir])->count();
+							->whereBetween('waktu_produksi', [$tgl_pertama, $tgl_akhir])->count();
 		if ( $cek > 0 ) {
 			\Session::flash('gagal', 'Gagal!! Data ini telah ada bulan ini');
 			return redirect('/app/produksi?offset='.$r->offset.'&limit='.$r->limit.'&pr='.$r->pr)->withInput();
@@ -55,6 +55,8 @@ class ProduksiController extends Controller
 		$data->jenis_produksi = $r->jenis_produksi;
 		$data->biaya_produksi = $r->biaya_produksi;
 		$data->jenis_ikan = $r->jenis_ikan;
+		$data->waktu_produksi = $r->waktu_produksi;
+		$data->jumlah_produksi = $r->jumlah_produksi;
 		$data->save();
 
 		\Session::flash('success', 'Berhasil menyimpan data');
@@ -73,7 +75,7 @@ class ProduksiController extends Controller
 		$tgl_akhir  = date('Y-m-t');
 		$cek = Produksi::where('jenis_produksi', $r->jenis_produksi)
 							->where('id', '<>', $r->id)
-							->whereBetween('created_at', [$tgl_pertama, $tgl_akhir])->count();
+							->whereBetween('waktu_produksi', [$tgl_pertama, $tgl_akhir])->count();
 		if ( $cek > 0 ) {
 			\Session::flash('gagal', 'Gagal!! Data yang anda masukkan telah diinput bulan ini');
 			return redirect()->back()->withInput();
@@ -82,7 +84,9 @@ class ProduksiController extends Controller
 		$data = Produksi::find($r->id);
 		$data->jenis_produksi = $r->jenis_produksi;
 		$data->biaya_produksi = $r->biaya_produksi;
+		$data->waktu_produksi = $r->waktu_produksi;
 		$data->jenis_ikan = $r->jenis_ikan;
+		$data->jumlah_produksi = $r->jumlah_produksi;
 		$data->save();
 
 		\Session::flash('success', 'Berhasil menyimpan data');
@@ -137,7 +141,7 @@ class ProduksiController extends Controller
 								->leftJoin('users as u', 'p.id_user', '=', 'u.id')
 								->select('p.*','u.id as id_user', 'u.name')
 								->where('u.profesi', $profesi)
-								->whereBetween('p.created_at', [ $r->offset, $r->limit ])
+								->whereBetween('p.waktu_produksi', [ $r->offset, $r->limit ])
 								->get();
 
 		$data['profesi'] = $profesi;
@@ -163,7 +167,7 @@ class ProduksiController extends Controller
 								->leftJoin('users as u', 'p.id_user', '=', 'u.id')
 								->select('p.*','u.id as id_user', 'u.name')
 								->where('u.profesi', $profesi)
-								->whereBetween('p.created_at', [ $r->offset, $r->limit ])
+								->whereBetween('p.waktu_produksi', [ $r->offset, $r->limit ])
 								->get();
 
 		$data['profesi'] = $profesi;

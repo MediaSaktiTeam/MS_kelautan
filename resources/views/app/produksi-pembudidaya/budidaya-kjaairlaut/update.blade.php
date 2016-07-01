@@ -52,26 +52,33 @@
 
 											<label><b>KETERANGAN PRODUKSI</b></label>
 											<div class="row">
-												<div class="col-md-6">
+												<div class="col-md-4">
 													<label>Lokasi</label>
 													<div class="form-group">
 														<input type="text" name="lokasi" value="{{ $kjaairlaut->lokasi }}" class="form-control" placeholder="Lokasi" required="">
 													</div>
 												</div>
-												<div class="col-md-6">
-													<label>Potensi</label>
+												<div class="col-md-4">
+													<label>Panjang Garis Pantai</label>
 													<div class="form-group input-group">
-														<input type="number" name="potensi" value="{{ $kjaairlaut->potensi }}" class="form-control" placeholder="Jumlah" required="">
+														<input type="number" name="panjang_pantai" value="{{ $kjaairlaut->panjang_pantai }}" class="form-control" placeholder="Jumlah" required="">
 														<span class="input-group-addon">Ha</span>
+													</div>
+												</div>
+												<div class="col-md-4">
+													<label>Petani/RTP</label>
+													<div class="form-group input-group">
+														<input type="number" name="rtp" value="{{ $kjaairlaut->rtp }}" class="form-control" placeholder="Jumlah" required="">
+														<span class="input-group-addon">RTP</span>
 													</div>
 												</div>
 											</div>
 											<div class="row">
 												<div class="col-md-6">
-													<label>Petani/RTP</label>
+													<label>Potensi</label>
 													<div class="form-group input-group">
-														<input type="number" name="rtp" value="{{ $kjaairlaut->rtp }}" class="form-control" placeholder="Jumlah" required="">
-														<span class="input-group-addon">RTP</span>
+														<input type="number" name="potensi" value="{{ $kjaairlaut->potensi }}" class="form-control" placeholder="Jumlah" required="">
+														<span class="input-group-addon">Ha</span>
 													</div>
 												</div>
 												<div class="col-md-6">

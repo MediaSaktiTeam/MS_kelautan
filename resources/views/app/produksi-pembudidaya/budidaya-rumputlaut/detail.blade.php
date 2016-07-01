@@ -3,6 +3,7 @@
 	<thead>
 		<tr>
 			<th>Lokasi</th>
+			<th>Panjang Garis Pantai</th>
 			<th>Jumlah RTP</th>
 			<th>Potensi</th>
 			<th>Luas Tanam</th>
@@ -12,10 +13,11 @@
 	<tbody>
 		<tr>
 			<td><b>{{ $budidayarumputlaut->lokasi }}</b></td>
+			<td><b>{{ $budidayarumputlaut->panjang_pantai }}</b></td>
 			<td><b>{{ $budidayarumputlaut->rtp }}</b></td>
 			<td><b>{{ $budidayarumputlaut->potensi }}</b></td>
 			<td><b>{{ $budidayarumputlaut->luas_tanam}} Ha</b></td>
-			<td><b>{{ $budidayarumputlaut->jumlah_bibit}} Ha</b></td>
+			<td><b>{{ $budidayarumputlaut->jumlah_bibit}}</b></td>
 		</tr>
 	</tbody>
 </table>

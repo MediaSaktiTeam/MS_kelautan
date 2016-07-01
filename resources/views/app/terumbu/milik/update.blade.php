@@ -93,16 +93,22 @@
 												</div>	
 											</div>
 											<div class="row">
-												<div class="col-sm-6">
+												<div class="col-sm-4">
 													<div class="form-group">
 														<label>Kondisi Rusak</label>
 														<input type="number" class="form-control number" name="kondisi_rusak" value="{{ $terumbumilik->kondisi_rusak }}" id="k_rusak" onchange="$('#k_sedang').attr('max',$('#luas').val() - $(this).val());">
 													</div>
 												</div>
-												<div class="col-sm-6">
+												<div class="col-sm-4">
 													<div class="form-group">
 														<label>Kondisi Sedang</label>
 														<input type="number" class="form-control number" name="kondisi_sedang" value="{{ $terumbumilik->kondisi_sedang }}" id="k_sedang">
+													</div>
+												</div>
+												<div class="col-sm-4">
+													<div class="form-group">
+														<label>Kondisi Baik</label>
+														<input type="number" class="form-control number" name="kondisi_baik" value="{{ $terumbumilik->kondisi_baik }}" id="k_baik" >
 													</div>
 												</div>
 											</div>

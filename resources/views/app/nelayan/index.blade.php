@@ -146,17 +146,12 @@
 												<div class="col-sm-6">
 													<div class="form-group">
 														<label>Nama Kelompok</label>
-														<div class="input-group">
-															<select class="full-width" name="id_kelompok" data-init-plugin="select2" required>
-																<option value="">Pilih Kelompok...</option>
-																@foreach( $kelompok as $klp )
-																	<option value="{{ $klp->id_kelompok }}" {{ Input::old('id_kelompok') == $klp->id_kelompok ? "selected":"" }}>{{ $klp->nama }}</option>
-																@endforeach
-															</select>
-															<div class="input-group-btn">
-																<a class="btn btn-primary" href="/app/kelompok">+</a>
-															</div>
-														</div>
+														<select class="full-width" name="id_kelompok" data-init-plugin="select2" required>
+															<option value="">Pilih Kelompok...</option>
+															@foreach( $kelompok as $klp )
+																<option value="{{ $klp->id_kelompok }}" {{ Input::old('id_kelompok') == $klp->id_kelompok ? "selected":"" }}>{{ $klp->nama }}</option>
+															@endforeach
+														</select>
 													</div>
 												</div>
 												<div class="col-sm-6">

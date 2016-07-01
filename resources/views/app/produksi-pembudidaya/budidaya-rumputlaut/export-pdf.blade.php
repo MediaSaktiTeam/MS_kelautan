@@ -34,8 +34,9 @@
 			<tr>
 				<th rowspan="2">No.</th>
 				<th rowspan="2">Lokasi</th>
-				<th rowspan="2">Potensi</th>
+				<th rowspan="2">Panjang Garis Pantai</th>
 				<th rowspan="2">Jumlah RTP</th>
+				<th rowspan="2">Potensi</th>
 				<th rowspan="2">Luas Tanam (Ha)</th>
 				<th rowspan="2">Jumlah Bibit</th>
 				<th colspan="2">Produksi</th>
@@ -51,8 +52,9 @@
 
 		<?php 
 			$i = 1; 
-			$potensi = "";
+			$panjang_pantai = "";
 			$jumlahrtp = "";
+			$potensi = "";
 			$luas_tanam = "";
 			$jumlah_bibit = "";
 			$produksi_catoni = "";
@@ -65,8 +67,9 @@
 			<tr>
 				<td><?php echo $i  ?></td>
 				<td>{{ $brl->lokasi }}</td>
-				<td>{{ $brl->potensi }}</td>
+				<td>{{ $brl->panjang_pantai }}</td>
 				<td>{{ $brl->rtp }}</td>
+				<td>{{ $brl->potensi }}</td>
 				<td>{{ $brl->luas_tanam }} Ha</td>
 				<td>{{ $brl->jumlah_bibit }}</td>
 				<td>{{ $brl->produksi_catoni }}</td>
@@ -78,8 +81,9 @@
 			<?php 
 
 				$i = $i + 1;
-				$potensi += $brl->potensi;
+				$panjang_pantai += $brl->panj;
 				$jumlahrtp += $brl->rtp;
+				$potensi += $brl->potensi;
 				$luas_tanam += $brl->luas_tanam;
 				$jumlah_bibit += $brl->jumlah_bibit;
 				$produksi_catoni += $brl->produksi_catoni;
@@ -89,8 +93,9 @@
 		@endforeach
 			<tr>
 				<td colspan="2"><b>JUMLAH</b></td>
-				<td><b><?php echo round($potensi,2); ?></b> Ha</td>
+				<td><b><?php echo round($panjang_pantai,2); ?></b></td>
 				<td><b><?php echo round($jumlahrtp,2); ?></b></td>
+				<td><b><?php echo round($potensi,2); ?></b> Ha</td>
 				<td><b><?php echo round($luas_tanam,2); ?></b> Ha</td>
 				<td><b><?php echo round($jumlah_bibit,2); ?></b></td>
 				<td><b><?php echo round($produksi_catoni,2); ?></b></td>

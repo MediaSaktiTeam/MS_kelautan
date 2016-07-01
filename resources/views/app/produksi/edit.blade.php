@@ -98,6 +98,21 @@
 											</div>
 										</div>
 
+										<div class="row">
+											<div class="col-md-6">
+												<div class="form-group">
+													<label>Jumlah Produksi</label>
+													<input type="number" class="form-control" name="jumlah_produksi" value="{{ $produksi->jumlah_produksi }}">
+												</div>
+											</div>
+											<div class="col-md-6">
+												<div class="form-group">
+													<label>Waktu Produksi</label>
+													<input type="date" class="form-control" name="waktu_produksi" value="{{ $produksi->waktu_produksi }}">
+												</div>
+											</div>
+										</div>
+
 										@if ( $Ms->dek($_GET['pr']) == 'Nelayan' )
 										<div class="row">
 											<div class="col-md-12">

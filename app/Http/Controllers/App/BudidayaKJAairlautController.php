@@ -60,6 +60,7 @@ class BudidayaKJAairlautController extends Controller
 		$dt = new kjaairlaut;
 		$dt->id = $request->id;
 		$dt->lokasi = $request->lokasi;
+		$dt->panjang_pantai = $request->panjang_pantai;
 		$dt->rtp = $request->rtp;
 		$dt->potensi = $request->potensi;
 		$dt->luas_tanam = $request->luas_tanam;
@@ -96,6 +97,7 @@ class BudidayaKJAairlautController extends Controller
 		$dt = KjaAirLaut::find($request->id);
 		$dt->id = $request->id;
 		$dt->lokasi = $request->lokasi;
+		$dt->panjang_pantai = $request->panjang_pantai;
 		$dt->rtp = $request->rtp;
 		$dt->potensi = $request->potensi;
 		$dt->luas_tanam = $request->luas_tanam;

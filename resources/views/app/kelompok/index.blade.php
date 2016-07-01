@@ -159,6 +159,7 @@
 											<label>Bidang Usaha</label>
 
 											<select id="bidang-usaha" class="full-width" data-init-plugin="select2" name="tipe">
+<<<<<<< HEAD
 
 													<?php $jenisUsaha = App\JenisUsaha::all() ?>
 
@@ -168,6 +169,14 @@
 
 													@endforeach
 
+=======
+													<option value="Nelayan">Nelayan</option>
+													<?php $jenisUsaha = App\JenisUsaha::all() ?>
+											@foreach( $jenisUsaha as $ju )
+												<option value="{{ $ju->id }}">{{ $ju->nama }}</option>
+											@endforeach
+													<option value="Pengolah">Pengolah</option>
+>>>>>>> origin/master
 											</select>
 
 										</div>
@@ -283,6 +292,7 @@
 											<select onchange="window.open(this.options[this.selectedIndex].value,'_top')" class="full-width" data-init-plugin="select2">
 
 												<option value="{{ route('kelompok', ['f' => '']) }}" {{ $_GET['f'] == '' ? 'selected' : '' }}>Semua Jenis Usaha</option> 
+
 												@foreach( $jenisUsaha as $ju )
 
 													<option value="{{ route('kelompok', ['f' => $ju->id]) }}" {{ $_GET['f'] == $ju->id ? 'selected' : '' }}>{{ $ju->nama }}</option> 

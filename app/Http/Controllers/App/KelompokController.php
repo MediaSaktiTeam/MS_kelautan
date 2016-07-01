@@ -13,9 +13,13 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 
 use App\Http\Controllers\Controller;
+<<<<<<< HEAD
 
 use App\User, App\Kelompok;
 
+=======
+use App\User, App\Kelompok, App\MasterProduksi, App\JenisUsaha;
+>>>>>>> origin/master
 use Excel, PDF, Permissions;
 
 
@@ -53,7 +57,11 @@ class KelompokController extends Controller
 		} else {
 			$data['kelompok'] = Kelompok::where('tipe', Permissions::pnp_role())->paginate($limit);
 		}
+<<<<<<< HEAD
 
+=======
+		// $data['kelompok'] = Kelompok::paginate($limit);
+>>>>>>> origin/master
 		return view('app.kelompok.index', $data)->with('limit', $limit);
 
 	}

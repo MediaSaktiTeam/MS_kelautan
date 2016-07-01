@@ -27,7 +27,7 @@ $SC = new App\Custom;
 				
 				<!-- START ROW -->
 				<div class="row">
-					<div class="col-md-6 col-xlg-5">
+					<div class="col-md-6">
 						
 						<div class="row">
 							<div class="col-md-12 m-b-10">
@@ -95,7 +95,7 @@ $SC = new App\Custom;
 
 
 
-					<div class="col-md-6 col-xlg-4">
+					<div class="col-md-6">
 						<div class="row">
 
 
@@ -126,7 +126,7 @@ $SC = new App\Custom;
 									<div class="panel-body">
 										<div class="p-l-5">
 											<div class="row">
-												<div class="col-md-12 col-xlg-6">
+												<div class="col-md-12">
 													<div class="row m-t-20">
 														<div class="col-md-5">
 															<h4 class="no-margin">{{ $SC->hari_indo(date('l')) }}</h4>
@@ -171,70 +171,6 @@ $SC = new App\Custom;
 																	<div class="col-md-12">
 																		<p class="pull-left">Kelembaban Maksimal</p>
 																		<p class="pull-right bold">{{ $kelembapan_max }}%</p>
-																	</div>
-																</div>
-															</div>
-														</div>
-													</div>
-												</div>
-												<div class="col-xlg-6 visible-xlg">
-													<div class="row">
-														<div class="forecast-day col-md-6 text-center m-t-10 ">
-															<div class="bg-master-lighter p-b-10 p-t-10">
-																<h4 class="p-t-10 no-margin">Tuesday</h4>
-																<p class="small hint-text m-b-20">11th Augest 2014</p>
-																<canvas class="rain" width="64" height="64"></canvas>
-																<h5 class="text-danger">32°</h5>
-																<p>Feels like
-																	<span class="bold">sunny</span>
-																</p>
-																<p class="small">Wind
-																	<span class="bold p-l-20">11km/h</span>
-																</p>
-																<div class="m-t-20 block">
-																	<div class="padding-10">
-																		<div class="row">
-																			<div class="col-md-6 text-center">
-																				<p class="small">Noon</p>
-																				<canvas class="sleet" width="25" height="25"></canvas>
-																				<p class="text-danger bold">30°C</p>
-																			</div>
-																			<div class="col-md-6 text-center">
-																				<p class="small">Night</p>
-																				<canvas class="wind" width="25" height="25"></canvas>
-																				<p class="text-danger bold">30°C</p>
-																			</div>
-																		</div>
-																	</div>
-																</div>
-															</div>
-														</div>
-														<div class="col-md-6 text-center m-t-10 ">
-															<div class="bg-master-lighter p-b-10 p-t-10">
-																<h4 class="p-t-10 no-margin">Wednesday</h4>
-																<p class="small hint-text m-b-20">11th Augest 2014</p>
-																<canvas class="rain" width="64" height="64"></canvas>
-																<h5 class="text-danger">32°</h5>
-																<p>Feels like
-																	<span class="bold">sunny</span>
-																</p>
-																<p class="small">Wind
-																	<span class="bold p-l-20">11km/h</span>
-																</p>
-																<div class="m-t-20 block">
-																	<div class="padding-10">
-																		<div class="row">
-																			<div class="col-md-6 text-center">
-																				<p class="small">Noon</p>
-																				<canvas class="sleet" width="25" height="25"></canvas>
-																				<p class="text-danger bold">30°C</p>
-																			</div>
-																			<div class="col-md-6 text-center">
-																				<p class="small">Night</p>
-																				<canvas class="wind" width="25" height="25"></canvas>
-																				<p class="text-danger bold">30°C</p>
-																			</div>
-																		</div>
 																	</div>
 																</div>
 															</div>

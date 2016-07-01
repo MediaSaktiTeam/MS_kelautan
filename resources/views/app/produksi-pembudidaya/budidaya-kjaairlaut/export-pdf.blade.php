@@ -34,10 +34,11 @@
 			<tr>
 				<th rowspan="2">No.</th>
 				<th rowspan="2">Lokasi</th>
-				<th rowspan="2">Potensi</th>
+				<th rowspan="2">Panjang Garis Pantai</th>
 				<th rowspan="2">Jumlah RTP</th>
+				<th rowspan="2">Potensi</th>
 				<th rowspan="2">Luas Tanam (Ha)</th>
-				<th colspan="3">Bibit</th>
+				<th colspan="3">Jumlah Bibit</th>
 				<th colspan="3">Produksi</th>
 				<th rowspan="2">Keterangan</th>
 			</tr>
@@ -56,6 +57,7 @@
 		<?php 
 			$i = 1; 
 			$potensi = "";
+			$panjang_pantai = "";
 			$jumlahrtp = "";
 			$luas_tanam = "";
 			$bibit_kakap = "";
@@ -71,8 +73,9 @@
 			<tr>
 				<td><?php echo $i  ?></td>
 				<td>{{ $kal->lokasi }}</td>
-				<td>{{ $kal->potensi }}</td>
+				<td>{{ $kal->panjang_pantai }}</td>
 				<td>{{ $kal->rtp }}</td>
+				<td>{{ $kal->potensi }}</td>
 				<td>{{ $kal->luas_tanam }} Ha</td>
 				<td>{{ $kal->bibit_kakap }}</td>
 				<td>{{ $kal->bibit_udang }}</td>
@@ -87,8 +90,9 @@
 			<?php 
 
 				$i = $i + 1;
-				$potensi += $kal->potensi;
+				$panjang_pantai += $kal->panjang_pantai;
 				$jumlahrtp += $kal->rtp;
+				$potensi += $kal->potensi;
 				$luas_tanam += $kal->luas_tanam;
 				$bibit_kakap += $kal->bibit_kakap;
 				$bibit_udang += $kal->bibit_udang;
@@ -101,8 +105,9 @@
 		@endforeach
 			<tr>
 				<td colspan="2"><b>JUMLAH</b></td>
-				<td><b><?php echo round($potensi,2); ?></b> Ha</td>
+				<td><b><?php echo round($panjang_pantai,2); ?></b></td>
 				<td><b><?php echo round($jumlahrtp,2); ?></b></td>
+				<td><b><?php echo round($potensi,2); ?></b> Ha</td>
 				<td><b><?php echo round($luas_tanam,2); ?></b> Ha</td>
 				<td><b><?php echo round($bibit_kakap,2); ?></b></td>
 				<td><b><?php echo round($bibit_udang,2); ?></b></td>

@@ -8,7 +8,7 @@
 				<th rowspan="2">Potensi</th>
 				<th rowspan="2">Jumlah RTP</th>
 				<th rowspan="2">Luas Tanam (Ha)</th>
-				<th colspan="4">Bibit</th>
+				<th colspan="4">Jumlah Bibit</th>
 				<th colspan="4">Produksi</th>
 				<th rowspan="2">Keterangan</th>
 			</tr>

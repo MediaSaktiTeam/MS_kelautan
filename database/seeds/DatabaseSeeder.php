@@ -77,9 +77,13 @@ class JenisUsahaTableSeeder extends Seeder
   {
     App\JenisUsaha::truncate();
     $data = [
-        ['nama' => 'Budidaya Air Laut'],
-        ['nama' => 'Budidaya Air Tawar'],
-        ['nama' => 'Budidaya Air Payau']
+        ['nama' => 'Nelayan'],
+        ['nama' => 'Pengolah'],
+        ['nama' => 'Budidaya Kolam Air Tawar'],
+        ['nama' => 'Budidaya Air Payau'],
+        ['nama' => 'Budidaya Budidaya Rumput Laut'],
+        ['nama' => 'Budidaya KJA Air Tawar'],
+        ['nama' => 'Budidaya KJA Air Laut']
     ];
     }
 }

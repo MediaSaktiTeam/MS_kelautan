@@ -23,7 +23,7 @@
 		</tr>
 		<tr>
 			<td>Kondisi Baik</td>
-			<td><b>{{ $k_baik }} M<sup>2</sup></b></td>
+			<td><b>{{ $mangrovemilik->kondisi_baik }} M<sup>2</sup></b></td>
 		</tr>
 	</tbody>
 </table>

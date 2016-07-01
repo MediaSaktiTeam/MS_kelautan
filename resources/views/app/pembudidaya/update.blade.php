@@ -194,13 +194,13 @@
 										<div class="row">
 											<div class="col-md-6">
 												<div class="form-group">
-													<label>Jenis Usaha</label>
+													<label>Jenis Produksi</label>
 													<div id="usaha">
 														<select class="full-width" data-init-plugin="select2" name="id_usaha" required>
-															<option value="">Pilih Spesifik Usaha...</option>
-															<?php $usaha = App\Usaha::where('jenis_usaha', $pembudidaya->usaha->jenisusaha->id)->get(); ?>
-															@foreach( $usaha as $us )
-																<option value="{{ $us->id }}" {{ $pembudidaya->usaha->nama == $us->nama ? "selected":"" }}>{{ $us->nama }}</option>
+															<option value="">Pilih Jenis produksi...</option>
+															<?php $masterproduksi = App\MasterProduksi::where('jenis_produksi', $pembudidaya->jenis_usaha)->get(); ?>
+															@foreach( $masterproduksi as $mp )
+																<option value="{{ $mp->id }}" {{ $pembudidaya->produksi->nama == $mp->nama ? "selected":"" }}>{{ $mp->nama }}</option>
 															@endforeach
 														</select>
 													</div>
@@ -211,7 +211,7 @@
 													<label>Kepemilikan Sarana dan Prasarana</label>
 													<div id="sarana">
 														<select name="id_sarana[]" class="full-width" data-init-plugin="select2" multiple="">
-															<?php $sarana = App\Sarana::where('jenis', $pembudidaya->usaha->jenisusaha->nama)->get(); ?>
+															<?php $sarana = App\Sarana::where('jenis', $pembudidaya->jenisusaha->nama)->get(); ?>
 															<?php $Ksarana = App\KepemilikanSarana::where('id_user', $pembudidaya->id)->get(); ?>
 															<?php $Ksarana_arr = []; ?>
 															@foreach ( $Ksarana as $val )

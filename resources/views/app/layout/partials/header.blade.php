@@ -83,19 +83,19 @@
 											<span class="icon-thumbnail">RL</span>
 										</li>
 										<li class="sub-kja-airlaut">
-											<a href="/app/kjaairlaut">KJA air laut</a>
+											<a href="/app/kjaairlaut">KJA Air Laut</a>
 											<span class="icon-thumbnail">KL</span>
 										</li>
 										<li class="sub-kolamairtawar">
-											<a href="/app/kolamairtawar">Kolam air tawar</a>
+											<a href="/app/kolamairtawar">Kolam Air Tawar</a>
 											<span class="icon-thumbnail">KT</span>
 										</li>
 										<li class="sub-kjaairtawar">
-											<a href="/app/kjaairtawar">KJA air tawar</a>
+											<a href="/app/kjaairtawar">KJA Air Tawar</a>
 											<span class="icon-thumbnail">KAT</span>
 										</li>
 										<li class="sub-budidayaairpayau">
-											<a href="/app/budidayaairpayau">Air payau</a>
+											<a href="/app/budidayaairpayau">Air Payau</a>
 											<span class="icon-thumbnail">AP</span>
 										</li>
 									</ul>
@@ -308,8 +308,15 @@
 							@endif
 
 							@if ( Permissions::pembudidaya() )
-
-								<li class="sub-usaha">
+								<li class="sub-master-usaha">
+									<a href="/app/master/usaha">Jenis Usaha</a>
+									<span class="icon-thumbnail">JU</span>
+								</li>
+								<li class="sub-master-produksi">
+									<a href="/app/master/produksi">Jenis Produksi</a>
+									<span class="icon-thumbnail">JP</span>
+								</li>
+								<!-- <li class="sub-usaha">
 									<a href="javascript:;"><span class="title">Usaha</span><span class=" arrow"></span></a>
 									<span class="icon-thumbnail">U</span>
 									<ul class="sub-menu">
@@ -322,7 +329,7 @@
 											<span class="icon-thumbnail">U</span>
 										</li>
 									</ul>
-								</li>
+								</li> -->
 							@endif
 							<!-- <li class="sub-jabatan">
 								<a href="/app/master/jabatan">Jabatan</a>

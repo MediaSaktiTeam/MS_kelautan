@@ -28,7 +28,7 @@
 					<td>{{ $mil->luas_lahan }} M<sup>2</sup></td>
 					<td>{{ $mil->kondisi_rusak }} M<sup>2</sup></td>
 					<td>{{ $mil->kondisi_sedang }} M<sup>2</sup></td>
-					<td>{{ $k_baik }} M<sup>2</sup></td>
+					<td>{{ $mil->kondisi_baik }} M<sup>2</sup></td>
 				</tr>
 
 			@endforeach

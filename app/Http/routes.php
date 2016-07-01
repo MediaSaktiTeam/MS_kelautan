@@ -45,7 +45,7 @@
 			'postUpdate'  => 'pembudidaya_update',
 			'getHapus'  => 'pembudidaya_hapus',
 			'getSarana'  => 'pembudidaya_get_sarana',
-			'getUsaha'  => 'pembudidaya_get_usaha',
+			'getProduksi'  => 'pembudidaya_get_produksi',
 			'getDetail'  => 'pembudidaya_get_detail',
 		]);
 
@@ -289,23 +289,32 @@
 				'getEdit' => 'desa_edit',
 			]);
 
-		// Route::get('/app/master/bantuan', function () {
-		// 	return view('app.master.bantuan');
-		// });
+		Route::get('/app/master/bantuan', function () {
+			return view('app.master.bantuan');
+		});
 	 
 
-		// Route::get('/app/master/jabatan', function () {
-		// 	return view('app.master.jabatan');
-		// });
+		Route::get('/app/master/jabatan', function () {
+			return view('app.master.jabatan');
+		});
 
-		// Route::get('/app/master/jenis-usaha', function () {
-		// 	return view('app.master.jenis-usaha');
-		// });
+		Route::get('/app/master/jenis-usaha', function () {
+			return view('app.master.jenis-usaha');
+		});
 
 
-		// Route::get('/app/master/usaha', function () {
-		// 	return view('app.master.usaha');
-		// });
+		Route::get('/app/master/produksi', function () {
+			return view('app.master.produksi');
+		});
+
+		Route::get('/app/master/usaha', function () {
+			return view('app.master.usaha');
+		});
+
+		Route::get('/app/master/usaha', function () {
+			return view('app.master.usaha');
+		});
+
 
 		Route::controller('/app/pengaturan', 'PengaturanController',
 			[
@@ -361,7 +370,14 @@
 				'getHapus'  => 'jabatan_hapus',
 				'getUpdate'  => 'jabatan_update',
 			]);
-		Route::controller('app/master/usaha', 'UsahaController',
+		Route::controller('app/master/produksi', 'MasterProduksiController',
+			[
+				'getIndex'  => 'produksi_index',
+				'getTambah' => 'produksi_tambah',
+				'getHapus'  => 'produksi_hapus',
+				'getUpdate'  => 'produksi_update',
+			]);
+		Route::controller('app/master/usaha', 'MasterUsahaController',
 			[
 				'getIndex'  => 'usaha',
 				'getTambah' => 'usaha_tambah',

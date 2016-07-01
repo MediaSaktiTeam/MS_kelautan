@@ -50,6 +50,7 @@ class JumlahPendudukController extends Controller
 			$dt = new JumlahPenduduk;
 			$dt->id = $request->id;
 			$dt->kecamatan = $request->kecamatan;
+			$dt->desa = $request->desa;
 			$dt->laki = $request->laki;
 			$dt->perempuan = $request->perempuan;
 			$dt->jumlah_kk = $request->jumlah_kk;
@@ -91,6 +92,7 @@ class JumlahPendudukController extends Controller
 			$dt = JumlahPenduduk::find($request->id);
 			$dt->id = $request->id;
 			$dt->kecamatan = $request->kecamatan;
+			$dt->desa = $request->desa;
 			$dt->laki = $request->laki;
 			$dt->perempuan = $request->perempuan;
 			$dt->jumlah_kk = $request->jumlah_kk;
@@ -101,10 +103,17 @@ class JumlahPendudukController extends Controller
 
 	public function getSearch($cari)
 	{
-		$data['jumlah_penduduk'] = DB::table('app_jumlah_penduduk as t')
-									->leftJoin('kecamatan as k', 't.kecamatan', '=', 'k.id')
-										->select('k.nama as nama_kecamatan', 't.*')
-										->where('k.nama','LIKE', '%'.$cari.'%')
+			$data['jumlahpenduduk'] = DB::table('app_jumlah_penduduk as mm')
+									->leftJoin('kecamatan as k', 'mm.kecamatan', '=', 'k.id')
+									->leftJoin('desa', 'mm.desa', '=', 'desa.id')
+										->select(
+											'k.nama as nama_kecamatan',
+											'mm.*',
+											'desa.nama as nama_desa')
+												->where(function($query) use ($cari) {
+													$query->where('k.nama','LIKE', '%'.$cari.'%')
+															->orWhere('desa.nama','LIKE', '%'.$cari.'%');
+												})
 									->take(40)->get();
 
 		return view('app.jumlah-penduduk.search', $data);

@@ -15,6 +15,7 @@ class TableJumlahPenduduk extends Migration
         Schema::create('app_jumlah_penduduk', function(Blueprint $table){
             $table->increments('id');
             $table->string('kecamatan');
+            $table->string('desa');
             $table->integer('laki');
             $table->integer('perempuan');
             $table->integer('jumlah_kk');

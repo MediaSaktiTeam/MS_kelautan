@@ -15,6 +15,7 @@ $(function(){
 				<center>#</center>
 			</th>
 			<th>Lokasi</th>
+			<th>Panjang Garis Pantai</th>
 			<th>Jumlah RTP</th>
 			<th>Potensi</th>
 			<th>Luas Tanam</th>
@@ -33,6 +34,7 @@ $(function(){
 						<button class="btn btn-xs btn-danger btn-hapus-single" data-toggle="modal" data-target="#modal-hapus" data-id="{{ $kal->id }}"><i class="pg-trash"></i></button>
 					</td>
 					<td>{{ $kal->lokasi }}</td>
+					<td>{{ $kal->panjang_pantai }}</td>
 					<td>{{ $kal->rtp }}</td>
 					<td>{{ $kal->potensi }}</td>
 					<td>{{ $kal->luas_tanam }}</td>

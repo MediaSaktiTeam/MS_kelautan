@@ -84,16 +84,22 @@
 											</div>
 
 											<div class="row">
-												<div class="col-sm-6">
+												<div class="col-sm-4">
 													<div class="form-group">
 														<label>Kondisi Rusak</label>
 														<input type="number" class="form-control number" name="kondisi_rusak" value="" min="0" id="k_rusak" onchange="$('#k_sedang').attr('max',$('#luas').val() - $(this).val());">
 													</div>
 												</div>
-												<div class="col-sm-6">
+												<div class="col-sm-4">
 													<div class="form-group">
 														<label>Kondisi Sedang</label>
 														<input type="number" class="form-control number" name="kondisi_sedang" value="" min="0" id="k_sedang">
+													</div>
+												</div>
+												<div class="col-sm-4">
+													<div class="form-group">
+														<label>Kondisi Baik</label>
+														<input type="number" class="form-control number" name="kondisi_baik" value="" min="0" id="k_baik">
 													</div>
 												</div>
 											</div>
@@ -204,7 +210,8 @@
 															<td>{{ $mil->luas_lahan }} M<sup>2</sup></td>
 															<td>{{ $mil->kondisi_rusak }} M<sup>2</sup></td>
 															<td>{{ $mil->kondisi_sedang }} M<sup>2</sup></td>
-															<td>{{ $k_baik }} M<sup>2</sup></td>
+															<td>{{ $mil->kondisi_baik }} M<sup>2</sup></td>
+															
 															<td style="text-align:center">
 																<a class="btn btn-default btn-xs view" data-id="{{ $mil->id }}"><i class="fa fa-search-plus"></i></a>
 																<a href="{{ route('terumbumilik_edit', $mil->id) }}" class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i></a>
@@ -216,11 +223,11 @@
 															$kondisi_baik += $k_baik * 0.0001;
 															$kondisi_sedang += $mil->kondisi_sedang * 0.0001;
 															$kondisi_rusak += $mil->kondisi_rusak * 0.0001;
+															$kondisi_baik += $mil->kondisi_baik * 0.0001;
 															$to_lahan += $mil->luas_lahan;
 															$to_rusak += $mil->kondisi_rusak;
 															$to_sedang += $mil->kondisi_sedang;
-															$to_baik += $k_baik;
-															
+															$to_baik += $mil->kondisi_baik;
 															 ?>
 												@endforeach
 														<tr>
@@ -232,6 +239,7 @@
 															<td><b>{{ $to_rusak }} M<sup>2</sup> <?php echo "(", round($kondisi_rusak,2), "Ha)"; ?></b></td>
 															<td><b>{{ $to_sedang }} M<sup>2</sup> <?php echo "(", round($kondisi_sedang,2), "Ha)"; ?></b></td>
 															<td><b>{{ $to_baik }} M<sup>2</sup> <?php echo "(", round($kondisi_baik,2), "Ha)"; ?></b></td>
+															
 															<td></td>
 														</tr>
 												</tbody>

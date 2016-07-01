@@ -9,6 +9,7 @@
 				@if ( $Ms->dek($_GET['pr']) == 'Nelayan' )
 					<th>Jenis Ikan</th>
 				@endif
+				<th>Biaya Produksi</th>
 				<th>Jumlah Produki</th>
 				<th>Waktu Produksi</th>
 			</tr>
@@ -28,7 +29,8 @@
 						<td>{{ $per->jenis_ikan }}</td>
 					@endif
 					<td>{{ $per->biaya_produksi }}</td>
-					<td>{{ $per->created_at }}</td>
+					<td>{{ $per->jumlah_produksi }}</td>
+					<td>{{ $per->waktu_produksi }}</td>
 				</tr>
 
 				<?php $i = $i + 1 ?>

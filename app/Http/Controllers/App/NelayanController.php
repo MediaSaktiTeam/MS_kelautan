@@ -55,7 +55,7 @@ class NelayanController extends Controller
 		$limit = 10;
 
 		$data['nelayan'] = $nelayan->paginate($limit);
-		$data['kelompok'] = Kelompok::where('tipe','nelayan')->paginate(10);
+		$data['kelompok'] = Kelompok::where('tipe','1')->paginate(10);
 		$data['jabatan'] = Jabatan::paginate($limit);
 		return view ('app.nelayan.index',$data)->with('limit', $limit);
 	}
@@ -144,7 +144,7 @@ class NelayanController extends Controller
 	public function getEdit($id)
 	{
 		$data['nelayan'] = User::find($id);
-		$data['kelompok'] = Kelompok::where('tipe','nelayan')->get();
+		$data['kelompok'] = Kelompok::where('tipe','1')->get();
 		$data['jabatan'] = Jabatan::all();
 		return view('app.nelayan.update', $data);
 	}
@@ -291,7 +291,7 @@ class NelayanController extends Controller
 								->orderBy('id','desc');
 
 		$data['nelayan'] = $nelayan->get();
-		$data['kelompok'] = Kelompok::where('tipe','nelayan')->get();
+		$data['kelompok'] = Kelompok::where('tipe','2')->get();
 		$data['jabatan'] = Jabatan::all();
 		$data['tgl_awal']		= $r->offset;
 		$data['tgl_akhir']		= $r->limit;

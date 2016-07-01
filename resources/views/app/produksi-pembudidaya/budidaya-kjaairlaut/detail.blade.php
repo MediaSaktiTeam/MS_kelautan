@@ -3,6 +3,7 @@
 	<thead>
 		<tr>
 			<th>Lokasi</th>
+			<th>Panjang Garis Pantai</th>
 			<th>Jumlah RTP</th>
 			<th>Potensi</th>
 			<th>Luas Tanam</th>
@@ -11,13 +12,14 @@
 	<tbody>
 		<tr>
 			<td><b>{{ $kjaairlaut->lokasi }}</b></td>
+			<td><b>{{ $kjaairlaut->panjang_pantai }}</b></td>
 			<td><b>{{ $kjaairlaut->rtp }}</b></td>
 			<td><b>{{ $kjaairlaut->potensi }}</b></td>
 			<td><b>{{ $kjaairlaut->luas_tanam}} Ha</b></td>
 		</tr>
 	</tbody>
 </table>
-<h5>Bibit</h5>
+<h5>Jumlah Bibit</h5>
 <table class="table table-hover">
 	<thead>
 		<tr>

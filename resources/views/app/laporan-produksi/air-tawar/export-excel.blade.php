@@ -87,7 +87,7 @@
 			?>
 		@endforeach
 			<tr>
-				<td colspan="3"><b>JUMLAH</b></td>
+				<td colspan="3"><b>JUMLAH PRODUKSI</b></td>
 				<td><b><?php echo round($jumlahrtp,2); ?></b></td>
 				<td><b><?php echo round($luas_areal,2); ?></b> Ha</td>
 				<td><b><?php echo round($luas_tanam,2); ?></b> Ha</td>

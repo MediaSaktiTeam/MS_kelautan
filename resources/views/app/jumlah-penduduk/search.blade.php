@@ -14,6 +14,7 @@ $(function(){
 				<center>#</center>
 			</th>
 			<th>Nama Kecamatan</th>
+			<th>Nama Desa</th>
 			<th>Laki Laki (org)</th>
 			<th>Perempuan (org)</th>
 			<th>Jumlah KK</th>
