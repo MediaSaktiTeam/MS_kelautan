@@ -305,7 +305,7 @@
 													@endforeach
 												</tbody>
 											</table>
-											<center>{!! $nelayan->links() !!}</center>
+											<center>{!! $nelayan->appends( ['offset' => $_GET['offset'], 'limit' => $_GET['limit'] ])->links() !!}</center>
 										</div>
 
 									</div>
