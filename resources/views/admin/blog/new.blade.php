@@ -51,7 +51,7 @@
 				</div>
 				
 				
-				<div class="compose-message-editor">
+				<div class="compose-message-edito">
 					<textarea name="konten" id="editor">
 					{{ Input::old('konten') }}
 					</textarea>

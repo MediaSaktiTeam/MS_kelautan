@@ -24,7 +24,6 @@ class DatabaseSeeder extends Seeder
         $this->call('MenuTableSeeder');
         $this->call('BantuanMasterSeeder');
         $this->call('KelompokSeeder');
-        // $this->call('SubUsahaSeeder');
         $this->call('SubSaranaSeeder');
         $this->call('JabatanSeeder');
         $this->call('ValidasiTableSeeder');
@@ -36,9 +35,40 @@ class DatabaseSeeder extends Seeder
         $this->call('SiteMenuTableSeeder');
         $this->call('SitePagesTableSeeder');
         $this->call('JenisUsahaTableSeeder');
+        $this->call('SambutanTableSeeder');
+        // $this->call('SubUsahaSeeder');
     }
 }
 
+class SambutanTableSeeder extends Seeder
+{
+    public function run()
+    {
+        App\Sambutan::truncate();
+        $data = [
+            [
+                'nama' => 'Prof. Dr. Ir. H. M. Nurdin Abdullah, M.A',
+                'nip' => '',
+                'jabatan' => 'Bupati',
+                'tgl' => '2015-08-1',
+                'foto' => 'bupati.png',
+                'deskripsi' => 'Paragraf Pertama',
+                'sambutan' => 'Kata Sambutan'
+            ],
+            [
+                'nama' => 'Ir. Muh. Dimiati Nongpa, M.P',
+                'nip' => '19640715199303 1 016',
+                'jabatan' => 'Kepala Dinas Perikanan dan Kelautan',
+                'tgl' => '2015-08-1',
+                'foto' => 'kadis.png',
+                'deskripsi' => 'Paragraf Pertama',
+                'sambutan' => 'Kata Sambutan'
+            ]
+        ];
+
+        DB::table('site_sambutan')->insert($data);
+    }
+}
 
 class ProvinsiTableSeeder extends Seeder
 {

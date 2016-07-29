@@ -521,6 +521,13 @@
 				'getRefresh' => 'setting_refresh',
 			]);
 
+		// Sambutan web
+		Route::controller('admin/sambutan', 'SambutanController',
+			[
+				'getIndex' => 'sambutan',
+				'postUpdate' => 'sambutan_update',
+			]);
+
 		// Menu
 		Route::controller('admin/menu', 'MenuController',
 			[

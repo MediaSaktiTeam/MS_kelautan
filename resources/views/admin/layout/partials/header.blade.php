@@ -110,6 +110,12 @@
 							<span>Tambah Baru</span>
 						</a>
 					</li>
+					<li>
+						<a href="{{ route('sambutan') }}">
+							<i class="entypo-newspaper"></i>
+							<span>Sambutan</span>
+						</a>
+					</li>
 				</ul>
 			</li>
 			<li class="nav-inbox">

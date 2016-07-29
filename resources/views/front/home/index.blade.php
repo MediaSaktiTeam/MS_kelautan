@@ -44,14 +44,14 @@
 				
 				<div class="quote-body col-sm-6">
 				
-					<h2 class="quote-name">Prof. Dr. Ir. H. M. Nurdin Abdullah, M.A</h2>
+					<h2 class="quote-name">{{ $sb1->nama }}</h2>
 
-					<h5 class="sub-info">Bupati Kab. Bantaeng</h5>
+					<h5 class="sub-info">{{ $sb1->jabatan }} Kab. Bantaeng</h5>
 
 					<div class="separator"><i class="fa fa-quote-left"></i></div>
 
 					<p class="quote-role">
-						Ucapan terima kasih kepada semua pihak yang telah mendukung Pembuatan Website Perikanan ini. Semoga Website ini dapat menjadi salah satu referensi dalam upaya mengembangkan potensi sumber daya alam dan sumber daya manusia di Kabupaten Bantaeng. Insya Allah.
+						{{ $sb1->deskripsi }}
 					</p>
 
 					<a href="#" data-toggle="modal" data-target="#bupati">~ Selengkapnya ~</a>
@@ -60,7 +60,7 @@
 
 				<div class="col-sm-6">
 					
-					<img src="{{ url('resources/assets/front') }}/img/bupati_diskanlutbantaeng.png" alt="" class="u-photo quote-image">
+					<img src="{{ url('resources/assets/img') }}/sambutan/{{ $sb1->foto }}" alt="{{ $sb1->nama }}" class="u-photo quote-image">
 
 				</div> <!-- end col-sm-6 -->			
 
@@ -76,21 +76,20 @@
 		<div class="container">			
 
 				<div class="col-sm-6">
-					
-					<img src="{{ url('resources/assets/front') }}/img/kadis_diskanlutbantaeng.png" alt="" class="u-photo quote-image">
+					<img src="{{ url('resources/assets/img') }}/sambutan/{{ $sb2->foto }}" alt="{{ $sb2->nama }}" class="u-photo quote-image">
 
 				</div> <!-- end col-sm-6 -->			
 				
 				<div class="quote-body col-sm-6">
 				
-					<h2 class="quote-name">Ir. Muh. Dimiati Nongpa, M.P</h2>
+					<h2 class="quote-name">{{ $sb2->nama }}</h2>
 
-					<h5 class="sub-info">Kepala Dinas Perikanan dan Kelautan Kab. Bantaeng</h5>
+					<h5 class="sub-info">{{ $sb2->jabatan }} Kab. Bantaeng</h5>
 
 					<div class="separator"><i class="fa fa-quote-left"></i></div>
 
 					<p class="quote-role">
-						Insya Allah kedepannya dengan terbentuknya website ini akan kami lengkapi semua data diwilayah pesisir Bantaeng. Kepada semua Pihak yang telah mendukung terbentuknya Website Dinas Perikanan dan Kelautan Kabupaten Bantaeng ini saya menyampaikan Terima Kasih yang Tak terhingga. Semoga mendapatkan amalan disisi-NYA.
+						{{ $sb2->deskripsi }}
 					</p>
 
 					<a href="#" data-toggle="modal" data-target="#kadis">~ Selengkapnya ~</a>
@@ -298,34 +297,20 @@
 					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 						<span aria-hidden="true">&times;</span>
 					</button>
-					<h2 class="quote-name">Prof. Dr. Ir. H. M. Nurdin Abdullah, M.A</h2>
-					<h5 class="sub-info">Bupati Kab. Bantaeng</h5>
+					<h2 class="quote-name">{{ $sb1->nama }}</h2>
+					<h5 class="sub-info">{{ $sb1->jabatan }} Kab. Bantaeng</h5>
 				</div>
 				<div class="modal-body">
 
-					<p class="quote-role">
-						<b>Assalamu Alaikum Warahmatullahi Wabarakatu</b>
-					</p>
-
-					<p class="quote-role">
-						Saya menyambut baik website Perikanan Kabupaten Bantaeng karena website ini akan memberikan banyak informasi kepada semua pihak, khususnya pada stakeholder yang membutuhkan data perikanan sebagai dasar untuk mendukung pengembangan sub sektor perikanan di Kabupaten Bantaeng.
-					</p>
-
-					<p class="quote-role">
-						Kabupaten Bantaeng saat ini terus melakukan berbagai terobosan di bidang perikanan dan kelautan yang sifatnya menyentuh langsung kepada pelaku bisnis mulai skala kecil hingga skala besar (Industri Perikanan). Bentuk dukungan ini telah tertuang dalam berbagai kerjasama dengan stakeholder daerah dan provinsi.
-					</p>
-
-					<p class="quote-role">
-						Ucapan terima kasih kepada semua pihak yang telah mendukung Pembuatan Website Perikanan ini. Semoga Website ini dapat menjadi salah satu referensi dalam upaya mengembangkan potensi sumber daya alam dan sumber daya manusia di Kabupaten Bantaeng. Insya Allah.
-					</p>
+					{!! $sb1->sambutan !!}
 
 					<div class="row" style="font-size: 12px">	
 						<p class="col-sm-offset-6 col-sm-6 col-xs-offset-6 col-xs-6">
-							Bantaeng, Agustus 2015 <br>
+							Bantaeng, {{ Sakti::tgl_indo($sb1->tgl) }} <br>
 
-							<b>BUPATI <br>
+							<b>{{ $sb1->jabatan }} <br>
 
-							Prof.Dr.Ir.H.M.Nurdin Abdullah, M.A</b>
+							{{ $sb1->nama }}</b>
 						</p>
 					</div>
 
@@ -341,28 +326,22 @@
 					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 						<span aria-hidden="true">&times;</span>
 					</button>
-					<h2 class="quote-name">Ir. Muh. Dimiati Nongpa, M.P</h2>
-					<h5 class="sub-info">Kepala Dinas Perikanan dan Kelautan Kab. Bantaeng</h5>
+					<h2 class="quote-name">{{ $sb2->nama }}</h2>
+					<h5 class="sub-info">{{ $sb2->jabatan }} Kab. Bantaeng</h5>
 				</div>
 				<div class="modal-body">
 
-					<p class="quote-role">
-						<b>Assalamu Alaikum Warahmatullahi Wabarakatu</b>
-					</p>
-
-					<p class="quote-role">
-						Syukur Alhamdulillah dipanjatkan kepada Allah SWT yang telah memberi kesempatan dan kemampuan kepada kita sehingga pembuatan Website Dinas Perikanan dan Kelautan Kab. Bantaeng ini dapat diselesaikan. Website ini dibuat dengan tujuan agar ketersediaan informasi terupdate data perikanan dan kelautan Kabupaten Bantaeng bisa lebih dikenal oleh seluruh masyarakat sekitar. Disadari bahwa masih terbatasnya data ditingkat kelurahan dan desa sehingga beberapa bagian dari website Dinas Perikanan dan Kelautan ini belum terisi dengan lengkap. Insya Allah kedepannya dengan terbentuknya website ini akan kami lengkapi semua data diwilayah pesisir Bantaeng. Kepada semua Pihak yang telah mendukung terbentuknya Website Dinas Perikanan dan Kelautan Kabupaten Bantaeng ini saya menyampaikan Terima Kasih yang Tak terhingga. Semoga mendapatkan amalan disisi-NYA. Akhirnya saya harap Website ini dapat bermanfaat bagi kita semua yang membutuhkan informasi seputar Dinas Perikanan dan Kelautan Kabupaten Bantaeng.
-					</p>
+					{!! $sb2->sambutan !!}
 
 					<div class="row" style="font-size: 12px">	
 						<p class="col-sm-offset-6 col-sm-6 col-xs-offset-6 col-xs-6">
-							Bantaeng, Agustus 2015 <br>
+							Bantaeng, {{ Sakti::tgl_indo( $sb2->tgl ) }}<br>
 
-							Kepala Dinas Perikanan dan Kelautan,<br>
+							{{ $sb2->jabatan }},<br>
 
-							<b>Ir.MUH. DIMIATI NONGPA, M.P<br>
+							<b>{{ $sb2->nama }}<br>
 
-							NIP:19640715199303 1 016</b>
+							NIP:{{ $sb2->nip }}</b>
 						</p>
 					</div>
 

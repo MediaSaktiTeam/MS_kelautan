@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Blog, App\Page, App\Pesan, App\Kategori, App\BlogKategori, App\Galeri, App\Setting;
-use DB, Config, Validator;
+use DB, Config, Validator, App\Sambutan;
 
 class FrontController extends Controller
 {
@@ -27,6 +27,8 @@ class FrontController extends Controller
 								->where('arsip', 0)
 								->orderBy('id', 'desc')
 								->get();
+		$data['sb1'] =  Sambutan::find(1);
+		$data['sb2'] =  Sambutan::find(2);
 
 		return view('front.home.index', $data);
 
