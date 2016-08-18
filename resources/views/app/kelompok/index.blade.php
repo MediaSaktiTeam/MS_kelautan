@@ -159,7 +159,6 @@
 											<label>Bidang Usaha</label>
 
 											<select id="bidang-usaha" class="full-width" data-init-plugin="select2" name="tipe">
-<<<<<<< HEAD
 
 													<?php $jenisUsaha = App\JenisUsaha::all() ?>
 
@@ -169,14 +168,6 @@
 
 													@endforeach
 
-=======
-													<option value="Nelayan">Nelayan</option>
-													<?php $jenisUsaha = App\JenisUsaha::all() ?>
-											@foreach( $jenisUsaha as $ju )
-												<option value="{{ $ju->id }}">{{ $ju->nama }}</option>
-											@endforeach
-													<option value="Pengolah">Pengolah</option>
->>>>>>> origin/master
 											</select>
 
 										</div>

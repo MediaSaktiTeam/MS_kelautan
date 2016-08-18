@@ -135,7 +135,7 @@ class PengolahController extends Controller
 
 		$r->session()->flash('success','Data tersimpan');
 
-		return redirect()->back();
+		return redirect(route('pengolah'));
 	}
 
 	public function getEdit(Request $r, $id)

@@ -2,7 +2,7 @@
 	<tbody>
 		<tr>
 			<td>Bidang Usaha</td>
-			<td><b>{{ $kelompok->tipe }}</b></td>
+			<td><b>{{ $kelompok->jenisusaha->nama }}</b></td>
 		</tr>
 		<tr>
 			<td>Nama Kelompok</td>
