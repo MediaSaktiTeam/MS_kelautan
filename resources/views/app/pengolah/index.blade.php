@@ -199,13 +199,11 @@
 													<div class="form-group">
 														<label>Legalitas Produksi</label>
 
-														<?php $legalitas_produksi = ['P-IRT', 'Depkes', 'Halal']; ?>
-
 														<select class="full-width" data-init-plugin="select2" name="legalitas_produksi" required>
 															<option value="">Pilih Legalitas Produksi...</option>
-															@for ( $i = 0; $i < count( $legalitas_produksi ); $i++ )
-																<option value="{{ $legalitas_produksi[$i] }}" {{ Input::old('legalitas_produksi') == $legalitas_produksi[$i] ? "selected":"" }}>{{ $legalitas_produksi[$i] }}</option>
-															@endfor
+															@foreach( $legalitas as $leg)
+																<option value="{{ $leg->nama }}" {{ Input::old('legalitas_produksi') == $leg->nama ? "selected":"" }}>{{ $leg->nama }}</option>
+															@endforeach
 														</select>
 													</div>
 												</div>
