@@ -16,6 +16,7 @@ class TableJenisUsaha extends Migration
         {
             $t->Increments('id');
             $t->string('nama');
+            $t->string('kelompok_bidang');
         });
     }
 

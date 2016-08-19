@@ -118,7 +118,6 @@
 														<div class="input-group">
 															<select class="full-width" name="id_kelompok" data-init-plugin="select2" required>
 																<option value="">Pilih Kelompok...</option>
-																<?php $kelompok = App\Kelompok::where('tipe','Pengolah')->orderBy('nama', 'asc')->get() ?>
 																@foreach( $kelompok as $klp )
 																	<option value="{{ $klp->id_kelompok }}" {{ $pe->id_kelompok == $klp->id_kelompok ? "selected":"" }}>{{ $klp->nama }}</option>
 																@endforeach

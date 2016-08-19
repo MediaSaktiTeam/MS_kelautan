@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use DB,Excel,PDF;
-use App\User, App\Kelompok, App\Jabatan, App\Usaha, App\Sarana, App\KepemilikanSarana;
+use App\User, App\Kelompok, App\Jabatan, App\Usaha, App\Sarana, App\KepemilikanSarana, App\JenisUsaha;
 use App\RefBantuan;
 use App\Permissions;
 
@@ -55,7 +55,7 @@ class NelayanController extends Controller
 		$limit = 10;
 
 		$data['nelayan'] = $nelayan->paginate($limit);
-		$data['kelompok'] = Kelompok::where('tipe','1')->paginate(10);
+		$data['kelompok'] = JenisUsaha::where('kelompok_bidang','Nelayan')->first()->kelompok;
 		$data['jabatan'] = Jabatan::paginate($limit);
 		return view ('app.nelayan.index',$data)->with('limit', $limit);
 	}
@@ -144,7 +144,7 @@ class NelayanController extends Controller
 	public function getEdit($id)
 	{
 		$data['nelayan'] = User::find($id);
-		$data['kelompok'] = Kelompok::where('tipe','1')->get();
+		$data['kelompok'] = JenisUsaha::where('kelompok_bidang','Nelayan')->first()->kelompok;
 		$data['jabatan'] = Jabatan::all();
 		return view('app.nelayan.update', $data);
 	}

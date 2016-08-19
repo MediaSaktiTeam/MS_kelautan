@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use DB,Excel,PDF;
-use App\User, App\Kelompok, App\Jabatan, App\Usaha, App\Sarana, App\KepemilikanSarana;
+use App\User, App\Kelompok, App\Jabatan, App\Usaha, App\Sarana, App\KepemilikanSarana, App\JenisUsaha;
 use App\RefBantuan, App\Permissions;
 
 class PengolahController extends Controller
@@ -54,7 +54,7 @@ class PengolahController extends Controller
 		$limit = 10;
 
 		$data['pengolah'] = $pengolah->paginate($limit);
-		$data['kelompok'] = Kelompok::where('tipe','2')->paginate($limit);
+		$data['kelompok'] = JenisUsaha::where('kelompok_bidang','Pengolah')->first()->kelompok;
 		$data['jabatan'] = Jabatan::paginate($limit);
 		return view ('app.pengolah.index',$data)->with('limit', $limit);
 	}
@@ -141,6 +141,7 @@ class PengolahController extends Controller
 	public function getEdit(Request $r, $id)
 	{
 		$data['pe'] = User::find($id);
+		$data['kelompok'] = JenisUsaha::where('kelompok_bidang','Pengolah')->first()->kelompok;
 		return view('app.pengolah.update', $data);
 	}
 

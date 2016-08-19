@@ -57,8 +57,8 @@ class PembudidayaController extends Controller
 
 		$data['pembudidaya'] = $pembudidaya->paginate($limit);
 
-		$data['kelompok'] = Kelompok::where('tipe','Pembudidaya')->get();
-		
+		$data['kelompok'] = JenisUsaha::where('kelompok_bidang','Pembudidaya')->first()->kelompok;
+
 		$data['jabatan'] = Jabatan::paginate($limit);
 		
 		return view ('app.pembudidaya.index',$data)->with('limit', $limit);
@@ -146,7 +146,7 @@ class PembudidayaController extends Controller
 
 	public function getEdit($id)
 	{
-		$data['kelompok'] = Kelompok::where('tipe','Pembudidaya')->get();
+		$data['kelompok'] = JenisUsaha::where('kelompok_bidang','Pembudidaya')->first()->kelompok;
 		$data['jabatan'] = Jabatan::all();
 		$data['pembudidaya'] = User::find($id);
 		return view('app.pembudidaya.update', $data);
@@ -259,8 +259,7 @@ class PembudidayaController extends Controller
 	{
 		$data['pembudidaya'] = DB::table('users')
 									->leftJoin('app_kelompok', 'users.id_kelompok', '=', 'app_kelompok.id_kelompok')
-									->leftJoin('app_usaha', 'users.id_usaha', '=', 'app_usaha.id')
-									->leftJoin('app_jenis_usaha', 'app_usaha.jenis_usaha', '=', 'app_jenis_usaha.id')
+									->leftJoin('app_jenis_usaha', 'users.id_usaha', '=', 'app_jenis_usaha.id')
 									->leftJoin('app_jabatan', 'users.id_jabatan', '=', 'app_jabatan.id')
 										->select(
 											'app_jabatan.nama as nama_jabatan',
@@ -270,8 +269,7 @@ class PembudidayaController extends Controller
 												->where(function($query) use ($cari) {
 													$query->where('users.name','LIKE', '%'.$cari.'%')
 															->orWhere('app_kelompok.nama','LIKE', '%'.$cari.'%')
-															->orWhere('app_jabatan.nama','LIKE', '%'.$cari.'%')
-															->orWhere('app_usaha.nama','LIKE', '%'.$cari.'%');
+															->orWhere('app_jabatan.nama','LIKE', '%'.$cari.'%');
 												})
 									->take(40)->get();
 		return view('app.pembudidaya.data-pencarian', $data);

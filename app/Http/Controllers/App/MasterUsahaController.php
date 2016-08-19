@@ -33,12 +33,13 @@ class MasterUsahaController extends Controller
 
 			$vb	=	JenisUsaha::where('nama',$request->nama)->count();
 			if ($vb > 0 ) {
-				return redirect()->route('usaha')->with(session()->flash('gagal','Data Sudah ada !!'));
+				return redirect()->back()->with(session()->flash('gagal','Data Sudah ada !!'));
 			}
 		/* end validasi */
 
 		$dt = new JenisUsaha;
 		$dt->nama = $request->nama;
+		$dt->kelompok_bidang = $request->kelompok_bidang;
 		$dt->save();
 		return redirect()->route('usaha', $data)->with(session()->flash('success','Data Berhasil Tersimpan !!'));
 	}
@@ -58,6 +59,7 @@ class MasterUsahaController extends Controller
 
 		$data = JenisUsaha::find($request->id);
 		$data->nama = $request->nama;
+		$data->kelompok_bidang = $request->kelompok_bidang;
 		$data->save();
 		$data['masterusaha'] = JenisUsaha::paginate(1);
 

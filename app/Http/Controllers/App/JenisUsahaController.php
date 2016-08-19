@@ -36,6 +36,7 @@ class JenisUsahaController extends Controller
 
 		$dt = new JenisUsaha;
 		$dt->nama = $request->nama;
+		$dt->kelompok_bidang = $request->kelompok_bidang;
 		$dt->save();
 		return redirect()->route('jenis_usaha')->with(session()->flash('success','Data Berhasil Tersimpan !!'));
 	}

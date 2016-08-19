@@ -173,7 +173,7 @@
 														<label>Jenis Usaha Budidaya</label>
 														<select onchange="get_produksi(this.value)" class="full-width" name="jenis_usaha" required data-init-plugin="select2">
 															<option value="">Pilih Jenis Usaha...</option>
-															<?php $jenisUsaha = App\JenisUsaha::all() ?>
+															<?php $jenisUsaha = App\JenisUsaha::where('kelompok_bidang','Pembudidaya')->get() ?>
 															@foreach( $jenisUsaha as $ju )
 																<option value="{{ $ju->id }}" {{ Input::old('jenis_usaha') ==  $ju->id ? 'selected':'' }}>{{ $ju->nama }}</option>
 															@endforeach

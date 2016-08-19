@@ -179,6 +179,6 @@
 
 @else
 
-	<span style="color:red">Belum pernah mendapatkan bantuan</span>
+	<span style="color:#ff5050">Belum pernah mendapatkan bantuan</span>
 
 @endif

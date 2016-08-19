@@ -68,6 +68,14 @@
 										<label>Jenis Usaha</label>
 										<input type="text" name="nama" class="form-control" required>
 									</div>
+									<div class="form-group form-group-default required">
+										<label>Kelompok Bidang</label>
+										<select name="kelompok_bidang" class="full-width" data-init-plugin="select2" required>
+											<option value="Nelayan">Nelayan</option>
+											<option value="Pembudidaya">Pembudidaya</option>
+											<option value="Pengolah">Pengolah</option>
+										</select>
+									</div>
 									<div class="form-group">
 										<button class="btn btn-primary btn-cons">Tambah</button>
 									</div>
@@ -88,6 +96,7 @@
 												<button class="btn btn-check" data-toggle="modal" data-target="#modal-hapus" disabled id="hapus"><i class="pg-trash"></i></button>
 											</th>
 											<th>Jenis Usaha</th>
+											<th>Klp Bidang</th>
 											<th>Aksi</th>
 										</tr>
 									</thead>
@@ -100,6 +109,7 @@
 											?>
 												<td></td>
 												<td>{{ $pd->nama }}</td>
+												<td>{{ $pd->kelompok_bidang }}</td>
 												<td></td>
 											<?php
 												} else {
@@ -121,7 +131,8 @@
 													</div>
 												</td>
 												<td>{{ $pd->nama }}</td>
-												<td><button class="btn btn-default btn-xs btn-edit"  data-id="{{ $pd->id }}"  data-nama="{{ $pd->nama }}"><i class="fa fa-pencil"></i></button></td>
+												<td>{{ $pd->kelompok_bidang }}</td>
+												<td><button class="btn btn-default btn-xs btn-edit"  data-id="{{ $pd->id }}" data-bidang="{{ $pd->kelompok_bidang }}" data-nama="{{ $pd->nama }}"><i class="fa fa-pencil"></i></button></td>
 											<?php
 												}
 											?>
@@ -206,6 +217,14 @@
 							<label>Nama Usaha</label>
 							<input type="text" id="nama" name="nama" class="form-control" required>
 						</div>
+						<div class="form-group form-group-default required">
+							<label>Kelompok Bidang</label>
+							<select name="kelompok_bidang" class="full-width" id="klp_bidang" data-init-plugin="select2" required>
+								<option value="Nelayan">Nelayan</option>
+								<option value="Pembudidaya">Pembudidaya</option>
+								<option value="Pengolah">Pengolah</option>
+							</select>
+						</div>
 						<div class="form-group">
 							<input type="hidden" id="id-jenis" name="id">
 							<button class="btn btn-primary btn-cons">Simpan</button>
@@ -250,16 +269,16 @@
 
 				var id = $(this).data('id');
 				var nama = $(this).data('nama');
-				var jenis = $(this).data('jenis');
-				var namajenis = $(this).data('namajenis');
+				var bidang = $(this).data('bidang');
 				$('#id-jenis').val(id);
 				$('#nama').val(nama);
+				$('#klp_bidang').val(bidang);
 				$('#modal-sunting').modal('show');
 
 				$("select option").filter(function() {
-				    if( $(this).val().trim() == jenis ){
+				    if( $(this).val().trim() == bidang ){
 				    	$(this).prop('selected', true);
-				    	$(".select2-chosen").html(namajenis);
+				    	$(".select2-chosen").html(bidang);
 				    }
 				});
 			});
