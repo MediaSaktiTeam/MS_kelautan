@@ -287,6 +287,13 @@
 							@endif
 
 							@if ( Permissions::pengolah() )
+								<li class="sub-legalitas">
+									<a href="/app/master/legalitas">Legalitas Produksi</a>
+									<span class="icon-thumbnail">LP</span>
+								</li>
+							@endif
+
+							@if ( Permissions::pengolah() )
 								<li class="sub-saranapengolah">
 									<a href="javascript:;"><span class="title">Sarana Pengolah</span><span class=" arrow"></span></a>
 									<span class="icon-thumbnail">SP</span>

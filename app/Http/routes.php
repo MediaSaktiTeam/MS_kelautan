@@ -68,6 +68,7 @@
 			]);
 
 		Route::controller('app/pengolah', 'PengolahController', ['getIndex' => 'pengolah']);
+
 		Route::controller('app/pemasar', 'PemasarController', 
 			[
 
@@ -289,6 +290,14 @@
 				'getEdit' => 'desa_edit',
 			]);
 
+		Route::controller('app/master/legalitas', 'LegalitasController',
+			[
+				'getIndex'	=> 'legalitas',
+				'postStore' => 'legalitas_store',
+				'getUpdate' => 'legalitas_update',
+				'getDelete'	=> 'legalitas_delete'
+			]);
+
 		Route::get('/app/master/bantuan', function () {
 			return view('app.master.bantuan');
 		});
@@ -297,6 +306,7 @@
 		Route::get('/app/master/jabatan', function () {
 			return view('app.master.jabatan');
 		});
+
 
 		Route::get('/app/master/jenis-usaha', function () {
 			return view('app.master.jenis-usaha');
