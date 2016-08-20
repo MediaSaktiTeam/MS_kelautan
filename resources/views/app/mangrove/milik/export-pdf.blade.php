@@ -111,8 +111,12 @@
 			</td>
 		</tr>
 		<tr>
-			<td width="70%"><b>MARWAH, SP.</b><br>NIP. 12309812980310192</td>
-			<td><b>AHMAD</b><br>NIP. 12309812980310192</td>
+			<?php
+				$pj_kiri = App\Laporan::where('jabatan','Kasi Budidaya Laut. Payau dan Air Tawar')->first();
+				$pj_kanan = App\Laporan::where('jabatan','Petugas Statistik')->first();
+			?>
+			<td width="70%"><b>{{ $pj_kiri->nama }}</b><br>NIP. {{ $pj_kiri->nip }}</td>
+			<td><b>{{ $pj_kanan->nama }}</b><br>NIP. {{ $pj_kanan->nip }}</td>
 		</tr>
 	</table>
 

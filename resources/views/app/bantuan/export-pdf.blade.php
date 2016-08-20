@@ -20,11 +20,12 @@
 		</tr>
 		<tr>
 			<td><b>KWARTAL</b></td>
-			<td><b>1 (Satu) Januari s/d Maret</b></td>
+			<?php $tgl = Sakti::TglLaporan($tgl_awal, $tgl_akhir) ?>
+			<td><b>{{  $tgl['tgl_awal'] }} s/d {{ $tgl['tgl_akhir'] }}</b></td>
 		</tr>
 		<tr>
 			<td><b>TAHUN</b></td>
-			<td><b>2016</b></td>
+			<td><b>{{ $tgl['tahun'] }}</b></td>
 		</tr>
 	</table>
 
@@ -96,21 +97,31 @@
 	</table>
 
 	<table class="table table-no-border" style="width: 100%;">
+		<?php
+			$jabatan_kiri 	= 'Kasi Budidaya Laut. Payau dan Air Tawar';
+			$jabatan_kanan 	= 'Petugas Statistik';
+		?>
 		<tr>
-			<td width="70%">Mengetahui:<br>Kasie Budidaya Laut, Payau<br>dan Air Tawar
+			<td width="70%">Mengetahui:<br>{{ $jabatan_kiri }}
 				<br>
 				<br>
 				<br>
 			</td>
-			<td>Bantaeng, 4 April 2016<br>Petugas Statistik Budidaya
+			<?php $Ms = new App\Custom; ?>
+
+			<td>Bantaeng, {{ $Ms->tgl_indo(date('Y-m-d')) }}<br>{{ $jabatan_kanan }}
 				<br>
 				<br>
 				<br>
 			</td>
 		</tr>
 		<tr>
-			<td width="70%"><b>MARWAH, SP.</b><br>NIP. 12309812980310192</td>
-			<td><b>AHMAD</b><br>NIP. 12309812980310192</td>
+			<?php
+				$pj_kiri = App\Laporan::where('jabatan',$jabatan_kiri)->first();
+				$pj_kanan = App\Laporan::where('jabatan',$jabatan_kanan)->first();
+			?>
+			<td width="70%"><b>{{ $pj_kiri->nama }}</b><br>NIP. {{ $pj_kiri->nip }}</td>
+			<td><b>{{ $pj_kanan->nama }}</b><br>NIP. {{ $pj_kanan->nip }}</td>
 		</tr>
 	</table>
 
