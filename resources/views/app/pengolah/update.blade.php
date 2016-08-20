@@ -212,7 +212,7 @@
 													<div class="form-group">
 														<label>Legalitas Produksi</label>
 
-														<?php $legalitas_produksi = ['P-IRT', 'Depkes', 'Halal']; ?>
+														<?php $legalitas = App\Legalitas::all() ?>
 
 														<select class="full-width" data-init-plugin="select2" name="legalitas_produksi" required>
 															<option value="">Pilih Legalitas Produksi...</option>
