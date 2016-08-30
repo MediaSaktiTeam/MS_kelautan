@@ -227,6 +227,8 @@ class RefBantuanController extends Controller
 		if ( $r->bidang != 'all') $bantuan_users->where('u.profesi', $r->bidang);
 
 		$data['bantuan_users'] = $bantuan_users->get();
+		$data['tahun'] = $r->thn;
+		$data['kelompok'] = $r->klp;
 		
         $pdf = PDF::loadView('app.bantuan.export-pdf', $data);
         return $pdf->setPaper('legal')->setOrientation('landscape')->setWarnings(false)->download('Data Bantuan.pdf');

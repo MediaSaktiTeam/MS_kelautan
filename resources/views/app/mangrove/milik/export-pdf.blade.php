@@ -94,31 +94,31 @@
 		</tbody>
 	</table>
 
-	<table class="table table-no-border" style="width: 100%;">
-		<tr>
-			<td width="70%">Mengetahui:<br>Kasie Budidaya Laut, Payau<br>dan Air Tawar
-				<br>
-				<br>
-				<br>
-			</td>
-			
-			<?php $Ms = new App\Custom; ?>
+	<?php $pj = App\Penugasan::where('halaman','Mangrove Dimiliki')->first(); ?>
 
-			<td>Bantaeng, {{ $Ms->tgl_indo(date('Y-m-d')) }}<br>Petugas Statistik Budidaya
-				<br>
-				<br>
-				<br>
-			</td>
-		</tr>
-		<tr>
-			<?php
-				$pj_kiri = App\Laporan::where('jabatan','Kasi Budidaya Laut. Payau dan Air Tawar')->first();
-				$pj_kanan = App\Laporan::where('jabatan','Petugas Statistik')->first();
-			?>
-			<td width="70%"><b>{{ $pj_kiri->nama }}</b><br>NIP. {{ $pj_kiri->nip }}</td>
-			<td><b>{{ $pj_kanan->nama }}</b><br>NIP. {{ $pj_kanan->nip }}</td>
-		</tr>
-	</table>
+	@if ( $pj )
+		<table class="table table-no-border" style="width: 100%;">
+			<tr>
+				<td width="70%">Mengetahui:<br>{{ $pj->ttdkiri->jabatan }}
+					<br>
+					<br>
+					<br>
+				</td>
+				<?php $Ms = new App\Custom; ?>
+
+				<td>Bantaeng, {{ $Ms->tgl_indo(date('Y-m-d')) }}<br>{{ $pj->ttdkanan->jabatan }}
+					<br>
+					<br>
+					<br>
+				</td>
+			</tr>
+			<tr>
+				
+				<td width="70%"><b>{{ $pj->ttdkiri->nama }}</b><br>NIP. {{ $pj->ttdkiri->nip }}</td>
+				<td><b>{{ $pj->ttdkanan->nama }}</b><br>NIP. {{ $pj->ttdkanan->nip }}</td>
+			</tr>
+		</table>
+	@endif
 
 </body>
 

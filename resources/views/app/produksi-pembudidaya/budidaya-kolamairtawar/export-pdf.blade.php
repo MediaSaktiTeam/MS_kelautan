@@ -126,6 +126,31 @@
 		</tbody>
 	</table>
 
+	<?php $pj = App\Penugasan::where('halaman','Pembudidaya Kolam Air Tawar')->first(); ?>
+
+	@if ( $pj )
+		<table class="table table-no-border" style="width: 100%;">
+			<tr>
+				<td width="70%">Mengetahui:<br>{{ $pj->ttdkiri->jabatan }}
+					<br>
+					<br>
+					<br>
+				</td>
+				<?php $Ms = new App\Custom; ?>
+
+				<td>Bantaeng, {{ $Ms->tgl_indo(date('Y-m-d')) }}<br>{{ $pj->ttdkanan->jabatan }}
+					<br>
+					<br>
+					<br>
+				</td>
+			</tr>
+			<tr>
+				
+				<td width="70%"><b>{{ $pj->ttdkiri->nama }}</b><br>NIP. {{ $pj->ttdkiri->nip }}</td>
+				<td><b>{{ $pj->ttdkanan->nama }}</b><br>NIP. {{ $pj->ttdkanan->nip }}</td>
+			</tr>
+		</table>
+	@endif
 </body>
 
 </html>

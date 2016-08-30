@@ -373,6 +373,13 @@
 				'getDelete'  => 'laporan_hapus',
 				'getUpdate'  => 'laporan_update',
 			]);
+		Route::controller('app/master/laporan-penugasan', 'PenugasanController',
+			[
+				'getIndex'  => 'penugasan',
+				'getAdd' => 'penugasan_tambah',
+				'getDelete'  => 'penugasan_hapus',
+				'getUpdate'  => 'penugasan_update',
+			]);
 		Route::controller('app/master/jabatan', 'JabatanController',
 			[
 				'getIndex'  => 'jabatan',

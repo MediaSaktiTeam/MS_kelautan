@@ -9,4 +9,5 @@ class Laporan extends Model
     protected $table = "app_laporan";
     
     public $timestamps = false;
+
 }

@@ -266,9 +266,20 @@
 									</li>
 								</ul>
 							</li>
-							<li class="sub-laporan">
-								<a href="/app/master/laporan">Laporan</a>
+							<li class="link-laporan">
+								<a href="javascript:;"><span class="title">Laporan</span>
+								<span class=" arrow"></span></a>
 								<span class="icon-thumbnail">L</span>
+								<ul class="sub-menu">
+									<li class="sub-petugas">
+										<a href="{{ route('laporan') }}">Petugas</a>
+										<span class="icon-thumbnail">PT</span>
+									</li>
+									<li class="sub-penugasan">
+										<a href="{{ route('penugasan') }}">Penugasan</a>
+										<span class="icon-thumbnail">PN</span>
+									</li>
+								</ul>
 							</li>
 							@endif
 

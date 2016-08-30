@@ -1,7 +1,7 @@
 @extends('app.layout.main')
 
 @section('title')
-	Master | Laporan
+	Master | Penugasan
 @endsection
 
 
@@ -26,7 +26,7 @@
 								<a href="#">Master</a>
 							</li>
 							<li>
-								<a href="#" class="active">Master laporan</a>
+								<a href="#" class="active">Master penugasan</a>
 							</li>
 						</ul>
 					</div>
@@ -64,33 +64,39 @@
 							<div class="panel-body">
 
 							<?php
-								$jabatan = ['Kepala Bidang Perikanan Budidaya','Kasi Budidaya Laut. Payau dan Air Tawar',
-											'Kasi Sarana dan Prasarana','Kasi Perlindungan Penyakit dan Mutu Hasil',
-											'Kepala Bidang Perikanan Tangkap','Kasi Sarana dan Prasarana Perikanan Tangkap',
-											'Kasi Bimbingan dan Pengawasan','Kasi Pengolahan dan Pemasaran','Kepala Bidang Kelautan dan Pesisir',
-											'Kasi Penataan Pesisir','Kasi Pemanfaatan','Kasi Pengawasan dan Perizinan','Petugas Statistik'];
-								
-								$pj = ['Pembudidaya Kanan','Pembudidaya Kiri']
+								$halaman = ['Pembudidaya','Pembudidaya Produksi','Pembudidaya Rumput Laut','Pembudidaya KJA Air Laut',
+											'Pembudidaya Kolam Air Tawar','Pembudidaya KJA Air Tawar','Pembudidaya Air Payau','Pembudidaya Laporan Produksi Air Tawar',
+											'Pembudidaya Laporan Produksi Rumput Laut','Pembudidaya Laporan Produksi Tambak',
+											'Nelayan','Nelayan Produksi','Pengolah','Pemasar','Produksi Pengolah','Mangrove Dimiliki',
+											'Mangrove Direhabilitasi','Jenis Mangrove','Terumbu Dimiliki','Terumbu Direhabiltasi',
+											'Terumbu Jenis Ikan','Jumlah Penduduk','Kelompok','Bantuan'];
 							?>
-								<h5>Master Laporan</h5>
-								<p>* Master laporan digunakan untuk melengkapi keterangan setiap laporan.</p>
-								<form class="style-form" method="GET" action="{{ route('laporan_tambah') }}">
-									<input type="hidden" name="_token" value="{{ csrf_token() }}">
+								<h5>Master Penugasan</h5>
+								<p>* Master penugasan digunakan untuk melengkapi keterangan pada footer laporan.</p>
+								<form class="style-form" method="GET" action="{{ route('penugasan_tambah') }}">
 									<div class="form-group form-group-default required">
-										<label>Master laporan</label>
-										<select class="full-width" data-init-plugin="select2" name="jabatan">
-											@foreach( $jabatan as $jab )
-												<option value="{{ $jab }}">{{ $jab }}</option>
+										<label>Laporan pada halaman</label>
+										<select class="full-width" data-init-plugin="select2" name="halaman">
+											@foreach( $halaman as $hal )
+												<option value="{{ $hal }}">{{ $hal }}</option>
 											@endforeach
 										</select>
 									</div>
 									<div class="form-group form-group-default required">
-										<label>Nama lengkap</label>
-										<input type="text" name="nama" class="form-control" required>
+										<label>Tanda Tangan Kolom Kanan</label>
+										<select class="full-width" data-init-plugin="select2" name="kolom_kanan">
+											@foreach( $laporan as $lap )
+												<option value="{{ $lap->id }}">{{ $lap->jabatan }} ({{ $lap->nama }})</option>
+											@endforeach
+										</select>
 									</div>
 									<div class="form-group form-group-default required">
-										<label>NIP</label>
-										<input type="text" name="nip" class="form-control" required>
+										<label>Tanda Tangan Kolom Kiri</label>
+										<select class="full-width" data-init-plugin="select2" name="kolom_kiri">
+											@foreach( $laporan as $lap )
+												<option value="{{ $lap->id }}">{{ $lap->jabatan }} ({{ $lap->nama }})</option>
+											@endforeach
+										</select>
 									</div>
 									<div class="form-group">
 										<button class="btn btn-primary btn-cons">Tambah</button>
@@ -111,14 +117,14 @@
 											<th width="70">
 												<button class="btn btn-check" data-toggle="modal" data-target="#modal-hapus" disabled id="hapus"><i class="pg-trash"></i></button>
 											</th>
-											<th>Jabatan</th>
-											<th>Nama lengkap</th>
-											<th>NIP</th>
+											<th>Halaman</th>
+											<th>Ttd Kol. Kanan</th>
+											<th>Ttd Kol. Kiri</th>
 											<th>Aksi</th>
 										</tr>
 									</thead>
 									<tbody>
-										@foreach($laporan as $lp)
+										@foreach($penugasan as $lp)
 										<tr>
 											<td>
 												<div class="checkbox">
@@ -126,15 +132,21 @@
 													<label for="checkbox{{ $lp->id }}" class="m-l-20"></label>
 												</div>
 											</td>
-											<td>{{ $lp->jabatan }}</td>
-											<td>{{ $lp->nama }}</td>
-											<td>{{ $lp->nip }}</td>
-											<td><button class="btn btn-default btn-xs btn-edit" data-id="{{ $lp->id }}" data-jabatan="{{ $lp->jabatan }}" data-nama="{{ $lp->nama }}" data-nip="{{ $lp->nip }}"><i class="fa fa-pencil"></i></button></td>
+											<td>{{ $lp->halaman }}</td>
+											<td>{{ $lp->ttdkanan->jabatan }} ({{ $lp->ttdkanan->nama }})</td>
+											<td>{{ $lp->ttdkiri->jabatan }} ({{ $lp->ttdkiri->nama }})</td>
+											<td><button class="btn btn-default btn-xs btn-edit" 
+												data-id="{{ $lp->id }}"
+												data-halaman="{{ $lp->halaman }}"
+												data-kolomkanantext="{{ $lp->ttdkanan->jabatan }} ({{ $lp->ttdkanan->nama }})"
+												data-kolomkiritext="{{ $lp->ttdkiri->jabatan }} ({{ $lp->ttdkiri->nama }})"
+												data-kolomkiriid="{{ $lp->kolom_kiri }}"
+												data-kolomkananid="{{ $lp->kolom_kanan }}"><i class="fa fa-pencil"></i></button></td>
 										</tr>
 										@endforeach
 									</tbody>
 								</table>
-								<center>{!! $laporan->links() !!}</center>
+								<center>{!! $penugasan->links() !!}</center>
 							</div>
 						</div>
 						<!-- END PANEL -->
@@ -205,26 +217,33 @@
 					<h5>Sunting Data</h5>
 				</div>
 				<div class="modal-body">
-					<form class="style-form" method="GET" action="{{ route('laporan_update') }}">
-						<input type="hidden" name="_token" value="{{ csrf_token() }}">
+					<form class="style-form" method="GET" action="{{ route('penugasan_update') }}">
 						<div class="form-group form-group-default required">
-							<label>jabatan laporan Budidaya</label>
-							<select class="full-width" data-init-plugin="select2" name="jabatan" id="jabatan">
-								@foreach( $jabatan as $jab )
-									<option value="{{ $jab }}">{{ $jab }}</option>
+						<label>Laporan pada halaman</label>
+							<select class="full-width" data-init-plugin="select2" id="halaman" name="halaman">
+								@foreach( $halaman as $hal )
+									<option value="{{ $hal }}">{{ $hal }}</option>
 								@endforeach
 							</select>
 						</div>
 						<div class="form-group form-group-default required">
-							<label>Nama lengkap</label>
-							<input type="text" id="nama" name="nama" class="form-control" required>
+							<label>Tanda Tangan Kolom Kanan</label>
+							<select class="full-width" data-init-plugin="select2" id="kolom-kanan" name="kolom_kanan">
+								@foreach( $laporan as $lap )
+									<option value="{{ $lap->id }}">{{ $lap->jabatan }} ({{ $lap->nama }})</option>
+								@endforeach
+							</select>
 						</div>
 						<div class="form-group form-group-default required">
-							<label>NIP</label>
-							<input type="text" id="nip" name="nip" class="form-control" required>
+							<label>Tanda Tangan Kolom Kiri</label>
+							<select class="full-width" data-init-plugin="select2" id="kolom-kiri" name="kolom_kiri">
+								@foreach( $laporan as $lap )
+									<option value="{{ $lap->id }}">{{ $lap->jabatan }} ({{ $lap->nama }})</option>
+								@endforeach
+							</select>
 						</div>
 						<div class="form-group">
-							<input type="hidden" id="id-jabatan" name="id">
+							<input type="hidden" id="id-tugas" name="id">
 							<button class="btn btn-primary btn-cons">Simpan</button>
 							<button type="button" class="btn btn-default btn-cons" data-dismiss="modal">Kembali</button>
 						</div>
@@ -244,8 +263,8 @@
 @section('registerscript')
 	<script>
 		$(".menu-items .link-master").addClass("active open");
-		$(".menu-items .link-master .link-laporan").addClass("active open");
-		$(".menu-items .link-master .sub-jabatan ").addClass("active");
+		$(".menu-items .link-master li.link-laporan").addClass("active open");
+		$(".menu-items .link-master .sub-penugasan").addClass("active");
 		
 		$(function(){
 
@@ -262,25 +281,38 @@
 					return false;
 				}
 
-				$(".btn-hapus").attr('href',"{{ route('laporan_hapus') }}/"+id);
+				$(".btn-hapus").attr('href',"{{ route('penugasan_hapus') }}/"+id);
 			});
 			$(".btn-edit").click(function(){
 
 				var id = $(this).data('id');
-				var nama = $(this).data('nama');
-				var nip = $(this).data('nip');
-				var jabatan = $(this).data('jabatan');
-				$('#id-jabatan').val(id);
-				$('#nama').val(nama);
-				$('#nip').val(nip);
-				$('#modal-sunting').modal('show');
+				var halaman = $(this).data('halaman');
+				var kolomkanantext = $(this).data('kolomkanantext');
+				var kolomkiritext = $(this).data('kolomkiritext');
+				var kolomkananid = $(this).data('kolomkananid');
+				var kolomkiriid = $(this).data('kolomkiriid');
 
-				$("select option").filter(function() {
-				    if( $(this).val().trim() == jabatan ){
+				$('#id-tugas').val(id);
+
+				$("#halaman option").filter(function() {
+				    if( $(this).val().trim() == halaman ){
 				    	$(this).prop('selected', true);
-				    	$(".select2-chosen").html(jabatan);
+				    	$("#select2-chosen-7").html(halaman);
 				    }
 				});
+				$("#kolom-kanan option").filter(function() {
+				    if( $(this).val().trim() == kolomkananid ){
+				    	$(this).prop('selected', true);
+				    	$("#select2-chosen-8").html(kolomkanantext);
+				    }
+				});
+				$("#kolom-kiri option").filter(function() {
+				    if( $(this).val().trim() == kolomkiriid ){
+				    	$(this).prop('selected', true);
+				    	$("#select2-chosen-9").html(kolomkiritext);
+				    }
+				});
+				$('#modal-sunting').modal('show');
 			});
 		})();
 	</script>
