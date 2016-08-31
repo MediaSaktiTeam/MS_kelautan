@@ -17,7 +17,7 @@ class TableBantuanMaster extends Migration
         {
             $t->increments('id')->unsigned();
             $t->string('nama');
-            $t->enum('jenis',['Pembudidaya','Nelayan']);
+            $t->enum('jenis');
         });
     }
 

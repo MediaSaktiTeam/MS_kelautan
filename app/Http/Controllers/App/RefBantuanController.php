@@ -16,7 +16,7 @@ class RefBantuanController extends Controller
 	{
 
 		$params = \Input::all();
-		if ( count($params) != 3 ) {
+		if ( !isset($r->bidang) || !isset($r->thn) || !isset($r->klp) ) {
 			$params = ['bidang' => 'all',
 						'thn' => 'all',
 						'klp' => 'all'];
@@ -25,7 +25,7 @@ class RefBantuanController extends Controller
 
 		$limit = 10;
 		if ( Permissions::admin() ) {
-			$profesi = ['Pembudidaya','Nelayan'];
+			$profesi = ['Pembudidaya','Nelayan','Pengolah'];
 		} else {
 			$profesi = [Permissions::pnp_role()];
 		}

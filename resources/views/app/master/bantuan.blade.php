@@ -74,6 +74,7 @@
 										<select class="full-width" data-init-plugin="select2" name="jenis">
 											<option value="Nelayan">Nelayan</option>
 											<option value="Pembudidaya">Pembudidaya</option>
+											<option value="Pengolah">Pengolah</option>
 										</select>
 									</div>
 									<div class="form-group form-group-default required">
@@ -221,6 +222,7 @@
 							<select class="full-width" data-init-plugin="select2" name="jenis" id="jenis">
 								<option value="Nelayan">Nelayan</option>
 								<option value="Pembudidaya">Pembudidaya</option>
+								<option value="Pengolah">Pengolah</option>
 							</select>
 						</div>
 						<div class="form-group form-group-default required">

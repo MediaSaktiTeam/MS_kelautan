@@ -140,6 +140,7 @@
 													<option value="{{ route('ref_bantuan', ['bidang' => 'all', 'thn' => $_GET['thn'], 'klp' => $_GET['klp'] ]) }}" {{ $_GET['bidang'] == 'all' ? 'selected' : '' }}>Semua Bidang Usaha</option>
 													<option value="{{ route('ref_bantuan', ['bidang' => 'Nelayan', 'thn' => $_GET['thn'], 'klp' => $_GET['klp'] ]) }}" {{ $_GET['bidang'] == 'Nelayan' ? 'selected' : '' }}>Nelayan</option>
 													<option value="{{ route('ref_bantuan', ['bidang' => 'Pembudidaya', 'thn' => $_GET['thn'], 'klp' => $_GET['klp'] ]) }}" {{ $_GET['bidang'] == 'Pembudidaya' ? 'selected' : '' }}>Pembudidaya</option>
+													<option value="{{ route('ref_bantuan', ['bidang' => 'Pengolah', 'thn' => $_GET['thn'], 'klp' => $_GET['klp'] ]) }}" {{ $_GET['bidang'] == 'Pengolah' ? 'selected' : '' }}>Pengolah</option>
 												</select>
 											</div>
 										</div>
@@ -262,7 +263,7 @@
 
 												</tbody>
 											</table>
-											<center>{!! $bantuan_users->links() !!}</center>
+											<center>{!! $bantuan_users->appends(array_except(Request::query(), 'page'))->links() !!}</center>
 										</div>
 
 									</div>

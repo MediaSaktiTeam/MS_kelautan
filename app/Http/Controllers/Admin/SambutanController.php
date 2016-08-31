@@ -43,12 +43,12 @@ class SambutanController extends Controller
         $sb1->deskripsi = $req->deskripsi;
         $sb1->sambutan = $req->sambutan;
 
-        $sb1->save();
 
         if ( isset($nm_gambar) ) {
             $sb1->foto  = $nm_gambar;
         }
 
+        $sb1->save();
     //Sambutan2
 
         if ( $req->hasFile('gambar2') ) {
