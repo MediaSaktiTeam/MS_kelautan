@@ -7,14 +7,14 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Sambutan;
+use File;
 
 class SambutanController extends Controller
 {
 
     public function getIndex()
     {
-        $data['bupati'] = Sambutan::findOrfail(1);
-        $data['kadis'] = Sambutan::findOrfail(2);
+        $data['sambutan'] = Sambutan::orderBy('id','asc')->get();
         return view( 'admin.sambutan.index', $data);
     }
 
@@ -23,62 +23,86 @@ class SambutanController extends Controller
     {
 
     // Sambutan 1
-        if ( $req->hasFile('gambar') ) {
+        $gambar = $req->file('gambar'); 
 
-            if ( $req->file('gambar')->isValid() ) {
+        for( $i = 0; $i<count($req->nama); $i++ ) {
 
-                $nm_gambar = $req->file('gambar')->getClientOriginalName();
-                $req->file('gambar')->move(
-                                            base_path() . "/resources/assets/img/sambutan/", 
-                                            $nm_gambar
-                                            );
-            }
-        }
+            $sb1 = Sambutan::find($req->id[$i]);
+            $nm_gambar = '';
 
-        $sb1 = Sambutan::find(1);
+            if ( $req->gambar[$i] != '' ) {
 
-        $sb1->nama = $req->nama;
-        $sb1->nip = $req->nip;
-        $sb1->jabatan = $req->jabatan;
-        $sb1->deskripsi = $req->deskripsi;
-        $sb1->sambutan = $req->sambutan;
-
-
-        if ( isset($nm_gambar) ) {
-            $sb1->foto  = $nm_gambar;
-        }
-
-        $sb1->save();
-    //Sambutan2
-
-        if ( $req->hasFile('gambar2') ) {
-
-            if ( $req->file('gambar2')->isValid() ) {
-
-                $nm_gambar2 = $req->file('gambar2')->getClientOriginalName();
-                $req->file('gambar2')->move(
-                                            base_path() . "/resources/assets/img/sambutan/", 
-                                            $nm_gambar2
-                                            );
+                $nm_gambar = $gambar[$i]->getClientOriginalName();
+                $gambar[$i]->move(
+                                base_path() . "/resources/assets/img/sambutan/", 
+                                $nm_gambar
+                                );
+                File::delete('resources/assets/img/sambutan/'.$sb1->foto);
             }
 
+
+            $sb1->nama = $req->nama[$i];
+            $sb1->nip = $req->nip[$i];
+            $sb1->jabatan = $req->jabatan[$i];
+            $sb1->deskripsi = $req->deskripsi[$i];
+            $sb1->sambutan = $req->sambutan[$i];
+
+
+            if ( $nm_gambar != '' ) {
+                $sb1->foto  = $nm_gambar;
+            }
+
+            $sb1->save();
+
         }
-
-        $sb2 = Sambutan::find(2);
-
-        $sb2->nama = $req->nama2;
-        $sb2->nip = $req->nip2;
-        $sb2->jabatan = $req->jabatan2;
-        $sb2->deskripsi = $req->deskripsi2;
-        $sb2->sambutan = $req->sambutan2;
-
-        if ( isset($nm_gambar2) ) {
-            $sb2->foto  = $nm_gambar2;
-        }
-        $sb2->save();
 
         $req->session()->flash('success','Berhasil menyimpan perubahan');
         return redirect(route('sambutan'));
     }
 
+    public function getAdd()
+    {
+        $sb1 = new Sambutan;
+
+        $sb1->nama = '';
+        $sb1->nip = '';
+        $sb1->jabatan = '';
+        $sb1->deskripsi = '';
+        $sb1->sambutan = '';
+        $sb1->foto = '';
+
+        $sb1->save();
+
+        \Session()->flash('success','Berhasil menambah sambutan');
+        return redirect(route('sambutan'));
+    }
+
+    public function getTruncate($id)
+    {
+        $sb1 = Sambutan::find($id);
+
+        File::delete('resources/assets/img/sambutan/'.$sb1->foto);
+
+        $sb1->nama = '';
+        $sb1->nip = '';
+        $sb1->jabatan = '';
+        $sb1->deskripsi = '';
+        $sb1->sambutan = '';
+        $sb1->foto = '';
+
+        $sb1->save();
+
+        \Session()->flash('success','Berhasil mengosongkan data');
+        return redirect(route('sambutan'));
+    }
+
+    public function getDelete($id)
+    {
+        $sb1 = Sambutan::find($id);
+        File::delete('resources/assets/img/sambutan/'.$sb1->foto);
+        Sambutan::where('id',$id)->delete();
+
+        \Session()->flash('success','Berhasil mengosongkan data');
+        return redirect(route('sambutan'));
+    }
 }

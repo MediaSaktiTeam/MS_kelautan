@@ -27,8 +27,7 @@ class FrontController extends Controller
 								->where('arsip', 0)
 								->orderBy('id', 'desc')
 								->get();
-		$data['sb1'] =  Sambutan::find(1);
-		$data['sb2'] =  Sambutan::find(2);
+		$data['sambutan'] = Sambutan::orderBy('id','asc')->get();
 
 		return view('front.home.index', $data);
 

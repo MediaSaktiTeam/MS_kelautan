@@ -542,7 +542,10 @@
 		Route::controller('admin/sambutan', 'SambutanController',
 			[
 				'getIndex' => 'sambutan',
+				'getAdd' => 'sambutan_add',
 				'postUpdate' => 'sambutan_update',
+				'getTruncate' => 'sambutan_truncate',
+				'getDelete' => 'sambutan_delete',
 			]);
 
 		// Menu

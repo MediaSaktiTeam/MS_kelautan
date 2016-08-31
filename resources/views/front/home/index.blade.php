@@ -36,70 +36,83 @@
 	</header>
 	<!-- END HEADER -->
 
+	@php($no=1)
+	@foreach( $sambutan as $sb )
 
-	<!-- QUOTE -->
-	<section class="section-quote">
-		
-		<div class="container">			
+		@if ( $no % 2 != 0 )
+
+			<?php if ( $sb->nama == '' ) continue; ?>
+
+			<!-- QUOTE -->
+			<section class="section-quote">
 				
-				<div class="quote-body col-sm-6">
+				<div class="container">			
+						
+						<div class="quote-body col-sm-6">
+						
+							<h2 class="quote-name">{{ $sb->nama }}</h2>
+
+							<h5 class="sub-info">{{ $sb->jabatan }} Kab. Bantaeng</h5>
+
+							<div class="separator"><i class="fa fa-quote-left"></i></div>
+
+							<p class="quote-role">
+								{{ $sb->deskripsi }}
+							</p>
+
+							<a href="#" data-toggle="modal" data-target="#sambutan-{{ $sb->id }}">~ Selengkapnya ~</a>
+
+						</div> <!-- end col-sm-6 -->
+
+						<div class="col-sm-6">
+							
+							<img src="{{ url('resources/assets/img') }}/sambutan/{{ $sb->foto }}" alt="{{ $sb->nama }}" class="u-photo quote-image">
+
+						</div> <!-- end col-sm-6 -->			
+
+				</div> <!-- end container -->
+
+			</section>
+			<!-- END SECTION QUOTE -->
+
+		@else
+
+			<?php if ( $sb->nama == '' ) continue; ?>
+			<!-- QUOTE -->
+			<section class="section-quote section-quote-2">
 				
-					<h2 class="quote-name">{{ $sb1->nama }}</h2>
+				<div class="container">			
 
-					<h5 class="sub-info">{{ $sb1->jabatan }} Kab. Bantaeng</h5>
+						<div class="col-sm-6">
+							<img src="{{ url('resources/assets/img') }}/sambutan/{{ $sb->foto }}" alt="{{ $sb->nama }}" class="u-photo quote-image">
 
-					<div class="separator"><i class="fa fa-quote-left"></i></div>
+						</div> <!-- end col-sm-6 -->			
+						
+						<div class="quote-body col-sm-6">
+						
+							<h2 class="quote-name">{{ $sb->nama }}</h2>
 
-					<p class="quote-role">
-						{{ $sb1->deskripsi }}
-					</p>
+							<h5 class="sub-info">{{ $sb->jabatan }} Kab. Bantaeng</h5>
 
-					<a href="#" data-toggle="modal" data-target="#bupati">~ Selengkapnya ~</a>
+							<div class="separator"><i class="fa fa-quote-left"></i></div>
 
-				</div> <!-- end col-sm-6 -->
+							<p class="quote-role">
+								{{ $sb->deskripsi }}
+							</p>
 
-				<div class="col-sm-6">
-					
-					<img src="{{ url('resources/assets/img') }}/sambutan/{{ $sb1->foto }}" alt="{{ $sb1->nama }}" class="u-photo quote-image">
+							<a href="#" data-toggle="modal" data-target="#sambutan-{{ $sb->id }}">~ Selengkapnya ~</a>
 
-				</div> <!-- end col-sm-6 -->			
+						</div> <!-- end col-sm-6 -->
 
-		</div> <!-- end container -->
+				</div> <!-- end container -->
 
-	</section>
-	<!-- END SECTION QUOTE -->
+			</section>
+			<!-- END SECTION QUOTE -->
 
+		@endif
 
-	<!-- QUOTE -->
-	<section class="section-quote section-quote-2">
-		
-		<div class="container">			
-
-				<div class="col-sm-6">
-					<img src="{{ url('resources/assets/img') }}/sambutan/{{ $sb2->foto }}" alt="{{ $sb2->nama }}" class="u-photo quote-image">
-
-				</div> <!-- end col-sm-6 -->			
-				
-				<div class="quote-body col-sm-6">
-				
-					<h2 class="quote-name">{{ $sb2->nama }}</h2>
-
-					<h5 class="sub-info">{{ $sb2->jabatan }} Kab. Bantaeng</h5>
-
-					<div class="separator"><i class="fa fa-quote-left"></i></div>
-
-					<p class="quote-role">
-						{{ $sb2->deskripsi }}
-					</p>
-
-					<a href="#" data-toggle="modal" data-target="#kadis">~ Selengkapnya ~</a>
-
-				</div> <!-- end col-sm-6 -->
-
-		</div> <!-- end container -->
-
-	</section>
-	<!-- END SECTION QUOTE -->
+		@php($no++)
+	@endforeach
 
 
 	<!-- VERTICAL SLIDER -->
@@ -287,30 +300,30 @@
 	<!-- END CONTACT -->
 
 
-
+@foreach( $sambutan as $sb )
 
 	<!-- Modal -->
-	<div class="modal fade" id="bupati" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+	<div class="modal fade" id="sambutan-{{ $sb->id }}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
 		<div class="modal-dialog" role="document">
 			<div class="modal-content">
 				<div class="modal-header">
 					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 						<span aria-hidden="true">&times;</span>
 					</button>
-					<h2 class="quote-name">{{ $sb1->nama }}</h2>
-					<h5 class="sub-info">{{ $sb1->jabatan }} Kab. Bantaeng</h5>
+					<h2 class="quote-name">{{ $sb->nama }}</h2>
+					<h5 class="sub-info">{{ $sb->jabatan }} Kab. Bantaeng</h5>
 				</div>
 				<div class="modal-body">
 
-					{!! $sb1->sambutan !!}
+					{!! $sb->sambutan !!}
 
 					<div class="row" style="font-size: 12px">	
 						<p class="col-sm-offset-6 col-sm-6 col-xs-offset-6 col-xs-6">
-							Bantaeng, {{ Sakti::tgl_indo($sb1->tgl) }} <br>
+							Bantaeng, {{ Sakti::tgl_indo($sb->tgl) }} <br>
 
-							<b>{{ $sb1->jabatan }} <br>
+							<b>{{ $sb->jabatan }} <br>
 
-							{{ $sb1->nama }}</b>
+							{{ $sb->nama }}</b>
 						</p>
 					</div>
 
@@ -319,36 +332,8 @@
 		</div>
 	</div>
 
-	<div class="modal fade" id="kadis" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-		<div class="modal-dialog" role="document">
-			<div class="modal-content">
-				<div class="modal-header">
-					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-						<span aria-hidden="true">&times;</span>
-					</button>
-					<h2 class="quote-name">{{ $sb2->nama }}</h2>
-					<h5 class="sub-info">{{ $sb2->jabatan }} Kab. Bantaeng</h5>
-				</div>
-				<div class="modal-body">
+@endforeach
 
-					{!! $sb2->sambutan !!}
-
-					<div class="row" style="font-size: 12px">	
-						<p class="col-sm-offset-6 col-sm-6 col-xs-offset-6 col-xs-6">
-							Bantaeng, {{ Sakti::tgl_indo( $sb2->tgl ) }}<br>
-
-							{{ $sb2->jabatan }},<br>
-
-							<b>{{ $sb2->nama }}<br>
-
-							NIP:{{ $sb2->nip }}</b>
-						</p>
-					</div>
-
-				</div>
-			</div>
-		</div>
-	</div>
 
 
 @endsection
